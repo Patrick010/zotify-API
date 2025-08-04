@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from zotify_api.routes import playlist, config, tracks, logging, cache, network, sync, downloads, metadata, spotify, stubs
+from zotify_api.routes import playlist, config, tracks, logging, cache, network, sync, downloads, metadata, spotify, stubs, user, system
 
 app = FastAPI(
     title="Zotify API",
@@ -18,6 +18,8 @@ app.include_router(downloads.router, prefix="/api")
 app.include_router(metadata.router, prefix="/api")
 app.include_router(spotify.router, prefix="/api")
 app.include_router(stubs.router, prefix="/api")
+app.include_router(user.router, prefix="/api")
+app.include_router(system.router, prefix="/api")
 
 @app.get("/ping")
 async def ping():

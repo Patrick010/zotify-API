@@ -120,10 +120,26 @@ async def fetch_metadata(track_id: str):
         logger.info(f"Received metadata: {resp.json()}")
         return await resp.json()
 
-@router.post("/playlist/sync")
-async def playlist_sync():
-    await refresh_token_if_needed()
-    # Fetch Spotify playlists, local playlists
-    # Reconcile differences (create/update/delete)
-    # Return sync summary and any conflicts
-    return {"status": "Playlists synced (stub)"}
+@router.get("/playlists")
+def get_spotify_playlists():
+    raise HTTPException(status_code=501, detail="Not Implemented")
+
+@router.get("/playlists/{playlist_id}")
+def get_spotify_playlist(playlist_id: str):
+    raise HTTPException(status_code=501, detail="Not Implemented")
+
+@router.delete("/playlists/{playlist_id}")
+def delete_spotify_playlist(playlist_id: str):
+    raise HTTPException(status_code=501, detail="Not Implemented")
+
+@router.get("/playlists/{playlist_id}/tracks")
+def get_spotify_playlist_tracks(playlist_id: str):
+    raise HTTPException(status_code=501, detail="Not Implemented")
+
+@router.post("/playlists/{playlist_id}/sync")
+def sync_spotify_playlist(playlist_id: str):
+    raise HTTPException(status_code=501, detail="Not Implemented")
+
+@router.put("/playlists/{playlist_id}/metadata")
+def update_spotify_playlist_metadata(playlist_id: str):
+    raise HTTPException(status_code=501, detail="Not Implemented")

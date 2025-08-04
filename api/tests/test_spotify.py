@@ -47,6 +47,6 @@ async def test_fetch_metadata(mock_refresh, mock_get):
 async def test_sync_playlists(mock_refresh):
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://testserver") as client:
-        response = await client.post("/api/spotify/playlist/sync")
+        response = await client.post("/api/spotify/sync_playlists")
 
     assert response.status_code == 200
