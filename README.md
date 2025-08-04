@@ -28,9 +28,11 @@ For detailed setup instructions, including prerequisites and different installat
 
 ### Running the Server
 
-To run the API server, execute the following command from the project's root directory:
+To run the API server, first install the API in editable mode from the project root, then start the server:
 
 ```bash
+# From the project root directory (containing api/ and zotify/)
+pip install -e ./api
 uvicorn api.main:app --reload --host 0.0.0.0 --port 8080
 ```
 

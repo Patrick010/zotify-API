@@ -24,20 +24,17 @@ This method requires **Git** to be installed. It involves cloning the repository
     cd zotify
     ```
 
-2.  **Navigate to the API directory:**
+2.  **Install the API in editable mode:**
+    From the root of the `zotify` project directory, run:
     ```bash
-    cd api
+    pip install -e ./api
     ```
+    This will install all necessary dependencies.
 
-3.  **Install the required Python packages:**
+3.  **Run the API server:**
+    Also from the project root, run:
     ```bash
-    pip install -r requirements.txt
-    ```
-    *(Note: We will create this requirements.txt file from pyproject.toml in a later step)*
-
-4.  **Run the API server:**
-    ```bash
-    uvicorn main:app --reload --host 0.0.0.0 --port 8080
+    uvicorn api.main:app --reload --host 0.0.0.0 --port 8080
     ```
 
 ### 2. Installation Script
