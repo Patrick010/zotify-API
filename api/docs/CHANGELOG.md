@@ -2,6 +2,15 @@
 
 All notable changes to the Zotify REST API will be documented in this file.
 
+## v0.2.0 - 2025-08-04
+
+### Added
+- Core search and download endpoints.
+  - `GET /search` with pagination.
+  - `POST /download/{target}` where target is one of `track`, `album`, or `playlist`.
+- Pydantic models for search and download request/response bodies.
+- Validation for search parameters and download request bodies.
+
 ## v0.1.1 - 2025-08-04
 
 ### Added

@@ -1,73 +1,67 @@
-"""
-Zotify API - Phase 1: Core Metadata Endpoint Stubs
-
-To run this API server locally:
-1. Install dependencies:
-   pip install fastapi uvicorn
-2. Start server:
-   uvicorn main:app --reload --host 0.0.0.0 --port 8080
-3. Access docs at:
-   http://<your-ip>:8080/docs
-
-⚠️ WARNING:
-Do NOT hardcode 127.0.0.1 anywhere.
-Always use --host 0.0.0.0 for dev so the API is reachable externally.
-"""
-
-from fastapi import FastAPI, Path, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel, Field
+from typing import List, Optional, Literal
+from uuid import uuid4
 
 app = FastAPI(
-    title="Zotify API - Metadata Endpoints",
-    version="0.1.0",
-    description="Static metadata endpoints for tracks, albums, and artists"
+    title="Zotify API - Search and Download Core",
+    version="0.2.0",
+    description="Search and download endpoints for Zotify external API"
 )
 
-# --- Pydantic Response Models ---
-
-class TrackMetadata(BaseModel):
+class SearchResult(BaseModel):
     id: str
+    type: Literal["track", "album", "playlist"]
     title: str
     artist: str
-    album: str
-    duration_sec: int
 
-class AlbumMetadata(BaseModel):
-    id: str
-    title: str
-    artist: str
-    track_count: int
+class SearchResponse(BaseModel):
+    results: List[SearchResult]
+    page: int
+    page_size: int
+    total: int
 
-class ArtistMetadata(BaseModel):
-    id: str
-    name: str
-    album_count: int
-
-# --- Endpoints ---
-
-@app.get("/tracks/{track_id}", response_model=TrackMetadata, summary="Get metadata for a track")
-async def get_track(track_id: str = Path(..., min_length=3, description="Unique track ID")):
-    return TrackMetadata(
-        id=track_id,
-        title="Static Track",
-        artist="Sample Artist",
-        album="Demo Album",
-        duration_sec=215
+@app.get("/search", response_model=SearchResponse, summary="Search for content")
+async def search(
+    q: str = Query(..., description="Search query"),
+    page: int = Query(1, ge=1),
+    page_size: int = Query(10, ge=1, le=100)
+):
+    """
+    Simulated search response for tracks, albums, or playlists.
+    """
+    dummy_result = SearchResult(
+        id="spotify:track:dummy",
+        type="track",
+        title=f"Fake Track for '{q}'",
+        artist="Test Artist"
+    )
+    return SearchResponse(
+        results=[dummy_result] * page_size,
+        page=page,
+        page_size=page_size,
+        total=200
     )
 
-@app.get("/albums/{album_id}", response_model=AlbumMetadata, summary="Get metadata for an album")
-async def get_album(album_id: str = Path(..., min_length=3, description="Unique album ID")):
-    return AlbumMetadata(
-        id=album_id,
-        title="Static Album",
-        artist="Sample Artist",
-        track_count=10
-    )
+class DownloadRequest(BaseModel):
+    id: str = Field(..., description="Spotify URI of the content to download")
+    embed_metadata: Optional[bool] = False
+    embed_coverart: Optional[bool] = False
+    output_dir: Optional[str] = None
 
-@app.get("/artists/{artist_id}", response_model=ArtistMetadata, summary="Get metadata for an artist")
-async def get_artist(artist_id: str = Path(..., min_length=3, description="Unique artist ID")):
-    return ArtistMetadata(
-        id=artist_id,
-        name="Sample Artist",
-        album_count=3
+class DownloadResponse(BaseModel):
+    task_id: str
+    message: str
+
+@app.post("/download/{target}", response_model=DownloadResponse, summary="Download Spotify content")
+async def download_content(target: Literal["track", "album", "playlist"], req: DownloadRequest):
+    """
+    Stubbed download endpoint. Accepts track, album, or playlist IDs.
+    """
+    if not req.id.startswith("spotify:"):
+        raise HTTPException(status_code=400, detail="Invalid Spotify ID format")
+
+    return DownloadResponse(
+        task_id=str(uuid4()),
+        message=f"Accepted download task for {target}"
     )
