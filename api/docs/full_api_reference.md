@@ -22,6 +22,7 @@ No authentication is required for local testing. Production deployments should r
 - [Logging](#logging)
 - [Caching](#caching)
 - [Network](#network--proxy-settings)
+- [Spotify Integration](#spotify-integration)
 - [Fork-Specific Features](#fork-specific-features)
 
 ---
@@ -498,9 +499,115 @@ The updated network proxy configuration object.
 
 ---
 
+## Spotify Integration
+
+### `GET /spotify/login`
+
+Returns a URL to authorize the application with Spotify.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/spotify/login
+```
+
+**Response:**
+
+```json
+{
+  "auth_url": "https://accounts.spotify.com/authorize?client_id=...&response_type=code&redirect_uri=...&scope=..."
+}
+```
+
+### `GET /spotify/callback`
+
+Callback endpoint for Spotify OAuth2 flow. This endpoint is called by Spotify after the user authorizes the application.
+
+**Query Parameters:**
+
+| Name   | Type   | Description                               |
+| ------ | ------ | ----------------------------------------- |
+| `code` | string | The authorization code from Spotify. |
+
+**Response:**
+
+```json
+{
+  "status": "Spotify tokens stored"
+}
+```
+
+**Errors:**
+
+- `400 Bad Request`: If the `code` query parameter is missing.
+
+### `GET /spotify/token_status`
+
+Returns the status of the Spotify API token.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/spotify/token_status
+```
+
+**Response:**
+
+```json
+{
+  "access_token_valid": true,
+  "expires_in_seconds": 3600
+}
+```
+
+### `POST /spotify/sync_playlists`
+
+Triggers a synchronization of playlists with Spotify.
+
+**Request:**
+
+```bash
+curl -X POST http://0.0.0.0:8080/api/spotify/sync_playlists
+```
+
+**Response:**
+
+```json
+{
+  "status": "Playlists synced (stub)"
+}
+```
+
+### `GET /spotify/metadata/{track_id}`
+
+Fetches metadata for a track from Spotify.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/spotify/metadata/3n3Ppam7vgaVa1iaRUc9Lp
+```
+
+**Path Parameters:**
+
+| Name       | Type   | Description                |
+| ---------- | ------ | -------------------------- |
+| `track_id` | string | The ID of the track. |
+
+**Response:**
+
+The raw JSON response from the Spotify API.
+
+**Errors:**
+
+- `401 Unauthorized`: If the Spotify access token is invalid or expired.
+- `404 Not Found`: If the track with the given ID does not exist on Spotify.
+
+---
+
 ## Fork-Specific Features
 
-### `POST /playlist/sync`
+### `POST /playlists/sync`
 
 Initiates a synchronization of a playlist with a remote source.
 
@@ -654,3 +761,27 @@ curl -X PATCH http://0.0.0.0:8080/api/metadata/abc123 \
 - All endpoints are unauthenticated for local use.
 - Use `jq` to pretty-print JSON responses in CLI.
 - Future integrations (Spotify, tagging engines) will build on these base endpoints.
+
+---
+
+## Manual Test Runbook
+
+### Setup
+
+1.  Register your app with Spotify Developer Console.
+2.  Set redirect URI to `http://localhost:8080/api/spotify/callback`.
+3.  Update `CLIENT_ID` and `CLIENT_SECRET` in `api/src/zotify_api/routes/spotify.py`.
+4.  Start API server.
+
+### Steps
+
+1.  Request login URL: `GET /api/spotify/login`
+2.  Open URL in browser, authorize, and get the `code` query param.
+3.  Call `/api/spotify/callback?code=YOUR_CODE` with that code.
+4.  Check token status with `/api/spotify/token_status`.
+5.  Trigger playlist sync with `/api/spotify/sync_playlists`.
+6.  Fetch metadata for sample track IDs.
+7.  Simulate token expiry and verify automatic refresh.
+8.  Test with proxy settings enabled.
+9.  Inject errors by revoking tokens on Spotify and verify error handling.
+10. Repeat tests on slow networks or disconnects.

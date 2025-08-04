@@ -23,6 +23,7 @@ No authentication is required for local testing. Production deployments should r
 - Logging and Configuration
 - Caching
 - Network / Proxy Settings
+- Spotify Integration
 - Fork-Specific Features
 
 ---
@@ -213,6 +214,30 @@ Update proxy settings.
   "https_proxy": "https://proxy.secure:443"
 }
 ```
+
+---
+
+## Spotify Integration
+
+### `GET /spotify/login`
+
+Returns a URL to authorize the application with Spotify.
+
+### `GET /spotify/callback`
+
+Callback endpoint for Spotify OAuth2 flow.
+
+### `GET /spotify/token_status`
+
+Returns the status of the Spotify API token.
+
+### `POST /spotify/sync_playlists`
+
+Triggers a synchronization of playlists with Spotify.
+
+### `GET /spotify/metadata/{track_id}`
+
+Fetches metadata for a track from Spotify.
 
 ---
 
