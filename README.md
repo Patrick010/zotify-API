@@ -55,6 +55,42 @@ See [INSTALLATION](INSTALLATION.md) for a more detailed and opinionated installa
 Download track(s), album(s), playlist(s), podcast episode(s), or artist(s) specified by the URL(s) passed as a command line argument(s).
 If an artist's URL is given, all albums by the specified artist will be downloaded. Can take multiple URLs as multiple arguments.
 
+### API Usage
+
+This project includes a REST API server.
+
+**Installation**
+
+To use the API, you must install the required dependencies:
+
+```bash
+pip install fastapi uvicorn
+```
+
+**Running the Server**
+
+To run the API server, execute the following command from the project's root directory:
+
+```bash
+uvicorn api.main:app --reload --host 0.0.0.0 --port 8080
+```
+
+The server will be accessible at `http://<your-host>:8080`.
+
+**Testing the API**
+
+You can test that the API is running by sending a request to the `/ping` endpoint:
+
+```bash
+curl http://127.0.0.1:8080/ping
+```
+
+The expected response is:
+
+```json
+{"pong":true}
+```
+
 ### Basic Flags and Modes
 
 `(python -m) zotify <{mode flag}> <{config flag} {config value}> <track/album/playlist/episode/artist url>`
