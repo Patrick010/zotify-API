@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from zotify_api.routes import playlist
+from zotify_api.routes import playlist, config, tracks
 
 app = FastAPI(
     title="Zotify API",
@@ -7,7 +7,9 @@ app = FastAPI(
     description="A REST API for the Zotify music and podcast downloader."
 )
 
-app.include_router(playlist.router)
+app.include_router(playlist.router, prefix="/api")
+app.include_router(config.router, prefix="/api")
+app.include_router(tracks.router, prefix="/api")
 
 @app.get("/ping")
 async def ping():

@@ -42,7 +42,7 @@ def run_around_tests():
 
 def test_get_playlists():
     """ Test for GET /playlists """
-    response = client.get("/playlists")
+    response = client.get("/api/playlists")
     assert response.status_code == 200
 
     # The response should be a list of Playlist objects
@@ -65,7 +65,7 @@ def test_create_playlist():
     """ Test for POST /playlists """
     new_playlist_data = {"name": "Chill Vibes"}
 
-    response = client.post("/playlists", json=new_playlist_data)
+    response = client.post("/api/playlists", json=new_playlist_data)
 
     # The status code for resource creation should be 201
     assert response.status_code == 201, response.text
