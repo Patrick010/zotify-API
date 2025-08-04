@@ -33,7 +33,7 @@ To run the API server, first install the API in editable mode from the project r
 ```bash
 # From the project root directory (containing api/ and zotify/)
 pip install -e ./api
-uvicorn api.main:app --reload --host 0.0.0.0 --port 8080
+uvicorn zotify_api.main:app --reload --host 0.0.0.0 --port 8080
 ```
 
 The server will be accessible at `http://<your-host>:8080`.

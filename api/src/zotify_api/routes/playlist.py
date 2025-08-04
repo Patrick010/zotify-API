@@ -4,8 +4,8 @@ from uuid import uuid4
 from fastapi import APIRouter, HTTPException, UploadFile, File, Form
 from starlette.responses import Response
 
-from ..models.playlist import Playlist, PlaylistCreate, TrackRequest
-from ..storage.crud import get_playlists_db, save_playlists_db
+from zotify_api.models.playlist import Playlist, PlaylistCreate, TrackRequest
+from zotify_api.storage.crud import get_playlists_db, save_playlists_db
 
 router = APIRouter()
 

@@ -34,7 +34,7 @@ This method requires **Git** to be installed. It involves cloning the repository
 3.  **Run the API server:**
     Also from the project root, run:
     ```bash
-    uvicorn api.main:app --reload --host 0.0.0.0 --port 8080
+    uvicorn zotify_api.main:app --reload --host 0.0.0.0 --port 8080
     ```
 
 ### 2. Installation Script

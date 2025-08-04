@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .routes import playlist
+from zotify_api.routes import playlist
 
 app = FastAPI(
     title="Zotify API",
