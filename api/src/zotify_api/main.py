@@ -8,3 +8,7 @@ app = FastAPI(
 )
 
 app.include_router(playlist.router)
+
+@app.get("/ping")
+async def ping():
+    return {"pong": True}
