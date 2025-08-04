@@ -118,7 +118,7 @@ async def fetch_metadata(track_id: str):
             logger.error(f"Failed to fetch track metadata: {resp.text}")
             raise HTTPException(resp.status_code, "Failed to fetch track metadata")
         logger.info(f"Received metadata: {resp.json()}")
-        return await resp.json()
+        return resp.json()
 
 @router.get("/playlists")
 def get_spotify_playlists():
