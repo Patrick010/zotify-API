@@ -2,6 +2,36 @@
 
 All notable changes to the Zotify REST API will be documented in this file.
 
+## v0.1.8 - 2025-08-04
+
+### Added
+- Live Spotify integration with OAuth2 authentication.
+- Endpoints for managing Spotify API tokens.
+- Stubs for syncing playlists and fetching metadata from Spotify.
+
+## v0.1.7 - 2025-08-04
+
+### Added
+- Comprehensive API reference manual.
+
+## v0.1.6 - 2025-08-04
+
+### Added
+- Fork-specific features:
+  - Advanced playlist sync endpoint.
+  - Download status and retry endpoints.
+  - Extended metadata endpoints.
+
+## v0.1.5 - 2025-08-04
+
+### Added
+- Endpoints for managing logging, caching, and network settings.
+
+## v0.1.4 - 2025-08-04
+
+### Added
+- Endpoints for managing application configuration and track metadata.
+
 ## v0.1.3 - 2025-08-04
 
 ### Added
