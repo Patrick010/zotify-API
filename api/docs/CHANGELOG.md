@@ -2,7 +2,7 @@
 
 All notable changes to the Zotify REST API will be documented in this file.
 
-## v0.2.0 - 2025-08-04
+## v0.1.2 - 2025-08-04
 
 ### Added
 - Core search and download endpoints.
