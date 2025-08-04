@@ -1,13 +1,8 @@
 # Changelog
 
-## 0.7.0
-
-- Added the foundation for a REST API server using FastAPI.
-- The API server is located in the `api/` directory.
-- Includes a `/ping` health check endpoint.
-
 ## 0.6.13
 
+- Added the foundation for a REST API server using FastAPI.
 - Only replace chars with _ when required
 - Added defaults to README
 

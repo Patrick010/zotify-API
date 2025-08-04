@@ -57,6 +57,9 @@ If an artist's URL is given, all albums by the specified artist will be download
 
 ### API Usage
 
+> [!NOTE]
+> The API is built for Zotify v0.6.x. Using it with other versions may not work as expected.
+
 This project includes a REST API server.
 
 **Installation**
