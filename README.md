@@ -15,11 +15,7 @@ This project provides a REST API for the [Zotify](https://github.com/Googolplexe
 
 ### Installation
 
-To use the API, you must first install the required Python packages:
-
-```bash
-pip install fastapi uvicorn
-```
+For detailed setup instructions, including prerequisites and different installation methods (Git Clone, Install Script, .deb Package, Docker), please see the [Installation Guide](./api/docs/INSTALLATION.md).
 
 ### Running the Server
 

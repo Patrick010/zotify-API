@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zotify-api"
+version = "0.1.0"
+description = "A REST API for the Zotify music and podcast downloader."
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "librespot @ git+https://github.com/kokarare1212/librespot-python.git",
+    "ffmpy",
+    "music_tag",
+    "Pillow",
+    "pkce",
+    "protobuf==3.20.1",
+    "pwinput",
+    "tabulate[widechars]",
+    "tqdm"
+]

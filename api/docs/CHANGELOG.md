@@ -2,6 +2,11 @@
 
 ## 0.6.13
 
+- Refactored the API to be a portable, decoupled module.
+- The API now dynamically loads the `zotify` core library.
+- Consolidated all dependencies into a single `api/pyproject.toml`.
+- Removed root dependency files (`pyproject.toml`, `requirements.txt`).
+- Added comprehensive installation documentation for multiple methods (Git, Script, .deb, Docker).
 - Added the foundation for a REST API server using FastAPI.
 - Only replace chars with _ when required
 - Added defaults to README

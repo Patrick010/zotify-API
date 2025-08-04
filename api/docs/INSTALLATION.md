@@ -1,34 +1,71 @@
-# Installing Zotify
+# Installation
 
-> **Windows**
+This document provides detailed instructions for installing and setting up the Zotify REST API.
 
-This guide uses *Scoop* (https://scoop.sh) to simplify installing prerequisites and *pipx* to manage Zotify itself.
-There are other ways to install and run Zotify on Windows but this is the official recommendation, other methods of installation will not receive support.
+## Prerequisites
 
-- Open PowerShell (cmd will not work)
-- Install Scoop by running:
-  - `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`
-  - `irm get.scoop.sh | iex`
-- After installing scoop run: `scoop install python ffmpeg-shared git`
-- Install pipx:
-  - `python3 -m pip install --user pipx`
-  - `python3 -m pipx ensurepath`
-Now close PowerShell and reopen it to ensure the pipx command is available.
-- Install Zotify with: `pipx install git+https://github.com/Googolplexed0/zotify.git`
-- Done! Use `zotify --help` for a basic list of commands or check the *README.md* file in Zotify's code repository for full documentation.
+Before you begin, ensure you have the following installed on your system:
 
-> **macOS**
+- **Python 3.10 or greater**
+- **FFmpeg**: A cross-platform solution to record, convert and stream audio and video.
+- **Git**: For cloning the repository.
+- **Docker**: (Optional) For the Docker-based installation.
 
-- Open the Terminal app
-- Install *Homebrew* (https://brew.sh) by running: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
-- After installing Homebrew run: `brew install python@3.11 pipx ffmpeg git`
-- Setup pipx: `pipx ensurepath`
-- Install Zotify: `pipx install git+https://github.com/Googolplexed0/zotify.git`
-- Done! Use `zotify --help` for a basic list of commands or check the README.md file in Zotify's code repository for full documentation.
+## Installation Methods
 
-> **Linux (Most Popular Distributions)**
+You can choose one of the following methods to install the Zotify API.
 
-- Install `python3`, `pip` (if a separate package), `ffmpeg`, and `git` from your distribution's package manager or software center.
-- Then install pipx, either from your package manager or through pip with: `python3 -m pip install --user pipx`
-- Install Zotify `pipx install git+https://github.com/Googolplexed0/zotify.git`
-- Done! Use `zotify --help` for a basic list of commands or check the README.md file in Zotify's code repository for full documentation.
+### 1. Git Clone (Recommended for Developers)
+
+This method involves cloning the repository and installing the dependencies manually.
+
+1.  **Clone the Zotify repository:**
+    ```bash
+    git clone https://github.com/Googolplexed0/zotify.git
+    cd zotify
+    ```
+
+2.  **Navigate to the API directory:**
+    ```bash
+    cd api
+    ```
+
+3.  **Install the required Python packages:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+    *(Note: We will create this requirements.txt file from pyproject.toml in a later step)*
+
+4.  **Run the API server:**
+    ```bash
+    uvicorn main:app --reload --host 0.0.0.0 --port 8080
+    ```
+
+### 2. Installation Script
+
+An installation script will be provided to automate the setup process.
+
+*(This section is a placeholder and will be updated with the script details.)*
+
+### 3. Debian Package (`.deb`)
+
+A Debian package will be created for easy installation on Debian-based systems like Ubuntu.
+
+*(This section is a placeholder and will be updated with package details.)*
+
+### 4. Docker
+
+Using Docker is a great way to run the API in a containerized environment.
+
+1.  **Build the Docker image:**
+    *(A Dockerfile will be created in a later step)*
+    ```bash
+    docker build -t zotify-api .
+    ```
+
+2.  **Run the Docker container:**
+    ```bash
+    docker run -p 8080:8080 zotify-api
+    ```
+
+This will start the API server inside a Docker container, accessible on port 8080 of your host machine.
