@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "name": "My Favorite Songs",
+    "tracks": [
+      "track1",
+      "track2"
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Workout Mix",
+    "tracks": []
+  },
+  {
+    "name": "Chill Vibes",
+    "id": "4f624dc0-77e5-4b25-869f-27c4b53396d8",
+    "tracks": []
+  }
+]
