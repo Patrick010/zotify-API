@@ -47,4 +47,4 @@ The expected response is:
 
 ## Disclaimer
 
-This API is intended to be used in compliance with DMCA, Section 1201, for educational, private and fair use. The contributors are not responsible for any misuse of the program or source code.
+This software is provided strictly for educational and personal use. It does not facilitate or promote the circumvention of any technological protection measures, and it is not intended for use in violation of copyright laws, including the DMCA or any equivalent legislation. Use of this software is entirely at your own risk. The authors and contributors disclaim all liability for any direct or indirect misuse, and do not condone or support any illegal activity involving this codebase.
