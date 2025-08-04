@@ -2,6 +2,14 @@
 
 All notable changes to the Zotify REST API will be documented in this file.
 
+## v0.1.3 - 2025-08-04
+
+### Added
+- Full playlist management module (`GET`, `POST`, `DELETE`, `add/remove tracks`).
+- Playlist import from `.json` and export to `.json` and `.m3u`.
+- Modular project structure with `models`, `routes`, and `storage` directories.
+- JSON-file-based storage for playlists.
+
 ## v0.1.2 - 2025-08-04
 
 ### Added

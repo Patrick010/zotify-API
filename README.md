@@ -1,6 +1,6 @@
 # Zotify REST API
 
-This project provides a REST API for the [Zotify](https://github.com/Googolplexed0/zotify) music and podcast downloader.
+This project provides a REST API for the [Zotify](https://github.com/Googolplexed0/zotify) music and podcast downloader, with features for playlist management, search, and downloading.
 
 ## Project Files
 
