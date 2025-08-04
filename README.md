@@ -2,6 +2,15 @@
 
 This project provides a REST API for the [Zotify](https://github.com/Googolplexed0/zotify) music and podcast downloader.
 
+## Project Files
+
+- **[Installation Guide](./api/docs/INSTALLATION.md)**: Detailed setup instructions.
+- **[Changelog](./api/docs/CHANGELOG.md)**: A log of all API version changes.
+- **[Contributing Guide](./api/docs/CONTRIBUTING.md)**: Guidelines for contributing to the API.
+- **[LICENSE](./api/docs/LICENSE)**: The software license.
+- **[OpenAPI Spec (JSON)](./api/docs/zotify-openapi-external-v1.json)**: The machine-readable API specification.
+- **[OpenAPI Spec (YAML)](./api/docs/zotify-openapi-external-v1.yaml)**: The human-friendly API specification.
+
 ## API Usage
 
 > [!NOTE]

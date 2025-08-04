@@ -8,7 +8,6 @@ Before you begin, ensure you have the following installed on your system:
 
 - **Python 3.10 or greater**
 - **FFmpeg**: A cross-platform solution to record, convert and stream audio and video.
-- **Git**: For cloning the repository.
 - **Docker**: (Optional) For the Docker-based installation.
 
 ## Installation Methods
@@ -17,7 +16,7 @@ You can choose one of the following methods to install the Zotify API.
 
 ### 1. Git Clone (Recommended for Developers)
 
-This method involves cloning the repository and installing the dependencies manually.
+This method requires **Git** to be installed. It involves cloning the repository and installing the dependencies manually.
 
 1.  **Clone the Zotify repository:**
     ```bash
