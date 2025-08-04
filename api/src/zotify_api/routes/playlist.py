@@ -13,6 +13,12 @@ router = APIRouter()
 async def get_playlists(db: List[dict] = Depends(database.get_db)):
     return db
 
+@router.delete("/playlists", status_code=204, summary="Delete all playlists")
+async def delete_all_playlists(db: List[dict] = Depends(database.get_db)):
+    db.clear()
+    database.save_db(db)
+    return Response(status_code=204)
+
 @router.post("/playlists", response_model=Playlist, status_code=201, summary="Create a new playlist")
 async def create_playlist(playlist_in: PlaylistCreate, db: List[dict] = Depends(database.get_db)):
     new_playlist = Playlist(id=str(uuid4()), name=playlist_in.name, tracks=[])
