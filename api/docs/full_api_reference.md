@@ -1,0 +1,656 @@
+# Zotify API Reference Manual
+
+This manual documents the full capabilities of the Zotify API, designed for managing media libraries, metadata, playlists, downloads, and configuration. All endpoints are RESTful and served under the base path:
+
+```
+http://0.0.0.0:8080/api
+```
+
+---
+
+## Authentication
+
+No authentication is required for local testing. Production deployments should restrict access via reverse proxy or API gateway.
+
+---
+
+## Index
+
+- [Configuration](#configuration)
+- [Playlists](#playlist-management)
+- [Tracks](#tracks)
+- [Logging](#logging)
+- [Caching](#caching)
+- [Network](#network--proxy-settings)
+- [Fork-Specific Features](#fork-specific-features)
+
+---
+
+## Configuration
+
+### `GET /config`
+
+Returns the current application configuration.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/config
+```
+
+**Response:**
+
+```json
+{
+  "library_path": "/music",
+  "scan_on_startup": true,
+  "cover_art_embed_enabled": true
+}
+```
+
+**Errors:**
+
+- `500 Internal Server Error`: If the configuration cannot be retrieved.
+
+### `PATCH /config`
+
+Updates specific fields in the application configuration.
+
+**Request:**
+
+```bash
+curl -X PATCH http://0.0.0.0:8080/api/config \
+  -H "Content-Type: application/json" \
+  -d '{
+    "scan_on_startup": false
+  }'
+```
+
+**Body Parameters:**
+
+| Name                      | Type    | Description                               |
+| ------------------------- | ------- | ----------------------------------------- |
+| `library_path`            | string  | (Optional) The path to the music library. |
+| `scan_on_startup`         | boolean | (Optional) Whether to scan on startup.    |
+| `cover_art_embed_enabled` | boolean | (Optional) Whether to embed cover art.    |
+
+**Response:**
+
+The updated configuration object.
+
+**Errors:**
+
+- `400 Bad Request`: If the request body is not valid JSON.
+
+### `POST /config/reset`
+
+Resets the application configuration to its default values.
+
+**Request:**
+
+```bash
+curl -X POST http://0.0.0.0:8080/api/config/reset
+```
+
+**Response:**
+
+The default configuration object.
+
+---
+
+## Playlist Management
+
+### `GET /playlists`
+
+Returns all saved playlists.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/playlists
+```
+
+**Response:**
+
+```json
+[
+  {
+    "id": "abc123",
+    "name": "My Playlist",
+    "tracks": ["track1", "track2"]
+  }
+]
+```
+
+### `POST /playlists`
+
+Creates a new playlist.
+
+**Request:**
+
+```bash
+curl -X POST http://0.0.0.0:8080/api/playlists \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "My New Playlist"
+  }'
+```
+
+**Body Parameters:**
+
+| Name   | Type   | Description                |
+| ------ | ------ | -------------------------- |
+| `name` | string | The name of the playlist. |
+
+**Response:**
+
+The newly created playlist object.
+
+### `DELETE /playlists/{playlist_id}`
+
+Deletes a playlist by its ID.
+
+**Request:**
+
+```bash
+curl -X DELETE http://0.0.0.0:8080/api/playlists/abc123
+```
+
+**Path Parameters:**
+
+| Name          | Type   | Description                  |
+| ------------- | ------ | ---------------------------- |
+| `playlist_id` | string | The ID of the playlist to delete. |
+
+**Response:**
+
+- `204 No Content`
+
+**Errors:**
+
+- `404 Not Found`: If the playlist with the given ID does not exist.
+
+### `POST /playlists/{playlist_id}/tracks`
+
+Adds one or more tracks to a playlist.
+
+**Request:**
+
+```bash
+curl -X POST http://0.0.0.0:8080/api/playlists/abc123/tracks \
+  -H "Content-Type: application/json" \
+  -d '{
+    "track_ids": ["track3", "track4"]
+  }'
+```
+
+**Path Parameters:**
+
+| Name          | Type   | Description                           |
+| ------------- | ------ | ------------------------------------- |
+| `playlist_id` | string | The ID of the playlist to add tracks to. |
+
+**Body Parameters:**
+
+| Name        | Type     | Description                     |
+| ----------- | -------- | ------------------------------- |
+| `track_ids` | string[] | A list of track IDs to add. |
+
+**Response:**
+
+The updated playlist object.
+
+**Errors:**
+
+- `404 Not Found`: If the playlist with the given ID does not exist.
+
+---
+
+## Tracks
+
+### `GET /tracks/{track_id}/metadata`
+
+Returns metadata for a specific track.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/tracks/abc123/metadata
+```
+
+**Path Parameters:**
+
+| Name       | Type   | Description                |
+| ---------- | ------ | -------------------------- |
+| `track_id` | string | The ID of the track. |
+
+**Response:**
+
+```json
+{
+  "id": "abc123",
+  "title": "Track Title",
+  "artist": "Artist",
+  "album": "Album",
+  "genre": "Rock",
+  "year": 2020
+}
+```
+
+### `PATCH /tracks/{track_id}/metadata`
+
+Updates metadata fields for a track.
+
+**Request:**
+
+```bash
+curl -X PATCH http://0.0.0.0:8080/api/tracks/abc123/metadata \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "New Title"
+  }'
+```
+
+**Path Parameters:**
+
+| Name       | Type   | Description                |
+| ---------- | ------ | -------------------------- |
+| `track_id` | string | The ID of the track. |
+
+**Body Parameters:**
+
+| Name     | Type   | Description                 |
+| -------- | ------ | --------------------------- |
+| `title`  | string | (Optional) The new title.   |
+| `artist` | string | (Optional) The new artist.  |
+| `album`  | string | (Optional) The new album.   |
+| `genre`  | string | (Optional) The new genre.   |
+| `year`   | integer| (Optional) The new year.    |
+
+**Response:**
+
+The updated track metadata object.
+
+### `POST /tracks/{track_id}/metadata/refresh`
+
+Triggers a refresh of the track's metadata from its source.
+
+**Request:**
+
+```bash
+curl -X POST http://0.0.0.0:8080/api/tracks/abc123/metadata/refresh
+```
+
+**Path Parameters:**
+
+| Name       | Type   | Description                |
+| ---------- | ------ | -------------------------- |
+| `track_id` | string | The ID of the track. |
+
+**Response:**
+
+The updated track metadata object.
+
+### `POST /tracks/{track_id}/cover`
+
+Uploads a cover image for a track.
+
+**Request:**
+
+```bash
+curl -X POST http://0.0.0.0:8080/api/tracks/abc123/cover \
+  -F "cover_image=@cover.jpg"
+```
+
+**Path Parameters:**
+
+| Name       | Type   | Description                |
+| ---------- | ------ | -------------------------- |
+| `track_id` | string | The ID of the track. |
+
+**Form Data:**
+
+| Name          | Type | Description              |
+| ------------- | ---- | ------------------------ |
+| `cover_image` | file | The cover image to upload. |
+
+**Response:**
+
+```json
+{
+  "id": "abc123",
+  "cover": "Embedded image: cover.jpg"
+}
+```
+
+---
+
+## Logging
+
+### `GET /logging`
+
+Returns the current logging configuration.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/logging
+```
+
+**Response:**
+
+```json
+{
+  "level": "INFO",
+  "log_to_file": false,
+  "log_file": null
+}
+```
+
+### `PATCH /logging`
+
+Updates the logging configuration.
+
+**Request:**
+
+```bash
+curl -X PATCH http://0.0.0.0:8080/api/logging \
+  -H "Content-Type: application/json" \
+  -d '{
+    "level": "DEBUG"
+  }'
+```
+
+**Body Parameters:**
+
+| Name          | Type    | Description                                                                 |
+| ------------- | ------- | --------------------------------------------------------------------------- |
+| `level`       | string  | (Optional) The new log level. Must be one of: `CRITICAL`, `ERROR`, `WARNING`, `INFO`, `DEBUG`. |
+| `log_to_file` | boolean | (Optional) Whether to log to a file.                                        |
+| `log_file`    | string  | (Optional) The path to the log file.                                        |
+
+**Response:**
+
+The updated logging configuration object.
+
+**Errors:**
+
+- `400 Bad Request`: If the log level is invalid.
+
+---
+
+## Caching
+
+### `GET /cache`
+
+Returns statistics about the cache.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/cache
+```
+
+**Response:**
+
+```json
+{
+  "total_items": 302,
+  "by_type": {
+    "search": 80,
+    "metadata": 222
+  }
+}
+```
+
+### `DELETE /cache`
+
+Clears the cache.
+
+**Request:**
+
+To clear the entire cache:
+
+```bash
+curl -X DELETE http://0.0.0.0:8080/api/cache \
+  -H "Content-Type: application/json" \
+  -d '{}'
+```
+
+To clear a specific type of cache:
+
+```bash
+curl -X DELETE http://0.0.0.0:8080/api/cache \
+  -H "Content-Type: application/json" \
+  -d '{
+    "type": "metadata"
+  }'
+```
+
+**Body Parameters:**
+
+| Name   | Type   | Description                                            |
+| ------ | ------ | ------------------------------------------------------ |
+| `type` | string | (Optional) The type of cache to clear (e.g., "search", "metadata"). If omitted, the entire cache is cleared. |
+
+**Response:**
+
+```json
+{
+  "status": "cleared",
+  "by_type": {
+    "search": 0,
+    "metadata": 0
+  }
+}
+```
+
+---
+
+## Network / Proxy Settings
+
+### `GET /network`
+
+Returns the current network proxy configuration.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/network
+```
+
+**Response:**
+
+```json
+{
+  "proxy_enabled": false,
+  "http_proxy": null,
+  "https_proxy": null
+}
+```
+
+### `PATCH /network`
+
+Updates the network proxy configuration.
+
+**Request:**
+
+```bash
+curl -X PATCH http://0.0.0.0:8080/api/network \
+  -H "Content-Type: application/json" \
+  -d '{
+    "proxy_enabled": true,
+    "http_proxy": "http://proxy.local:3128"
+  }'
+```
+
+**Body Parameters:**
+
+| Name            | Type    | Description                          |
+| --------------- | ------- | ------------------------------------ |
+| `proxy_enabled` | boolean | (Optional) Whether the proxy is enabled. |
+| `http_proxy`    | string  | (Optional) The HTTP proxy URL.       |
+| `https_proxy`   | string  | (Optional) The HTTPS proxy URL.      |
+
+**Response:**
+
+The updated network proxy configuration object.
+
+---
+
+## Fork-Specific Features
+
+### `POST /playlist/sync`
+
+Initiates a synchronization of a playlist with a remote source.
+
+**Request:**
+
+```bash
+curl -X POST http://0.0.0.0:8080/api/playlist/sync \
+  -H "Content-Type: application/json" \
+  -d '{
+    "playlist_id": "abc123"
+  }'
+```
+
+**Body Parameters:**
+
+| Name          | Type   | Description                            |
+| ------------- | ------ | -------------------------------------- |
+| `playlist_id` | string | The ID of the playlist to synchronize. |
+
+**Response:**
+
+```json
+{
+  "status": "ok",
+  "synced_tracks": 18,
+  "conflicts": ["track_4", "track_9"]
+}
+```
+
+### `GET /downloads/status`
+
+Returns the status of the download queue.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/downloads/status
+```
+
+**Response:**
+
+```json
+{
+  "in_progress": [],
+  "failed": {
+    "track_7": "Network error",
+    "track_10": "404 not found"
+  },
+  "completed": ["track_3", "track_5"]
+}
+```
+
+### `POST /downloads/retry`
+
+Retries failed downloads.
+
+**Request:**
+
+```bash
+curl -X POST http://0.0.0.0:8080/api/downloads/retry \
+  -H "Content-Type: application/json" \
+  -d '{
+    "track_ids": ["track_7", "track_10"]
+  }'
+```
+
+**Body Parameters:**
+
+| Name        | Type     | Description                          |
+| ----------- | -------- | ------------------------------------ |
+| `track_ids` | string[] | A list of track IDs to retry. |
+
+**Response:**
+
+```json
+{
+  "retried": ["track_7", "track_10"],
+  "queued": true
+}
+```
+
+### `GET /metadata/{track_id}`
+
+Returns extended metadata for a specific track.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/metadata/abc123
+```
+
+**Path Parameters:**
+
+| Name       | Type   | Description                |
+| ---------- | ------ | -------------------------- |
+| `track_id` | string | The ID of the track. |
+
+**Response:**
+
+```json
+{
+  "title": "Track Title",
+  "mood": "Chill",
+  "rating": 4,
+  "source": "Manual Import"
+}
+```
+
+### `PATCH /metadata/{track_id}`
+
+Updates extended metadata for a track.
+
+**Request:**
+
+```bash
+curl -X PATCH http://0.0.0.0:8080/api/metadata/abc123 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "mood": "Energetic",
+    "rating": 5
+  }'
+```
+
+**Path Parameters:**
+
+| Name       | Type   | Description                |
+| ---------- | ------ | -------------------------- |
+| `track_id` | string | The ID of the track. |
+
+**Body Parameters:**
+
+| Name     | Type    | Description                   |
+| -------- | ------- | ----------------------------- |
+| `mood`   | string  | (Optional) The new mood.      |
+| `rating` | integer | (Optional) The new rating.    |
+| `source` | string  | (Optional) The new source.    |
+
+**Response:**
+
+```json
+{
+  "status": "updated",
+  "track_id": "abc123"
+}
+```
+
+---
+
+## Final Notes
+
+- All endpoints are unauthenticated for local use.
+- Use `jq` to pretty-print JSON responses in CLI.
+- Future integrations (Spotify, tagging engines) will build on these base endpoints.
