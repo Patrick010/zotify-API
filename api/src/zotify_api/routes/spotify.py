@@ -119,3 +119,11 @@ async def fetch_metadata(track_id: str):
             raise HTTPException(resp.status_code, "Failed to fetch track metadata")
         logger.info(f"Received metadata: {resp.json()}")
         return await resp.json()
+
+@router.post("/playlist/sync")
+async def playlist_sync():
+    await refresh_token_if_needed()
+    # Fetch Spotify playlists, local playlists
+    # Reconcile differences (create/update/delete)
+    # Return sync summary and any conflicts
+    return {"status": "Playlists synced (stub)"}

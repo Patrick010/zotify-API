@@ -292,3 +292,27 @@ curl -X PATCH http://0.0.0.0:8080/api/network -H "Content-Type: application/json
 - All endpoints are unauthenticated for local use.
 - Use `jq` to pretty-print JSON responses in CLI.
 - Future integrations (Spotify, tagging engines) will build on these base endpoints.
+
+---
+
+## Manual Test Runbook
+
+### Setup
+
+1.  Register your app with Spotify Developer Console.
+2.  Set redirect URI to `http://localhost:8080/api/spotify/callback`.
+3.  Update `CLIENT_ID` and `CLIENT_SECRET` in `api/src/zotify_api/routes/spotify.py`.
+4.  Start API server.
+
+### Steps
+
+1.  Request login URL: `GET /api/spotify/login`
+2.  Open URL in browser, authorize, and get the `code` query param.
+3.  Call `/api/spotify/callback?code=YOUR_CODE` with that code.
+4.  Check token status with `/api/spotify/token_status`.
+5.  Trigger playlist sync with `/api/spotify/sync_playlists`.
+6.  Fetch metadata for sample track IDs.
+7.  Simulate token expiry and verify automatic refresh.
+8.  Test with proxy settings enabled.
+9.  Inject errors by revoking tokens on Spotify and verify error handling.
+10. Repeat tests on slow networks or disconnects.
