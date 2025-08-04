@@ -1,62 +1,64 @@
 import json
 from typing import List
 from uuid import uuid4
-from fastapi import APIRouter, HTTPException, UploadFile, File, Form
+from fastapi import APIRouter, HTTPException, UploadFile, File, Depends
 from starlette.responses import Response
 
 from zotify_api.models.playlist import Playlist, PlaylistCreate, TrackRequest
-from zotify_api.storage.crud import get_playlists_db, save_playlists_db
+from zotify_api import database
 
 router = APIRouter()
 
 @router.get("/playlists", response_model=List[Playlist], summary="Get all playlists")
-async def get_playlists():
-    return get_playlists_db()
+async def get_playlists(db: List[dict] = Depends(database.get_db)):
+    return db
 
 @router.post("/playlists", response_model=Playlist, status_code=201, summary="Create a new playlist")
-async def create_playlist(playlist_in: PlaylistCreate):
-    db = get_playlists_db()
+async def create_playlist(playlist_in: PlaylistCreate, db: List[dict] = Depends(database.get_db)):
     new_playlist = Playlist(id=str(uuid4()), name=playlist_in.name, tracks=[])
-    db.append(new_playlist.dict())
-    save_playlists_db(db)
+    db.append(new_playlist.model_dump())
+    database.save_db(db)
     return new_playlist
 
 @router.delete("/playlists/{playlist_id}", status_code=204, summary="Delete a playlist by ID")
-async def delete_playlist(playlist_id: str):
-    db = get_playlists_db()
+async def delete_playlist(playlist_id: str, db: List[dict] = Depends(database.get_db)):
     playlist_to_delete = next((p for p in db if p["id"] == playlist_id), None)
     if not playlist_to_delete:
         raise HTTPException(status_code=404, detail="Playlist not found")
 
-    db = [p for p in db if p["id"] != playlist_id]
-    save_playlists_db(db)
+    db_after_delete = [p for p in db if p["id"] != playlist_id]
+    database.save_db(db_after_delete)
     return Response(status_code=204)
 
 @router.post("/playlists/{playlist_id}/tracks", response_model=Playlist, summary="Add tracks to a playlist")
-async def add_tracks_to_playlist(playlist_id: str, tracks_in: TrackRequest):
-    db = get_playlists_db()
+async def add_tracks_to_playlist(playlist_id: str, tracks_in: TrackRequest, db: List[dict] = Depends(database.get_db)):
     playlist_to_update = next((p for p in db if p["id"] == playlist_id), None)
     if not playlist_to_update:
         raise HTTPException(status_code=404, detail="Playlist not found")
 
-    playlist_to_update["tracks"].extend(tracks_in.track_ids)
-    save_playlists_db(db)
+    # Add only unique tracks
+    existing_tracks = set(playlist_to_update["tracks"])
+    for track_id in tracks_in.track_ids:
+        if track_id not in existing_tracks:
+            playlist_to_update["tracks"].append(track_id)
+            existing_tracks.add(track_id)
+
+    database.save_db(db)
     return playlist_to_update
 
 @router.delete("/playlists/{playlist_id}/tracks", response_model=Playlist, summary="Remove tracks from a playlist")
-async def remove_tracks_from_playlist(playlist_id: str, tracks_in: TrackRequest):
-    db = get_playlists_db()
+async def remove_tracks_from_playlist(playlist_id: str, tracks_in: TrackRequest, db: List[dict] = Depends(database.get_db)):
     playlist_to_update = next((p for p in db if p["id"] == playlist_id), None)
     if not playlist_to_update:
         raise HTTPException(status_code=404, detail="Playlist not found")
 
-    playlist_to_update["tracks"] = [t for t in playlist_to_update["tracks"] if t not in tracks_in.track_ids]
-    save_playlists_db(db)
+    tracks_to_remove = set(tracks_in.track_ids)
+    playlist_to_update["tracks"] = [t for t in playlist_to_update["tracks"] if t not in tracks_to_remove]
+    database.save_db(db)
     return playlist_to_update
 
 @router.get("/playlists/{playlist_id}/export", summary="Export a playlist")
-async def export_playlist(playlist_id: str, format: str = "json"):
-    db = get_playlists_db()
+async def export_playlist(playlist_id: str, format: str = "json", db: List[dict] = Depends(database.get_db)):
     playlist = next((p for p in db if p["id"] == playlist_id), None)
     if not playlist:
         raise HTTPException(status_code=404, detail="Playlist not found")
@@ -69,19 +71,26 @@ async def export_playlist(playlist_id: str, format: str = "json"):
     else:
         raise HTTPException(status_code=400, detail="Unsupported format")
 
-@router.post("/playlists/import", response_model=Playlist, status_code=201, summary="Import a playlist from a .json file")
-async def import_playlist(file: UploadFile = File(...)):
-    if not file.filename.endswith(".json"):
-        raise HTTPException(status_code=400, detail="Invalid file type. Only .json files are supported.")
+@router.post("/playlists/import", response_model=Playlist, status_code=201, summary="Import a playlist from a .json or .m3u file")
+async def import_playlist(file: UploadFile = File(...), db: List[dict] = Depends(database.get_db)):
+    if file.filename.endswith(".json"):
+        try:
+            contents = await file.read()
+            data = json.loads(contents)
+            playlist = Playlist(**data)
+        except Exception:
+            raise HTTPException(status_code=400, detail="Invalid JSON format or structure.")
+    elif file.filename.endswith(".m3u"):
+        try:
+            contents = await file.read()
+            track_ids = [line.strip() for line in contents.decode("utf-8").splitlines() if line.strip() and not line.startswith("#")]
+            playlist_name = file.filename[:-4]
+            playlist = Playlist(id=str(uuid4()), name=playlist_name, tracks=track_ids)
+        except Exception:
+            raise HTTPException(status_code=400, detail="Could not parse M3U file.")
+    else:
+        raise HTTPException(status_code=400, detail="Invalid file type. Only .json and .m3u files are supported.")
 
-    try:
-        contents = await file.read()
-        data = json.loads(contents)
-        playlist = Playlist(**data)
-    except Exception:
-        raise HTTPException(status_code=400, detail="Invalid JSON format or structure.")
-
-    db = get_playlists_db()
-    db.append(playlist.dict())
-    save_playlists_db(db)
+    db.append(playlist.model_dump())
+    database.save_db(db)
     return playlist
