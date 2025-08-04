@@ -24,6 +24,8 @@ No authentication is required for local testing. Production deployments should r
 - Caching
 - Network / Proxy Settings
 - Spotify Integration
+- User
+- System
 - Fork-Specific Features
 
 ---
@@ -238,6 +240,78 @@ Triggers a synchronization of playlists with Spotify.
 ### `GET /spotify/metadata/{track_id}`
 
 Fetches metadata for a track from Spotify.
+
+### `GET /spotify/playlists`
+
+List user playlists.
+
+### `GET /spotify/playlists/{playlist_id}`
+
+Get playlist metadata.
+
+### `DELETE /spotify/playlists/{playlist_id}`
+
+Delete local copy.
+
+### `GET /spotify/playlists/{playlist_id}/tracks`
+
+List tracks in playlist.
+
+### `POST /spotify/playlists/{playlist_id}/sync`
+
+Sync specific playlist.
+
+### `PUT /spotify/playlists/{playlist_id}/metadata`
+
+Update local playlist metadata.
+
+---
+
+## User
+
+### `GET /user/profile`
+
+Get user profile.
+
+### `GET /user/liked`
+
+List liked songs.
+
+### `POST /user/sync_liked`
+
+Download liked songs.
+
+### `GET /user/history`
+
+List download history.
+
+### `DELETE /user/history`
+
+Clear history.
+
+---
+
+## System
+
+### `GET /system/status`
+
+Get system health.
+
+### `GET /system/storage`
+
+Get disk/storage usage.
+
+### `GET /system/logs`
+
+Fetch logs.
+
+### `POST /system/reload`
+
+Reload config.
+
+### `POST /system/reset`
+
+Reset state.
 
 ---
 

@@ -23,6 +23,8 @@ No authentication is required for local testing. Production deployments should r
 - [Caching](#caching)
 - [Network](#network--proxy-settings)
 - [Spotify Integration](#spotify-integration)
+- [User](#user)
+- [System](#system)
 - [Fork-Specific Features](#fork-specific-features)
 
 ---
@@ -602,6 +604,238 @@ The raw JSON response from the Spotify API.
 
 - `401 Unauthorized`: If the Spotify access token is invalid or expired.
 - `404 Not Found`: If the track with the given ID does not exist on Spotify.
+
+### `GET /spotify/playlists`
+
+List user playlists.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/spotify/playlists
+```
+
+**Response:**
+
+`501 Not Implemented`
+
+### `GET /spotify/playlists/{playlist_id}`
+
+Get playlist metadata.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/spotify/playlists/abc123
+```
+
+**Response:**
+
+`501 Not Implemented`
+
+### `DELETE /spotify/playlists/{playlist_id}`
+
+Delete local copy.
+
+**Request:**
+
+```bash
+curl -X DELETE http://0.0.0.0:8080/api/spotify/playlists/abc123
+```
+
+**Response:**
+
+`501 Not Implemented`
+
+### `GET /spotify/playlists/{playlist_id}/tracks`
+
+List tracks in playlist.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/spotify/playlists/abc123/tracks
+```
+
+**Response:**
+
+`501 Not Implemented`
+
+### `POST /spotify/playlists/{playlist_id}/sync`
+
+Sync specific playlist.
+
+**Request:**
+
+```bash
+curl -X POST http://0.0.0.0:8080/api/spotify/playlists/abc123/sync
+```
+
+**Response:**
+
+`501 Not Implemented`
+
+### `PUT /spotify/playlists/{playlist_id}/metadata`
+
+Update local playlist metadata.
+
+**Request:**
+
+```bash
+curl -X PUT http://0.0.0.0:8080/api/spotify/playlists/abc123/metadata
+```
+
+**Response:**
+
+`501 Not Implemented`
+
+---
+
+## User
+
+### `GET /user/profile`
+
+Get user profile.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/user/profile
+```
+
+**Response:**
+
+`501 Not Implemented`
+
+### `GET /user/liked`
+
+List liked songs.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/user/liked
+```
+
+**Response:**
+
+`501 Not Implemented`
+
+### `POST /user/sync_liked`
+
+Download liked songs.
+
+**Request:**
+
+```bash
+curl -X POST http://0.0.0.0:8080/api/user/sync_liked
+```
+
+**Response:**
+
+`501 Not Implemented`
+
+### `GET /user/history`
+
+List download history.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/user/history
+```
+
+**Response:**
+
+`501 Not Implemented`
+
+### `DELETE /user/history`
+
+Clear history.
+
+**Request:**
+
+```bash
+curl -X DELETE http://0.0.0.0:8080/api/user/history
+```
+
+**Response:**
+
+`501 Not Implemented`
+
+---
+
+## System
+
+### `GET /system/status`
+
+Get system health.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/system/status
+```
+
+**Response:**
+
+`501 Not Implemented`
+
+### `GET /system/storage`
+
+Get disk/storage usage.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/system/storage
+```
+
+**Response:**
+
+`501 Not Implemented`
+
+### `GET /system/logs`
+
+Fetch logs.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/system/logs
+```
+
+**Response:**
+
+`501 Not Implemented`
+
+### `POST /system/reload`
+
+Reload config.
+
+**Request:**
+
+```bash
+curl -X POST http://0.0.0.0:8080/api/system/reload
+```
+
+**Response:**
+
+`501 Not Implemented`
+
+### `POST /system/reset`
+
+Reset state.
+
+**Request:**
+
+```bash
+curl -X POST http://0.0.0.0:8080/api/system/reset
+```
+
+**Response:**
+
+`501 Not Implemented`
 
 ---
 
