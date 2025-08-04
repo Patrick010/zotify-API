@@ -2,25 +2,11 @@
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools.packages.find]
-where = ["src"]
-
-[tool.pytest.ini_options]
-testpaths = [
-    "tests",
-]
-addopts = "-v"
-pythonpath = "src"
-
 [project]
 name = "zotify-api"
 version = "0.1.0"
 description = "A REST API for the Zotify music and podcast downloader."
 requires-python = ">=3.10"
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "Operating System :: OS Independent",
-]
 dependencies = [
     "fastapi",
     "uvicorn",
@@ -32,5 +18,15 @@ dependencies = [
     "protobuf==3.20.1",
     "pwinput",
     "tabulate[widechars]",
-    "tqdm"
+    "tqdm",
+    "pytest",
+    "pytest-asyncio"
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"
+pythonpath = "src"
+
+[tool.pytest-asyncio]
+mode = "auto"
