@@ -17,9 +17,9 @@ spotify_tokens = {
     "expires_at": 0
 }
 
-CLIENT_ID = "65b708073fc0480ea92a077233ca87bd"
-CLIENT_SECRET = "your_spotify_client_secret"
-REDIRECT_URI = "http://localhost:8080/api/spotify/callback"
+CLIENT_ID = "d9994d1fa6d243628ea0d4920716aa54"
+CLIENT_SECRET = "832bc60deeb147db86dd1cc521d9e4bf"
+REDIRECT_URI = "http://127.0.0.1:8080/api/spotify/callback"
 SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize"
 SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
 SPOTIFY_API_BASE = "https://api.spotify.com/v1"
