@@ -27,13 +27,14 @@ def get_db_counts():
             last_track = conn.execute(text("SELECT MAX(updated_at) FROM tracks")).scalar()
             last_updated = last_track if last_track is not None else None
             return int(total_tracks), int(total_playlists), last_updated
-    except OperationalError as e:
+    except (OperationalError, SQLAlchemyError) as e:
         # Expected when table is missing or DB schema not created
-        log.warning("OperationalError in get_db_counts — returning fallback. Error: %s", e, exc_info=True)
-        return 0, 0, None
-    except SQLAlchemyError as e:
-        # Generic SQLAlchemy fallback/defensive catch
-        log.error("SQLAlchemyError in get_db_counts — returning fallback. Error: %s", e, exc_info=True)
+        exc_info = settings.app_env == "development"
+        log.warning(
+            "DB error in get_db_counts — returning fallback. Error: %s",
+            e,
+            exc_info=exc_info,
+        )
         return 0, 0, None
 
 def get_library_size_mb(path: str | None = None) -> float:
