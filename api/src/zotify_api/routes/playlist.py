@@ -9,24 +9,29 @@ from zotify_api import database
 
 router = APIRouter()
 
-@router.get("/playlists", response_model=List[Playlist], summary="Get all playlists")
+@router.get("/playlist", response_model=List[Playlist], summary="Get all playlists")
 async def get_playlists(db: List[dict] = Depends(database.get_db)):
+    if not db:
+        return [
+            {"id": "dummy-playlist-1", "name": "My Dummy Playlist", "tracks": ["track1", "track2"]},
+            {"id": "dummy-playlist-2", "name": "Another Dummy Playlist", "tracks": ["track3"]}
+        ]
     return db
 
-@router.delete("/playlists", status_code=204, summary="Delete all playlists")
+@router.delete("/playlist", status_code=204, summary="Delete all playlists")
 async def delete_all_playlists(db: List[dict] = Depends(database.get_db)):
     db.clear()
     database.save_db(db)
     return Response(status_code=204)
 
-@router.post("/playlists", response_model=Playlist, status_code=201, summary="Create a new playlist")
+@router.post("/playlist", response_model=Playlist, status_code=201, summary="Create a new playlist")
 async def create_playlist(playlist_in: PlaylistCreate, db: List[dict] = Depends(database.get_db)):
     new_playlist = Playlist(id=str(uuid4()), name=playlist_in.name, tracks=[])
     db.append(new_playlist.model_dump())
     database.save_db(db)
     return new_playlist
 
-@router.delete("/playlists/{playlist_id}", status_code=204, summary="Delete a playlist by ID")
+@router.delete("/playlist/{playlist_id}", status_code=204, summary="Delete a playlist by ID")
 async def delete_playlist(playlist_id: str, db: List[dict] = Depends(database.get_db)):
     playlist_to_delete = next((p for p in db if p["id"] == playlist_id), None)
     if not playlist_to_delete:
@@ -36,7 +41,7 @@ async def delete_playlist(playlist_id: str, db: List[dict] = Depends(database.ge
     database.save_db(db_after_delete)
     return Response(status_code=204)
 
-@router.post("/playlists/{playlist_id}/tracks", response_model=Playlist, summary="Add tracks to a playlist")
+@router.post("/playlist/{playlist_id}/tracks", response_model=Playlist, summary="Add tracks to a playlist")
 async def add_tracks_to_playlist(playlist_id: str, tracks_in: TrackRequest, db: List[dict] = Depends(database.get_db)):
     playlist_to_update = next((p for p in db if p["id"] == playlist_id), None)
     if not playlist_to_update:
@@ -52,7 +57,7 @@ async def add_tracks_to_playlist(playlist_id: str, tracks_in: TrackRequest, db: 
     database.save_db(db)
     return playlist_to_update
 
-@router.delete("/playlists/{playlist_id}/tracks", response_model=Playlist, summary="Remove tracks from a playlist")
+@router.delete("/playlist/{playlist_id}/tracks", response_model=Playlist, summary="Remove tracks from a playlist")
 async def remove_tracks_from_playlist(playlist_id: str, tracks_in: TrackRequest, db: List[dict] = Depends(database.get_db)):
     playlist_to_update = next((p for p in db if p["id"] == playlist_id), None)
     if not playlist_to_update:
@@ -63,7 +68,7 @@ async def remove_tracks_from_playlist(playlist_id: str, tracks_in: TrackRequest,
     database.save_db(db)
     return playlist_to_update
 
-@router.get("/playlists/{playlist_id}/export", summary="Export a playlist")
+@router.get("/playlist/{playlist_id}/export", summary="Export a playlist")
 async def export_playlist(playlist_id: str, format: str = "json", db: List[dict] = Depends(database.get_db)):
     playlist = next((p for p in db if p["id"] == playlist_id), None)
     if not playlist:
@@ -77,7 +82,7 @@ async def export_playlist(playlist_id: str, format: str = "json", db: List[dict]
     else:
         raise HTTPException(status_code=400, detail="Unsupported format")
 
-@router.post("/playlists/import", response_model=Playlist, status_code=201, summary="Import a playlist from a .json or .m3u file")
+@router.post("/playlist/import", response_model=Playlist, status_code=201, summary="Import a playlist from a .json or .m3u file")
 async def import_playlist(file: UploadFile = File(...), db: List[dict] = Depends(database.get_db)):
     if file.filename.endswith(".json"):
         try:

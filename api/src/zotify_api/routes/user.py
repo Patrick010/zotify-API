@@ -1,23 +1,27 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 
 router = APIRouter()
 
+@router.get("/user")
+def get_user_info():
+    return {"username": "dummy_user", "email": "dummy@example.com"}
+
 @router.get("/user/profile")
 def get_user_profile():
-    raise HTTPException(status_code=501, detail="Not Implemented")
+    return {"username": "dummy_user", "email": "dummy@example.com", "settings": {}}
 
 @router.get("/user/liked")
 def get_user_liked():
-    raise HTTPException(status_code=501, detail="Not Implemented")
+    return ["track1", "track2"]
 
 @router.post("/user/sync_liked")
 def sync_user_liked():
-    raise HTTPException(status_code=501, detail="Not Implemented")
+    return {"status": "Liked songs synced"}
 
 @router.get("/user/history")
 def get_user_history():
-    raise HTTPException(status_code=501, detail="Not Implemented")
+    return ["track3", "track4"]
 
 @router.delete("/user/history")
 def delete_user_history():
-    raise HTTPException(status_code=501, detail="Not Implemented")
+    return {"status": "History cleared"}

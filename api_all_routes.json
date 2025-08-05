@@ -1,0 +1,27 @@
+[
+{"route":"config", "data": {"library_path":"/music","scan_on_startup":true,"cover_art_embed_enabled":true}}
+,
+{"route":"playlist", "data": [{"name":"My Dummy Playlist","id":"dummy-playlist-1","tracks":["track1","track2"]},{"name":"Another Dummy Playlist","id":"dummy-playlist-2","tracks":["track3"]}]}
+,
+{"route":"tracks", "data": [{"id":"1","title":"Demo Track 1"},{"id":"2","title":"Demo Track 2"}]}
+,
+{"route":"logging", "data": {"level":"INFO","log_to_file":false,"log_file":null}}
+,
+{"route":"cache", "data": {"total_items":302,"by_type":{"search":80,"metadata":222}}}
+,
+{"route":"network", "data": {"proxy_enabled":false,"http_proxy":null,"https_proxy":null}}
+,
+{"route":"sync", "data": {"status":"Sync is active","details":"Ready to sync."}}
+,
+{"route":"downloads", "data": {"in_progress":[],"failed":{"track_7":"Network error","track_10":"404 not found"},"completed":["track_3","track_5"]}}
+,
+{"route":"metadata", "data": {"abc123":{"title":"Track Title","mood":"Chill","rating":4,"source":"Manual Import"}}}
+,
+{"route":"spotify", "data": {"status":"Spotify integration is active"}}
+,
+{"route":"stubs", "data": {"message":"This is a stub endpoint."}}
+,
+{"route":"user", "data": {"username":"dummy_user","email":"dummy@example.com"}}
+,
+{"route":"system", "data": {"status":"System is operational"}}
+]

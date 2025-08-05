@@ -3,6 +3,10 @@ from zotify_api.models.track import TrackMetadata
 
 router = APIRouter()
 
+@router.get("/tracks", summary="Get all tracks")
+def get_tracks():
+    return [{"id": "1", "title": "Demo Track 1"}, {"id": "2", "title": "Demo Track 2"}]
+
 @router.get("/tracks/{track_id}/metadata", summary="Get metadata for a specific track")
 def get_track_metadata(track_id: str):
     return {"id": track_id, "title": "Demo", "artist": "Artist", "album": "Album", "genre": "Rock", "year": 2020}

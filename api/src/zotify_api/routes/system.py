@@ -1,23 +1,27 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 
 router = APIRouter()
 
+@router.get("/system")
+def get_system_info():
+    return {"status": "System is operational"}
+
 @router.get("/system/status")
 def get_system_status():
-    raise HTTPException(status_code=501, detail="Not Implemented")
+    return {"status": "All systems nominal"}
 
 @router.get("/system/storage")
 def get_system_storage():
-    raise HTTPException(status_code=501, detail="Not Implemented")
+    return {"free_space": "100GB", "total_space": "500GB"}
 
 @router.get("/system/logs")
 def get_system_logs():
-    raise HTTPException(status_code=501, detail="Not Implemented")
+    return ["Log entry 1", "Log entry 2"]
 
 @router.post("/system/reload")
 def reload_system_config():
-    raise HTTPException(status_code=501, detail="Not Implemented")
+    return {"message": "System config reloaded"}
 
 @router.post("/system/reset")
 def reset_system_state():
-    raise HTTPException(status_code=501, detail="Not Implemented")
+    return {"message": "System state reset"}

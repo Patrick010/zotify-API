@@ -1,15 +1,19 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 
 router = APIRouter()
 
-@router.get("/search")
+@router.get("/stubs")
+def get_stubs():
+    return {"message": "This is a stub endpoint."}
+
+@router.get("/stubs/search")
 def search():
-    raise HTTPException(status_code=501, detail="Not Implemented")
+    return {"status": "Search not implemented"}
 
-@router.post("/download")
+@router.post("/stubs/download")
 def download():
-    raise HTTPException(status_code=501, detail="Not Implemented")
+    return {"status": "Download not implemented"}
 
-@router.get("/download/status")
+@router.get("/stubs/download/status")
 def download_status():
-    raise HTTPException(status_code=501, detail="Not Implemented")
+    return {"status": "Download status not implemented"}

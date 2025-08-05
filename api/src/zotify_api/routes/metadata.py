@@ -13,6 +13,10 @@ track_metadata = {
     }
 }
 
+@router.get("/metadata", summary="Get all metadata")
+def get_all_metadata():
+    return track_metadata
+
 @router.get("/metadata/{track_id}", summary="Get extended metadata for a track")
 def get_metadata(track_id: str):
     return track_metadata.get(track_id, {"track_id": track_id, "status": "not found"})

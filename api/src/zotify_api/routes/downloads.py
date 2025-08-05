@@ -10,7 +10,7 @@ download_state = {
     "completed": ["track_3", "track_5"]
 }
 
-@router.get("/downloads/status", summary="Get status of download queue")
+@router.get("/downloads", summary="Get status of download queue")
 def download_status():
     return download_state
 

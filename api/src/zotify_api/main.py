@@ -21,6 +21,10 @@ app.include_router(stubs.router, prefix="/api")
 app.include_router(user.router, prefix="/api")
 app.include_router(system.router, prefix="/api")
 
+@app.get("/api/spotify")
+def spotify_status():
+    return {"status": "Spotify integration is active"}
+
 @app.get("/ping")
 async def ping():
     return {"pong": True}
