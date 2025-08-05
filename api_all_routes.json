@@ -3,7 +3,7 @@
 ,
 {"route":"playlist", "data": [{"name":"My Dummy Playlist","id":"dummy-playlist-1","tracks":["track1","track2"]},{"name":"Another Dummy Playlist","id":"dummy-playlist-2","tracks":["track3"]}]}
 ,
-{"route":"tracks", "data": [{"id":"1","title":"Demo Track 1"},{"id":"2","title":"Demo Track 2"}]}
+{"route":"tracks", "data": [{"title":"Demo Track 1","artist":"Artist 1","album":"Album 1","id":"1","genre":null,"year":null},{"title":"Demo Track 2","artist":"Artist 2","album":"Album 2","id":"2","genre":"Rock","year":2021}]}
 ,
 {"route":"logging", "data": {"level":"INFO","log_to_file":false,"log_file":null}}
 ,
@@ -21,7 +21,7 @@
 ,
 {"route":"stubs", "data": {"message":"This is a stub endpoint."}}
 ,
-{"route":"user", "data": {"username":"dummy_user","email":"dummy@example.com"}}
+{"route":"user", "data": {"username":"dummy_user","email":"dummy@example.com","id":"dummy-user","liked_tracks":["track1","track2"],"history":["track3","track4"],"settings":{"theme":"dark"}}}
 ,
-{"route":"system", "data": {"status":"System is operational"}}
+{"route":"system", "data": {"status":"System is operational","free_space":"100GB","total_space":"500GB","logs":["Log entry 1","Log entry 2"]}}
 ]

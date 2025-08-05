@@ -22,7 +22,8 @@ dependencies = [
     "pytest",
     "pytest-asyncio",
     "python-multipart",
-    "httpx"
+    "httpx",
+    "pydantic[email]"
 ]
 
 [tool.pytest.ini_options]

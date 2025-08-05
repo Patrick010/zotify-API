@@ -9,13 +9,15 @@ from zotify_api import database
 
 router = APIRouter()
 
+mock_playlists = [
+    Playlist(id="dummy-playlist-1", name="My Dummy Playlist", tracks=["track1", "track2"]),
+    Playlist(id="dummy-playlist-2", name="Another Dummy Playlist", tracks=["track3"])
+]
+
 @router.get("/playlist", response_model=List[Playlist], summary="Get all playlists")
 async def get_playlists(db: List[dict] = Depends(database.get_db)):
     if not db:
-        return [
-            {"id": "dummy-playlist-1", "name": "My Dummy Playlist", "tracks": ["track1", "track2"]},
-            {"id": "dummy-playlist-2", "name": "Another Dummy Playlist", "tracks": ["track3"]}
-        ]
+        return mock_playlists
     return db
 
 @router.delete("/playlist", status_code=204, summary="Delete all playlists")
