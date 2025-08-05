@@ -6,7 +6,7 @@ client = TestClient(app)
 
 @pytest.fixture(autouse=True)
 def patch_db_none(monkeypatch):
-    monkeypatch.setattr("zotify_api.routes.metadata.get_db_engine", lambda: None)
+    monkeypatch.setattr("zotify_api.services.db.get_db_engine", lambda: None)
 
 def test_metadata_fallback():
     r = client.get("/api/metadata")

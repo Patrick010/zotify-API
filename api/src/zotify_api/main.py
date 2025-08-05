@@ -1,30 +1,14 @@
 from fastapi import FastAPI
-from zotify_api.routes import playlist, config, tracks, logging, cache, network, sync, downloads, metadata, spotify, stubs, user, system
+from zotify_api.routes import metadata, cache, logging, system, user, playlist, tracks, downloads, spotify, sync, stubs
 from .globals import app_start_time
 
-app = FastAPI(
-    title="Zotify API",
-    version="0.1.3",
-    description="A REST API for the Zotify music and podcast downloader."
-)
+app = FastAPI()
+from zotify_api.routes import config, network
 
-app.include_router(playlist.router, prefix="/api")
-app.include_router(config.router, prefix="/api")
-app.include_router(tracks.router, prefix="/api")
-app.include_router(logging.router, prefix="/api")
-app.include_router(cache.router, prefix="/api")
-app.include_router(network.router, prefix="/api")
-app.include_router(sync.router, prefix="/api")
-app.include_router(downloads.router, prefix="/api")
-app.include_router(metadata.router, prefix="/api")
-app.include_router(spotify.router, prefix="/api")
-app.include_router(stubs.router, prefix="/api")
-app.include_router(user.router, prefix="/api")
-app.include_router(system.router, prefix="/api")
-
-@app.get("/api/spotify")
-def spotify_status():
-    return {"status": "Spotify integration is active"}
+modules = [metadata, cache, logging, system, user, playlist, tracks, downloads, sync, stubs, config, network]
+for m in modules:
+    app.include_router(m.router, prefix="/api")
+app.include_router(spotify.router, prefix="/api/spotify")
 
 @app.get("/ping")
 async def ping():

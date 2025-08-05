@@ -1,21 +1,40 @@
+# api/src/zotify_api/services/metadata.py
 from datetime import datetime
 import os
 from sqlalchemy import text
-from zotify_api.config import settings
-
+from sqlalchemy.exc import OperationalError, SQLAlchemyError
 from zotify_api.services.db import get_db_engine
+from zotify_api.config import settings
+import logging
 
-def get_db_counts() -> tuple[int,int,datetime]:
+log = logging.getLogger(__name__)
+
+def get_db_counts():
+    """
+    Return (total_tracks:int, total_playlists:int, last_updated:datetime|None)
+    Falls back to safe defaults if DB or tables are missing.
+    """
     engine = get_db_engine()
+    # If no engine available (shouldn't happen with dev default), return fallback
     if engine is None:
+        log.warning("get_db_counts: no DB engine available — returning fallback counts")
         return 0, 0, None
-    # Example using SQLAlchemy core connection
-    with engine.connect() as conn:
-        total_tracks = conn.execute(text("SELECT COUNT(1) FROM tracks")).scalar() or 0
-        total_playlists = conn.execute(text("SELECT COUNT(1) FROM playlists")).scalar() or 0
-        last_track = conn.execute(text("SELECT MAX(updated_at) FROM tracks")).scalar()
-    last_updated = last_track or datetime.utcnow()
-    return total_tracks, total_playlists, last_updated
+
+    try:
+        with engine.connect() as conn:
+            total_tracks = conn.execute(text("SELECT COUNT(1) FROM tracks")).scalar() or 0
+            total_playlists = conn.execute(text("SELECT COUNT(1) FROM playlists")).scalar() or 0
+            last_track = conn.execute(text("SELECT MAX(updated_at) FROM tracks")).scalar()
+            last_updated = last_track if last_track is not None else None
+            return int(total_tracks), int(total_playlists), last_updated
+    except OperationalError as e:
+        # Expected when table is missing or DB schema not created
+        log.warning("OperationalError in get_db_counts — returning fallback. Error: %s", e, exc_info=True)
+        return 0, 0, None
+    except SQLAlchemyError as e:
+        # Generic SQLAlchemy fallback/defensive catch
+        log.error("SQLAlchemyError in get_db_counts — returning fallback. Error: %s", e, exc_info=True)
+        return 0, 0, None
 
 def get_library_size_mb(path: str | None = None) -> float:
     path = path or settings.library_path

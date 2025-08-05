@@ -14,7 +14,7 @@ from zotify_api.models.spotify import (
 )
 from typing import Literal
 
-router = APIRouter(prefix="/spotify")
+router = APIRouter()
 logger = logging.getLogger(__name__)
 
 # In-memory token store (replace with secure DB in prod)

@@ -6,6 +6,8 @@ for ep in "${ENDPOINTS[@]}"; do
   echo "Checking /$ep"
   if [ "$ep" == "user" ]; then
     code=$(curl -s -o /dev/null -w "%{http_code}" -H "X-Test-User: 3fa85f64-5717-4562-b3fc-2c963f66afa6" "$BASE_URL/$ep")
+  elif [ "$ep" == "spotify" ]; then
+    code=$(curl -s -o /dev/null -w "%{http_code}" "$BASE_URL/spotify/status")
   else
     code=$(curl -s -o /dev/null -w "%{http_code}" "$BASE_URL/$ep")
   fi
@@ -13,7 +15,18 @@ for ep in "${ENDPOINTS[@]}"; do
 done
 
 # check metadata non-empty
-curl -s "$BASE_URL/metadata" | jq '.total_tracks' >/dev/null || { echo "metadata missing total_tracks"; exit 1; }
+RESP=$(curl -s "$BASE_URL/metadata")
+if ! echo "$RESP" | jq . >/dev/null; then
+  echo "ERROR: /metadata did not return valid JSON"
+  exit 1
+fi
+# ensure total_tracks exists and is number
+TT=$(echo "$RESP" | jq '.total_tracks // 0')
+if [ -z "$TT" ]; then
+  echo "ERROR: /metadata missing total_tracks"
+  exit 1
+fi
+
 # check cache hit_rate present
 curl -s "$BASE_URL/cache" | jq '.hit_rate' >/dev/null || { echo "cache missing hit_rate"; exit 1; }
 # check logging returns data array
