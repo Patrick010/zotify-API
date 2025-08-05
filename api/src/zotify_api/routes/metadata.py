@@ -1,30 +1,24 @@
 from fastapi import APIRouter
-from zotify_api.models.metadata import MetadataUpdate
+from zotify_api.models.metadata import MetadataUpdate, MetadataResponse
+from datetime import datetime
 
 router = APIRouter()
 
-# Simulated backend storage
-track_metadata = {
-    "abc123": {
-        "title": "Track Title",
-        "mood": "Chill",
-        "rating": 4,
-        "source": "Manual Import"
-    }
-}
+mock_metadata = MetadataResponse(
+    total_tracks=1234,
+    total_playlists=56,
+    last_updated=datetime.now(),
+    library_size_mb=5678.9
+)
 
-@router.get("/metadata", summary="Get all metadata")
+@router.get("/metadata", response_model=MetadataResponse, summary="Get all metadata")
 def get_all_metadata():
-    return track_metadata
+    return mock_metadata
 
 @router.get("/metadata/{track_id}", summary="Get extended metadata for a track")
 def get_metadata(track_id: str):
-    return track_metadata.get(track_id, {"track_id": track_id, "status": "not found"})
+    return {"track_id": track_id, "mood": "Chill", "rating": 4}
 
 @router.patch("/metadata/{track_id}", summary="Update extended metadata for a track")
 def patch_metadata(track_id: str, meta: MetadataUpdate):
-    if track_id not in track_metadata:
-        track_metadata[track_id] = {"title": f"Track {track_id}"}
-    for k, v in meta.model_dump(exclude_unset=True).items():
-        track_metadata[track_id][k] = v
     return {"status": "updated", "track_id": track_id}

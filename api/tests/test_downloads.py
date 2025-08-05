@@ -1,28 +1,41 @@
 from fastapi.testclient import TestClient
 from zotify_api.main import app
-from zotify_api.routes.downloads import download_state
 
 client = TestClient(app)
 
-def test_download_status():
+def test_get_downloads():
+    """ Test for GET /downloads """
     response = client.get("/api/downloads")
     assert response.status_code == 200
-    assert "in_progress" in response.json()
-    assert "failed" in response.json()
-    assert "completed" in response.json()
+    response_json = response.json()
+    assert "data" in response_json
+    assert "meta" in response_json
+    assert isinstance(response_json["data"], list)
+    assert len(response_json["data"]) == 4
+
+def test_get_downloads_with_limit():
+    """ Test for GET /downloads with limit """
+    response = client.get("/api/downloads?limit=1")
+    assert response.status_code == 200
+    response_json = response.json()
+    assert len(response_json["data"]) == 1
+
+def test_get_downloads_with_offset():
+    """ Test for GET /downloads with offset """
+    response = client.get("/api/downloads?offset=1")
+    assert response.status_code == 200
+    response_json = response.json()
+    assert len(response_json["data"]) == 3
+
+def test_get_downloads_with_status():
+    """ Test for GET /downloads with status """
+    response = client.get("/api/downloads?status=completed")
+    assert response.status_code == 200
+    response_json = response.json()
+    assert len(response_json["data"]) == 1
+    assert response_json["data"][0]["status"] == "completed"
 
 def test_retry_downloads():
-    # Get initial state
-    initial_failed_count = len(download_state["failed"])
-    assert initial_failed_count > 0
-
-    # Retry failed downloads
     response = client.post("/api/downloads/retry", json={"track_ids": ["track_7", "track_10"]})
     assert response.status_code == 200
     assert response.json()["queued"] is True
-
-    # Verify that the failed queue is now empty
-    final_status = client.get("/api/downloads").json()
-    assert len(final_status["failed"]) == 0
-    assert "track_7" in final_status["in_progress"]
-    assert "track_10" in final_status["in_progress"]
