@@ -4,7 +4,11 @@ This directory contains bash scripts for running integration sanity checks on th
 
 ## Usage
 
-First, make sure the API server is running. Then, from the `api` directory, you can run the scripts individually:
+First, make sure the API server is running. Then, from the `api` directory, you can run the scripts individually.
+
+### Local Development
+
+For local development, the API will use a local SQLite database (`dev.db`) by default if `DATABASE_URL` is not set.
 
 ```bash
 # Run health checks

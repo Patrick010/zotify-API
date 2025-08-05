@@ -28,7 +28,9 @@ For detailed setup instructions, including prerequisites and different installat
 
 ### Running the Server
 
-To run the API server, first install the API in editable mode from the project root, then start the server:
+#### Local Development
+
+To run the API server for local development, first install the API in editable mode from the project root, then start the server. If `DATABASE_URL` is not set, a local SQLite database (`dev.db`) will be used by default.
 
 ```bash
 # From the project root directory (containing api/ and zotify/)
@@ -37,6 +39,16 @@ uvicorn zotify_api.main:app --reload --host 0.0.0.0 --port 8080
 ```
 
 The server will be accessible at `http://<your-host>:8080`.
+
+#### Production
+
+For production, you must set the `APP_ENV` and `DATABASE_URL` environment variables. The application will not start in production mode without a `DATABASE_URL`.
+
+```bash
+export APP_ENV=production
+export DATABASE_URL="postgresql+psycopg://user:pass@db:5432/zotify"
+uvicorn zotify_api.main:app --workers 4 --host 0.0.0.0 --port 8080
+```
 
 ### Testing the API
 

@@ -3,9 +3,14 @@ import os
 from sqlalchemy import text
 from zotify_api.config import settings
 
-def get_db_counts(db_engine) -> tuple[int,int,datetime]:
+from zotify_api.services.db import get_db_engine
+
+def get_db_counts() -> tuple[int,int,datetime]:
+    engine = get_db_engine()
+    if engine is None:
+        return 0, 0, None
     # Example using SQLAlchemy core connection
-    with db_engine.connect() as conn:
+    with engine.connect() as conn:
         total_tracks = conn.execute(text("SELECT COUNT(1) FROM tracks")).scalar() or 0
         total_playlists = conn.execute(text("SELECT COUNT(1) FROM playlists")).scalar() or 0
         last_track = conn.execute(text("SELECT MAX(updated_at) FROM tracks")).scalar()
