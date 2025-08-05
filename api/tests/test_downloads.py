@@ -5,7 +5,7 @@ from zotify_api.routes.downloads import download_state
 client = TestClient(app)
 
 def test_download_status():
-    response = client.get("/api/downloads/status")
+    response = client.get("/api/downloads")
     assert response.status_code == 200
     assert "in_progress" in response.json()
     assert "failed" in response.json()
@@ -22,7 +22,7 @@ def test_retry_downloads():
     assert response.json()["queued"] is True
 
     # Verify that the failed queue is now empty
-    final_status = client.get("/api/downloads/status").json()
+    final_status = client.get("/api/downloads").json()
     assert len(final_status["failed"]) == 0
     assert "track_7" in final_status["in_progress"]
     assert "track_10" in final_status["in_progress"]

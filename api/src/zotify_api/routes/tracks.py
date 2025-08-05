@@ -9,9 +9,22 @@ mock_tracks = [
     Track(id="2", title="Demo Track 2", artist="Artist 2", album="Album 2", genre="Rock", year=2021),
 ]
 
-@router.get("/tracks", response_model=List[Track], summary="Get all tracks")
-def get_tracks():
-    return mock_tracks
+from zotify_api.models.track import Track, TrackMetadata, TrackResponse
+
+@router.get("/tracks", response_model=TrackResponse, summary="Get all tracks")
+def get_tracks(
+    limit: int = 10,
+    offset: int = 0,
+    search: str = None,
+):
+    tracks = mock_tracks
+    if search:
+        tracks = [
+            t for t in tracks if search.lower() in t.title.lower() or search.lower() in t.artist.lower()
+        ]
+    total = len(tracks)
+    tracks = tracks[offset : offset + limit]
+    return {"data": tracks, "meta": {"total": total, "limit": limit, "offset": offset}}
 
 @router.get("/tracks/{track_id}/metadata", response_model=TrackMetadata, summary="Get metadata for a specific track")
 def get_track_metadata(track_id: str):

@@ -1,8 +1,8 @@
-from pydantic import BaseModel, ConfigDict, EmailStr
+from pydantic import BaseModel, ConfigDict, EmailStr, Field
 from typing import List, Optional
 
 class UserBase(BaseModel):
-    username: str
+    username: str = Field(..., min_length=3, max_length=50)
     email: EmailStr
 
 class UserCreate(UserBase):
@@ -14,4 +14,4 @@ class User(UserBase):
     id: str
     liked_tracks: List[str] = []
     history: List[str] = []
-    settings: Optional[dict] = {}
+    settings: Optional[dict] = Field(default_factory=dict)
