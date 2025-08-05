@@ -1,30 +1,20 @@
 from fastapi import APIRouter
-from zotify_api.models.cache import CacheClearRequest
+from zotify_api.models.cache import CacheClearRequest, CacheResponse
+from datetime import datetime
 
 router = APIRouter()
 
-# In-memory state
-cache_state = {
-    "search": 80,
-    "metadata": 222
-}
+mock_cache_data = CacheResponse(
+    total_items=421,
+    memory_usage_mb=128.5,
+    hit_rate=87.3,
+    last_cleared="2025-08-01T00:00:00Z",
+)
 
-@router.get("/cache", summary="Get cache statistics")
+@router.get("/cache", response_model=CacheResponse, summary="Get cache statistics")
 def get_cache():
-    return {
-        "total_items": sum(cache_state.values()),
-        "by_type": cache_state
-    }
+    return mock_cache_data
 
 @router.delete("/cache", summary="Clear entire cache or by type")
 def clear_cache(req: CacheClearRequest):
-    if req.type:
-        if req.type in cache_state:
-            cache_state[req.type] = 0
-        else:
-            # Or raise an error, depending on desired behavior
-            pass
-    else:
-        for k in cache_state:
-            cache_state[k] = 0
-    return {"status": "cleared", "by_type": cache_state}
+    return {"status": "cleared"}

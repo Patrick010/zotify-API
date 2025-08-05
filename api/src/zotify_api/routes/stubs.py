@@ -1,19 +1,14 @@
 from fastapi import APIRouter
+from zotify_api.models.stubs import Stub, StubsResponse
+from typing import List
 
 router = APIRouter()
 
-@router.get("/stubs")
+mock_stubs = [
+    Stub(id=1, name="sample1", description="Dev fixture A"),
+    Stub(id=2, name="sample2", description="Dev fixture B"),
+]
+
+@router.get("/stubs", response_model=StubsResponse, summary="Get all stubs")
 def get_stubs():
-    return {"message": "This is a stub endpoint."}
-
-@router.get("/stubs/search")
-def search():
-    return {"status": "Search not implemented"}
-
-@router.post("/stubs/download")
-def download():
-    return {"status": "Download not implemented"}
-
-@router.get("/stubs/download/status")
-def download_status():
-    return {"status": "Download status not implemented"}
+    return {"data": mock_stubs}

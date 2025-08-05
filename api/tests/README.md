@@ -19,3 +19,5 @@ bash tests/test_user_system.sh
 # Run all endpoint checks
 bash tests/test_all_endpoints.sh
 ```
+
+Note: `test_playlists_tracks.sh` requires `jq` to be installed on the server.

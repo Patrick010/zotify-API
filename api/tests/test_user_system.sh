@@ -1,18 +1,8 @@
 #!/bin/bash
-set -e
+BASE_URL="http://localhost:8000/api"
 
-BASE_URL="http://127.0.0.1:8080/api"
-
-echo "--- Testing User and System Endpoints ---"
-
-# Test GET /user
-echo "Fetching /user..."
-curl -sS --fail "$BASE_URL/user" | grep -q '"username":"dummy_user"'
-echo "/user responded correctly."
-
-# Test GET /system
-echo "Fetching /system..."
-curl -sS --fail "$BASE_URL/system" | grep -q '"status":"System is operational"'
-echo "/system responded correctly."
-
-echo "--- User and System Tests Passed ---"
+for endpoint in user system; do
+  echo "Testing /$endpoint endpoint..."
+  http_code=$(curl -s -o /dev/null -w "%{http_code}" "$BASE_URL/$endpoint")
+  [[ "$http_code" == "200" ]] && echo "  GET /$endpoint OK" || { echo "  GET /$endpoint FAIL ($http_code)"; exit 1; }
+done

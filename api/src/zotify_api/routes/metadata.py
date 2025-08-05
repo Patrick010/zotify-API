@@ -5,10 +5,10 @@ from datetime import datetime
 router = APIRouter()
 
 mock_metadata = MetadataResponse(
-    total_tracks=1234,
-    total_playlists=56,
-    last_updated=datetime.now(),
-    library_size_mb=5678.9
+    total_tracks=5421,
+    total_playlists=128,
+    last_updated="2025-08-04T18:00:00Z",
+    library_size_mb=12345.67
 )
 
 @router.get("/metadata", response_model=MetadataResponse, summary="Get all metadata")

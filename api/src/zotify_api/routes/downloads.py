@@ -14,33 +14,20 @@ router = APIRouter()
 # Simulated backend storage
 mock_downloads = [
     DownloadItem(
-        id=uuid4(),
-        filename="track1.mp3",
+        id="3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        filename="album1.zip",
+        status=DownloadStatus.in_progress,
+        progress=42.5,
+        started_at="2025-08-01T09:12:34Z",
+        finished_at=None,
+    ),
+    DownloadItem(
+        id="7c9e6679-7425-40de-944b-e07fc1f90ae7",
+        filename="single_track.mp3",
         status=DownloadStatus.completed,
         progress=100.0,
-        started_at=datetime.now() - timedelta(minutes=5),
-        finished_at=datetime.now() - timedelta(minutes=4),
-    ),
-    DownloadItem(
-        id=uuid4(),
-        filename="track2.mp3",
-        status=DownloadStatus.in_progress,
-        progress=50.0,
-        started_at=datetime.now() - timedelta(minutes=2),
-    ),
-    DownloadItem(
-        id=uuid4(),
-        filename="track3.mp3",
-        status=DownloadStatus.failed,
-        progress=0.0,
-        started_at=datetime.now() - timedelta(minutes=1),
-    ),
-    DownloadItem(
-        id=uuid4(),
-        filename="track4.mp3",
-        status=DownloadStatus.pending,
-        progress=0.0,
-        started_at=datetime.now(),
+        started_at="2025-07-30T14:00:00Z",
+        finished_at="2025-07-30T14:01:10Z",
     ),
 ]
 

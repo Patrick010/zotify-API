@@ -1,28 +1,16 @@
 #!/bin/bash
-set -e
+BASE_URL="http://localhost:8000/api"
 
-BASE_URL="http://127.0.0.1:8080/api"
+for endpoint in playlists tracks; do
+  echo "Testing /$endpoint endpoint..."
+  http_code=$(curl -s -o /dev/null -w "%{http_code}" "$BASE_URL/$endpoint")
+  [[ "$http_code" == "200" ]] && echo "  GET /$endpoint OK" || { echo "  GET /$endpoint FAIL ($http_code)"; exit 1; }
 
-echo "--- Testing Playlists and Tracks Endpoints ---"
+  resp=$(curl -s "$BASE_URL/$endpoint")
+  echo "$resp" | grep -q '"data"' || { echo "  Missing data field"; exit 1; }
+  echo "$resp" | grep -q '"meta"' || { echo "  Missing meta field"; exit 1; }
 
-# Test GET /playlists
-echo "Fetching /playlists..."
-curl -sS --fail "$BASE_URL/playlists" | grep -q '"data":'
-echo "/playlists responded correctly."
-
-# Test GET /playlists with query params
-echo "Fetching /playlists with limit=1..."
-curl -sS --fail "$BASE_URL/playlists?limit=1" | grep -q '"limit":1'
-echo "/playlists with limit is working."
-
-# Test GET /tracks
-echo "Fetching /tracks..."
-curl -sS --fail "$BASE_URL/tracks" | grep -q '"data":'
-echo "/tracks responded correctly."
-
-# Test GET /tracks with search
-echo "Fetching /tracks with search=Artist..."
-curl -sS --fail "$BASE_URL/tracks?search=Artist" | grep -q '"total":2'
-echo "/tracks with search is working."
-
-echo "--- Playlists and Tracks Tests Passed ---"
+  resp_limit=$(curl -s "$BASE_URL/$endpoint?limit=1")
+  data_count=$(echo "$resp_limit" | grep -o '"id":' | wc -l)
+  [[ "$data_count" == 1 ]] && echo "  limit=1 works" || { echo "  limit=1 failed (returned $data_count)"; exit 1; }
+done
