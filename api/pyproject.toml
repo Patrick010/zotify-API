@@ -23,7 +23,10 @@ dependencies = [
     "pytest-asyncio",
     "python-multipart",
     "httpx",
-    "pydantic[email]"
+    "pydantic[email]",
+    "pydantic-settings",
+    "redis",
+    "SQLAlchemy"
 ]
 
 [tool.pytest.ini_options]

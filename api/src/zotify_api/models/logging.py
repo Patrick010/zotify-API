@@ -1,17 +1,18 @@
 from pydantic import BaseModel
-from typing import Optional, List, Literal
+from typing import Literal, List
 from datetime import datetime
 
-class LogUpdate(BaseModel):
-    level: Optional[str] = None
-    log_to_file: Optional[bool] = None
-    log_file: Optional[str] = None
+class LogLevel(str):
+    DEBUG = "DEBUG"
+    INFO = "INFO"
+    WARNING = "WARNING"
+    ERROR = "ERROR"
 
 class LogEntry(BaseModel):
     timestamp: datetime
-    level: Literal["DEBUG", "INFO", "WARNING", "ERROR"]
+    level: str
     message: str
 
 class LoggingResponse(BaseModel):
-    data: List[LogEntry]
+    data: list[LogEntry]
     meta: dict

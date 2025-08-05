@@ -1,14 +1,10 @@
 from pydantic import BaseModel
-from typing import Optional
 from datetime import datetime
-
-class MetadataUpdate(BaseModel):
-    mood: Optional[str] = None
-    rating: Optional[int] = None
-    source: Optional[str] = None
+from typing import Optional
 
 class MetadataResponse(BaseModel):
     total_tracks: int
     total_playlists: int
-    last_updated: datetime
+    last_updated: Optional[datetime]
     library_size_mb: float
+    warning: Optional[str] = None

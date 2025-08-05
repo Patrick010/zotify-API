@@ -1,17 +1,8 @@
-from pydantic import BaseModel, ConfigDict, EmailStr, Field
-from typing import List, Optional
+from pydantic import BaseModel, EmailStr
+from uuid import UUID
 
-class UserBase(BaseModel):
-    username: str = Field(..., min_length=3, max_length=50)
+class UserModel(BaseModel):
+    id: UUID
+    username: str
     email: EmailStr
-
-class UserCreate(UserBase):
-    pass
-
-class User(UserBase):
-    model_config = ConfigDict(from_attributes=True)
-
-    id: str
-    liked_tracks: List[str] = []
-    history: List[str] = []
-    settings: Optional[dict] = Field(default_factory=dict)
+    display_name: str | None = None

@@ -1,24 +1,28 @@
-from fastapi import APIRouter
-from zotify_api.models.metadata import MetadataUpdate, MetadataResponse
-from datetime import datetime
+from fastapi import APIRouter, Depends
+from sqlalchemy import create_engine
+from zotify_api.config import settings
+from zotify_api.models.metadata import MetadataResponse
+from zotify_api.services.metadata import get_db_counts, get_library_size_mb
 
 router = APIRouter()
 
-mock_metadata = MetadataResponse(
-    total_tracks=5421,
-    total_playlists=128,
-    last_updated="2025-08-04T18:00:00Z",
-    library_size_mb=12345.67
-)
-
-@router.get("/metadata", response_model=MetadataResponse, summary="Get all metadata")
-def get_all_metadata():
-    return mock_metadata
-
-@router.get("/metadata/{track_id}", summary="Get extended metadata for a track")
-def get_metadata(track_id: str):
-    return {"track_id": track_id, "mood": "Chill", "rating": 4}
-
-@router.patch("/metadata/{track_id}", summary="Update extended metadata for a track")
-def patch_metadata(track_id: str, meta: MetadataUpdate):
-    return {"status": "updated", "track_id": track_id}
+@router.get("/metadata", response_model=MetadataResponse)
+def metadata_route():
+    try:
+        engine = create_engine(settings.database_url)
+        total_tracks, total_playlists, last_updated = get_db_counts(engine)
+        library_size = get_library_size_mb()
+        return {
+            "total_tracks": total_tracks,
+            "total_playlists": total_playlists,
+            "last_updated": last_updated,
+            "library_size_mb": library_size
+        }
+    except Exception as e:
+        return {
+            "total_tracks": 0,
+            "total_playlists": 0,
+            "last_updated": None,
+            "library_size_mb": 0.0,
+            "warning": "metadata backend unavailable"
+        }

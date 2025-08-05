@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from zotify_api.routes import playlist, config, tracks, logging, cache, network, sync, downloads, metadata, spotify, stubs, user, system
+from .globals import app_start_time
 
 app = FastAPI(
     title="Zotify API",
