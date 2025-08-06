@@ -1,6 +1,7 @@
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
+    app_env: str = "production"
     admin_api_key: str | None = None
     enable_fork_features: bool = False
     feature_search_advanced: bool = False

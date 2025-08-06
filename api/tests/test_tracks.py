@@ -1,38 +1,76 @@
-import os
+import pytest
 from fastapi.testclient import TestClient
 from zotify_api.main import app
+from zotify_api.services.db import get_db_engine
+from unittest.mock import MagicMock
+from io import BytesIO
 
 client = TestClient(app)
 
-def test_get_track_metadata():
-    response = client.get("/api/tracks/test-track-1/metadata")
+def test_list_tracks_no_db():
+    app.dependency_overrides[get_db_engine] = lambda: None
+    response = client.get("/api/tracks")
     assert response.status_code == 200
-    assert response.json()["id"] == "test-track-1"
+    body = response.json()
+    assert body["data"] == []
+    assert body["meta"]["total"] == 0
+    app.dependency_overrides.clear()
 
-def test_update_track_metadata():
-    update_data = {"title": "New Title"}
-    response = client.patch("/api/tracks/test-track-1/metadata", json=update_data)
+def test_list_tracks_with_db():
+    mock_engine = MagicMock()
+    mock_conn = MagicMock()
+    mock_engine.connect.return_value.__enter__.return_value = mock_conn
+    mock_conn.execute.return_value.mappings.return_value.all.return_value = [
+        {"id": "1", "name": "Test Track", "artist": "Test Artist", "album": "Test Album"},
+    ]
+    app.dependency_overrides[get_db_engine] = lambda: mock_engine
+    response = client.get("/api/tracks")
     assert response.status_code == 200
-    assert response.json()["title"] == "New Title"
+    body = response.json()
+    assert len(body["data"]) == 1
+    assert body["data"][0]["name"] == "Test Track"
+    app.dependency_overrides.clear()
 
-def test_refresh_track_metadata():
-    response = client.post("/api/tracks/test-track-1/metadata/refresh")
+def test_crud_flow():
+    mock_engine = MagicMock()
+    mock_conn = MagicMock()
+    mock_engine.connect.return_value.__enter__.return_value = mock_conn
+
+    # Create
+    mock_conn.execute.return_value.lastrowid = 1
+    app.dependency_overrides[get_db_engine] = lambda: mock_engine
+    create_payload = {"name": "New Track", "artist": "New Artist"}
+    response = client.post("/api/tracks", json=create_payload)
+    assert response.status_code == 201
+    track_id = response.json()["id"]
+
+    # Get
+    mock_conn.execute.return_value.mappings.return_value.first.return_value = {"id": track_id, **create_payload}
+    response = client.get(f"/api/tracks/{track_id}")
     assert response.status_code == 200
-    assert response.json()["title"] == "Updated"
+    assert response.json()["name"] == "New Track"
+
+    # Patch
+    update_payload = {"name": "Updated Track"}
+    response = client.patch(f"/api/tracks/{track_id}", json=update_payload)
+    assert response.status_code == 200
+    assert response.json()["name"] == "Updated Track"
+
+    # Delete
+    response = client.delete(f"/api/tracks/{track_id}")
+    assert response.status_code == 204
+
+    app.dependency_overrides.clear()
 
 def test_upload_cover():
-    # Create a dummy file for testing
-    with open("cover.jpg", "w") as f:
-        f.write("test")
+    mock_engine = MagicMock()
+    app.dependency_overrides[get_db_engine] = lambda: mock_engine
 
-    with open("cover.jpg", "rb") as f:
-        response = client.post(
-            "/api/tracks/test-track-1/cover",
-            files={"cover_image": ("cover.jpg", f, "image/jpeg")}
-        )
-
-    # Clean up the dummy file
-    os.remove("cover.jpg")
-
+    file_content = b"fake image data"
+    response = client.post(
+        "/api/tracks/1/cover",
+        files={"cover_image": ("test.jpg", BytesIO(file_content), "image/jpeg")}
+    )
     assert response.status_code == 200
-    assert "Embedded image: cover.jpg" in response.json()["cover"]
+    assert "cover_url" in response.json()
+    app.dependency_overrides.clear()
