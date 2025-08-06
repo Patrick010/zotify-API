@@ -1094,6 +1094,86 @@ curl -X PATCH http://0.0.0.0:8080/api/metadata/abc123 \
 
 ---
 
+## Notifications
+
+### `POST /notifications`
+
+Creates a new notification.
+
+**Request:**
+
+```bash
+curl -X POST http://0.0.0.0:8080/api/notifications \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user_id": "user1",
+    "message": "Hello, world!"
+  }'
+```
+
+**Body Parameters:**
+
+| Name      | Type   | Description                   |
+| --------- | ------ | ----------------------------- |
+| `user_id` | string | The ID of the user to notify. |
+| `message` | string | The notification message.     |
+
+**Response:**
+
+The newly created notification object.
+
+### `GET /notifications/{user_id}`
+
+Retrieves a list of notifications for a user.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/notifications/user1
+```
+
+**Path Parameters:**
+
+| Name      | Type   | Description                |
+| --------- | ------ | -------------------------- |
+| `user_id` | string | The ID of the user.        |
+
+**Response:**
+
+A list of notification objects.
+
+### `PATCH /notifications/{notification_id}`
+
+Marks a notification as read.
+
+**Request:**
+
+```bash
+curl -X PATCH http://0.0.0.0:8080/api/notifications/notif1 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "read": true
+  }'
+```
+
+**Path Parameters:**
+
+| Name             | Type   | Description                   |
+| ---------------- | ------ | ----------------------------- |
+| `notification_id` | string | The ID of the notification.     |
+
+**Body Parameters:**
+
+| Name   | Type    | Description                       |
+| ------ | ------- | --------------------------------- |
+| `read` | boolean | Whether the notification is read. |
+
+**Response:**
+
+- `204 No Content`
+
+---
+
 ## Final Notes
 
 - All endpoints are unauthenticated for local use.

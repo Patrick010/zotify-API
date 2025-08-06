@@ -20,11 +20,13 @@ class UserService:
         user_liked: List[str],
         user_history: List[str],
         user_preferences: Dict[str, Any],
+        notifications: List[Dict[str, Any]],
     ):
         self._user_profile = user_profile
         self._user_liked = user_liked
         self._user_history = user_history
         self._user_preferences = user_preferences
+        self._notifications = notifications
 
     def _save_data(self):
         data = {
@@ -32,6 +34,7 @@ class UserService:
             "liked": self._user_liked,
             "history": self._user_history,
             "preferences": self._user_preferences,
+            "notifications": self._notifications,
         }
         with open(STORAGE_FILE, "w") as f:
             json.dump(data, f, indent=4)
@@ -71,6 +74,20 @@ class UserService:
         self._user_history.clear()
         self._save_data()
 
+    def get_notifications(self, user_id: str) -> List[Dict[str, Any]]:
+        return [n for n in self._notifications if n["user_id"] == user_id]
+
+    def add_notification(self, notification: Dict[str, Any]) -> None:
+        self._notifications.append(notification)
+        self._save_data()
+
+    def mark_notification_as_read(self, notification_id: str) -> None:
+        for n in self._notifications:
+            if n["id"] == notification_id:
+                n["read"] = True
+                break
+        self._save_data()
+
 def get_user_service():
     if not STORAGE_FILE.exists():
         default_data = {
@@ -78,6 +95,7 @@ def get_user_service():
             "liked": ["track1", "track2"],
             "history": ["track3", "track4"],
             "preferences": {"theme": "dark", "language": "en"},
+            "notifications": [],
         }
         with open(STORAGE_FILE, "w") as f:
             json.dump(default_data, f, indent=4)
@@ -90,4 +108,5 @@ def get_user_service():
             user_liked=data.get("liked", []),
             user_history=data.get("history", []),
             user_preferences=data.get("preferences", {}),
+            notifications=data.get("notifications", []),
         )

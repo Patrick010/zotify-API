@@ -1,6 +1,11 @@
 Changelog
 
 All notable changes to the Zotify REST API will be documented in this file.
+v0.1.27
+Added
+
+    Notifications subsystem with endpoints for creating, retrieving, and managing user notifications.
+
 v0.1.26
 Added
 

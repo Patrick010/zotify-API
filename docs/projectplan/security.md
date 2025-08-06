@@ -86,3 +86,9 @@ A comprehensive audit logging strategy will be implemented in a future phase of 
 *   **Role-Based Access Control (RBAC):** The current implementation does not have a concept of users or roles, so RBAC cannot be implemented at this time. This is a high-priority feature that will be implemented in a future phase of the project.
 *   **Rate Limiting:** There is no rate limiting on the profile update endpoints. This could be a potential issue if the API is exposed to the public, as it could be abused to update profiles repeatedly. This should be addressed in a future iteration by adding rate limiting to the profile update endpoints.
 *   **Audit Logging:** The service now logs all profile and preference updates.
+
+### Notifications Subsystem
+
+*   **Authentication and Authorization:** The notification endpoints are not authenticated. This is a major security flaw, as it allows any user to create, view, and manage notifications for any other user. This will be addressed in a future iteration when a proper user authentication and authorization system is implemented.
+*   **Data Privacy:** Notification data is stored in the `user_data.json` file. As with the user profile data, this file should have restricted permissions.
+*   **Rate Limiting:** There is no rate limiting on the notification endpoints. This could be a potential issue if the API is exposed to the public. This should be addressed in a future iteration.

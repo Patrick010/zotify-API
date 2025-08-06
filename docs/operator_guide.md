@@ -41,4 +41,4 @@ The application will refuse to start in a production environment (`app_env="prod
 
 ## User Data
 
-User profile and preference data is stored in the `api/storage/user_data.json` file. It is recommended to back up this file regularly.
+User profile, preference, and notification data is stored in the `api/storage/user_data.json` file. It is recommended to back up this file regularly.

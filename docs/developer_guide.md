@@ -54,3 +54,13 @@ The API provides endpoints for managing user profiles and preferences.
 ### Data Storage
 
 User data is stored in a JSON file in the `api/storage` directory. This is a temporary solution that will be replaced with a database in a future iteration.
+
+## Notifications
+
+The API provides endpoints for managing user notifications.
+
+### Endpoints
+
+*   `POST /notifications`: Create a new notification.
+*   `GET /notifications/{user_id}`: Retrieve a list of notifications for a user.
+*   `PATCH /notifications/{notification_id}`: Mark a notification as read.

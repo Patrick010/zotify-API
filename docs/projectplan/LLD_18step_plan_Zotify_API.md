@@ -26,12 +26,13 @@ For each subsystem:
 10. Metadata subsystem → Service layer
 11. Playlists subsystem → Service layer
 12. User Profiles and Preferences → Service layer
+13. Notifications Subsystem → Service layer
 
 ### Remaining:
-13. Step 15: Authentication & Admin Controls
-14. Step 16: Spotify Integration Refinement
-15. Step 17: System Info & Health Endpoints
-16. Step 18: Final QA Pass & Cleanup
+14. Step 15: Authentication & Admin Controls
+15. Step 16: Spotify Integration Refinement
+16. Step 17: System Info & Health Endpoints
+17. Step 18: Final QA Pass & Cleanup
 
 ---
 
