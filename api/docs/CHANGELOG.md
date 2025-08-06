@@ -1,37 +1,159 @@
-## v0.1.12
+Changelog
 
-### Changed
-- Refactored **playlists subsystem** to use a dedicated `playlists_service.py` service layer.
-- Updated `routes/playlist.py` to use the new service layer via dependency injection.
-- Improved maintainability by removing direct DB/logic calls from routes.
-- Added full unit test coverage for playlists routes and service.
-- **Maintained and updated related documentation to reflect changes.**
+All notable changes to the Zotify REST API will be documented in this file.
+v0.1.14
+Added
 
-## v0.1.11
+    Dedicated tracks_service for all track-related logic.
 
-### Changed
-- Refactored **config subsystem** to use a dedicated `config_service.py` service layer.
-- Updated `routes/config.py` to use dependency injection for configuration management.
-- Added new unit tests to cover all code paths in config handling.
-- Fixed intermittent failure in `tests/test_playlists.py`.
-- Resolved bug in `tests/test_config.py::test_reset_config` where defaults were not restored correctly.
-- **Maintained and updated related documentation to reflect changes.**
+    New tracks.py schema file for request/response validation.
 
-## v0.1.10
+    Unit tests for tracks_service and updated integration tests for tracks routes.
 
-### Changed
-- Refactored **sync subsystem** to extract `run_sync_job` into `sync_service.py`.
-- Updated `routes/sync.py` to use dependency injection for sync job execution.
-- Added test coverage for sync runner failures and fallback behavior.
-- **Maintained and updated related documentation to reflect changes.**
+Changed
 
-## v0.1.9
+    Refactored tracks routes to use the new tracks_service and Pydantic schemas.
 
-### Changed
-- Refactored **search subsystem** for maintainability and testability:
-  - Moved `search_spotify` to a dedicated `services/search_spotify.py` module.
-  - Updated `perform_search` in `services/search.py` to accept injected `db_engine` and `spotify_search_func`.
-  - Updated `routes/search.py` to use FastAPI dependency injection for feature flags, DB engine, and search function.
-- Fixed failing search tests caused by inconsistent import and patch targets.
-- Added new tests for database failure fallback to Spotify search.
-- **Maintained and updated related documentation to reflect changes.**
+v0.1.13
+Added
+
+    Dedicated playlists_service for playlist management.
+
+    Full unit test coverage for the playlists service.
+
+Changed
+
+    Refactored playlists routes to use the new service layer.
+
+    Updated integration tests to match the dependency injection pattern.
+
+v0.1.12
+Added
+
+    Dedicated config_service for application configuration handling.
+
+    Extended tests for config logic with additional edge case coverage.
+
+Changed
+
+    Refactored config routes to use config_service.
+
+    Fixed intermittent test failures in playlist tests.
+
+v0.1.11
+Added
+
+    Dedicated sync_service with run_sync_job moved from routes to service layer.
+
+    New unit tests covering sync failure scenarios.
+
+Changed
+
+    Refactored sync routes to use FastAPI dependency injection for run_sync_job.
+
+v0.1.10
+Added
+
+    Dependency injection for search subsystem.
+
+    Additional tests for database failure with fallback to Spotify.
+
+Changed
+
+    Refactored perform_search in services/search.py to accept db_engine and spotify_search_func arguments.
+
+    Updated routes/search.py to use injected dependencies.
+
+    Improved testability and maintainability of search code.
+
+v0.1.9
+Fixed
+
+    Corrected failing test_reset_config by ensuring config defaults are restored on reset.
+
+v0.1.8
+Added
+
+    Live Spotify integration with OAuth2 authentication.
+
+    Endpoints for managing Spotify API tokens.
+
+    Stubs for syncing playlists and fetching metadata from Spotify.
+
+v0.1.7
+Added
+
+    Comprehensive API reference manual.
+
+v0.1.6
+Added
+
+    Fork-specific features:
+
+        Advanced playlist sync endpoint.
+
+        Download status and retry endpoints.
+
+        Extended metadata endpoints.
+
+v0.1.5
+Added
+
+    Endpoints for managing logging, caching, and network settings.
+
+v0.1.4
+Added
+
+    Endpoints for managing application configuration and track metadata.
+
+v0.1.3
+Added
+
+    Full playlist management module (GET, POST, DELETE, add/remove tracks).
+
+    Playlist import from .json and export to .json and .m3u.
+
+    Modular project structure with models, routes, and storage directories.
+
+    JSON-file-based storage for playlists.
+
+v0.1.2
+Added
+
+    Core search and download endpoints:
+
+        GET /search with pagination.
+
+        POST /download/{target} where target is one of track, album, or playlist.
+
+    Pydantic models for search and download request/response bodies.
+
+    Validation for search parameters and download request bodies.
+
+v0.1.1
+Added
+
+    Stub endpoints for retrieving metadata for tracks, albums, and artists:
+
+        GET /tracks/{track_id}
+
+        GET /albums/{album_id}
+
+        GET /artists/{artist_id}
+
+    Pydantic models for metadata responses.
+
+v0.1.0
+Added
+
+    Initial setup of the FastAPI server.
+
+    Basic /ping health check endpoint.
+
+    Decoupled architecture to allow the API to run alongside a standard Zotify v0.6.x installation.
+
+    All dependencies are managed within the api module.
+
+    Comprehensive documentation for installation, usage, and contribution.
+
+    OpenAPI 3.0 specifications in both JSON and YAML formats.
