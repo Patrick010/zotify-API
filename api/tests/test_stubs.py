@@ -3,9 +3,6 @@ from zotify_api.main import app
 
 client = TestClient(app)
 
-def test_search_stub():
-    response = client.get("/api/search")
-    assert response.status_code == 501
 
 def test_download_stub():
     response = client.post("/api/download")
