@@ -1,6 +1,19 @@
 Changelog
 
 All notable changes to the Zotify REST API will be documented in this file.
+v0.1.17
+Added
+
+    Dedicated logging_service for all logging-related logic.
+
+    New logging.py schema file for request/response validation.
+
+    Unit tests for logging_service and updated integration tests for logging routes.
+
+Changed
+
+    Refactored logging routes to use the new logging_service and Pydantic schemas.
+
 v0.1.16
 Changed
 

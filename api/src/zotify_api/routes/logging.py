@@ -1,23 +1,19 @@
-from fastapi import APIRouter, HTTPException
-from zotify_api.models.logging import LogUpdate
+from fastapi import APIRouter, Depends, HTTPException
+from zotify_api.schemas.logging import LogUpdate, LoggingConfigResponse
+from zotify_api.services.logging_service import LoggingService, get_logging_service
 
-router = APIRouter()
+router = APIRouter(prefix="/logging")
 
-# In-memory state
-log_config = {
-    "level": "INFO",
-    "log_to_file": False,
-    "log_file": None
-}
+@router.get("", response_model=LoggingConfigResponse)
+def get_logging(logging_service: LoggingService = Depends(get_logging_service)):
+    return logging_service.get_logging_config()
 
-@router.get("/logging", summary="Get current logging settings")
-def get_logging():
-    return log_config
-
-@router.patch("/logging", summary="Update logging level or target")
-def update_logging(update: LogUpdate):
-    if update.level and update.level not in ["CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"]:
-        raise HTTPException(status_code=400, detail="Invalid log level")
-    for k, v in update.model_dump(exclude_unset=True).items():
-        log_config[k] = v
-    return log_config
+@router.patch("", response_model=LoggingConfigResponse)
+def update_logging(
+    update: LogUpdate,
+    logging_service: LoggingService = Depends(get_logging_service)
+):
+    try:
+        return logging_service.update_logging_config(update.model_dump(exclude_unset=True))
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
