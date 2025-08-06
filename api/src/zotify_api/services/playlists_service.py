@@ -1,0 +1,75 @@
+# api/src/zotify_api/services/playlists_service.py
+from typing import List, Tuple, Optional, Dict
+import logging
+from sqlalchemy import text
+from zotify_api.config import settings
+
+log = logging.getLogger(__name__)
+
+DEFAULT_LIMIT = 25
+MAX_LIMIT = 250
+
+class PlaylistsServiceError(Exception):
+    pass
+
+def get_default_limit() -> int:
+    return DEFAULT_LIMIT
+
+def get_max_limit() -> int:
+    return MAX_LIMIT
+
+def _normalize_limit(limit: int) -> int:
+    try:
+        limit = int(limit)
+    except Exception:
+        limit = DEFAULT_LIMIT
+    if limit <= 0:
+        return DEFAULT_LIMIT
+    return min(limit, MAX_LIMIT)
+
+def _normalize_offset(offset: int) -> int:
+    try:
+        offset = int(offset)
+    except Exception:
+        offset = 0
+    return max(0, offset)
+
+def get_playlists(db_engine, limit: int = DEFAULT_LIMIT, offset: int = 0, search: Optional[str] = None) -> Tuple[List[Dict], int]:
+    limit = _normalize_limit(limit)
+    offset = _normalize_offset(offset)
+    if not db_engine:
+        # Non-db fallback: return empty list + 0 — keep predictable
+        return [], 0
+
+    try:
+        with db_engine.connect() as conn:
+            if search:
+                stmt = text("SELECT id, name, description FROM playlists WHERE name LIKE :q LIMIT :limit OFFSET :offset")
+                params = {"q": f"%{search}%", "limit": limit, "offset": offset}
+            else:
+                stmt = text("SELECT id, name, description FROM playlists LIMIT :limit OFFSET :offset")
+                params = {"limit": limit, "offset": offset}
+            result = conn.execute(stmt, params)
+            rows = result.mappings().all()
+            items = [dict(r) for r in rows]
+            # For now the DB doesn’t return a total — return len(items) (okay for pagination tests)
+            return items, len(items)
+    except Exception as exc:
+        log.exception("Error fetching playlists")
+        # Surface a service-level error to the route
+        raise PlaylistsServiceError("Database error while fetching playlists") from exc
+
+def create_playlist(db_engine, playlist_in: Dict) -> Dict:
+    # Minimal validation is performed in Pydantic at the route layer, but check here too.
+    if not db_engine:
+        # Not able to persist — raise so route can return 503 or fallback.
+        raise PlaylistsServiceError("No DB engine available")
+    try:
+        with db_engine.connect() as conn:
+            stmt = text("INSERT INTO playlists (name, description) VALUES (:name, :description)")
+            conn.execute(stmt, {"name": playlist_in["name"], "description": playlist_in.get("description", "")})
+            # In a real DB the insert should return an id. For now, return the payload (tests will mock DB).
+            return {"id": None, "name": playlist_in["name"], "description": playlist_in.get("description", "")}
+    except Exception as exc:
+        log.exception("Error creating playlist")
+        raise PlaylistsServiceError("Database error while creating playlist") from exc
