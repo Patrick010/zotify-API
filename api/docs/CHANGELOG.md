@@ -1,6 +1,19 @@
 Changelog
 
 All notable changes to the Zotify REST API will be documented in this file.
+v0.1.20
+Added
+
+    Dedicated metadata_service for all metadata-related logic.
+
+    New metadata.py schema file for request/response validation.
+
+    Unit tests for metadata_service and updated integration tests for metadata routes.
+
+Changed
+
+    Refactored metadata routes to use the new metadata_service and Pydantic schemas.
+
 v0.1.19
 Added
 

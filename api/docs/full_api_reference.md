@@ -972,10 +972,10 @@ curl http://0.0.0.0:8080/api/metadata/abc123
 
 ```json
 {
-  "title": "Track Title",
-  "mood": "Chill",
-  "rating": 4,
-  "source": "Manual Import"
+  "title": "string",
+  "mood": "string",
+  "rating": 0,
+  "source": "string"
 }
 ```
 
@@ -1012,8 +1012,8 @@ curl -X PATCH http://0.0.0.0:8080/api/metadata/abc123 \
 
 ```json
 {
-  "status": "updated",
-  "track_id": "abc123"
+  "status": "string",
+  "track_id": "string"
 }
 ```
 

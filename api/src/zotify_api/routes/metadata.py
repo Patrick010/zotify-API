@@ -1,26 +1,39 @@
-from fastapi import APIRouter
-from zotify_api.models.metadata import MetadataUpdate
+from fastapi import APIRouter, Depends
+from zotify_api.schemas.metadata import MetadataUpdate, MetadataResponse, MetadataPatchResponse
+from zotify_api.services.metadata_service import MetadataService, get_metadata_service
 
 router = APIRouter()
 
-# Simulated backend storage
-track_metadata = {
-    "abc123": {
-        "title": "Track Title",
-        "mood": "Chill",
-        "rating": 4,
-        "source": "Manual Import"
-    }
-}
+@router.get(
+    "/metadata/{track_id}",
+    response_model=MetadataResponse,
+    summary="Get extended metadata for a track"
+)
+def get_metadata(
+    track_id: str,
+    metadata_service: MetadataService = Depends(get_metadata_service)
+):
+    """
+    Retrieves extended metadata for a specific track.
 
-@router.get("/metadata/{track_id}", summary="Get extended metadata for a track")
-def get_metadata(track_id: str):
-    return track_metadata.get(track_id, {"track_id": track_id, "status": "not found"})
+    - **track_id**: The ID of the track to retrieve metadata for.
+    """
+    return metadata_service.get_metadata(track_id)
 
-@router.patch("/metadata/{track_id}", summary="Update extended metadata for a track")
-def patch_metadata(track_id: str, meta: MetadataUpdate):
-    if track_id not in track_metadata:
-        track_metadata[track_id] = {"title": f"Track {track_id}"}
-    for k, v in meta.model_dump(exclude_unset=True).items():
-        track_metadata[track_id][k] = v
-    return {"status": "updated", "track_id": track_id}
+@router.patch(
+    "/metadata/{track_id}",
+    response_model=MetadataPatchResponse,
+    summary="Update extended metadata for a track"
+)
+def patch_metadata(
+    track_id: str,
+    meta: MetadataUpdate,
+    metadata_service: MetadataService = Depends(get_metadata_service)
+):
+    """
+    Updates extended metadata for a specific track.
+
+    - **track_id**: The ID of the track to update.
+    - **meta**: A `MetadataUpdate` object with the fields to update.
+    """
+    return metadata_service.patch_metadata(track_id, meta)
