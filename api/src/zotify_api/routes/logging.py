@@ -1,11 +1,23 @@
-from fastapi import APIRouter, Query
-from zotify_api.models.logging import LoggingResponse, LogEntry
-from zotify_api.services.logs import read_recent_logs
+from fastapi import APIRouter, HTTPException
+from zotify_api.models.logging import LogUpdate
 
 router = APIRouter()
 
-@router.get("/logging", response_model=LoggingResponse)
-def logging_route(limit: int = Query(10, ge=1, le=100), offset: int = 0, level: str | None = None):
-    logs = read_recent_logs(limit=limit, level=level)
-    meta = {"total": len(logs), "limit": limit, "offset": offset}
-    return {"data": logs, "meta": meta}
+# In-memory state
+log_config = {
+    "level": "INFO",
+    "log_to_file": False,
+    "log_file": None
+}
+
+@router.get("/logging", summary="Get current logging settings")
+def get_logging():
+    return log_config
+
+@router.patch("/logging", summary="Update logging level or target")
+def update_logging(update: LogUpdate):
+    if update.level and update.level not in ["CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"]:
+        raise HTTPException(status_code=400, detail="Invalid log level")
+    for k, v in update.model_dump(exclude_unset=True).items():
+        log_config[k] = v
+    return log_config

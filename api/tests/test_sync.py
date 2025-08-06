@@ -3,8 +3,9 @@ from zotify_api.main import app
 
 client = TestClient(app)
 
-def test_sync():
-    resp = client.get("/api/sync")
-    assert resp.status_code == 200
-    for job in resp.json()["data"]:
-        assert job["status"] in ("pending","running","completed","failed")
+def test_playlist_sync():
+    response = client.post("/api/playlist/sync", json={"playlist_id": "abc123"})
+    assert response.status_code == 200
+    assert response.json()["status"] == "ok"
+    assert "synced_tracks" in response.json()
+    assert "conflicts" in response.json()

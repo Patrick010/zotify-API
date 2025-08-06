@@ -5,16 +5,9 @@ from typing import Optional, List
 import httpx
 import time
 
-from zotify_api.models.spotify import (
-    OAuthLoginResponse,
-    TokenStatus,
-    SpotifyStatus,
-    SpotifySearchResponse,
-    SpotifySearchItem,
-)
-from typing import Literal
+from zotify_api.models.spotify import OAuthLoginResponse, TokenStatus
 
-router = APIRouter()
+router = APIRouter(prefix="/spotify")
 logger = logging.getLogger(__name__)
 
 # In-memory token store (replace with secure DB in prod)
@@ -31,39 +24,6 @@ SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize"
 SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
 SPOTIFY_API_BASE = "https://api.spotify.com/v1"
 
-
-@router.get("/status", response_model=SpotifyStatus)
-def get_spotify_status():
-    return {
-        "connected": True,
-        "account_name": "j.smith@example.com",
-        "subscription_type": "premium",
-        "last_synced": "2025-08-04T20:05:00Z",
-    }
-
-@router.get("/search", response_model=SpotifySearchResponse)
-def search_spotify(
-    q: str, type: Literal["track", "album", "artist", "playlist"], limit: int = 10
-):
-    return {
-        "data": [
-            {
-                "id": "spotify:track:1",
-                "name": "Dancing Queen",
-                "type": "track",
-                "artist": "ABBA",
-                "album": "Arrival",
-            },
-            {
-                "id": "spotify:track:2",
-                "name": "Mamma Mia",
-                "type": "track",
-                "artist": "ABBA",
-                "album": "ABBA",
-            },
-        ],
-        "meta": {"total": 2, "limit": limit, "offset": 0},
-    }
 
 @router.get("/login", response_model=OAuthLoginResponse)
 def spotify_login():

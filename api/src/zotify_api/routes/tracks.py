@@ -1,51 +1,19 @@
 from fastapi import APIRouter, UploadFile, File
-from zotify_api.models.track import Track, TrackMetadata
-from typing import List
+from zotify_api.models.track import TrackMetadata
 
 router = APIRouter()
 
-mock_tracks = [
-    Track(id="1", title="Demo Track 1", artist="Artist 1", album="Album 1"),
-    Track(id="2", title="Demo Track 2", artist="Artist 2", album="Album 2", genre="Rock", year=2021),
-]
-
-from zotify_api.models.track import Track, TrackMetadata, TrackResponse
-
-@router.get("/tracks", response_model=TrackResponse, summary="Get all tracks")
-def get_tracks(
-    limit: int = 10,
-    offset: int = 0,
-    search: str = None,
-):
-    tracks = mock_tracks
-    if search:
-        tracks = [
-            t for t in tracks if search.lower() in t.title.lower() or search.lower() in t.artist.lower()
-        ]
-    total = len(tracks)
-    tracks = tracks[offset : offset + limit]
-    return {"data": tracks, "meta": {"total": total, "limit": limit, "offset": offset}}
-
-@router.get("/tracks/{track_id}/metadata", response_model=TrackMetadata, summary="Get metadata for a specific track")
+@router.get("/tracks/{track_id}/metadata", summary="Get metadata for a specific track")
 def get_track_metadata(track_id: str):
-    track = next((t for t in mock_tracks if t.id == track_id), None)
-    if not track:
-        return {"track_id": track_id, "status": "not found"}
-    return TrackMetadata(
-        title=track.title,
-        artist=track.artist,
-        album=track.album,
-        genre=track.genre,
-        year=track.year,
-    )
+    return {"id": track_id, "title": "Demo", "artist": "Artist", "album": "Album", "genre": "Rock", "year": 2020}
 
-@router.patch("/tracks/{track_id}/metadata", response_model=TrackMetadata, summary="Update metadata fields for a track")
+@router.patch("/tracks/{track_id}/metadata", summary="Update metadata fields for a track")
 def update_track_metadata(track_id: str, metadata: TrackMetadata):
-    return metadata
+    return {**{"id": track_id}, **metadata.model_dump(exclude_unset=True)}
 
-@router.post("/tracks/{track_id}/metadata/refresh", response_model=TrackMetadata, summary="Trigger metadata refresh for a track")
+@router.post("/tracks/{track_id}/metadata/refresh", summary="Trigger metadata refresh for a track")
 def refresh_track_metadata(track_id: str):
-    return TrackMetadata(title="Updated Title", artist="Updated Artist", album="Updated Album")
+    return {"id": track_id, "title": "Updated", "artist": "New Artist", "album": "Updated Album"}
 
 @router.post("/tracks/{track_id}/cover", summary="Embed or replace cover art for a track")
 def upload_cover(track_id: str, cover_image: UploadFile = File(...)):

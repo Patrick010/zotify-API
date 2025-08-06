@@ -1,8 +1,5 @@
 from pydantic import BaseModel
-from datetime import datetime
+from typing import Optional
 
-class CacheStats(BaseModel):
-    total_items: int
-    memory_usage_mb: float
-    hit_rate: float  # 0.0 - 100.0
-    last_cleared: datetime
+class CacheClearRequest(BaseModel):
+    type: Optional[str] = None  # "search", "metadata", etc.

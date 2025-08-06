@@ -3,13 +3,18 @@ from zotify_api.main import app
 
 client = TestClient(app)
 
-def test_logging_filter(monkeypatch):
-    def fake_read(limit, level):
-        if level == "ERROR":
-            return [{"timestamp":"2025-08-01T00:00:00Z","level":"ERROR","message":"err"}]
-        return []
-    monkeypatch.setattr("zotify_api.routes.logging.read_recent_logs", fake_read)
-    r = client.get("/api/logging?level=ERROR")
-    assert r.status_code == 200
-    data = r.json()["data"]
-    assert data and data[0]["level"] == "ERROR"
+def test_get_logging():
+    response = client.get("/api/logging")
+    assert response.status_code == 200
+    assert "level" in response.json()
+
+def test_update_logging():
+    update_data = {"level": "DEBUG"}
+    response = client.patch("/api/logging", json=update_data)
+    assert response.status_code == 200
+    assert response.json()["level"] == "DEBUG"
+
+def test_update_logging_invalid_level():
+    update_data = {"level": "INVALID"}
+    response = client.patch("/api/logging", json=update_data)
+    assert response.status_code == 400

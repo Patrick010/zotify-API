@@ -1,14 +1,15 @@
-from fastapi import APIRouter
-from zotify_api.models.stubs import Stub, StubsResponse
-from typing import List
+from fastapi import APIRouter, HTTPException
 
 router = APIRouter()
 
-mock_stubs = [
-    Stub(id=1, name="sample1", description="Dev fixture A"),
-    Stub(id=2, name="sample2", description="Dev fixture B"),
-]
+@router.get("/search")
+def search():
+    raise HTTPException(status_code=501, detail="Not Implemented")
 
-@router.get("/stubs", response_model=StubsResponse, summary="Get all stubs")
-def get_stubs():
-    return {"data": mock_stubs}
+@router.post("/download")
+def download():
+    raise HTTPException(status_code=501, detail="Not Implemented")
+
+@router.get("/download/status")
+def download_status():
+    raise HTTPException(status_code=501, detail="Not Implemented")

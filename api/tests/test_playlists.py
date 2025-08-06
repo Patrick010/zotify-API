@@ -7,14 +7,14 @@ from zotify_api.models.playlist import Playlist
 # In-memory "database" for testing
 fake_db = {
     "playlists": [
-        Playlist(id="1", name="My Favorite Songs", tracks=["track1", "track2"]),
-        Playlist(id="2", name="Workout Mix", tracks=[])
+        {"id": "1", "name": "My Favorite Songs", "tracks": ["track1", "track2"]},
+        {"id": "2", "name": "Workout Mix", "tracks": []}
     ]
 }
 
 # A dependency override to use a stateful mock database
 def override_get_db():
-    return fake_db["playlists"]
+    return fake_db['playlists']
 
 def override_save_db(db_instance):
     # In a real scenario, this would save to the fake_db, but for now, we'll just pass
@@ -44,34 +44,22 @@ def test_get_playlists():
     """ Test for GET /playlists """
     response = client.get("/api/playlists")
     assert response.status_code == 200
-    response_json = response.json()
-    assert "data" in response_json
-    assert "meta" in response_json
-    assert isinstance(response_json["data"], list)
-    assert len(response_json["data"]) == 2
 
-def test_get_playlists_with_limit():
-    """ Test for GET /playlists with limit """
-    response = client.get("/api/playlists?limit=1")
-    assert response.status_code == 200
+    # The response should be a list of Playlist objects
     response_json = response.json()
-    assert len(response_json["data"]) == 1
+    assert isinstance(response_json, list)
 
-def test_get_playlists_with_offset():
-    """ Test for GET /playlists with offset """
-    response = client.get("/api/playlists?offset=1")
-    assert response.status_code == 200
-    response_json = response.json()
-    assert len(response_json["data"]) == 1
-    assert response_json["data"][0]["name"] == "Workout Mix"
+    # Check if the structure matches the Playlist model
+    for item in response_json:
+        assert "id" in item
+        assert "name" in item
+        assert "tracks" in item
 
-def test_get_playlists_with_search():
-    """ Test for GET /playlists with search """
-    response = client.get("/api/playlists?search=Favorite")
-    assert response.status_code == 200
-    response_json = response.json()
-    assert len(response_json["data"]) == 1
-    assert response_json["data"][0]["name"] == "My Favorite Songs"
+    # Check if the data matches our mock db
+    assert len(response_json) == len(fake_db["playlists"])
+    # A more specific check on content
+    assert response_json[0]["name"] == fake_db["playlists"][0]["name"]
+
 
 def test_create_playlist():
     """ Test for POST /playlists """

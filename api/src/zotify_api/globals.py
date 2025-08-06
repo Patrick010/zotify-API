@@ -1,3 +1,3 @@
-import time
+from datetime import datetime
 
-app_start_time = time.time()
+app_start_time = datetime.now()

@@ -1,20 +1,20 @@
-import pytest
 from fastapi.testclient import TestClient
 from zotify_api.main import app
 
 client = TestClient(app)
 
-@pytest.fixture(autouse=True)
-def patch_metadata(monkeypatch):
-    def fake_get_db_counts():
-        from datetime import datetime
-        return (10, 2, datetime(2025,8,1))
-    monkeypatch.setattr("zotify_api.routes.metadata.get_db_counts", fake_get_db_counts)
-    monkeypatch.setattr("zotify_api.routes.metadata.get_library_size_mb", lambda: 123.45)
+def test_get_metadata():
+    response = client.get("/api/metadata/abc123")
+    assert response.status_code == 200
+    assert response.json()["mood"] == "Chill"
 
-def test_metadata_returns_schema():
-    r = client.get("/api/metadata")
-    assert r.status_code == 200
-    b = r.json()
-    assert b["total_tracks"] == 10
-    assert isinstance(b["library_size_mb"], float)
+def test_patch_metadata():
+    update_data = {"mood": "Energetic", "rating": 5}
+    response = client.patch("/api/metadata/abc123", json=update_data)
+    assert response.status_code == 200
+    assert response.json()["status"] == "updated"
+
+    # Verify that the metadata was updated
+    final_metadata = client.get("/api/metadata/abc123").json()
+    assert final_metadata["mood"] == "Energetic"
+    assert final_metadata["rating"] == 5

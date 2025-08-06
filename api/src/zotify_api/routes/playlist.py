@@ -9,28 +9,9 @@ from zotify_api import database
 
 router = APIRouter()
 
-mock_playlists = [
-    Playlist(id="dummy-playlist-1", name="My Dummy Playlist", tracks=["track1", "track2"]),
-    Playlist(id="dummy-playlist-2", name="Another Dummy Playlist", tracks=["track3"])
-]
-
-from zotify_api.models.playlist import Playlist, PlaylistCreate, TrackRequest, PlaylistResponse
-
-@router.get("/playlists", response_model=PlaylistResponse, summary="Get all playlists")
-async def get_playlists(
-    db: List[dict] = Depends(database.get_db),
-    limit: int = 10,
-    offset: int = 0,
-    search: str = None,
-):
-    playlists = [Playlist(**p) for p in db] if db else mock_playlists
-    if search:
-        playlists = [
-            p for p in playlists if search.lower() in p.name.lower()
-        ]
-    total = len(playlists)
-    playlists = playlists[offset : offset + limit]
-    return {"data": playlists, "meta": {"total": total, "limit": limit, "offset": offset}}
+@router.get("/playlists", response_model=List[Playlist], summary="Get all playlists")
+async def get_playlists(db: List[dict] = Depends(database.get_db)):
+    return db
 
 @router.delete("/playlists", status_code=204, summary="Delete all playlists")
 async def delete_all_playlists(db: List[dict] = Depends(database.get_db)):

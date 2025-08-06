@@ -20,13 +20,7 @@ dependencies = [
     "tabulate[widechars]",
     "tqdm",
     "pytest",
-    "pytest-asyncio",
-    "python-multipart",
-    "httpx",
-    "pydantic[email]",
-    "pydantic-settings",
-    "redis",
-    "SQLAlchemy"
+    "pytest-asyncio"
 ]
 
 [tool.pytest.ini_options]

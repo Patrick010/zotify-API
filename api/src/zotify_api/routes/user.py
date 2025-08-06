@@ -1,9 +1,23 @@
-from fastapi import APIRouter, Depends
-from zotify_api.models.user import UserModel
-from zotify_api.services.user import get_current_user_info
+from fastapi import APIRouter, HTTPException
 
 router = APIRouter()
 
-@router.get("/user", response_model=UserModel)
-def user_route(user = Depends(get_current_user_info)):
-    return user
+@router.get("/user/profile")
+def get_user_profile():
+    raise HTTPException(status_code=501, detail="Not Implemented")
+
+@router.get("/user/liked")
+def get_user_liked():
+    raise HTTPException(status_code=501, detail="Not Implemented")
+
+@router.post("/user/sync_liked")
+def sync_user_liked():
+    raise HTTPException(status_code=501, detail="Not Implemented")
+
+@router.get("/user/history")
+def get_user_history():
+    raise HTTPException(status_code=501, detail="Not Implemented")
+
+@router.delete("/user/history")
+def delete_user_history():
+    raise HTTPException(status_code=501, detail="Not Implemented")
