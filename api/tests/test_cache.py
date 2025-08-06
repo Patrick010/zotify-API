@@ -1,34 +1,37 @@
-import json
 import pytest
 from fastapi.testclient import TestClient
 from zotify_api.main import app
-from zotify_api.routes.cache import cache_state as app_cache_state
+from zotify_api.services import cache_service
+import json
 
 client = TestClient(app)
 
-@pytest.fixture(autouse=True)
-def run_around_tests():
-    # Reset the cache state before each test
-    global app_cache_state
-    app_cache_state.update({
+@pytest.fixture
+def cache_service_override():
+    cache_state = {
         "search": 80,
         "metadata": 222
-    })
-    yield
+    }
+    def get_cache_service_override():
+        return cache_service.CacheService(cache_state)
+    return get_cache_service_override
 
-def test_get_cache():
+def test_get_cache(cache_service_override):
+    app.dependency_overrides[cache_service.get_cache_service] = cache_service_override
     response = client.get("/api/cache")
     assert response.status_code == 200
     assert "total_items" in response.json()
+    app.dependency_overrides = {}
 
-def test_clear_cache_all():
+def test_clear_cache_all(cache_service_override):
+    app.dependency_overrides[cache_service.get_cache_service] = cache_service_override
     # Get initial state
     initial_response = client.get("/api/cache")
     initial_total = initial_response.json()["total_items"]
     assert initial_total > 0
 
     # Clear all
-    response = client.request("DELETE", "/api/cache", json={})
+    response = client.request("DELETE", "/api/cache", content=json.dumps({}))
     assert response.status_code == 200
     assert response.json()["by_type"]["search"] == 0
     assert response.json()["by_type"]["metadata"] == 0
@@ -36,11 +39,14 @@ def test_clear_cache_all():
     # Verify that the cache is empty
     final_response = client.get("/api/cache")
     assert final_response.json()["total_items"] == 0
+    app.dependency_overrides = {}
 
 
-def test_clear_cache_by_type():
+def test_clear_cache_by_type(cache_service_override):
+    app.dependency_overrides[cache_service.get_cache_service] = cache_service_override
     # Clear by type
-    response = client.request("DELETE", "/api/cache", json={"type": "search"})
+    response = client.request("DELETE", "/api/cache", content=json.dumps({"type": "search"}))
     assert response.status_code == 200
     assert response.json()["by_type"]["search"] == 0
     assert response.json()["by_type"]["metadata"] != 0
+    app.dependency_overrides = {}
