@@ -1,13 +1,11 @@
 from sqlalchemy import text
-from zotify_api.services.db import get_db_engine
-from zotify_api.services.spotify import search_spotify
+from typing import Callable
 
-def perform_search(q: str, type: str = "track", limit: int = 25, offset: int = 0, engine=None):
-    engine = engine or get_db_engine()
-    if not engine:
-        return search_spotify(q, type=type, limit=limit, offset=offset)
+def perform_search(q: str, type: str, limit: int, offset: int, db_engine: any, spotify_search_func: Callable):
+    if not db_engine:
+        return spotify_search_func(q, type=type, limit=limit, offset=offset)
     try:
-        with engine.connect() as conn:
+        with db_engine.connect() as conn:
             query = text("SELECT id, name, type, artist, album FROM tracks WHERE name LIKE :q LIMIT :limit OFFSET :offset")
             result = conn.execute(query, {"q": f"%{q}%", "limit": limit, "offset": offset})
             rows = result.mappings().all()
@@ -16,4 +14,4 @@ def perform_search(q: str, type: str = "track", limit: int = 25, offset: int = 0
             return items, total
     except Exception:
         # safe fallback to spotify search if DB fails
-        return search_spotify(q, type=type, limit=limit, offset=offset)
+        return spotify_search_func(q, type=type, limit=limit, offset=offset)
