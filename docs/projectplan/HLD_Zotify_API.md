@@ -58,6 +58,9 @@ The refactor aims to:
 
 A comprehensive overview of the security architecture, principles, and roadmap for the Zotify API project is available in the [Zotify API Security](./security.md) document. This document serves as the definitive security reference for the project.
 
-## 10. Development Process
+### Development Process / Task Completion
 
-All development tasks must follow the [Task Execution Checklist](./task_checklist.md) to ensure consistency, quality, and security.
+**All development tasks must comply with the Task Execution Checklist.**
+The canonical checklist is located at `docs/projectplan/task_checklist.md`. Before a task is marked complete (including committing, creating a PR, or merging), follow the checklist: update HLD/LLD as needed, ensure security & privacy checks, update docs, write tests, and confirm all tests pass.
+
+This checklist is authoritative and enforced for every task.

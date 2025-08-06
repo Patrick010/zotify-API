@@ -1,18 +1,21 @@
 import pytest
 from zotify_api.services.user_service import UserService
+import json
 
 @pytest.fixture
 def user_data():
     return {
         "user_profile": {"name": "Test User", "email": "test@example.com"},
         "user_liked": ["track1", "track2"],
-        "user_history": ["track3", "track4"]
+        "user_history": ["track3", "track4"],
+        "user_preferences": {"theme": "dark", "language": "en"},
+        "notifications": [],
     }
 
 def test_get_user_profile(user_data):
     service = UserService(**user_data)
     profile = service.get_user_profile()
-    assert profile == user_data["user_profile"]
+    assert profile == {**user_data["user_profile"], "preferences": user_data["user_preferences"]}
 
 def test_get_user_liked(user_data):
     service = UserService(**user_data)

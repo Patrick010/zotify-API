@@ -2,17 +2,40 @@ import pytest
 from fastapi.testclient import TestClient
 from zotify_api.main import app
 from zotify_api.services import user_service
+import json
 
 client = TestClient(app)
 
 @pytest.fixture
-def user_service_override():
+def user_service_override(tmp_path):
+    user_data_path = tmp_path / "user_data.json"
     user_profile = {"name": "Test User", "email": "test@example.com"}
     user_liked = ["track1", "track2"]
     user_history = ["track3", "track4"]
+    user_preferences = {"theme": "dark", "language": "en"}
+    notifications = []
+
     def get_user_service_override():
-        return user_service.UserService(user_profile, user_liked, user_history)
-    return get_user_service_override
+        with open(user_data_path, "w") as f:
+            json.dump({
+                "profile": user_profile,
+                "liked": user_liked,
+                "history": user_history,
+                "preferences": user_preferences,
+                "notifications": notifications,
+            }, f)
+        return user_service.UserService(
+            user_profile=user_profile,
+            user_liked=user_liked,
+            user_history=user_history,
+            user_preferences=user_preferences,
+            notifications=notifications,
+        )
+
+    original_storage_file = user_service.STORAGE_FILE
+    user_service.STORAGE_FILE = user_data_path
+    yield get_user_service_override
+    user_service.STORAGE_FILE = original_storage_file
 
 def test_get_user_profile(user_service_override):
     app.dependency_overrides[user_service.get_user_service] = user_service_override

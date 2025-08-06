@@ -65,8 +65,11 @@ A comprehensive overview of the security architecture, principles, and roadmap f
 
 ---
 
-### 6. Task Workflow
-All development tasks must follow the [Task Execution Checklist](./task_checklist.md) to ensure consistency, quality, and security.
+### Task Workflow / Checklist Enforcement
+
+Every task described in this LLD must be executed in compliance with the Task Execution Checklist at `docs/projectplan/task_checklist.md`. This ensures that implementation details remain aligned with high-level requirements, and that tests, documentation, security and privacy checks are performed before completion.
+
+Any deviation from the LLD requires an explicit update to both the LLD and HLD and must reference the checklist steps that were followed.
 
 ## Security Roadmap
 

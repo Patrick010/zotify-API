@@ -18,4 +18,4 @@ Before closing a development task, you must ensure that all relevant documentati
 *   **Operator Guide:** The operator guide must be updated to reflect any changes that affect how operators manage the system.
 *   **Security Documentation:** The security documentation must be updated to reflect any changes that affect the security of the system.
 *   **Changelog:** The changelog must be updated with a clear and concise description of the changes.
-*   **Task Execution Checklist:** You must review the [Task Execution Checklist](./task_checklist.md) and ensure that all applicable items have been addressed.
+*   **Task Execution Checklist:** You must review the [Task Execution Checklist](./task_checklist.md) and ensure that all applicable items have been addressed. Missing checklist items will prevent merge.

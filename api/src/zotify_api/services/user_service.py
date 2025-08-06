@@ -21,33 +21,36 @@ class UserService:
         user_history: List[str],
         user_preferences: Dict[str, Any],
         notifications: List[Dict[str, Any]],
+        storage_file: Path = None,
     ):
         self._user_profile = user_profile
         self._user_liked = user_liked
         self._user_history = user_history
         self._user_preferences = user_preferences
         self._notifications = notifications
+        self._storage_file = storage_file
 
     def _save_data(self):
-        data = {
-            "profile": self._user_profile,
-            "liked": self._user_liked,
-            "history": self._user_history,
-            "preferences": self._user_preferences,
-            "notifications": self._notifications,
-        }
-        with open(STORAGE_FILE, "w") as f:
-            json.dump(data, f, indent=4)
+        if self._storage_file:
+            data = {
+                "profile": self._user_profile,
+                "liked": self._user_liked,
+                "history": self._user_history,
+                "preferences": self._user_preferences,
+                "notifications": self._notifications,
+            }
+            with open(self._storage_file, "w") as f:
+                json.dump(data, f, indent=4)
 
     def get_user_profile(self) -> Dict[str, Any]:
-        return self._user_profile
+        return {**self._user_profile, "preferences": self._user_preferences}
 
     def update_user_profile(self, profile_data: Dict[str, Any]) -> Dict[str, Any]:
         log.info(f"Updating user profile with: {profile_data}")
         self._user_profile.update(profile_data)
         self._save_data()
         log.info("User profile updated successfully.")
-        return self._user_profile
+        return {**self._user_profile, "preferences": self._user_preferences}
 
     def get_user_preferences(self) -> Dict[str, Any]:
         return self._user_preferences
@@ -88,7 +91,10 @@ class UserService:
                 break
         self._save_data()
 
-def get_user_service():
+def get_user_service() -> "UserService":
+    if not STORAGE_FILE.parent.exists():
+        STORAGE_FILE.parent.mkdir(parents=True, exist_ok=True)
+
     if not STORAGE_FILE.exists():
         default_data = {
             "profile": {"name": "Test User", "email": "test@example.com"},
@@ -99,7 +105,14 @@ def get_user_service():
         }
         with open(STORAGE_FILE, "w") as f:
             json.dump(default_data, f, indent=4)
-        return UserService(**default_data)
+        return UserService(
+            user_profile=default_data["profile"],
+            user_liked=default_data["liked"],
+            user_history=default_data["history"],
+            user_preferences=default_data["preferences"],
+            notifications=default_data["notifications"],
+            storage_file=STORAGE_FILE,
+        )
     else:
         with open(STORAGE_FILE, "r") as f:
             data = json.load(f)
@@ -109,4 +122,5 @@ def get_user_service():
             user_history=data.get("history", []),
             user_preferences=data.get("preferences", {}),
             notifications=data.get("notifications", []),
+            storage_file=STORAGE_FILE,
         )
