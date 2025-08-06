@@ -23,17 +23,26 @@ def test_get_logging(logging_service_override):
     assert "level" in response.json()
     app.dependency_overrides = {}
 
-def test_update_logging(logging_service_override):
+def test_update_logging_unauthorized(logging_service_override):
     app.dependency_overrides[logging_service.get_logging_service] = logging_service_override
     update_data = {"level": "DEBUG"}
     response = client.patch("/api/logging", json=update_data)
+    assert response.status_code == 503
+    app.dependency_overrides = {}
+
+def test_update_logging(logging_service_override, monkeypatch):
+    monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
+    app.dependency_overrides[logging_service.get_logging_service] = logging_service_override
+    update_data = {"level": "DEBUG"}
+    response = client.patch("/api/logging", headers={"X-API-Key": "test_key"}, json=update_data)
     assert response.status_code == 200
     assert response.json()["level"] == "DEBUG"
     app.dependency_overrides = {}
 
-def test_update_logging_invalid_level(logging_service_override):
+def test_update_logging_invalid_level(logging_service_override, monkeypatch):
+    monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
     app.dependency_overrides[logging_service.get_logging_service] = logging_service_override
     update_data = {"level": "INVALID"}
-    response = client.patch("/api/logging", json=update_data)
+    response = client.patch("/api/logging", headers={"X-API-Key": "test_key"}, json=update_data)
     assert response.status_code == 400
     app.dependency_overrides = {}

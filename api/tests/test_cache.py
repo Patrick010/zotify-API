@@ -23,7 +23,14 @@ def test_get_cache(cache_service_override):
     assert "total_items" in response.json()
     app.dependency_overrides = {}
 
-def test_clear_cache_all(cache_service_override):
+def test_clear_cache_all_unauthorized(cache_service_override):
+    app.dependency_overrides[cache_service.get_cache_service] = cache_service_override
+    response = client.request("DELETE", "/api/cache", content=json.dumps({}))
+    assert response.status_code == 503
+    app.dependency_overrides = {}
+
+def test_clear_cache_all(cache_service_override, monkeypatch):
+    monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
     app.dependency_overrides[cache_service.get_cache_service] = cache_service_override
     # Get initial state
     initial_response = client.get("/api/cache")
@@ -31,7 +38,7 @@ def test_clear_cache_all(cache_service_override):
     assert initial_total > 0
 
     # Clear all
-    response = client.request("DELETE", "/api/cache", content=json.dumps({}))
+    response = client.request("DELETE", "/api/cache", headers={"X-API-Key": "test_key"}, content=json.dumps({}))
     assert response.status_code == 200
     assert response.json()["by_type"]["search"] == 0
     assert response.json()["by_type"]["metadata"] == 0
@@ -41,11 +48,17 @@ def test_clear_cache_all(cache_service_override):
     assert final_response.json()["total_items"] == 0
     app.dependency_overrides = {}
 
+def test_clear_cache_by_type_unauthorized(cache_service_override):
+    app.dependency_overrides[cache_service.get_cache_service] = cache_service_override
+    response = client.request("DELETE", "/api/cache", content=json.dumps({"type": "search"}))
+    assert response.status_code == 503
+    app.dependency_overrides = {}
 
-def test_clear_cache_by_type(cache_service_override):
+def test_clear__by_type(cache_service_override, monkeypatch):
+    monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
     app.dependency_overrides[cache_service.get_cache_service] = cache_service_override
     # Clear by type
-    response = client.request("DELETE", "/api/cache", content=json.dumps({"type": "search"}))
+    response = client.request("DELETE", "/api/cache", headers={"X-API-Key": "test_key"}, content=json.dumps({"type": "search"}))
     assert response.status_code == 200
     assert response.json()["by_type"]["search"] == 0
     assert response.json()["by_type"]["metadata"] != 0

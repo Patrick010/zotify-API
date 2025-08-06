@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile, File
 from zotify_api.services.db import get_db_engine
 from zotify_api.services import tracks_service
 from zotify_api.schemas.tracks import CreateTrackModel, UpdateTrackModel, TrackResponseModel
+from zotify_api.services.auth import require_admin_api_key
 from typing import List, Any
 
 router = APIRouter(prefix="/tracks")
@@ -18,28 +19,28 @@ def get_track(track_id: str, engine: Any = Depends(get_db_engine)):
         raise HTTPException(status_code=404, detail="Track not found")
     return track
 
-@router.post("", response_model=TrackResponseModel, status_code=201)
+@router.post("", response_model=TrackResponseModel, status_code=201, dependencies=[Depends(require_admin_api_key)])
 def create_track(payload: CreateTrackModel, engine: Any = Depends(get_db_engine)):
     try:
         return tracks_service.create_track(payload.model_dump(), engine)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.patch("/{track_id}", response_model=TrackResponseModel)
+@router.patch("/{track_id}", response_model=TrackResponseModel, dependencies=[Depends(require_admin_api_key)])
 def update_track(track_id: str, payload: UpdateTrackModel, engine: Any = Depends(get_db_engine)):
     try:
         return tracks_service.update_track(track_id, payload.model_dump(exclude_unset=True), engine)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.delete("/{track_id}", status_code=204)
+@router.delete("/{track_id}", status_code=204, dependencies=[Depends(require_admin_api_key)])
 def delete_track(track_id: str, engine: Any = Depends(get_db_engine)):
     try:
         tracks_service.delete_track(track_id, engine)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.post("/{track_id}/cover")
+@router.post("/{track_id}/cover", dependencies=[Depends(require_admin_api_key)])
 async def upload_track_cover(track_id: str, cover_image: UploadFile = File(...), engine: Any = Depends(get_db_engine)):
     try:
         file_bytes = await cover_image.read()

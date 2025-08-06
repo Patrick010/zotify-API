@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, BackgroundTasks
-from zotify_api.deps.auth import require_admin_api_key
+from zotify_api.services.auth import require_admin_api_key
 import zotify_api.services.webhooks as webhooks_service
 from pydantic import BaseModel
 from typing import List
@@ -12,18 +12,18 @@ class FirePayload(BaseModel):
     event: str
     data: dict
 
-router = APIRouter(prefix="/webhooks")
+router = APIRouter(prefix="/webhooks", dependencies=[Depends(require_admin_api_key)])
 
 @router.post("/register", status_code=201)
-def register_webhook(payload: WebhookPayload, authorized: bool = Depends(require_admin_api_key)):
+def register_webhook(payload: WebhookPayload):
     return webhooks_service.register_hook(payload)
 
 @router.get("", status_code=200)
-def list_webhooks(authorized: bool = Depends(require_admin_api_key)):
+def list_webhooks():
     return webhooks_service.list_hooks()
 
 @router.delete("/{hook_id}", status_code=204)
-def unregister_webhook(hook_id: str, authorized: bool = Depends(require_admin_api_key)):
+def unregister_webhook(hook_id: str):
     webhooks_service.unregister_hook(hook_id)
 
 @router.post("/fire")

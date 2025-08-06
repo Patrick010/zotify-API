@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from zotify_api.models.sync import SyncRequest
-from zotify_api.deps.auth import require_admin_api_key
+from zotify_api.services.auth import require_admin_api_key
 import zotify_api.services.sync_service as sync_service
 from typing import Callable
 

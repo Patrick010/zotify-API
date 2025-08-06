@@ -1,6 +1,18 @@
 Changelog
 
 All notable changes to the Zotify REST API will be documented in this file.
+v0.1.21
+Added
+
+    Admin API key authentication for protected endpoints.
+    `X-API-Key` header for authenticating admin requests.
+    Production startup guard to require an admin API key.
+
+Changed
+
+    Protected all admin-only endpoints with the new authentication mechanism.
+    Updated tests to include authentication checks.
+
 v0.1.20
 Added
 

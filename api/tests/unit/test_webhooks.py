@@ -52,6 +52,12 @@ def test_fire_webhook(mock_post):
         headers={"X-API-Key": "test_key"},
         json={"url": "http://test.com", "events": ["test_event"]},
     )
+
+    # Test without API key
     response = client.post("/api/webhooks/fire", json={"event": "test_event", "data": {}})
+    assert response.status_code == 401
+
+    # Test with API key
+    response = client.post("/api/webhooks/fire", headers={"X-API-Key": "test_key"}, json={"event": "test_event", "data": {}})
     assert response.status_code == 200
     mock_post.assert_called_once()

@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from zotify_api.schemas.logging import LogUpdate, LoggingConfigResponse
 from zotify_api.services.logging_service import LoggingService, get_logging_service
+from zotify_api.services.auth import require_admin_api_key
 
 router = APIRouter(prefix="/logging")
 
@@ -8,7 +9,7 @@ router = APIRouter(prefix="/logging")
 def get_logging(logging_service: LoggingService = Depends(get_logging_service)):
     return logging_service.get_logging_config()
 
-@router.patch("", response_model=LoggingConfigResponse)
+@router.patch("", response_model=LoggingConfigResponse, dependencies=[Depends(require_admin_api_key)])
 def update_logging(
     update: LogUpdate,
     logging_service: LoggingService = Depends(get_logging_service)

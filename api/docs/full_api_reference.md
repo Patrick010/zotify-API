@@ -10,7 +10,9 @@ http://0.0.0.0:8080/api
 
 ## Authentication
 
-No authentication is required for local testing. Production deployments should restrict access via reverse proxy or API gateway.
+Admin-only endpoints are protected by an API key. To access these endpoints, you must provide the API key in the `X-API-Key` header.
+
+No authentication is required for other endpoints in local testing. Production deployments should restrict access via reverse proxy or API gateway.
 
 ---
 
@@ -55,7 +57,7 @@ curl http://0.0.0.0:8080/api/config
 
 - `500 Internal Server Error`: If the configuration cannot be retrieved.
 
-### `PATCH /config`
+### `PATCH /config` (Admin-Only)
 
 Updates specific fields in the application configuration.
 
@@ -85,7 +87,7 @@ The updated configuration object.
 
 - `400 Bad Request`: If the request body is not valid JSON.
 
-### `POST /config/reset`
+### `POST /config/reset` (Admin-Only)
 
 Resets the application configuration to its default values.
 
@@ -224,7 +226,7 @@ The track object.
 
 - `404 Not Found`: If the track with the given ID does not exist.
 
-### `POST /tracks`
+### `POST /tracks` (Admin-Only)
 
 Creates a new track.
 
@@ -253,7 +255,7 @@ curl -X POST http://0.0.0.0:8080/api/tracks \
 
 The newly created track object.
 
-### `PATCH /tracks/{track_id}`
+### `PATCH /tracks/{track_id}` (Admin-Only)
 
 Updates a track by its ID.
 
@@ -281,7 +283,7 @@ Same as `POST /tracks`, but all fields are optional.
 
 The updated track object.
 
-### `DELETE /tracks/{track_id}`
+### `DELETE /tracks/{track_id}` (Admin-Only)
 
 Deletes a track by its ID.
 
@@ -301,7 +303,7 @@ curl -X DELETE http://0.0.0.0:8080/api/tracks/abc123
 
 - `204 No Content`
 
-### `POST /tracks/{track_id}/cover`
+### `POST /tracks/{track_id}/cover` (Admin-Only)
 
 Uploads a cover image for a track.
 
@@ -357,7 +359,7 @@ curl http://0.0.0.0:8080/api/logging
 }
 ```
 
-### `PATCH /logging`
+### `PATCH /logging` (Admin-Only)
 
 Updates the logging configuration.
 
@@ -413,7 +415,7 @@ curl http://0.0.0.0:8080/api/cache
 }
 ```
 
-### `DELETE /cache`
+### `DELETE /cache` (Admin-Only)
 
 Clears the cache.
 
@@ -479,7 +481,7 @@ curl http://0.0.0.0:8080/api/network
 }
 ```
 
-### `PATCH /network`
+### `PATCH /network` (Admin-Only)
 
 Updates the network proxy configuration.
 
@@ -569,7 +571,7 @@ curl http://0.0.0.0:8080/api/spotify/token_status
 }
 ```
 
-### `POST /spotify/sync_playlists`
+### `POST /spotify/sync_playlists` (Admin-Only)
 
 Triggers a synchronization of playlists with Spotify.
 
@@ -794,7 +796,7 @@ curl -X DELETE http://0.0.0.0:8080/api/user/history
 
 ---
 
-## System
+## System (Admin-Only)
 
 ### `GET /system/status`
 
