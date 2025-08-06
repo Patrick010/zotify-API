@@ -1,6 +1,11 @@
 Changelog
 
 All notable changes to the Zotify REST API will be documented in this file.
+v0.1.25
+Changed
+
+    Refactored the playlists subsystem to a dedicated service layer.
+
 v0.1.24
 Added
 

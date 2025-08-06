@@ -71,3 +71,11 @@ A comprehensive audit logging strategy will be implemented in a future phase of 
 
 *   **Security Testing:** Regular security testing, including penetration testing and vulnerability scanning, will be performed to identify and address security vulnerabilities.
 *   **Monitoring:** The API is monitored for suspicious activity, and alerts are generated for potential security incidents.
+
+## 12. Subsystem-Specific Security Notes
+
+### Playlists Subsystem
+
+*   **Data Privacy:** The current implementation does not have a concept of private playlists. All playlists are public. This is a potential privacy issue that should be addressed in a future iteration by adding a `private` flag to the playlist model and enforcing access control based on user ownership.
+*   **Rate Limiting:** There is no rate limiting on the playlist endpoints. This could be a potential issue if the API is exposed to the public, as it could be abused to create a large number of playlists. This should be addressed in a future iteration by adding rate limiting to the playlist creation endpoint.
+*   **Logging & Monitoring:** The service logs database errors, but it does not log security-sensitive events like playlist creation or deletion. This should be improved by adding audit logging for these events.
