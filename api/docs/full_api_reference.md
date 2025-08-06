@@ -702,7 +702,7 @@ curl -X PUT http://0.0.0.0:8080/api/spotify/playlists/abc123/metadata
 
 ### `GET /user/profile`
 
-Get user profile.
+Retrieves the user's profile information.
 
 **Request:**
 
@@ -712,11 +712,16 @@ curl http://0.0.0.0:8080/api/user/profile
 
 **Response:**
 
-`501 Not Implemented`
+```json
+{
+  "name": "string",
+  "email": "string"
+}
+```
 
 ### `GET /user/liked`
 
-List liked songs.
+Retrieves a list of the user's liked songs.
 
 **Request:**
 
@@ -726,11 +731,17 @@ curl http://0.0.0.0:8080/api/user/liked
 
 **Response:**
 
-`501 Not Implemented`
+```json
+{
+  "items": [
+    "string"
+  ]
+}
+```
 
 ### `POST /user/sync_liked`
 
-Download liked songs.
+Triggers a synchronization of the user's liked songs.
 
 **Request:**
 
@@ -740,11 +751,16 @@ curl -X POST http://0.0.0.0:8080/api/user/sync_liked
 
 **Response:**
 
-`501 Not Implemented`
+```json
+{
+  "status": "string",
+  "synced": 0
+}
+```
 
 ### `GET /user/history`
 
-List download history.
+Retrieves the user's download history.
 
 **Request:**
 
@@ -754,11 +770,17 @@ curl http://0.0.0.0:8080/api/user/history
 
 **Response:**
 
-`501 Not Implemented`
+```json
+{
+  "items": [
+    "string"
+  ]
+}
+```
 
 ### `DELETE /user/history`
 
-Clear history.
+Clears the user's download history.
 
 **Request:**
 
@@ -768,7 +790,7 @@ curl -X DELETE http://0.0.0.0:8080/api/user/history
 
 **Response:**
 
-`501 Not Implemented`
+- `204 No Content`
 
 ---
 
