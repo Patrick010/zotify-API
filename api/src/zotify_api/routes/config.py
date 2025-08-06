@@ -9,13 +9,14 @@ CONFIG_PATH = Path(__file__).parent.parent / "storage" / "config.json"
 
 def load_config():
     if CONFIG_PATH.exists():
-        return json.loads(CONFIG_PATH.read_text())
-    else:
-        return {
-            "library_path": "/music",
-            "scan_on_startup": True,
-            "cover_art_embed_enabled": True
-        }
+        content = CONFIG_PATH.read_text()
+        if content:
+            return json.loads(content)
+    return {
+        "library_path": "/music",
+        "scan_on_startup": True,
+        "cover_art_embed_enabled": True
+    }
 
 def save_config(config_data):
     CONFIG_PATH.write_text(json.dumps(config_data, indent=2))

@@ -9,9 +9,9 @@ webhooks: Dict[str, dict] = {}
 
 def register_hook(payload: dict):
     hook_id = str(uuid.uuid4())
-    webhooks[hook_id] = payload.copy()
-    webhooks[hook_id]["id"] = hook_id
-    return webhooks[hook_id]
+    hook = {"id": hook_id, **payload.model_dump()}
+    webhooks[hook_id] = hook
+    return hook
 
 def list_hooks():
     return list(webhooks.values())
@@ -21,9 +21,10 @@ def unregister_hook(hook_id: str):
         del webhooks[hook_id]
 
 def fire_event(event: str, data: dict):
-    for hook in webhooks.values():
-        if event in hook["events"]:
+    hooks = list_hooks()
+    for hook in hooks:
+        if event in hook.get("events", []):
             try:
-                httpx.post(hook["url"], json={"event": event, "data": data})
-            except httpx.RequestError as e:
-                log.error(f"Webhook request failed for {hook['url']}: {e}")
+                httpx.post(hook["url"], json={"event": event, "data": data}, timeout=5.0)
+            except Exception:
+                log.exception("webhook delivery failed")
