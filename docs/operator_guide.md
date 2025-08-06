@@ -38,3 +38,7 @@ To rotate or reset the admin API key, you have two options:
 In a production environment, it is strongly recommended to set the `ADMIN_API_KEY` environment variable to a securely generated, random key. This will prevent the application from generating a new key on every restart if the `.admin_api_key` file is not persisted across deployments.
 
 The application will refuse to start in a production environment (`app_env="production"`) unless an admin API key is provided. This behavior can be disabled by setting `REQUIRE_ADMIN_API_KEY_IN_PROD=false`, but this is not recommended.
+
+## User Data
+
+User profile and preference data is stored in the `api/storage/user_data.json` file. It is recommended to back up this file regularly.

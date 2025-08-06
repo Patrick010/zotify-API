@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from zotify_api.schemas.user import UserProfileResponse, UserLikedResponse, UserHistoryResponse, SyncLikedResponse
+from zotify_api.schemas.user import UserProfileResponse, UserLikedResponse, UserHistoryResponse, SyncLikedResponse, UserProfileUpdate, UserPreferences, UserPreferencesUpdate
 from zotify_api.services.user_service import UserService, get_user_service
 
 router = APIRouter(prefix="/user")
@@ -7,6 +7,26 @@ router = APIRouter(prefix="/user")
 @router.get("/profile", response_model=UserProfileResponse)
 def get_user_profile(user_service: UserService = Depends(get_user_service)):
     return user_service.get_user_profile()
+
+@router.patch("/profile", response_model=UserProfileResponse)
+def update_user_profile(
+    profile_data: UserProfileUpdate,
+    user_service: UserService = Depends(get_user_service)
+):
+    return user_service.update_user_profile(profile_data.model_dump(exclude_unset=True))
+
+@router.get("/preferences", response_model=UserPreferences)
+def get_user_preferences(user_service: UserService = Depends(get_user_service)):
+    return user_service.get_user_preferences()
+
+@router.patch("/preferences", response_model=UserPreferences)
+def update_user_preferences(
+    preferences_data: UserPreferencesUpdate,
+    user_service: UserService = Depends(get_user_service)
+):
+    return user_service.update_user_preferences(
+        preferences_data.model_dump(exclude_unset=True)
+    )
 
 @router.get("/liked", response_model=UserLikedResponse)
 def get_user_liked(user_service: UserService = Depends(get_user_service)):

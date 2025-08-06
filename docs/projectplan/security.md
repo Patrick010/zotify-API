@@ -79,3 +79,10 @@ A comprehensive audit logging strategy will be implemented in a future phase of 
 *   **Data Privacy:** The current implementation does not have a concept of private playlists. All playlists are public. This is a potential privacy issue that should be addressed in a future iteration by adding a `private` flag to the playlist model and enforcing access control based on user ownership.
 *   **Rate Limiting:** There is no rate limiting on the playlist endpoints. This could be a potential issue if the API is exposed to the public, as it could be abused to create a large number of playlists. This should be addressed in a future iteration by adding rate limiting to the playlist creation endpoint.
 *   **Logging & Monitoring:** The service logs database errors, but it does not log security-sensitive events like playlist creation or deletion. This should be improved by adding audit logging for these events.
+
+### User Profile Subsystem
+
+*   **Data Privacy:** User profile data is stored in a JSON file. While this is a temporary solution, it is important to ensure that the file has restricted permissions and is not publicly accessible. In a production environment, user data should be stored in a secure, encrypted database.
+*   **Role-Based Access Control (RBAC):** The current implementation does not have a concept of users or roles, so RBAC cannot be implemented at this time. This is a high-priority feature that will be implemented in a future phase of the project.
+*   **Rate Limiting:** There is no rate limiting on the profile update endpoints. This could be a potential issue if the API is exposed to the public, as it could be abused to update profiles repeatedly. This should be addressed in a future iteration by adding rate limiting to the profile update endpoints.
+*   **Audit Logging:** The service now logs all profile and preference updates.

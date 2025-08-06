@@ -1,6 +1,11 @@
 Changelog
 
 All notable changes to the Zotify REST API will be documented in this file.
+v0.1.26
+Added
+
+    User profile and preferences management endpoints.
+
 v0.1.25
 Changed
 

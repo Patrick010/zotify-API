@@ -717,9 +717,82 @@ curl http://0.0.0.0:8080/api/user/profile
 ```json
 {
   "name": "string",
-  "email": "string"
+  "email": "string",
+  "preferences": {
+    "theme": "string",
+    "language": "string"
+  }
 }
 ```
+
+### `PATCH /user/profile`
+
+Updates the user's profile information.
+
+**Request:**
+
+```bash
+curl -X PATCH http://0.0.0.0:8080/api/user/profile \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "New Name"
+  }'
+```
+
+**Body Parameters:**
+
+| Name    | Type   | Description                |
+| ------- | ------ | -------------------------- |
+| `name`  | string | (Optional) The user's name. |
+| `email` | string | (Optional) The user's email. |
+
+**Response:**
+
+The updated user profile object.
+
+### `GET /user/preferences`
+
+Retrieves the user's preferences.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/user/preferences
+```
+
+**Response:**
+
+```json
+{
+  "theme": "string",
+  "language": "string"
+}
+```
+
+### `PATCH /user/preferences`
+
+Updates the user's preferences.
+
+**Request:**
+
+```bash
+curl -X PATCH http://0.0.0.0:8080/api/user/preferences \
+  -H "Content-Type: application/json" \
+  -d '{
+    "theme": "light"
+  }'
+```
+
+**Body Parameters:**
+
+| Name       | Type   | Description                 |
+| ---------- | ------ | --------------------------- |
+| `theme`    | string | (Optional) The user's theme. |
+| `language` | string | (Optional) The user's language. |
+
+**Response:**
+
+The updated user preferences object.
 
 ### `GET /user/liked`
 

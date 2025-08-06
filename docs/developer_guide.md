@@ -39,3 +39,18 @@ When making requests to protected endpoints, include the API key in the `X-API-K
 ```bash
 curl -H "X-API-Key: your-secret-key" http://0.0.0.0:8080/api/some-protected-endpoint
 ```
+
+## User Profiles and Preferences
+
+The API provides endpoints for managing user profiles and preferences.
+
+### Endpoints
+
+*   `GET /user/profile`: Retrieve the user's profile.
+*   `PATCH /user/profile`: Update the user's profile.
+*   `GET /user/preferences`: Retrieve the user's preferences.
+*   `PATCH /user/preferences`: Update the user's preferences.
+
+### Data Storage
+
+User data is stored in a JSON file in the `api/storage` directory. This is a temporary solution that will be replaced with a database in a future iteration.

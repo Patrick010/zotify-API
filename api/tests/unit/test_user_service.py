@@ -34,3 +34,20 @@ def test_delete_user_history(user_data):
     service = UserService(**user_data)
     service.delete_user_history()
     assert service.get_user_history() == []
+
+def test_update_user_profile(user_data):
+    service = UserService(**user_data)
+    update_data = {"name": "New Name"}
+    service.update_user_profile(update_data)
+    assert service.get_user_profile()["name"] == "New Name"
+
+def test_get_user_preferences(user_data):
+    service = UserService(**user_data)
+    preferences = service.get_user_preferences()
+    assert preferences == user_data["user_preferences"]
+
+def test_update_user_preferences(user_data):
+    service = UserService(**user_data)
+    update_data = {"theme": "light"}
+    service.update_user_preferences(update_data)
+    assert service.get_user_preferences()["theme"] == "light"
