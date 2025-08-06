@@ -1,19 +1,35 @@
+import pytest
 from fastapi.testclient import TestClient
 from zotify_api.main import app
-from zotify_api.routes.downloads import download_state
+from zotify_api.services import downloads_service
 
 client = TestClient(app)
 
-def test_download_status():
+@pytest.fixture
+def downloads_service_override():
+    download_state = {
+        "in_progress": [],
+        "failed": {"track_7": "Network error", "track_10": "404 not found"},
+        "completed": ["track_3", "track_5"]
+    }
+    def get_downloads_service_override():
+        return downloads_service.DownloadsService(download_state)
+    return get_downloads_service_override
+
+def test_download_status(downloads_service_override):
+    app.dependency_overrides[downloads_service.get_downloads_service] = downloads_service_override
     response = client.get("/api/downloads/status")
     assert response.status_code == 200
     assert "in_progress" in response.json()
     assert "failed" in response.json()
     assert "completed" in response.json()
+    app.dependency_overrides = {}
 
-def test_retry_downloads():
+def test_retry_downloads(downloads_service_override):
+    app.dependency_overrides[downloads_service.get_downloads_service] = downloads_service_override
     # Get initial state
-    initial_failed_count = len(download_state["failed"])
+    initial_status = client.get("/api/downloads/status").json()
+    initial_failed_count = len(initial_status["failed"])
     assert initial_failed_count > 0
 
     # Retry failed downloads
@@ -26,3 +42,4 @@ def test_retry_downloads():
     assert len(final_status["failed"]) == 0
     assert "track_7" in final_status["in_progress"]
     assert "track_10" in final_status["in_progress"]
+    app.dependency_overrides = {}

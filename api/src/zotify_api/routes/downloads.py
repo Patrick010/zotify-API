@@ -1,23 +1,16 @@
-from fastapi import APIRouter
-from zotify_api.models.downloads import RetryRequest
+from fastapi import APIRouter, Depends
+from zotify_api.schemas.downloads import RetryRequest, DownloadStatusResponse
+from zotify_api.services.downloads_service import DownloadsService, get_downloads_service
 
-router = APIRouter()
+router = APIRouter(prefix="/downloads")
 
-# Simulated backend storage
-download_state = {
-    "in_progress": [],
-    "failed": {"track_7": "Network error", "track_10": "404 not found"},
-    "completed": ["track_3", "track_5"]
-}
+@router.get("/status", response_model=DownloadStatusResponse)
+def download_status(downloads_service: DownloadsService = Depends(get_downloads_service)):
+    return downloads_service.get_download_status()
 
-@router.get("/downloads/status", summary="Get status of download queue")
-def download_status():
-    return download_state
-
-@router.post("/downloads/retry", summary="Retry failed downloads")
-def retry_downloads(req: RetryRequest):
-    for tid in req.track_ids:
-        if tid in download_state["failed"]:
-            download_state["in_progress"].append(tid)
-            del download_state["failed"][tid]
-    return {"retried": req.track_ids, "queued": True}
+@router.post("/retry", summary="Retry failed downloads")
+def retry_downloads(
+    req: RetryRequest,
+    downloads_service: DownloadsService = Depends(get_downloads_service)
+):
+    return downloads_service.retry_downloads(req.track_ids)

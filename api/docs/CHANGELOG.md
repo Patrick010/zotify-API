@@ -1,6 +1,19 @@
 Changelog
 
 All notable changes to the Zotify REST API will be documented in this file.
+v0.1.15
+Added
+
+    Dedicated downloads_service for all download-related logic.
+
+    New downloads.py schema file for request/response validation.
+
+    Unit tests for downloads_service and updated integration tests for downloads routes.
+
+Changed
+
+    Refactored downloads routes to use the new downloads_service and Pydantic schemas.
+
 v0.1.14
 Added
 
