@@ -1,6 +1,19 @@
 Changelog
 
 All notable changes to the Zotify REST API will be documented in this file.
+v0.1.19
+Added
+
+    Dedicated user_service for all user-related logic.
+
+    New user.py schema file for request/response validation.
+
+    Unit tests for user_service and updated integration tests for user routes.
+
+Changed
+
+    Refactored user routes to use the new user_service and Pydantic schemas.
+
 v0.1.18
 Added
 

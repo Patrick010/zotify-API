@@ -1,23 +1,26 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends
+from zotify_api.schemas.user import UserProfileResponse, UserLikedResponse, UserHistoryResponse, SyncLikedResponse
+from zotify_api.services.user_service import UserService, get_user_service
 
-router = APIRouter()
+router = APIRouter(prefix="/user")
 
-@router.get("/user/profile")
-def get_user_profile():
-    raise HTTPException(status_code=501, detail="Not Implemented")
+@router.get("/profile", response_model=UserProfileResponse)
+def get_user_profile(user_service: UserService = Depends(get_user_service)):
+    return user_service.get_user_profile()
 
-@router.get("/user/liked")
-def get_user_liked():
-    raise HTTPException(status_code=501, detail="Not Implemented")
+@router.get("/liked", response_model=UserLikedResponse)
+def get_user_liked(user_service: UserService = Depends(get_user_service)):
+    return {"items": user_service.get_user_liked()}
 
-@router.post("/user/sync_liked")
-def sync_user_liked():
-    raise HTTPException(status_code=501, detail="Not Implemented")
+@router.post("/sync_liked", response_model=SyncLikedResponse)
+def sync_user_liked(user_service: UserService = Depends(get_user_service)):
+    return user_service.sync_user_liked()
 
-@router.get("/user/history")
-def get_user_history():
-    raise HTTPException(status_code=501, detail="Not Implemented")
+@router.get("/history", response_model=UserHistoryResponse)
+def get_user_history(user_service: UserService = Depends(get_user_service)):
+    return {"items": user_service.get_user_history()}
 
-@router.delete("/user/history")
-def delete_user_history():
-    raise HTTPException(status_code=501, detail="Not Implemented")
+@router.delete("/history", status_code=204)
+def delete_user_history(user_service: UserService = Depends(get_user_service)):
+    user_service.delete_user_history()
+    return {}
