@@ -14,12 +14,9 @@ from zotify_api.routes import config, network
 
 prefix = settings.api_prefix
 
-modules = [metadata, cache, logging, system, user, playlist, tracks, downloads, sync, stubs, config, network]
+modules = [metadata, cache, logging, system, user, playlist, tracks, downloads, sync, stubs, config, network, search, webhooks, spotify]
 for m in modules:
     app.include_router(m.router, prefix=prefix)
-app.include_router(search.router, prefix=f"{prefix}/search")
-app.include_router(webhooks.router, prefix=f"{prefix}/webhooks")
-app.include_router(spotify.router, prefix=f"{prefix}/spotify")
 
 @app.get("/ping")
 async def ping():
