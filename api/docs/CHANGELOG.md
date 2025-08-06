@@ -1,6 +1,15 @@
 Changelog
 
 All notable changes to the Zotify REST API will be documented in this file.
+v0.1.29
+Added
+
+    User privacy compliance statement and GDPR alignment.
+    Implemented data export and deletion API endpoints.
+    Enforced audit logging for personal data access.
+    Updated documentation with detailed privacy and security compliance info.
+    Added compliance checks and tests to validate GDPR adherence.
+
 v0.1.28
 Changed
 

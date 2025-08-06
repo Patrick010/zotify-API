@@ -1,27 +1,30 @@
-# Privacy Compliance
+# Privacy Compliance Overview
 
-This document outlines the privacy compliance measures taken by the Zotify API project, with a focus on user profile data handling.
+This document outlines how the Zotify API project complies with data protection laws, specifically the EU General Data Protection Regulation (GDPR).
 
-## 1. Data Minimization
+## User Privacy Compliance Statement
 
-We only collect the minimum amount of data necessary to provide our services. For user profiles, this includes:
+Zotify respects user privacy and commits to protecting personal data by:
 
-*   **Name:** To personalize the user experience.
-*   **Email:** For account management and communication.
+- Collecting only necessary data for functionality and services.
+- Obtaining explicit user consent where required.
+- Providing users with full access to their personal data, including export and deletion options.
+- Ensuring data security through access control, encryption, and audit logging.
+- Processing data transparently and lawfully, with clearly documented purposes.
+- Supporting users’ rights to data correction, portability, and consent withdrawal.
+- Conducting regular privacy impact assessments.
 
-## 2. Explicit Consent
+## API Compliance
 
-We will obtain explicit consent from users before collecting any personal data. This will be done through a clear and concise privacy policy and terms of service.
+- All API endpoints handling personal data enforce access controls and audit logging.
+- Privacy by design and default are implemented in API logic and storage.
+- Data minimization and retention policies are applied rigorously.
+- Data export and deletion endpoints are provided under `/privacy/data`.
 
-## 3. Right to Access and Delete Data
+## Future Enhancements
 
-Users have the right to access and delete their personal data. We will provide a mechanism for users to request a copy of their data and to delete their account and all associated data.
+- Implementation of role-based access control (RBAC) for fine-grained permissions.
+- Rate limiting to prevent abuse of personal data endpoints.
+- Continuous monitoring and improvements based on security reviews and audits.
 
-## 4. GDPR Compliance
-
-The Zotify API is designed to be compliant with the General Data Protection Regulation (GDPR). This includes:
-
-*   **Data Protection by Design and by Default:** We have implemented appropriate technical and organizational measures to ensure that data protection is integrated into our services from the outset.
-*   **Data Protection Impact Assessments (DPIAs):** We will conduct DPIAs for any new processing activities that are likely to result in a high risk to the rights and freedoms of individuals.
-*   **Data Breach Notifications:** In the event of a data breach, we will notify the relevant supervisory authority and affected individuals in accordance with GDPR requirements.
-*   **Data Subject Rights:** We will respect the rights of data subjects, including the right to access, rectification, erasure, and data portability.
+For full details, see the security.md file and developer/operator guides.

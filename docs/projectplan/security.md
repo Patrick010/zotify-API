@@ -74,6 +74,14 @@ A comprehensive audit logging strategy will be implemented in a future phase of 
 
 ## 12. Subsystem-Specific Security Notes
 
+### Privacy & GDPR Compliance Notes
+
+- Notification, user profile, and preferences endpoints must respect user privacy rights and data protection laws.
+- All personal data access is logged via audit trails for accountability.
+- Unauthenticated access to sensitive endpoints is forbidden (to be implemented as a high-priority fix).
+- Privacy by design principles guide API architecture and implementation.
+- GDPR compliance is validated during every development cycle, including during Step 19 privacy integration.
+
 ### Playlists Subsystem
 
 *   **Data Privacy:** The current implementation does not have a concept of private playlists. All playlists are public. This is a potential privacy issue that should be addressed in a future iteration by adding a `private` flag to the playlist model and enforcing access control based on user ownership.

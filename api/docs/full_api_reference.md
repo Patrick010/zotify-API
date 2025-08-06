@@ -1174,6 +1174,16 @@ curl -X PATCH http://0.0.0.0:8080/api/notifications/notif1 \
 
 ---
 
+### Privacy Endpoints
+
+- `GET /privacy/data`
+  Export all personal data related to the authenticated user in JSON format.
+
+- `DELETE /privacy/data`
+  Delete all personal data related to the authenticated user, in compliance with GDPR data erasure requirements.
+
+Access to these endpoints requires authentication and proper authorization. All access and actions are logged for audit purposes.
+
 ## Final Notes
 
 - All endpoints are unauthenticated for local use.

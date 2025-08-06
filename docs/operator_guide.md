@@ -42,3 +42,10 @@ The application will refuse to start in a production environment (`app_env="prod
 ## User Data
 
 User profile, preference, and notification data is stored in the `api/storage/user_data.json` file. It is recommended to back up this file regularly.
+
+### Privacy Compliance Operations
+
+- Monitor audit logs for unauthorized access attempts to personal data.
+- Ensure backups and storage comply with data retention and deletion policies.
+- Support user data export and deletion requests promptly via API endpoints.
+- Follow security.md recommendations for access control and incident response regarding personal data.

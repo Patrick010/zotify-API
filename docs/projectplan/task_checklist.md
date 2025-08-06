@@ -38,3 +38,21 @@ This checklist must be followed for *every* development task before it is marked
 **Enforcement:**
 No task is considered complete unless all applicable checklist items have been addressed.
 This file is authoritative and version-controlled.
+
+### Step 19 — Privacy Compliance Integration
+
+- Implement explicit user consent capture and storage.
+- Add user privacy endpoints:
+  - GET /privacy/data (export user data)
+  - DELETE /privacy/data (delete user data)
+- Enforce data minimization in storage and API responses.
+- Implement RBAC and access control for personal data.
+- Extend audit logging for all personal data access and changes.
+- Support user rights (data correction, consent withdrawal).
+- Ensure all API endpoints comply with GDPR and the project’s User Privacy Compliance Statement, including:
+  - Lawful and transparent processing.
+  - Privacy by design and default principles.
+  - Regular data protection impact assessments.
+- Perform security reviews and patch identified issues.
+- Write unit and integration tests covering privacy features and GDPR compliance.
+- Update all relevant documentation with privacy compliance info.

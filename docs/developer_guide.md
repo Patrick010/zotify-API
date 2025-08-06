@@ -44,6 +44,13 @@ curl -H "X-API-Key: your-secret-key" http://0.0.0.0:8080/api/some-protected-endp
 
 The API provides endpoints for managing user profiles and preferences.
 
+### Privacy Compliance and GDPR
+
+- All API endpoints handling user personal data implement consent verification, access control, and audit logging.
+- New endpoints `/privacy/data` allow users to export and delete their data as per GDPR requirements.
+- When developing new features, ensure personal data handling complies with privacy by design and data minimization principles.
+- Regularly consult `privacy_compliance.md` and `security.md` for updated compliance guidelines.
+
 ## Response Format
 
 All API endpoints return a standardized JSON response with the following structure:
