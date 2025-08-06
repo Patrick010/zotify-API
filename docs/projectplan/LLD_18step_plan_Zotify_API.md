@@ -57,6 +57,22 @@ For each subsystem:
 - Commit with clear message referencing step number.
 - Summary of changes for service file, schema, route, tests, docs.
 
+### 5. Admin API Key Usage and Risk Management
+The current implementation uses a static admin API key for protecting administrative endpoints. This is a known security risk and is documented in the [Admin API Key Security Risk Analysis](./admin_api_key_security_risk.md) document.
+
+**Implementation Details:**
+- **Header Name:** `X-API-Key`
+- **Configuration:** The API key is configured via the `ADMIN_API_KEY` environment variable.
+- **Error Handling:**
+  - If the `admin_api_key` is not configured, protected endpoints will return a `503 Service Unavailable` error.
+  - If the key is configured but the header is missing or incorrect, a `401 Unauthorized` error is returned.
+- **Test Mocking:** Tests use `monkeypatch` to set the `admin_api_key` in the settings for testing protected endpoints.
+
+**Next Steps:**
+Future phases of the project will replace the static admin API key with a more robust authentication mechanism, such as OAuth2 or JWT.
+
+The security risk document and this section must be maintained alongside any future changes to authentication or admin key usage. Any changes related to authentication or this risk must also be documented in `docs/CHANGELOG.md`.
+
 ---
 
 ## Multi-Phase Plan Beyond Step 18
