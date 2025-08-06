@@ -1,45 +1,20 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from zotify_api.models.config import ConfigUpdate
-import json
-from pathlib import Path
+from zotify_api.services.config_service import ConfigService, get_config_service
 
-router = APIRouter()
+router = APIRouter(prefix="/config")
 
-CONFIG_PATH = Path(__file__).parent.parent / "storage" / "config.json"
+@router.get("")
+def get_config(config_service: ConfigService = Depends(get_config_service)):
+    return config_service.get_config()
 
-DEFAULT_CONFIG = {
-    "library_path": "/music",
-    "scan_on_startup": True,
-    "cover_art_embed_enabled": True
-}
+@router.patch("")
+def update_config(
+    update: ConfigUpdate,
+    config_service: ConfigService = Depends(get_config_service)
+):
+    return config_service.update_config(update.model_dump(exclude_unset=True))
 
-def load_config():
-    if CONFIG_PATH.exists():
-        content = CONFIG_PATH.read_text()
-        if content:
-            return json.loads(content)
-    return DEFAULT_CONFIG.copy()
-
-def save_config(config_data):
-    CONFIG_PATH.write_text(json.dumps(config_data, indent=2))
-
-config = load_config()
-default_config = DEFAULT_CONFIG.copy()
-
-@router.get("/config")
-def get_config():
-    return config
-
-@router.patch("/config")
-def update_config(update: ConfigUpdate):
-    for k, v in update.model_dump(exclude_unset=True).items():
-        config[k] = v
-    save_config(config)
-    return config
-
-@router.post("/config/reset")
-def reset_config():
-    global config
-    config = DEFAULT_CONFIG.copy()
-    save_config(config)
-    return config
+@router.post("/reset")
+def reset_config(config_service: ConfigService = Depends(get_config_service)):
+    return config_service.reset_config()
