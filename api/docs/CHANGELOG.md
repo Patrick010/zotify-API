@@ -1,6 +1,12 @@
 Changelog
 
 All notable changes to the Zotify REST API will be documented in this file.
+v0.1.16
+Changed
+
+    Performed a full audit of all documentation under the docs/ directory.
+    Updated API reference pages, developer guides, usage examples, and CHANGELOG.md to be accurate, complete, and consistent with the current codebase.
+
 v0.1.15
 Added
 

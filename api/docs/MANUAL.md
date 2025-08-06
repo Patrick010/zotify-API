@@ -64,70 +64,74 @@ Create a new playlist.
 **Body:**
 
 ```json
-{ "name": "My Playlist" }
-```
-
-### `DELETE /playlists/{id}`
-
-Delete the playlist with given ID.
-
-### `POST /playlists/{id}/tracks`
-
-Append tracks to playlist.
-
-**Body:**
-
-```json
-{ "track_ids": ["abc123", "xyz456"] }
+{
+  "name": "My Playlist",
+  "description": "My favorite songs"
+}
 ```
 
 ---
 
 ## Downloads
 
-### `GET /downloads`
+### `GET /downloads/status`
 
 Returns current download queue.
 
-### `POST /downloads`
+### `POST /downloads/retry`
 
-Start a download.
+Retry a download.
 
 **Body:**
 
 ```json
-{ "track_id": "abc123" }
+{ "track_ids": ["abc123"] }
 ```
-
-### `DELETE /downloads/{id}`
-
-Cancel a download.
 
 ---
 
-## Metadata and Cover Art
+## Tracks
 
-### `GET /metadata/{track_id}`
+### `GET /tracks`
 
-Fetch metadata for track.
+Returns a list of tracks.
 
-### `PATCH /metadata/{track_id}`
+### `GET /tracks/{track_id}`
 
-Update metadata for a track.
+Returns a specific track by its ID.
+
+### `POST /tracks`
+
+Creates a new track.
 
 **Body:**
 
 ```json
 {
-  "title": "New Title",
-  "artist": "New Artist",
-  "tags": ["chill", "favorite"]
+  "name": "New Track",
+  "artist": "New Artist"
 }
 ```
 
-### `POST /metadata/{track_id}/cover`
+### `PATCH /tracks/{track_id}`
 
-Upload cover art.
+Updates a track by its ID.
+
+**Body:**
+
+```json
+{
+  "name": "Updated Track"
+}
+```
+
+### `DELETE /tracks/{track_id}`
+
+Deletes a track by its ID.
+
+### `POST /tracks/{track_id}/cover`
+
+Uploads a cover image for a track.
 
 ---
 
@@ -317,33 +321,15 @@ Reset state.
 
 ## Fork-Specific Features
 
-### `POST /playlists/sync`
+### `POST /sync/playlist/sync`
 
 Trigger advanced playlist sync.
 
 **Body:**
 
 ```json
-{ "source": "external", "mode": "merge" }
+{ "playlist_id": "abc123" }
 ```
-
-### `GET /downloads/status`
-
-Get extended download status.
-
-### `POST /downloads/retry`
-
-Retry failed downloads.
-
-**Body:**
-
-```json
-{ "download_id": "xyz789" }
-```
-
-### `GET /metadata/tags`
-
-Return all known tags for user-defined classification.
 
 ---
 
@@ -352,21 +338,20 @@ Return all known tags for user-defined classification.
 ### Create and populate a playlist
 
 ```bash
-curl -X POST http://0.0.0.0:8080/api/playlists -H "Content-Type: application/json" -d '{"name": "My Chill Playlist"}'
-curl -X POST http://0.0.0.0:8080/api/playlists/1/tracks -H "Content-Type: application/json" -d '{"track_ids": ["abc123"]}'
+curl -X POST http://0.0.0.0:8080/api/playlists -H "Content-Type: application/json" -d '{"name": "My Chill Playlist", "description": "My favorite songs"}'
 ```
 
 ### Download and monitor a track
 
 ```bash
-curl -X POST http://0.0.0.0:8080/api/downloads -H "Content-Type: application/json" -d '{"track_id": "abc123"}'
-curl http://0.0.0.0:8080/api/downloads
+curl http://0.0.0.0:8080/api/downloads/status
+curl -X POST http://0.0.0.0:8080/api/downloads/retry -H "Content-Type: application/json" -d '{"track_ids": ["track_7"]}'
 ```
 
-### Update metadata
+### Update track metadata
 
 ```bash
-curl -X PATCH http://0.0.0.0:8080/api/metadata/abc123 -H "Content-Type: application/json" -d '{"title": "Updated Title"}'
+curl -X PATCH http://0.0.0.0:8080/api/tracks/abc123 -H "Content-Type: application/json" -d '{"name": "Updated Title"}'
 ```
 
 ### Clear metadata cache

@@ -116,13 +116,20 @@ curl http://0.0.0.0:8080/api/playlists
 **Response:**
 
 ```json
-[
-  {
-    "id": "abc123",
-    "name": "My Playlist",
-    "tracks": ["track1", "track2"]
+{
+  "data": [
+    {
+      "id": "abc123",
+      "name": "My Playlist",
+      "description": "My favorite songs"
+    }
+  ],
+  "meta": {
+    "total": 1,
+    "limit": 25,
+    "offset": 0
   }
-]
+}
 ```
 
 ### `POST /playlists`
@@ -135,164 +142,164 @@ Creates a new playlist.
 curl -X POST http://0.0.0.0:8080/api/playlists \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "My New Playlist"
+    "name": "My New Playlist",
+    "description": "A playlist for my new favorite songs"
   }'
 ```
 
 **Body Parameters:**
 
-| Name   | Type   | Description                |
-| ------ | ------ | -------------------------- |
-| `name` | string | The name of the playlist. |
+| Name          | Type   | Description                           |
+|---------------|--------|---------------------------------------|
+| `name`        | string | The name of the playlist.             |
+| `description` | string | (Optional) The description of the playlist. |
 
 **Response:**
 
 The newly created playlist object.
 
-### `DELETE /playlists/{playlist_id}`
-
-Deletes a playlist by its ID.
-
-**Request:**
-
-```bash
-curl -X DELETE http://0.0.0.0:8080/api/playlists/abc123
-```
-
-**Path Parameters:**
-
-| Name          | Type   | Description                  |
-| ------------- | ------ | ---------------------------- |
-| `playlist_id` | string | The ID of the playlist to delete. |
-
-**Response:**
-
-- `204 No Content`
-
-**Errors:**
-
-- `404 Not Found`: If the playlist with the given ID does not exist.
-
-### `POST /playlists/{playlist_id}/tracks`
-
-Adds one or more tracks to a playlist.
-
-**Request:**
-
-```bash
-curl -X POST http://0.0.0.0:8080/api/playlists/abc123/tracks \
-  -H "Content-Type: application/json" \
-  -d '{
-    "track_ids": ["track3", "track4"]
-  }'
-```
-
-**Path Parameters:**
-
-| Name          | Type   | Description                           |
-| ------------- | ------ | ------------------------------------- |
-| `playlist_id` | string | The ID of the playlist to add tracks to. |
-
-**Body Parameters:**
-
-| Name        | Type     | Description                     |
-| ----------- | -------- | ------------------------------- |
-| `track_ids` | string[] | A list of track IDs to add. |
-
-**Response:**
-
-The updated playlist object.
-
-**Errors:**
-
-- `404 Not Found`: If the playlist with the given ID does not exist.
-
 ---
 
 ## Tracks
 
-### `GET /tracks/{track_id}/metadata`
+### `GET /tracks`
 
-Returns metadata for a specific track.
+Returns a list of tracks.
 
 **Request:**
 
 ```bash
-curl http://0.0.0.0:8080/api/tracks/abc123/metadata
+curl http://0.0.0.0:8080/api/tracks
 ```
 
-**Path Parameters:**
+**Query Parameters:**
 
-| Name       | Type   | Description                |
-| ---------- | ------ | -------------------------- |
-| `track_id` | string | The ID of the track. |
+| Name     | Type    | Description                                      |
+|----------|---------|--------------------------------------------------|
+| `limit`  | integer | (Optional) The maximum number of tracks to return. |
+| `offset` | integer | (Optional) The offset from which to start returning tracks. |
+| `q`      | string  | (Optional) A search query to filter tracks by name. |
 
 **Response:**
 
 ```json
 {
-  "id": "abc123",
-  "title": "Track Title",
-  "artist": "Artist",
-  "album": "Album",
-  "genre": "Rock",
-  "year": 2020
+  "data": [
+    {
+      "id": "abc123",
+      "name": "Track Title",
+      "artist": "Artist",
+      "album": "Album"
+    }
+  ],
+  "meta": {
+    "total": 1,
+    "limit": 25,
+    "offset": 0
+  }
 }
 ```
 
-### `PATCH /tracks/{track_id}/metadata`
+### `GET /tracks/{track_id}`
 
-Updates metadata fields for a track.
+Returns a specific track by its ID.
 
 **Request:**
 
 ```bash
-curl -X PATCH http://0.0.0.0:8080/api/tracks/abc123/metadata \
+curl http://0.0.0.0:8080/api/tracks/abc123
+```
+
+**Path Parameters:**
+
+| Name       | Type   | Description          |
+|------------|--------|----------------------|
+| `track_id` | string | The ID of the track. |
+
+**Response:**
+
+The track object.
+
+**Errors:**
+
+- `404 Not Found`: If the track with the given ID does not exist.
+
+### `POST /tracks`
+
+Creates a new track.
+
+**Request:**
+
+```bash
+curl -X POST http://0.0.0.0:8080/api/tracks \
   -H "Content-Type: application/json" \
   -d '{
-    "title": "New Title"
+    "name": "New Track",
+    "artist": "New Artist"
+  }'
+```
+
+**Body Parameters:**
+
+| Name               | Type    | Description                           |
+|--------------------|---------|---------------------------------------|
+| `name`             | string  | The name of the track.                |
+| `artist`           | string  | (Optional) The artist of the track.   |
+| `album`            | string  | (Optional) The album of the track.    |
+| `duration_seconds` | integer | (Optional) The duration of the track in seconds. |
+| `path`             | string  | (Optional) The path to the track file. |
+
+**Response:**
+
+The newly created track object.
+
+### `PATCH /tracks/{track_id}`
+
+Updates a track by its ID.
+
+**Request:**
+
+```bash
+curl -X PATCH http://0.0.0.0:8080/api/tracks/abc123 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Updated Track"
   }'
 ```
 
 **Path Parameters:**
 
-| Name       | Type   | Description                |
-| ---------- | ------ | -------------------------- |
+| Name       | Type   | Description          |
+|------------|--------|----------------------|
 | `track_id` | string | The ID of the track. |
 
 **Body Parameters:**
 
-| Name     | Type   | Description                 |
-| -------- | ------ | --------------------------- |
-| `title`  | string | (Optional) The new title.   |
-| `artist` | string | (Optional) The new artist.  |
-| `album`  | string | (Optional) The new album.   |
-| `genre`  | string | (Optional) The new genre.   |
-| `year`   | integer| (Optional) The new year.    |
+Same as `POST /tracks`, but all fields are optional.
 
 **Response:**
 
-The updated track metadata object.
+The updated track object.
 
-### `POST /tracks/{track_id}/metadata/refresh`
+### `DELETE /tracks/{track_id}`
 
-Triggers a refresh of the track's metadata from its source.
+Deletes a track by its ID.
 
 **Request:**
 
 ```bash
-curl -X POST http://0.0.0.0:8080/api/tracks/abc123/metadata/refresh
+curl -X DELETE http://0.0.0.0:8080/api/tracks/abc123
 ```
 
 **Path Parameters:**
 
-| Name       | Type   | Description                |
-| ---------- | ------ | -------------------------- |
+| Name       | Type   | Description          |
+|------------|--------|----------------------|
 | `track_id` | string | The ID of the track. |
 
 **Response:**
 
-The updated track metadata object.
+- `204 No Content`
 
 ### `POST /tracks/{track_id}/cover`
 
@@ -307,22 +314,22 @@ curl -X POST http://0.0.0.0:8080/api/tracks/abc123/cover \
 
 **Path Parameters:**
 
-| Name       | Type   | Description                |
-| ---------- | ------ | -------------------------- |
+| Name       | Type   | Description          |
+|------------|--------|----------------------|
 | `track_id` | string | The ID of the track. |
 
 **Form Data:**
 
-| Name          | Type | Description              |
-| ------------- | ---- | ------------------------ |
+| Name          | Type | Description                |
+|---------------|------|----------------------------|
 | `cover_image` | file | The cover image to upload. |
 
 **Response:**
 
 ```json
 {
-  "id": "abc123",
-  "cover": "Embedded image: cover.jpg"
+  "track_id": "abc123",
+  "cover_url": "/static/covers/abc123.jpg"
 }
 ```
 
@@ -841,14 +848,14 @@ curl -X POST http://0.0.0.0:8080/api/system/reset
 
 ## Fork-Specific Features
 
-### `POST /playlists/sync`
+### `POST /sync/playlist/sync`
 
 Initiates a synchronization of a playlist with a remote source.
 
 **Request:**
 
 ```bash
-curl -X POST http://0.0.0.0:8080/api/playlist/sync \
+curl -X POST http://0.0.0.0:8080/api/sync/playlist/sync \
   -H "Content-Type: application/json" \
   -d '{
     "playlist_id": "abc123"
