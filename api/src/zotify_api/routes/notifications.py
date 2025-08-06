@@ -2,10 +2,11 @@ from fastapi import APIRouter, Depends
 from typing import List
 from zotify_api.schemas.notifications import Notification, NotificationCreate, NotificationUpdate
 from zotify_api.services.notifications_service import NotificationsService, get_notifications_service
+from zotify_api.services.auth import require_admin_api_key
 
 router = APIRouter(prefix="/notifications")
 
-@router.post("", response_model=Notification)
+@router.post("", response_model=Notification, dependencies=[Depends(require_admin_api_key)])
 def create_notification(
     payload: NotificationCreate,
     notifications_service: NotificationsService = Depends(get_notifications_service),
@@ -19,7 +20,7 @@ def get_notifications(
 ):
     return notifications_service.get_notifications(user_id)
 
-@router.patch("/{notification_id}", status_code=204)
+@router.patch("/{notification_id}", status_code=204, dependencies=[Depends(require_admin_api_key)])
 def mark_notification_as_read(
     notification_id: str,
     payload: NotificationUpdate,

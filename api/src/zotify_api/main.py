@@ -33,3 +33,14 @@ async def ping():
 @app.get("/openapi.json", include_in_schema=False)
 async def get_open_api_endpoint():
     return app.openapi()
+
+import time
+
+@app.get("/version")
+async def version():
+    return {
+        "api": "v0.1.28",
+        "cli_version": "v0.1.54",
+        "build": "local",
+        "uptime": time.time() - app_start_time,
+    }

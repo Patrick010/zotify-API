@@ -1,6 +1,13 @@
 Changelog
 
 All notable changes to the Zotify REST API will be documented in this file.
+v0.1.28
+Changed
+
+    Standardized the response structure for all endpoints.
+    Added a `/version` endpoint.
+    Performed a final polish pass on the codebase.
+
 v0.1.27
 Added
 

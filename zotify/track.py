@@ -147,7 +147,7 @@ def update_track_metadata(track_id: str, track_path: Path, track_resp: dict) -> 
     track_metadata = parse_track_metadata(track_resp)
     (scraped_track_id, track_name, artists, artist_ids, release_date, release_year, track_number, total_tracks,
      album, album_artists, disc_number, compilation, duration_ms, image_url, is_playable) = track_metadata.values()
-    total_discs = None #TODO implement total discs or just ignore to halve API calls
+    total_discs = None
     
     genres = get_track_genres(track_metadata[ARTIST_IDS], track_name)
     lyrics = handle_lyrics(track_id, track_path.parent, track_metadata)

@@ -17,18 +17,15 @@ def test_get_cache_status(cache_state):
 def test_clear_cache_all(cache_state):
     service = CacheService(cache_state)
     result = service.clear_cache()
-    assert result["status"] == "cleared"
-    assert service.get_cache_status()["total_items"] == 0
+    assert result["total_items"] == 0
 
 def test_clear_cache_by_type(cache_state):
     service = CacheService(cache_state)
     result = service.clear_cache("search")
-    assert result["status"] == "cleared"
-    assert service.get_cache_status()["by_type"]["search"] == 0
-    assert service.get_cache_status()["by_type"]["metadata"] == 222
+    assert result["by_type"]["search"] == 0
+    assert result["by_type"]["metadata"] == 222
 
 def test_clear_cache_invalid_type(cache_state):
     service = CacheService(cache_state)
     result = service.clear_cache("invalid")
-    assert result["status"] == "cleared"
-    assert service.get_cache_status()["total_items"] == 302
+    assert result["total_items"] == 302

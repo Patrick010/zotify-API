@@ -15,27 +15,30 @@ def notifications_service_override(tmp_path, monkeypatch):
         return user_service.get_user_service()
     return get_user_service_override
 
-def test_create_notification(notifications_service_override):
+def test_create_notification(notifications_service_override, monkeypatch):
+    monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
     app.dependency_overrides[user_service.get_user_service] = notifications_service_override
-    response = client.post("/api/notifications", json={"user_id": "user1", "message": "Test message"})
+    response = client.post("/api/notifications", headers={"X-API-Key": "test_key"}, json={"user_id": "user1", "message": "Test message"})
     assert response.status_code == 200
     assert response.json()["message"] == "Test message"
     app.dependency_overrides = {}
 
-def test_get_notifications(notifications_service_override):
+def test_get_notifications(notifications_service_override, monkeypatch):
+    monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
     app.dependency_overrides[user_service.get_user_service] = notifications_service_override
-    client.post("/api/notifications", json={"user_id": "user1", "message": "Test message"})
+    client.post("/api/notifications", headers={"X-API-Key": "test_key"}, json={"user_id": "user1", "message": "Test message"})
     response = client.get("/api/notifications/user1")
     assert response.status_code == 200
     assert len(response.json()) == 1
     assert response.json()[0]["message"] == "Test message"
     app.dependency_overrides = {}
 
-def test_mark_notification_as_read(notifications_service_override):
+def test_mark_notification_as_read(notifications_service_override, monkeypatch):
+    monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
     app.dependency_overrides[user_service.get_user_service] = notifications_service_override
-    create_response = client.post("/api/notifications", json={"user_id": "user1", "message": "Test message"})
+    create_response = client.post("/api/notifications", headers={"X-API-Key": "test_key"}, json={"user_id": "user1", "message": "Test message"})
     notification_id = create_response.json()["id"]
-    response = client.patch(f"/api/notifications/{notification_id}", json={"read": True})
+    response = client.patch(f"/api/notifications/{notification_id}", headers={"X-API-Key": "test_key"}, json={"read": True})
     assert response.status_code == 204
 
     notifications = client.get("/api/notifications/user1").json()

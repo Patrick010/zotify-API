@@ -20,7 +20,7 @@ def test_get_cache(cache_service_override):
     app.dependency_overrides[cache_service.get_cache_service] = cache_service_override
     response = client.get("/api/cache")
     assert response.status_code == 200
-    assert "total_items" in response.json()
+    assert "total_items" in response.json()["data"]
     app.dependency_overrides = {}
 
 def test_clear_cache_all_unauthorized(cache_service_override):
@@ -34,18 +34,18 @@ def test_clear_cache_all(cache_service_override, monkeypatch):
     app.dependency_overrides[cache_service.get_cache_service] = cache_service_override
     # Get initial state
     initial_response = client.get("/api/cache")
-    initial_total = initial_response.json()["total_items"]
+    initial_total = initial_response.json()["data"]["total_items"]
     assert initial_total > 0
 
     # Clear all
     response = client.request("DELETE", "/api/cache", headers={"X-API-Key": "test_key"}, content=json.dumps({}))
     assert response.status_code == 200
-    assert response.json()["by_type"]["search"] == 0
-    assert response.json()["by_type"]["metadata"] == 0
+    assert response.json()["data"]["by_type"]["search"] == 0
+    assert response.json()["data"]["by_type"]["metadata"] == 0
 
     # Verify that the cache is empty
     final_response = client.get("/api/cache")
-    assert final_response.json()["total_items"] == 0
+    assert final_response.json()["data"]["total_items"] == 0
     app.dependency_overrides = {}
 
 def test_clear_cache_by_type_unauthorized(cache_service_override):
@@ -60,6 +60,6 @@ def test_clear__by_type(cache_service_override, monkeypatch):
     # Clear by type
     response = client.request("DELETE", "/api/cache", headers={"X-API-Key": "test_key"}, content=json.dumps({"type": "search"}))
     assert response.status_code == 200
-    assert response.json()["by_type"]["search"] == 0
-    assert response.json()["by_type"]["metadata"] != 0
+    assert response.json()["data"]["by_type"]["search"] == 0
+    assert response.json()["data"]["by_type"]["metadata"] != 0
     app.dependency_overrides = {}

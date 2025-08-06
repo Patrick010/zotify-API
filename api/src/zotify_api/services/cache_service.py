@@ -23,7 +23,7 @@ class CacheService:
         else:
             for k in self._cache_state:
                 self._cache_state[k] = 0
-        return {"status": "cleared", "by_type": self._cache_state}
+        return self.get_cache_status()
 
 def get_cache_service():
     # This is a placeholder for a real implementation that would get the cache state from a persistent storage.

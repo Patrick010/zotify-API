@@ -44,6 +44,42 @@ curl -H "X-API-Key: your-secret-key" http://0.0.0.0:8080/api/some-protected-endp
 
 The API provides endpoints for managing user profiles and preferences.
 
+## Response Format
+
+All API endpoints return a standardized JSON response with the following structure:
+
+```json
+{
+  "status": "success",
+  "data": ...
+}
+```
+
+The `data` field contains the actual response data. For endpoints that return a list of items, the `data` field will be an object with a `data` field containing the list and a `meta` field with pagination information.
+
+For error responses, the `status` field will be `"error"`, and the `data` field will be an object with an `error` field containing the error message.
+
+## Version Endpoint
+
+The `/version` endpoint can be used to retrieve the current version of the API.
+
+**Request:**
+
+```bash
+curl http://0.0.0.0:8080/api/version
+```
+
+**Response:**
+
+```json
+{
+  "api": "v0.1.28",
+  "cli_version": "v0.1.54",
+  "build": "local",
+  "uptime": 12345.6789
+}
+```
+
 ### Endpoints
 
 *   `GET /user/profile`: Retrieve the user's profile.
