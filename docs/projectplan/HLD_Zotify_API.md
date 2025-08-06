@@ -57,3 +57,7 @@ The refactor aims to:
 ## 9. Security
 
 A comprehensive overview of the security architecture, principles, and roadmap for the Zotify API project is available in the [Zotify API Security](./security.md) document. This document serves as the definitive security reference for the project.
+
+## 10. Development Process
+
+All development tasks must follow the [Task Execution Checklist](./task_checklist.md) to ensure consistency, quality, and security.

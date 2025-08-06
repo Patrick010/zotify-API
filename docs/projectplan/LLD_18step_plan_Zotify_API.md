@@ -65,6 +65,9 @@ A comprehensive overview of the security architecture, principles, and roadmap f
 
 ---
 
+### 6. Task Workflow
+All development tasks must follow the [Task Execution Checklist](./task_checklist.md) to ensure consistency, quality, and security.
+
 ## Security Roadmap
 
 ### Phase 1: Foundations (Current)
@@ -110,3 +113,8 @@ Goal: All subsystems fully modular, testable, documented.
 - Freeze features.
 - Full regression test.
 - Publish docs & changelog for v1.0.0.
+
+---
+
+## Ongoing Maintenance
+All development tasks must follow the [Task Execution Checklist](./task_checklist.md) to ensure consistency, quality, and security.
