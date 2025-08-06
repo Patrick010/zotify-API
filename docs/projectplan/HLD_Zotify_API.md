@@ -54,10 +54,6 @@ The refactor aims to:
 - **Risk**: Large refactor introduces regressions.
   **Mitigation**: Incremental step-by-step plan with green tests at each stage.
 
-## 9. Security Considerations
+## 9. Security
 
-The current implementation uses a dynamic, auto-generated admin API key for protecting administrative endpoints. This significantly mitigates the risk of a leaked key compared to a static key. The details of this approach are documented in the [Admin API Key Mitigation Strategy](./admin_api_key_mitigation.md) document.
-
-While this is a significant improvement, the use of a single API key for all admin operations still presents a risk. Future phases of the project will implement more granular, role-based access control (RBAC) and more robust authentication mechanisms, such as OAuth2 or JWT.
-
-The security risk and mitigation documents, and this section, must be maintained alongside any future changes to authentication or admin key usage.
+A comprehensive overview of the security architecture, principles, and roadmap for the Zotify API project is available in the [Zotify API Security](./security.md) document. This document serves as the definitive security reference for the project.

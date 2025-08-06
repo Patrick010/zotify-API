@@ -1,6 +1,13 @@
 Changelog
 
 All notable changes to the Zotify REST API will be documented in this file.
+v0.1.24
+Added
+
+    Comprehensive security chapter to HLD and LLD.
+    New `security.md` document.
+    Security roadmap to LLD.
+
 v0.1.23
 Changed
 

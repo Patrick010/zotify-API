@@ -57,25 +57,32 @@ For each subsystem:
 - Commit with clear message referencing step number.
 - Summary of changes for service file, schema, route, tests, docs.
 
-### 5. Admin API Key Usage and Risk Management
-The application now uses a dynamic, auto-generated admin API key to protect administrative endpoints. This approach is detailed in the [Admin API Key Mitigation Strategy](./admin_api_key_mitigation.md) document.
-
-**Implementation Details:**
-- **Key Generation:** A new key is generated on first startup if one is not provided via the `ADMIN_API_KEY` environment variable.
-- **Secure Storage:** The generated key is stored in the `.admin_api_key` file with restricted permissions.
-- **Header Name:** `X-API-Key`
-- **Configuration:** The API key is configured via the `ADMIN_API_KEY` environment variable, which always overrides the generated key.
-- **Error Handling:**
-  - If the `admin_api_key` is not configured and cannot be read from the storage file, protected endpoints will return a `503 Service Unavailable` error.
-  - If the key is configured but the header is missing or incorrect, a `401 Unauthorized` error is returned.
-- **Test Mocking:** Tests use `monkeypatch` to set the `admin_api_key` in the settings for testing protected endpoints.
-
-**Next Steps:**
-Future phases of the project will replace the admin API key with a more robust authentication mechanism, such as OAuth2 or JWT, and implement role-based access control (RBAC).
-
-The security risk and mitigation documents, and this section, must be maintained alongside any future changes to authentication or admin key usage. Any changes related to authentication or this risk must also be documented in `docs/CHANGELOG.md`.
+### 5. Security
+A comprehensive overview of the security architecture, principles, and roadmap for the Zotify API project is available in the [Zotify API Security](./security.md) document. This document serves as the definitive security reference for the project.
 
 ---
+
+## Security Roadmap
+
+### Phase 1: Foundations (Current)
+- **Policy and Documentation:** Establish a formal security policy and create comprehensive security documentation.
+- **Admin API Key Mitigation:** Replace the static admin API key with a dynamic, auto-generated key system.
+- **Development Environment Security:** Ensure that development and testing environments are configured securely.
+
+### Phase 2: Authentication & Secrets Management
+- **OAuth2:** Implement OAuth2 for user-level authentication and authorization.
+- **2FA (Two-Factor Authentication):** Add support for 2FA to provide an extra layer of security for user accounts.
+- **Secret Rotation:** Implement a mechanism for automatically rotating secrets, such as the admin API key and database credentials.
+
+### Phase 3: Monitoring & Protection
+- **Audit Logging:** Implement a comprehensive audit logging system to track all security-sensitive events.
+- **TLS Hardening:** Harden the TLS configuration to protect against common attacks.
+- **Web Application Firewall (WAF):** Deploy a WAF to protect the API from common web application attacks.
+
+### Phase 4: Documentation & Compliance
+- **Security Guides:** Create detailed security guides for developers and operators.
+- **Security Audits:** Conduct regular security audits to identify and address vulnerabilities.
+- **Compliance:** Ensure that the API complies with all relevant security standards and regulations.
 
 ## Multi-Phase Plan Beyond Step 18
 ### Phase 1 — Service Layer Completion (Steps 1–18)
