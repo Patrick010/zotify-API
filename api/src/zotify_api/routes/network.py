@@ -1,21 +1,16 @@
-from fastapi import APIRouter
-from zotify_api.models.network import ProxyConfig
+from fastapi import APIRouter, Depends
+from zotify_api.schemas.network import ProxyConfig, NetworkConfigResponse
+from zotify_api.services.network_service import NetworkService, get_network_service
 
-router = APIRouter()
+router = APIRouter(prefix="/network")
 
-# In-memory state
-network_config = {
-    "proxy_enabled": False,
-    "http_proxy": None,
-    "https_proxy": None
-}
+@router.get("", response_model=NetworkConfigResponse)
+def get_network(network_service: NetworkService = Depends(get_network_service)):
+    return network_service.get_network_config()
 
-@router.get("/network", summary="Get network proxy configuration")
-def get_network():
-    return network_config
-
-@router.patch("/network", summary="Update network proxy settings")
-def update_network(cfg: ProxyConfig):
-    for k, v in cfg.model_dump(exclude_unset=True).items():
-        network_config[k] = v
-    return network_config
+@router.patch("", response_model=NetworkConfigResponse)
+def update_network(
+    cfg: ProxyConfig,
+    network_service: NetworkService = Depends(get_network_service)
+):
+    return network_service.update_network_config(cfg.model_dump(exclude_unset=True))

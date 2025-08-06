@@ -1,6 +1,19 @@
 Changelog
 
 All notable changes to the Zotify REST API will be documented in this file.
+v0.1.18
+Added
+
+    Dedicated network_service for all network-related logic.
+
+    New network.py schema file for request/response validation.
+
+    Unit tests for network_service and updated integration tests for network routes.
+
+Changed
+
+    Refactored network routes to use the new network_service and Pydantic schemas.
+
 v0.1.17
 Added
 
