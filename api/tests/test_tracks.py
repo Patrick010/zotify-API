@@ -33,7 +33,7 @@ def test_list_tracks_with_db():
 
 def test_crud_flow_unauthorized():
     response = client.post("/api/tracks", json={"name": "New Track", "artist": "New Artist"})
-    assert response.status_code == 503
+    assert response.status_code == 401
 
 def test_crud_flow(monkeypatch):
     monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
@@ -73,7 +73,7 @@ def test_upload_cover_unauthorized():
         "/api/tracks/1/cover",
         files={"cover_image": ("test.jpg", BytesIO(file_content), "image/jpeg")}
     )
-    assert response.status_code == 503
+    assert response.status_code == 401
 
 def test_upload_cover(monkeypatch):
     monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")

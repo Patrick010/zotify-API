@@ -31,7 +31,7 @@ def test_update_network_unauthorized(network_service_override):
         "https_proxy": "https://secure.proxy:443"
     }
     response = client.patch("/api/network", json=update_data)
-    assert response.status_code == 503
+    assert response.status_code == 401
     app.dependency_overrides = {}
 
 def test_update_network(network_service_override, monkeypatch):

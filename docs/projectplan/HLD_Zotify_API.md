@@ -56,8 +56,8 @@ The refactor aims to:
 
 ## 9. Security Considerations
 
-The current implementation uses a static admin API key for protecting administrative endpoints. This presents a security risk, as a leaked key could grant an attacker full administrative access to the API. This risk is documented in detail in the [Admin API Key Security Risk Analysis](./admin_api_key_security_risk.md) document.
+The current implementation uses a dynamic, auto-generated admin API key for protecting administrative endpoints. This significantly mitigates the risk of a leaked key compared to a static key. The details of this approach are documented in the [Admin API Key Mitigation Strategy](./admin_api_key_mitigation.md) document.
 
-This risk is accepted for the current phase of the project, but it must be addressed before the application is deployed in a production environment. Future phases of the project will implement more robust authentication mechanisms, such as OAuth2 or JWT.
+While this is a significant improvement, the use of a single API key for all admin operations still presents a risk. Future phases of the project will implement more granular, role-based access control (RBAC) and more robust authentication mechanisms, such as OAuth2 or JWT.
 
-The security risk document and this section must be maintained alongside any future changes to authentication or admin key usage.
+The security risk and mitigation documents, and this section, must be maintained alongside any future changes to authentication or admin key usage.

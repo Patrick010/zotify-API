@@ -155,3 +155,6 @@ Zotify\ Podcasts/
 
 # Testing
 debug.py
+
+# Ignore admin API key file
+.admin_api_key

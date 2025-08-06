@@ -27,7 +27,7 @@ def test_update_logging_unauthorized(logging_service_override):
     app.dependency_overrides[logging_service.get_logging_service] = logging_service_override
     update_data = {"level": "DEBUG"}
     response = client.patch("/api/logging", json=update_data)
-    assert response.status_code == 503
+    assert response.status_code == 401
     app.dependency_overrides = {}
 
 def test_update_logging(logging_service_override, monkeypatch):

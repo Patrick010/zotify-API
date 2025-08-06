@@ -1,6 +1,12 @@
 Changelog
 
 All notable changes to the Zotify REST API will be documented in this file.
+v0.1.23
+Changed
+
+    Replaced static admin API key with a dynamic, auto-generated key system to mitigate security risks.
+    The application now generates a secure admin API key on first startup if one is not provided.
+
 v0.1.22
 Added
 

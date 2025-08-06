@@ -26,7 +26,7 @@ def test_get_cache(cache_service_override):
 def test_clear_cache_all_unauthorized(cache_service_override):
     app.dependency_overrides[cache_service.get_cache_service] = cache_service_override
     response = client.request("DELETE", "/api/cache", content=json.dumps({}))
-    assert response.status_code == 503
+    assert response.status_code == 401
     app.dependency_overrides = {}
 
 def test_clear_cache_all(cache_service_override, monkeypatch):
@@ -51,7 +51,7 @@ def test_clear_cache_all(cache_service_override, monkeypatch):
 def test_clear_cache_by_type_unauthorized(cache_service_override):
     app.dependency_overrides[cache_service.get_cache_service] = cache_service_override
     response = client.request("DELETE", "/api/cache", content=json.dumps({"type": "search"}))
-    assert response.status_code == 503
+    assert response.status_code == 401
     app.dependency_overrides = {}
 
 def test_clear__by_type(cache_service_override, monkeypatch):

@@ -31,7 +31,7 @@ def test_update_config_unauthorized(config_service_override):
     app.dependency_overrides[config_service.get_config_service] = config_service_override
     update_data = {"scan_on_startup": False}
     response = client.patch("/api/config", json=update_data)
-    assert response.status_code == 503
+    assert response.status_code == 401
     app.dependency_overrides = {}
 
 def test_update_config(config_service_override, monkeypatch):
@@ -46,7 +46,7 @@ def test_update_config(config_service_override, monkeypatch):
 def test_reset_config_unauthorized(config_service_override):
     app.dependency_overrides[config_service.get_config_service] = config_service_override
     response = client.post("/api/config/reset")
-    assert response.status_code == 503
+    assert response.status_code == 401
     app.dependency_overrides = {}
 
 def test_reset_config(config_service_override, monkeypatch):

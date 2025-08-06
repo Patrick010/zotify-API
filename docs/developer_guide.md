@@ -22,24 +22,20 @@ This guide provides instructions for setting up the Zotify API for local develop
 
 ## Admin API Key
 
-Some endpoints are protected and require an admin API key. To access these endpoints, you need to set the `ADMIN_API_KEY` environment variable.
+Some endpoints are protected and require an admin API key. The application uses a dynamic, auto-generated admin API key system that is secure by default.
 
-You can do this by creating a `.env` file in the `api` directory with the following content:
+### Local Development
 
-```
-ADMIN_API_KEY="your-secret-key"
-```
+For local development, you have two options:
 
-Alternatively, you can set the environment variable directly in your shell:
-
-```bash
-export ADMIN_API_KEY="your-secret-key"
-```
+1.  **Auto-generated key:** On the first startup, a new admin API key will be generated and stored in the `.admin_api_key` file in the `api` directory. The key will also be printed to the console. You can use this key for subsequent requests.
+2.  **`.env` file:** For a consistent key across restarts, you can create a `.env` file in the `api` directory and set the `ADMIN_API_KEY` environment variable:
+    ```
+    ADMIN_API_KEY="your-secret-key"
+    ```
 
 When making requests to protected endpoints, include the API key in the `X-API-Key` header:
 
 ```bash
 curl -H "X-API-Key: your-secret-key" http://0.0.0.0:8080/api/some-protected-endpoint
 ```
-
-In production (`app_env="production"`), the application will refuse to start unless an admin API key is provided. This behavior can be disabled by setting `REQUIRE_ADMIN_API_KEY_IN_PROD=false`.
