@@ -37,7 +37,7 @@ func newHandler(shutdown chan<- bool, expectedState string) http.HandlerFunc {
 		// Respond to the user's browser.
 		w.Header().Set("Content-Type", "text/plain")
 		w.WriteHeader(http.StatusOK)
-		fmt.Fprintln(w, "Authentication successful! You can close this window now.")
+		fmt.Fprintln(w, "Authentication complete.")
 		log.Printf("Successfully received OAuth code with valid state token.")
 
 		// Signal the server to shut down.

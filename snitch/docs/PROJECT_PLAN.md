@@ -30,3 +30,13 @@ Snitch will be invoked by the Zotify-API backend or a related CLI tool when user
 - **No State**: Snitch does not store any tokens or sensitive information. Its only job is to pass the received `code` to its parent process via `stdout`.
 - **Secure IPC (Future Phases)**: While Phase 1 uses `stdout`, later phases will implement a more secure Inter-Process Communication (IPC) handshake to ensure that Snitch is communicating with the legitimate Zotify-API process. This will involve a secret passed at startup.
 - **Randomized Port (Future Phases)**: To prevent other applications from squatting on the known port, future phases will use a randomized port for the listener, with the port number communicated back to the parent process.
+
+## Phase 2: Secure Callback Handling
+
+Phase 2 introduces a critical security enhancement: **state validation**.
+
+- **State Token**: The Zotify-API process now starts Snitch with a `--state` flag, providing a unique, unguessable token.
+- **Validation Logic**: The HTTP handler in Snitch validates that the `state` parameter in the callback URL from Spotify exactly matches the expected token.
+- **Conditional Shutdown**:
+    - If the `state` is valid, Snitch captures the `code`, prints it to stdout, and triggers a graceful shutdown.
+    - If the `state` is missing or invalid, Snitch rejects the request with a `400 Bad Request` error and, crucially, **does not shut down**. It continues to listen for a valid request until the timeout is reached. This prevents a malicious or malformed request from terminating the authentication process prematurely.
