@@ -14,11 +14,11 @@ const (
 
 // Start initializes and runs the HTTP listener.
 // It shuts down when a code is received or when the timeout is reached.
-func Start() {
+func Start(expectedState string) {
 	shutdown := make(chan bool, 1)
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("/callback", newHandler(shutdown))
+	mux.HandleFunc("/callback", newHandler(shutdown, expectedState))
 
 	server := &http.Server{
 		Addr:    listenAddr,
