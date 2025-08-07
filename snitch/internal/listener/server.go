@@ -12,8 +12,13 @@ const (
 	serverTimeout = 2 * time.Minute
 )
 
-// Start initializes and runs the HTTP listener.
-// It shuts down when a code is received or when the timeout is reached.
+// Start initializes and runs the HTTP listener. It sets up a server on
+// localhost:21371 that waits for a single callback to the /callback endpoint.
+// The server will gracefully shut down after a valid request is received (with
+// the correct state token) or after a 2-minute timeout.
+//
+// expectedState is the required value for the 'state' query parameter for the
+// request to be considered valid.
 func Start(expectedState string) {
 	shutdown := make(chan bool, 1)
 

@@ -40,3 +40,13 @@ Phase 2 introduces a critical security enhancement: **state validation**.
 - **Conditional Shutdown**:
     - If the `state` is valid, Snitch captures the `code`, prints it to stdout, and triggers a graceful shutdown.
     - If the `state` is missing or invalid, Snitch rejects the request with a `400 Bad Request` error and, crucially, **does not shut down**. It continues to listen for a valid request until the timeout is reached. This prevents a malicious or malformed request from terminating the authentication process prematurely.
+
+## Phase 3: Code and Structure Refactor
+
+Phase 3 focuses on improving the internal code structure for maintainability and testability, without changing existing functionality.
+
+- **Goal**: Refactor the codebase into a standard Go project layout.
+- **Outcome**: The code is now organized into two main packages:
+    - `cmd/snitch`: The main application entry point.
+    - `internal/listener`: The core package containing all HTTP listener and request handling logic.
+- **Benefit**: This separation of concerns makes the code easier to understand, maintain, and test in the future. The application's entry point is decoupled from its core business logic.
