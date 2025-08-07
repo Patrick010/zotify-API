@@ -1,5 +1,7 @@
 # Spotify Integration Blueprint
 
+> *Note: This document outlines the strategy for exposing Spotify and Librespot features through the Zotify API. It is not a plan to reimplement the Spotify Web API, but rather to provide a powerful, automation-oriented developer platform on top of the existing Zotify CLI. For more context, see the "Architectural Overview" in the `MANUAL.md`.*
+
 This document provides a comprehensive blueprint for the Zotify API's integration with Spotify. It expands on the initial [Spotify Capability Audit](./spotify_capability_audit.md) and serves as the definitive guide for all future development work related to Spotify.
 
 ## 1. Expanded Feature Matrix

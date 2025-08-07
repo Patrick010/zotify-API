@@ -2,6 +2,19 @@
 
 This project provides a REST API for the [Zotify](https://github.com/Googolplexed0/zotify) music and podcast downloader, with features for playlist management, search, and downloading.
 
+## What This Is (and What It Isn't)
+
+The Zotify API is an automation and developer framework built on top of the original Zotify CLI. It uses Librespot (an open-source Spotify client library) to handle authentication and download media directly from Spotify's servers.
+
+This project is **not** a reimplementation of the official Spotify Web API.
+
+Instead, its purpose is to expose powerful functionality that is difficult or impossible to achieve with the standard Spotify API, such as:
+- Automated track and playlist downloading.
+- Offline media caching and library management.
+- Advanced, scriptable control over the download queue.
+
+Think of it as a developer platform for building applications that need to programmatically acquire and manage Spotify content, powered by the battle-tested Zotify CLI and Librespot library.
+
 ## Project Files
 
 - **[Installation Guide](./api/docs/INSTALLATION.md)**: Detailed setup instructions.

@@ -8,6 +8,21 @@ http://0.0.0.0:8080/api
 
 ---
 
+## Architectural Overview
+
+It is critical to understand that the Zotify API is **not** a reimplementation of the Spotify Web API. Instead, it is a developer-centric framework built around the original Zotify CLI client, which itself uses Librespot for authentication and media retrieval.
+
+The primary purpose of this API is to expose powerful, automation-oriented functionality that Spotify’s own Web API either does not offer or makes difficult to script. This includes:
+
+*   **Direct Media Downloads**: Programmatically download tracks, albums, or playlists.
+*   **Offline Caching**: Manage a local cache of media content.
+*   **Advanced Automation**: Hook into a robust queueing and download management system.
+*   **Raw Librespot Access**: Provide a safe, scriptable, and scalable interface to Librespot's underlying capabilities.
+
+Think of the Zotify API as a developer platform for building systems on top of Spotify's content ecosystem, with a strong focus on media acquisition and local library management.
+
+---
+
 ## Authentication
 
 No authentication is required for local testing. Production deployments should restrict access via reverse proxy or API gateway.
