@@ -22,6 +22,9 @@ This checklist must be followed for *every* development task before it is marked
 - Reference the **Spotify Capability Audit** (`docs/projectplan/spotify_capability_audit.md`) for any tasks related to Spotify integration.
 - Update relevant guides (`developer_guide.md`, `operator_guide.md`) for new features.
 - Add a **CHANGELOG** entry for the version bump.
+- Generate and save a **Task Completion Report** in `docs/projectplan/reports/` for every major task completion.
+- Update the `reports/README.md` with an index of new reports.
+- Link relevant reports in changelogs or documentation as appropriate.
 
 ## 4. Tests
 - Write **unit tests** for new or changed logic.
