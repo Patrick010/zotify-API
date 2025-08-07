@@ -1,0 +1,32 @@
+# Project Plan: Snitch
+
+## 1. Purpose of Snitch
+
+Snitch is a lightweight, single-purpose command-line tool designed to act as a temporary local OAuth 2.0 callback listener. Its sole function is to capture the authorization `code` sent by Spotify's authentication server during the authorization code flow.
+
+## 2. Problem Being Solved
+
+When command-line applications like Zotify-API need to perform user-level authentication with Spotify, they must use an OAuth 2.0 flow. This typically involves redirecting the user to a Spotify URL in their browser. After the user grants permission, Spotify redirects the browser back to a `redirect_uri`.
+
+For a headless or CLI application, there is no persistent web server to receive this callback. Snitch solves this by spinning up a short-lived HTTP server on a known port (21371 in Phase 1) to listen for this one-time redirect, capture the necessary `code`, and then immediately terminate.
+
+## 3. How it Integrates with Zotify-API
+
+Snitch will be invoked by the Zotify-API backend or a related CLI tool when user authentication is required. The flow is as follows:
+
+1.  Zotify-API determines that a new Spotify OAuth token is needed.
+2.  It launches the Snitch binary as a subprocess.
+3.  It opens a browser window pointing to the Spotify authorization URL, with `redirect_uri` set to `http://localhost:21371/callback`.
+4.  The user authorizes the application in their browser.
+5.  Spotify redirects the browser to the Snitch listener.
+6.  Snitch captures the `code` from the query parameters, prints it to `stdout`, and exits.
+7.  Zotify-API reads the `code` from Snitch's `stdout`.
+8.  Zotify-API exchanges the `code` for an access token and refresh token with Spotify's backend.
+
+## 4. Security Constraints and Assumptions
+
+- **Localhost Only**: Snitch must only bind to the localhost interface (`127.0.0.1`) to prevent external network exposure.
+- **Short-Lived**: The listener is designed to be ephemeral. It will automatically shut down after a short timeout (2 minutes) to minimize its attack surface.
+- **No State**: Snitch does not store any tokens or sensitive information. Its only job is to pass the received `code` to its parent process via `stdout`.
+- **Secure IPC (Future Phases)**: While Phase 1 uses `stdout`, later phases will implement a more secure Inter-Process Communication (IPC) handshake to ensure that Snitch is communicating with the legitimate Zotify-API process. This will involve a secret passed at startup.
+- **Randomized Port (Future Phases)**: To prevent other applications from squatting on the known port, future phases will use a randomized port for the listener, with the port number communicated back to the parent process.
