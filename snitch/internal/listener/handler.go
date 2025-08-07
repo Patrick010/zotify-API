@@ -1,48 +1,64 @@
 package listener
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 )
 
-// newHandler creates a new HTTP handler for the /callback endpoint.
-// It takes a channel to signal the server to shut down and the expected state token.
+// oAuthPayload defines the structure of the incoming JSON payload.
+type oAuthPayload struct {
+	Code  string `json:"code"`
+	State string `json:"state"`
+}
+
+// newHandler creates a new HTTP handler for the /snitch/oauth-code endpoint.
+// It validates POST requests, parses the JSON payload, and checks the state token.
 func newHandler(shutdown chan<- bool, expectedState string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		code := r.URL.Query().Get("code")
-		state := r.URL.Query().Get("state")
-
-		if state == "" {
-			log.Println("OAuth callback received without a state token.")
-			http.Error(w, "Error: Missing state token in callback.", http.StatusBadRequest)
+		// 1. Validate Method
+		if r.Method != http.MethodPost {
+			http.Error(w, "Error: Method not allowed. Only POST requests are accepted.", http.StatusMethodNotAllowed)
+			log.Printf("Rejected non-POST request from %s", r.RemoteAddr)
 			return
 		}
 
-		if state != expectedState {
-			log.Printf("OAuth callback received with invalid state token. Expected: %s, Got: %s", expectedState, state)
+		// 2. Decode JSON payload
+		var payload oAuthPayload
+		if err := json.NewDecoder(r.Body).Decode(&payload); err != nil {
+			http.Error(w, "Error: Malformed JSON in request body.", http.StatusBadRequest)
+			log.Printf("Failed to decode JSON from %s: %v", r.RemoteAddr, err)
+			return
+		}
+
+		// 3. Validate State
+		if payload.State == "" {
+			http.Error(w, "Error: 'state' field is missing from JSON payload.", http.StatusBadRequest)
+			log.Printf("Rejected request from %s due to missing state.", r.RemoteAddr)
+			return
+		}
+		if payload.State != expectedState {
 			http.Error(w, "Error: Invalid state token.", http.StatusBadRequest)
+			log.Printf("Rejected request from %s due to invalid state. Expected: %s, Got: %s", r.RemoteAddr, expectedState, payload.State)
 			return
 		}
 
-		if code == "" {
-			log.Println("OAuth callback received without a code.")
-			http.Error(w, "Error: Missing authorization code in callback.", http.StatusBadRequest)
+		// 4. Validate Code
+		if payload.Code == "" {
+			http.Error(w, "Error: 'code' field is missing from JSON payload.", http.StatusBadRequest)
+			log.Printf("Rejected request from %s due to missing code.", r.RemoteAddr)
 			return
 		}
 
-		// Print the code to standard output for the parent process to capture.
-		fmt.Println(code)
+		// 5. Success: Print code and shut down
+		log.Printf("Successfully received and validated OAuth code from %s.", r.RemoteAddr)
+		fmt.Println(payload.Code)
 
-		// Respond to the user's browser.
-		w.Header().Set("Content-Type", "text/plain")
+		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-		fmt.Fprintln(w, "Authentication successful! You can close this window now.")
-		log.Printf("Successfully received OAuth code with valid state token.")
+		json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
 
-		// Signal the server to shut down.
-		go func() {
-			shutdown <- true
-		}()
+		shutdown <- true
 	}
 }

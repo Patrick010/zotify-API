@@ -23,5 +23,5 @@ snitch/
 
 -   **Purpose**: This package contains the core logic for the OAuth callback listener. It is considered `internal` to the `snitch` module, meaning its API is not intended to be imported by other modules.
 -   **Files**:
-    -   `server.go`: Contains the logic for initializing, running, and gracefully shutting down the `http.Server`. It also manages the shutdown and timeout mechanisms.
-    -   `handler.go`: Contains the `http.HandlerFunc` for the `/callback` endpoint. It is responsible for validating the request (checking `state` and `code` parameters), printing the code to stdout, and signaling the server to shut down upon a valid request.
+    -   `server.go`: Contains the logic for initializing, running, and gracefully shutting down the `http.Server`. It defines the port and endpoint path.
+    -   `handler.go`: Contains the `http.HandlerFunc` for the `/snitch/oauth-code` endpoint. It is responsible for validating the `POST` request method, decoding the JSON payload, checking the `state` token, printing the `code` to stdout, and signaling the server to shut down.

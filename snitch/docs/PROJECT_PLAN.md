@@ -50,3 +50,12 @@ Phase 3 focuses on improving the internal code structure for maintainability and
     - `cmd/snitch`: The main application entry point.
     - `internal/listener`: The core package containing all HTTP listener and request handling logic.
 - **Benefit**: This separation of concerns makes the code easier to understand, maintain, and test in the future. The application's entry point is decoupled from its core business logic.
+
+## Phase 4: Secure POST Endpoint
+
+Phase 4 transitions Snitch from a `GET` callback listener to a more robust and secure `POST` endpoint. This improves cross-platform compatibility and removes the need for a user-facing browser redirect.
+
+- **Endpoint**: The listener now runs on `http://127.0.0.1:56789` and only accepts `POST` requests to `/snitch/oauth-code`.
+- **Payload**: The `code` and `state` are now passed in a JSON body, which is more secure and flexible than query parameters.
+- **Strict Validation**: The handler strictly validates the request method, path, and JSON payload before processing the authentication code.
+- **Testing**: Unit tests have been introduced to verify the handler's logic for various success and failure scenarios.
