@@ -162,3 +162,4 @@ debug.py
 # Ignore snitch binary
 /snitch/snitch
 /snitch/snitch.exe
+/snitch/bin/
