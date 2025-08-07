@@ -19,6 +19,7 @@ This checklist must be followed for *every* development task before it is marked
 ## 3. Documentation
 - Update **HLD** and **LLD** if the design or implementation deviates from current specs.
 - Update **roadmap.md** if this affects timelines, scope, or priorities.
+- Reference the **Spotify Capability Audit** (`docs/projectplan/spotify_capability_audit.md`) for any tasks related to Spotify integration.
 - Update relevant guides (`developer_guide.md`, `operator_guide.md`) for new features.
 - Add a **CHANGELOG** entry for the version bump.
 

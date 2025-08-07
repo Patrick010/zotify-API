@@ -50,6 +50,7 @@ The API provides endpoints for managing user profiles and preferences.
 - New endpoints `/privacy/data` allow users to export and delete their data as per GDPR requirements.
 - When developing new features, ensure personal data handling complies with privacy by design and data minimization principles.
 - Regularly consult `privacy_compliance.md` and `security.md` for updated compliance guidelines.
+- For details on the Spotify integration, see the [Spotify Capability Audit](./projectplan/spotify_capability_audit.md).
 
 ## Response Format
 

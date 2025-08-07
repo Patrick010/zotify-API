@@ -78,6 +78,9 @@ Any deviation from the LLD requires an explicit update to both the LLD and HLD a
 - **Admin API Key Mitigation:** Replace the static admin API key with a dynamic, auto-generated key system.
 - **Development Environment Security:** Ensure that development and testing environments are configured securely.
 
+### Phase 3: Authentication, Security & Privacy (In Progress)
+- **Spotify Capability Audit:** Audit the Spotify capabilities available through the Zotify stack to inform future development. This is a blocking task for Phase 4.
+
 ### Phase 2: Authentication & Secrets Management
 - **OAuth2:** Implement OAuth2 for user-level authentication and authorization.
 - **2FA (Two-Factor Authentication):** Add support for 2FA to provide an extra layer of security for user accounts.
