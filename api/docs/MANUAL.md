@@ -25,7 +25,44 @@ Think of the Zotify API as a developer platform for building systems on top of S
 
 ## Authentication
 
-No authentication is required for local testing. Production deployments should restrict access via reverse proxy or API gateway.
+The Zotify API uses an OAuth2 Authorization Code Flow to connect to a user's Spotify account. This process is orchestrated by the `/auth/login` endpoint and the `snitch` helper application.
+
+The flow is as follows:
+1.  **Initiate Login**: A client sends a `POST` request to `/api/auth/login`.
+2.  **Launch Helpers**: The API backend launches two components:
+    -   **Snitch**: A temporary `GET` listener on `http://127.0.0.1:21371/callback`.
+    -   **IPC Server**: A temporary `POST` listener on `http://127.0.0.1:9999/zotify/receive-code`.
+3.  **User Authorization**: The API returns a Spotify authorization URL. The user opens this URL in a browser and grants permission.
+4.  **Callback to Snitch**: Spotify redirects the browser to Snitch's `/callback` endpoint with an authorization `code` and `state` token.
+5.  **Secure Handoff**: Snitch validates the `state` token, then securely sends the `code` to the Zotify API's IPC server.
+6.  **Token Exchange**: The main API receives the code and can now exchange it for a permanent refresh token and a short-lived access token from Spotify.
+
+This entire process is designed for headless environments and is handled by a single API call.
+
+---
+
+## Endpoints
+
+### Authentication
+
+#### `POST /auth/login`
+
+Initiates the authentication flow. This endpoint starts the Snitch helper and returns a Spotify URL that the user must open in their browser to grant permissions. The request completes once the OAuth code has been successfully captured or a timeout occurs.
+
+**Response (Success 202 Accepted):**
+```json
+{
+  "status": "success",
+  "message": "OAuth code captured. Token exchange would happen here."
+}
+```
+
+**Response (Error):**
+```json
+{
+  "detail": "Snitch executable not found."
+}
+```
 
 ---
 
@@ -239,14 +276,6 @@ Update proxy settings.
 ---
 
 ## Spotify Integration
-
-### `GET /spotify/login`
-
-Returns a URL to authorize the application with Spotify.
-
-### `GET /spotify/callback`
-
-Callback endpoint for Spotify OAuth2 flow.
 
 ### `GET /spotify/token_status`
 
