@@ -20,7 +20,12 @@ dependencies = [
     "tabulate[widechars]",
     "tqdm",
     "pytest",
-    "pytest-asyncio"
+    "pytest-asyncio",
+    "httpx",
+    "respx",
+    "pydantic-settings",
+    "sqlalchemy",
+    "python-multipart"
 ]
 
 [tool.pytest.ini_options]

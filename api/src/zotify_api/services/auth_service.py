@@ -1,115 +1,86 @@
 import logging
 import secrets
 import string
-import subprocess
-import threading
-from http.server import BaseHTTPRequestHandler, HTTPServer
-from typing import Optional
-import json
+import httpx
+from pkce import get_code_challenge, generate_code_verifier
 
 log = logging.getLogger(__name__)
 
-class IPCServer(threading.Thread):
-    """
-    A one-shot HTTP server that runs in a background thread to receive the
-    OAuth code from the Snitch subprocess.
-    """
+# This is a temporary, in-memory store. In a real application, this MUST be
+# replaced with a secure, persistent, and concurrency-safe store (e.g., Redis, DB).
+state_store = {}
 
-    def __init__(self, ipc_token: str):
-        super().__init__()
-        self.host = "127.0.0.1"
-        self.port = 9999  # In a real scenario, this should be randomized.
-        self.ipc_token = ipc_token
-        self.captured_code: Optional[str] = None
-        self._server = HTTPServer((self.host, self.port), self._make_handler())
-
-    def run(self):
-        log.info(f"IPC server starting on http://{self.host}:{self.port}")
-        self._server.handle_request()  # Handle one request and exit.
-        log.info("IPC server has shut down.")
-
-    def _make_handler(self):
-        # Closure to pass instance variables to the handler
-        ipc_server_instance = self
-        class RequestHandler(BaseHTTPRequestHandler):
-            def do_POST(self):
-                if self.path != "/zotify/receive-code":
-                    self.send_error(404, "Not Found")
-                    return
-
-                auth_header = self.headers.get("Authorization")
-                expected_header = "Bearer " + ipc_server_instance.ipc_token
-                if auth_header != expected_header:
-                    self.send_error(401, "Unauthorized")
-                    return
-
-                try:
-                    content_len = int(self.headers.get("Content-Length"))
-                    post_body = self.rfile.read(content_len)
-                    data = json.loads(post_body)
-                    ipc_server_instance.captured_code = data.get("code")
-                except Exception as e:
-                    log.error(f"Error processing IPC request: {e}")
-                    self.send_error(400, "Bad Request")
-                    return
-
-                self.send_response(200)
-                self.send_header("Content-type", "application/json")
-                self.end_headers()
-                self.wfile.write(json.dumps({"status": "ok"}).encode("utf-8"))
-
-            def log_message(self, format, *args):
-                # Suppress default logging to stdout
-                return
-
-        return RequestHandler
-
+# Constants - In a real app, these would come from config
+CLIENT_ID = "65b708073fc0480ea92a077233ca87bd" # Example client ID from prompt
+REDIRECT_URI = "http://127.0.0.1:4381/login"
+SCOPES = "user-read-private user-read-email" # Example scopes
 
 def generate_secure_token(length=32):
     """Generates a URL-safe random token."""
     alphabet = string.ascii_letters + string.digits
     return "".join(secrets.choice(alphabet) for _ in range(length))
 
-
-def start_authentication_flow():
+def start_pkce_flow():
     """
-    Starts the full authentication flow:
-    1. Generates tokens.
-    2. Starts the IPC server.
-    3. Launches Snitch.
-    4. Returns the Spotify URL for the user.
+    Generates state and PKCE codes for the Spotify OAuth flow.
     """
     state = generate_secure_token()
-    ipc_token = generate_secure_token()
+    code_verifier = generate_code_verifier(length=128)
+    code_challenge = get_code_challenge(code_verifier)
 
-    # Start IPC Server
-    ipc_server = IPCServer(ipc_token=ipc_token)
-    ipc_server.start()
+    # Store the verifier for the callback
+    state_store[state] = code_verifier
+    log.info(f"Generated state and stored code_verifier for state: {state}")
 
-    # Launch Snitch
-    try:
-        snitch_command = [
-            "./snitch/snitch", # This path needs to be correct relative to execution dir
-            f"-state={state}",
-            f"-ipc-token={ipc_token}",
-            f"-ipc-port={ipc_server.port}",
-        ]
-        log.info(f"Launching Snitch with command: {' '.join(snitch_command)}")
-        # In a real app, you'd handle stdout/stderr better.
-        subprocess.Popen(snitch_command)
-    except FileNotFoundError:
-        log.error("Could not find the 'snitch' executable. Make sure it is built and in the correct path.")
-        return {"error": "Snitch executable not found."}
+    # Construct the authorization URL
+    auth_url = "https://accounts.spotify.com/authorize"
+    params = {
+        "client_id": CLIENT_ID,
+        "response_type": "code",
+        "redirect_uri": REDIRECT_URI,
+        "code_challenge_method": "S256",
+        "code_challenge": code_challenge,
+        "state": state,
+        "scope": SCOPES,
+    }
 
-    # Construct Spotify URL (dummy client_id for now)
-    client_id = "YOUR_CLIENT_ID" # This should come from config
-    redirect_uri = "http://127.0.0.1:21371/callback"
-    spotify_url = (
-        f"https://accounts.spotify.com/authorize?response_type=code"
-        f"&client_id={client_id}"
-        f"&scope=user-read-private%20user-read-email"
-        f"&redirect_uri={redirect_uri}"
-        f"&state={state}"
-    )
+    import urllib.parse
+    full_auth_url = f"{auth_url}?{urllib.parse.urlencode(params)}"
 
-    return {"spotify_auth_url": spotify_url, "ipc_server_thread": ipc_server}
+    return {"authorization_url": full_auth_url}
+
+
+async def exchange_code_for_token(code: str, state: str):
+    """
+    Exchanges the authorization code for an access token using PKCE.
+    """
+    log.info(f"Attempting to exchange code for state: {state}")
+    code_verifier = state_store.pop(state, None)
+
+    if not code_verifier:
+        log.warning(f"Invalid or expired state received: {state}")
+        return {"error": "Invalid or expired state token."}
+
+    token_url = "https://accounts.spotify.com/api/token"
+    headers = {"Content-Type": "application/x-www-form-urlencoded"}
+    data = {
+        "grant_type": "authorization_code",
+        "code": code,
+        "redirect_uri": REDIRECT_URI,
+        "client_id": CLIENT_ID,
+        "code_verifier": code_verifier,
+    }
+
+    async with httpx.AsyncClient() as client:
+        response = await client.post(token_url, data=data, headers=headers)
+
+    if response.status_code != 200:
+        log.error(f"Failed to exchange token. Spotify responded with {response.status_code}: {response.text}")
+        return {"error": "Failed to exchange authorization code for a token."}
+
+    token_data = response.json()
+    log.info("Successfully exchanged code for token.")
+
+    # In a real app, you would securely store the access_token, refresh_token, etc.
+    # For now, we just return them.
+    return {"status": "success", "token_data": token_data}
