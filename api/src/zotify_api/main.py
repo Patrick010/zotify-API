@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.security.api_key import APIKeyHeader
 from zotify_api.config import settings
-from zotify_api.routes import auth, metadata, cache, logging, system, user, playlist, tracks, downloads, spotify, sync, stubs, search, webhooks, notifications, debug
+from zotify_api.routes import auth, metadata, cache, logging, system, user, playlist, tracks, downloads, spotify, sync, stubs, search, webhooks, notifications
 from .globals import app_start_time
 from .middleware.request_id import RequestIDMiddleware
 from .logging_config import setup_logging
@@ -18,7 +18,7 @@ app = FastAPI(
 )
 app.add_middleware(RequestIDMiddleware)
 
-from zotify_api.routes import config, network
+from zotify_api.routes import config, network, debug
 
 prefix = settings.api_prefix
 
