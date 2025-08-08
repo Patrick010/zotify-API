@@ -1,64 +1,84 @@
 package listener
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 )
 
-// oAuthPayload defines the structure of the incoming JSON payload.
-type oAuthPayload struct {
-	Code  string `json:"code"`
-	State string `json:"state"`
+// ipcPayload defines the structure of the JSON payload sent to the Zotify API.
+type ipcPayload struct {
+	Code string `json:"code"`
 }
 
-// newHandler creates a new HTTP handler for the /snitch/oauth-code endpoint.
-// It validates POST requests, parses the JSON payload, and checks the state token.
-func newHandler(shutdown chan<- bool, expectedState string) http.HandlerFunc {
+// newHandler creates a handler that validates a GET request from the browser,
+// then sends the captured code to the main Zotify API via a POST request.
+func newHandler(shutdown chan<- bool, expectedState, ipcToken string, ipcPort int) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		// 1. Validate Method
-		if r.Method != http.MethodPost {
-			http.Error(w, "Error: Method not allowed. Only POST requests are accepted.", http.StatusMethodNotAllowed)
-			log.Printf("Rejected non-POST request from %s", r.RemoteAddr)
-			return
-		}
+		// 1. Validate GET request from browser
+		code := r.URL.Query().Get("code")
+		state := r.URL.Query().Get("state")
 
-		// 2. Decode JSON payload
-		var payload oAuthPayload
-		if err := json.NewDecoder(r.Body).Decode(&payload); err != nil {
-			http.Error(w, "Error: Malformed JSON in request body.", http.StatusBadRequest)
-			log.Printf("Failed to decode JSON from %s: %v", r.RemoteAddr, err)
-			return
-		}
-
-		// 3. Validate State
-		if payload.State == "" {
-			http.Error(w, "Error: 'state' field is missing from JSON payload.", http.StatusBadRequest)
-			log.Printf("Rejected request from %s due to missing state.", r.RemoteAddr)
-			return
-		}
-		if payload.State != expectedState {
+		if state != expectedState {
+			log.Printf("Invalid state token received. Expected: %s, Got: %s", expectedState, state)
 			http.Error(w, "Error: Invalid state token.", http.StatusBadRequest)
-			log.Printf("Rejected request from %s due to invalid state. Expected: %s, Got: %s", r.RemoteAddr, expectedState, payload.State)
+			// DO NOT shut down. Wait for a valid request or timeout.
 			return
 		}
 
-		// 4. Validate Code
-		if payload.Code == "" {
-			http.Error(w, "Error: 'code' field is missing from JSON payload.", http.StatusBadRequest)
-			log.Printf("Rejected request from %s due to missing code.", r.RemoteAddr)
+		if code == "" {
+			log.Println("Callback received without a code.")
+			http.Error(w, "Error: Missing authorization code in callback.", http.StatusBadRequest)
+			// Still shut down, because the state was valid and consumed.
+			shutdown <- true
 			return
 		}
 
-		// 5. Success: Print code and shut down
-		log.Printf("Successfully received and validated OAuth code from %s.", r.RemoteAddr)
-		fmt.Println(payload.Code)
+		// 2. Send captured code to Zotify API IPC server
+		if err := sendCodeToAPI(code, ipcToken, ipcPort); err != nil {
+			log.Printf("Failed to send code to Zotify API: %v", err)
+			http.Error(w, "Error: Could not communicate with Zotify API. Please check logs.", http.StatusInternalServerError)
+		} else {
+			log.Println("Successfully sent code to Zotify API.")
+			fmt.Fprintln(w, "Authentication successful! You can close this window now.")
+		}
 
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
-
+		// 3. Trigger shutdown regardless of IPC success/failure,
+		// because the one-time-use code has been received.
 		shutdown <- true
 	}
+}
+
+// sendCodeToAPI makes a POST request to the main Zotify API to deliver the code.
+func sendCodeToAPI(code, ipcToken string, ipcPort int) error {
+	payload := ipcPayload{Code: code}
+	payloadBytes, err := json.Marshal(payload)
+	if err != nil {
+		return fmt.Errorf("failed to marshal IPC payload: %w", err)
+	}
+
+	url := fmt.Sprintf("http://127.0.0.1:%d/zotify/receive-code", ipcPort)
+	req, err := http.NewRequest(http.MethodPost, url, bytes.NewBuffer(payloadBytes))
+	if err != nil {
+		return fmt.Errorf("failed to create IPC request: %w", err)
+	}
+
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Authorization", "Bearer "+ipcToken)
+
+	client := &http.Client{Timeout: 10 * time.Second}
+	resp, err := client.Do(req)
+	if err != nil {
+		return fmt.Errorf("failed to send IPC request: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("IPC request failed with status code %d", resp.StatusCode)
+	}
+
+	return nil
 }

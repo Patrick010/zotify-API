@@ -8,30 +8,18 @@ The primary purpose of Snitch is to solve the Spotify authentication redirect pr
 
 ## Usage
 
-To run Snitch, execute the following command from the `snitch` directory, providing the required `state` token:
+Snitch is not intended to be run manually. It is launched as a subprocess by the main Zotify API during the OAuth authentication flow.
 
-```bash
-go run ./cmd/snitch -state="your-secret-state-token"
-```
-
-This starts a web server on `http://127.0.0.1:56789`. The server waits for a single `POST` request to the `/snitch/oauth-code` endpoint.
-
-To provide the code, send a POST request with a JSON body like this:
-```bash
-curl -X POST -H "Content-Type: application/json" \
-  -d '{"code": "your-auth-code", "state": "your-secret-state-token"}' \
-  http://127.0.0.1:56789/snitch/oauth-code
-```
-
-Upon receiving a valid request, Snitch prints the `code` to standard output and shuts down.
+It is configured via command-line flags:
+- `-state`: The CSRF token to validate the browser redirect.
+- `-ipc-port`: The port of the main Zotify API's IPC server.
+- `-ipc-token`: The bearer token for authenticating with the IPC server.
 
 ## Architecture
 
-The Snitch module follows a standard Go project layout:
+Snitch has two main roles:
 
--   `cmd/snitch/main.go`: The application's entry point. It handles command-line flag parsing and starts the listener.
--   `internal/listener/`: The core logic for the web server.
-    -   `server.go`: Creates, runs, and shuts down the HTTP server.
-    -   `handler.go`: Contains the HTTP handler for the `/snitch/oauth-code` endpoint, which validates the POST request and JSON payload.
+1.  **HTTP Listener**: It runs a local server on `127.0.0.1:21371` to receive the `GET /callback` redirect from Spotify's authentication flow in the user's browser.
+2.  **IPC Client**: After capturing and validating the `code` and `state` from the redirect, it makes a `POST` request to a secondary IPC server running within the main Zotify API process. This securely transmits the captured code back to the application.
 
 This tool is intended to be used as part of the Zotify-API authentication flow and is not designed for standalone use.

@@ -8,23 +8,23 @@ import (
 )
 
 const (
-	listenAddr    = "127.0.0.1:56789"
+	listenAddr    = "127.0.0.1:21371"
 	serverTimeout = 2 * time.Minute
-	endpointPath  = "/snitch/oauth-code"
+	endpointPath  = "/callback"
 )
 
 // Start initializes and runs the HTTP listener. It sets up a server on
-// the specified port that waits for a single POST request to the /snitch/oauth-code
-// endpoint. The server will gracefully shut down after a valid request is
-// received or after a 2-minute timeout.
+// localhost:21371 that waits for a single callback GET request from the browser.
+// The server will gracefully shut down after a valid request is received or
+// after a 2-minute timeout.
 //
-// expectedState is the required value for the 'state' field in the JSON payload
-// for the request to be considered valid.
-func Start(expectedState string) {
+// expectedState is the required value for the 'state' query parameter.
+// ipcPort and ipcToken are used to send the captured code back to the main application.
+func Start(expectedState, ipcToken string, ipcPort int) {
 	shutdown := make(chan bool, 1)
 
 	mux := http.NewServeMux()
-	mux.HandleFunc(endpointPath, newHandler(shutdown, expectedState))
+	mux.HandleFunc(endpointPath, newHandler(shutdown, expectedState, ipcToken, ipcPort))
 
 	server := &http.Server{
 		Addr:    listenAddr,
@@ -53,8 +53,8 @@ func Start(expectedState string) {
 		}
 	}()
 
-	log.Printf("Snitch is listening for a POST request on http://%s%s", listenAddr, endpointPath)
-	log.Println("The listener will time out in 2 minutes.")
+	log.Printf("Snitch is listening on http://%s%s", listenAddr, endpointPath)
+	log.Println("Waiting for Spotify to redirect... The listener will time out in 2 minutes.")
 
 	if err := server.ListenAndServe(); err != http.ErrServerClosed {
 		log.Fatalf("Listener error: %v", err)
