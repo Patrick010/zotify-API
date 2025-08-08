@@ -100,3 +100,8 @@ A comprehensive audit logging strategy will be implemented in a future phase of 
 *   **Authentication and Authorization:** The notification endpoints are not authenticated. This is a major security flaw, as it allows any user to create, view, and manage notifications for any other user. This will be addressed in a future iteration when a proper user authentication and authorization system is implemented.
 *   **Data Privacy:** Notification data is stored in the `user_data.json` file. As with the user profile data, this file should have restricted permissions.
 *   **Rate Limiting:** There is no rate limiting on the notification endpoints. This could be a potential issue if the API is exposed to the public. This should be addressed in a future iteration.
+
+### Spotify Token Storage
+
+-   **Risk:** Spotify OAuth tokens (access and refresh) are currently stored in a plain text JSON file (`api/storage/spotify_tokens.json`). This is a temporary solution for development and is not secure for a production environment. If the file is compromised, an attacker could gain full access to the user's Spotify account.
+-   **Mitigation:** This is a high-priority item to be addressed. In a future iteration, tokens must be moved to a secure, encrypted storage solution, such as a database with encrypted columns or a dedicated secrets management service (e.g., HashiCorp Vault). Access to the tokens must be strictly controlled.

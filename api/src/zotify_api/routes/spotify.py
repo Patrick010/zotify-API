@@ -12,13 +12,8 @@ from urllib.parse import quote_plus
 router = APIRouter(prefix="/spotify")
 logger = logging.getLogger(__name__)
 
-# In-memory stores (replace with DB in prod)
-spotify_tokens = {
-    "access_token": None,
-    "refresh_token": None,
-    "expires_at": 0
-}
-pending_states = {}  # state -> code_verifier mapping for PKCE
+# Import the shared state stores
+from zotify_api.auth_state import spotify_tokens, pending_states, save_tokens
 
 CLIENT_ID = "65b708073fc0480ea92a077233ca87bd"
 CLIENT_SECRET = "832bc60deeb147db86dd1cc521d9e4bf"
@@ -72,41 +67,6 @@ def spotify_login():
     return {"auth_url": auth_url}
 
 
-@router.get("/callback")
-async def spotify_callback(request: Request, code: Optional[str] = None, state: Optional[str] = None):
-    logger.info(f"Callback received with code={code}, state={state}")
-
-    if not code or not state:
-        raise HTTPException(400, "Missing code or state query parameters")
-
-    code_verifier = pending_states.pop(state, None)
-    if not code_verifier:
-        logger.error("Invalid or expired state parameter")
-        raise HTTPException(400, "Invalid or expired state")
-
-    data = {
-        "grant_type": "authorization_code",
-        "code": code,
-        "redirect_uri": REDIRECT_URI,
-        "client_id": CLIENT_ID,
-        "code_verifier": code_verifier,
-    }
-    headers = {"Content-Type": "application/x-www-form-urlencoded"}
-
-    async with httpx.AsyncClient() as client:
-        resp = await client.post(SPOTIFY_TOKEN_URL, data=data, headers=headers)
-        if resp.status_code != 200:
-            logger.error(f"Failed to fetch tokens: {resp.text}")
-            raise HTTPException(400, f"Failed to fetch tokens: {resp.text}")
-        tokens = resp.json()
-
-    spotify_tokens.update({
-        "access_token": tokens["access_token"],
-        "refresh_token": tokens.get("refresh_token", spotify_tokens.get("refresh_token")),
-        "expires_at": time.time() + tokens["expires_in"] - 60,
-    })
-    logger.info("Spotify tokens stored successfully")
-    return {"status": "Spotify tokens stored"}
 
 
 @router.get("/token_status", response_model=TokenStatus)
@@ -138,6 +98,7 @@ async def refresh_token_if_needed():
         tokens = resp.json()
         spotify_tokens["access_token"] = tokens["access_token"]
         spotify_tokens["expires_at"] = time.time() + tokens["expires_in"] - 60
+        save_tokens(spotify_tokens)
 
 
 @router.post("/sync_playlists")
