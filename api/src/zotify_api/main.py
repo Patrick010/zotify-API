@@ -22,7 +22,10 @@ from zotify_api.routes import config, network, debug
 
 prefix = settings.api_prefix
 
-modules = [auth, metadata, cache, logging, system, user, playlist, tracks, downloads, sync, stubs, config, network, search, webhooks, spotify, notifications, debug]
+# Add the debug router directly as per user guidance
+app.include_router(debug.router, prefix="/debug", tags=["debug"])
+
+modules = [auth, metadata, cache, logging, system, user, playlist, tracks, downloads, sync, stubs, config, network, search, webhooks, spotify, notifications]
 for m in modules:
     app.include_router(m.router, prefix=prefix)
 
