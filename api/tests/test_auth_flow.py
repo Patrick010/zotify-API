@@ -10,6 +10,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
 
 from zotify_api.main import app
 from zotify_api.services import auth_service
+from zotify_api.config import settings
 
 client = TestClient(app)
 
@@ -44,12 +45,36 @@ def test_full_auth_flow(mock_spotify_token_endpoint):
     auth_url = data["authorization_url"]
     print(f"[INFO] Received auth URL: {auth_url}")
 
-    # 2. Extract state from the URL (simulating the browser redirect)
+    # 2. Extract and verify parameters from the URL
     parsed_url = urlparse(auth_url)
     query_params = parse_qs(parsed_url.query)
+
+    # Check for presence of all required PKCE and OAuth params
     assert "state" in query_params
+    assert "client_id" in query_params
+    assert "redirect_uri" in query_params
+    assert "scope" in query_params
+    assert "code_challenge" in query_params
+    assert "code_challenge_method" in query_params
+
+    # Verify the values are correct
+    assert query_params["client_id"][0] == settings.spotify_client_id
+    assert query_params["redirect_uri"][0] == "http://127.0.0.1:4381/login"
+    assert query_params["code_challenge_method"][0] == "S256"
+
+    # The full scope string
+    expected_scope = (
+        "user-read-private user-read-email user-read-playback-state "
+        "user-modify-playback-state user-read-currently-playing app-remote-control "
+        "playlist-read-private playlist-read-collaborative playlist-modify-public "
+        "playlist-modify-private user-library-read user-library-modify "
+        "user-top-read user-read-recently-played user-follow-read "
+        "user-follow-modify streaming ugc-image-upload"
+    )
+    assert query_params["scope"][0] == expected_scope
+
     state = query_params["state"][0]
-    print(f"[INFO] Extracted state from URL: {state}")
+    print(f"[INFO] Extracted and verified URL parameters. State: {state}")
 
     # Verify that the state and code_verifier are in our temporary store
     assert state in auth_service.state_store
