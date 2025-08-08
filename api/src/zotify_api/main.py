@@ -18,12 +18,9 @@ app = FastAPI(
 )
 app.add_middleware(RequestIDMiddleware)
 
-from zotify_api.routes import config, network, debug
+from zotify_api.routes import config, network
 
 prefix = settings.api_prefix
-
-# Add the debug router directly as per user guidance
-app.include_router(debug.router, prefix="/debug", tags=["debug"])
 
 modules = [auth, metadata, cache, logging, system, user, playlist, tracks, downloads, sync, stubs, config, network, search, webhooks, spotify, notifications]
 for m in modules:
