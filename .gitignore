@@ -160,6 +160,6 @@ debug.py
 .admin_api_key
 
 # Ignore snitch binary
-/snitch/snitch
-/snitch/snitch.exe
-/snitch/bin/
+snitch/snitch
+snitch/snitch.exe
+snitch/bin/
