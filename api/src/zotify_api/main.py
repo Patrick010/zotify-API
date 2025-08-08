@@ -30,6 +30,10 @@ for m in modules:
 async def ping():
     return {"pong": True}
 
+@app.get("/health", tags=["health"])
+async def health_check():
+    return {"status": "ok", "message": "API is running"}
+
 @app.get("/openapi.json", include_in_schema=False)
 async def get_open_api_endpoint():
     return app.openapi()
