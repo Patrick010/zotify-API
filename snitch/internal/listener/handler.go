@@ -46,7 +46,7 @@ func handleCallback(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// The backend URL is fixed for now as per requirements.
-	apiURL := "http://127.0.0.1:8000/api/auth/spotify/callback"
+	apiURL := "http://192.168.20.5/auth/spotify/callback"
 	client := &http.Client{Timeout: 5 * time.Second}
 	resp, err := client.Post(apiURL, "application/json", bytes.NewBuffer(jsonBytes))
 	if err != nil {

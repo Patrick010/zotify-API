@@ -5,7 +5,6 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     app_env: str = "production"
-    spotify_client_id: str = "65b708073fc0480ea92a077233ca87bd"
     admin_api_key: str | None = None
     require_admin_api_key_in_prod: bool = True
     enable_fork_features: bool = False
