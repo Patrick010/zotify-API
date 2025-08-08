@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.security.api_key import APIKeyHeader
 from zotify_api.config import settings
-from zotify_api.routes import auth, metadata, cache, logging, system, user, playlist, tracks, downloads, spotify, sync, stubs, search, webhooks, notifications
+from zotify_api.routes import auth, metadata, cache, logging, system, user, playlist, tracks, downloads, spotify, sync, stubs, search, webhooks, notifications, debug
 from .globals import app_start_time
 from .middleware.request_id import RequestIDMiddleware
 from .logging_config import setup_logging
@@ -22,7 +22,7 @@ from zotify_api.routes import config, network
 
 prefix = settings.api_prefix
 
-modules = [auth, metadata, cache, logging, system, user, playlist, tracks, downloads, sync, stubs, config, network, search, webhooks, spotify, notifications]
+modules = [auth, metadata, cache, logging, system, user, playlist, tracks, downloads, sync, stubs, config, network, search, webhooks, spotify, notifications, debug]
 for m in modules:
     app.include_router(m.router, prefix=prefix)
 
