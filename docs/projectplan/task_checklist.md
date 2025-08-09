@@ -4,63 +4,98 @@
 # Task Execution Checklist
 
 **Purpose**
-This checklist must be followed for *every* development task before it is marked complete. It ensures security-by-design, privacy compliance, documentation maintenance, testing discipline, and professional code quality.
+This checklist must be followed for *every* development task before it is marked complete. It ensures security-by-design, privacy compliance, documentation maintenance, testing discipline, and overall project hygiene.
 
 ---
 
 ## 1. Security
-- Review code changes for **security risks**: injection vulnerabilities, data leaks, improper authentication, unsafe file handling, privilege escalation.
-- Ensure **admin API key handling** follows `docs/projectplan/admin_api_key_mitigation.md`.
+- Review code changes for **security risks**: injection, data leaks, improper authentication, unsafe file handling.
+- Ensure **admin API key handling** complies with `docs/projectplan/admin_api_key_mitigation.md`.
 - Confirm **least-privilege principle** is applied for endpoints, data access, and dependencies.
-- Add/update **`docs/projectplan/security.md`** if any new security considerations arise.
+- Add or update **`docs/projectplan/security.md`** with any new security considerations.
+- Verify any new dependencies or third-party components are vetted for security and properly licensed.
 
 ## 2. Privacy
-- Review code changes for **privacy compliance** (GDPR, CCPA, or applicable regulations).
-- Confirm sensitive data is **minimized**, **encrypted** where needed, and **not logged** in plain text.
-- Implement and enforce **privacy-by-design principles** in new features.
-- Capture explicit **user consent** where applicable.
-- Implement RBAC and access control for personal data.
-- Extend audit logging for all personal data access and changes.
-- Support user rights: data export, correction, and deletion.
-- Update **`docs/projectplan/privacy_compliance.md`** with any new privacy impacts and compliance steps.
+- Review code changes for **privacy compliance** (GDPR, CCPA, or other applicable regulations).
+- Confirm sensitive data is **minimized**, **encrypted** where needed, and **never logged in plain text**.
+- Update **`docs/projectplan/privacy_compliance.md`** reflecting new privacy impacts and controls.
+- Enforce user data rights: consent capture, data export, deletion, correction, and withdrawal mechanisms.
+- Extend audit logging to track all personal data access and changes securely.
+- Integrate privacy by design and default into the task's implementation.
 
 ## 3. Documentation
-- Update **all relevant documentation** (`*.md` files across the project, excluding zotify/ directory), reviewing filenames and contents to verify updates are consistent with task scope.
-- This includes but is not limited to HLD, LLD, roadmaps, guides, capability audits, changelogs, and project plans.
-- Add a **CHANGELOG** entry reflecting the version bump and task summary.
-- Generate and save a **Task Completion Report** in `docs/projectplan/reports/` for every major task completion.
-- Update `reports/README.md` with an index of new reports.
-- Link relevant reports in changelogs or documentation as appropriate.
+For **every completed task** — no exceptions:
+
+1. **Functional Changes**
+   - Document all functional changes introduced by the task.
+   - This includes:
+     - New endpoints, removed endpoints, or changes to existing endpoint behavior.
+     - Changes in request/response formats, parameters, or authentication requirements.
+     - Changes to CLI commands, API workflows, or integration points.
+   - Update **all relevant docs** (guides, API references, manuals) so they match reality.
+   - Add before/after examples where applicable.
+
+2. **Design Documentation**
+   - Update or create high-level and low-level design documents if the implementation differs from specifications.
+
+3. **Planning & Roadmap**
+   - Update planning docs and roadmaps for any timeline, scope, or capability changes.
+
+4. **User & Operator Guides**
+   - Review all guides (developer, operator, user) and update them to match current functionality.
+
+5. **Release Notes & Reports**
+   - Add entry to release notes/version history.
+   - Generate a **Task Completion Report** in `docs/projectplan/reports/`.
+   - Update the reports index to reference the new report.
+
+6. **Repo-wide Documentation Sweep**
+   - Review **every** `.md` file outside excluded directories (e.g. zotify/).
+   - In the Task Completion Report, include:
+     - Full list of reviewed files.
+     - For each file: note changes made or confirm “no change needed.”
+   - Task is incomplete until this review list is provided.
+
 
 ## 4. Tests
-- Write **unit tests** for new or changed logic.
-- Update **integration tests** to reflect new API behavior.
-- Ensure **all tests pass** locally and in CI pipelines.
-- For security or privacy-sensitive features, write **negative tests** covering invalid or malicious inputs.
-- Confirm test coverage is sufficient to protect critical code paths.
+- Write or update **unit tests** covering all new or changed logic, including edge cases and failure modes.
+- Update **integration tests** to reflect new API endpoints, flows, or behavioral changes.
+- Ensure **all tests pass** in continuous integration (CI) and locally before marking task complete.
+- For security- or privacy-sensitive features, write **negative tests** simulating invalid inputs, unauthorized access, or malformed data.
+- Automate running linting, static analysis, security scans, and documentation build tests as part of CI where applicable.
 
-## 5. Code Quality and Code Review
-- Follow established **naming conventions**, project architecture, and folder structure.
-- Maintain strict **modularity** — no leaking of unrelated concerns across layers.
-- Ensure **type hints** and comprehensive **docstrings** are accurate and clear.
-- Write **clean, readable, idiomatic code** consistent with project language and style.
-- Avoid unnecessary complexity or premature optimization but remove obvious inefficiencies or anti-patterns.
-- **Review for security and safety** beyond functionality—identify unsafe patterns or risky operations.
-- Ensure **proper error handling and input validation** throughout.
-- Use **efficient algorithms and data structures** appropriate for the task.
-- Run and pass **automated formatting, linting, and static analysis** tools to catch common issues.
-- Conduct a **manual code review focused on maintainability, readability, and technical debt**.
-- Refactor to improve clarity and reduce duplication or fragility.
-- Verify **dependencies are minimal, necessary, and up-to-date**.
-- Confirm **test coverage** adequately covers complex or critical paths.
+## 5. Code Quality
+- Follow established **naming conventions**, directory structures, and coding style guides strictly.
+- Maintain strict **modularity** — separate concerns cleanly, avoid cross-layer leakage (e.g., CLI logic leaking into API layer).
+- Ensure complete and correct **type hints** and **docstrings** for all functions, classes, and modules.
+- Perform **code reviews** with a focus on readability, maintainability, performance, and security.
+- Use automated **linters** and **formatters** to enforce consistent style.
+- Where feasible, use static code analysis tools to detect potential bugs or anti-patterns.
+- Consider efficiency, scalability, and resource usage when writing or modifying code.
+- Refactor legacy or autogenerated code as needed to meet these quality standards.
 
-## 6. Automation and Process Compliance
-- Confirm **automated checks** (linting, security scans, documentation build/tests) run successfully on this code.
-- Confirm the task complies with the **branching and release process** if fully automated as part of this task.
-- Include explicit review or approval steps (code reviews, security/privacy signoffs) where automatable as part of the task workflow.
+## 6. Automation and Workflow
+- Integrate **explicit approval steps** (code reviews, security/privacy sign-offs) if your project workflow requires them.
+- Include **automated checks** like linting, security scans, and documentation builds as part of task completion validation.
+- Follow a **clear branching and release process** if it can be fully automated as part of the task execution.
+- If the task is fully automatable and no manual review is needed, document this clearly and proceed with direct commits/pushes accordingly.
 
 ---
 
 **Enforcement:**
-No task is considered complete unless *all* applicable checklist items have been addressed.
-This file is authoritative and version-controlled.
+No task is considered complete unless all applicable checklist items have been addressed. This file is authoritative and version-controlled.
+
+---
+
+### Notes on Privacy Compliance (Integrated)
+Privacy compliance is an integral part of every task, not a separate addendum. Ensure:
+- User consent is captured and stored where relevant.
+- API endpoints exposing personal data enforce RBAC and access controls.
+- Data minimization, encryption, and audit logging are applied consistently.
+- User rights such as data export, deletion, and correction are implemented and tested.
+- All privacy-related documentation is updated as part of normal doc maintenance.
+
+---
+
+**Usage:**
+Include the full content of this checklist as part of your prompt or task instructions to ensure all aspects of security, privacy, documentation, testing, and code quality are covered before task completion.
