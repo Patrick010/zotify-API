@@ -13,7 +13,7 @@ import (
 const (
 	listenAddr    = "localhost:4381"
 	callbackPath  = "/login"
-	defaultAPIURL = "http://192.168.20.5:8000/auth/spotify/callback"
+	defaultAPIURL = "http://192.168.20.5:8000/api/auth/spotify/callback"
 )
 
 type CallbackPayload struct {
