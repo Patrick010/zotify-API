@@ -1,13 +1,22 @@
 import pytest
-from fastapi.testclient import TestClient
-from zotify_api.main import app
-from zotify_api.services.db import get_db_engine
 from unittest.mock import MagicMock
 from io import BytesIO
+from zotify_api.main import app
+from zotify_api.services.db import get_db_engine
 
-client = TestClient(app)
+@pytest.fixture
+def mock_db():
+    """Fixture to mock the database engine."""
+    mock_engine = MagicMock()
+    mock_conn = MagicMock()
+    mock_engine.connect.return_value.__enter__.return_value = mock_conn
 
-def test_list_tracks_no_db():
+    original_override = app.dependency_overrides.get(get_db_engine)
+    app.dependency_overrides[get_db_engine] = lambda: mock_engine
+    yield mock_engine, mock_conn
+    app.dependency_overrides[get_db_engine] = original_override
+
+def test_list_tracks_no_db(client):
     app.dependency_overrides[get_db_engine] = lambda: None
     response = client.get("/api/tracks")
     assert response.status_code == 200
@@ -16,34 +25,26 @@ def test_list_tracks_no_db():
     assert body["meta"]["total"] == 0
     app.dependency_overrides.clear()
 
-def test_list_tracks_with_db():
-    mock_engine = MagicMock()
-    mock_conn = MagicMock()
-    mock_engine.connect.return_value.__enter__.return_value = mock_conn
+def test_list_tracks_with_db(client, mock_db):
+    mock_engine, mock_conn = mock_db
     mock_conn.execute.return_value.mappings.return_value.all.return_value = [
         {"id": "1", "name": "Test Track", "artist": "Test Artist", "album": "Test Album"},
     ]
-    app.dependency_overrides[get_db_engine] = lambda: mock_engine
     response = client.get("/api/tracks")
     assert response.status_code == 200
     body = response.json()
     assert len(body["data"]) == 1
     assert body["data"][0]["name"] == "Test Track"
-    app.dependency_overrides.clear()
 
-def test_crud_flow_unauthorized():
+def test_crud_flow_unauthorized(client):
     response = client.post("/api/tracks", json={"name": "New Track", "artist": "New Artist"})
     assert response.status_code == 401
 
-def test_crud_flow(monkeypatch):
-    monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
-    mock_engine = MagicMock()
-    mock_conn = MagicMock()
-    mock_engine.connect.return_value.__enter__.return_value = mock_conn
+def test_crud_flow(client, mock_db):
+    mock_engine, mock_conn = mock_db
 
     # Create
     mock_conn.execute.return_value.lastrowid = 1
-    app.dependency_overrides[get_db_engine] = lambda: mock_engine
     create_payload = {"name": "New Track", "artist": "New Artist"}
     response = client.post("/api/tracks", headers={"X-API-Key": "test_key"}, json=create_payload)
     assert response.status_code == 201
@@ -65,9 +66,7 @@ def test_crud_flow(monkeypatch):
     response = client.delete(f"/api/tracks/{track_id}", headers={"X-API-Key": "test_key"})
     assert response.status_code == 204
 
-    app.dependency_overrides.clear()
-
-def test_upload_cover_unauthorized():
+def test_upload_cover_unauthorized(client):
     file_content = b"fake image data"
     response = client.post(
         "/api/tracks/1/cover",
@@ -75,11 +74,7 @@ def test_upload_cover_unauthorized():
     )
     assert response.status_code == 401
 
-def test_upload_cover(monkeypatch):
-    monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
-    mock_engine = MagicMock()
-    app.dependency_overrides[get_db_engine] = lambda: mock_engine
-
+def test_upload_cover(client, mock_db):
     file_content = b"fake image data"
     response = client.post(
         "/api/tracks/1/cover",
@@ -88,4 +83,3 @@ def test_upload_cover(monkeypatch):
     )
     assert response.status_code == 200
     assert "cover_url" in response.json()
-    app.dependency_overrides.clear()

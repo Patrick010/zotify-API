@@ -56,6 +56,46 @@ def spotify_login():
     return {"auth_url": auth_url}
 
 
+@router.get("/callback")
+async def spotify_callback(code: str, state: str, response: Response):
+    """
+    Callback endpoint for Spotify OAuth2 flow.
+    """
+    if state not in pending_states:
+        raise HTTPException(status_code=400, detail="Invalid state parameter")
+
+    code_verifier = pending_states.pop(state)
+
+    data = {
+        "grant_type": "authorization_code",
+        "code": code,
+        "redirect_uri": REDIRECT_URI,
+        "client_id": CLIENT_ID,
+        "code_verifier": code_verifier,
+    }
+    headers = {"Content-Type": "application/x-www-form-urlencoded"}
+
+    async with httpx.AsyncClient() as client:
+        try:
+            resp = await client.post(SPOTIFY_TOKEN_URL, data=data, headers=headers)
+            resp.raise_for_status()
+            tokens = await resp.json()
+
+            # Persist tokens
+            spotify_tokens["access_token"] = tokens["access_token"]
+            spotify_tokens["refresh_token"] = tokens.get("refresh_token")
+            spotify_tokens["expires_at"] = time.time() + tokens["expires_in"] - 60  # 60s buffer
+            save_tokens(spotify_tokens)
+
+            return {"status": "success", "message": "Successfully authenticated with Spotify."}
+        except httpx.HTTPStatusError as e:
+            logger.error(f"Failed to get token from Spotify: {e.response.text}")
+            raise HTTPException(status_code=e.response.status_code, detail="Failed to retrieve token from Spotify")
+        except httpx.RequestError as e:
+            logger.error(f"Request to Spotify failed: {e}")
+            raise HTTPException(status_code=503, detail="Could not connect to Spotify")
+
+
 @router.get("/token_status", response_model=TokenStatus)
 def token_status():
     valid = spotify_tokens["access_token"] is not None and spotify_tokens["expires_at"] > time.time()

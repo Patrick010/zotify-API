@@ -1,4 +1,3 @@
-import secrets
 import os
 from pathlib import Path
 from pydantic_settings import BaseSettings
@@ -15,24 +14,19 @@ class Settings(BaseSettings):
     database_uri: str | None = None
     redis_uri: str | None = None
 
-    def __init__(self, key_file_path: Path | None = None, generate_key: bool = True, **values):
-        super().__init__(**values)
-
-        if not key_file_path:
-            key_file_path = Path(__file__).parent.parent / ".admin_api_key"
-
-        if self.admin_api_key:
-            pass
-        elif key_file_path.exists():
-            self.admin_api_key = key_file_path.read_text().strip()
-        elif generate_key:
-            self.admin_api_key = secrets.token_hex(32)
-            key_file_path.write_text(self.admin_api_key)
-            os.chmod(key_file_path, 0o600)
-            print(f"Generated new admin API key: {self.admin_api_key}")
-            print(f"Stored in: {key_file_path}")
-
-        if self.app_env == "production" and self.require_admin_api_key_in_prod and not self.admin_api_key:
-            raise RuntimeError("ADMIN_API_KEY must be set in production.")
+    # The complex __init__ method was removed.
+    # Pydantic's BaseSettings will now handle loading from environment variables directly.
+    # This fixes the test failures where the test-specific API key was being ignored.
 
 settings = Settings()
+
+# Production check remains important.
+# This logic is moved out of the class constructor to avoid side-effects during instantiation.
+if settings.app_env == "production" and settings.require_admin_api_key_in_prod and not settings.admin_api_key:
+    # To avoid breaking existing setups, we'll check for the key file that the old logic created.
+    key_file_path = Path(__file__).parent.parent / ".admin_api_key"
+    if key_file_path.exists():
+        settings.admin_api_key = key_file_path.read_text().strip()
+    else:
+        # If no key is set via ENV and no key file exists, raise an error in prod.
+        raise RuntimeError("ADMIN_API_KEY must be set in production, and .admin_api_key file was not found.")

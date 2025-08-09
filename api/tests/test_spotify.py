@@ -1,52 +1,61 @@
 import pytest
-from httpx import AsyncClient
-from httpx import ASGITransport
 from unittest.mock import patch, AsyncMock
-from zotify_api.main import app
+from zotify_api.auth_state import pending_states, spotify_tokens
 
-@pytest.mark.asyncio
-@patch("httpx.AsyncClient.post", new_callable=AsyncMock)
-async def test_spotify_callback(mock_post):
-    mock_response = AsyncMock()
-    mock_response.status_code = 200
-    mock_response.json = AsyncMock(return_value={
-        "access_token": "test_access_token",
-        "refresh_token": "test_refresh_token",
-        "expires_in": 3600,
-    })
-    mock_post.return_value = mock_response
+def test_spotify_callback(client):
+    """ Test the Spotify OAuth callback endpoint """
+    # Before the callback, a state must be pending from the /login step
+    test_state = "test_state_123"
+    pending_states[test_state] = "mock_code_verifier"
 
-    transport = ASGITransport(app=app)
-    async with AsyncClient(transport=transport, base_url="http://testserver") as client:
-        response = await client.get("/api/spotify/callback?code=test_code")
+    # Mock the external call to Spotify's token endpoint
+    with patch("httpx.AsyncClient.post", new_callable=AsyncMock) as mock_post:
+        mock_response = AsyncMock()
+        mock_response.status_code = 200
+        mock_response.json = AsyncMock(return_value={
+            "access_token": "test_access_token",
+            "refresh_token": "test_refresh_token",
+            "expires_in": 3600,
+        })
+        mock_post.return_value = mock_response
+
+        # Make the request to the callback endpoint
+        response = client.get(f"/api/spotify/callback?code=test_code&state={test_state}")
 
     assert response.status_code == 200
-    assert response.json() == {"status": "Spotify tokens stored"}
+    assert response.json()["status"] == "success"
+    assert spotify_tokens["access_token"] == "test_access_token"
 
+    # Ensure the state was consumed
+    assert test_state not in pending_states
 
-@pytest.mark.asyncio
-@patch("httpx.AsyncClient.get", new_callable=AsyncMock)
+    # Cleanup
+    pending_states.clear()
+    spotify_tokens.clear()
+
 @patch("zotify_api.routes.spotify.refresh_token_if_needed", new_callable=AsyncMock)
-async def test_fetch_metadata(mock_refresh, mock_get):
-    mock_response = AsyncMock()
-    mock_response.status_code = 200
-    mock_response.json = AsyncMock(return_value={"id": "test_track_id"})
-    mock_get.return_value = mock_response
+def test_fetch_metadata(mock_refresh, client):
+    """ Test fetching metadata for a track """
+    # Set a dummy token to simulate an authenticated state
+    spotify_tokens["access_token"] = "dummy_token"
 
-    transport = ASGITransport(app=app)
-    async with AsyncClient(transport=transport, base_url="http://testserver") as client:
-        response = await client.get("/api/spotify/metadata/test-track-id")
+    with patch('httpx.AsyncClient.get', new_callable=AsyncMock) as mock_get:
+        mock_response = AsyncMock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {"id": "test_track_id"}
+        mock_get.return_value = mock_response
+
+        response = client.get("/api/spotify/metadata/test-track-id")
 
     assert response.status_code == 200
-    data = await response.json()
+    data = response.json()
     assert data["id"] == "test_track_id"
 
+    # Cleanup
+    spotify_tokens.clear()
 
-@pytest.mark.asyncio
 @patch("zotify_api.routes.spotify.refresh_token_if_needed", new_callable=AsyncMock)
-async def test_sync_playlists(mock_refresh):
-    transport = ASGITransport(app=app)
-    async with AsyncClient(transport=transport, base_url="http://testserver") as client:
-        response = await client.post("/api/spotify/sync_playlists")
-
+def test_sync_playlists(mock_refresh, client):
+    """ Test syncing playlists """
+    response = client.post("/api/spotify/sync_playlists")
     assert response.status_code == 200
