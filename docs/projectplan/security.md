@@ -28,6 +28,10 @@ The most significant security risk in the current implementation is the use of a
 
 The current mitigation for this risk is a dynamic, auto-generated admin API key system. However, this is still a temporary solution, and a more robust authentication mechanism will be implemented in a future phase of the project.
 
+### Spotify Token Storage
+-   **Risk:** Spotify OAuth tokens (access and refresh) are currently stored in a plain text JSON file (`api/storage/spotify_tokens.json`). This is a temporary solution for development and is not secure for a production environment. If the file is compromised, an attacker could gain full access to the user's Spotify account.
+-   **Mitigation:** This is a high-priority item to be addressed. In a future iteration, tokens must be moved to a secure, encrypted storage solution, such as a database with encrypted columns or a dedicated secrets management service (e.g., HashiCorp Vault). Access to the tokens must be strictly controlled.
+
 ## 5. Planned Security Features
 
 The following security features are planned for future phases of the project:

@@ -3,8 +3,9 @@
 This manual documents the full capabilities of the Zotify API, designed for managing media libraries, metadata, playlists, downloads, and configuration. All endpoints are RESTful and served under the base path:
 
 ```
-http://0.0.0.0:8080/api
+http://0.0.0.0:8000
 ```
+*(Note: The `/api` prefix is configurable and may not be present in all environments.)*
 
 ---
 
@@ -25,19 +26,16 @@ Think of the Zotify API as a developer platform for building systems on top of S
 
 ## Authentication
 
-The Zotify API uses an OAuth2 Authorization Code Flow to connect to a user's Spotify account. This process is orchestrated by the `/auth/login` endpoint and the `snitch` helper application.
+The Zotify API uses the **OAuth 2.0 Authorization Code Flow with PKCE** to securely connect to a user's Spotify account. This process is designed for both interactive and headless environments and is orchestrated by the API and the `snitch` helper application.
 
 The flow is as follows:
-1.  **Initiate Login**: A client sends a `POST` request to `/api/auth/login`.
-2.  **Launch Helpers**: The API backend launches two components:
-    -   **Snitch**: A temporary `GET` listener on `http://127.0.0.1:21371/callback`.
-    -   **IPC Server**: A temporary `POST` listener on `http://127.0.0.1:9999/zotify/receive-code`.
-3.  **User Authorization**: The API returns a Spotify authorization URL. The user opens this URL in a browser and grants permission.
-4.  **Callback to Snitch**: Spotify redirects the browser to Snitch's `/callback` endpoint with an authorization `code` and `state` token.
-5.  **Secure Handoff**: Snitch validates the `state` token, then securely sends the `code` to the Zotify API's IPC server.
-6.  **Token Exchange**: The main API receives the code and can now exchange it for a permanent refresh token and a short-lived access token from Spotify.
+1.  **Initiate Login**: A client sends a `GET` request to `/api/spotify/login`.
+2.  **User Authorization**: The API returns a Spotify authorization URL. The user must open this URL in a browser and grant permission to the application.
+3.  **Callback to Snitch**: After the user grants permission, Spotify redirects the browser to `http://127.0.0.1:4381/login`, where the `snitch` application is listening. Snitch captures the authorization `code` and `state` token from the request.
+4.  **Secure Handoff**: Snitch makes a `POST` request to the Zotify API's `/api/auth/spotify/callback` endpoint, sending the `code` and `state` in a secure JSON body.
+5.  **Token Exchange**: The main API validates the `state` token, then securely exchanges the `code` for a permanent refresh token and a short-lived access token from Spotify using the PKCE verifier. The tokens are then persisted.
 
-This entire process is designed for headless environments and is handled by a single API call.
+This process ensures that credentials and secrets are never exposed in the browser.
 
 ---
 
@@ -45,22 +43,33 @@ This entire process is designed for headless environments and is handled by a si
 
 ### Authentication
 
-#### `POST /auth/login`
+#### `GET /spotify/login`
 
-Initiates the authentication flow. This endpoint starts the Snitch helper and returns a Spotify URL that the user must open in their browser to grant permissions. The request completes once the OAuth code has been successfully captured or a timeout occurs.
+Initiates the authentication flow. This endpoint generates all the necessary PKCE parameters and returns a Spotify URL that the user must open in their browser to grant permissions.
 
-**Response (Success 202 Accepted):**
+**Response (Success 200 OK):**
 ```json
 {
-  "status": "success",
-  "message": "OAuth code captured. Token exchange would happen here."
+  "auth_url": "https://accounts.spotify.com/authorize?client_id=..."
 }
 ```
 
-**Response (Error):**
+#### `POST /auth/spotify/callback`
+
+This endpoint is not intended for direct use by users. It is the secure callback target for the `snitch` application. Snitch forwards the `code` and `state` here to be exchanged for final tokens.
+
+**Request Body:**
 ```json
 {
-  "detail": "Snitch executable not found."
+  "code": "...",
+  "state": "..."
+}
+```
+
+**Response (Success 200 OK):**
+```json
+{
+  "status": "success"
 }
 ```
 
@@ -401,13 +410,13 @@ curl -X PATCH http://0.0.0.0:8080/api/tracks/abc123 -H "Content-Type: applicatio
 ### Clear metadata cache
 
 ```bash
-curl -X DELETE http://0.0.0.0:8080/api/cache -H "Content-Type: application/json" -d '{"type": "metadata"}'
+curl -X DELETE http://0.0.0.0:8080/api/cache -H "Content-Type": "application/json" -d '{"type": "metadata"}'
 ```
 
 ### Update proxy settings
 
 ```bash
-curl -X PATCH http://0.0.0.0:8080/api/network -H "Content-Type: application/json" -d '{
+curl -X PATCH http://0.0.0.0:8080/api/network -H "Content-Type": "application/json" -d '{
   "proxy_enabled": true,
   "http_proxy": "http://localhost:3128"
 }'
@@ -425,22 +434,29 @@ curl -X PATCH http://0.0.0.0:8080/api/network -H "Content-Type: application/json
 
 ## Manual Test Runbook
 
+This runbook describes how to manually test the full authentication flow.
+
 ### Setup
 
-1.  Register your app with Spotify Developer Console.
-2.  Set redirect URI to `http://localhost:8080/api/spotify/callback`.
-3.  Update `CLIENT_ID` and `CLIENT_SECRET` in `api/src/zotify_api/routes/spotify.py`.
-4.  Start API server.
+1.  **Start the Zotify API Server:**
+    ```bash
+    uvicorn zotify_api.main:app --host 0.0.0.0 --port 8000
+    ```
+2.  **Start the Snitch Service:**
+    -   Make sure the Snitch binary is built (`cd snitch && go build .`).
+    -   Set the callback URL environment variable:
+        ```bash
+        export SNITCH_API_CALLBACK_URL="http://localhost:8000/api/auth/spotify/callback"
+        ```
+    -   Run the snitch executable:
+        ```bash
+        ./snitch
+        ```
 
 ### Steps
 
-1.  Request login URL: `GET /api/spotify/login`
-2.  Open URL in browser, authorize, and get the `code` query param.
-3.  Call `/api/spotify/callback?code=YOUR_CODE` with that code.
-4.  Check token status with `/api/spotify/token_status`.
-5.  Trigger playlist sync with `/api/spotify/sync_playlists`.
-6.  Fetch metadata for sample track IDs.
-7.  Simulate token expiry and verify automatic refresh.
-8.  Test with proxy settings enabled.
-9.  Inject errors by revoking tokens on Spotify and verify error handling.
-10. Repeat tests on slow networks or disconnects.
+1.  **Request login URL:** Send a `GET` request to `http://localhost:8000/api/spotify/login`.
+2.  **Authorize in Browser:** Open the `auth_url` from the response in your web browser. Log in to Spotify and grant the requested permissions.
+3.  **Automatic Callback:** The browser will be redirected to Snitch, which will then automatically POST the authorization code to the Zotify API.
+4.  **Check Token Status:** Send a `GET` request to `http://localhost:8000/api/spotify/token_status`. The `access_token_valid` field should be `true`.
+5.  **Test an Authenticated Endpoint:** For example, fetch metadata for a track with `GET /api/spotify/metadata/{track_id}`.

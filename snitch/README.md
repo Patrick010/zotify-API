@@ -4,22 +4,17 @@ Snitch is a short-lived, local OAuth callback HTTP listener written in Go. It is
 
 ## Purpose
 
-The primary purpose of Snitch is to solve the Spotify authentication redirect problem for headless Zotify-API usage. When a user needs to authenticate with Spotify, they are redirected to a URL. Snitch runs a temporary local web server to catch this redirect, extract the authentication `code`, print it to standard output, and then shut down.
+The primary purpose of Snitch is to solve the Spotify authentication redirect problem for headless or CLI-based Zotify-API usage. When a user needs to authenticate with Spotify, they are redirected to a URL. Snitch runs a temporary local web server on `localhost:4381` to catch this redirect, extract the authentication `code` and `state`, and securely forward them to the main Zotify API backend.
 
 ## Usage
 
-Snitch is not intended to be run manually. It is launched as a subprocess by the main Zotify API during the OAuth authentication flow.
+Snitch is intended to be run as a standalone process during the authentication flow. It is configured via an environment variable.
 
-It is configured via command-line flags:
-- `-state`: The CSRF token to validate the browser redirect.
-- `-ipc-port`: The port of the main Zotify API's IPC server.
-- `-ipc-token`: The bearer token for authenticating with the IPC server.
+-   **`SNITCH_API_CALLBACK_URL`**: This environment variable must be set to the full URL of the backend API's callback endpoint.
+    -   Example: `export SNITCH_API_CALLBACK_URL="http://localhost:8000/api/auth/spotify/callback"`
 
-## Architecture
+When started, Snitch listens on `http://localhost:4381/login`. After receiving a callback from Spotify, it will make a `POST` request with a JSON body (`{"code": "...", "state": "..."}`) to the configured callback URL.
 
-Snitch has two main roles:
+## Implementation
 
-1.  **HTTP Listener**: It runs a local server on `127.0.0.1:21371` to receive the `GET /callback` redirect from Spotify's authentication flow in the user's browser.
-2.  **IPC Client**: After capturing and validating the `code` and `state` from the redirect, it makes a `POST` request to a secondary IPC server running within the main Zotify API process. This securely transmits the captured code back to the application.
-
-This tool is intended to be used as part of the Zotify-API authentication flow and is not designed for standalone use.
+The entire implementation is contained within `snitch.go`. It is a self-contained Go application with no external dependencies, and can be built and run using standard Go tooling.
