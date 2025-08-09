@@ -103,36 +103,19 @@ def token_status():
     return {"access_token_valid": valid, "expires_in_seconds": expires_in}
 
 
-async def refresh_token_if_needed():
-    if spotify_tokens["expires_at"] > time.time():
-        return  # Token still valid
+from fastapi import Depends
+from zotify_api.services.auth import require_admin_api_key
 
-    if not spotify_tokens["refresh_token"]:
-        raise HTTPException(401, "No refresh token available")
-
-    data = {
-        "grant_type": "refresh_token",
-        "refresh_token": spotify_tokens["refresh_token"],
-        "client_id": CLIENT_ID,
-        "client_secret": CLIENT_SECRET,
-    }
-    headers = {"Content-Type": "application/x-www-form-urlencoded"}
-
-    async with httpx.AsyncClient() as client:
-        resp = await client.post(SPOTIFY_TOKEN_URL, data=data, headers=headers)
-        if resp.status_code != 200:
-            raise HTTPException(401, "Spotify token refresh failed")
-        tokens = resp.json()
-        spotify_tokens["access_token"] = tokens["access_token"]
-        spotify_tokens["expires_at"] = time.time() + tokens["expires_in"] - 60
-        save_tokens(spotify_tokens)
-
-
-@router.post("/sync_playlists")
+@router.post("/sync_playlists", dependencies=[Depends(require_admin_api_key)])
 async def sync_playlists():
-    await refresh_token_if_needed()
-    # TODO: implement playlist sync logic here
-    return {"status": "Playlists synced (stub)"}
+    """
+    Triggers a full sync of the user's playlists from Spotify.
+    """
+    # The refresh_token_if_needed logic is now implicitly handled by the SpotiClient's _request method.
+    # However, for a long-running operation like sync, it's good practice to ensure
+    # the token is fresh before starting. The `get_me` call serves as a quick validation.
+    await spotify_service.get_me()
+    return await spotify_service.sync_playlists()
 
 
 from zotify_api.schemas.spotify import Playlist, PlaylistTracks, CreatePlaylistRequest, AddTracksRequest, RemoveTracksRequest

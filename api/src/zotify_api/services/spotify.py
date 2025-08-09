@@ -95,9 +95,30 @@ async def remove_tracks_from_playlist(playlist_id: str, uris: List[str]) -> Dict
     finally:
         await client.close()
 
+import json
+from pathlib import Path
+
 async def unfollow_playlist(playlist_id: str) -> None:
     client = SpotiClient()
     try:
         await client.unfollow_playlist(playlist_id)
+    finally:
+        await client.close()
+
+async def sync_playlists() -> Dict[str, Any]:
+    """
+    Fetches all of the user's playlists from Spotify and saves them to a local JSON file.
+    """
+    client = SpotiClient()
+    try:
+        playlists = await client.get_all_current_user_playlists()
+
+        # Define the storage path and save the playlists
+        storage_path = Path("api/api/storage/playlists.json")
+        storage_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(storage_path, "w") as f:
+            json.dump(playlists, f, indent=4)
+
+        return {"status": "success", "message": f"Successfully synced {len(playlists)} playlists.", "count": len(playlists)}
     finally:
         await client.close()

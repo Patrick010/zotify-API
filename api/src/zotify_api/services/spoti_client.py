@@ -113,6 +113,23 @@ class SpotiClient:
         response = await self._request("GET", f"/playlists/{playlist_id}/tracks", params=params)
         return response.json()
 
+    async def get_all_current_user_playlists(self) -> List[Dict[str, Any]]:
+        """
+        Gets a list of all playlists owned or followed by the current user, handling pagination.
+        """
+        all_playlists = []
+        url = "/me/playlists"
+        params = {"limit": 50}
+
+        while url:
+            response = await self._request("GET", url, params=params)
+            data = response.json()
+            all_playlists.extend(data.get("items", []))
+            url = data.get("next")
+            params = {} # params are included in the 'next' URL
+
+        return all_playlists
+
     async def create_playlist(self, user_id: str, name: str, public: bool, collaborative: bool, description: str) -> Dict[str, Any]:
         """
         Creates a new playlist for a Spotify user.
@@ -196,3 +213,28 @@ class SpotiClient:
             spotify_tokens["refresh_token"] = new_tokens["refresh_token"]
 
         save_tokens(spotify_tokens)
+
+    async def exchange_code_for_token(self, code: str, code_verifier: str) -> Dict[str, Any]:
+        """
+        Exchanges an authorization code for an access token.
+        """
+        from zotify_api.auth_state import CLIENT_ID, REDIRECT_URI, SPOTIFY_TOKEN_URL
+
+        data = {
+            "grant_type": "authorization_code",
+            "code": code,
+            "redirect_uri": REDIRECT_URI,
+            "client_id": CLIENT_ID,
+            "code_verifier": code_verifier,
+        }
+        headers = {"Content-Type": "application/x-www-form-urlencoded"}
+
+        async with httpx.AsyncClient() as client:
+            try:
+                resp = await client.post(SPOTIFY_TOKEN_URL, data=data, headers=headers)
+                resp.raise_for_status()
+                return resp.json()
+            except httpx.HTTPStatusError as e:
+                raise HTTPException(status_code=400, detail=f"Failed to exchange code for token: {e.response.text}")
+            except httpx.RequestError:
+                raise HTTPException(status_code=503, detail="Service unavailable: Could not connect to Spotify.")

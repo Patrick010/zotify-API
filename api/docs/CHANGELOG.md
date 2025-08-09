@@ -2,6 +2,14 @@ Changelog
 
 All notable changes to the Zotify REST API will be documented in this file.
 
+v0.1.35
+Changed
+    - Implemented `POST /api/spotify/sync_playlists` to fetch all user playlists and save them locally.
+    - Refactored `POST /auth/spotify/callback` to use the `SpotiClient`, removing the last direct `httpx` call from the route files.
+Fixed
+    - Corrected multiple test cases related to response validation and mocking strategy.
+    - Added missing `Depends` and `require_admin_api_key` imports that were causing test discovery to fail.
+
 v0.1.34
 Added
     - Full implementation for all Spotify playlist management endpoints under `/api/spotify/playlists`.

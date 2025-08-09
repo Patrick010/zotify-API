@@ -182,3 +182,49 @@ async def test_spoti_client_add_tracks_success():
         result = await client.add_tracks_to_playlist("p1", ["uri1", "uri2"])
         assert result == mock_json_response
         await client.close()
+
+@pytest.mark.asyncio
+async def test_spoti_client_get_all_playlists_pagination():
+    """
+    Tests that the client correctly handles pagination when fetching all playlists.
+    """
+    mock_page1 = {
+        "items": [{"id": "p1"}],
+        "next": "/me/playlists?offset=1&limit=1"
+    }
+    mock_page2 = {
+        "items": [{"id": "p2"}],
+        "next": None
+    }
+
+    with patch("httpx.AsyncClient.request", new_callable=AsyncMock) as mock_request:
+        mock_response1 = MagicMock()
+        mock_response1.json.return_value = mock_page1
+        mock_response2 = MagicMock()
+        mock_response2.json.return_value = mock_page2
+        mock_request.side_effect = [mock_response1, mock_response2]
+
+        client = SpotiClient(access_token="fake_token")
+        results = await client.get_all_current_user_playlists()
+
+        assert len(results) == 2
+        assert results[0]["id"] == "p1"
+        assert results[1]["id"] == "p2"
+        assert mock_request.call_count == 2
+        await client.close()
+
+@pytest.mark.asyncio
+async def test_spoti_client_exchange_code_for_token_success():
+    """
+    Tests that the client can successfully exchange an auth code for a token.
+    """
+    mock_json_response = {"access_token": "new_token", "refresh_token": "new_refresh"}
+    with patch("httpx.AsyncClient.post", new_callable=AsyncMock) as mock_post:
+        mock_response = MagicMock()
+        mock_response.json.return_value = mock_json_response
+        mock_post.return_value = mock_response
+
+        client = SpotiClient()
+        result = await client.exchange_code_for_token("auth_code", "code_verifier")
+        assert result == mock_json_response
+        await client.close()

@@ -38,6 +38,8 @@ async def refresh_spotify_token() -> int:
         await client.close()
 
 
+from zotify_api.auth_state import pending_states, save_tokens
+
 async def get_auth_status() -> AuthStatus:
     """
     Checks the current authentication status with Spotify.
@@ -60,5 +62,28 @@ async def get_auth_status() -> AuthStatus:
         if e.status_code == 401:
             return AuthStatus(authenticated=True, token_valid=False, expires_in=0)
         raise  # Re-raise other exceptions
+    finally:
+        await client.close()
+
+async def handle_spotify_callback(code: str, state: str) -> None:
+    """
+    Handles the OAuth callback from Spotify, exchanges the code for tokens, and saves them.
+    """
+    code_verifier = pending_states.pop(state, None)
+    if not code_verifier:
+        logger.warning(f"Invalid or expired state received in callback: {state}")
+        raise HTTPException(status_code=400, detail="Invalid or expired state token.")
+
+    client = SpotiClient()
+    try:
+        tokens = await client.exchange_code_for_token(code, code_verifier)
+
+        spotify_tokens.update({
+            "access_token": tokens["access_token"],
+            "refresh_token": tokens.get("refresh_token"),
+            "expires_at": time.time() + tokens["expires_in"] - 60,
+        })
+        save_tokens(spotify_tokens)
+        logger.info("Successfully exchanged code for token and stored them.")
     finally:
         await client.close()
