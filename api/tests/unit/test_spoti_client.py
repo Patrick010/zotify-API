@@ -145,3 +145,40 @@ async def test_spoti_client_search_success():
         assert results == mock_json_response
         mock_request.assert_called_once()
         await client.close()
+
+@pytest.mark.asyncio
+async def test_spoti_client_get_playlists_success():
+    mock_json_response = {"items": [{"id": "p1", "name": "Playlist 1"}]}
+    with patch("httpx.AsyncClient.request", new_callable=AsyncMock) as mock_request:
+        mock_response = MagicMock()
+        mock_response.json.return_value = mock_json_response
+        mock_request.return_value = mock_response
+        client = SpotiClient(access_token="fake_token")
+        result = await client.get_current_user_playlists()
+        assert result == mock_json_response
+        mock_request.assert_called_once_with("GET", "/me/playlists", params={"limit": 20, "offset": 0}, headers={"Authorization": "Bearer fake_token"})
+        await client.close()
+
+@pytest.mark.asyncio
+async def test_spoti_client_create_playlist_success():
+    mock_json_response = {"id": "new_p1", "name": "New Playlist"}
+    with patch("httpx.AsyncClient.request", new_callable=AsyncMock) as mock_request:
+        mock_response = MagicMock()
+        mock_response.json.return_value = mock_json_response
+        mock_request.return_value = mock_response
+        client = SpotiClient(access_token="fake_token")
+        result = await client.create_playlist("user1", "New Playlist", True, False, "Desc")
+        assert result == mock_json_response
+        await client.close()
+
+@pytest.mark.asyncio
+async def test_spoti_client_add_tracks_success():
+    mock_json_response = {"snapshot_id": "snapshot1"}
+    with patch("httpx.AsyncClient.request", new_callable=AsyncMock) as mock_request:
+        mock_response = MagicMock()
+        mock_response.json.return_value = mock_json_response
+        mock_request.return_value = mock_response
+        client = SpotiClient(access_token="fake_token")
+        result = await client.add_tracks_to_playlist("p1", ["uri1", "uri2"])
+        assert result == mock_json_response
+        await client.close()

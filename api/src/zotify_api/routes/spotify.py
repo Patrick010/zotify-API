@@ -135,32 +135,60 @@ async def sync_playlists():
     return {"status": "Playlists synced (stub)"}
 
 
-@router.get("/playlists")
-def get_spotify_playlists():
-    raise HTTPException(status_code=501, detail="Not Implemented")
-
-@router.get("/playlists/{playlist_id}")
-def get_spotify_playlist(playlist_id: str):
-    raise HTTPException(status_code=501, detail="Not Implemented")
-
-@router.delete("/playlists/{playlist_id}")
-def delete_spotify_playlist(playlist_id: str):
-    raise HTTPException(status_code=501, detail="Not Implemented")
-
-@router.get("/playlists/{playlist_id}/tracks")
-def get_spotify_playlist_tracks(playlist_id: str):
-    raise HTTPException(status_code=501, detail="Not Implemented")
-
-@router.post("/playlists/{playlist_id}/sync")
-def sync_spotify_playlist(playlist_id: str):
-    raise HTTPException(status_code=501, detail="Not Implemented")
-
+from zotify_api.schemas.spotify import Playlist, PlaylistTracks, CreatePlaylistRequest, AddTracksRequest, RemoveTracksRequest
+from fastapi import Query, Body, Depends
 from zotify_api.services.auth import require_admin_api_key
-from fastapi import Depends
 
-@router.put("/playlists/{playlist_id}/metadata")
-def update_spotify_playlist_metadata(playlist_id: str):
-    raise HTTPException(status_code=501, detail="Not Implemented")
+@router.get("/playlists", response_model=dict, dependencies=[Depends(require_admin_api_key)])
+async def get_spotify_playlists(limit: int = Query(20, ge=1, le=50), offset: int = Query(0, ge=0)):
+    return await spotify_service.get_playlists(limit=limit, offset=offset)
+
+@router.post("/playlists", response_model=Playlist, status_code=201, dependencies=[Depends(require_admin_api_key)])
+async def create_spotify_playlist(request: CreatePlaylistRequest = Body(...)):
+    # Note: Creating a playlist requires the user's ID. We get this from the /me endpoint.
+    me = await spotify_service.get_me()
+    user_id = me.get("id")
+    if not user_id:
+        raise HTTPException(status_code=500, detail="Could not determine user ID to create playlist.")
+
+    return await spotify_service.create_playlist(
+        user_id=user_id,
+        name=request.name,
+        public=request.public,
+        collaborative=request.collaborative,
+        description=request.description
+    )
+
+@router.get("/playlists/{playlist_id}", response_model=Playlist, dependencies=[Depends(require_admin_api_key)])
+async def get_spotify_playlist(playlist_id: str):
+    return await spotify_service.get_playlist(playlist_id)
+
+@router.put("/playlists/{playlist_id}", status_code=204, dependencies=[Depends(require_admin_api_key)])
+async def update_spotify_playlist_metadata(playlist_id: str, request: CreatePlaylistRequest = Body(...)):
+    await spotify_service.update_playlist_details(
+        playlist_id=playlist_id,
+        name=request.name,
+        public=request.public,
+        collaborative=request.collaborative,
+        description=request.description
+    )
+
+@router.delete("/playlists/{playlist_id}", status_code=204, dependencies=[Depends(require_admin_api_key)])
+async def delete_spotify_playlist(playlist_id: str):
+    """ Note: This unfollows the playlist, it does not delete it for all collaborators. """
+    await spotify_service.unfollow_playlist(playlist_id)
+
+@router.get("/playlists/{playlist_id}/tracks", response_model=PlaylistTracks, dependencies=[Depends(require_admin_api_key)])
+async def get_spotify_playlist_tracks(playlist_id: str, limit: int = Query(100, ge=1, le=100), offset: int = Query(0, ge=0)):
+    return await spotify_service.get_playlist_tracks(playlist_id, limit=limit, offset=offset)
+
+@router.post("/playlists/{playlist_id}/tracks", status_code=201, dependencies=[Depends(require_admin_api_key)])
+async def add_tracks_to_spotify_playlist(playlist_id: str, request: AddTracksRequest = Body(...)):
+    return await spotify_service.add_tracks_to_playlist(playlist_id, request.uris)
+
+@router.delete("/playlists/{playlist_id}/tracks", dependencies=[Depends(require_admin_api_key)])
+async def remove_tracks_from_spotify_playlist(playlist_id: str, request: RemoveTracksRequest = Body(...)):
+    return await spotify_service.remove_tracks_from_playlist(playlist_id, request.uris)
 
 from zotify_api.services import spotify as spotify_service
 

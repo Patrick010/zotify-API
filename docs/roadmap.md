@@ -38,9 +38,13 @@
   - ✅ `GET /api/auth/refresh`: Refactored to use `SpotiClient`.
   - ✅ `GET /api/spotify/devices`: Refactored to use `SpotiClient`.
   - ✅ `GET /api/search`: Implemented service layer to use `SpotiClient`.
+  - ✅ `GET /api/spotify/playlists`: Implemented.
+  - ✅ `POST /api/spotify/playlists`: Implemented.
+  - ✅ All other `/api/spotify/playlists/*` endpoints implemented.
 - **Add unit and integration tests.** (Ongoing)
   - ✅ Added tests for `SpotiClient`.
   - ✅ Added tests for `/tracks/metadata`, `/spotify/me`, `/auth/*`, `/spotify/devices`, and `/search` endpoints.
+  - ✅ Added tests for all `/spotify/playlists/*` endpoints.
 - **Complete CI/CD pipelines.** (To Do)
 - **Finalize error handling.** (Ongoing)
 - **Privacy compliance verification.** (To Do)

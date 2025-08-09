@@ -10,3 +10,27 @@ class OAuthLoginResponse(BaseModel):
 class TokenStatus(BaseModel):
     access_token_valid: bool
     expires_in_seconds: int
+
+class Playlist(BaseModel):
+    id: str
+    name: str
+    public: bool
+    collaborative: bool
+    description: str | None = None
+    tracks: dict
+
+class PlaylistTracks(BaseModel):
+    items: List[dict]
+    total: int
+
+class CreatePlaylistRequest(BaseModel):
+    name: str
+    public: bool = True
+    collaborative: bool = False
+    description: str = ""
+
+class AddTracksRequest(BaseModel):
+    uris: List[str]
+
+class RemoveTracksRequest(BaseModel):
+    uris: List[str]

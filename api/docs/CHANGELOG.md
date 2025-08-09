@@ -2,6 +2,18 @@ Changelog
 
 All notable changes to the Zotify REST API will be documented in this file.
 
+v0.1.34
+Added
+    - Full implementation for all Spotify playlist management endpoints under `/api/spotify/playlists`.
+        - `GET /playlists`: List current user's playlists.
+        - `POST /playlists`: Create a new playlist.
+        - `GET /playlists/{id}`: Get a specific playlist.
+        - `PUT /playlists/{id}`: Update a playlist's details.
+        - `DELETE /playlists/{id}`: Unfollow a playlist.
+        - `GET /playlists/{id}/tracks`: Get tracks from a playlist.
+        - `POST /playlists/{id}/tracks`: Add tracks to a playlist.
+        - `DELETE /playlists/{id}/tracks`: Remove tracks from a playlist.
+
 v0.1.33
 Changed
     - Implemented the `GET /api/search` endpoint to perform searches against the Spotify API.

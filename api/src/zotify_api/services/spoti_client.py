@@ -90,6 +90,76 @@ class SpotiClient:
         response = await self._request("GET", "/search", params=params)
         return response.json()
 
+    async def get_current_user_playlists(self, limit: int = 20, offset: int = 0) -> Dict[str, Any]:
+        """
+        Gets a list of the playlists owned or followed by the current user.
+        """
+        params = {"limit": limit, "offset": offset}
+        response = await self._request("GET", "/me/playlists", params=params)
+        return response.json()
+
+    async def get_playlist(self, playlist_id: str) -> Dict[str, Any]:
+        """
+        Gets a playlist owned by a Spotify user.
+        """
+        response = await self._request("GET", f"/playlists/{playlist_id}")
+        return response.json()
+
+    async def get_playlist_tracks(self, playlist_id: str, limit: int = 100, offset: int = 0) -> Dict[str, Any]:
+        """
+        Get full details of the items of a playlist owned by a Spotify user.
+        """
+        params = {"limit": limit, "offset": offset}
+        response = await self._request("GET", f"/playlists/{playlist_id}/tracks", params=params)
+        return response.json()
+
+    async def create_playlist(self, user_id: str, name: str, public: bool, collaborative: bool, description: str) -> Dict[str, Any]:
+        """
+        Creates a new playlist for a Spotify user.
+        """
+        data = {
+            "name": name,
+            "public": public,
+            "collaborative": collaborative,
+            "description": description,
+        }
+        response = await self._request("POST", f"/users/{user_id}/playlists", json=data)
+        return response.json()
+
+    async def update_playlist_details(self, playlist_id: str, name: str, public: bool, collaborative: bool, description: str) -> None:
+        """
+        Updates the details of a playlist.
+        """
+        data = {
+            "name": name,
+            "public": public,
+            "collaborative": collaborative,
+            "description": description,
+        }
+        await self._request("PUT", f"/playlists/{playlist_id}", json=data)
+
+    async def add_tracks_to_playlist(self, playlist_id: str, uris: List[str]) -> Dict[str, Any]:
+        """
+        Adds one or more items to a user's playlist.
+        """
+        data = {"uris": uris}
+        response = await self._request("POST", f"/playlists/{playlist_id}/tracks", json=data)
+        return response.json()
+
+    async def remove_tracks_from_playlist(self, playlist_id: str, uris: List[str]) -> Dict[str, Any]:
+        """
+        Removes one or more items from a user's playlist.
+        """
+        data = {"tracks": [{"uri": uri} for uri in uris]}
+        response = await self._request("DELETE", f"/playlists/{playlist_id}/tracks", json=data)
+        return response.json()
+
+    async def unfollow_playlist(self, playlist_id: str) -> None:
+        """
+        Unfollows a playlist for the current user. (Spotify's way of "deleting" a playlist from a user's library)
+        """
+        await self._request("DELETE", f"/playlists/{playlist_id}/followers")
+
     async def close(self):
         """Closes the underlying httpx client."""
         await self._client.aclose()
