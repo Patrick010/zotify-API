@@ -135,23 +135,6 @@ async def sync_playlists():
     return {"status": "Playlists synced (stub)"}
 
 
-@router.get("/metadata/{track_id}")
-async def fetch_metadata(track_id: str):
-    logger.info(f"Fetching metadata for track: {track_id}")
-    await refresh_token_if_needed()
-    headers = {"Authorization": f"Bearer {spotify_tokens['access_token']}"}
-    async with httpx.AsyncClient() as client:
-        url = f"{SPOTIFY_API_BASE}/tracks/{track_id}"
-        logger.info(f"Requesting metadata from {url}")
-        resp = await client.get(url, headers=headers)
-        if resp.status_code != 200:
-            logger.error(f"Failed to fetch track metadata: {await resp.text()}")
-            raise HTTPException(resp.status_code, "Failed to fetch track metadata")
-        data = await resp.json()
-        logger.info(f"Received metadata: {data}")
-        return data
-
-
 @router.get("/playlists")
 def get_spotify_playlists():
     raise HTTPException(status_code=501, detail="Not Implemented")

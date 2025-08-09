@@ -2,9 +2,22 @@ from typing import Dict, Any
 from zotify_api.services.spotify_client import SpotifyClient
 
 
-def search_spotify(q: str, type: str, limit: int, offset: int):
-    # TODO: Implement with SpotifyClient
-    return [], 0
+async def search_spotify(q: str, type: str, limit: int, offset: int) -> tuple[list, int]:
+    """
+    Performs a search on Spotify using the SpotifyClient.
+    """
+    client = SpotifyClient()
+    try:
+        results = await client.search(q=q, type=type, limit=limit, offset=offset)
+        # The search endpoint returns a dictionary with keys like 'tracks', 'artists', etc.
+        # Each of these contains a paging object. We need to extract the items.
+        # For simplicity, we'll just return the items from the first key found.
+        for key in results:
+            if 'items' in results[key]:
+                return results[key]['items'], results[key].get('total', 0)
+        return [], 0
+    finally:
+        await client.close()
 
 
 from typing import Dict, Any, List

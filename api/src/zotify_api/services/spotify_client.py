@@ -77,6 +77,19 @@ class SpotifyClient:
         response = await self._request("GET", "/me/player/devices")
         return response.json().get("devices", [])
 
+    async def search(self, q: str, type: str, limit: int, offset: int) -> Dict[str, Any]:
+        """
+        Performs a search on Spotify.
+        """
+        params = {
+            "q": q,
+            "type": type,
+            "limit": limit,
+            "offset": offset,
+        }
+        response = await self._request("GET", "/search", params=params)
+        return response.json()
+
     async def close(self):
         """Closes the underlying httpx client."""
         await self._client.aclose()

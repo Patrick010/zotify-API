@@ -36,27 +36,6 @@ def test_spotify_callback(client):
     spotify_tokens.clear()
 
 @patch("zotify_api.routes.spotify.refresh_token_if_needed", new_callable=AsyncMock)
-def test_fetch_metadata(mock_refresh, client):
-    """ Test fetching metadata for a track """
-    # Set a dummy token to simulate an authenticated state
-    spotify_tokens["access_token"] = "dummy_token"
-
-    with patch('httpx.AsyncClient.get', new_callable=AsyncMock) as mock_get:
-        mock_response = AsyncMock()
-        mock_response.status_code = 200
-        mock_response.json.return_value = {"id": "test_track_id"}
-        mock_get.return_value = mock_response
-
-        response = client.get("/api/spotify/metadata/test-track-id")
-
-    assert response.status_code == 200
-    data = response.json()
-    assert data["id"] == "test_track_id"
-
-    # Cleanup
-    spotify_tokens.clear()
-
-@patch("zotify_api.routes.spotify.refresh_token_if_needed", new_callable=AsyncMock)
 def test_sync_playlists(mock_refresh, client):
     """ Test syncing playlists """
     response = client.post("/api/spotify/sync_playlists")

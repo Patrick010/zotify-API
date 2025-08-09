@@ -11,3 +11,4 @@ This directory contains auto-generated reports for significant tasks completed b
 *   [2025-08-08: Auth Callback Refactor Completion Report](./20250808-comprehensive-auth-and-docs-update-report.md)
 *   [2025-08-09: New API Endpoints Completion Report](./20250809-api-endpoints-completion-report.md)
 *   [2025-08-09: Phase 5 Endpoint Refactor Report](./20250809-phase5-endpoint-refactor-report.md)
+*   [2025-08-09: Phase 5 Search and Cleanup Report](./20250809-phase5-search-cleanup-report.md)

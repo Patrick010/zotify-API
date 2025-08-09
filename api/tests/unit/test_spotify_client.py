@@ -126,3 +126,22 @@ async def test_spotify_client_refresh_token_success():
         assert client._refresh_token == "new_refresh_token"
         mock_post.assert_called_once()
         await client.close()
+
+@pytest.mark.asyncio
+async def test_spotify_client_search_success():
+    """
+    Tests that the Spotify client can successfully perform a search.
+    """
+    mock_json_response = {"tracks": {"items": [{"id": "track1", "name": "Search Result"}]}}
+
+    with patch("httpx.AsyncClient.request", new_callable=AsyncMock) as mock_request:
+        mock_response = MagicMock()
+        mock_response.json.return_value = mock_json_response
+        mock_request.return_value = mock_response
+
+        client = SpotifyClient(access_token="fake_token")
+        results = await client.search(q="test", type="track", limit=1, offset=0)
+
+        assert results == mock_json_response
+        mock_request.assert_called_once()
+        await client.close()

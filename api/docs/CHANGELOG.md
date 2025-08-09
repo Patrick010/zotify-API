@@ -2,6 +2,12 @@ Changelog
 
 All notable changes to the Zotify REST API will be documented in this file.
 
+v0.1.33
+Changed
+    - Implemented the `GET /api/search` endpoint to perform searches against the Spotify API.
+Removed
+    - Removed the duplicate `GET /api/spotify/metadata/{track_id}` endpoint. The `POST /api/tracks/metadata` endpoint should be used instead.
+
 v0.1.32
 Changed
     - Refactored `GET /api/auth/status` to use the `SpotifyClient`.

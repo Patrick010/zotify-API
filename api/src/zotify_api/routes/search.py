@@ -47,7 +47,7 @@ def get_spotify_search_func():
 from typing import Literal
 
 @router.get("")
-def search(
+async def search(
     q: str = Query(...),
     type: Literal["track", "album", "artist", "playlist", "all"] = "all",
     limit: int = 20,
@@ -59,7 +59,7 @@ def search(
     if not feature_flags["fork_features"] or not feature_flags["search_advanced"]:
         raise HTTPException(status_code=404, detail="Advanced search disabled")
 
-    results, total = search_service.perform_search(
+    results, total = await search_service.perform_search(
         q,
         type=type,
         limit=limit,
