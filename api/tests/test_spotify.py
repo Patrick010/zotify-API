@@ -1,5 +1,5 @@
 import pytest
-from unittest.mock import patch, AsyncMock
+from unittest.mock import patch, AsyncMock, MagicMock
 from zotify_api.auth_state import pending_states, spotify_tokens
 
 def test_spotify_callback(client):
@@ -17,6 +17,8 @@ def test_spotify_callback(client):
             "refresh_token": "test_refresh_token",
             "expires_in": 3600,
         })
+        # Configure raise_for_status to be a synchronous mock
+        mock_response.raise_for_status = MagicMock()
         mock_post.return_value = mock_response
 
         # Make the request to the callback endpoint
