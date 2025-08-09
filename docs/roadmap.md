@@ -34,9 +34,12 @@
 - **Convert stubbed endpoints to full Spotify API calls.** (Ongoing)
   - ✅ `POST /api/tracks/metadata`: Refactored to use `SpotifyClient`.
   - ✅ `GET /api/spotify/me`: Refactored to use `SpotifyClient`.
+  - ✅ `GET /api/auth/status`: Refactored to use `SpotifyClient`.
+  - ✅ `GET /api/auth/refresh`: Refactored to use `SpotifyClient`.
+  - ✅ `GET /api/spotify/devices`: Refactored to use `SpotifyClient`.
 - **Add unit and integration tests.** (Ongoing)
   - ✅ Added tests for `SpotifyClient`.
-  - ✅ Added tests for `/tracks/metadata` and `/spotify/me` endpoints.
+  - ✅ Added tests for `/tracks/metadata`, `/spotify/me`, `/auth/*`, and `/spotify/devices` endpoints.
 - **Complete CI/CD pipelines.** (To Do)
 - **Finalize error handling.** (Ongoing)
 - **Privacy compliance verification.** (To Do)

@@ -1,5 +1,6 @@
 import httpx
 import logging
+import time
 from typing import List, Dict, Any, Optional
 
 from zotify_api.auth_state import spotify_tokens, SPOTIFY_API_BASE, save_tokens
@@ -69,6 +70,46 @@ class SpotifyClient:
         response = await self._request("GET", "/me")
         return response.json()
 
+    async def get_devices(self) -> List[Dict[str, Any]]:
+        """
+        Retrieves the list of available playback devices for the current user.
+        """
+        response = await self._request("GET", "/me/player/devices")
+        return response.json().get("devices", [])
+
     async def close(self):
         """Closes the underlying httpx client."""
         await self._client.aclose()
+
+    async def refresh_access_token(self) -> None:
+        """
+        Refreshes the Spotify access token using the refresh token.
+        """
+        from zotify_api.auth_state import CLIENT_ID, CLIENT_SECRET, SPOTIFY_TOKEN_URL
+
+        if not self._refresh_token:
+            raise HTTPException(status_code=400, detail="No refresh token available.")
+
+        data = {
+            "grant_type": "refresh_token",
+            "refresh_token": self._refresh_token,
+        }
+
+        async with httpx.AsyncClient() as client:
+            try:
+                resp = await client.post(SPOTIFY_TOKEN_URL, data=data, auth=(CLIENT_ID, CLIENT_SECRET))
+                resp.raise_for_status()
+                new_tokens = resp.json()
+            except httpx.HTTPStatusError as e:
+                raise HTTPException(status_code=400, detail=f"Failed to refresh token: {e.response.text}")
+            except httpx.RequestError:
+                raise HTTPException(status_code=503, detail="Service unavailable: Could not connect to Spotify.")
+
+        self._access_token = new_tokens["access_token"]
+        spotify_tokens["access_token"] = new_tokens["access_token"]
+        spotify_tokens["expires_at"] = time.time() + new_tokens["expires_in"] - 60
+        if "refresh_token" in new_tokens:
+            self._refresh_token = new_tokens["refresh_token"]
+            spotify_tokens["refresh_token"] = new_tokens["refresh_token"]
+
+        save_tokens(spotify_tokens)

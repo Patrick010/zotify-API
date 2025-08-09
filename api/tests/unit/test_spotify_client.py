@@ -85,3 +85,44 @@ async def test_spotify_client_http_error():
         assert excinfo.value.status_code == 404
         assert excinfo.value.detail == "Not Found"
         await client.close()
+
+@pytest.mark.asyncio
+async def test_spotify_client_get_devices_success():
+    """
+    Tests that the Spotify client can successfully fetch devices.
+    """
+    mock_json_response = {"devices": [{"id": "device1", "name": "Device 1"}]}
+
+    with patch("httpx.AsyncClient.request", new_callable=AsyncMock) as mock_request:
+        mock_response = MagicMock()
+        mock_response.json.return_value = mock_json_response
+        mock_request.return_value = mock_response
+
+        client = SpotifyClient(access_token="fake_token")
+        devices = await client.get_devices()
+
+        assert devices == mock_json_response["devices"]
+        mock_request.assert_called_once_with("GET", "/me/player/devices", headers={"Authorization": "Bearer fake_token"})
+        await client.close()
+
+@pytest.mark.asyncio
+async def test_spotify_client_refresh_token_success():
+    """
+    Tests that the Spotify client can successfully refresh an access token.
+    """
+    mock_json_response = {"access_token": "new_fake_token", "expires_in": 3600, "refresh_token": "new_refresh_token"}
+
+    with patch("httpx.AsyncClient.post", new_callable=AsyncMock) as mock_post:
+        mock_response = MagicMock()
+        mock_response.json.return_value = mock_json_response
+        mock_post.return_value = mock_response
+
+        client = SpotifyClient(access_token="old_token", refresh_token="old_refresh")
+        await client.refresh_access_token()
+
+        # This is a bit of a tricky test as it modifies the global state
+        # We can assert the internal state of the client for now
+        assert client._access_token == "new_fake_token"
+        assert client._refresh_token == "new_refresh_token"
+        mock_post.assert_called_once()
+        await client.close()

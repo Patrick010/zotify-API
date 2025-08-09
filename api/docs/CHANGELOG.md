@@ -2,6 +2,14 @@ Changelog
 
 All notable changes to the Zotify REST API will be documented in this file.
 
+v0.1.32
+Changed
+    - Refactored `GET /api/auth/status` to use the `SpotifyClient`.
+    - Refactored `GET /api/auth/refresh` to use the `SpotifyClient`.
+    - Refactored `GET /api/spotify/devices` to use the `SpotifyClient`.
+Fixed
+    - Corrected several integration tests to use service-level mocking instead of direct HTTP mocking, improving test stability and consistency.
+
 v0.1.31
 Changed
     - Refactored Spotify API interactions into a dedicated `SpotifyClient` class to centralize authentication, requests, and error handling.

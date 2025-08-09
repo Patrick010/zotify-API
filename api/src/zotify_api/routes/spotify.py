@@ -189,16 +189,5 @@ async def get_me():
 @router.get("/devices", response_model=SpotifyDevices, dependencies=[Depends(require_admin_api_key)])
 async def get_devices():
     """ Wraps Spotify /v1/me/player/devices. Lists all playback devices. """
-    if not spotify_tokens.get("access_token"):
-        raise HTTPException(status_code=401, detail="Not authenticated with Spotify.")
-
-    headers = {"Authorization": f"Bearer {spotify_tokens['access_token']}"}
-    async with httpx.AsyncClient() as client:
-        try:
-            resp = await client.get(f"{SPOTIFY_API_BASE}/me/player/devices", headers=headers)
-            resp.raise_for_status()
-            return resp.json()
-        except httpx.HTTPStatusError as e:
-            raise HTTPException(status_code=e.response.status_code, detail=e.response.text)
-        except httpx.RequestError:
-            raise HTTPException(status_code=503, detail="Service unavailable: Could not connect to Spotify.")
+    devices = await spotify_service.get_spotify_devices()
+    return {"devices": devices}
