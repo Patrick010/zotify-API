@@ -57,7 +57,7 @@ async def spotify_callback(payload: SpotifyCallbackPayload):
             logger.error(f"Failed to connect to Spotify token endpoint: {e}")
             raise HTTPException(status_code=503, detail="Service unavailable: Could not connect to Spotify.")
 
-    # 3. Store tokens in our in-memory store
+    # 3. Store tokens
     spotify_tokens.update({
         "access_token": tokens["access_token"],
         "refresh_token": tokens.get("refresh_token"), # Refresh token is optional

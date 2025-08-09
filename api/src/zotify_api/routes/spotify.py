@@ -9,15 +9,16 @@ from typing import Optional
 import httpx
 from urllib.parse import quote_plus
 
-router = APIRouter(prefix="/spotify")
-logger = logging.getLogger(__name__)
-
 # Import the shared state and constants
 from zotify_api.auth_state import (
     spotify_tokens, pending_states, save_tokens,
     CLIENT_ID, CLIENT_SECRET, REDIRECT_URI,
     SPOTIFY_AUTH_URL, SPOTIFY_TOKEN_URL, SPOTIFY_API_BASE
 )
+
+router = APIRouter(prefix="/spotify")
+logger = logging.getLogger(__name__)
+
 
 class OAuthLoginResponse(BaseModel):
     auth_url: str
@@ -61,8 +62,6 @@ def spotify_login():
         f"&code_challenge={code_challenge}"
     )
     return {"auth_url": auth_url}
-
-
 
 
 @router.get("/token_status", response_model=TokenStatus)
