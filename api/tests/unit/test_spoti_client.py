@@ -3,12 +3,12 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import httpx
 
 from fastapi import HTTPException
-from zotify_api.services.spotify_client import SpotifyClient
+from zotify_api.services.spoti_client import SpotiClient
 
 @pytest.mark.asyncio
-async def test_spotify_client_get_tracks_metadata_success():
+async def test_spoti_client_get_tracks_metadata_success():
     """
-    Tests that the Spotify client can successfully fetch track metadata.
+    Tests that the SpotiClient can successfully fetch track metadata.
     """
     mock_json_response = {
         "tracks": [
@@ -25,7 +25,7 @@ async def test_spotify_client_get_tracks_metadata_success():
         mock_response.raise_for_status = MagicMock()
         mock_request.return_value = mock_response
 
-        client = SpotifyClient(access_token="fake_token")
+        client = SpotiClient(access_token="fake_token")
         metadata = await client.get_tracks_metadata(["track1", "track2"])
 
         assert metadata == mock_json_response["tracks"]
@@ -34,9 +34,9 @@ async def test_spotify_client_get_tracks_metadata_success():
         await client.close()
 
 @pytest.mark.asyncio
-async def test_spotify_client_get_current_user_success():
+async def test_spoti_client_get_current_user_success():
     """
-    Tests that the Spotify client can successfully fetch the current user.
+    Tests that the SpotiClient can successfully fetch the current user.
     """
     mock_json_response = {"id": "user1", "display_name": "Test User"}
 
@@ -47,7 +47,7 @@ async def test_spotify_client_get_current_user_success():
         mock_response.raise_for_status = MagicMock()
         mock_request.return_value = mock_response
 
-        client = SpotifyClient(access_token="fake_token")
+        client = SpotiClient(access_token="fake_token")
         user = await client.get_current_user()
 
         assert user == mock_json_response
@@ -55,11 +55,11 @@ async def test_spotify_client_get_current_user_success():
         await client.close()
 
 @pytest.mark.asyncio
-async def test_spotify_client_no_token():
+async def test_spoti_client_no_token():
     """
     Tests that the client raises an HTTPException if no access token is provided.
     """
-    client = SpotifyClient(access_token=None)
+    client = SpotiClient(access_token=None)
     with pytest.raises(HTTPException) as excinfo:
         await client.get_current_user()
 
@@ -68,7 +68,7 @@ async def test_spotify_client_no_token():
     await client.close()
 
 @pytest.mark.asyncio
-async def test_spotify_client_http_error():
+async def test_spoti_client_http_error():
     """
     Tests that the client propagates HTTP exceptions from the API.
     """
@@ -78,7 +78,7 @@ async def test_spotify_client_http_error():
             "Error", request=MagicMock(), response=MagicMock(status_code=404, text="Not Found")
         )
 
-        client = SpotifyClient(access_token="fake_token")
+        client = SpotiClient(access_token="fake_token")
         with pytest.raises(HTTPException) as excinfo:
             await client.get_current_user()
 
@@ -87,9 +87,9 @@ async def test_spotify_client_http_error():
         await client.close()
 
 @pytest.mark.asyncio
-async def test_spotify_client_get_devices_success():
+async def test_spoti_client_get_devices_success():
     """
-    Tests that the Spotify client can successfully fetch devices.
+    Tests that the SpotiClient can successfully fetch devices.
     """
     mock_json_response = {"devices": [{"id": "device1", "name": "Device 1"}]}
 
@@ -98,7 +98,7 @@ async def test_spotify_client_get_devices_success():
         mock_response.json.return_value = mock_json_response
         mock_request.return_value = mock_response
 
-        client = SpotifyClient(access_token="fake_token")
+        client = SpotiClient(access_token="fake_token")
         devices = await client.get_devices()
 
         assert devices == mock_json_response["devices"]
@@ -106,9 +106,9 @@ async def test_spotify_client_get_devices_success():
         await client.close()
 
 @pytest.mark.asyncio
-async def test_spotify_client_refresh_token_success():
+async def test_spoti_client_refresh_token_success():
     """
-    Tests that the Spotify client can successfully refresh an access token.
+    Tests that the SpotiClient can successfully refresh an access token.
     """
     mock_json_response = {"access_token": "new_fake_token", "expires_in": 3600, "refresh_token": "new_refresh_token"}
 
@@ -117,7 +117,7 @@ async def test_spotify_client_refresh_token_success():
         mock_response.json.return_value = mock_json_response
         mock_post.return_value = mock_response
 
-        client = SpotifyClient(access_token="old_token", refresh_token="old_refresh")
+        client = SpotiClient(access_token="old_token", refresh_token="old_refresh")
         await client.refresh_access_token()
 
         # This is a bit of a tricky test as it modifies the global state
@@ -128,9 +128,9 @@ async def test_spotify_client_refresh_token_success():
         await client.close()
 
 @pytest.mark.asyncio
-async def test_spotify_client_search_success():
+async def test_spoti_client_search_success():
     """
-    Tests that the Spotify client can successfully perform a search.
+    Tests that the SpotiClient can successfully perform a search.
     """
     mock_json_response = {"tracks": {"items": [{"id": "track1", "name": "Search Result"}]}}
 
@@ -139,7 +139,7 @@ async def test_spotify_client_search_success():
         mock_response.json.return_value = mock_json_response
         mock_request.return_value = mock_response
 
-        client = SpotifyClient(access_token="fake_token")
+        client = SpotiClient(access_token="fake_token")
         results = await client.search(q="test", type="track", limit=1, offset=0)
 
         assert results == mock_json_response

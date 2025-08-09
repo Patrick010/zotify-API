@@ -10,17 +10,17 @@ Removed
 
 v0.1.32
 Changed
-    - Refactored `GET /api/auth/status` to use the `SpotifyClient`.
-    - Refactored `GET /api/auth/refresh` to use the `SpotifyClient`.
-    - Refactored `GET /api/spotify/devices` to use the `SpotifyClient`.
+    - Refactored `GET /api/auth/status` to use the `SpotiClient`.
+    - Refactored `GET /api/auth/refresh` to use the `SpotiClient`.
+    - Refactored `GET /api/spotify/devices` to use the `SpotiClient`.
 Fixed
     - Corrected several integration tests to use service-level mocking instead of direct HTTP mocking, improving test stability and consistency.
 
 v0.1.31
 Changed
-    - Refactored Spotify API interactions into a dedicated `SpotifyClient` class to centralize authentication, requests, and error handling.
-    - Updated `POST /api/tracks/metadata` to use the new `SpotifyClient`, improving robustness and adhering to the service-layer architecture.
-    - Updated `GET /api/spotify/me` to use the new `SpotifyClient`.
+    - Refactored Spotify API interactions into a dedicated `SpotiClient` class to centralize authentication, requests, and error handling.
+    - Updated `POST /api/tracks/metadata` to use the new `SpotiClient`, improving robustness and adhering to the service-layer architecture.
+    - Updated `GET /api/spotify/me` to use the new `SpotiClient`.
 Fixed
     - Corrected several test environment and mocking issues to ensure a stable and reliable test suite.
 

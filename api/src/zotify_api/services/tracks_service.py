@@ -116,7 +116,7 @@ def delete_track(track_id: str, engine: Any = None) -> None:
 def search_tracks(q: str, limit: int, offset: int, engine: Any = None) -> Tuple[List[Dict], int]:
     return get_tracks(limit, offset, q, engine)
 
-from zotify_api.services.spotify_client import SpotifyClient
+from zotify_api.services.spoti_client import SpotiClient
 
 def upload_cover(track_id: str, file_bytes: bytes, engine: Any = None) -> Dict:
     # This is a stub for now
@@ -127,7 +127,7 @@ async def get_tracks_metadata_from_spotify(track_ids: List[str]) -> List[Dict[st
     """
     Retrieves track metadata from Spotify using the dedicated client.
     """
-    client = SpotifyClient()
+    client = SpotiClient()
     try:
         metadata = await client.get_tracks_metadata(track_ids)
         return metadata

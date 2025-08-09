@@ -9,7 +9,7 @@ from fastapi import HTTPException
 logger = logging.getLogger(__name__)
 
 
-class SpotifyClient:
+class SpotiClient:
     """
     A client for interacting with the Spotify Web API.
     Handles authentication and token refreshing.

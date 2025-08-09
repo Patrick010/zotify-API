@@ -1,12 +1,12 @@
 from typing import Dict, Any
-from zotify_api.services.spotify_client import SpotifyClient
+from zotify_api.services.spoti_client import SpotiClient
 
 
 async def search_spotify(q: str, type: str, limit: int, offset: int) -> tuple[list, int]:
     """
-    Performs a search on Spotify using the SpotifyClient.
+    Performs a search on Spotify using the SpotiClient.
     """
-    client = SpotifyClient()
+    client = SpotiClient()
     try:
         results = await client.search(q=q, type=type, limit=limit, offset=offset)
         # The search endpoint returns a dictionary with keys like 'tracks', 'artists', etc.
@@ -26,7 +26,7 @@ async def get_me() -> Dict[str, Any]:
     """
     Retrieves the current user's profile from Spotify.
     """
-    client = SpotifyClient()
+    client = SpotiClient()
     try:
         user_profile = await client.get_current_user()
         return user_profile
@@ -38,7 +38,7 @@ async def get_spotify_devices() -> List[Dict[str, Any]]:
     """
     Retrieves the list of available playback devices from Spotify.
     """
-    client = SpotifyClient()
+    client = SpotiClient()
     try:
         devices = await client.get_devices()
         return devices

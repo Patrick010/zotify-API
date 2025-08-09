@@ -8,7 +8,7 @@ log = logging.getLogger(__name__)
 def get_admin_api_key_header(x_api_key: Optional[str] = Header(None, alias="X-API-Key")) -> Optional[str]:
     return x_api_key
 
-from zotify_api.services.spotify_client import SpotifyClient
+from zotify_api.services.spoti_client import SpotiClient
 from zotify_api.auth_state import spotify_tokens
 from fastapi import HTTPException
 
@@ -27,10 +27,10 @@ from zotify_api.schemas.auth import AuthStatus
 
 async def refresh_spotify_token() -> int:
     """
-    Uses the SpotifyClient to refresh the access token.
+    Uses the SpotiClient to refresh the access token.
     Returns the new expiration timestamp.
     """
-    client = SpotifyClient()
+    client = SpotiClient()
     try:
         await client.refresh_access_token()
         return int(spotify_tokens.get("expires_at", 0))
@@ -45,7 +45,7 @@ async def get_auth_status() -> AuthStatus:
     if not spotify_tokens.get("access_token"):
         return AuthStatus(authenticated=False, token_valid=False, expires_in=0)
 
-    client = SpotifyClient()
+    client = SpotiClient()
     try:
         user_data = await client.get_current_user()
         expires_in = spotify_tokens.get("expires_at", 0) - time.time()

@@ -8,14 +8,14 @@
 
 ## 1. Summary of Work Completed
 
-This task continued the Phase 5 wrap-up by implementing the previously stubbed search functionality and removing a duplicate, legacy endpoint. This work further centralizes Spotify API interactions into the `SpotifyClient` and cleans up the API surface.
+This task continued the Phase 5 wrap-up by implementing the previously stubbed search functionality and removing a duplicate, legacy endpoint. This work further centralizes Spotify API interactions into the `SpotiClient` and cleans up the API surface.
 
 ## 2. Key Changes and Implementations
 
 ### a. Search Endpoint Implementation
 
 - **`GET /api/search`**: This endpoint is now fully functional.
-- **`SpotifyClient` Enhancement**: A `search()` method was added to the client to handle the `GET /v1/search` Spotify API call.
+- **`SpotiClient` Enhancement**: A `search()` method was added to the client to handle the `GET /v1/search` Spotify API call.
 - **Service Layer**: The `search_spotify()` service function was implemented to use the new client method. The entire call chain was made asynchronous to support the `httpx` client.
 
 ### b. Endpoint Removal

@@ -14,18 +14,18 @@ This task focused on continuing Phase 5 of the Zotify API development by convert
 
 ### a. Architectural Refactoring
 
-- **`SpotifyClient` Service:** A new `SpotifyClient` class was created in `api/src/zotify_api/services/spotify_client.py`. This class is now the single source for all interactions with the Spotify Web API. It handles request authentication, session management (`httpx.AsyncClient`), and standardized error handling.
+- **`SpotiClient` Service:** A new `SpotiClient` class was created in `api/src/zotify_api/services/spoti_client.py`. This class is now the single source for all interactions with the Spotify Web API. It handles request authentication, session management (`httpx.AsyncClient`), and standardized error handling.
 
 ### b. Endpoint Implementations
 
-The following endpoints were refactored to use the new `SpotifyClient` via their respective service layers:
+The following endpoints were refactored to use the new `SpotiClient` via their respective service layers:
 
-- **`POST /api/tracks/metadata`**: The endpoint's logic was moved from the route handler into the `tracks_service`, which now calls the `SpotifyClient`. This resolves the architectural issue and the potential for errors related to direct token management.
-- **`GET /api/spotify/me`**: This endpoint was similarly refactored to use the `spotify_service` and the `SpotifyClient`.
+- **`POST /api/tracks/metadata`**: The endpoint's logic was moved from the route handler into the `tracks_service`, which now calls the `SpotiClient`. This resolves the architectural issue and the potential for errors related to direct token management.
+- **`GET /api/spotify/me`**: This endpoint was similarly refactored to use the `spotify_service` and the `SpotiClient`.
 
 ### c. Testing Improvements
 
-- **New Unit Tests:** Comprehensive unit tests were created for the new `SpotifyClient` to validate its functionality in isolation, using `unittest.mock` to patch `httpx` calls.
+- **New Unit Tests:** Comprehensive unit tests were created for the new `SpotiClient` to validate its functionality in isolation, using `unittest.mock` to patch `httpx` calls.
 - **Endpoint Test Coverage:** New integration tests were added for the `/api/tracks/metadata` and `/api/spotify/me` endpoints to verify their behavior, authorization, and error handling.
 - **Test Suite Stabilization:** A significant effort was made to diagnose and fix a series of underlying issues within the test environment. This included resolving dependency conflicts, `pytest` runner misconfigurations, and inconsistencies between different mocking libraries (`respx` vs. `unittest.mock`). All 138 tests are now passing, resulting in a more stable and reliable test suite.
 
