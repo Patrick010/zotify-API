@@ -23,38 +23,97 @@ This checklist must be followed for *every* development task before it is marked
 - Extend audit logging to track all personal data access and changes securely.
 - Integrate privacy by design and default into the task's implementation.
 
-## 3. Documentation
-For **every completed task** — no exceptions:
+## 3. Documentation — **Mandatory & Verifiable**
 
-1. **Functional Changes**
-   - Document all functional changes introduced by the task.
-   - This includes:
-     - New endpoints, removed endpoints, or changes to existing endpoint behavior.
-     - Changes in request/response formats, parameters, or authentication requirements.
-     - Changes to CLI commands, API workflows, or integration points.
-   - Update **all relevant docs** (guides, API references, manuals) so they match reality.
-   - Add before/after examples where applicable.
+The task is **not complete** until every item below is satisfied and evidence is committed.
 
-2. **Design Documentation**
-   - Update or create high-level and low-level design documents if the implementation differs from specifications.
+- **HLD & LLD**:
+  - Update or create high-level and low-level design docs if implementation deviates from specs.
+  - Include clear architectural change summaries.
 
-3. **Planning & Roadmap**
-   - Update planning docs and roadmaps for any timeline, scope, or capability changes.
+- **Roadmap**:
+  - Update `docs/roadmap.md` or equivalent if timelines, scope, or priorities change.
 
-4. **User & Operator Guides**
-   - Review all guides (developer, operator, user) and update them to match current functionality.
+- **Audit References**:
+  - Update relevant audit documents (e.g., `docs/projectplan/spotify_capability_audit.md`) if impacted.
 
-5. **Release Notes & Reports**
-   - Add entry to release notes/version history.
-   - Generate a **Task Completion Report** in `docs/projectplan/reports/`.
-   - Update the reports index to reference the new report.
+- **User & Operator Guides**:
+  - Update `developer_guide.md`, `operator_guide.md`, and related manuals for all functional changes, including API examples.
 
-6. **Repo-wide Documentation Sweep**
-   - Review **every** `.md` file outside excluded directories (e.g. zotify/).
-   - In the Task Completion Report, include:
-     - Full list of reviewed files.
-     - For each file: note changes made or confirm “no change needed.”
-   - Task is incomplete until this review list is provided.
+- **CHANGELOG**:
+  - Add entries reflecting **all** functional changes: new/modified/removed endpoints, param changes, behavioral changes.
+
+- **Task Completion Report**:
+  - Produce a detailed report in `docs/projectplan/reports/<taskname>.md` that includes:
+    - Summary of code and architectural changes.
+    - **Documentation review log**: A table listing every file from the Documentation Review File List with a “Changed” or “No Change” mark plus commit references.
+    - Explicit statement on API documentation updates.
+
+- **Reports Index**:
+  - Update `docs/projectplan/reports/README.md` to reference the new report.
+
+- **Full `.md` File Sweep**:
+  - **Carefully review every file on the Documentation Review File List for needed updates** related to the task.
+  - Apply updates wherever necessary.
+  - Mark each file in the documentation review log regardless of change status.
+
+- **Functional Change Documentation**:
+  - Document all functional changes in every relevant doc: API reference, developer/operator guides, README if user-facing.
+  - Include before/after request/response examples and behavior notes.
+
+- **Verification**:
+  - Task is incomplete without all above deliverables committed and verified.
+
+---
+
+### Documentation Review File List
+*(Add new `.md` files here as they appear. Do not remove existing entries.)*
+
+./README.md
+./api/docs/CHANGELOG.md
+./api/docs/CONTRIBUTING.md
+./api/docs/DATABASE.md
+./api/docs/INSTALLATION.md
+./api/docs/MANUAL.md
+./api/docs/full_api_reference.md
+./docs/INTEGRATION_CHECKLIST.md
+./docs/developer_guide.md
+./docs/operator_guide.md
+./docs/roadmap.md
+./docs/zotify-api-manual.md
+./docs/projectplan/HLD_Zotify_API.md
+./docs/projectplan/LLD_18step_plan_Zotify_API.md
+./docs/projectplan/admin_api_key_mitigation.md
+./docs/projectplan/admin_api_key_security_risk.md
+./docs/projectplan/doc_maintenance.md
+./docs/projectplan/next_steps_and_phases.md
+./docs/projectplan/privacy_compliance.md
+./docs/projectplan/roadmap.md
+./docs/projectplan/security.md
+./docs/projectplan/spotify_capability_audit.md
+./docs/projectplan/spotify_fullstack_capability_blueprint.md
+./docs/projectplan/spotify_gap_alignment_report.md
+./docs/projectplan/task_checklist.md
+./docs/projectplan/reports/20250807-doc-clarification-completion-report.md
+./docs/projectplan/reports/20250807-spotify-blueprint-completion-report.md
+./docs/projectplan/reports/20250808-comprehensive-auth-and-docs-update-report.md
+./docs/projectplan/reports/20250808-oauth-unification-completion-report.md
+./docs/projectplan/reports/20250809-api-endpoints-completion-report.md
+./docs/projectplan/reports/20250809-phase5-endpoint-refactor-report.md
+./docs/projectplan/reports/README.md
+./docs/snitch/PHASE_2_SECURE_CALLBACK.md
+./docs/snitch/TEST_RUNBOOK.md
+./docs/snitch/phase5-ipc.md
+./snitch/README.md
+./snitch/docs/INSTALLATION.md
+./snitch/docs/MILESTONES.md
+./snitch/docs/MODULES.md
+./snitch/docs/PHASES.md
+./snitch/docs/PROJECT_PLAN.md
+./snitch/docs/ROADMAP.md
+./snitch/docs/STATUS.md
+./snitch/docs/TASKS.md
+./snitch/docs/TEST_RUNBOOK.md
 
 
 ## 4. Tests
