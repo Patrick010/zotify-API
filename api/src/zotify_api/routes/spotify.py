@@ -179,22 +179,12 @@ from fastapi import Depends
 def update_spotify_playlist_metadata(playlist_id: str):
     raise HTTPException(status_code=501, detail="Not Implemented")
 
+from zotify_api.services import spotify as spotify_service
+
 @router.get("/me", dependencies=[Depends(require_admin_api_key)])
 async def get_me():
     """ Returns raw Spotify /v1/me profile. For debugging and verification. """
-    if not spotify_tokens.get("access_token"):
-        raise HTTPException(status_code=401, detail="Not authenticated with Spotify.")
-
-    headers = {"Authorization": f"Bearer {spotify_tokens['access_token']}"}
-    async with httpx.AsyncClient() as client:
-        try:
-            resp = await client.get(f"{SPOTIFY_API_BASE}/me", headers=headers)
-            resp.raise_for_status()
-            return resp.json()
-        except httpx.HTTPStatusError as e:
-            raise HTTPException(status_code=e.response.status_code, detail=e.response.text)
-        except httpx.RequestError:
-            raise HTTPException(status_code=503, detail="Service unavailable: Could not connect to Spotify.")
+    return await spotify_service.get_me()
 
 @router.get("/devices", response_model=SpotifyDevices, dependencies=[Depends(require_admin_api_key)])
 async def get_devices():

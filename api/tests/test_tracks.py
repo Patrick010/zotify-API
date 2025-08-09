@@ -74,6 +74,9 @@ def test_upload_cover_unauthorized(client):
     )
     assert response.status_code == 401
 
+from unittest.mock import patch
+from fastapi import HTTPException
+
 def test_upload_cover(client, mock_db):
     file_content = b"fake image data"
     response = client.post(
@@ -83,3 +86,37 @@ def test_upload_cover(client, mock_db):
     )
     assert response.status_code == 200
     assert "cover_url" in response.json()
+
+def test_get_metadata_unauthorized(client):
+    response = client.post("/api/tracks/metadata", json={"track_ids": ["id1"]})
+    assert response.status_code == 401 # No X-API-Key
+
+from unittest.mock import AsyncMock
+
+@patch("zotify_api.services.tracks_service.get_tracks_metadata_from_spotify", new_callable=AsyncMock)
+def test_get_metadata_success(mock_get_metadata, client):
+    mock_metadata = [{"id": "track1", "name": "Test Track"}]
+    mock_get_metadata.return_value = mock_metadata
+
+    response = client.post(
+        "/api/tracks/metadata",
+        headers={"X-API-Key": "test_key"},
+        json={"track_ids": ["track1"]}
+    )
+
+    assert response.status_code == 200
+    assert response.json() == {"metadata": mock_metadata}
+    mock_get_metadata.assert_called_with(["track1"])
+
+@patch("zotify_api.services.tracks_service.get_tracks_metadata_from_spotify", new_callable=AsyncMock)
+def test_get_metadata_spotify_error(mock_get_metadata, client):
+    # Simulate an error from the service layer (e.g., Spotify is down)
+    mock_get_metadata.side_effect = HTTPException(status_code=503, detail="Service unavailable")
+
+    response = client.post(
+        "/api/tracks/metadata",
+        headers={"X-API-Key": "test_key"},
+        json={"track_ids": ["track1"]}
+    )
+    assert response.status_code == 503
+    assert "Service unavailable" in response.json()["detail"]

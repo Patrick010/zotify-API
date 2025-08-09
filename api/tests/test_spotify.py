@@ -61,3 +61,26 @@ def test_sync_playlists(mock_refresh, client):
     """ Test syncing playlists """
     response = client.post("/api/spotify/sync_playlists")
     assert response.status_code == 200
+
+@patch("zotify_api.services.spotify.get_me", new_callable=AsyncMock)
+def test_get_me_success(mock_get_me, client):
+    """
+    Tests the /api/spotify/me endpoint, mocking the service call.
+    """
+    mock_user_profile = {"id": "user1", "display_name": "Test User"}
+    mock_get_me.return_value = mock_user_profile
+
+    response = client.get("/api/spotify/me", headers={"X-API-Key": "test_key"})
+
+    assert response.status_code == 200
+    assert response.json() == mock_user_profile
+    mock_get_me.assert_called_once()
+
+@patch("zotify_api.services.spotify.get_me", new_callable=AsyncMock)
+def test_get_me_unauthorized(mock_get_me, client):
+    """
+    Tests that the /api/spotify/me endpoint is protected by the admin API key.
+    """
+    response = client.get("/api/spotify/me") # No X-API-Key header
+    assert response.status_code == 401
+    mock_get_me.assert_not_called()

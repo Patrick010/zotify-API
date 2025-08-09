@@ -2,6 +2,14 @@ Changelog
 
 All notable changes to the Zotify REST API will be documented in this file.
 
+v0.1.31
+Changed
+    - Refactored Spotify API interactions into a dedicated `SpotifyClient` class to centralize authentication, requests, and error handling.
+    - Updated `POST /api/tracks/metadata` to use the new `SpotifyClient`, improving robustness and adhering to the service-layer architecture.
+    - Updated `GET /api/spotify/me` to use the new `SpotifyClient`.
+Fixed
+    - Corrected several test environment and mocking issues to ensure a stable and reliable test suite.
+
 v0.1.30
 Added
     - `GET /api/auth/status`: Returns current Spotify authentication status.
