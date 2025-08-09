@@ -4,13 +4,10 @@ import httpx
 from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel, Field
 
-from zotify_api.auth_state import spotify_tokens, pending_states, save_tokens
-
-# Constants are defined in spotify.py, but we need them here too.
-# In a larger refactor, these would move to the central config.
-CLIENT_ID = "65b708073fc0480ea92a077233ca87bd"
-REDIRECT_URI = "http://127.0.0.1:4381/login"
-SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
+from zotify_api.auth_state import (
+    spotify_tokens, pending_states, save_tokens,
+    CLIENT_ID, REDIRECT_URI, SPOTIFY_TOKEN_URL
+)
 
 
 router = APIRouter(prefix="/auth")

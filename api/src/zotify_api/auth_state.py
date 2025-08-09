@@ -2,15 +2,25 @@ import json
 import logging
 from pathlib import Path
 
-# This module holds the shared, in-memory state for the authentication process.
+# This module holds the shared state and constants for the authentication process.
 
 logger = logging.getLogger(__name__)
+
+# --- Constants ---
+# In a production app, these should be loaded from a secure config (e.g., env vars)
+CLIENT_ID = "65b708073fc0480ea92a077233ca87bd"
+CLIENT_SECRET = "832bc60deeb147db86dd1cc521d9e4bf"
+REDIRECT_URI = "http://127.0.0.1:4381/login"  # Must match Snitch listener URL
+SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize"
+SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
+SPOTIFY_API_BASE = "https://api.spotify.com/v1"
+
+
+# --- File-based Token Storage (Temporary) ---
 
 # Define the path for the temporary token storage file
 STORAGE_DIR = Path(__file__).parent.parent / "storage"
 TOKEN_FILE = STORAGE_DIR / "spotify_tokens.json"
-
-# --- Token Management ---
 
 def load_tokens():
     """Loads tokens from the JSON file if it exists."""
@@ -43,9 +53,7 @@ if not spotify_tokens:
     })
 
 
-# --- PKCE State Management ---
+# --- PKCE State Management (Ephemeral) ---
 
 # Stores the PKCE code_verifier, indexed by the `state` parameter.
-# This is used to verify the callback request. This store is ephemeral and
-# does not need to be persisted.
 pending_states = {}  # state -> code_verifier mapping
