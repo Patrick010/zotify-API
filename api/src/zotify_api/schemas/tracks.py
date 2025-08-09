@@ -26,5 +26,13 @@ class TrackResponseModel(BaseModel):
     updated_at: datetime
     cover_url: Optional[str] = None
 
+from typing import List
+
+class TrackMetadataRequest(BaseModel):
+    track_ids: List[str]
+
+class TrackMetadataResponse(BaseModel):
+    metadata: List[dict]
+
     class Config:
         from_attributes = True

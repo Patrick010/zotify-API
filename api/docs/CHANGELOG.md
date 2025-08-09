@@ -1,6 +1,21 @@
 Changelog
 
 All notable changes to the Zotify REST API will be documented in this file.
+
+v0.1.30
+Added
+    - `GET /api/auth/status`: Returns current Spotify authentication status.
+    - `POST /api/auth/logout`: Clears stored Spotify credentials.
+    - `GET /api/auth/refresh`: Refreshes the Spotify access token.
+    - `GET /api/spotify/me`: Returns the raw Spotify user profile.
+    - `GET /api/spotify/devices`: Lists available Spotify playback devices.
+    - `POST /api/tracks/metadata`: Fetches metadata for multiple tracks in a single request.
+    - `GET /api/system/uptime`: Returns the API server's uptime.
+    - `GET /api/system/env`: Returns environment information for the API server.
+    - `GET /api/schema`: Returns the OpenAPI schema for the API.
+Changed
+    - Extended `/api/search` to allow searching by `type` (track, album, artist, playlist, all) and added `limit` and `offset` for pagination.
+
 v0.1.29
 Added
 

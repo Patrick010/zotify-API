@@ -4,9 +4,9 @@ import secrets
 import base64
 import hashlib
 from fastapi import APIRouter, HTTPException, Request, Response
-from pydantic import BaseModel
 from typing import Optional
 import httpx
+from zotify_api.schemas.spotify import SpotifyDevices, OAuthLoginResponse, TokenStatus
 from urllib.parse import quote_plus
 
 # Import the shared state and constants
@@ -16,16 +16,8 @@ from zotify_api.auth_state import (
     SPOTIFY_AUTH_URL, SPOTIFY_TOKEN_URL, SPOTIFY_API_BASE
 )
 
-router = APIRouter(prefix="/spotify")
+router = APIRouter(prefix="/spotify", tags=["spotify"])
 logger = logging.getLogger(__name__)
-
-
-class OAuthLoginResponse(BaseModel):
-    auth_url: str
-
-class TokenStatus(BaseModel):
-    access_token_valid: bool
-    expires_in_seconds: int
 
 
 def generate_pkce_pair():
@@ -140,6 +132,43 @@ def get_spotify_playlist_tracks(playlist_id: str):
 def sync_spotify_playlist(playlist_id: str):
     raise HTTPException(status_code=501, detail="Not Implemented")
 
+from zotify_api.services.auth import require_admin_api_key
+from fastapi import Depends
+
 @router.put("/playlists/{playlist_id}/metadata")
 def update_spotify_playlist_metadata(playlist_id: str):
     raise HTTPException(status_code=501, detail="Not Implemented")
+
+@router.get("/me", dependencies=[Depends(require_admin_api_key)])
+async def get_me():
+    """ Returns raw Spotify /v1/me profile. For debugging and verification. """
+    if not spotify_tokens.get("access_token"):
+        raise HTTPException(status_code=401, detail="Not authenticated with Spotify.")
+
+    headers = {"Authorization": f"Bearer {spotify_tokens['access_token']}"}
+    async with httpx.AsyncClient() as client:
+        try:
+            resp = await client.get(f"{SPOTIFY_API_BASE}/me", headers=headers)
+            resp.raise_for_status()
+            return resp.json()
+        except httpx.HTTPStatusError as e:
+            raise HTTPException(status_code=e.response.status_code, detail=e.response.text)
+        except httpx.RequestError:
+            raise HTTPException(status_code=503, detail="Service unavailable: Could not connect to Spotify.")
+
+@router.get("/devices", response_model=SpotifyDevices, dependencies=[Depends(require_admin_api_key)])
+async def get_devices():
+    """ Wraps Spotify /v1/me/player/devices. Lists all playback devices. """
+    if not spotify_tokens.get("access_token"):
+        raise HTTPException(status_code=401, detail="Not authenticated with Spotify.")
+
+    headers = {"Authorization": f"Bearer {spotify_tokens['access_token']}"}
+    async with httpx.AsyncClient() as client:
+        try:
+            resp = await client.get(f"{SPOTIFY_API_BASE}/me/player/devices", headers=headers)
+            resp.raise_for_status()
+            return resp.json()
+        except httpx.HTTPStatusError as e:
+            raise HTTPException(status_code=e.response.status_code, detail=e.response.text)
+        except httpx.RequestError:
+            raise HTTPException(status_code=503, detail="Service unavailable: Could not connect to Spotify.")

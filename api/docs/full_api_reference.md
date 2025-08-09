@@ -14,6 +14,59 @@ Admin-only endpoints are protected by an API key. To access these endpoints, you
 
 No authentication is required for other endpoints in local testing. Production deployments should restrict access via reverse proxy or API gateway.
 
+### `GET /auth/status` (Admin-Only)
+
+Returns the current authentication status with Spotify.
+
+**Request:**
+
+```bash
+curl -H "X-API-Key: YOUR_ADMIN_KEY" http://0.0.0.0:8080/api/auth/status
+```
+
+**Response:**
+
+```json
+{
+  "authenticated": true,
+  "user_id": "your_spotify_user_id",
+  "token_valid": true,
+  "expires_in": 3599
+}
+```
+
+### `POST /auth/logout` (Admin-Only)
+
+Revokes the current Spotify token and clears stored credentials.
+
+**Request:**
+
+```bash
+curl -X POST -H "X-API-Key: YOUR_ADMIN_KEY" http://0.0.0.0:8080/api/auth/logout
+```
+
+**Response:**
+
+- `204 No Content`
+
+### `GET /auth/refresh` (Admin-Only)
+
+Forces a refresh of the Spotify access token.
+
+**Request:**
+
+```bash
+curl -H "X-API-Key: YOUR_ADMIN_KEY" http://0.0.0.0:8080/api/auth/refresh
+```
+
+**Response:**
+
+```json
+{
+  "expires_at": 1678886400
+}
+```
+
 ---
 
 ## Index
@@ -100,6 +153,33 @@ curl -X POST http://0.0.0.0:8080/api/config/reset
 **Response:**
 
 The default configuration object.
+
+---
+
+## Search
+
+### `GET /search`
+
+Searches for tracks, albums, artists, and playlists on Spotify.
+
+**Request:**
+
+```bash
+curl "http://0.0.0.0:8080/api/search?q=My+Query&type=track&limit=10&offset=0"
+```
+
+**Query Parameters:**
+
+| Name     | Type    | Description                                      |
+|----------|---------|--------------------------------------------------|
+| `q`      | string  | The search query.                                |
+| `type`   | string  | (Optional) The type of item to search for. Can be `track`, `album`, `artist`, `playlist`, or `all`. Defaults to `all`. |
+| `limit`  | integer | (Optional) The maximum number of items to return. |
+| `offset` | integer | (Optional) The offset from which to start returning items. |
+
+**Response:**
+
+The response from the Spotify API search endpoint.
 
 ---
 
@@ -302,6 +382,45 @@ curl -X DELETE http://0.0.0.0:8080/api/tracks/abc123
 **Response:**
 
 - `204 No Content`
+
+### `POST /tracks/metadata` (Admin-Only)
+
+Returns metadata for multiple tracks in one call.
+
+**Request:**
+
+```bash
+curl -X POST -H "X-API-Key: YOUR_ADMIN_KEY" -H "Content-Type: application/json" \
+  -d '{
+    "track_ids": ["TRACK_ID_1", "TRACK_ID_2"]
+  }' \
+  http://0.0.0.0:8080/api/tracks/metadata
+```
+
+**Body Parameters:**
+
+| Name        | Type     | Description                          |
+| ----------- | -------- | ------------------------------------ |
+| `track_ids` | string[] | A list of Spotify track IDs.         |
+
+**Response:**
+
+```json
+{
+  "metadata": [
+    {
+      "id": "TRACK_ID_1",
+      "name": "Track 1 Name",
+      ...
+    },
+    {
+      "id": "TRACK_ID_2",
+      "name": "Track 2 Name",
+      ...
+    }
+  ]
+}
+```
 
 ### `POST /tracks/{track_id}/cover` (Admin-Only)
 
@@ -698,6 +817,48 @@ curl -X PUT http://0.0.0.0:8080/api/spotify/playlists/abc123/metadata
 
 `501 Not Implemented`
 
+### `GET /spotify/me` (Admin-Only)
+
+Returns the raw Spotify user profile.
+
+**Request:**
+
+```bash
+curl -H "X-API-Key: YOUR_ADMIN_KEY" http://0.0.0.0:8080/api/spotify/me
+```
+
+**Response:**
+
+The raw JSON response from the Spotify API for the `/v1/me` endpoint.
+
+### `GET /spotify/devices` (Admin-Only)
+
+Lists all available Spotify playback devices.
+
+**Request:**
+
+```bash
+curl -H "X-API-Key: YOUR_ADMIN_KEY" http://0.0.0.0:8080/api/spotify/devices
+```
+
+**Response:**
+
+```json
+{
+  "devices": [
+    {
+      "id": "YOUR_DEVICE_ID",
+      "is_active": true,
+      "is_private_session": false,
+      "is_restricted": false,
+      "name": "Your Device Name",
+      "type": "Computer",
+      "volume_percent": 100
+    }
+  ]
+}
+```
+
 ---
 
 ## User
@@ -940,6 +1101,65 @@ curl -X POST http://0.0.0.0:8080/api/system/reset
 **Response:**
 
 `501 Not Implemented`
+
+### `GET /system/uptime` (Admin-Only)
+
+Returns the uptime of the API server.
+
+**Request:**
+
+```bash
+curl -H "X-API-Key: YOUR_ADMIN_KEY" http://0.0.0.0:8080/api/system/uptime
+```
+
+**Response:**
+
+```json
+{
+  "uptime_seconds": 3600.5,
+  "uptime_human": "1h 0m 0s"
+}
+```
+
+### `GET /system/env` (Admin-Only)
+
+Returns a safe subset of environment information.
+
+**Request:**
+
+```bash
+curl -H "X-API-Key: YOUR_ADMIN_KEY" http://0.0.0.0:8080/api/system/env
+```
+
+**Response:**
+
+```json
+{
+  "version": "0.1.30",
+  "python_version": "3.10.0",
+  "platform": "Linux"
+}
+```
+
+### `GET /schema` (Admin-Only)
+
+Returns the OpenAPI schema for the API. Can also return a specific schema component.
+
+**Request:**
+
+To get the full schema:
+```bash
+curl -H "X-API-Key: YOUR_ADMIN_KEY" http://0.0.0.0:8080/api/schema
+```
+
+To get a specific schema component:
+```bash
+curl -H "X-API-Key: YOUR_ADMIN_KEY" "http://0.0.0.0:8080/api/schema?q=SystemEnv"
+```
+
+**Response:**
+
+The full OpenAPI schema or the requested schema component.
 
 ---
 

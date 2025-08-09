@@ -81,12 +81,35 @@ curl http://0.0.0.0:8080/api/version
 
 ```json
 {
-  "api": "v0.1.28",
+  "api": "v0.1.30",
   "cli_version": "v0.1.54",
   "build": "local",
   "uptime": 12345.6789
 }
 ```
+
+## New API Endpoints (v0.1.30)
+
+A number of new endpoints were added in v0.1.30 to enhance the API's capabilities.
+
+### Authentication and Spotify Integration
+
+*   `GET /api/auth/status`: Check Spotify authentication status.
+*   `POST /api/auth/logout`: Clear Spotify credentials.
+*   `GET /api/auth/refresh`: Refresh the Spotify access token.
+*   `GET /api/spotify/me`: Get the raw Spotify user profile.
+*   `GET /api/spotify/devices`: List Spotify playback devices.
+
+### Search and Metadata
+
+*   The `/api/search` endpoint now supports `type`, `limit`, and `offset` parameters.
+*   `POST /api/tracks/metadata`: Get metadata for multiple tracks at once.
+
+### System Diagnostics
+
+*   `GET /api/system/uptime`: Get API server uptime.
+*   `GET /api/system/env`: Get environment information.
+*   `GET /api/schema`: Get the OpenAPI schema.
 
 ### Endpoints
 

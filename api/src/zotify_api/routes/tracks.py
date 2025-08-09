@@ -40,6 +40,10 @@ def delete_track(track_id: str, engine: Any = Depends(get_db_engine)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+import httpx
+from zotify_api.auth_state import spotify_tokens, SPOTIFY_API_BASE
+from zotify_api.schemas.tracks import TrackMetadataRequest, TrackMetadataResponse
+
 @router.post("/{track_id}/cover", dependencies=[Depends(require_admin_api_key)])
 async def upload_track_cover(track_id: str, cover_image: UploadFile = File(...), engine: Any = Depends(get_db_engine)):
     try:
@@ -47,3 +51,25 @@ async def upload_track_cover(track_id: str, cover_image: UploadFile = File(...),
         return tracks_service.upload_cover(track_id, file_bytes, engine)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/metadata", response_model=TrackMetadataResponse, dependencies=[Depends(require_admin_api_key)])
+async def get_metadata(request: TrackMetadataRequest):
+    """ Returns metadata for all given tracks in one call. """
+    if not spotify_tokens.get("access_token"):
+        raise HTTPException(status_code=401, detail="Not authenticated with Spotify.")
+
+    if not request.track_ids:
+        return TrackMetadataResponse(metadata=[])
+
+    headers = {"Authorization": f"Bearer {spotify_tokens['access_token']}"}
+    params = {"ids": ",".join(request.track_ids)}
+
+    async with httpx.AsyncClient() as client:
+        try:
+            resp = await client.get(f"{SPOTIFY_API_BASE}/tracks", headers=headers, params=params)
+            resp.raise_for_status()
+            return TrackMetadataResponse(metadata=resp.json().get("tracks", []))
+        except httpx.HTTPStatusError as e:
+            raise HTTPException(status_code=e.response.status_code, detail=e.response.text)
+        except httpx.RequestError:
+            raise HTTPException(status_code=503, detail="Service unavailable: Could not connect to Spotify.")

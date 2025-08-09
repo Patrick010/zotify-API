@@ -9,3 +9,4 @@ This directory contains auto-generated reports for significant tasks completed b
 *   [2025-08-08: OAuth Unification Completion Report](./20250808-oauth-unification-completion-report.md)
 *   [2025-08-08: Snitch Test Endpoint Completion Report](./20250808-snitch-test-endpoint-completion-report.md)
 *   [2025-08-08: Auth Callback Refactor Completion Report](./20250808-comprehensive-auth-and-docs-update-report.md)
+*   [2025-08-09: New API Endpoints Completion Report](./20250809-api-endpoints-completion-report.md)

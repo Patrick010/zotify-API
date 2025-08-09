@@ -4,6 +4,7 @@ from pathlib import Path
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
+    version: str = "0.1.0"
     app_env: str = "production"
     admin_api_key: str | None = None
     require_admin_api_key_in_prod: bool = True

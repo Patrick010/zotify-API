@@ -40,6 +40,10 @@ async def get_open_api_endpoint():
 
 import time
 
+from typing import Optional
+from fastapi import Depends, HTTPException, Request
+from zotify_api.services.auth import require_admin_api_key
+
 @app.get("/version")
 async def version():
     return {
@@ -48,3 +52,14 @@ async def version():
         "build": "local",
         "uptime": time.time() - app_start_time,
     }
+
+@app.get("/api/schema", tags=["system"], dependencies=[Depends(require_admin_api_key)])
+def get_schema(request: Request, q: Optional[str] = None):
+    """ Returns either full OpenAPI spec or schema fragment for requested object type (via query param). """
+    openapi_schema = request.app.openapi()
+    if q:
+        if "components" in openapi_schema and "schemas" in openapi_schema["components"] and q in openapi_schema["components"]["schemas"]:
+            return openapi_schema["components"]["schemas"][q]
+        else:
+            raise HTTPException(status_code=404, detail=f"Schema '{q}' not found.")
+    return openapi_schema

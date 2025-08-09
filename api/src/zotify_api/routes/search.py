@@ -44,11 +44,13 @@ def get_db_engine():
 def get_spotify_search_func():
     return search_spotify
 
+from typing import Literal
+
 @router.get("")
 def search(
     q: str = Query(...),
-    type: str = "track",
-    limit: int = 25,
+    type: Literal["track", "album", "artist", "playlist", "all"] = "all",
+    limit: int = 20,
     offset: int = 0,
     feature_flags: dict = Depends(get_feature_flags),
     db_engine: any = Depends(get_db_engine),

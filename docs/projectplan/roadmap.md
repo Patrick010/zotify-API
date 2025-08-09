@@ -36,7 +36,7 @@
 
 ---
 
-## Phase 3 — Authentication, Security & Privacy (In Progress)
+## Phase 3 — Authentication, Security & Privacy ✅ (Completed)
 
 - **Authentication strategy**:
   - Admin API key system implemented.
@@ -61,17 +61,25 @@
 
 ---
 
-## Phase 4 — Feature Completion & Polishing (Upcoming)
+## Phase 4 — Feature Completion & Polishing (In Progress)
 
-- Finish remaining endpoints and services:
-  - Cache stats & clearing (with admin protection).
-  - Sync operations.
-  - Metadata management.
-  - User profile and preference management.
-- **Enhance validation & sanitization** for all inputs.
-- Add **audit logging** for sensitive actions.
-- Implement **metrics & monitoring hooks**.
-- Expand API documentation with request/response examples and error codes.
+- **Finished Endpoints and Services**:
+  - `GET /api/auth/status`
+  - `POST /api/auth/logout`
+  - `GET /api/auth/refresh`
+  - `GET /api/spotify/me`
+  - `GET /api/spotify/devices`
+  - `POST /api/tracks/metadata`
+  - `GET /api/system/uptime`
+  - `GET /api/system/env`
+  - `GET /api/schema`
+  - Extended `/api/search`
+- **API Documentation**:
+  - Expanded API documentation with request/response examples and error codes for all new endpoints.
+- **Upcoming in this phase**:
+  - **Enhance validation & sanitization** for all inputs.
+  - Add **audit logging** for sensitive actions.
+  - Implement **metrics & monitoring hooks**.
 
 ---
 
