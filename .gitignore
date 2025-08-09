@@ -163,3 +163,6 @@ debug.py
 snitch/snitch
 snitch/snitch.exe
 snitch/bin/
+
+# Ignore spotify tokens file
+api/src/storage/spotify_tokens.json
