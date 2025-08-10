@@ -3,7 +3,7 @@
 **File:** `docs/projectplan/ROADMAP.md`
 **Maintainer:** Jules
 **Last Updated:** 2025-08-10 # JULES-NOTE: Realigned with codebase reality.
-**Purpose:** This document actively tracks all planned, in-progress, and completed work across all phases. It defines each phase, breaks it down into granular tasks, and aligns all work with roadmap goals and deliverables.
+**Purpose:** This document outlines the high-level phases of development. For a detailed breakdown of tasks, see the [Execution Plan](./EXECUTION_PLAN.md).
 
 ---
 
