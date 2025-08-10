@@ -1,8 +1,8 @@
-# **AUDIT-phase-1: Comprehensive API & Documentation Reality Audit (Corrected)**
+# **AUDIT-phase-1: Comprehensive API & Documentation Reality Audit (Corrected v3)**
 
 **Date:** 2025-08-10
 **Author:** Jules
-**Version:** 2.0 (This version corrects a critical error in the file inventory count and list from version 1.0. This is the definitive baseline.)
+**Version:** 3.0 (This version corrects the scope of the file inventory to include only .py and .go files, as requested. This is the definitive baseline.)
 **Objective:** To provide a definitive, unvarnished, and brutally honest analysis of the Zotify API's current implementation versus its documented design, plans, and specifications. This document serves as the new, single source of truth and baseline for all future project planning and development.
 
 ---
@@ -77,62 +77,14 @@ This table provides the definitive list of every unique API endpoint path found 
 | `/api/webhooks/{hook_id}`| DELETE | ✅ Functional | Deletes a specific registered webhook. |
 | `/api/webhooks/fire`| POST | ✅ Functional | Manually fires a webhook for testing. |
 
-### **1.2: Complete Code File Inventory (Exhaustive)**
+### **1.2: Complete Code File Inventory (.py & .go only)**
 
-This table provides the definitive list of all 194 relevant source code, documentation, and configuration files.
+This table provides the definitive list of all 117 `.py` and `.go` source files in the project.
 
 | File Path | Purpose |
 | :--- | :--- |
 | **`./` (Root Directory)** | |
-| `./.gitignore` | Specifies intentionally untracked files for Git to ignore. |
-| `./README.md` | The main README for the entire Zotify project. |
 | `./audit_endpoints.py` | A script used to audit and list API endpoints. |
-| `./run_e2e_auth_test.sh` | A shell script to run end-to-end authentication tests. |
-| `./roadmap-test.sh` | A shell script for testing roadmap-related functionality (likely deprecated). |
-| `./test_single_config.sh` | A shell script for testing a single configuration setup. |
-| **`./.github/`** | |
-| `./.github/ISSUE_TEMPLATE/bug-report.md` | Template for creating bug reports on GitHub. |
-| `./.github/ISSUE_TEMPLATE/feature-request.md`| Template for creating feature requests on GitHub. |
-| `./.github/workflows/pushmirror.yml` | GitHub Actions workflow for mirroring the repository. |
-| **`./docs/`** | |
-| `./docs/developer_guide.md` | A guide for developers working on the Zotify project (currently inaccurate). |
-| `./docs/INTEGRATION_CHECKLIST.md` | A checklist for integration tasks. |
-| `./docs/operator_guide.md` | A guide for operators deploying or managing the Zotify service. |
-| `./docs/roadmap.md` | The high-level product roadmap. |
-| `./docs/zotify-api-manual.md` | A manual for using the Zotify API. |
-| **`./docs/projectplan/`** | |
-| `./docs/projectplan/admin_api_key_mitigation.md` | Document detailing mitigation strategies for an admin API key risk. |
-| `./docs/projectplan/admin_api_key_security_risk.md`| Document outlining the security risk of the admin API key. |
-| `./docs/projectplan/doc_maintenance.md` | Plan and procedures for maintaining documentation. |
-| `./docs/projectplan/HLD_Zotify_API.md` | The High-Level Design document for the Zotify API. |
-| `./docs/projectplan/LLD_18step_plan_Zotify_API.md` | A detailed, but now falsified, 18-step low-level implementation plan. |
-| `./docs/projectplan/next_steps_and_phases.md` | A deprecated document outlining project phases. |
-| `./docs/projectplan/privacy_compliance.md` | Documentation regarding privacy compliance (GDPR, CCPA). |
-| `./docs/projectplan/roadmap.md` | A more detailed, project-plan-specific roadmap (likely conflicts with root roadmap). |
-| `./docs/projectplan/security.md` | General security documentation for the project. |
-| `./docs/projectplan/spotify_capability_audit.md` | An older audit of Spotify capabilities. |
-| `./docs/projectplan/spotify_fullstack_capability_blueprint.md`| An architectural blueprint for Spotify integration (partially outdated). |
-| `./docs/projectplan/spotify_gap_alignment_report.md` | A deprecated report on gaps in Spotify integration. |
-| `./docs/projectplan/task_checklist.md` | A checklist for development tasks. |
-| **`./docs/projectplan/audit/`** | |
-| `./docs/projectplan/audit/AUDIT-phase-1.md` | The definitive audit report establishing the project baseline (this file). |
-| `./docs/projectplan/audit/README.md` | README for the audit directory. |
-| **`./docs/projectplan/reports/`** | |
-| `./docs/projectplan/reports/20250807-doc-clarification-completion-report.md` | A specific progress report. |
-| `./docs/projectplan/reports/20250807-spotify-blueprint-completion-report.md`| A specific progress report. |
-| `./docs/projectplan/reports/20250808-comprehensive-auth-and-docs-update-report.md`| A specific progress report. |
-| `./docs/projectplan/reports/20250808-oauth-unification-completion-report.md`| A specific progress report. |
-| `./docs/projectplan/reports/20250809-api-endpoints-completion-report.md`| A specific progress report. |
-| `./docs/projectplan/reports/20250809-phase5-endpoint-refactor-report.md`| A specific progress report. |
-| `./docs/projectplan/reports/20250809-phase5-final-cleanup-report.md`| A specific progress report. |
-| `./docs/projectplan/reports/20250809-phase5-playlist-implementation-report.md`| A specific progress report. |
-| `./docs/projectplan/reports/20250809-phase5-search-cleanup-report.md`| A specific progress report. |
-| `./docs/projectplan/reports/FIRST_AUDIT.md`| A previous, incomplete audit file. |
-| `./docs/projectplan/reports/README.md` | README for the reports directory. |
-| **`./docs/snitch/`** | |
-| `./docs/snitch/PHASE_2_SECURE_CALLBACK.md`| Design document for the secure callback feature in Snitch. |
-| `./docs/snitch/TEST_RUNBOOK.md`| A runbook for testing the Snitch application. |
-| `./docs/snitch/phase5-ipc.md`| Document detailing inter-process communication for Phase 5. |
 | **`./zotify/` (CLI Tool)** | |
 | `./zotify/__init__.py` | Makes the `zotify` directory a Python package. |
 | `./zotify/__main__.py` | Main entry point for running the Zotify CLI tool (`python -m zotify`). |
@@ -148,43 +100,14 @@ This table provides the definitive list of all 194 relevant source code, documen
 | `./zotify/zotify.py` | Defines the central `Zotify` class that holds state for the CLI. |
 | **`./snitch/` (Go Helper App)** | |
 | `./snitch/cmd/snitch/main.go`| Command-line entry point for the Snitch application. |
-| `./snitch/docs/INSTALLATION.md` | Installation instructions for Snitch. |
-| `./snitch/docs/MILESTONES.md` | Development milestones for Snitch. |
-| `./snitch/docs/MODULES.md` | Documentation of modules within Snitch. |
-| `./snitch/docs/PHASES.md` | Development phases for Snitch. |
-| `./snitch/docs/PROJECT_PLAN.md`| The project plan for Snitch. |
-| `./snitch/docs/ROADMAP.md` | The roadmap for Snitch. |
-| `./snitch/docs/STATUS.md` | The current status of the Snitch project. |
-| `./snitch/docs/TASKS.md` | Tasks for Snitch development. |
-| `./snitch/docs/TEST_RUNBOOK.md`| A runbook for testing Snitch. |
-| `./snitch/go.mod` | Go module definition file, manages dependencies. |
-| `./snitch/go.sum` | Go module checksum file for dependency verification. |
 | `./snitch/internal/listener/handler.go`| Defines the HTTP request handlers for the Snitch listener. |
 | `./snitch/internal/listener/handler_test.go`| Tests for the Snitch request handlers. |
 | `./snitch/internal/listener/server.go`| Defines the HTTP server for the Snitch listener. |
-| `./snitch/README.md` | README file for the Snitch application. |
 | `./snitch/snitch.go` | Main application file for the Snitch helper. |
 | **`./api/` (Zotify API)** | |
-| `./api/.gitignore` | Specifies files for Git to ignore within the `api` directory. |
-| `./api/audit_routes.sh` | A shell script to audit API routes. |
 | `./api/minimal_test_app.py` | A minimal FastAPI app for testing purposes. |
-| `./api/pyproject.toml` | Project metadata and build configuration for the API. |
 | `./api/route_audit.py` | A Python script to audit API routes. |
-| `./api/routes_check.sh` | A shell script to check API routes. |
-| `./api/test_api.sh` | A general shell script for testing the API. |
 | `./api/test_minimal_app.py` | A script to test the minimal FastAPI application. |
-| `./api/test_phase5_api.sh` | A script for testing Phase 5 API features. |
-| `./api/test_phase6_api.sh` | A script for testing Phase 6 API features. |
-| `./api/test_phase8_api.sh` | A script for testing Phase 8 API features. |
-| **`./api/docs/`** | |
-| `./api/docs/CHANGELOG.md` | Log of changes specific to the API. |
-| `./api/docs/CONTRIBUTING.md` | Contribution guidelines for the API. |
-| `./api/docs/DATABASE.md` | Documentation for the API's database schema. |
-| `./api/docs/full_api_reference.md`| A markdown file intended for a full API reference. |
-| `./api/docs/INSTALLATION.md` | Installation instructions for the API. |
-| `./api/docs/LICENSE` | The license file for the API code. |
-| `./api/docs/MANUAL.md` | The user manual for the API. |
-| `./api/docs/zotify-openapi-external-v1.yaml` | A small, outdated OpenAPI specification file. |
 | **`./api/tests/`** | |
 | `./api/tests/__init__.py` | Makes the `tests` directory a Python package. |
 | `./api/tests/conftest.py`| Pytest configuration and shared fixtures for integration tests. |
