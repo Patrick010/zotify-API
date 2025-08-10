@@ -1,8 +1,8 @@
-# **AUDIT-phase-1: Comprehensive API & Documentation Reality Audit (Corrected v4)**
+# **AUDIT-phase-1: Comprehensive API & Documentation Reality Audit (Corrected v5)**
 
 **Date:** 2025-08-10
 **Author:** Jules
-**Version:** 4.0 (This version includes the exhaustive analysis of all 52 project markdown files. This is the definitive baseline.)
+**Version:** 5.0 (This version incorporates the definitive file list provided by the user, correcting all previous inventory errors. This is the final baseline.)
 **Objective:** To provide a definitive, unvarnished, and brutally honest analysis of the Zotify API's current implementation versus its documented design, plans, and specifications. This document serves as the new, single source of truth and baseline for all future project planning and development.
 
 ---
@@ -79,134 +79,179 @@ This table provides the definitive list of every unique API endpoint path found 
 
 ### **1.2: Complete Code File Inventory (.py & .go only)**
 
-This table provides the definitive list of all 117 `.py` and `.go` source files in the project.
+This table provides the definitive list of all `.py` and `.go` source files as provided by the user.
 
 | File Path | Purpose |
 | :--- | :--- |
-| **`./` (Root Directory)** | |
-| `./audit_endpoints.py` | A script used to audit and list API endpoints. |
-| **`./zotify/` (CLI Tool)** | |
-| `./zotify/__init__.py` | Makes the `zotify` directory a Python package. |
-| `./zotify/__main__.py` | Main entry point for running the Zotify CLI tool (`python -m zotify`). |
-| `./zotify/album.py` | Contains logic for downloading albums for the CLI. |
-| `./zotify/app.py` | Main application logic and command handling for the CLI. |
-| `./zotify/config.py` | Manages the complex configuration for the CLI tool. |
-| `./zotify/const.py` | Defines global constants for the CLI application. |
-| `./zotify/playlist.py` | Contains logic for downloading Spotify playlists for the CLI. |
-| `./zotify/podcast.py` | Contains logic for downloading podcast episodes for the CLI. |
-| `./zotify/termoutput.py`| Provides sophisticated terminal output formatting for the CLI. |
-| `./zotify/track.py` | Contains logic for downloading and parsing individual tracks in the CLI. |
-| `./zotify/utils.py` | Miscellaneous utility functions for the CLI. |
-| `./zotify/zotify.py` | Defines the central `Zotify` class that holds state for the CLI. |
-| **`./snitch/` (Go Helper App)** | |
-| `./snitch/cmd/snitch/main.go`| Command-line entry point for the Snitch application. |
+| **`./api/src/zotify_api/routes/`** | **API Route Definitions** |
+| `./api/src/zotify_api/routes/config.py` | Defines endpoints for managing application configuration. |
+| `./api/src/zotify_api/routes/network.py` | Defines endpoints for managing network configuration. |
+| `./api/src/zotify_api/routes/spotify.py` | Defines all Spotify-specific interaction endpoints. |
+| `./api/src/zotify_api/routes/webhooks.py` | Defines endpoints for managing webhooks. |
+| `./api/src/zotify_api/routes/notifications.py`| Defines endpoints for user notifications. |
+| `./api/src/zotify_api/routes/search.py` | Defines the primary search endpoint for Spotify. |
+| `./api/src/zotify_api/routes/cache.py` | Defines endpoints for managing the application cache. |
+| `./api/src/zotify_api/routes/tracks.py` | Defines endpoints for managing the local tracks database. |
+| `./api/src/zotify_api/routes/logging.py` | Defines endpoints for managing logging levels. |
+| `./api/src/zotify_api/routes/playlist.py` | Defines endpoints for managing local playlists. |
+| `./api/src/zotify_api/routes/auth.py` | Defines all authentication-related API endpoints. |
+| `./api/src/zotify_api/routes/stubs.py` | Defines explicitly unimplemented endpoints that return 501. |
+| `./api/src/zotify_api/routes/metadata.py` | Defines endpoints for managing local metadata. |
+| `./api/src/zotify_api/routes/downloads.py` | Defines endpoints for managing the download queue. |
+| `./api/src/zotify_api/routes/sync.py` | Defines endpoints for triggering background synchronization jobs. |
+| `./api/src/zotify_api/routes/system.py` | Defines endpoints for retrieving system information and status. |
+| `./api/src/zotify_api/routes/user.py` | Defines endpoints for managing the local user profile. |
+| **`./api/src/zotify_api/`** | **Core API Logic** |
+| `./api/src/zotify_api/config.py` | Handles loading and managing API-specific settings. |
+| `./api/src/zotify_api/logging_config.py`| Configures the application's logging setup. |
+| `./api/src/zotify_api/main.py` | The main FastAPI application entrypoint and router configuration. |
+| `./api/src/zotify_api/globals.py`| Stores global variables and application-wide objects. |
+| `./api/src/zotify_api/auth_state.py`| Manages global authentication state and token storage. |
+| `./api/src/zotify_api/database.py`| Contains database connection and session management logic. |
+| **`./api/src/zotify_api/models/`** | **Data Models** |
+| `./api/src/zotify_api/models/config.py` | Data models related to configuration. |
+| `./api/src/zotify_api/models/spotify.py` | Data models related to Spotify objects. |
+| `./api/src/zotify_api/models/sync.py` | Data models related to synchronization jobs. |
+| **`./api/src/zotify_api/middleware/`** | **API Middleware** |
+| `./api/src/zotify_api/middleware/request_id.py`| Middleware for adding a unique request ID to logs for traceability. |
+| **`./api/src/zotify_api/schemas/`** | **Pydantic Schemas** |
+| `./api/src/zotify_api/schemas/network.py` | Pydantic models for the Network module. |
+| `./api/src/zotify_api/schemas/spotify.py` | Pydantic models for the Spotify module. |
+| `./api/src/zotify_api/schemas/notifications.py`| Pydantic models for the Notifications module. |
+| `./api/src/zotify_api/schemas/cache.py` | Pydantic models for the Cache module. |
+| `./api/src/zotify_api/schemas/tracks.py` | Pydantic models for the local Tracks module. |
+| `./api/src/zotify_api/schemas/logging.py` | Pydantic models for the Logging module. |
+| `./api/src/zotify_api/schemas/auth.py` | Pydantic models for the Authentication module. |
+| `./api/src/zotify_api/schemas/metadata.py` | Pydantic models for the local Metadata module. |
+| `./api/src/zotify_api/schemas/playlists.py`| Pydantic models for the local Playlists module. |
+| `./api/src/zotify_api/schemas/downloads.py`| Pydantic models for the Downloads module. |
+| `./api/src/zotify_api/schemas/generic.py` | Generic response models (e.g., message, status) for the API. |
+| `./api/src/zotify_api/schemas/system.py` | Pydantic models for the System module. |
+| `./api/src/zotify_api/schemas/user.py` | Pydantic models for the User module. |
+| **`./api/src/zotify_api/services/`** | **Business Logic Services** |
+| `./api/src/zotify_api/services/sync_service.py` | Business logic for background synchronization jobs. |
+| `./api/src/zotify_api/services/notifications_service.py`| Business logic for user notifications. |
+| `./api/src/zotify_api/services/spoti_client.py`| **CRITICAL:** The central client for all Spotify API communication. |
+| `./api/src/zotify_api/services/spotify.py` | Service functions that bridge routes to the SpotiClient. |
+| `./api/src/zotify_api/services/user_service.py` | Business logic for local user profile management. |
+| `./api/src/zotify_api/services/playlists_service.py`| Business logic for local playlist management. |
+| `./api/src/zotify_api/services/webhooks.py` | Business logic for webhook management. |
+| `./api/src/zotify_api/services/metadata_service.py` | Business logic for local metadata management. |
+| `./api/src/zotify_api/services/search.py` | Business logic for the search feature. |
+| `./api/src/zotify_api/services/db.py` | Utility functions for database interactions. |
+| `./api/src/zotify_api/services/config_service.py` | Business logic for configuration management. |
+| `./api/src/zotify_api/services/deps.py` | FastAPI dependencies for injection into route handlers. |
+| `./api/src/zotify_api/services/__init__.py` | Makes the services directory a Python package. |
+| `./api/src/zotify_api/services/auth.py` | Business logic for all authentication flows. |
+| `./api/src/zotify_api/services/logging_service.py` | Business logic for logging management. |
+| `./api/src/zotify_api/services/cache_service.py` | Business logic for cache management. |
+| `./api/src/zotify_api/services/tracks_service.py` | Business logic for local tracks management. |
+| `./api/src/zotify_api/services/network_service.py` | Business logic for network configuration. |
+| `./api/src/zotify_api/services/downloads_service.py`| Business logic for the download queue. |
+| **`./api/` (Root)** | **API Root Files** |
+| `./api/minimal_test_app.py` | A minimal FastAPI app for testing purposes. |
+| `./api/test_minimal_app.py` | A script to test the minimal FastAPI application. |
+| `./api/route_audit.py` | A Python script to audit API routes. |
+| **`./api/tests/`** | **Integration Tests** |
+| `./api/tests/test_notifications.py`| Integration tests for the Notifications module. |
+| `./api/tests/test_logging.py`| Integration tests for the Logging module. |
+| `./api/tests/test_network.py`| Integration tests for the Network module. |
+| `./api/tests/test_sync.py`| Integration tests for the Sync module. |
+| `./api/tests/test_tracks.py`| Integration tests for the Tracks module. |
+| `./api/tests/__init__.py` | Makes the tests directory a Python package. |
+| `./api/tests/test_user.py`| Integration tests for the User module. |
+| `./api/tests/test_downloads.py`| Integration tests for the Downloads module. |
+| `./api/tests/test_system.py`| Integration tests for the System module. |
+| `./api/tests/test_config.py`| Integration tests for the Config module. |
+| `./api/tests/test_stubs.py`| Tests that confirm stubbed endpoints return a 501 error. |
+| `./api/tests/test_playlists.py`| Integration tests for the local Playlists module. |
+| `./api/tests/conftest.py`| Pytest configuration and shared fixtures for integration tests. |
+| `./api/tests/test_cache.py`| Integration tests for the Cache module. |
+| `./api/tests/test_metadata.py`| Integration tests for the Metadata module. |
+| `./api/tests/test_spotify.py`| Integration tests for the Spotify module. |
+| **`./api/tests/unit/`** | **Unit Tests** |
+| `./api/tests/unit/test_playlists_service.py`| Unit tests for the local playlists service logic. |
+| `./api/tests/unit/test_spoti_client.py`| Unit tests for the central SpotiClient. |
+| `./api/tests/unit/test_sync.py`| Unit tests for the sync service logic. |
+| `./api/tests/unit/test_network_service.py`| Unit tests for the network service logic. |
+| `./api/tests/unit/test_cache_service.py`| Unit tests for the cache service logic. |
+| `./api/tests/unit/test_new_endpoints.py`| Integration tests for recently added endpoints. |
+| `./api/tests/unit/test_config.py`| Placeholder for config service unit tests. |
+| `./api/tests/unit/test_auth.py` | Unit tests for the authentication service and routes. |
+| `./api/tests/unit/test_metadata_service.py`| Unit tests for the metadata service logic. |
+| `./api/tests/unit/test_tracks_service.py`| Unit tests for the tracks service logic. |
+| `./api/tests/unit/test_webhooks.py`| Unit tests for the webhooks service logic. |
+| `./api/tests/unit/test_search.py`| Unit tests for the Search endpoint. |
+| `./api/tests/unit/test_downloads_service.py`| Unit tests for the downloads service logic. |
+| `./api/tests/unit/test_notifications_service.py`| Unit tests for the notifications service logic. |
+| `./api/tests/unit/test_user_service.py`| Unit tests for the user service logic. |
+| `./api/tests/unit/test_logging_service.py`| Unit tests for the logging service logic. |
+| **`./api/build/lib/zotify_api/`** | **Build Artifacts** |
+| `./api/build/lib/zotify_api/routes/config.py`| Build artifact of the config route module. |
+| `./api/build/lib/zotify_api/routes/network.py`| Build artifact of the network route module. |
+| `./api/build/lib/zotify_api/routes/spotify.py`| Build artifact of the spotify route module. |
+| `./api/build/lib/zotify_api/routes/webhooks.py`| Build artifact of the webhooks route module. |
+| `./api/build/lib/zotify_api/routes/notifications.py`| Build artifact of the notifications route module. |
+| `./api/build/lib/zotify_api/routes/search.py`| Build artifact of the search route module. |
+| `./api/build/lib/zotify_api/routes/cache.py`| Build artifact of the cache route module. |
+| `./api/build/lib/zotify_api/routes/tracks.py`| Build artifact of the tracks route module. |
+| `./api/build/lib/zotify_api/routes/logging.py`| Build artifact of the logging route module. |
+| `./api/build/lib/zotify_api/routes/playlist.py`| Build artifact of the playlist route module. |
+| `./api/build/lib/zotify_api/routes/auth.py`| Build artifact of the auth route module. |
+| `./api/build/lib/zotify_api/routes/stubs.py`| Build artifact of the stubs route module. |
+| `./api/build/lib/zotify_api/routes/metadata.py`| Build artifact of the metadata route module. |
+| `./api/build/lib/zotify_api/routes/downloads.py`| Build artifact of the downloads route module. |
+| `./api/build/lib/zotify_api/routes/sync.py`| Build artifact of the sync route module. |
+| `./api/build/lib/zotify_api/routes/system.py`| Build artifact of the system route module. |
+| `./api/build/lib/zotify_api/routes/user.py`| Build artifact of the user route module. |
+| `./api/build/lib/zotify_api/config.py`| Build artifact of the config module. |
+| `./api/build/lib/zotify_api/logging_config.py`| Build artifact of the logging_config module. |
+| `./api/build/lib/zotify_api/main.py`| Build artifact of the main module. |
+| `./api/build/lib/zotify_api/globals.py`| Build artifact of the globals module. |
+| `./api/build/lib/zotify_api/auth_state.py`| Build artifact of the auth_state module. |
+| `./api/build/lib/zotify_api/database.py`| Build artifact of the database module. |
+| `./api/build/lib/zotify_api/models/config.py`| Build artifact of the config model. |
+| `./api/build/lib/zotify_api/models/spotify.py`| Build artifact of the spotify model. |
+| `./api/build/lib/zotify_api/models/sync.py`| Build artifact of the sync model. |
+| `./api/build/lib/zotify_api/middleware/request_id.py`| Build artifact of the request_id middleware. |
+| `./api/build/lib/zotify_api/schemas/network.py`| Build artifact of the network schema. |
+| `./api/build/lib/zotify_api/schemas/spotify.py`| Build artifact of the spotify schema. |
+| `./api/build/lib/zotify_api/schemas/notifications.py`| Build artifact of the notifications schema. |
+| `./api/build/lib/zotify_api/schemas/cache.py`| Build artifact of the cache schema. |
+| `./api/build/lib/zotify_api/schemas/tracks.py`| Build artifact of the tracks schema. |
+| `./api/build/lib/zotify_api/schemas/logging.py`| Build artifact of the logging schema. |
+| `./api/build/lib/zotify_api/schemas/auth.py`| Build artifact of the auth schema. |
+| `./api/build/lib/zotify_api/schemas/metadata.py`| Build artifact of the metadata schema. |
+| `./api/build/lib/zotify_api/schemas/playlists.py`| Build artifact of the playlists schema. |
+| `./api/build/lib/zotify_api/schemas/downloads.py`| Build artifact of the downloads schema. |
+| `./api/build/lib/zotify_api/schemas/generic.py`| Build artifact of the generic schema. |
+| `./api/build/lib/zotify_api/schemas/system.py`| Build artifact of the system schema. |
+| `./api/build/lib/zotify_api/schemas/user.py`| Build artifact of the user schema. |
+| `./api/build/lib/zotify_api/services/sync_service.py`| Build artifact of the sync_service module. |
+| `./api/build/lib/zotify_api/services/notifications_service.py`| Build artifact of the notifications_service module. |
+| `./api/build/lib/zotify_api/services/spotify.py`| Build artifact of the spotify service module. |
+| `./api/build/lib/zotify_api/services/user_service.py`| Build artifact of the user_service module. |
+| `./api/build/lib/zotify_api/services/playlists_service.py`| Build artifact of the playlists_service module. |
+| `./api/build/lib/zotify_api/services/webhooks.py`| Build artifact of the webhooks service module. |
+| `./api/build/lib/zotify_api/services/metadata_service.py`| Build artifact of the metadata_service module. |
+| `./api/build/lib/zotify_api/services/search.py`| Build artifact of the search service module. |
+| `./api/build/lib/zotify_api/services/db.py`| Build artifact of the db service module. |
+| `./api/build/lib/zotify_api/services/config_service.py`| Build artifact of the config_service module. |
+| `./api/build/lib/zotify_api/services/deps.py`| Build artifact of the deps module. |
+| `./api/build/lib/zotify_api/services/__init__.py`| Build artifact of the services package init. |
+| `./api/build/lib/zotify_api/services/auth.py`| Build artifact of the auth service module. |
+| `./api/build/lib/zotify_api/services/logging_service.py`| Build artifact of the logging_service module. |
+| `./api/build/lib/zotify_api/services/cache_service.py`| Build artifact of the cache_service module. |
+| `./api/build/lib/zotify_api/services/tracks_service.py`| Build artifact of the tracks_service module. |
+| `./api/build/lib/zotify_api/services/network_service.py`| Build artifact of the network_service module. |
+| `./api/build/lib/zotify_api/services/downloads_service.py`| Build artifact of the downloads_service module. |
+| **`./snitch/`** | **Snitch Go Application** |
 | `./snitch/internal/listener/handler.go`| Defines the HTTP request handlers for the Snitch listener. |
 | `./snitch/internal/listener/handler_test.go`| Tests for the Snitch request handlers. |
 | `./snitch/internal/listener/server.go`| Defines the HTTP server for the Snitch listener. |
 | `./snitch/snitch.go` | Main application file for the Snitch helper. |
-| **`./api/` (Zotify API)** | |
-| `./api/minimal_test_app.py` | A minimal FastAPI app for testing purposes. |
-| `./api/route_audit.py` | A Python script to audit API routes. |
-| `./api/test_minimal_app.py` | A script to test the minimal FastAPI application. |
-| **`./api/tests/`** | |
-| `./api/tests/__init__.py` | Makes the `tests` directory a Python package. |
-| `./api/tests/conftest.py`| Pytest configuration and shared fixtures for integration tests. |
-| `./api/tests/test_cache.py`| Integration tests for the Cache module. |
-| `./api/tests/test_config.py`| Integration tests for the Config module. |
-| `./api/tests/test_downloads.py`| Integration tests for the Downloads module. |
-| `./api/tests/test_logging.py`| Integration tests for the Logging module. |
-| `./api/tests/test_metadata.py`| Integration tests for the Metadata module. |
-| `./api/tests/test_network.py`| Integration tests for the Network module. |
-| `./api/tests/test_notifications.py`| Integration tests for the Notifications module. |
-| `./api/tests/test_playlists.py`| Integration tests for the local Playlists module. |
-| `./api/tests/test_spotify.py`| Integration tests for the Spotify module. |
-| `./api/tests/test_stubs.py`| Tests that confirm stubbed endpoints return a 501 error. |
-| `./api/tests/test_sync.py`| Integration tests for the Sync module. |
-| `./api/tests/test_system.py`| Integration tests for the System module. |
-| `./api/tests/test_tracks.py`| Integration tests for the Tracks module. |
-| `./api/tests/test_user.py`| Integration tests for the User module. |
-| **`./api/tests/unit/`** | |
-| `./api/tests/unit/test_auth.py` | Unit tests for the authentication service and routes. |
-| `./api/tests/unit/test_cache_service.py`| Unit tests for the cache service logic. |
-| `./api/tests/unit/test_config.py`| Placeholder for config service unit tests. |
-| `./api/tests/unit/test_downloads_service.py`| Unit tests for the downloads service logic. |
-| `./api/tests/unit/test_logging_service.py`| Unit tests for the logging service logic. |
-| `./api/tests/unit/test_metadata_service.py`| Unit tests for the metadata service logic. |
-| `./api/tests/unit/test_network_service.py`| Unit tests for the network service logic. |
-| `./api/tests/unit/test_new_endpoints.py`| Integration tests for recently added endpoints. |
-| `./api/tests/unit/test_notifications_service.py`| Unit tests for the notifications service logic. |
-| `./api/tests/unit/test_playlists_service.py`| Unit tests for the local playlists service logic. |
-| `./api/tests/unit/test_search.py`| Unit tests for the Search endpoint. |
-| `./api/tests/unit/test_spoti_client.py`| Unit tests for the central SpotiClient. |
-| `./api/tests/unit/test_sync.py`| Unit tests for the sync service logic. |
-| `./api/tests/unit/test_tracks_service.py`| Unit tests for the tracks service logic. |
-| `./api/tests/unit/test_user_service.py`| Unit tests for the user service logic. |
-| `./api/tests/unit/test_webhooks.py`| Unit tests for the webhooks service logic. |
-| **`./api/src/zotify_api/`** | |
-| `./api/src/zotify_api/auth_state.py`| Manages global authentication state and token storage. |
-| `./api/src/zotify_api/config.py` | Handles loading and managing API-specific settings. |
-| `./api/src/zotify_api/database.py`| Contains database connection and session management logic. |
-| `./api/src/zotify_api/globals.py`| Stores global variables and application-wide objects. |
-| `./api/src/zotify_api/logging_config.py`| Configures the application's logging setup. |
-| `./api/src/zotify_api/main.py` | The main FastAPI application entrypoint and router configuration. |
-| **`./api/src/zotify_api/middleware/`** | |
-| `./api/src/zotify_api/middleware/request_id.py`| Middleware for adding a unique request ID to logs for traceability. |
-| **`./api/src/zotify_api/models/`** | |
-| `./api/src/zotify_api/models/config.py` | Data models related to configuration. |
-| `./api/src/zotify_api/models/spotify.py` | Data models related to Spotify objects. |
-| `./api/src/zotify_api/models/sync.py` | Data models related to synchronization jobs. |
-| **`./api/src/zotify_api/routes/`** | |
-| `./api/src/zotify_api/routes/auth.py` | Defines all authentication-related API endpoints. |
-| `./api/src/zotify_api/routes/cache.py` | Defines endpoints for managing the application cache. |
-| `./api/src/zotify_api/routes/config.py` | Defines endpoints for managing application configuration. |
-| `./api/src/zotify_api/routes/downloads.py` | Defines endpoints for managing the download queue. |
-| `./api/src/zotify_api/routes/logging.py` | Defines endpoints for managing logging levels. |
-| `./api/src/zotify_api/routes/metadata.py` | Defines endpoints for managing local metadata. |
-| `./api/src/zotify_api/routes/network.py` | Defines endpoints for managing network configuration. |
-| `./api/src/zotify_api/routes/notifications.py`| Defines endpoints for user notifications. |
-| `./api/src/zotify_api/routes/playlist.py` | Defines endpoints for managing local playlists. |
-| `./api/src/zotify_api/routes/search.py` | Defines the primary search endpoint for Spotify. |
-| `./api/src/zotify_api/routes/spotify.py` | Defines all Spotify-specific interaction endpoints. |
-| `./api/src/zotify_api/routes/stubs.py` | Defines explicitly unimplemented endpoints that return 501. |
-| `./api/src/zotify_api/routes/sync.py` | Defines endpoints for triggering background synchronization jobs. |
-| `./api/src/zotify_api/routes/system.py` | Defines endpoints for retrieving system information and status. |
-| `./api/src/zotify_api/routes/tracks.py` | Defines endpoints for managing the local tracks database. |
-| `./api/src/zotify_api/routes/user.py` | Defines endpoints for managing the local user profile. |
-| `./api/src/zotify_api/routes/webhooks.py` | Defines endpoints for managing webhooks. |
-| **`./api/src/zotify_api/schemas/`** | |
-| `./api/src/zotify_api/schemas/auth.py` | Pydantic models for the Authentication module. |
-| `./api/src/zotify_api/schemas/cache.py` | Pydantic models for the Cache module. |
-| `./api/src/zotify_api/schemas/downloads.py`| Pydantic models for the Downloads module. |
-| `./api/src/zotify_api/schemas/generic.py` | Generic response models (e.g., message, status) for the API. |
-| `./api/src/zotify_api/schemas/logging.py` | Pydantic models for the Logging module. |
-| `./api/src/zotify_api/schemas/metadata.py` | Pydantic models for the local Metadata module. |
-| `./api/src/zotify_api/schemas/network.py` | Pydantic models for the Network module. |
-| `./api/src/zotify_api/schemas/notifications.py`| Pydantic models for the Notifications module. |
-| `./api/src/zotify_api/schemas/playlists.py`| Pydantic models for the local Playlists module. |
-| `./api/src/zotify_api/schemas/spotify.py` | Pydantic models for the Spotify module. |
-| `./api/src/zotify_api/schemas/system.py` | Pydantic models for the System module. |
-| `./api/src/zotify_api/schemas/tracks.py` | Pydantic models for the local Tracks module. |
-| `./api/src/zotify_api/schemas/user.py` | Pydantic models for the User module. |
-| **`./api/src/zotify_api/services/`** | |
-| `./api/src/zotify_api/services/__init__.py` | Makes the services directory a Python package. |
-| `./api/src/zotify_api/services/auth.py` | Business logic for all authentication flows. |
-| `./api/src/zotify_api/services/cache_service.py` | Business logic for cache management. |
-| `./api/src/zotify_api/services/config_service.py` | Business logic for configuration management. |
-| `./api/src/zotify_api/services/db.py` | Utility functions for database interactions. |
-| `./api/src/zotify_api/services/deps.py` | FastAPI dependencies for injection into route handlers. |
-| `./api/src/zotify_api/services/downloads_service.py`| Business logic for the download queue. |
-| `./api/src/zotify_api/services/logging_service.py` | Business logic for logging management. |
-| `./api/src/zotify_api/services/metadata_service.py` | Business logic for local metadata management. |
-| `./api/src/zotify_api/services/network_service.py` | Business logic for network configuration. |
-| `./api/src/zotify_api/services/notifications_service.py`| Business logic for user notifications. |
-| `./api/src/zotify_api/services/playlists_service.py`| Business logic for local playlist management. |
-| `./api/src/zotify_api/services/search.py` | Business logic for the search feature. |
-| `./api/src/zotify_api/services/spoti_client.py`| **CRITICAL:** The central client for all Spotify API communication. |
-| `./api/src/zotify_api/services/spotify.py` | Service functions that bridge routes to the SpotiClient. |
-| `./api/src/zotify_api/services/sync_service.py` | Business logic for background synchronization jobs. |
-| `./api/src/zotify_api/services/tracks_service.py` | Business logic for local tracks management. |
-| `./api/src/zotify_api/services/user_service.py` | Business logic for local user profile management. |
-| `./api/src/zotify_api/services/webhooks.py` | Business logic for webhook management. |
+| `./snitch/snitch_debug.go` | A debug version of the main Snitch application file. |
+| `./snitch/cmd/snitch/main.go`| Command-line entry point for the Snitch application. |
 
 ---
 
@@ -223,7 +268,7 @@ This table provides a complete analysis of all 52 markdown files in the reposito
 | `./.github/ISSUE_TEMPLATE/feature-request.md` | ✅ **Accurate** | None. Standard, functional issue template. |
 | **`./docs/` (Root Docs)** | | |
 | `./docs/developer_guide.md` | ❌ **Critically Inaccurate** | Describes a fictional API. Key endpoints (e.g., `/privacy/data`) do not exist, the documented response format is wrong, and endpoint paths are incorrect. |
-| `./docs/INTEGRATION_CHECKLIST.md` | 🤷 **Ambiguous / Low-Value** | Minimal, context-free checklist for a single component. Appears to be a developer's scratchpad. |
+| `./docs/INTEGRATION_CHECKLIST.md` | 🤷 **Ambiguous / Low-Value** | Minimal, context-free checklist for a single component. Appears to be a developer's note rather than formal documentation. |
 | `./docs/operator_guide.md` | ⚠️ **Partially Inaccurate** | Describes a more robust API key management system than is implemented and refers to non-existent privacy endpoints. |
 | `./docs/roadmap.md` | ❌ **Misleading and Inaccurate** | Presents a false narrative of a nearly complete project by marking incomplete items (e.g., stub removal, testing) as "✅ (Completed)". |
 | `./docs/zotify-api-manual.md` | ❌ **Critically Inaccurate** | Unusable as a reference. Incomplete auth flow description, useless endpoint list with no details, and an incorrect manual test runbook. |
