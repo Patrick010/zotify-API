@@ -27,3 +27,15 @@
 | Notifications Subsystem | Y | Y | Functional. |
 | Authentication & Admin Controls | Y | Y | The core admin API key system is functional. |
 | **System Info & Health Endpoints**| Y | N | This is only partially implemented. `uptime` and `env` are functional, but other endpoints are **stubs**. |
+
+---
+
+## Known Experiential Gaps (Task 1.3)
+
+The following are known areas of mismatch identified outside of direct document-vs-code comparison:
+
+- **Authentication & Authorization:** The design specifies JWT-based auth and 2FA plans, but the current codebase mostly uses placeholders and partial implementations.
+- **Spotify Integration:** The design aims for full CRUD and sync support, but write-sync is incomplete, and webhook support is missing.
+- **Documentation Practices:** The design mandates a docs-first workflow; in reality, docs have lagged significantly, causing confusion.
+- **Error Handling & Logging:** The design expects consistent error models and audit logs; the code has some gaps and inconsistent logging.
+- **Security Features:** Some security enhancements like secret rotation and TLS hardening are in design but not yet reflected in code.

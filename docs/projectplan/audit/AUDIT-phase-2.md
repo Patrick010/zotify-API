@@ -34,7 +34,7 @@ This document was intended to describe the specific work items for an "18-step s
 
 ---
 
-## 3. Summary & Recommendations
+## 3. Recommendations (from initial analysis)
 
 The HLD and LLD documents contain a mixture of useful technical guidance and highly inaccurate, obsolete project management information.
 
@@ -43,8 +43,26 @@ The HLD and LLD documents contain a mixture of useful technical guidance and hig
 *   **Problem:** Both documents are polluted with fictional processes, falsified status claims, and obsolete plans that directly contradict our new canonical planning documents.
 
 **Recommendation:**
-To make these documents useful, they should be heavily refactored to serve as pure technical design documents. I recommend that a future task be created to:
-1.  **Strip all project management content:** Remove all roadmaps, phase/step breakdowns, status claims, and fictional process descriptions from both the HLD and LLD.
-2.  **Retain only technical guidance:** The final documents should contain only the architectural overview (from the HLD) and the technical refactor standards (from the LLD).
+A future task should be created to refactor the HLD and LLD to serve as pure technical design documents by stripping all project management content. All active planning and status tracking should remain exclusively in `ROADMAP.md` and `EXECUTION_PLAN.md`.
 
-This would allow them to serve as stable, long-term architectural references, while all active planning and status tracking remains exclusively in `ROADMAP.md` and `EXECUTION_PLAN.md`.
+---
+
+## 4. Summary of Implemented Core Functionalities (Task 1.2)
+
+Based on a review of the `EXECUTION_PLAN.md` and the `AUDIT-phase-1.md` report, the following core functionalities are considered implemented and functional:
+
+*   **Project Foundation:**
+    *   Repository structure and CI/CD pipelines (ruff, mypy, pytest).
+    *   FastAPI application skeleton with a modular structure.
+*   **Core API Endpoints:**
+    *   Albums, Tracks, and Metadata retrieval.
+    *   Notifications (CRUD operations).
+    *   User Profile management (profile, preferences, etc.).
+    *   Search functionality.
+    *   System info (`/uptime`, `/env`).
+*   **Spotify Integration:**
+    *   Authentication and token management (OAuth2 flow).
+    *   Playlist management (CRUD operations).
+    *   Library sync (read-only fetching).
+*   **Testing:**
+    *   A comprehensive Pytest suite is in place and passes consistently.
