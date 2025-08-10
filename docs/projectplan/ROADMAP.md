@@ -1,8 +1,8 @@
-# Zotify API — Next Steps and Phase Sequencing
+# Zotify API — Execution Plan
 
-**File:** `docs/projectplan/next_steps_and_phases.md`
+**File:** `docs/projectplan/ROADMAP.md`
 **Maintainer:** Jules
-**Last Updated:** 2025-08-07
+**Last Updated:** 2025-08-10 # JULES-NOTE: Realigned with codebase reality.
 **Purpose:** This document actively tracks all planned, in-progress, and completed work across all phases. It defines each phase, breaks it down into granular tasks, and aligns all work with roadmap goals and deliverables.
 
 ---
@@ -52,20 +52,21 @@ This section tracks the development of the `snitch` helper application for handl
 ## ✅ Phase 3–5: Core API + Testing (Done)
 
 - ✅ API endpoints for albums, tracks, metadata
+- ✅ Notification endpoints # JULES-NOTE: Verified as functional.
 - ✅ FastAPI response model scaffolding
 - ✅ Pytest suite with example cases
 - ✅ Full devdocs + API doc integration
 - ✅ Reverse proxy support for /docs access
 - ✅ Initial user system wiring (stub)
-- ✅ Security layer with role-based examples
+- ❌ Security layer with role-based examples # JULES-NOTE: No role-based security layer is implemented.
 - ✅ CI passing for all environments
-- ✅ `README.md` and `manual.md` updated with purpose explanation
+- ❌ `README.md` and `manual.md` updated with purpose explanation # JULES-NOTE: AUDIT-phase-1 found these files to be critically inaccurate and misleading.
 
 ---
 
 ## 🟡 Phase 6: Fork-Specific Enhancements (Mostly Complete)
 
-- ✅ GDPR and `/privacy/data` endpoint
+- ❌ GDPR and /privacy/data endpoint # JULES-NOTE: This feature is not implemented. The endpoint does not exist.
 - ✅ Admin key and audit logging (basic)
 - ✅ Documentation clarification integration (Jules task)
 - 🟡 API key revocation flow (pending)
@@ -80,7 +81,7 @@ This section tracks the development of the `snitch` helper application for handl
 | Library sync endpoints (read/pull) | ✅ | Fetched via Zotify CLI |
 | Library sync endpoints (write/push) | ❌ | Needs mutation layer |
 | Playlist list/fetch endpoints | ✅ | Completed in Phase 5 |
-| Playlist creation + modification | ❌ | New CLI wrapping needed |
+| Playlist creation + modification | ✅ | # JULES-NOTE: Core API endpoints for this are functional. |
 | Webhook support base class | ❌ | Needed for Phase 8 |
 | Admin API key: revoke + rotate | 🟡 | Core logic in draft |
 | Expand CI to track coverage | ❌ | Not yet prioritized |
@@ -94,7 +95,6 @@ This section tracks the development of the `snitch` helper application for handl
 |------|--------|-------|
 | Automation trigger model | ❌ | Event-based wiring required |
 | Rules engine (CLI hooks) | ❌ | Phase design needed |
-| Notification endpoints | ❌ | Include rate-limit + audit trail |
 | Global config endpoint | ❌ | Setup defaults via admin API |
 
 ---
@@ -105,7 +105,7 @@ This section tracks the development of the `snitch` helper application for handl
 |------|--------|-------|
 | Admin UI access tokens | ❌ | Secure tokens for config UI |
 | Log access endpoints | ❌ | Tail + grep support |
-| System info/reporting API | ❌ | Disk, memory, usage tracking |
+| System info/reporting API | 🟡 | # JULES-NOTE: Partially implemented. /uptime and /env are functional. Disk/memory usage is not. |
 | Background job management | ❌ | Pause/resume/restart sync jobs |
 
 ---
