@@ -126,14 +126,14 @@ This section tracks the development of the `snitch` helper application for handl
 - [ ] Create mutation layer for playlist management
 - [ ] Finalize admin API key lifecycle (revoke, audit, rotate)
 - [ ] Sync task_checklist.md with new report policy
-- [ ] Wire `next_steps_and_phases.md` to CI release candidate flow
+- [ ] Wire `ROADMAP.md` to CI release candidate flow
 - [ ] Prepare Phase 8 strategy doc
 
 ---
 
 ## 🧠 Notes
 
-- `next_steps_and_phases.md` is the only file allowed to define global task state.
+- `ROADMAP.md` is the only file allowed to define global task state.
 - Phase transitions are **not time-based** but milestone-based.
 - All Jules task prompts **must update this file** upon completion.
 - Link to any task artifacts (e.g. `/docs/projectplan/completions/`).
