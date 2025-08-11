@@ -115,3 +115,30 @@ Beyond technical features, the long-term success of the API depends on making it
 ---
 
 If we deliver this whole ecosystem tightly integrated with the API, it won’t just be “another Spotify API clone” but a full-fledged platform that’s accessible to casual users and power users alike—and that’s how you drive adoption and stand out in a crowded market.
+
+---
+
+## Unified Database Layer Adoption
+
+The recent architectural refactor introducing a backend-agnostic database layer using SQLAlchemy lays the groundwork for more scalable, maintainable data management across all services. While currently focused on core entities (downloads, playlists, tokens), future enhancements should:
+
+- Expand this unified layer to support multi-service integrations and provider-specific data.
+- Implement advanced querying, caching, and transactional features.
+- Ensure smooth migration paths for any additional persistence needs.
+- Maintain strict separation between API logic and data storage for flexibility in swapping backend databases if needed.
+
+**Note:** This foundation is critical and should be a key consideration in any upcoming feature developments, especially multi-provider support and API expansion, but the core refactor is complete and in use. New features must build on top of this layer rather than circumvent it.
+
+
+## Unified Provider Abstraction Layer
+
+To enable multi-provider support for music services without creating endpoint bloat, a unified abstraction layer will be developed. This layer will translate standardized API requests into provider-specific API calls through adapters or connectors.
+
+**Key objectives:**
+- Define a core, normalized set of API endpoints and data models that cover common operations across providers.
+- Implement lightweight translation matrices or adapter modules to handle provider-specific API differences.
+- Support pluggable authentication and token management per provider.
+- Avoid duplicating full API gateway solutions like WSO2 by embedding the translation logic within the application layer.
+- Ensure extensibility for easy addition of new music service providers.
+
+This is a medium- to long-term goal and must be factored into future architectural decisions and design plans.
