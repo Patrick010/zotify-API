@@ -5,7 +5,7 @@ from zotify_api.schemas.download import DownloadQueueStatus, DownloadJob
 from zotify_api.services.download_service import DownloadsService, get_downloads_service
 from zotify_api.services.auth import require_admin_api_key
 
-router = APIRouter(prefix="/download", tags=["download"], dependencies=[Depends(require_admin_api_key)])
+router = APIRouter(prefix="/download", tags=["download"])
 
 class DownloadRequest(BaseModel):
     track_ids: List[str]
@@ -14,6 +14,7 @@ class DownloadRequest(BaseModel):
 def download(
     payload: DownloadRequest,
     downloads_service: DownloadsService = Depends(get_downloads_service),
+    _admin: bool = Depends(require_admin_api_key),
 ):
     """ Queue one or more tracks for download. """
     return downloads_service.add_downloads_to_queue(payload.track_ids)
