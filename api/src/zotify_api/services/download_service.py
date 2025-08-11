@@ -1,46 +1,43 @@
 import time
-from collections import deque
-from typing import List, Dict, Optional
+from typing import List, Optional
 from zotify_api.schemas.download import DownloadJob, DownloadJobStatus, DownloadQueueStatus
+import zotify_api.services.downloads_db as downloads_db
 
 class DownloadsService:
     """
-    Manages the download queue and the status of download jobs.
-    NOTE: This is a simple in-memory implementation. A persistent queue
-    is a required future enhancement.
+    Manages the download queue and the status of download jobs using a persistent
+    SQLite database.
     """
-    def __init__(self):
-        self.queue: deque[DownloadJob] = deque()
-        self.jobs: Dict[str, DownloadJob] = {}
 
     def add_downloads_to_queue(self, track_ids: List[str]) -> List[DownloadJob]:
-        """Creates new download jobs and adds them to the queue."""
+        """Creates new download jobs and adds them to the database queue."""
         new_jobs = []
         for track_id in track_ids:
             job = DownloadJob(track_id=track_id)
-            self.queue.append(job)
-            self.jobs[job.job_id] = job
+            downloads_db.add_job_to_db(job)
             new_jobs.append(job)
         return new_jobs
 
     def get_queue_status(self) -> DownloadQueueStatus:
-        """Returns the current status of the download queue."""
+        """Returns the current status of the download queue from the database."""
+        all_jobs = downloads_db.get_all_jobs_from_db()
+
         status_counts = {
             DownloadJobStatus.PENDING: 0,
             DownloadJobStatus.IN_PROGRESS: 0,
             DownloadJobStatus.COMPLETED: 0,
             DownloadJobStatus.FAILED: 0,
         }
-        for job in self.jobs.values():
+        for job in all_jobs:
             if job.status in status_counts:
                 status_counts[job.status] += 1
 
         return DownloadQueueStatus(
-            total_jobs=len(self.jobs),
+            total_jobs=len(all_jobs),
             pending=status_counts[DownloadJobStatus.PENDING],
             completed=status_counts[DownloadJobStatus.COMPLETED],
             failed=status_counts[DownloadJobStatus.FAILED],
-            jobs=list(self.jobs.values())
+            jobs=all_jobs,
         )
 
     def process_download_queue(self, force_fail: bool = False) -> Optional[DownloadJob]:
@@ -48,11 +45,12 @@ class DownloadsService:
         Processes one job from the download queue.
         This method is designed to be called manually to simulate a background worker.
         """
-        if not self.queue:
+        job = downloads_db.get_next_pending_job_from_db()
+        if not job:
             return None
 
-        job = self.queue.popleft()
         job.status = DownloadJobStatus.IN_PROGRESS
+        downloads_db.update_job_in_db(job)
 
         try:
             # Simulate the download process
@@ -67,19 +65,19 @@ class DownloadsService:
             job.status = DownloadJobStatus.FAILED
             job.error_message = str(e)
 
+        downloads_db.update_job_in_db(job)
         return job
 
     def retry_failed_jobs(self) -> DownloadQueueStatus:
-        """Resets the status of all failed jobs to pending and re-queues them."""
-        for job in self.jobs.values():
-            if job.status == DownloadJobStatus.FAILED:
-                job.status = DownloadJobStatus.PENDING
-                job.error_message = None
-                self.queue.append(job)
+        """Resets the status of all failed jobs to pending in the database."""
+        downloads_db.update_failed_jobs_to_pending_in_db()
         return self.get_queue_status()
 
 
 # --- FastAPI Dependency ---
+
+# Initialize the database when the application starts
+downloads_db.init_db()
 
 # A simple singleton pattern to ensure we use the same service instance
 downloads_service_instance = DownloadsService()

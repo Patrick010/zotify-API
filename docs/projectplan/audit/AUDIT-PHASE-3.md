@@ -6,6 +6,29 @@
 
 ---
 
+## 5. Task: Implement Persistent Download Queue
+
+**Date:** 2025-08-11
+**Status:** ✅ Done
+
+### 5.1. Problem
+The `TRACEABILITY_MATRIX.md` identified a high-priority gap for the "Downloads Subsystem". The initial implementation used a temporary, in-memory queue, which was not suitable for production.
+
+### 5.2. Changes Made
+1.  **Code Implementation:**
+    *   Created a new database module `api/src/zotify_api/services/downloads_db.py` to manage a persistent queue using SQLite.
+    *   Refactored `api/src/zotify_api/services/download_service.py` to use the new database module, replacing the in-memory queue.
+2.  **Testing:**
+    *   Updated the test suite in `api/tests/test_download.py` to use a temporary, isolated database for each test, ensuring the new implementation is robustly tested.
+3.  **Documentation Updates:**
+    *   Updated `LOW_LEVEL_DESIGN.md` to describe the new SQLite-based persistent queue.
+    *   Updated `TRACEABILITY_MATRIX.md` to mark the "Downloads Subsystem" gap as fully closed (`Matches Design? = Y`).
+
+### 5.3. Outcome
+The "Downloads Subsystem" now has a production-ready, persistent job queue. This closes a critical, high-priority gap identified in the audit.
+
+---
+
 ## 1. Task: Align Admin Endpoint Security Documentation
 
 **Date:** 2025-08-11

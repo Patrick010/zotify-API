@@ -1,18 +1,45 @@
 import pytest
+import os
 from fastapi.testclient import TestClient
 from zotify_api.main import app
-from zotify_api.services.download_service import get_downloads_service, DownloadsService
+import zotify_api.services.downloads_db as downloads_db
+from zotify_api.services.download_service import get_downloads_service, downloads_service_instance
 
 client = TestClient(app)
 
 @pytest.fixture
-def fresh_downloads_service(monkeypatch):
-    """ Ensures each test gets a fresh service instance and a dummy admin key. """
-    service = DownloadsService()
-    app.dependency_overrides[get_downloads_service] = lambda: service
+def test_db(tmp_path, monkeypatch):
+    """
+    Fixture to set up a temporary, isolated database for each test.
+    This prevents tests from interfering with each other.
+    """
+    # Create a temporary database file
+    temp_db_path = tmp_path / "test_downloads.db"
+
+    # Use monkeypatch to make the download_db module use the temporary file
+    monkeypatch.setattr(downloads_db, "DB_FILE", str(temp_db_path))
+
+    # Initialize the database schema in the temporary database
+    downloads_db.init_db()
+
+    yield temp_db_path
+
+    # Cleanup is handled by tmp_path fixture, but we can be explicit if needed
+    if os.path.exists(temp_db_path):
+        os.remove(temp_db_path)
+
+@pytest.fixture
+def fresh_downloads_service(test_db, monkeypatch):
+    """
+    Ensures each test uses the isolated test database and has a dummy admin key.
+    The `test_db` fixture dependency ensures the DB is set up before the service is used.
+    """
     monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
-    yield service
-    app.dependency_overrides = {}
+    # The service instance is a singleton, so we just return it.
+    # The test_db fixture ensures it's operating on a clean DB.
+    yield downloads_service_instance
+    # No need to reset the singleton, as each test gets its own DB.
+
 
 def test_get_initial_queue_status(fresh_downloads_service):
     response = client.get("/api/download/status")
@@ -42,15 +69,23 @@ def test_add_new_downloads(fresh_downloads_service):
     assert data["pending"] == 2
     assert data["completed"] == 0
 
-def test_retry_failed_jobs_and_process(fresh_downloads_service):
+def test_retry_failed_jobs_and_process(fresh_downloads_service, monkeypatch):
     """
     Tests that a failed job can be retried and then successfully processed.
     This confirms the fix to re-queue retried jobs.
     """
-    # Manually set a job to failed for testing
-    service = fresh_downloads_service
-    job = service.add_downloads_to_queue(["failed_track"])[0]
-    job.status = "failed"
+    # Add a job
+    client.post("/api/download", headers={"X-API-Key": "test_key"}, json={"track_ids": ["track_to_fail"]})
+
+    # Force it to fail
+    original_method = downloads_service_instance.process_download_queue
+    def mock_process_fail(*args, **kwargs):
+        return original_method(force_fail=True)
+    monkeypatch.setattr(downloads_service_instance, "process_download_queue", mock_process_fail)
+    client.post("/api/download/process", headers={"X-API-Key": "test_key"})
+
+    # Restore original method
+    monkeypatch.undo()
 
     # Check status before retry
     response = client.get("/api/download/status")
@@ -72,7 +107,7 @@ def test_retry_failed_jobs_and_process(fresh_downloads_service):
     response = client.post("/api/download/process", headers={"X-API-Key": "test_key"})
     assert response.status_code == 200
     processed_job = response.json()
-    assert processed_job["track_id"] == "failed_track"
+    assert processed_job["track_id"] == "track_to_fail"
     assert processed_job["status"] == "completed"
 
     # Final status check
@@ -121,11 +156,10 @@ def test_process_job_failure(fresh_downloads_service, monkeypatch):
     client.post("/api/download", headers={"X-API-Key": "test_key"}, json={"track_ids": ["track_fail"]})
 
     # Patch the service method to force a failure
-    service = fresh_downloads_service
-    original_method = service.process_download_queue
+    original_method = downloads_service_instance.process_download_queue
     def mock_process_fail(*args, **kwargs):
         return original_method(force_fail=True)
-    monkeypatch.setattr(service, "process_download_queue", mock_process_fail)
+    monkeypatch.setattr(downloads_service_instance, "process_download_queue", mock_process_fail)
 
     response = client.post("/api/download/process", headers={"X-API-Key": "test_key"})
     assert response.status_code == 200

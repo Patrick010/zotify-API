@@ -196,12 +196,12 @@ The current integration provides the following capabilities:
 - `POST /api/downloads/retry`: Retries all failed jobs in the queue.
 - `POST /api/downloads/process`: Manually processes one job from the queue.
 
-**Service Layer (`services/downloads_service.py`):**
-- The service will manage an in-memory download queue (e.g., a `collections.deque`).
-- **`add_downloads_to_queue(track_ids: list)`**: Creates `DownloadJob` objects and adds them to the queue.
-- **`get_queue_status()`**: Returns a list of all jobs and their current status.
-- **`process_download_queue()`**: Processes one job from the front of the queue, updating its status to `in-progress` and then `completed` or `failed`.
-- **`retry_failed_jobs()`**: Moves all jobs with "failed" status back to "pending" and adds them back to the queue to be processed again.
+**Service Layer (`services/download_service.py`):**
+- The service uses a new `downloads_db.py` module to manage a persistent download queue in a SQLite database (`api/storage/downloads.db`).
+- **`add_downloads_to_queue(track_ids: list)`**: Creates `DownloadJob` objects and adds them to the database.
+- **`get_queue_status()`**: Retrieves all jobs from the database and returns a summary of their status.
+- **`process_download_queue()`**: Fetches the oldest pending job from the database, simulates processing, and updates its status to `completed` or `failed`.
+- **`retry_failed_jobs()`**: Resets the status of all failed jobs in the database to `pending`.
 
 **Data Models (`schemas/downloads.py`):**
 - **`DownloadJobStatus` (Enum):** `PENDING`, `IN_PROGRESS`, `COMPLETED`, `FAILED`.
@@ -219,9 +219,8 @@ The current integration provides the following capabilities:
   - `failed: int`
   - `jobs: List[DownloadJob]`
 
-**Dependencies & Limitations:**
-- The initial implementation will use a simple in-memory queue. This means the queue will be lost on server restart.
-- A persistent job queue (e.g., using a database or Redis) is a required future enhancement before this feature is considered production-ready.
+**Data Persistence:**
+- The download queue is now persistent and will survive server restarts. All job data is stored in a dedicated SQLite database located at `api/storage/downloads.db`. This fulfills the requirement for a persistent job queue.
 
 ---
 
