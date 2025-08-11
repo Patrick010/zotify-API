@@ -10,13 +10,34 @@ class DownloadJobStatus(str, Enum):
     COMPLETED = "completed"
     FAILED = "failed"
 
-class DownloadJob(BaseModel):
-    job_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+# --- Base Schemas ---
+
+class DownloadJobBase(BaseModel):
     track_id: str
-    status: DownloadJobStatus = DownloadJobStatus.PENDING
-    progress: Optional[float] = None # JULES-NOTE: Placeholder for future progress reporting (e.g., 0.0 to 1.0).
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+
+# --- Schemas for Creating and Updating ---
+
+class DownloadJobCreate(DownloadJobBase):
+    pass
+
+class DownloadJobUpdate(BaseModel):
+    status: Optional[DownloadJobStatus] = None
+    progress: Optional[float] = None
     error_message: Optional[str] = None
+
+# --- Schema for Reading Data (includes all fields) ---
+
+class DownloadJob(DownloadJobBase):
+    job_id: str
+    status: DownloadJobStatus
+    progress: Optional[float]
+    created_at: datetime
+    error_message: Optional[str]
+
+    class Config:
+        orm_mode = True
+
+# --- Schema for the Queue Status Endpoint ---
 
 class DownloadQueueStatus(BaseModel):
     total_jobs: int

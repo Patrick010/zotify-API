@@ -6,6 +6,31 @@
 
 ---
 
+## 6. Task: Implement Unified Database Architecture
+
+**Date:** 2025-08-11
+**Status:** ✅ Done
+
+### 6.1. Problem
+The application used multiple, inconsistent persistence mechanisms, including file-based storage (`playlists.json`, `spotify_tokens.json`) and a single-purpose SQLite database for downloads. This was not scalable, secure, or maintainable. A unified, backend-agnostic database layer was required.
+
+### 6.2. Changes Made
+1.  **Architectural Refactoring:**
+    *   A new database layer was created at `api/src/zotify_api/database/` using SQLAlchemy.
+    *   This layer includes a configurable session manager, ORM models for all application data, and a set of CRUD functions.
+2.  **Service Migration:**
+    *   The Downloads Service, Playlist Storage, and Spotify Token Storage were all refactored to use the new unified database layer.
+    *   The old persistence mechanisms (JSON files, standalone SQLite DB) were removed.
+3.  **Testing:**
+    *   The test suite was updated to use the new database architecture, with isolated in-memory databases for each test run.
+4.  **Documentation:**
+    *   The `HIGH_LEVEL_DESIGN.md`, `LOW_LEVEL_DESIGN.md`, and `TRACEABILITY_MATRIX.md` were all updated to reflect the new architecture.
+
+### 6.3. Outcome
+The application now has a robust, centralized, and backend-agnostic persistence layer. This improves scalability, maintainability, and security, and provides a solid foundation for future development.
+
+---
+
 ## 5. Task: Implement Persistent Download Queue
 
 **Date:** 2025-08-11
