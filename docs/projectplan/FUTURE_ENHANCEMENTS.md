@@ -28,6 +28,8 @@ This section lists specific technical features and improvements that are candida
 *   **Observability:**
     *   Improve the audit trail with more detailed event logging.
     *   Add real-time monitoring hooks for integration with external monitoring systems.
+*   **Comprehensive Health Checks:**
+    *   Expand the system info endpoints to include detailed process stats, disk/network health, and dependency checks.
 
 ---
 

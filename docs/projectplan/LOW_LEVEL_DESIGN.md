@@ -128,6 +128,28 @@ Goal: All subsystems fully modular, testable, documented.
 
 ---
 
+## System Info & Health Endpoints Design
+
+**Goal:** Provide basic endpoints for monitoring the system's status and environment.
+
+**API Endpoints (`routes/system.py`):**
+- `GET /api/system/uptime`: Returns the system's uptime.
+- `GET /api/system/env`: Returns a list of environment variables.
+
+**Service Layer (`services/system_service.py`):**
+- The service provides simple methods to retrieve system information, currently limited to uptime and environment variables.
+
+**Current Implementation:**
+- The existing implementation provides basic information through the `/uptime` and `/env` endpoints.
+
+**Future Enhancements:**
+- As noted in the `TRACEABILITY_MATRIX.md`, the full design for this subsystem includes more comprehensive checks. These are now tracked in the [`FUTURE_ENHANCEMENTS.md`](./FUTURE_ENHANCEMENTS.md) document and include:
+  - Process stats
+  - Disk and network health
+  - Dependency checks
+
+---
+
 ## Downloads Subsystem Design
 
 **Goal:** Implement a functional download management system that allows users to queue tracks for download and check the status of the queue.
