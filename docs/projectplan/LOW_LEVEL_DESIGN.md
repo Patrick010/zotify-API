@@ -62,7 +62,7 @@ For each subsystem:
 - Summary of changes for service file, schema, route, tests, docs.
 
 ### 5. Security
-A comprehensive overview of the security architecture, principles, and roadmap for the Zotify API project is available in the [Zotify API Security](./security.md) document. This document serves as the definitive security reference for the project.
+A comprehensive overview of the security architecture, principles, and roadmap for the Zotify API project is available in the [Zotify API Security](./SECURITY.md) document. This document serves as the definitive security reference for the project.
 
 ---
 
