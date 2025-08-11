@@ -10,7 +10,7 @@ router = APIRouter(prefix="/downloads", tags=["downloads"], dependencies=[Depend
 class DownloadRequest(BaseModel):
     track_ids: List[str]
 
-@router.post("/new", response_model=List[DownloadJob])
+@router.post("/", response_model=List[DownloadJob])
 def new_download_jobs(
     payload: DownloadRequest,
     downloads_service: DownloadsService = Depends(get_downloads_service),
