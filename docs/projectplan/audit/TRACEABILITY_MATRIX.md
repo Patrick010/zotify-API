@@ -2,40 +2,21 @@
 
 **Purpose:** This document tracks the alignment between the features and architectural principles described in the `HIGH_LEVEL_DESIGN.md` and `LOW_LEVEL_DESIGN.md` documents and the actual state of the codebase.
 
-| Feature / Component | Exists in Codebase? (Y/N) | Matches Design? (Y/N) | Notes on Deviations |
-| :--- | :--- | :--- | :--- |
-| **High-Level Architecture (from HLD)** | | | |
-| Dedicated Service Layer Architecture | Y | Y | The codebase correctly separates routes, services, and schemas as designed. |
-| Documentation-first Workflow | N | N | This process was not followed, leading to the documentation drift that prompted the audit. |
-| Test Coverage > 90% | N | N | Test coverage is present but well below the 90% target. Coverage enforcement is not wired into the CI pipeline. |
-| Admin Endpoint Security | Y | N | API key check exists, but design specifies layered security (e.g., rate limiting, secondary auth) which is not implemented. |
-| CI/CD Pipeline | Y | Y | The `.github/workflows` directory and project config show that ruff, mypy, bandit, and pytest are configured. |
-| OAuth2 for Spotify Integration | Y | N | Core auth flow is implemented, but post-auth CRUD/sync functionality is incomplete compared to design. |
-| JWT for API Authentication | N | N | This is a core design requirement that is not implemented. |
-| **Service Refactor Status (from LLD)** | | | The LLD claims all 18 steps are complete, but the audit shows this is false. |
-| Search Subsystem | Y | Y | Functional. |
-| Sync Subsystem | Y | Y | Functional. |
-| Config Subsystem | Y | Y | Functional. |
-| Playlists Subsystem | Y | Y | Functional. |
-| Tracks Subsystem | Y | Y | Functional. |
-| **Downloads Subsystem** | Y | N | The LLD assumed full workflow integration, but current code only has route stubs with no backing service logic. |
-| Logging Subsystem | Y | N | Basic logging exists, but standardized error models and audit trails specified in the design are not implemented. |
-| Cache Subsystem | Y | Y | Functional. |
-| Network Subsystem | Y | Y | Functional. |
-| Metadata Subsystem | Y | Y | Functional. |
-| User Profiles Subsystem | Y | Y | Functional. |
-| Notifications Subsystem | Y | Y | Functional. |
-| Authentication & Admin Controls | Y | Y | The core admin API key system is functional. |
-| **System Info & Health Endpoints**| Y | N | Partially implemented. `uptime`/`env` are functional, but design includes process stats, disk/network health, and dependency checks which are missing. |
-
----
-
-## Known Experiential Gaps (Task 1.3)
-
-The following are known areas of mismatch identified outside of direct document-vs-code comparison:
-
-- **Authentication & Authorization:** The design specifies JWT-based auth and 2FA plans, but the current codebase mostly uses placeholders and partial implementations.
-- **Spotify Integration:** The design aims for full CRUD and sync support, but write-sync is incomplete, and webhook support is missing.
-- **Documentation Practices:** The design mandates a docs-first workflow; in reality, docs have lagged significantly, causing confusion.
-- **Error Handling & Logging:** The design expects consistent error models and audit logs; the code has some gaps and inconsistent logging.
-- **Security Features:** Some security enhancements like secret rotation and TLS hardening are in design but not yet reflected in code.
+| Feature / Component | Exists? | Matches Design? | Priority | Notes on Deviations & Context |
+| :--- | :--- | :--- | :--- | :--- |
+| **Authentication & Authorization** | | | | |
+| Admin Endpoint Security | Y | N | High | **Context:** Intentional trade-off for initial release as endpoints are internal-only. **Gap:** Design specifies layered security (rate limiting, JWT, etc.) not just an API key. Must be implemented before any external exposure. |
+| JWT for API Authentication | N | N | Medium | **Context:** Core design requirement for user-level auth. Not implemented. |
+| Role-Based Access Control (RBAC) | N | N | Low | **Context:** Planned for multi-user environments, but current model is single-user. Deferred until multi-user support is prioritized. |
+| **Spotify Integration** | | | | |
+| OAuth2 for Spotify Integration | Y | N | Medium | **Context:** Post-auth features were deferred to focus on a working auth flow first. **Gap:** Design aims for full CRUD/sync; write-sync and full library management are incomplete. |
+| Webhook/Event System | N | N | Low | **Context:** Deferred as no downstream consumers exist yet. **Gap:** Design specifies an outbound event system for state changes (downloads, syncs) that is not implemented. |
+| **Core Subsystems** | | | | |
+| Downloads Subsystem | Y | N | High | **Context:** Deferred because it depends on an upcoming task orchestration layer. **Gap:** Design assumes full job queue and progress tracking; code only has stubs. |
+| System Info & Health Endpoints | Y | N | Medium | **Context:** Full telemetry was deprioritized to stabilize the core pipeline first. **Gap:** `uptime`/`env` are functional, but design includes process stats, disk/network health, and dependency checks which are missing. |
+| Error Handling & Logging | Y | N | Medium | **Context:** Grew organically during iterative development without early enforcement. **Gap:** Design specifies consistent error schemas and audit trails; current implementation is inconsistent. |
+| Config Management via API | N | N | Medium | **Context:** Deferred to avoid complexity while config schema was evolving. **Gap:** Design includes runtime config updates via API; current code only reads config at startup. |
+| **General Processes & Security** | | | | |
+| Documentation Practices | Y | N | High | **Context:** Docs lagged significantly during rapid development. **Gap:** Design mandates a docs-first workflow which was not followed. This is the focus of the current audit/realignment. |
+| Security Enhancements | N | N | Medium | **Context:** Deferred as not critical for internal-only MVP. **Gap:** Features like secret rotation and TLS hardening are in the design but not implemented. |
+| Test Coverage > 90% & Gating | N | N | Medium | **Context:** Basic tests exist, but coverage is not enforced in CI. **Gap:** HLD requires >90% coverage and CI gating, which is not implemented. |

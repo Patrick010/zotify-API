@@ -123,5 +123,42 @@ Goal: All subsystems fully modular, testable, documented.
 
 ---
 
+## Downloads Subsystem Design
+
+**Goal:** Implement a functional download management system that allows users to queue tracks for download and check the status of the queue.
+
+**API Endpoints (`routes/downloads.py`):**
+- `POST /api/download`: Accepts a list of track IDs, creates a download job for each, and adds them to a queue. Returns a job ID for tracking.
+- `GET /api/downloads/status`: Returns the status of all jobs in the queue (pending, in-progress, completed, failed).
+- `POST /api/downloads/retry`: Retries all failed jobs in the queue.
+
+**Service Layer (`services/downloads_service.py`):**
+- The service will manage an in-memory download queue (e.g., a `collections.deque`).
+- **`add_downloads_to_queue(track_ids: list)`**: Creates `DownloadJob` objects and adds them to the queue.
+- **`get_queue_status()`**: Returns a list of all jobs and their current status.
+- **`process_download_queue()`**: A background task (to be implemented later) that would process the queue. For now, jobs will remain in "pending" state.
+- **`retry_failed_jobs()`**: Moves all jobs with "failed" status back to "pending".
+
+**Data Models (`schemas/downloads.py`):**
+- **`DownloadJobStatus` (Enum):** `PENDING`, `IN_PROGRESS`, `COMPLETED`, `FAILED`.
+- **`DownloadJob` (Pydantic Model):**
+  - `job_id: str`
+  - `track_id: str`
+  - `status: DownloadJobStatus`
+  - `created_at: datetime`
+  - `error_message: Optional[str] = None`
+- **`DownloadQueueStatus` (Pydantic Model):**
+  - `total_jobs: int`
+  - `pending: int`
+  - `completed: int`
+  - `failed: int`
+  - `jobs: List[DownloadJob]`
+
+**Dependencies & Limitations:**
+- The initial implementation will use a simple in-memory queue. This means the queue will be lost on server restart.
+- A persistent job queue (e.g., using a database or Redis) is a required future enhancement before this feature is considered production-ready.
+
+---
+
 ## Ongoing Maintenance
 All development tasks must follow the [Task Execution Checklist](./task_checklist.md) to ensure consistency, quality, and security.

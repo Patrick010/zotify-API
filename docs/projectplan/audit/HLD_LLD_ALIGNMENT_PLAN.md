@@ -12,10 +12,11 @@
 ## Phase 2: Document Deviations (2–3 days)
 
 **Goal:** Record and explain every gap or deviation clearly for context.
+**Status:** ✅ Done
 
-- **Task 2.1:** For each mismatch in the spreadsheet, add a brief note explaining why it exists (e.g., intentional change, technical debt, scope creep).
-- **Task 2.2:** Highlight which mismatches require fixing vs which are acceptable tradeoffs for now.
-- **Task 2.3:** Store this annotated matrix as the “alignment blueprint” in the docs repo under /docs/design/alignment_matrix.md.
+- **Task 2.1:** ✅ Done - For each mismatch in the spreadsheet, add a brief note explaining why it exists (e.g., intentional change, technical debt, scope creep).
+- **Task 2.2:** ✅ Done - Highlight which mismatches require fixing vs which are acceptable tradeoffs for now.
+- **Task 2.3:** ✅ Done - Store this annotated matrix as the “alignment blueprint” in `docs/projectplan/audit/TRACEABILITY_MATRIX.md`.
 
 ## Phase 3: Incremental Design Updates (Ongoing, sprint-based)
 
