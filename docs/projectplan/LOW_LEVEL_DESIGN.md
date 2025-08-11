@@ -74,6 +74,8 @@ Any deviation from the LLD requires an explicit update to both the LLD and HLD a
 
 ## Security Roadmap
 
+> Note: This roadmap outlines high-level security goals. For a more detailed and up-to-date list of planned features and product vision, please see the [`FUTURE_ENHANCEMENTS.md`](./FUTURE_ENHANCEMENTS.md) document.
+
 ### Phase 1: Foundations (Current)
 - **Policy and Documentation:** Establish a formal security policy and create comprehensive security documentation.
 - **Admin API Key Mitigation:** Replace the static admin API key with a dynamic, auto-generated key system.
@@ -98,6 +100,9 @@ Any deviation from the LLD requires an explicit update to both the LLD and HLD a
 - **Compliance:** Ensure that the API complies with all relevant security standards and regulations.
 
 ## Multi-Phase Plan Beyond Step 18
+
+> Note: This multi-phase plan represents a high-level sketch of potential future work. For a more detailed and up-to-date list of planned features and product vision, please see the [`FUTURE_ENHANCEMENTS.md`](./FUTURE_ENHANCEMENTS.md) document.
+
 ### Phase 1 — Service Layer Completion (Steps 1–18)
 Goal: All subsystems fully modular, testable, documented.
 

@@ -48,6 +48,8 @@ The refactor aims to:
 - JWT for API authentication (future step).
 - Principle of least privilege for DB access.
 
+> Note: Specific, long-term security ambitions are tracked in the [`FUTURE_ENHANCEMENTS.md`](./FUTURE_ENHANCEMENTS.md) document.
+
 ## 8. Risks & Mitigations
 - **Risk**: Drift between docs and code.
   **Mitigation**: PR checklist and CI step that flags doc inconsistencies.
@@ -64,3 +66,9 @@ A comprehensive overview of the security architecture, principles, and roadmap f
 The canonical checklist is located at `docs/projectplan/task_checklist.md`. Before a task is marked complete (including committing, creating a PR, or merging), follow the checklist: update HLD/LLD as needed, ensure security & privacy checks, update docs, write tests, and confirm all tests pass.
 
 This checklist is authoritative and enforced for every task.
+
+---
+
+## 10. Future Vision
+
+While this document outlines the current architecture, the project maintains a separate [`FUTURE_ENHANCEMENTS.md`](./FUTURE_ENHANCEMENTS.md) document. This file captures the long-term product vision, including goals for usability, competitive differentiation, and advanced feature sets that go beyond the current roadmap.
