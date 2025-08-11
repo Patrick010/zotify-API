@@ -4,6 +4,22 @@ This document provides a live, chronological log of all major tasks undertaken a
 
 ---
 
+## Task: Plan Unified Database Architecture
+
+**Date:** 2025-08-11
+**Status:** 🟡 In Progress
+**Assignee:** Jules
+
+### Objective
+To create a comprehensive plan for refactoring the project to use a unified, backend-agnostic database system. This involves selecting an ORM, designing a new schema, and planning the refactoring of all services and documentation.
+
+### Related Documents
+- `docs/projectplan/HIGH_LEVEL_DESIGN.md`
+- `docs/projectplan/LOW_LEVEL_DESIGN.md`
+- `docs/projectplan/ROADMAP.md`
+
+---
+
 ## Task: Implement Persistent Download Queue
 
 **Date:** 2025-08-11
