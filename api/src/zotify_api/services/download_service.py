@@ -1,6 +1,6 @@
 from collections import deque
 from typing import List, Dict
-from zotify_api.schemas.downloads import DownloadJob, DownloadJobStatus, DownloadQueueStatus
+from zotify_api.schemas.download import DownloadJob, DownloadJobStatus, DownloadQueueStatus
 
 class DownloadsService:
     """

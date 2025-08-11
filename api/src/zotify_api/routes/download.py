@@ -1,16 +1,16 @@
 from fastapi import APIRouter, Depends
 from typing import List
 from pydantic import BaseModel
-from zotify_api.schemas.downloads import DownloadQueueStatus, DownloadJob
-from zotify_api.services.downloads_service import DownloadsService, get_downloads_service
+from zotify_api.schemas.download import DownloadQueueStatus, DownloadJob
+from zotify_api.services.download_service import DownloadsService, get_downloads_service
 from zotify_api.services.auth import require_admin_api_key
 
-router = APIRouter(tags=["downloads"], dependencies=[Depends(require_admin_api_key)])
+router = APIRouter(prefix="/download", tags=["download"], dependencies=[Depends(require_admin_api_key)])
 
 class DownloadRequest(BaseModel):
     track_ids: List[str]
 
-@router.post("/download", response_model=List[DownloadJob])
+@router.post("/", response_model=List[DownloadJob])
 def download(
     payload: DownloadRequest,
     downloads_service: DownloadsService = Depends(get_downloads_service),
@@ -19,7 +19,7 @@ def download(
     return downloads_service.add_downloads_to_queue(payload.track_ids)
 
 
-@router.get("/downloads/status", response_model=DownloadQueueStatus)
+@router.get("/status", response_model=DownloadQueueStatus)
 def get_download_queue_status(
     downloads_service: DownloadsService = Depends(get_downloads_service)
 ):
@@ -27,7 +27,7 @@ def get_download_queue_status(
     return downloads_service.get_queue_status()
 
 
-@router.post("/downloads/retry", response_model=DownloadQueueStatus)
+@router.post("/retry", response_model=DownloadQueueStatus)
 def retry_failed_downloads(
     downloads_service: DownloadsService = Depends(get_downloads_service)
 ):

@@ -1,7 +1,7 @@
 import pytest
 from fastapi.testclient import TestClient
 from zotify_api.main import app
-from zotify_api.services.downloads_service import get_downloads_service, DownloadsService
+from zotify_api.services.download_service import get_downloads_service, DownloadsService
 
 client = TestClient(app)
 
@@ -15,7 +15,7 @@ def fresh_downloads_service(monkeypatch):
     app.dependency_overrides = {}
 
 def test_get_initial_queue_status(fresh_downloads_service):
-    response = client.get("/api/downloads/status", headers={"X-API-Key": "test_key"})
+    response = client.get("/api/download/status", headers={"X-API-Key": "test_key"})
     assert response.status_code == 200
     data = response.json()
     assert data["total_jobs"] == 0
@@ -35,7 +35,7 @@ def test_add_new_downloads(fresh_downloads_service):
     assert jobs[0]["status"] == "pending"
 
     # Check the queue status
-    response = client.get("/api/downloads/status", headers={"X-API-Key": "test_key"})
+    response = client.get("/api/download/status", headers={"X-API-Key": "test_key"})
     assert response.status_code == 200
     data = response.json()
     assert data["total_jobs"] == 2
@@ -49,14 +49,14 @@ def test_retry_failed_jobs(fresh_downloads_service):
     job.status = "failed"
 
     # Check status before retry
-    response = client.get("/api/downloads/status", headers={"X-API-Key": "test_key"})
+    response = client.get("/api/download/status", headers={"X-API-Key": "test_key"})
     data = response.json()
     assert data["total_jobs"] == 1
     assert data["failed"] == 1
     assert data["pending"] == 0
 
     # Retry failed jobs
-    response = client.post("/api/downloads/retry", headers={"X-API-Key": "test_key"})
+    response = client.post("/api/download/retry", headers={"X-API-Key": "test_key"})
     assert response.status_code == 200
     data = response.json()
     assert data["total_jobs"] == 1
@@ -65,11 +65,11 @@ def test_retry_failed_jobs(fresh_downloads_service):
     assert data["jobs"][0]["status"] == "pending"
 
 def test_unauthorized_access(fresh_downloads_service):
-    response = client.get("/api/downloads/status")
-    assert response.status_code == 401 # or 403 depending on implementation
+    response = client.get("/api/download/status")
+    assert response.status_code == 401
 
     response = client.post("/api/download", json={"track_ids": ["track1"]})
     assert response.status_code == 401
 
-    response = client.post("/api/downloads/retry")
+    response = client.post("/api/download/retry")
     assert response.status_code == 401
