@@ -136,15 +136,16 @@ Goal: All subsystems fully modular, testable, documented.
 - The service will manage an in-memory download queue (e.g., a `collections.deque`).
 - **`add_downloads_to_queue(track_ids: list)`**: Creates `DownloadJob` objects and adds them to the queue.
 - **`get_queue_status()`**: Returns a list of all jobs and their current status.
-- **`process_download_queue()`**: A background task (to be implemented later) that would process the queue. For now, jobs will remain in "pending" state.
+- **`process_download_queue()`**: A background task (to be implemented later) that would process the queue. For now, jobs will remain in "pending" state. # JULES-NOTE: Will be implemented to be manually callable for testing state transitions.
 - **`retry_failed_jobs()`**: Moves all jobs with "failed" status back to "pending".
 
 **Data Models (`schemas/downloads.py`):**
 - **`DownloadJobStatus` (Enum):** `PENDING`, `IN_PROGRESS`, `COMPLETED`, `FAILED`.
 - **`DownloadJob` (Pydantic Model):**
-  - `job_id: str`
+  - `job_id: str` # JULES-NOTE: To be implemented as a UUIDv4 string.
   - `track_id: str`
   - `status: DownloadJobStatus`
+  - `progress: Optional[float] = None` # JULES-NOTE: Placeholder for future progress reporting (e.g., 0.0 to 1.0).
   - `created_at: datetime`
   - `error_message: Optional[str] = None`
 - **`DownloadQueueStatus` (Pydantic Model):**
