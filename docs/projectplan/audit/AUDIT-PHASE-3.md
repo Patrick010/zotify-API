@@ -53,3 +53,25 @@ The `TRACEABILITY_MATRIX.md` identified a high-priority gap for the "Downloads S
 ### 2.3. Outcome
 
 The "Downloads Subsystem" now has a functional, in-memory job queue, closing the initial implementation gap. This completes this task as another item in the Alignment Plan's Phase 3.
+
+---
+
+## 3. Task: Align Error Handling & Logging Documentation
+
+**Date:** 2025-08-11
+**Status:** ✅ Done
+
+### 3.1. Problem
+
+The `TRACEABILITY_MATRIX.md` identified a medium-priority gap for "Error Handling & Logging". The implementation was inconsistent and did not match the ideal design of standardized error schemas and audit trails.
+
+### 3.2. Changes Made
+
+1.  **Investigation:** Analyzed the codebase to document the current ad-hoc implementation of error handling and logging.
+2.  **`FUTURE_ENHANCEMENTS.md`:** Added the "ideal" design for standardized error handling and logging to this document.
+3.  **`LOW_LEVEL_DESIGN.md`:** Added a new design section to accurately describe the current, inconsistent implementation.
+4.  **`TRACEABILITY_MATRIX.md`:** Updated the entry for "Error Handling & Logging" to `Matches Design? = Y`, closing the documentation gap.
+
+### 3.3. Outcome
+
+The project's design documents now accurately reflect the current state of the error handling and logging system. The aspirational, standardized design is captured as a future goal. This completes this task as another item in the Alignment Plan's Phase 3.

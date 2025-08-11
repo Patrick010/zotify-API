@@ -28,6 +28,10 @@ This section lists specific technical features and improvements that are candida
 *   **Observability:**
     *   Improve the audit trail with more detailed event logging.
     *   Add real-time monitoring hooks for integration with external monitoring systems.
+*   **Standardized Error Handling & Logging:**
+    *   Implement a standardized error schema for all API responses.
+    *   Refactor the service layer to raise domain-specific exceptions instead of `HTTPException`s.
+    *   Establish a consistent logging format and convention across all services.
 *   **Comprehensive Health Checks:**
     *   Expand the system info endpoints to include detailed process stats, disk/network health, and dependency checks.
 

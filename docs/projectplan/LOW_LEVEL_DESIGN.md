@@ -128,6 +128,25 @@ Goal: All subsystems fully modular, testable, documented.
 
 ---
 
+## Error Handling & Logging Design
+
+**Goal:** To document the current, ad-hoc approach to error handling and logging in the application.
+
+**Current Implementation - Error Handling:**
+- **API Layer:** Errors are returned to the client using FastAPI's `HTTPException`.
+- **Status Codes & Messages:** The use of HTTP status codes and the content of the `detail` messages are inconsistent across different endpoints. Some errors return a generic `500` status, while others use more specific codes like `401`, `404`, or `503`. Detail messages are often the direct string representation of an internal exception.
+- **Service Layer:** Some services, like `spoti_client.py`, raise `HTTPException`s directly, coupling them to the web framework. Other services may raise standard Python exceptions that are caught in the route layer.
+
+**Current Implementation - Logging:**
+- **Framework:** The standard Python `logging` module is used.
+- **Configuration:** A basic configuration is applied at startup via `logging.basicConfig(level=logging.INFO)`, which logs all messages of `INFO` level and above to the console with a default format.
+- **Usage:** Loggers are instantiated per-module using `logging.getLogger(__name__)`. Naming conventions for the logger instance (`log` vs. `logger`) are inconsistent.
+
+**Future Enhancements:**
+- A comprehensive, standardized approach to error handling and logging is a required future enhancement. This includes creating a unified error response schema, refactoring services to use domain-specific exceptions, and establishing consistent logging formats. These items are tracked in the [`FUTURE_ENHANCEMENTS.md`](./FUTURE_ENHANCEMENTS.md) document.
+
+---
+
 ## System Info & Health Endpoints Design
 
 **Goal:** Provide basic endpoints for monitoring the system's status and environment.
