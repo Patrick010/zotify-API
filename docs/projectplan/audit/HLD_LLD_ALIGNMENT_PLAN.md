@@ -21,6 +21,7 @@
 ## Phase 3: Incremental Design Updates (Ongoing, sprint-based)
 
 **Goal:** Gradually update design docs to reflect reality, starting with critical subsystems.
+**Status:** 🟡 In Progress
 
 - **Task 3.1:** Pick 1–2 core subsystems from the matrix with the biggest deviations.
 - **Task 3.2:** Update the HLD and LLD sections for those subsystems:
