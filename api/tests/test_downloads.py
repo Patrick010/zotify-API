@@ -26,7 +26,7 @@ def test_get_initial_queue_status(fresh_downloads_service):
 
 def test_add_new_downloads(fresh_downloads_service):
     # Add two tracks to the queue
-    response = client.post("/api/downloads", headers={"X-API-Key": "test_key"}, json={"track_ids": ["track1", "track2"]})
+    response = client.post("/api/download", headers={"X-API-Key": "test_key"}, json={"track_ids": ["track1", "track2"]})
     assert response.status_code == 200
     jobs = response.json()
     assert len(jobs) == 2
@@ -68,7 +68,7 @@ def test_unauthorized_access(fresh_downloads_service):
     response = client.get("/api/downloads/status")
     assert response.status_code == 401 # or 403 depending on implementation
 
-    response = client.post("/api/downloads", json={"track_ids": ["track1"]})
+    response = client.post("/api/download", json={"track_ids": ["track1"]})
     assert response.status_code == 401
 
     response = client.post("/api/downloads/retry")
