@@ -50,3 +50,4 @@ This document serves as the master file, or single source of truth, for tracking
 |---|---|---|
 | 2025-08-11 | Initial creation of the project registry. | Jules |
 | 2025-08-11 | Updated LLD and Traceability Matrix for "Error Handling & Logging" alignment. | Jules |
+| 2025-08-11 | Updated LLD and Traceability Matrix for "Spotify Integration" alignment. | Jules |

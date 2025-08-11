@@ -128,6 +128,23 @@ Goal: All subsystems fully modular, testable, documented.
 
 ---
 
+## Spotify Integration Design
+
+**Goal:** To provide a robust integration with the Spotify Web API for authentication, playlist management, and library synchronization.
+
+**Current Implementation:**
+The current integration provides the following capabilities:
+- **Authentication:** A full OAuth2 PKCE flow for authenticating the application with a user's Spotify account.
+- **Playlist Management:** Full CRUD (Create, Read, Update, Delete) functionality for user playlists and the tracks within them. This is exposed via a comprehensive set of API endpoints.
+- **Read-Only Sync:** A one-way synchronization feature (`/sync_playlists`) that fetches all of a user's playlists from Spotify and saves them to a local file.
+
+**Future Enhancements:**
+- As noted in the `TRACEABILITY_MATRIX.md`, the full design for this subsystem includes more advanced synchronization and library management features. These are now tracked in the [`FUTURE_ENHANCEMENTS.md`](./FUTURE_ENHANCEMENTS.md) document and include:
+  - Two-way ("write") synchronization for playlists.
+  - Full library management (saved albums, liked songs, etc.).
+
+---
+
 ## Error Handling & Logging Design
 
 **Goal:** To document the current, ad-hoc approach to error handling and logging in the application.

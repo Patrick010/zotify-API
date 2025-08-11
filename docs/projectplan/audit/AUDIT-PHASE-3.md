@@ -75,3 +75,25 @@ The `TRACEABILITY_MATRIX.md` identified a medium-priority gap for "Error Handlin
 ### 3.3. Outcome
 
 The project's design documents now accurately reflect the current state of the error handling and logging system. The aspirational, standardized design is captured as a future goal. This completes this task as another item in the Alignment Plan's Phase 3.
+
+---
+
+## 4. Task: Align OAuth2 for Spotify Integration Documentation
+
+**Date:** 2025-08-11
+**Status:** ✅ Done
+
+### 4.1. Problem
+
+The `TRACEABILITY_MATRIX.md` identified a medium-priority gap for "OAuth2 for Spotify Integration". The design specified full CRUD/sync functionality, but the implementation was incomplete.
+
+### 4.2. Changes Made
+
+1.  **Investigation:** Analyzed the `spotify` service and client to determine the exact capabilities of the current integration. Confirmed that playlist CRUD is functional, but write-sync and full library management are not implemented.
+2.  **`FUTURE_ENHANCEMENTS.md`:** Updated the entry for "Full Spotify OAuth2 Integration" to be more specific about the missing features (write-sync, full library management).
+3.  **`LOW_LEVEL_DESIGN.md`:** Added a new design section to accurately describe the current, partial implementation.
+4.  **`TRACEABILITY_MATRIX.md`:** Updated the entry for "OAuth2 for Spotify Integration" to `Matches Design? = Y (partial)`, closing the documentation gap.
+
+### 4.3. Outcome
+
+The project's design documents now accurately reflect the current state of the Spotify integration. The unimplemented features are captured as future goals. This completes this task as another item in the Alignment Plan's Phase 3.

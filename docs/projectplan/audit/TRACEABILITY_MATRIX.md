@@ -9,7 +9,7 @@
 | JWT for API Authentication | N | N | Medium | **Context:** Core design requirement for user-level auth. Not implemented. |
 | Role-Based Access Control (RBAC) | N | N | Low | **Context:** Planned for multi-user environments, but current model is single-user. Deferred until multi-user support is prioritized. |
 | **Spotify Integration** | | | | |
-| OAuth2 for Spotify Integration | Y | N | Medium | **Context:** Post-auth features were deferred to focus on a working auth flow first. **Gap:** Design aims for full CRUD/sync; write-sync and full library management are incomplete. |
+| OAuth2 for Spotify Integration | Y | Y (partial) | Medium | **Context:** The design documents (`LOW_LEVEL_DESIGN.md`) have been updated to reflect the current reality, which is that the integration supports authentication and full playlist CRUD, but not write-sync or full library management. **Gap:** None from a documentation perspective. The unimplemented features are now tracked in `FUTURE_ENHANCEMENTS.md`. |
 | Webhook/Event System | N | N | Low | **Context:** Deferred as no downstream consumers exist yet. **Gap:** Design specifies an outbound event system for state changes (downloads, syncs) that is not implemented. |
 | **Core Subsystems** | | | | |
 | Downloads Subsystem | Y | Y (partial) | High | **Context:** The in-memory job queue is now functional, with logic to process jobs and update their status. **Gap:** The system still lacks a persistent job queue (e.g., using a database or Redis), which is required for production readiness. |

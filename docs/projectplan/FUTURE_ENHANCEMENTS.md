@@ -17,8 +17,9 @@ This section lists specific technical features and improvements that are candida
     *   Transition from a static admin API key to a more robust, layered security model, including rate limiting, JWT/OAuth2 for user-level endpoints, and dynamic key rotation.
 *   **Persistent & Distributed Job Queue:**
     *   Replace the current in-memory download queue with a persistent, database or Redis-backed system to ensure job durability across restarts and to support distributed workers.
-*   **Full Spotify OAuth2 Integration:**
-    *   Expand the Spotify integration to include full post-authentication CRUD (Create, Read, Update, Delete) and write-sync functionality, achieving full feature parity with the Spotify API.
+*   **Full Spotify OAuth2 Integration & Library Sync:**
+    *   Expand the Spotify integration to include full, two-way synchronization (write-sync) for playlists.
+    *   Implement full library management, including the ability to read and modify a user's saved albums and liked tracks.
 *   **Enhanced Download & Job Management:**
     *   Implement detailed, real-time progress reporting for download jobs.
     *   Introduce user notifications for job completion or failure.
