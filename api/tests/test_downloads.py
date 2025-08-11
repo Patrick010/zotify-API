@@ -1,52 +1,75 @@
 import pytest
+from fastapi.testclient import TestClient
 from zotify_api.main import app
-from zotify_api.services import downloads_service
+from zotify_api.services.downloads_service import get_downloads_service, DownloadsService
+
+client = TestClient(app)
 
 @pytest.fixture
-def downloads_service_override():
-    """Fixture to override the downloads service with a predictable state."""
-    download_state = {
-        "in_progress": [],
-        "failed": {"track_7": "Network error", "track_10": "404 not found"},
-        "completed": ["track_3", "track_5"]
-    }
-    def get_downloads_service_override():
-        return downloads_service.DownloadsService(download_state)
+def fresh_downloads_service(monkeypatch):
+    """ Ensures each test gets a fresh service instance and a dummy admin key. """
+    service = DownloadsService()
+    app.dependency_overrides[get_downloads_service] = lambda: service
+    monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
+    yield service
+    app.dependency_overrides = {}
 
-    original_override = app.dependency_overrides.get(downloads_service.get_downloads_service)
-    app.dependency_overrides[downloads_service.get_downloads_service] = get_downloads_service_override
-    yield
-    app.dependency_overrides[downloads_service.get_downloads_service] = original_override
-
-
-def test_download_status(client, downloads_service_override):
-    response = client.get("/api/downloads/status")
+def test_get_initial_queue_status(fresh_downloads_service):
+    response = client.get("/api/downloads/status", headers={"X-API-Key": "test_key"})
     assert response.status_code == 200
-    assert "in_progress" in response.json()["data"]
-    assert "failed" in response.json()["data"]
-    assert "completed" in response.json()["data"]
+    data = response.json()
+    assert data["total_jobs"] == 0
+    assert data["pending"] == 0
+    assert data["completed"] == 0
+    assert data["failed"] == 0
+    assert data["jobs"] == []
 
-def test_retry_downloads_unauthorized(client, downloads_service_override):
-    response = client.post("/api/downloads/retry", json={"track_ids": ["track_7", "track_10"]})
+def test_add_new_downloads(fresh_downloads_service):
+    # Add two tracks to the queue
+    response = client.post("/api/downloads/new", headers={"X-API-Key": "test_key"}, json={"track_ids": ["track1", "track2"]})
+    assert response.status_code == 200
+    jobs = response.json()
+    assert len(jobs) == 2
+    assert jobs[0]["track_id"] == "track1"
+    assert jobs[1]["track_id"] == "track2"
+    assert jobs[0]["status"] == "pending"
+
+    # Check the queue status
+    response = client.get("/api/downloads/status", headers={"X-API-Key": "test_key"})
+    assert response.status_code == 200
+    data = response.json()
+    assert data["total_jobs"] == 2
+    assert data["pending"] == 2
+    assert data["completed"] == 0
+
+def test_retry_failed_jobs(fresh_downloads_service):
+    # Manually set a job to failed for testing
+    service = fresh_downloads_service
+    job = service.add_downloads_to_queue(["failed_track"])[0]
+    job.status = "failed"
+
+    # Check status before retry
+    response = client.get("/api/downloads/status", headers={"X-API-Key": "test_key"})
+    data = response.json()
+    assert data["total_jobs"] == 1
+    assert data["failed"] == 1
+    assert data["pending"] == 0
+
+    # Retry failed jobs
+    response = client.post("/api/downloads/retry", headers={"X-API-Key": "test_key"})
+    assert response.status_code == 200
+    data = response.json()
+    assert data["total_jobs"] == 1
+    assert data["failed"] == 0
+    assert data["pending"] == 1
+    assert data["jobs"][0]["status"] == "pending"
+
+def test_unauthorized_access(fresh_downloads_service):
+    response = client.get("/api/downloads/status")
+    assert response.status_code == 401 # or 403 depending on implementation
+
+    response = client.post("/api/downloads/new", json={"track_ids": ["track1"]})
     assert response.status_code == 401
 
-def test_retry_downloads(client, downloads_service_override):
-    # Get initial state
-    initial_status = client.get("/api/downloads/status").json()
-    initial_failed_count = len(initial_status["data"]["failed"])
-    assert initial_failed_count > 0
-
-    # Retry failed downloads
-    response = client.post(
-        "/api/downloads/retry",
-        headers={"X-API-Key": "test_key"},
-        json={"track_ids": ["track_7", "track_10"]}
-    )
-    assert response.status_code == 200
-    assert response.json()["data"]["queued"] is True
-
-    # Verify that the failed queue is now empty
-    final_status = client.get("/api/downloads/status").json()
-    assert len(final_status["data"]["failed"]) == 0
-    assert "track_7" in final_status["data"]["in_progress"]
-    assert "track_10" in final_status["data"]["in_progress"]
+    response = client.post("/api/downloads/retry")
+    assert response.status_code == 401

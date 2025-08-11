@@ -1,18 +1,35 @@
-from fastapi import APIRouter, Depends
-from zotify_api.schemas.downloads import RetryRequest, DownloadStatusResponse
-from zotify_api.schemas.generic import StandardResponse
+from fastapi import APIRouter, Depends, Body
+from typing import List
+from pydantic import BaseModel
+from zotify_api.schemas.downloads import DownloadQueueStatus, DownloadJob
 from zotify_api.services.downloads_service import DownloadsService, get_downloads_service
 from zotify_api.services.auth import require_admin_api_key
 
-router = APIRouter(prefix="/downloads")
+router = APIRouter(prefix="/downloads", tags=["downloads"], dependencies=[Depends(require_admin_api_key)])
 
-@router.get("/status", response_model=StandardResponse[DownloadStatusResponse])
-def download_status(downloads_service: DownloadsService = Depends(get_downloads_service)):
-    return {"data": downloads_service.get_download_status()}
+class DownloadRequest(BaseModel):
+    track_ids: List[str]
 
-@router.post("/retry", summary="Retry failed downloads", dependencies=[Depends(require_admin_api_key)], response_model=StandardResponse)
-def retry_downloads(
-    req: RetryRequest,
+@router.post("/new", response_model=List[DownloadJob])
+def new_download_jobs(
+    payload: DownloadRequest,
+    downloads_service: DownloadsService = Depends(get_downloads_service),
+):
+    """ Queue one or more tracks for download. """
+    return downloads_service.add_downloads_to_queue(payload.track_ids)
+
+
+@router.get("/status", response_model=DownloadQueueStatus)
+def get_download_queue_status(
     downloads_service: DownloadsService = Depends(get_downloads_service)
 ):
-    return {"data": downloads_service.retry_downloads(req.track_ids)}
+    """ Get the current status of the download queue. """
+    return downloads_service.get_queue_status()
+
+
+@router.post("/retry", response_model=DownloadQueueStatus)
+def retry_failed_downloads(
+    downloads_service: DownloadsService = Depends(get_downloads_service)
+):
+    """ Retry all failed downloads in the queue. """
+    return downloads_service.retry_failed_jobs()
