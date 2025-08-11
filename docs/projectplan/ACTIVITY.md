@@ -4,6 +4,21 @@ This document provides a live, chronological log of all major tasks undertaken a
 
 ---
 
+## Task: Plan API Testing Webpage
+
+**Date:** 2025-08-11
+**Status:** 🟡 In Progress
+**Assignee:** Jules
+
+### Objective
+To create a comprehensive plan for developing a new API testing webpage with integrated `sqlite-web` support. This is a high-priority task to improve development and testing workflows.
+
+### Related Documents
+- `docs/projectplan/ROADMAP.md`
+- `docs/projectplan/EXECUTION_PLAN.md`
+
+---
+
 ## Task: Implement Unified Database Architecture
 
 **Date:** 2025-08-11
