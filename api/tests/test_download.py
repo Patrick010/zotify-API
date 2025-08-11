@@ -42,11 +42,7 @@ def test_add_new_downloads(fresh_downloads_service):
     assert data["pending"] == 2
     assert data["completed"] == 0
 
-def test_retry_failed_jobs_and_process(fresh_downloads_service):
-    """
-    Tests that a failed job can be retried and then successfully processed.
-    This confirms the fix to re-queue retried jobs.
-    """
+def test_retry_failed_jobs(fresh_downloads_service):
     # Manually set a job to failed for testing
     service = fresh_downloads_service
     job = service.add_downloads_to_queue(["failed_track"])[0]
@@ -68,21 +64,6 @@ def test_retry_failed_jobs_and_process(fresh_downloads_service):
     assert data["pending"] == 1
     assert data["jobs"][0]["status"] == "pending"
 
-    # Now, process the re-queued job
-    response = client.post("/api/download/process", headers={"X-API-Key": "test_key"})
-    assert response.status_code == 200
-    processed_job = response.json()
-    assert processed_job["track_id"] == "failed_track"
-    assert processed_job["status"] == "completed"
-
-    # Final status check
-    response = client.get("/api/download/status")
-    data = response.json()
-    assert data["total_jobs"] == 1
-    assert data["pending"] == 0
-    assert data["completed"] == 1
-
-
 def test_auth_logic(fresh_downloads_service):
     # status and retry should be public (no key needed)
     response = client.get("/api/download/status")
@@ -97,59 +78,4 @@ def test_auth_logic(fresh_downloads_service):
 
     # ...and should succeed with auth
     response = client.post("/api/download", headers={"X-API-Key": "test_key"}, json={"track_ids": ["track1"]})
-    assert response.status_code == 200
-
-
-def test_process_job_success(fresh_downloads_service):
-    client.post("/api/download", headers={"X-API-Key": "test_key"}, json={"track_ids": ["track_success"]})
-
-    response = client.post("/api/download/process", headers={"X-API-Key": "test_key"})
-    assert response.status_code == 200
-    job = response.json()
-    assert job["track_id"] == "track_success"
-    assert job["status"] == "completed"
-    assert job["progress"] == 1.0
-
-    response = client.get("/api/download/status")
-    data = response.json()
-    assert data["total_jobs"] == 1
-    assert data["pending"] == 0
-    assert data["completed"] == 1
-
-
-def test_process_job_failure(fresh_downloads_service, monkeypatch):
-    client.post("/api/download", headers={"X-API-Key": "test_key"}, json={"track_ids": ["track_fail"]})
-
-    # Patch the service method to force a failure
-    service = fresh_downloads_service
-    original_method = service.process_download_queue
-    def mock_process_fail(*args, **kwargs):
-        return original_method(force_fail=True)
-    monkeypatch.setattr(service, "process_download_queue", mock_process_fail)
-
-    response = client.post("/api/download/process", headers={"X-API-Key": "test_key"})
-    assert response.status_code == 200
-    job = response.json()
-    assert job["track_id"] == "track_fail"
-    assert job["status"] == "failed"
-    assert job["error_message"] == "Forced failure for testing."
-
-    response = client.get("/api/download/status")
-    data = response.json()
-    assert data["total_jobs"] == 1
-    assert data["pending"] == 0
-    assert data["failed"] == 1
-
-
-def test_process_empty_queue(fresh_downloads_service):
-    response = client.post("/api/download/process", headers={"X-API-Key": "test_key"})
-    assert response.status_code == 200
-    assert response.json() is None
-
-
-def test_process_auth(fresh_downloads_service):
-    response = client.post("/api/download/process")
-    assert response.status_code == 401
-
-    response = client.post("/api/download/process", headers={"X-API-Key": "test_key"})
     assert response.status_code == 200

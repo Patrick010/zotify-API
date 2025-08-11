@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from typing import List, Optional
+from typing import List
 from pydantic import BaseModel
 from zotify_api.schemas.download import DownloadQueueStatus, DownloadJob
 from zotify_api.services.download_service import DownloadsService, get_downloads_service
@@ -34,12 +34,3 @@ def retry_failed_downloads(
 ):
     """ Retry all failed downloads in the queue. """
     return downloads_service.retry_failed_jobs()
-
-
-@router.post("/process", response_model=Optional[DownloadJob])
-def process_job(
-    downloads_service: DownloadsService = Depends(get_downloads_service),
-    _admin: bool = Depends(require_admin_api_key),
-):
-    """ Manually process one job from the download queue. """
-    return downloads_service.process_download_queue()

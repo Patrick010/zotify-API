@@ -1,6 +1,5 @@
-import time
 from collections import deque
-from typing import List, Dict, Optional
+from typing import List, Dict
 from zotify_api.schemas.download import DownloadJob, DownloadJobStatus, DownloadQueueStatus
 
 class DownloadsService:
@@ -43,39 +42,11 @@ class DownloadsService:
             jobs=list(self.jobs.values())
         )
 
-    def process_download_queue(self, force_fail: bool = False) -> Optional[DownloadJob]:
-        """
-        Processes one job from the download queue.
-        This method is designed to be called manually to simulate a background worker.
-        """
-        if not self.queue:
-            return None
-
-        job = self.queue.popleft()
-        job.status = DownloadJobStatus.IN_PROGRESS
-
-        try:
-            # Simulate the download process
-            time.sleep(0.1)  # Simulate I/O
-            if force_fail:
-                raise ValueError("Forced failure for testing.")
-
-            # Simulate a successful download
-            job.progress = 1.0
-            job.status = DownloadJobStatus.COMPLETED
-        except Exception as e:
-            job.status = DownloadJobStatus.FAILED
-            job.error_message = str(e)
-
-        return job
-
     def retry_failed_jobs(self) -> DownloadQueueStatus:
-        """Resets the status of all failed jobs to pending and re-queues them."""
+        """Resets the status of all failed jobs to pending."""
         for job in self.jobs.values():
             if job.status == DownloadJobStatus.FAILED:
                 job.status = DownloadJobStatus.PENDING
-                job.error_message = None
-                self.queue.append(job)
         return self.get_queue_status()
 
 

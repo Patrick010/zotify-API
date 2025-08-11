@@ -59,7 +59,7 @@ This document provides a detailed breakdown of the tasks required to fulfill the
 - ❌ Develop secure UI access token management.
 - ❌ Add endpoints for log access with filtering support.
 - 🟡 Implement system info and reporting endpoints (uptime, env, disk/memory). # JULES-NOTE: Partially implemented. /uptime and /env are functional.
-- 🟡 Introduce background job management for sync tasks. # JULES-NOTE: The foundational in-memory queue processing logic has been implemented for the Downloads Subsystem.
+- ❌ Introduce background job management for sync tasks.
 
 ## Phase 10: Finalization & Release Readiness
 **Goal:** Lock API schema, prepare release packaging and finalize docs.
