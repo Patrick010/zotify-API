@@ -25,3 +25,31 @@ The `TRACEABILITY_MATRIX.md` identified a high-priority gap for "Admin Endpoint 
 ### 1.3. Outcome
 
 The project's security documentation is now accurate and aligned with the current state of the codebase. This completes the first task of Phase 3.
+
+---
+
+## 2. Task: Implement Downloads Subsystem Queue Processor
+
+**Date:** 2025-08-11
+**Status:** ✅ Done
+
+### 2.1. Problem
+
+The `TRACEABILITY_MATRIX.md` identified a high-priority gap for the "Downloads Subsystem". The design specified a functional job queue, but the codebase only contained stubs.
+
+### 2.2. Changes Made
+
+1.  **Code Implementation:**
+    *   Added `process_download_queue()` method to `DownloadsService` to process one job from the queue.
+    *   Added a manual trigger endpoint `POST /api/download/process`.
+    *   Fixed a bug in the `retry_failed_jobs` logic.
+2.  **Testing:**
+    *   Added a comprehensive test suite for the new functionality. All project tests pass.
+3.  **Documentation Updates:**
+    *   Updated `LOW_LEVEL_DESIGN.md` to reflect the new implementation.
+    *   Updated `TRACEABILITY_MATRIX.md` to mark the gap as partially closed.
+    *   Updated `EXECUTION_PLAN.md` and `ROADMAP.md` to reflect the progress.
+
+### 2.3. Outcome
+
+The "Downloads Subsystem" now has a functional, in-memory job queue, closing the initial implementation gap. This completes this task as another item in the Alignment Plan's Phase 3.

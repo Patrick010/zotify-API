@@ -108,7 +108,7 @@ This section tracks the development of the `snitch` helper application for handl
 | Admin UI access tokens | ❌ | Secure tokens for config UI |
 | Log access endpoints | ❌ | Tail + grep support |
 | System info/reporting API | 🟡 | # JULES-NOTE: Partially implemented. /uptime and /env are functional. Disk/memory usage is not. |
-| Background job management | ❌ | Pause/resume/restart sync jobs |
+| Background job management | 🟡 | In-memory download queue processor implemented. |
 
 ---
 
