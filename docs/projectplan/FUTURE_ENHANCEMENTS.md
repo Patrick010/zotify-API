@@ -62,3 +62,49 @@ Beyond technical features, the long-term success of the API depends on making it
 *   **Actions:**
     *   Focus on "how-to" guides and tutorials over purely theoretical references.
     *   Establish a developer community channel (e.g., Discord, forum) for feedback, support, and collaboration.
+
+---
+
+# Future Enhancements: Framework & Multi-Service Accessibility
+
+## Web UI
+- Clean, responsive HTML/CSS/JS templates that let users browse, search, queue downloads, manage playlists, view statuses—all without writing code.
+
+## Query Language
+- A beginner-friendly, expressive query syntax or DSL for filtering and manipulating tracks/playlists. Not just simple filters but advanced ops like:
+  - Create, edit, delete playlists
+  - Merge playlists with rules (e.g., remove duplicates, reorder by popularity)
+  - Import/export playlists in multiple formats (Spotify, M3U, JSON, CSV)
+  - Search by genre, artist, album, release year, popularity, explicit content flags
+  - Bulk actions (tag editing, batch downloads)
+  - Smart dynamic playlists (auto-update by criteria)
+- Investigate and prototype integration of AI-driven natural language processing (NLP) to allow users to express queries and commands in everyday language.
+  - Enable transforming human-readable requests into precise API queries or playlist manipulations without requiring formal syntax knowledge.
+  - Examples:
+    - "Create a playlist of upbeat rock songs from the 90s."
+    - "Merge my jazz and blues playlists but remove duplicates."
+    - "Show me tracks by artists similar to Radiohead released after 2010."
+  - This would drastically lower the entry barrier and make advanced functionality accessible to casual users.
+  - Research options include embedding pre-trained language models, or interfacing with cloud NLP APIs, with focus on privacy and performance.
+
+## Scripting / Automation Hooks
+- A lightweight embedded scripting layer or API clients with abstractions for complex workflows (e.g., periodic sync, trigger downloads on new releases).
+
+## Metadata Editing & Enrichment
+- Allow users to edit track metadata locally (tags, cover art), and pull enriched data from third-party sources (e.g., lyrics, credits).
+
+## User Profiles & Sharing
+- Basic multi-user support with saved settings, playlist sharing, favorites, and history.
+
+## Notifications & Progress UI
+- Push notifications or UI alerts for download completions, failures, quota warnings, etc.
+
+## Mobile-friendly Design
+- So users can manage and interact on phones or tablets smoothly.
+
+## Comprehensive Documentation & Examples
+- Usage guides, recipes, and code samples for all common tasks to flatten the learning curve.
+
+---
+
+If we deliver this whole ecosystem tightly integrated with the API, it won’t just be “another Spotify API clone” but a full-fledged platform that’s accessible to casual users and power users alike—and that’s how you drive adoption and stand out in a crowded market.
