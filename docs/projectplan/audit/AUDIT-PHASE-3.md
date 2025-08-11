@@ -19,7 +19,7 @@ The application used multiple, inconsistent persistence mechanisms, including fi
     *   A new database layer was created at `api/src/zotify_api/database/` using SQLAlchemy.
     *   This layer includes a configurable session manager, ORM models for all application data, and a set of CRUD functions.
 2.  **Service Migration:**
-    *   The Downloads Service, Playlist Storage, and Spotify Token Storage were all refactored to use the new unified database layer.
+    *   The Download Service, Playlist Storage, and Spotify Token Storage were all refactored to use the new unified database layer.
     *   The old persistence mechanisms (JSON files, standalone SQLite DB) were removed.
 3.  **Testing:**
     *   The test suite was updated to use the new database architecture, with isolated in-memory databases for each test run.

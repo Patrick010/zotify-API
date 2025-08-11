@@ -15,7 +15,7 @@ To refactor the entire application to use a unified, backend-agnostic database s
 
 ### Outcome
 - A new database layer was created with a configurable session manager, ORM models, and CRUD functions.
-- The Downloads Service, Playlist Storage, and Spotify Token Storage were all migrated to the new system.
+- The Download Service, Playlist Storage, and Spotify Token Storage were all migrated to the new system.
 - The test suite was updated to use isolated, in-memory databases for each test run.
 - All relevant project documentation was updated to reflect the new architecture.
 
