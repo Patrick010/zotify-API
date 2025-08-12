@@ -1,9 +1,0 @@
-[project]
-name = "zotify-devtools"
-version = "0.1.0"
-description = "Developer tools for the Zotify API."
-requires-python = ">=3.10"
-dependencies = [
-    "Flask",
-    "sqlite-web",
-]
