@@ -23,6 +23,16 @@ This section tracks the development of the `snitch` helper application for handl
 
 ---
 
+## 🛠️ Developer Tooling
+
+This section tracks the development of tools to aid in the development and testing of the Zotify API.
+
+| Tool | Status | Notes |
+|------|--------|-------|
+| `gonk-testUI` | ✅ | A standalone web-based UI for API testing and database browsing. |
+
+---
+
 ## 🔁 Structure and Update Policy
 
 - **This file is mandatory and must be maintained after each major task or roadmap update.**
