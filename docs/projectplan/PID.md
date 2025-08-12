@@ -1,120 +1,124 @@
 # Project Initiation Document (PID)
 
-**Project Name:** Zotify API Refactoring and Enhancement
-**Date:** 2025-08-12
-**Version:** 1.0
+**Project Name:** Zotify API Refactoring and Enhancement  
+**Date:** 2025-08-12  
+**Version:** 1.0  
 
 ---
 
 ## 1. Full Business Case
 
-**Justification:** The Zotify API, in its initial state, was not built on a sustainable architecture. It lacked a persistent data layer, had inconsistent documentation, and was tightly coupled to a single provider (Spotify). This project was initiated to rectify these foundational issues, reducing technical debt and enabling future growth.
+**Justification:**  
+The Zotify API was originally built as a lightweight wrapper for a single use case—interacting with Spotify through Zotify/Librespot—but without a sustainable architecture for long-term growth. It lacked persistent storage, modularity, and the flexibility to support multiple providers. This project aims to refactor and expand the API to form a robust, scalable, and provider-agnostic backend for automation, integrations, and developer tooling.
 
-**Business Benefits:**
--   **Reduced Operational Risk:** By moving to a persistent database, the risk of data loss (e.g., download queues, user tokens) is eliminated.
--   **Increased Development Velocity:** A clean, well-documented, and modular architecture allows for faster and more reliable implementation of new features.
--   **Enhanced Scalability:** The new architecture is designed to support more users, more data, and more integrations.
--   **Strategic Optionality:** The move towards a provider-agnostic design creates future opportunities to expand the service to other platforms, increasing the application's value proposition.
+**Strategic Goals:**  
+- Transition Zotify from a Spotify-only CLI wrapper into a fully modular API framework capable of integrating with multiple audio content sources.  
+- Lay the foundation for a future-ready architecture that supports automation, sync, analytics, and secure multi-user workflows.  
+- Deliver an API that is developer-friendly, self-documented, and scalable without major redesigns.  
+- Enable both CLI and WebUI-based interactions, giving users and developers a choice of interfaces.  
+
+**Business Benefits:**  
+- **Reduced Operational Risk:** Persistent database eliminates data loss for queues, tokens, and state.  
+- **Faster Development:** Cleaner, modular architecture accelerates new feature delivery.  
+- **Better Scalability:** Prepared for higher load, more data, and multiple integrations.  
+- **Future Expansion:** Provider-agnostic design allows easy addition of new streaming platforms.  
+- **Enhanced Feature Set:** Full two-way playlist sync and advanced automation unlock entirely new workflows.  
 
 ---
 
 ## 2. Detailed Project Scope & Product Breakdown
 
-### 2.1. In Scope
--   A full audit of the codebase against documentation.
--   Refactoring of the persistence layer to a unified, SQLAlchemy-based system.
--   Migration of all file-based and in-memory data (playlists, tokens, download jobs) to the new database.
--   Creation of a standalone developer testing UI (`gonk-testUI`) with `sqlite-web` integration.
--   A complete overhaul of the system documentation (`INSTALLATION.md`, `USER_MANUAL.md`, etc.).
--   Creation of formal project management documents (Project Brief, PID).
--   The initial design and planning for a provider-agnostic abstraction layer.
+### 2.1 In Scope
+- Full audit of the codebase against documentation. *(In Progress)*  
+- Refactoring to a unified, SQLAlchemy-based persistence layer.  
+- Migration of all file-based and in-memory data (playlists, tokens, download jobs) to the new database.  
+- Creation of a standalone developer testing UI (`gonk-testUI`) with `sqlite-web` integration.  
+- Complete overhaul of system documentation (`INSTALLATION.md`, `USER_MANUAL.md`, etc.). *(In Progress)*  
+- Creation of formal project management documents (Project Brief, PID).  
+- Initial design and implementation of a provider-agnostic abstraction layer. *(In Progress)*  
+- **Full two-way sync for Spotify playlists** as a core API feature.  
 
-### 2.2. Out of Scope
--   Implementation of any new music service providers.
--   Implementation of a full JWT-based authentication system.
--   Implementation of two-way (write) sync for Spotify playlists.
+### 2.2 Out of Scope (Current Phase)
+- None of the features are permanently out of scope. However, some items (e.g., **full JWT-based authentication** and other advanced security layers) are **strategic goals** for later phases, after the core architecture and sync features are complete.  
 
-### 2.3. Main Products (Deliverables)
-1.  **Refactored Zotify API (v1.0):** The core API with the new database architecture.
-2.  **`gonk-testUI` Module (v0.1.0):** The standalone developer testing tool.
-3.  **System Documentation Set:** The new `docs/system/` directory and its contents.
-4.  **PRINCE2 Project Documentation:** This PID and the associated Project Brief.
-5.  **`scripts/start.sh`:** The new startup script.
+### 2.3 Main Products (Deliverables)
+1. **Refactored Zotify API (v1.0):** New database architecture with modular design.  
+2. **`gonk-testUI` Module (v0.1.0):** Developer testing tool with SQLite inspection.  
+3. **System Documentation Set:** Fully updated `docs/system/` directory.  
+4. **PRINCE2 Project Documentation:** PID, Project Brief, and supporting docs.  
+5. **`scripts/start.sh`:** Unified startup script.  
+6. **Spotify Two-Way Sync Module:** Bidirectional playlist sync, with conflict resolution.  
 
 ---
 
 ## 3. Stage Plans (High-Level)
 
-The project has been executed in a series of logical, milestone-based stages rather than time-based stages.
-
--   **Stage 1: Audit & Alignment (Completed):** The initial phase focused on understanding the codebase and documenting the gaps between the code and the existing documentation.
--   **Stage 2: Core Refactoring (Completed):** This stage involved the two major architectural refactorings: the move to a unified database and the implementation of the `gonk-testUI`.
--   **Stage 3: Documentation & Formalization (Completed):** This stage involved the creation of the new system documentation and these PRINCE2 documents.
--   **Stage 4: Provider Abstraction (Next):** The next stage of the project will be to implement the provider-agnostic abstraction layer.
+- **Stage 1: Audit & Alignment** *(In Progress)* — Code/documentation gap analysis and alignment.  
+- **Stage 2: Core Refactoring** *(Completed)* — Unified database, new dev UI.  
+- **Stage 3: Documentation & Formalization** *(In Progress)* — Full system documentation, formal project docs.  
+- **Stage 4: Provider Abstraction** *(In Progress)* — Design and partial implementation of multi-provider layer.  
 
 ---
 
 ## 4. Project Controls
 
--   **Reporting:** Progress and status are tracked through the "living documents" in the `docs/projectplan/` directory, specifically `ACTIVITY.md` and `CURRENT_STATE.md`.
--   **Change Control:** All changes are managed through a process of proposing a plan, getting user approval, and then executing the plan. Any significant deviation from an approved plan requires re-approval.
--   **Quality Assurance:** Quality is assured through:
-    -   Code reviews (`request_code_review` tool).
-    -   Unit and integration testing (though the test runner is currently a known issue).
-    -   Meticulous documentation updates to ensure alignment with the code.
+- **Reporting:** Progress tracked in `docs/projectplan/` (`ACTIVITY.md`, `CURRENT_STATE.md`).  
+- **Change Control:** All changes require proposal, approval, and re-approval if scope deviates.  
+- **Quality Assurance:**  
+  - Code reviews before merge.  
+  - Unit/integration testing (test runner stability is a known issue).  
+  - Continuous documentation updates in sync with code changes.  
 
 ---
 
 ## 5. Risk, Issue, and Quality Registers
 
-This PID formalizes the known issues into registers.
+- **Risk Register:**  
+  - *Risk:* Development tools for filesystem manipulation/testing are unreliable.  
+  - *Impact:* Delays and workarounds reduce efficiency.  
+  - *Mitigation:* External code review, safe file operations instead of rename/move.  
 
--   **Risk Register:**
-    -   **Risk:** The development environment's tools for file system manipulation and test execution are unreliable.
-    -   **Impact:** This can cause delays and require workarounds, impacting development velocity.
-    -   **Mitigation:** Rely on external code reviews for validation where tests cannot be run. For file system issues, prefer creating/deleting files over renaming/moving directories.
--   **Issue Register:**
-    -   **Issue #1:** The `devtools/` directory exists as a duplicate of `gonk-testUI/`.
-    -   **Status:** Open.
-    -   **Impact:** Minor codebase clutter. No functional impact.
-    -   **Action:** To be removed in a future cleanup task.
--   **Quality Register:**
-    -   All code changes must be reviewed.
-    -   All documentation must be updated with every change.
-    -   The "living documents" (PID, CURRENT_STATE, ACTIVITY) must be kept in sync.
+- **Issue Register:**  
+  - *Issue #1:* Duplicate `devtools/` directory exists alongside `gonk-testUI/`.  
+  - *Status:* Open.  
+  - *Impact:* Minor clutter, no functional risk.  
+  - *Action:* Cleanup in future refactor.  
+
+- **Quality Register:**  
+  - All code must be reviewed.  
+  - All docs must be updated with every change.  
+  - PID, `CURRENT_STATE.md`, `ACTIVITY.md` remain in sync.  
 
 ---
 
 ## 6. Project Organisation (Roles & Responsibilities)
 
--   **Project Board / Project Executive:** The primary user, who provides the project mandate, sets the high-level requirements, and approves major plans and stage transitions.
--   **Project Manager:** The user is also fulfilling this role, providing detailed instructions, course corrections, and managing the project flow.
--   **Senior Supplier / Lead Developer:** Jules (the AI agent) is the primary technical resource responsible for design, implementation, testing, and documentation.
+- **Project Board / Project Executive:** Primary user — provides mandate, sets requirements, approves plans.  
+- **Project Manager:** Primary user — manages flow, gives detailed direction.  
+- **Senior Supplier / Lead Developer:** Jules (AI agent) — responsible for technical design, implementation, testing, and documentation.  
 
 ---
 
 ## 7. Communication Management Approach
 
--   All communication is handled through the interactive session.
--   Jules provides regular progress updates via the `message_user` tool and by updating the "living documents".
--   The user provides feedback, approvals, and new directives.
--   The `CURRENT_STATE.md` document serves as the primary asynchronous communication tool for project hand-offs.
+- All communication via interactive session.  
+- Jules provides regular updates and `CURRENT_STATE.md` hand-offs.  
+- User provides approvals and new directives.  
 
 ---
 
 ## 8. Configuration Management Approach
 
--   **Source Code:** Managed in a Git repository. All changes are committed to feature branches.
--   **Documentation:** All documentation is stored as Markdown files within the Git repository and is versioned alongside the code.
--   **Project State:** The "living documents" (`ACTIVITY.md`, `CURRENT_STATE.md`, `PID.md`) serve as the configuration management database for the project's status and direction.
+- **Source Code:** Managed in Git with feature branches.  
+- **Documentation:** Markdown in repo, versioned alongside code.  
+- **Project State:** Tracked in living docs (`ACTIVITY.md`, `CURRENT_STATE.md`, `PID.md`).  
 
 ---
 
 ## 9. Tailoring Approach
 
-This project adapts the PRINCE2 framework to a highly agile, one-on-one development context between a human project manager and an AI developer.
+- PRINCE2 principles applied in a minimal, agile form for a one-on-one AI/human workflow.  
+- Quality, risk, and change managed through interactive process and living documentation.  
+- Stage boundaries managed via user approval of new high-level plans.  
 
--   **Principles:** All PRINCE2 principles are adhered to (continued business justification, learn from experience, defined roles, manage by stages, manage by exception, focus on products, tailor to suit).
--   **Themes:** Themes like Quality, Risk, and Change are managed through the interactive process and documented in this PID.
--   **Processes:** Formal processes like "Starting up a Project" and "Initiating a Project" are condensed into the creation of the Project Brief and this PID. "Managing a Stage Boundary" is handled by the user's approval of new high-level plans.
--   **Documents:** The number of management products is minimized to the essential "living documents" to avoid bureaucracy while maintaining clarity and control.
+---
