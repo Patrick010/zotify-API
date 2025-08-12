@@ -135,3 +135,13 @@ def create_or_update_spotify_token(db: Session, token_data: dict) -> models.Spot
     db.commit()
     db.refresh(token)
     return token
+
+
+def delete_spotify_token(db: Session):
+    """
+    Deletes the Spotify token from the database.
+    """
+    token = get_spotify_token(db)
+    if token:
+        db.delete(token)
+        db.commit()

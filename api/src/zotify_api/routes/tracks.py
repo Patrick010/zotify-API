@@ -1,9 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile, File
 from zotify_api.services.db import get_db_engine
 from zotify_api.services import tracks_service
-from zotify_api.schemas.tracks import CreateTrackModel, UpdateTrackModel, TrackResponseModel
+from zotify_api.schemas.tracks import CreateTrackModel, UpdateTrackModel, TrackResponseModel, TrackMetadataRequest, TrackMetadataResponse
 from zotify_api.services.auth import require_admin_api_key
 from typing import List, Any
+from zotify_api.providers.base import BaseProvider
+from zotify_api.services.deps import get_provider
 
 router = APIRouter(prefix="/tracks")
 
@@ -40,8 +42,6 @@ def delete_track(track_id: str, engine: Any = Depends(get_db_engine)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-from zotify_api.schemas.tracks import TrackMetadataRequest, TrackMetadataResponse
-
 @router.post("/{track_id}/cover", dependencies=[Depends(require_admin_api_key)])
 async def upload_track_cover(track_id: str, cover_image: UploadFile = File(...), engine: Any = Depends(get_db_engine)):
     try:
@@ -51,10 +51,10 @@ async def upload_track_cover(track_id: str, cover_image: UploadFile = File(...),
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/metadata", response_model=TrackMetadataResponse, dependencies=[Depends(require_admin_api_key)])
-async def get_metadata(request: TrackMetadataRequest):
+async def get_metadata(request: TrackMetadataRequest, provider: BaseProvider = Depends(get_provider)):
     """ Returns metadata for all given tracks in one call. """
     if not request.track_ids:
         return TrackMetadataResponse(metadata=[])
 
-    metadata = await tracks_service.get_tracks_metadata_from_spotify(request.track_ids)
+    metadata = await tracks_service.get_tracks_metadata_from_spotify(request.track_ids, provider=provider)
     return TrackMetadataResponse(metadata=metadata)
