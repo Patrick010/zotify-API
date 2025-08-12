@@ -22,6 +22,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **Future Enhancements** | [`FUTURE_ENHANCEMENTS.md`](./FUTURE_ENHANCEMENTS.md) | A "parking lot" for new ideas and long-term ambitions not on the current roadmap. |
 | **Lessons Learnt Log** | [`LESSONS-LEARNT.md`](./LESSONS-LEARNT.md) | A log of key takeaways and insights from each project phase. |
 | **Project Backlog** | [`BACKLOG.md`](./BACKLOG.md) | A tactical backlog of clearly defined, approved, but un-assigned tasks. |
+| **Changelog** | [`api/docs/CHANGELOG.md`](./api/docs/CHANGELOG.md) | A log of all user-facing changes for each version. |
 
 ---
 
