@@ -12,6 +12,7 @@
 | OAuth2 for Spotify Integration | Y | Y (partial) | Medium | **Context:** The design documents (`LOW_LEVEL_DESIGN.md`) have been updated to reflect the current reality, which is that the integration supports authentication and full playlist CRUD, but not write-sync or full library management. **Gap:** None from a documentation perspective. The unimplemented features are now tracked in `FUTURE_ENHANCEMENTS.md`. |
 | Webhook/Event System | N | N | Low | **Context:** Deferred as no downstream consumers exist yet. **Gap:** Design specifies an outbound event system for state changes (downloads, syncs) that is not implemented. |
 | **Core Subsystems** | | | | |
+| Provider Abstraction Layer | Y | Y | Critical | **Context:** A new provider-agnostic abstraction layer has been implemented. Spotify has been refactored into an adapter for this layer. **Gap:** None. |
 | Unified Database System | Y | Y | Critical | **Context:** A new backend-agnostic database layer using SQLAlchemy has been implemented. It handles all data persistence for the application. **Gap:** None. |
 | Downloads Subsystem | Y | Y | High | **Context:** The download queue is now managed by the unified database system, making it fully persistent and production-ready. **Gap:** None. |
 | Spotify Integration | Y | Y | Medium | **Context:** The storage for OAuth tokens and synced playlists has been migrated to the unified database system. **Gap:** None. |

@@ -14,8 +14,9 @@ The refactor aims to:
 1. **Routes Layer** — FastAPI route handlers; minimal logic.
 2. **Service Layer** — Pure business logic; no framework dependencies.
 3. **Schema Layer** — Pydantic models for validation and serialization.
-4. **Persistence Layer** — A unified, backend-agnostic database system built on SQLAlchemy. This layer handles all data persistence for the application, including download jobs, playlists, and user tokens. It is designed to be configurable to support different database backends (e.g., SQLite, PostgreSQL).
-5. **Config Layer** — Centralized settings with environment-based overrides.
+4. **Persistence Layer** — A unified, backend-agnostic database system built on SQLAlchemy.
+5. **Provider Abstraction Layer** — An interface that decouples the core application from specific music service providers (e.g., Spotify). All interactions with external music services go through this layer.
+6. **Config Layer** — Centralized settings with environment-based overrides.
 
 **Data Flow Example (Search Request):**
 1. Request hits FastAPI route.

@@ -52,3 +52,15 @@ async def get_spoti_client(db: Session = Depends(get_db)) -> SpotiClient:
                 raise HTTPException(status_code=e.response.status_code, detail=f"Failed to refresh Spotify token: {e.response.text}")
 
     return SpotiClient(auth_token=token.access_token)
+
+
+from zotify_api.providers.base import BaseProvider
+from zotify_api.providers.spotify_adapter import SpotifyAdapter
+
+async def get_provider(db: Session = Depends(get_db), client: SpotiClient = Depends(get_spoti_client)) -> BaseProvider:
+    """
+    Provider manager dependency.
+    For now, it always returns the SpotifyAdapter. In the future, this could
+    select a provider based on user settings or other criteria.
+    """
+    return SpotifyAdapter(client=client, db=db)

@@ -1,13 +1,13 @@
 from sqlalchemy import text
-from typing import Callable
+from zotify_api.providers.base import BaseProvider
 
-async def perform_search(q: str, type: str, limit: int, offset: int, db_engine: any, spotify_search_func: Callable):
+async def perform_search(q: str, type: str, limit: int, offset: int, db_engine: any, provider: BaseProvider):
     search_type = type
     if type == "all":
         search_type = "track,album,artist,playlist"
 
     if not db_engine:
-        return await spotify_search_func(q, type=search_type, limit=limit, offset=offset)
+        return await provider.search(q, type=search_type, limit=limit, offset=offset)
     try:
         with db_engine.connect() as conn:
             sql_query = "SELECT id, name, type, artist, album FROM tracks WHERE name LIKE :q"
@@ -25,4 +25,4 @@ async def perform_search(q: str, type: str, limit: int, offset: int, db_engine: 
             return items, total
     except Exception:
         # safe fallback to spotify search if DB fails
-        return await spotify_search_func(q, type=search_type, limit=limit, offset=offset)
+        return await provider.search(q, type=search_type, limit=limit, offset=offset)

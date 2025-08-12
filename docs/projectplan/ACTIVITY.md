@@ -4,6 +4,45 @@ This document provides a live, chronological log of all major tasks undertaken a
 
 ---
 
+## Task: Implement Provider Abstraction Layer
+
+**Date:** 2025-08-12
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To refactor the application to use a provider-agnostic abstraction layer.
+
+### Outcome
+- A `BaseProvider` interface was created.
+- The Spotify integration was refactored into a `SpotifyAdapter` that implements the interface.
+- Core services and routes were updated to use the new abstraction layer.
+- All relevant documentation was updated.
+
+### Related Documents
+- `api/src/zotify_api/providers/`
+- `docs/providers/spotify.md`
+
+---
+
+## Task: Plan Provider Abstraction Layer
+
+**Date:** 2025-08-12
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To create a comprehensive plan for refactoring the application to use a provider-agnostic abstraction layer.
+
+### Outcome
+- A detailed, multi-phase plan was created and approved.
+
+### Related Documents
+- `docs/projectplan/HIGH_LEVEL_DESIGN.md`
+- `docs/projectplan/LOW_LEVEL_DESIGN.md`
+
+---
+
 ## Task: Create PRINCE2 Project Documents
 
 **Date:** 2025-08-12
@@ -21,24 +60,6 @@ To formalize the project's management structure by creating a PRINCE2-compliant 
 ### Related Documents
 - `docs/projectplan/PROJECT_BRIEF.md`
 - `docs/projectplan/PID.md`
-
----
-
-## Task: Capture Project State
-
-**Date:** 2025-08-12
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Objective
-To update the `ACTIVITY.md` log and create a new `CURRENT_STATE.md` document to serve as a comprehensive bootstrap prompt for the next developer.
-
-### Outcome
-- The `ACTIVITY.md` log was updated to reflect the current state of all tasks.
-- A new `CURRENT_STATE.md` document was created to provide a comprehensive overview of the project for the next developer.
-
-### Related Documents
-- `docs/projectplan/CURRENT_STATE.md`
 
 ---
 

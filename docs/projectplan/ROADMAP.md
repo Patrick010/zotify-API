@@ -33,6 +33,17 @@ This section tracks the development of tools to aid in the development and testi
 
 ---
 
+## 🏛️ Architectural Refactoring
+
+This section tracks major architectural initiatives.
+
+| Task | Status | Notes |
+|------|--------|-------|
+| Unified Database Layer | ✅ | Migrated all persistence to a unified SQLAlchemy backend. |
+| Provider Abstraction Layer | ✅ | Implemented a provider interface and refactored Spotify into an adapter. |
+
+---
+
 ## 🔁 Structure and Update Policy
 
 - **This file is mandatory and must be maintained after each major task or roadmap update.**
