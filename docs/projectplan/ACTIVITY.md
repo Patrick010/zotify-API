@@ -4,6 +4,53 @@ This document provides a live, chronological log of all major tasks undertaken a
 
 ---
 
+## Task: Plan Provider Abstraction Layer
+
+**Date:** 2025-08-12
+**Status:** 🟡 In Progress
+**Assignee:** Jules
+
+### Objective
+To create a comprehensive plan for refactoring the application to use a provider-agnostic abstraction layer, with Spotify being the first implemented provider.
+
+### Related Documents
+- `docs/projectplan/HIGH_LEVEL_DESIGN.md`
+- `docs/projectplan/LOW_LEVEL_DESIGN.md`
+
+---
+
+## Task: Capture Project State
+
+**Date:** 2025-08-12
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To update the `ACTIVITY.md` log and create a new `CURRENT_STATE.md` document to serve as a comprehensive bootstrap prompt for the next developer.
+
+### Outcome
+- The `ACTIVITY.md` log was updated to reflect the current state of all tasks.
+- A new `CURRENT_STATE.md` document was created to provide a comprehensive overview of the project for the next developer.
+
+### Related Documents
+- `docs/projectplan/CURRENT_STATE.md`
+
+---
+
+## Task: Reorganize Documentation Directories
+
+**Date:** 2025-08-12
+**Status:** ❌ Blocked
+**Assignee:** Jules
+
+### Objective
+To refactor the documentation directory structure for better organization.
+
+### Outcome
+- This task was blocked by a persistent issue with the `rename_file` tool in the environment, which prevented the renaming of the `docs/` directory. The task was aborted, and the documentation was left in its current structure.
+
+---
+
 ## Task: Implement Startup Script and System Documentation
 
 **Date:** 2025-08-12
@@ -11,11 +58,11 @@ This document provides a live, chronological log of all major tasks undertaken a
 **Assignee:** Jules
 
 ### Objective
-To create a robust startup script for the API and to overhaul the system documentation to reflect the current state of the application.
+To create a robust startup script for the API and to overhaul the system documentation.
 
 ### Outcome
-- A new `scripts/start.sh` script was created to manage the application startup.
-- A new `docs/system/` directory was created to house a comprehensive set of system documentation, including an `INSTALLATION.md`, `USER_MANUAL.md`, `REQUIREMENTS.md`, `DEVELOPER_GUIDE.md`, and `OPERATOR_GUIDE.md`.
+- A new `scripts/start.sh` script was created.
+- A new `docs/system/` directory was created with a comprehensive set of system documentation.
 - The main `README.md` and other project-level documents were updated.
 
 ### Related Documents
@@ -45,24 +92,6 @@ To create a standalone web-based UI for API testing and database browsing.
 
 ---
 
-## Task: Plan API Testing Webpage
-
-**Date:** 2025-08-11
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Objective
-To create a comprehensive plan for developing a new API testing webpage with integrated `sqlite-web` support.
-
-### Outcome
-- A detailed, four-phase plan was created and approved to build the tool as a separate `gonk-testUI` module.
-
-### Related Documents
-- `docs/projectplan/ROADMAP.md`
-- `docs/projectplan/EXECUTION_PLAN.md`
-
----
-
 ## Task: Implement Unified Database Architecture
 
 **Date:** 2025-08-11
@@ -81,134 +110,3 @@ To refactor the entire application to use a unified, backend-agnostic database s
 ### Related Documents
 - `docs/projectplan/LOW_LEVEL_DESIGN.md`
 - `docs/projectplan/audit/AUDIT-PHASE-3.md`
-
----
-
-## Task: Plan Unified Database Architecture
-
-**Date:** 2025-08-11
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Objective
-To create a comprehensive plan for refactoring the project to use a unified, backend-agnostic database system.
-
-### Outcome
-- A detailed, four-phase plan was created and approved, covering design, implementation, documentation, and verification.
-
-### Related Documents
-- `docs/projectplan/HIGH_LEVEL_DESIGN.md`
-- `docs/projectplan/LOW_LEVEL_DESIGN.md`
-
----
-
-## Task: Implement Persistent Download Queue
-
-**Date:** 2025-08-11
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Objective
-To replace the temporary in-memory download queue with a persistent, database-backed queue using SQLite. This will address the highest-priority gap in the `TRACEABILITY_MATRIX.md` and make the downloads subsystem production-ready.
-
-### Related Documents
-- `docs/projectplan/audit/TRACEABILITY_MATRIX.md`
-- `docs/projectplan/LOW_LEVEL_DESIGN.md`
-- `api/src/zotify_api/services/download_service.py`
-
----
-
-## Task: Review and Synchronize Audit Documentation
-
-**Date:** 2025-08-11
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Objective
-To perform a comprehensive review of all planning and audit documents to ensure alignment and identify any leftover issues before proceeding with further audit tasks. This task was mandated to ensure full context and synchronization with the project's goals.
-
-### Outcome
-- The review confirmed that the project documentation is well-aligned. A minor ambiguity around "User system wiring" was identified for future clarification. The new `ACTIVITY.md` log was created and the process was validated.
-
-### Related Documents
-- `docs/projectplan/audit/HLD_LLD_ALIGNMENT_PLAN.md`
-- `docs/projectplan/EXECUTION_PLAN.md`
-- `docs/projectplan/audit/TRACEABILITY_MATRIX.md`
-- `docs/projectplan/audit/AUDIT-PHASE-3.md`
-
----
-
-## Task: Align OAuth2 for Spotify Integration Documentation
-
-**Date:** 2025-08-11
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Objective
-To update the project's design documents to accurately reflect the current, partial implementation of the Spotify OAuth2 integration.
-
-### Outcome
-- The `LOW_LEVEL_DESIGN.md` and `TRACEABILITY_MATRIX.md` were updated to show that playlist CRUD is functional, but write-sync and full library management are not implemented. This closed the documentation gap.
-
-### Related Documents
-- `docs/projectplan/audit/AUDIT-PHASE-3.md` (Task 4)
-- `docs/projectplan/LOW_LEVEL_DESIGN.md`
-- `docs/projectplan/audit/TRACEABILITY_MATRIX.md`
-
----
-
-## Task: Align Error Handling & Logging Documentation
-
-**Date:** 2025-08-11
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Objective
-To update the project's design documents to accurately describe the current, ad-hoc implementation of error handling and logging.
-
-### Outcome
-- The `LOW_LEVEL_DESIGN.md` was updated to reflect the current state. The "ideal" design was moved to `FUTURE_ENHANCEMENTS.md`. The `TRACEABILITY_MATRIX.md` was updated to close the documentation gap.
-
-### Related Documents
-- `docs/projectplan/audit/AUDIT-PHASE-3.md` (Task 3)
-- `docs/projectplan/LOW_LEVEL_DESIGN.md`
-- `docs/projectplan/audit/TRACEABILITY_MATRIX.md`
-- `docs/projectplan/FUTURE_ENHANCEMENTS.md`
-
----
-
-## Task: Implement Downloads Subsystem Queue Processor
-
-**Date:** 2025-08-11
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Objective
-To implement the initial, in-memory version of the download job queue as specified in the design documents.
-
-### Outcome
-- A functional, in-memory job queue was added to the `DownloadsService`. The `LOW_LEVEL_DESIGN.md` and `TRACEABILITY_MATRIX.md` were updated to reflect this progress, noting that a persistent queue is still required.
-
-### Related Documents
-- `docs/projectplan/audit/AUDIT-PHASE-3.md` (Task 2)
-- `docs/projectplan/LOW_LEVEL_DESIGN.md`
-- `docs/projectplan/audit/TRACEABILITY_MATRIX.md`
-
----
-
-## Task: Align Admin Endpoint Security Documentation
-
-**Date:** 2025-08-11
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Objective
-To create and update the security documentation to match the current implementation of a static admin API key.
-
-### Outcome
-- A new `docs/projectplan/security.md` file was created and the `TRACEABILITY_MATRIX.md` was updated to close the documentation gap.
-
-### Related Documents
-- `docs/projectplan/audit/AUDIT-PHASE-3.md` (Task 1)
-- `docs/projectplan/security.md`
-- `docs/projectplan/audit/TRACEABILITY_MATRIX.md`
