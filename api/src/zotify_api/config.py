@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     feature_search_advanced: bool = False
     feature_sync_automation: bool = False
     api_prefix: str = "/api"
-    database_uri: str | None = None
+    database_uri: str = "sqlite:///./storage/zotify.db"
     redis_uri: str | None = None
 
     # The complex __init__ method was removed.

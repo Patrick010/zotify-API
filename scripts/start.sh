@@ -1,12 +1,9 @@
 #!/bin/bash
 set -e
 
-# Check if DATABASE_URI is set
-if [ -z "$DATABASE_URI" ]; then
-    echo "Error: DATABASE_URI environment variable is not set."
-    echo "Please set it to a valid database connection string (e.g., sqlite:///./api/storage/zotify.db)"
-    exit 1
-fi
+# The DATABASE_URI check has been removed.
+# The application now uses a sensible default for local development if the
+# environment variable is not set. See api/src/zotify_api/config.py.
 
 echo "Starting Zotify API server..."
 

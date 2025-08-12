@@ -9,8 +9,9 @@ For a complete guide on how to install the project and run it for the first time
 In summary, the main steps are:
 1.  Clone the repository.
 2.  Install dependencies with `pip install -e ./api`.
-3.  Configure the `DATABASE_URI` in `api/.env`.
-4.  Run the application with `./scripts/start.sh`.
+3.  Run the application with `./scripts/start.sh`.
+
+By default, the application will create and use a SQLite database at `api/storage/zotify.db`. If you wish to use a different database, you can configure the `DATABASE_URI` environment variable before running the start script.
 
 ## Core Architecture
 
