@@ -21,6 +21,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **Execution Plan** | [`EXECUTION_PLAN.md`](./EXECUTION_PLAN.md) | Provides a detailed breakdown of tasks required to fulfill the roadmap. |
 | **Future Enhancements** | [`FUTURE_ENHANCEMENTS.md`](./FUTURE_ENHANCEMENTS.md) | A "parking lot" for new ideas and long-term ambitions not on the current roadmap. |
 | **Lessons Learnt Log** | [`LESSONS-LEARNT.md`](./LESSONS-LEARNT.md) | A log of key takeaways and insights from each project phase. |
+| **Project Backlog** | [`BACKLOG.md`](./BACKLOG.md) | A tactical backlog of clearly defined, approved, but un-assigned tasks. |
 
 ---
 

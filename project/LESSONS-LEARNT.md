@@ -54,6 +54,7 @@ Covers insights from initial planning (Phase 0) through current active developme
 |--------|--------|-----------|
 | Keep designs realistic; avoid aspirational traps. | **High** – prevented false expectations. | (doc: HIGH_LEVEL_DESIGN.md#security) |
 | Move advanced features to “Future Enhancements” to keep docs clean. | **Medium** – vision retained without clutter. | (doc: HIGH_LEVEL_DESIGN.md#future-enhancements) |
+| A single, authoritative source for project status and next-steps is critical. | **High** – Discrepancies between `CURRENT_STATE.md`, `ACTIVITY.md`, and audit plans caused confusion and required significant clarification cycles to resolve. | (doc: CURRENT_STATE.md, ACTIVITY.md, audit/AUDIT-PHASE-3.md) |
 
 ---
 
