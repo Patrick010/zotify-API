@@ -6,6 +6,8 @@ from .globals import app_start_time
 from .middleware.request_id import RequestIDMiddleware
 from .logging_config import setup_logging
 
+from zotify_api.database.session import Base, engine
+
 setup_logging()
 
 api_key_scheme = APIKeyHeader(name="X-API-Key", auto_error=False)
@@ -17,6 +19,10 @@ app = FastAPI(
     security=[{"APIKeyHeader": []}],
 )
 app.add_middleware(RequestIDMiddleware)
+
+@app.on_event("startup")
+def startup_event():
+    Base.metadata.create_all(bind=engine)
 
 from zotify_api.routes import config, network
 

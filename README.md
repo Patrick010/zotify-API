@@ -11,7 +11,13 @@ This repository contains the source code for the Zotify API, a RESTful service f
     *Note: For now, install dependencies directly from `api/pyproject.toml`.*
 
 2.  **Set up the environment:**
-    Create a `.env` file in the `api/` directory with the necessary settings (e.g., `DATABASE_URI`).
+    The API now requires a database to function. You must configure the database connection string via an environment variable. You can do this by creating a `.env` file in the `api/` directory.
+
+    Example `.env` file:
+    ```
+    # Use a SQLite database located in the api/storage/ directory
+    DATABASE_URI="sqlite:///storage/zotify.db"
+    ```
 
 3.  **Run the API server:**
     ```bash
