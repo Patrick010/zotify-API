@@ -2,47 +2,52 @@
 
 This repository contains the source code for the Zotify API, a RESTful service for interacting with the Zotify music and podcast downloader.
 
-## Running the API
+## Getting Started
 
-1.  **Install dependencies:**
-    ```bash
-    pip install -r api/requirements.txt  # Assuming a requirements.txt is generated from pyproject.toml
-    ```
-    *Note: For now, install dependencies directly from `api/pyproject.toml`.*
+### 1. Installation
 
-2.  **Set up the environment:**
-    The API now requires a database to function. You must configure the database connection string via an environment variable. You can do this by creating a `.env` file in the `api/` directory.
+For detailed installation instructions, please see the [Installation Guide](./docs/system/INSTALLATION.md).
 
-    Example `.env` file:
-    ```
-    # Use a SQLite database located in the api/storage/ directory
-    DATABASE_URI="sqlite:///storage/zotify.db"
-    ```
+In summary:
+-   Clone the repository.
+-   Install the API dependencies: `pip install -e ./api`
+-   Install the developer UI dependencies: `pip install -e ./gonk-testUI`
 
-3.  **Run the API server:**
-    ```bash
-    uvicorn zotify_api.main:app --host 0.0.0.0 --port 8000
-    ```
+### 2. Configuration
+
+The API requires a database connection string to be configured via a `DATABASE_URI` environment variable.
+
+Create a `.env` file in the `api/` directory:
+```
+# Example for a SQLite database
+DATABASE_URI="sqlite:///storage/zotify.db"
+```
+
+### 3. Running the API
+
+A startup script is provided to run the API server.
+
+First, make the script executable:
+```bash
+chmod +x scripts/start.sh
+```
+
+Then, run the script from the root of the project:
+```bash
+./scripts/start.sh
+```
+The API will be available at `http://localhost:8000`.
+
+## Documentation
+
+Comprehensive system documentation is available in the `docs/system` directory.
+
+-   **[Installation Guide](./docs/system/INSTALLATION.md)**
+-   **[User Manual](./docs/system/USER_MANUAL.md)**
+-   **[Developer Guide](./docs/system/DEVELOPER_GUIDE.md)**
+-   **[Operator Guide](./docs/system/OPERATOR_GUIDE.md)**
+-   **[System Requirements](./docs/system/REQUIREMENTS.md)**
 
 ## Developer Testing UI (`gonk-testUI`)
 
-This project includes a separate developer testing UI to help with API development and testing.
-
-**1. Install dependencies:**
-```bash
-pip install -r gonk-testUI/requirements.txt # Assuming a requirements.txt is generated
-```
-*Note: For now, install dependencies directly from `gonk-testUI/pyproject.toml`.*
-
-**2. Set the `DATABASE_URI` environment variable:**
-The `gonk-testUI` needs access to the same database as the main API to use the `sqlite-web` integration.
-```bash
-export DATABASE_URI="sqlite:///../api/storage/zotify.db" # Example for Linux/macOS
-set DATABASE_URI=sqlite:///../api/storage/zotify.db     # Example for Windows
-```
-
-**3. Run the `gonk-testUI` server:**
-```bash
-python gonk-testUI/app.py
-```
-The UI will be available at `http://localhost:8082`.
+This project includes a separate developer testing UI. For instructions on how to run it, please see the `README.md` file inside the `gonk-testUI/` directory.
