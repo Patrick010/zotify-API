@@ -4,6 +4,21 @@ This document provides a live, chronological log of all major tasks undertaken a
 
 ---
 
+## Task: Plan Provider Abstraction Layer
+
+**Date:** 2025-08-12
+**Status:** 🟡 In Progress
+**Assignee:** Jules
+
+### Objective
+To create a comprehensive plan for refactoring the application to use a provider-agnostic abstraction layer, with Spotify being the first implemented provider.
+
+### Related Documents
+- `docs/projectplan/HIGH_LEVEL_DESIGN.md`
+- `docs/projectplan/LOW_LEVEL_DESIGN.md`
+
+---
+
 ## Task: Implement `gonk-testUI` Module
 
 **Date:** 2025-08-11

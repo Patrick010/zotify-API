@@ -1,60 +1,93 @@
 # Gonk Test UI - User Manual
 
-## Introduction
+## Getting Started
 
-Welcome to the Gonk Test UI, a developer tool designed to make testing the Zotify API easy and efficient. This manual will guide you through the features of the UI.
+This section will guide you through the setup and launch of the Gonk Test UI application.
 
-## Main Interface
+### Prerequisites
+
+-   You must have Python 3.10 or higher installed on your system.
+-   The main Zotify API application must be running, as the Gonk Test UI interacts with it. By default, the Zotify API runs on `http://localhost:8000`.
+
+### 1. Installation
+
+The Gonk Test UI is a standalone application with its own set of dependencies. These must be installed before running the tool.
+
+First, open your terminal or command prompt and navigate to the `gonk-testUI` directory, which is located at the root of the project.
+```bash
+cd path/to/project/gonk-testUI
+```
+
+Next, install the required Python packages. The dependencies are listed in the `pyproject.toml` file. You can install them using `pip`:
+```bash
+pip install -e .
+```
+This command installs the necessary packages (`Flask` and `sqlite-web`) and also installs the `gonk-testUI` project in "editable" mode, which is good for development.
+
+### 2. Configuration
+
+For the integrated database browser (`sqlite-web`) to work, the tool needs to know where the Zotify API's database file is located. This is configured by setting an environment variable.
+
+Before running the application, you must set the `DATABASE_URI` environment variable.
+
+**On Linux or macOS:**
+```bash
+export DATABASE_URI="sqlite:///../api/storage/zotify.db"
+```
+
+**On Windows (Command Prompt):**
+```bash
+set DATABASE_URI=sqlite:///../api/storage/zotify.db
+```
+This path points to the default location of the database file relative to the `gonk-testUI` directory. If your database is located elsewhere, you will need to adjust the path accordingly.
+
+### 3. Running the Application
+
+Once the installation and configuration are complete, you can start the Gonk Test UI server.
+
+From within the `gonk-testUI` directory, run the following command:
+```bash
+python app.py
+```
+
+You should see output indicating that the Flask server is running. The server runs on port **8082** by default.
+
+### 4. Accessing the UI
+
+Open your web browser and navigate to the following URL:
+
+**`http://localhost:8082`**
+
+You should now see the Gonk Test UI interface.
+
+---
+
+## Using the UI
+
+### Main Interface
 
 The UI is divided into two main sections:
 -   **API Section (Left)**: For interacting with the Zotify API endpoints.
 -   **Database Section (Right)**: For browsing the development database using `sqlite-web`.
 
-## Using the API Tester
+### Using the API Tester
 
-### 1. Loading Endpoints
+1.  **Loading Endpoints**: When you first load the page, the UI automatically fetches the OpenAPI schema from the running Zotify API. The list of all available API endpoints is then displayed in the "API Endpoints" panel on the left.
 
-When you first load the page, the UI will automatically try to fetch the OpenAPI schema from the running Zotify API (at `http://localhost:8000/openapi.json`). The list of all available API endpoints will be displayed in the "API Endpoints" panel.
+2.  **Generating an API Form**: Click on any endpoint button in the list. A form will be dynamically generated for that specific endpoint, with fields for all necessary parameters (path, query, request body) and an optional field for the Admin API Key.
 
-### 2. Generating an API Form
+3.  **Sending a Request**: Fill out the form with the desired values and click the "Send Request" button.
 
-Click on any endpoint button in the list. A form will be dynamically generated for that specific endpoint. The form will include fields for:
--   **Path parameters**: Any parameters that are part of the URL path (e.g., `playlist_id`).
--   **Query parameters**: Any parameters that are appended to the URL.
--   **Request Body**: A textarea for providing a JSON body for `POST`, `PUT`, or `PATCH` requests.
--   **Admin API Key**: A field to provide the admin API key if the endpoint requires authentication.
+4.  **Viewing the Response**: The JSON response from the API will be displayed in the "API Response" panel.
 
-### 3. Sending a Request
+### Using the Database Browser
 
-Fill out the form with the desired values and click the "Send Request" button. The UI will send the request to the Zotify API.
+1.  **Launching sqlite-web**: To browse the database, you must first start the `sqlite-web` server. Click the **"Launch sqlite-web"** button at the top of the page. This will start the server in the background on port **8081**.
 
-### 4. Viewing the Response
+2.  **Browsing the Database**: After a few seconds, the `sqlite-web` interface will load in the `<iframe>` on the right. You can now browse tables, run queries, and manage data.
 
-The JSON response from the API will be displayed in the "API Response" panel. If there is an error, the error message will be displayed instead.
+3.  **Stopping sqlite-web**: When you are finished, click the **"Stop sqlite-web"** button to shut down the database browser server.
 
-## Using the Database Browser
+### Spotify Authentication
 
-The database browser is powered by `sqlite-web`.
-
-### 1. Launching sqlite-web
-
-Before you can use the database browser, you must launch it. Click the **"Launch sqlite-web"** button at the top of the page. This will start the `sqlite-web` server in the background.
-
-*Note: You must have the `DATABASE_URI` environment variable set correctly for this to work.*
-
-### 2. Browsing the Database
-
-After a few seconds, the `sqlite-web` interface will load in the `<iframe>` on the right side of the page. You can now use it to:
--   Browse the data in all tables.
--   Run custom SQL queries.
--   Insert, update, or delete rows.
-
-### 3. Stopping sqlite-web
-
-When you are finished with the database browser, you can stop the server by clicking the **"Stop sqlite-web"** button.
-
-## Spotify Authentication
-
-To test endpoints that require Spotify authentication, you will need to log in.
-
-Click the **"Login with Spotify"** button. This will open a new tab with the Spotify authorization page. Follow the prompts to log in and authorize the application. After you are redirected back, the application will have stored the necessary tokens to make authenticated requests to Spotify.
+To test endpoints that require Spotify authentication, click the **"Login with Spotify"** button. This will open a new tab for the Spotify authorization flow. Once you complete it, the application will be able to make authenticated requests.

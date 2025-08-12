@@ -1,10 +1,8 @@
 # Gonk Test UI
 
-A standalone developer tool for testing the Zotify API.
-
 ## Overview
 
-Gonk Test UI is a lightweight, web-based tool designed to make testing and interacting with the Zotify API as simple as possible. It is a completely separate application from the main Zotify API and is intended for development purposes only.
+Gonk Test UI is a standalone developer tool for testing the Zotify API. It is a lightweight, web-based tool designed to make testing and interacting with the Zotify API as simple as possible. It runs as a completely separate application from the main Zotify API and is intended for development purposes only.
 
 ## Features
 
@@ -14,44 +12,60 @@ Gonk Test UI is a lightweight, web-based tool designed to make testing and inter
 -   **Spotify Authentication Helper**: Provides a simple button to initiate the Spotify OAuth2 login flow.
 -   **Integrated Database Browser**: Includes an embedded `sqlite-web` interface, allowing you to browse and query the development database directly from the UI.
 
-## Quick Start
+## Getting Started
+
+This guide will walk you through the setup and usage of the Gonk Test UI.
+
+### Prerequisites
+
+-   Python 3.10+
+-   The main Zotify API application must be running (usually on `http://localhost:8000`).
 
 ### 1. Installation
 
 This tool has its own set of dependencies, which need to be installed separately from the main Zotify API.
 
+First, navigate to the `gonk-testUI` directory in your terminal:
 ```bash
-# Navigate to the gonk-testUI directory
 cd gonk-testUI
+```
 
-# Install dependencies from its pyproject.toml
+Next, install the required Python packages using its `pyproject.toml` file. The recommended way to do this is with `pip` in editable mode:
+```bash
 pip install -e .
 ```
-*(Note: The `-e .` command will install the project in editable mode and handle the dependencies from `pyproject.toml`)*
+This command will install the packages listed in `pyproject.toml` (`Flask` and `sqlite-web`) into your Python environment.
 
 ### 2. Configuration
 
-The tool needs to know the location of the Zotify API's database to launch the `sqlite-web` browser. Set the following environment variable before running the tool:
+The tool needs to know the location of the Zotify API's database to launch the `sqlite-web` browser. This is configured via an environment variable.
 
+Before running the tool, set the `DATABASE_URI` environment variable to point to the Zotify API's database file.
+
+**For Linux/macOS:**
 ```bash
-# Example for Linux/macOS
 export DATABASE_URI="sqlite:///../api/storage/zotify.db"
+```
 
-# Example for Windows
+**For Windows (Command Prompt):**
+```bash
 set DATABASE_URI=sqlite:///../api/storage/zotify.db
 ```
+*Note: The path is relative to the `gonk-testUI` directory.*
 
-### 3. Running the Tool
+### 3. Running the Application
 
-Make sure the main Zotify API is running (usually on `http://localhost:8000`). Then, run the Gonk Test UI:
+Once the dependencies are installed and the environment variable is set, you can run the application:
 
 ```bash
-python gonk-testUI/app.py
+python app.py
 ```
+*(Make sure you are still inside the `gonk-testUI` directory when running this command.)*
 
-The UI will be available at **`http://localhost:8082`**.
+The Gonk Test UI server will start, and you can access it in your web browser at the following URL:
 
-### 4. Using the UI
+**`http://localhost:8082`**
 
--   **API Testing**: Click on an endpoint from the list on the left to generate a testing form. Fill out the form and click "Send Request". The API response will appear in the response panel.
--   **Database Browsing**: Click the "Launch sqlite-web" button. This will start the `sqlite-web` server on port 8081, and it will be displayed in the iframe on the right side of the page.
+### 4. How to Use the UI
+
+For detailed instructions on how to use the features of the UI, please refer to the [User Manual](./docs/USER_MANUAL.md).
