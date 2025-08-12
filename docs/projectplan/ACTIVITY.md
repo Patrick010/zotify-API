@@ -4,18 +4,23 @@ This document provides a live, chronological log of all major tasks undertaken a
 
 ---
 
-## Task: Plan Provider Abstraction Layer
+## Task: Create PRINCE2 Project Documents
 
 **Date:** 2025-08-12
-**Status:** 🟡 In Progress
+**Status:** ✅ Done
 **Assignee:** Jules
 
 ### Objective
-To create a comprehensive plan for refactoring the application to use a provider-agnostic abstraction layer, with Spotify being the first implemented provider.
+To formalize the project's management structure by creating a PRINCE2-compliant Project Brief and Project Initiation Document (PID).
+
+### Outcome
+- A `PROJECT_BRIEF.md` was created to provide a high-level summary of the project.
+- A `PID.md` was created to serve as the 'living document' defining the project's scope, plans, and controls.
+- The `CURRENT_STATE.md` and `PROJECT_REGISTRY.md` were updated to include these new documents.
 
 ### Related Documents
-- `docs/projectplan/HIGH_LEVEL_DESIGN.md`
-- `docs/projectplan/LOW_LEVEL_DESIGN.md`
+- `docs/projectplan/PROJECT_BRIEF.md`
+- `docs/projectplan/PID.md`
 
 ---
 

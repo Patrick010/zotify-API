@@ -48,8 +48,9 @@ To get a full understanding of the project, please review the following document
 
 1.  **`README.md`**: For a general overview and quick-start instructions.
 2.  **This `CURRENT_STATE.md` document**: For the latest context.
-3.  **`docs/projectplan/ACTIVITY.md`**: For a chronological log of all recent tasks.
-4.  **`docs/projectplan/audit/` directory**: These documents (especially the `TRACEABILITY_MATRIX.md`) provide the full context for the ongoing audit and alignment work.
+3.  **`docs/projectplan/PROJECT_BRIEF.md` and `docs/projectplan/PID.md`**: For the formal PRINCE2 project definition.
+4.  **`docs/projectplan/ACTIVITY.md`**: For a chronological log of all recent tasks.
+5.  **`docs/projectplan/audit/` directory**: These documents (especially the `TRACEABILITY_MATRIX.md`) provide the full context for the ongoing audit and alignment work.
 5.  **`docs/projectplan/HIGH_LEVEL_DESIGN.md` and `docs/projectplan/LOW_LEVEL_DESIGN.md`**: To understand the new, refactored architecture.
 6.  **`docs/system/` directory**: For detailed guides on installation, usage, and operation.
 7.  **`gonk-testUI/README.md`**: For instructions on the developer testing tool.
