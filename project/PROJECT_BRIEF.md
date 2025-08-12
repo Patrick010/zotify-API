@@ -1,7 +1,8 @@
 # Project Brief
 
 **Project Name:** Gonk API Refactoring and Enhancement  
-**Date:** 2025-08-12  
+**Date:** 2025-08-12 
+**status:** Live document 
 
 ## 1. Project Objectives and Justification
 

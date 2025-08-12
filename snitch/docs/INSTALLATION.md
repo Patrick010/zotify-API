@@ -1,3 +1,5 @@
+# Snitch Installation Documentation
+
 # Prerequisites
 
 This guide provides instructions for setting up and running the Snitch module on a Debian-based Linux distribution.

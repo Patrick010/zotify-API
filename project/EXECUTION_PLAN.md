@@ -1,5 +1,7 @@
 # Execution Plan
 
+**Status:** Live Document
+
 This document provides a detailed breakdown of the tasks required to fulfill the [Canonical Roadmap](./ROADMAP.md).
 
 ## Phase 0–2: Foundational Setup

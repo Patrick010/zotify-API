@@ -2,7 +2,8 @@
 
 **Project Name:** Zotify API Refactoring and Enhancement  
 **Date:** 2025-08-12  
-**Version:** 1.0  
+**Version:** 1.0
+**Status:** Live Document
 
 ---
 
@@ -62,7 +63,7 @@ The Zotify API was originally built as a lightweight wrapper for a single use ca
 
 ## 4. Project Controls
 
-- **Reporting:** Progress tracked in `docs/projectplan/` (`ACTIVITY.md`, `CURRENT_STATE.md`).  
+- **Reporting:** Progress tracked in `project/` (`ACTIVITY.md`, `CURRENT_STATE.md`).  
 - **Change Control:** All changes require proposal, approval, and re-approval if scope deviates.  
 - **Quality Assurance:**  
   - Code reviews before merge.  
@@ -122,3 +123,19 @@ The Zotify API was originally built as a lightweight wrapper for a single use ca
 - Stage boundaries managed via user approval of new high-level plans.  
 
 ---
+
+Appendix / References
+
+    project/ROADMAP.md
+
+    project/EXECUTION_PLAN.md
+
+    project/TRACEABILITY_MATRIX.md
+
+    project/PROJECT_REGISTRY.md
+
+    docs/providers/spotify.md (starter)
+
+    project/ACTIVITY.md (live)
+
+    project/CURRENT_STATE.md (live)

@@ -1,5 +1,7 @@
 # High-Level Design (HLD) – Zotify API Refactor
 
+**Status:** Live Document
+
 ## 1. Purpose
 This document outlines the high-level architecture, scope, and guiding principles for the ongoing Zotify API refactor. It serves as a blueprint for the development team to maintain alignment with long-term goals.
 

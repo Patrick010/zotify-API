@@ -4,6 +4,7 @@
 **Maintainer:** Jules
 **Last Updated:** 2025-08-10 # JULES-NOTE: Realigned with codebase reality.
 **Purpose:** This document outlines the high-level phases of development. For a detailed breakdown of tasks, see the [Execution Plan](./EXECUTION_PLAN.md).
+**Status:** Live Document
 
 > **Note on Future Ambitions:** This roadmap outlines the currently committed phases of work. A separate document, the [`FUTURE_ENHANCEMENTS.md`](./FUTURE_ENHANCEMENTS.md), serves as a "parking lot" for new ideas, long-term ambitions, and product vision that are not yet part of the active roadmap.
 

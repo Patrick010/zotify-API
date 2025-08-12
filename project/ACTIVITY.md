@@ -1,5 +1,7 @@
 # Activity Log
 
+**Status:** Live Document
+
 This document provides a live, chronological log of all major tasks undertaken as part of the project's development and audit cycles. It serves as an authoritative source for work status and provides cross-references to other planning and documentation artifacts.
 
 ---
@@ -21,7 +23,7 @@ To refactor the application to use a provider-agnostic abstraction layer.
 
 ### Related Documents
 - `api/src/zotify_api/providers/`
-- `docs/providers/spotify.md`
+- `api/docs/providers/spotify.md`
 
 ---
 
@@ -38,8 +40,8 @@ To create a comprehensive plan for refactoring the application to use a provider
 - A detailed, multi-phase plan was created and approved.
 
 ### Related Documents
-- `docs/projectplan/HIGH_LEVEL_DESIGN.md`
-- `docs/projectplan/LOW_LEVEL_DESIGN.md`
+- `project/HIGH_LEVEL_DESIGN.md`
+- `project/LOW_LEVEL_DESIGN.md`
 
 ---
 
@@ -58,8 +60,8 @@ To formalize the project's management structure by creating a PRINCE2-compliant 
 - The `CURRENT_STATE.md` and `PROJECT_REGISTRY.md` were updated to include these new documents.
 
 ### Related Documents
-- `docs/projectplan/PROJECT_BRIEF.md`
-- `docs/projectplan/PID.md`
+- `project/PROJECT_BRIEF.md`
+- `project/PID.md`
 
 ---
 
@@ -88,12 +90,12 @@ To create a robust startup script for the API and to overhaul the system documen
 
 ### Outcome
 - A new `scripts/start.sh` script was created.
-- A new `docs/system/` directory was created with a comprehensive set of system documentation.
+- A new `api/docs/system/` directory was created with a comprehensive set of system documentation.
 - The main `README.md` and other project-level documents were updated.
 
 ### Related Documents
 - `scripts/start.sh`
-- `docs/system/`
+- `api/docs/system/`
 - `README.md`
 
 ---
@@ -134,5 +136,5 @@ To refactor the entire application to use a unified, backend-agnostic database s
 - All relevant project documentation was updated to reflect the new architecture.
 
 ### Related Documents
-- `docs/projectplan/LOW_LEVEL_DESIGN.md`
-- `docs/projectplan/audit/AUDIT-PHASE-3.md`
+- `project/LOW_LEVEL_DESIGN.md`
+- `project/audit/AUDIT-PHASE-3.md`

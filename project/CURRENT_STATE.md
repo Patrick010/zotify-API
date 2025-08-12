@@ -1,5 +1,7 @@
 # Project State as of 2025-08-12
 
+**Status:** Live Document
+
 ## 1. Introduction & Purpose
 
 This document serves as a comprehensive bootstrap prompt to bring any developer up to speed on the current state of the Zotify API project. It provides historical context, a summary of recent accomplishments, known issues, and a clear definition of the next steps.
@@ -20,7 +22,7 @@ Over the last several sessions, the following major tasks have been completed, s
 
 *   **`gonk-testUI` Developer Tool**: A new, standalone developer tool was created to facilitate API testing and development. This tool is a Flask-based web application that provides a UI to dynamically test all API endpoints and browse the development database via an integrated `sqlite-web` instance.
 
-*   **System Documentation Overhaul**: A comprehensive set of system documentation was created in the `docs/system/` directory, including a detailed Installation Guide, User Manual, Developer Guide, and Operator Guide.
+*   **System Documentation Overhaul**: A comprehensive set of system documentation was created in the `api/docs/system/` directory, including a detailed Installation Guide, User Manual, Developer Guide, and Operator Guide.
 
 *   **Live Project-Tracking Documents**: A new process has been established using "live" project documents to track the state of the project. This includes this `CURRENT_STATE.md` file and the `ACTIVITY.md` log.
 
@@ -48,9 +50,9 @@ To get a full understanding of the project, please review the following document
 
 1.  **`README.md`**: For a general overview and quick-start instructions.
 2.  **This `CURRENT_STATE.md` document**: For the latest context.
-3.  **`docs/projectplan/PROJECT_BRIEF.md` and `docs/projectplan/PID.md`**: For the formal PRINCE2 project definition.
-4.  **`docs/projectplan/ACTIVITY.md`**: For a chronological log of all recent tasks.
-5.  **`docs/projectplan/audit/` directory**: These documents (especially the `TRACEABILITY_MATRIX.md`) provide the full context for the ongoing audit and alignment work.
-5.  **`docs/projectplan/HIGH_LEVEL_DESIGN.md` and `docs/projectplan/LOW_LEVEL_DESIGN.md`**: To understand the new, refactored architecture.
-6.  **`docs/system/` directory**: For detailed guides on installation, usage, and operation.
+3.  **`project/PROJECT_BRIEF.md` and `project/PID.md`**: For the formal PRINCE2 project definition.
+4.  **`project/ACTIVITY.md`**: For a chronological log of all recent tasks.
+5.  **`project/audit/` directory**: These documents (especially the `TRACEABILITY_MATRIX.md`) provide the full context for the ongoing audit and alignment work.
+5.  **`project/HIGH_LEVEL_DESIGN.md` and `project/LOW_LEVEL_DESIGN.md`**: To understand the new, refactored architecture.
+6.  **`project/system/` directory**: For detailed guides on installation, usage, and operation.
 7.  **`gonk-testUI/README.md`**: For instructions on the developer testing tool.

@@ -6,7 +6,7 @@ This repository contains the source code for the Zotify API, a RESTful service f
 
 ### 1. Installation
 
-For detailed installation instructions, please see the [Installation Guide](./docs/system/INSTALLATION.md).
+For detailed installation instructions, please see the [Installation Guide](./api/docs/system/INSTALLATION.md).
 
 In summary:
 -   Clone the repository.
@@ -40,13 +40,13 @@ The API will be available at `http://localhost:8000`.
 
 ## Documentation
 
-Comprehensive system documentation is available in the `docs/system` directory.
+Comprehensive system documentation is available in the `api/docs/system` directory.
 
--   **[Installation Guide](./docs/system/INSTALLATION.md)**
--   **[User Manual](./docs/system/USER_MANUAL.md)**
--   **[Developer Guide](./docs/system/DEVELOPER_GUIDE.md)**
--   **[Operator Guide](./docs/system/OPERATOR_GUIDE.md)**
--   **[System Requirements](./docs/system/REQUIREMENTS.md)**
+-   **[Installation Guide](./api/docs/manuals/INSTALLATION.md)**
+-   **[User Manual](./api/docs/manuals/USER_MANUAL.md)**
+-   **[Developer Guide](./api/`docs/manuals/DEVELOPER_GUIDE.md)**
+-   **[Operator Guide](./api/docs/manuals/OPERATOR_GUIDE.md)**
+-   **[System Requirements](./api/docs/system/REQUIREMENTS.md)**
 
 ## Developer Testing UI (`gonk-testUI`)
 
