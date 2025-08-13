@@ -17,7 +17,7 @@ During testing, the `gonk-testUI` was unable to connect to the Zotify API, despi
 ### 10.2. Changes Made
 1.  **Code:** Added FastAPI's `CORSMiddleware` to `api/src/zotify_api/main.py` with a permissive default policy (`allow_origins=["*"]`) suitable for local development.
 2.  **Design Docs:** Updated `HIGH_LEVEL_DESIGN.md` and `LOW_LEVEL_DESIGN.md` to include the new CORS policy as a documented part of the architecture.
-3.  **Audit Docs:** Added a "CORS Policy" entry to `AUDIT_TRACEABILITY_MATRIX.md` to track this as a formal requirement.
+3.  **Audit Docs:** Added a "CORS Policy" entry to the main `TRACEABILITY_MATRIX.md` to track this as a formal system requirement.
 4.  **Operator Docs:** Updated `OPERATOR_GUIDE.md` to inform system administrators about the default CORS policy and considerations for production.
 
 ### 10.3. Outcome

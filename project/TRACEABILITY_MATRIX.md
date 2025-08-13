@@ -37,3 +37,4 @@
 | SYS-02 | Performance <200ms | HIGH_LEVEL_DESIGN.md | 🔍 Needs Verification | N/A | N/A | | No performance benchmarks exist |
 | SYS-03 | Security (Admin Auth) | HIGH_LEVEL_DESIGN.md | ✅ Implemented | `services/auth.py` | 🔍 Needs Verification | FE-01 | Basic API key auth is implemented |
 | SYS-04 | Extensibility | HIGH_LEVEL_DESIGN.md | ✅ Implemented | `providers/base.py` | N/A | | Provider model allows for extension |
+| SYS-05 | CORS Policy for Web UI | HIGH_LEVEL_DESIGN.md | ✅ Implemented | `zotify_api/main.py` | N/A | | Permissive CORS policy to allow browser-based clients. |
