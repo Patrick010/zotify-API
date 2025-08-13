@@ -35,6 +35,8 @@ This section lists specific technical features and improvements that are candida
     *   Establish a consistent logging format and convention across all services.
 *   **Comprehensive Health Checks:**
     *   Expand the system info endpoints to include detailed process stats, disk/network health, and dependency checks.
+*   **Unified Configuration Management:**
+    *   Unify the two configuration systems (`config.py` and `config_service.py`). This would likely involve migrating the settings from `config.json` into the main database and providing a single, consistent API for managing all application settings at runtime.
 
 ---
 

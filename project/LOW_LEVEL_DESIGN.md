@@ -54,6 +54,22 @@ This LLD describes the specific implementation details of the Zotify API's subsy
 
 ---
 
+## Configuration Management
+
+The application uses a dual system for managing configuration, separating immutable startup settings from mutable runtime settings.
+
+*   **Startup Configuration (`config.py`)**:
+    *   **Purpose**: Manages core, system-level settings required for the application to boot (e.g., `database_uri`, `admin_api_key`).
+    *   **Source**: Settings are loaded from environment variables using `pydantic-settings`.
+    *   **Mutability**: These settings are considered immutable and are only read once at startup. They cannot be changed at runtime.
+
+*   **Application Configuration (`config_service.py`)**:
+    *   **Purpose**: Manages user-facing application settings that can be changed during operation (e.g., `library_path`, `scan_on_startup`).
+    *   **Source**: Settings are persisted in a `config.json` file.
+    *   **Mutability**: These settings can be read and updated at runtime via the `/api/config` endpoints (`GET`, `PATCH`, `POST /reset`).
+
+---
+
 ## Downloads Subsystem Design
 
 **Goal:** To provide a persistent and robust download management system using the unified database.

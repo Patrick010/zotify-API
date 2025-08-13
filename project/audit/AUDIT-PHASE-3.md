@@ -6,6 +6,25 @@
 
 ---
 
+## 8. Task: Align Configuration Management Documentation
+
+**Date:** 2025-08-12
+**Status:** ✅ Done
+
+### 8.1. Problem
+The `TRACEABILITY_MATRIX.md` identified a gap for "Config Management via API". The documentation was unclear and did not accurately reflect the existing implementation, which turned out to be a dual system for handling configuration.
+
+### 8.2. Changes Made
+1.  **Investigation:** Analyzed `config.py`, `routes/config.py`, and `services/config_service.py` to understand the dual-system approach. Confirmed that core settings are startup-only, while a separate service handles mutable application settings via a JSON file and API.
+2.  **`LOW_LEVEL_DESIGN.md` Update:** Added a new "Configuration Management" section to accurately describe the dual system, detailing the purpose, source, and mutability of each.
+3.  **`FUTURE_ENHANCEMENTS.md` Update:** Added the aspirational goal of a "Unified Configuration Management" system to the technical enhancements list.
+4.  **`TRACEABILITY_MATRIX.md` Update:** Updated the "Config Management via API" row to `Matches Design? = Y` and added a note clarifying the resolution.
+
+### 8.3. Outcome
+The project's design documents now accurately reflect the current state of the configuration system. The documentation gap is closed, and the potential for a future, unified system is recorded.
+
+---
+
 ## 7. Task: Consolidate Terminology, Scopes, and Processes
 
 **Date:** 2025-08-12
