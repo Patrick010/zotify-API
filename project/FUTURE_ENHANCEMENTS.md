@@ -1,5 +1,7 @@
 # Future Enhancements & Product Vision
 
+> **Note:** See the [`TRACEABILITY_MATRIX.md`](./TRACEABILITY_MATRIX.md) for status and implementation tracking of these enhancements.
+
 **Date:** 2025-08-11
 **Status:** Living Document
 

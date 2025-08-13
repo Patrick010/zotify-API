@@ -23,6 +23,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **Lessons Learnt Log** | [`LESSONS-LEARNT.md`](./LESSONS-LEARNT.md) | A log of key takeaways and insights from each project phase. |
 | **Project Backlog** | [`BACKLOG.md`](./BACKLOG.md) | A tactical backlog of clearly defined, approved, but un-assigned tasks. |
 | **Changelog** | [`api/docs/CHANGELOG.md`](./api/docs/CHANGELOG.md) | A log of all user-facing changes for each version. |
+| **Traceability Matrix** | [`TRACEABILITY_MATRIX.md`](./TRACEABILITY_MATRIX.md) | A live matrix mapping requirements from use cases and design docs to implementation and test status. |
 
 ---
 
@@ -32,7 +33,6 @@ This document serves as the master file, or single source of truth, for tracking
 |---|---|---|
 | **HLD/LLD Alignment Plan** | [`audit/HLD_LLD_ALIGNMENT_PLAN.md`](./audit/HLD_LLD_ALIGNMENT_PLAN.md) | The phased plan for bringing design documents into alignment with the codebase. |
 | **Live Activity Log** | [`ACTIVITY.md`](./ACTIVITY.md) | A live, chronological log of all major tasks and audit activities. |
-| **Traceability Matrix** | [`audit/TRACEABILITY_MATRIX.md`](./audit/TRACEABILITY_MATRIX.md) | Tracks the alignment between design documents and the codebase. |
 | **Security Document** | [`SECURITY.md`](./SECURITY.md) | The definitive security reference for the project. |
 | **Audit Log: Phase 1** | [`audit/AUDIT-phase-1.md`](./audit/AUDIT-phase-1.md) | Log of activities and findings from Phase 1 of the alignment plan. |
 | **Audit Log: Phase 2** | [`audit/AUDIT-phase-2.md`](./audit/AUDIT-phase-2.md) | Log of activities and findings from Phase 2 of the alignment plan. |
