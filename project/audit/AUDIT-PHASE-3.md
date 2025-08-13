@@ -6,6 +6,25 @@
 
 ---
 
+## 7. Task: Fix Startup Script and Token Storage Regression
+
+**Date:** 2025-08-12
+**Status:** ✅ Done
+
+### 7.1. Problem
+A regression was identified where Spotify OAuth tokens were being saved to a JSON file instead of the unified database. The root cause was a faulty `scripts/start.sh` script that failed to set the `PYTHONPATH` correctly. This resulted in the application running a stale, globally installed version of the package instead of the up-to-date local source code.
+
+### 7.2. Changes Made
+1.  **`scripts/start.sh`:**
+    *   Modified the `uvicorn` command to prepend `PYTHONPATH=./src`. This ensures the local, correct source code is always used.
+2.  **Code Verification:**
+    *   Confirmed that the existing code in `api/src/zotify_api/services/auth.py` and `api/src/zotify_api/database/crud.py` correctly handles saving tokens to the database. The issue was purely environmental.
+
+### 7.3. Outcome
+The application startup script is now robust and correctly uses the local source code, fixing the token storage regression. The system now behaves as designed, storing all persistent data in the unified database.
+
+---
+
 ## 6. Task: Implement Unified Database Architecture
 
 **Date:** 2025-08-11
