@@ -40,10 +40,10 @@ Covers insights from initial planning (Phase 0) through current active developme
 
 | Lesson | Impact | Reference |
 |--------|--------|-----------|
-| Approval gates save effort by stopping drift. | **High** – avoided building on incomplete work. | (doc: TRACEABILITY_MATRIX.md) |
+| Approval gates save effort by stopping drift. | **High** – avoided building on incomplete work. | (doc: AUDIT_TRACEABILITY_MATRIX.md) |
 | Implementation and docs must move together. | **High** – avoided multiple audit rewrites. | (doc: projectplan/AUDIT-lessons-learnt.md) |
 | Add operational control endpoints like `/api/download/process`. | **Medium** – faster debugging + validation. | (code: app/routers/download.py) |
-| Maintain a Traceability Matrix to catch mismatches. | **High** – caught Admin Endpoint Security gap. | (doc: TRACEABILITY_MATRIX.md#admin-endpoint-security) |
+| Maintain a Traceability Matrix to catch mismatches. | **High** – caught Admin Endpoint Security gap. | (doc: AUDIT_TRACEABILITY_MATRIX.md#admin-endpoint-security) |
 | Don’t over-engineer security before it’s needed. | **Medium** – kept focus on deliverables. | (doc: HIGH_LEVEL_DESIGN.md#security) |
 
 ---

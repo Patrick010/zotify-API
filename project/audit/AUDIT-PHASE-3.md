@@ -12,12 +12,12 @@
 **Status:** ✅ Done
 
 ### 9.1. Problem
-The `TRACEABILITY_MATRIX.md` identified a high-priority gap for "Documentation Practices". The design documents mandated a "docs-first" workflow that was not being followed, creating a mismatch between the documented process and the actual process.
+The `AUDIT_TRACEABILITY_MATRIX.md` identified a high-priority gap for "Documentation Practices". The design documents mandated a "docs-first" workflow that was not being followed, creating a mismatch between the documented process and the actual process.
 
 ### 9.2. Changes Made
 1.  **`HIGH_LEVEL_DESIGN.md` Update:** The "Documentation Governance" section was rewritten to reflect the current, pragmatic "living documentation" process. This new description accurately portrays the project's workflow during the audit and alignment phase.
 2.  **Future Vision:** The updated text explicitly keeps the door open for adopting a more formal "docs-first" approach in future phases, once the project's design has stabilized.
-3.  **`TRACEABILITY_MATRIX.md` Update:** The "Documentation Practices" row was updated to `Matches Design? = Y`, closing the final major documentation gap identified in the audit.
+3.  **`AUDIT_TRACEABILITY_MATRIX.md` Update:** The "Documentation Practices" row was updated to `Matches Design? = Y`, closing the final major documentation gap identified in the audit.
 
 ### 9.3. Outcome
 The project's high-level design now accurately reflects its actual documentation processes, resolving the identified gap. This completes the final planned task of the documentation alignment phase.
@@ -30,13 +30,13 @@ The project's high-level design now accurately reflects its actual documentation
 **Status:** ✅ Done
 
 ### 8.1. Problem
-The `TRACEABILITY_MATRIX.md` identified a gap for "Config Management via API". The documentation was unclear and did not accurately reflect the existing implementation, which turned out to be a dual system for handling configuration.
+The `AUDIT_TRACEABILITY_MATRIX.md` identified a gap for "Config Management via API". The documentation was unclear and did not accurately reflect the existing implementation, which turned out to be a dual system for handling configuration.
 
 ### 8.2. Changes Made
 1.  **Investigation:** Analyzed `config.py`, `routes/config.py`, and `services/config_service.py` to understand the dual-system approach. Confirmed that core settings are startup-only, while a separate service handles mutable application settings via a JSON file and API.
 2.  **`LOW_LEVEL_DESIGN.md` Update:** Added a new "Configuration Management" section to accurately describe the dual system, detailing the purpose, source, and mutability of each.
 3.  **`FUTURE_ENHANCEMENTS.md` Update:** Added the aspirational goal of a "Unified Configuration Management" system to the technical enhancements list.
-4.  **`TRACEABILITY_MATRIX.md` Update:** Updated the "Config Management via API" row to `Matches Design? = Y` and added a note clarifying the resolution.
+4.  **`AUDIT_TRACEABILITY_MATRIX.md` Update:** Updated the "Config Management via API" row to `Matches Design? = Y` and added a note clarifying the resolution.
 
 ### 8.3. Outcome
 The project's design documents now accurately reflect the current state of the configuration system. The documentation gap is closed, and the potential for a future, unified system is recorded.
@@ -84,7 +84,7 @@ The application used multiple, inconsistent persistence mechanisms, including fi
 3.  **Testing:**
     *   The test suite was updated to use the new database architecture, with isolated in-memory databases for each test run.
 4.  **Documentation:**
-    *   The `HIGH_LEVEL_DESIGN.md`, `LOW_LEVEL_DESIGN.md`, and `TRACEABILITY_MATRIX.md` were all updated to reflect the new architecture.
+    *   The `HIGH_LEVEL_DESIGN.md`, `LOW_LEVEL_DESIGN.md`, and `AUDIT_TRACEABILITY_MATRIX.md` were all updated to reflect the new architecture.
 
 ### 6.3. Outcome
 The application now has a robust, centralized, and backend-agnostic persistence layer. This improves scalability, maintainability, and security, and provides a solid foundation for future development.
@@ -97,7 +97,7 @@ The application now has a robust, centralized, and backend-agnostic persistence 
 **Status:** ✅ Done
 
 ### 5.1. Problem
-The `TRACEABILITY_MATRIX.md` identified a high-priority gap for the "Downloads Subsystem". The initial implementation used a temporary, in-memory queue, which was not suitable for production.
+The `AUDIT_TRACEABILITY_MATRIX.md` identified a high-priority gap for the "Downloads Subsystem". The initial implementation used a temporary, in-memory queue, which was not suitable for production.
 
 ### 5.2. Changes Made
 1.  **Code Implementation:**
@@ -107,7 +107,7 @@ The `TRACEABILITY_MATRIX.md` identified a high-priority gap for the "Downloads S
     *   Updated the test suite in `api/tests/test_download.py` to use a temporary, isolated database for each test, ensuring the new implementation is robustly tested.
 3.  **Documentation Updates:**
     *   Updated `LOW_LEVEL_DESIGN.md` to describe the new SQLite-based persistent queue.
-    *   Updated `TRACEABILITY_MATRIX.md` to mark the "Downloads Subsystem" gap as fully closed (`Matches Design? = Y`).
+    *   Updated `AUDIT_TRACEABILITY_MATRIX.md` to mark the "Downloads Subsystem" gap as fully closed (`Matches Design? = Y`).
 
 ### 5.3. Outcome
 The "Downloads Subsystem" now has a production-ready, persistent job queue. This closes a critical, high-priority gap identified in the audit.
@@ -121,13 +121,13 @@ The "Downloads Subsystem" now has a production-ready, persistent job queue. This
 
 ### 1.1. Problem
 
-The `TRACEABILITY_MATRIX.md` identified a high-priority gap for "Admin Endpoint Security". The existing design documents were pointing to a non-existent `security.md` file and contained outdated information about the security model.
+The `AUDIT_TRACEABILITY_MATRIX.md` identified a high-priority gap for "Admin Endpoint Security". The existing design documents were pointing to a non-existent `security.md` file and contained outdated information about the security model.
 
 ### 1.2. Changes Made
 
 1.  **Created `docs/projectplan/security.md`:** A new, definitive security document was created by copying the archived (pre-audit) version and updating it to reflect the current implementation.
     *   The document now clearly separates the **Current Security Model** (static admin API key) from the **Future Enhancements** (JWT, rate limiting, etc.).
-2.  **Updated `TRACEABILITY_MATRIX.md`:** The entry for "Admin Endpoint Security" was updated to `Matches Design? = Y`, closing the documentation gap.
+2.  **Updated `AUDIT_TRACEABILITY_MATRIX.md`:** The entry for "Admin Endpoint Security" was updated to `Matches Design? = Y`, closing the documentation gap.
 3.  **Updated `HLD_LLD_ALIGNMENT_PLAN.md`:** The plan was updated to mark the beginning of Phase 3.
 
 ### 1.3. Outcome
@@ -143,7 +143,7 @@ The project's security documentation is now accurate and aligned with the curren
 
 ### 2.1. Problem
 
-The `TRACEABILITY_MATRIX.md` identified a high-priority gap for the "Downloads Subsystem". The design specified a functional job queue, but the codebase only contained stubs.
+The `AUDIT_TRACEABILITY_MATRIX.md` identified a high-priority gap for the "Downloads Subsystem". The design specified a functional job queue, but the codebase only contained stubs.
 
 ### 2.2. Changes Made
 
@@ -155,7 +155,7 @@ The `TRACEABILITY_MATRIX.md` identified a high-priority gap for the "Downloads S
     *   Added a comprehensive test suite for the new functionality. All project tests pass.
 3.  **Documentation Updates:**
     *   Updated `LOW_LEVEL_DESIGN.md` to reflect the new implementation.
-    *   Updated `TRACEABILITY_MATRIX.md` to mark the gap as partially closed.
+    *   Updated `AUDIT_TRACEABILITY_MATRIX.md` to mark the gap as partially closed.
     *   Updated `EXECUTION_PLAN.md` and `ROADMAP.md` to reflect the progress.
 
 ### 2.3. Outcome
@@ -171,14 +171,14 @@ The "Downloads Subsystem" now has a functional, in-memory job queue, closing the
 
 ### 3.1. Problem
 
-The `TRACEABILITY_MATRIX.md` identified a medium-priority gap for "Error Handling & Logging". The implementation was inconsistent and did not match the ideal design of standardized error schemas and audit trails.
+The `AUDIT_AUDIT_TRACEABILITY_MATRIX.md` identified a medium-priority gap for "Error Handling & Logging". The implementation was inconsistent and did not match the ideal design of standardized error schemas and audit trails.
 
 ### 3.2. Changes Made
 
 1.  **Investigation:** Analyzed the codebase to document the current ad-hoc implementation of error handling and logging.
 2.  **`FUTURE_ENHANCEMENTS.md`:** Added the "ideal" design for standardized error handling and logging to this document.
 3.  **`LOW_LEVEL_DESIGN.md`:** Added a new design section to accurately describe the current, inconsistent implementation.
-4.  **`TRACEABILITY_MATRIX.md`:** Updated the entry for "Error Handling & Logging" to `Matches Design? = Y`, closing the documentation gap.
+4.  **`AUDIT_AUDIT_TRACEABILITY_MATRIX.md`:** Updated the entry for "Error Handling & Logging" to `Matches Design? = Y`, closing the documentation gap.
 
 ### 3.3. Outcome
 
@@ -193,14 +193,14 @@ The project's design documents now accurately reflect the current state of the e
 
 ### 4.1. Problem
 
-The `TRACEABILITY_MATRIX.md` identified a medium-priority gap for "OAuth2 for Spotify Integration". The design specified full CRUD/sync functionality, but the implementation was incomplete.
+The `AUDIT_AUDIT_TRACEABILITY_MATRIX.md` identified a medium-priority gap for "OAuth2 for Spotify Integration". The design specified full CRUD/sync functionality, but the implementation was incomplete.
 
 ### 4.2. Changes Made
 
 1.  **Investigation:** Analyzed the `spotify` service and client to determine the exact capabilities of the current integration. Confirmed that playlist CRUD is functional, but write-sync and full library management are not implemented.
 2.  **`FUTURE_ENHANCEMENTS.md`:** Updated the entry for "Full Spotify OAuth2 Integration" to be more specific about the missing features (write-sync, full library management).
 3.  **`LOW_LEVEL_DESIGN.md`:** Added a new design section to accurately describe the current, partial implementation.
-4.  **`TRACEABILITY_MATRIX.md`:** Updated the entry for "OAuth2 for Spotify Integration" to `Matches Design? = Y (partial)`, closing the documentation gap.
+4.  **`AUDIT_AUDIT_TRACEABILITY_MATRIX.md`:** Updated the entry for "OAuth2 for Spotify Integration" to `Matches Design? = Y (partial)`, closing the documentation gap.
 
 ### 4.3. Outcome
 
