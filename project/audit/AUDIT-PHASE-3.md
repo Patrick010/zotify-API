@@ -6,6 +6,24 @@
 
 ---
 
+## 9. Task: Align Documentation Practices
+
+**Date:** 2025-08-12
+**Status:** ✅ Done
+
+### 9.1. Problem
+The `TRACEABILITY_MATRIX.md` identified a high-priority gap for "Documentation Practices". The design documents mandated a "docs-first" workflow that was not being followed, creating a mismatch between the documented process and the actual process.
+
+### 9.2. Changes Made
+1.  **`HIGH_LEVEL_DESIGN.md` Update:** The "Documentation Governance" section was rewritten to reflect the current, pragmatic "living documentation" process. This new description accurately portrays the project's workflow during the audit and alignment phase.
+2.  **Future Vision:** The updated text explicitly keeps the door open for adopting a more formal "docs-first" approach in future phases, once the project's design has stabilized.
+3.  **`TRACEABILITY_MATRIX.md` Update:** The "Documentation Practices" row was updated to `Matches Design? = Y`, closing the final major documentation gap identified in the audit.
+
+### 9.3. Outcome
+The project's high-level design now accurately reflects its actual documentation processes, resolving the identified gap. This completes the final planned task of the documentation alignment phase.
+
+---
+
 ## 8. Task: Align Configuration Management Documentation
 
 **Date:** 2025-08-12

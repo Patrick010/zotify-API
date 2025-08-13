@@ -51,4 +51,4 @@ class SpotifyConnector(BaseProvider):
 
     # Other methods from the spotify service can be moved here as well,
     # and added to the BaseProvider interface if they are to be generic.
-    # For now, we will keep the adapter focused on the methods defined in the interface.
+    # For now, we will keep the connector focused on the methods defined in the interface.

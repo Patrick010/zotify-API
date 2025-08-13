@@ -9,7 +9,7 @@ This document outlines the high-level architecture, scope, and guiding principle
 The refactor aims to:
 - Transition all subsystems to a **dedicated service layer** architecture.
 - Improve **testability**, **maintainability**, and **separation of concerns**.
-- Establish a **documentation-first** workflow where `docs/` is the source of truth.
+- Establish a **living documentation** workflow where all documentation is kept in constant alignment with the codebase.
 
 ## 3. Architecture Overview
 **Key Layers:**
@@ -34,12 +34,14 @@ The refactor aims to:
 - **Extensibility**: Minimal coupling; future modules plug into the service layer.
 
 ## 5. Documentation Governance
-- All feature changes require updates to:
-  - `docs/full_api_reference.md`
-  - Relevant developer guides in `docs/`
-  - Example API requests/responses
-  - `CHANGELOG.md`
-- Docs must be updated **before merging PRs**.
+
+The project is currently in a phase of audit and alignment, where the primary goal is to bring all documentation in sync with the implemented reality of the codebase. The following principles guide this "living documentation" approach:
+
+- **Reality First**: The codebase is treated as the ground truth. Documentation is updated to reflect the actual, verified behavior of the application.
+- **Continuous Alignment**: All significant changes to code must be accompanied by corresponding updates to all relevant documentation (e.g., LLD, changelogs, user guides) in the same commit.
+- **Centralized Logging**: All work must be logged in the project's official logs (e.g., `AUDIT-PHASE-3.md`, `ACTIVITY.md`) to maintain a clear, traceable history of changes.
+
+Once the codebase and documentation have been fully aligned and the design has stabilized, the project may adopt a more formal "docs-first" workflow for future feature development, where design documents are created and approved before implementation begins.
 
 ## 6. Deployment Model
 - **Dev**: Local Docker + SQLite

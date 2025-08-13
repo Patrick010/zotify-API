@@ -44,7 +44,7 @@ async def get_spoti_client(db: Session = Depends(get_db)) -> SpotiClient:
 async def get_provider(db: Session = Depends(get_db), client: SpotiClient = Depends(get_spoti_client)) -> BaseProvider:
     """
     Provider manager dependency.
-    For now, it always returns the SpotifyAdapter. In the future, this could
+    For now, it always returns the SpotifyConnector. In the future, this could
     select a provider based on user settings or other criteria.
     """
-    return SpotifyAdapter(client=client, db=db)
+    return SpotifyConnector(client=client, db=db)
