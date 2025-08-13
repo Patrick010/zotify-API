@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (spotifyLoginBtn) {
         spotifyLoginBtn.addEventListener("click", async () => {
             try {
-                const response = await fetch(`${ZOTIFY_API_BASE}/spotify/login`);
+                const response = await fetch(`${ZOTIFY_API_BASE}/api/spotify/login`);
                 const data = await response.json();
                 if (data.auth_url) {
                     window.open(data.auth_url, "_blank");
