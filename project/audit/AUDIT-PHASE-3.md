@@ -6,6 +6,29 @@
 
 ---
 
+## 7. Task: Consolidate Terminology, Scopes, and Processes
+
+**Date:** 2025-08-12
+**Status:** ✅ Done
+
+### 7.1. Problem
+During ongoing work, several small but important alignment tasks were identified:
+1. The term "Adapter" was used for the provider abstraction layer, but "Connector" was deemed more accurate.
+2. The Spotify integration requested a minimal set of permissions (scopes), limiting its potential functionality.
+3. The process for handling postponed tasks was undefined, leading to clutter in the `ACTIVITY.md` log.
+4. Obsolete storage directories and files were present in the repository.
+
+### 7.2. Changes Made
+1.  **Terminology Refactor:** The term "Adapter" was replaced with "Connector" across all code, documentation, and project management files.
+2.  **Scope Expansion:** The Spotify authorization request was updated to include all standard scopes, enabling the broadest possible functionality.
+3.  **Process Formalization:** New rules were added to `PID.md` and `CURRENT_STATE.md` to formalize the handling of postponed tasks and the requirement to log all significant changes in documentation. The status of a blocked task in `ACTIVITY.md` was updated to `Obsolete`.
+4.  **Storage Cleanup:** Redundant storage directories and obsolete `.json` data files were removed from the repository.
+
+### 7.3. Outcome
+The project's terminology is now more consistent, its capabilities are expanded, and its development processes are more clearly defined and documented. The repository is cleaner and more aligned with the current architecture.
+
+---
+
 ## 6. Task: Implement Unified Database Architecture
 
 **Date:** 2025-08-11

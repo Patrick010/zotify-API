@@ -10,6 +10,8 @@ This document serves as a comprehensive bootstrap prompt to bring any developer 
 
 **Furthermore, all significant changes, including but not limited to architectural refactors, feature additions, and process updates, must themselves be logged and reflected in the relevant project documentation (e.g., PID, HLD, LLD, CHANGELOG, etc.) as part of the implementation task.**
 
+**To maintain clarity in the project's logs, any task that is postponed or paused must be moved from the `ACTIVITY.md` log to the `BACKLOG.md`. This ensures the activity log remains a clear and accurate record of completed or actively in-progress work.**
+
 The overarching goal of the recent work has been to execute a comprehensive audit and alignment of the project's documentation with its codebase, and to refactor the architecture to be more robust, maintainable, and scalable.
 
 ## 2. Current High-Level Goal

@@ -65,6 +65,7 @@ The Zotify API was originally built as a lightweight wrapper for a single use ca
 
 - **Reporting:** Progress tracked in `project/` (`ACTIVITY.md`, `CURRENT_STATE.md`).  
 - **Change Control:** All changes require proposal, approval, and re-approval if scope deviates.  
+- **Handling of Postponed Tasks:** Postponed or paused tasks must be moved from the `ACTIVITY.md` log to the `BACKLOG.md` with an appropriate status. This ensures the activity log remains a clear record of completed or actively in-progress work.
 - **Quality Assurance:**  
   - Code reviews before merge.  
   - Unit/integration testing (test runner stability is a known issue).  
