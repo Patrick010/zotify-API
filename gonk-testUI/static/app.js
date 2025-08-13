@@ -146,46 +146,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- Control Button Handlers ---
 
-    spotifyLoginBtn.addEventListener("click", async () => {
-        try {
-            const response = await fetch(`${ZOTIFY_API_BASE}/spotify/login`);
-            const data = await response.json();
-            if (data.auth_url) {
-                window.open(data.auth_url, "_blank");
+    if (spotifyLoginBtn) {
+        spotifyLoginBtn.addEventListener("click", async () => {
+            try {
+                const response = await fetch(`${ZOTIFY_API_BASE}/spotify/login`);
+                const data = await response.json();
+                if (data.auth_url) {
+                    window.open(data.auth_url, "_blank");
+                }
+            } catch (error) {
+                apiResponse.textContent = `Error: ${error.message}`;
             }
-        } catch (error) {
-            apiResponse.textContent = `Error: ${error.message}`;
-        }
-    });
+        });
+    }
 
-    launchSqliteBtn.addEventListener("click", async () => {
-        try {
-            const response = await fetch("/launch-sqlite-web", { method: "POST" });
-            const data = await response.json();
-            alert(data.message);
-            if (response.ok) {
-                // Give it a moment to start up, then load it
-                setTimeout(() => {
-                    sqliteIframe.src = "http://localhost:8081";
-                }, 1000);
+    if (launchSqliteBtn) {
+        launchSqliteBtn.addEventListener("click", async () => {
+            try {
+                const response = await fetch("/launch-sqlite-web", { method: "POST" });
+                const data = await response.json();
+                alert(data.message);
+                if (response.ok) {
+                    // Give it a moment to start up, then load it
+                    setTimeout(() => {
+                        sqliteIframe.src = "http://localhost:8081";
+                    }, 1000);
+                }
+            } catch (error) {
+                alert(`Error: ${error.message}`);
             }
-        } catch (error) {
-            alert(`Error: ${error.message}`);
-        }
-    });
+        });
+    }
 
-    stopSqliteBtn.addEventListener("click", async () => {
-        try {
-            const response = await fetch("/stop-sqlite-web", { method: "POST" });
-            const data = await response.json();
-            alert(data.message);
-            if (response.ok) {
-                sqliteIframe.src = "about:blank";
+    if (stopSqliteBtn) {
+        stopSqliteBtn.addEventListener("click", async () => {
+            try {
+                const response = await fetch("/stop-sqlite-web", { method: "POST" });
+                const data = await response.json();
+                alert(data.message);
+                if (response.ok) {
+                    sqliteIframe.src = "about:blank";
+                }
+            } catch (error) {
+                alert(`Error: ${error.message}`);
             }
-        } catch (error) {
-            alert(`Error: ${error.message}`);
-        }
-    });
+        });
+    }
 
     // Initial load
     loadEndpoints();
