@@ -1,5 +1,7 @@
 # Traceability Matrix – Zotify API
 
+> **Note:** For a high-level summary of feature coverage and gaps, see the [`USECASES_GAP_ANALYSIS.md`](./USECASES_GAP_ANALYSIS.md) document.
+
 ## Legend
 - ✅ Implemented
 - 🟡 Partial

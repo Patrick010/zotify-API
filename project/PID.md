@@ -72,6 +72,7 @@ The Zotify API was originally built as a lightweight wrapper for a single use ca
   - Continuous documentation updates in sync with code changes.  
   - **Logging of Changes:** All significant changes (e.g., refactors, new features) must be logged and reflected in all relevant project documentation (PID, HLD, LLD, CHANGELOG, etc.) as part of the implementation task itself. This ensures the 'living documentation' principle is maintained.
   - **Traceability Matrix Maintenance:** `TRACEABILITY_MATRIX.md` is a live document. All requirement, enhancement, or system-level changes must update the matrix in the same commit.
+  - **Use Case Gap Analysis Maintenance:** Any time a new use case is added to `USECASES.md`, the `USECASES_GAP_ANALYSIS.md` must be updated to reflect its implementation status. The gap analysis will be formally reviewed once per major release cycle to ensure accuracy.
 
 ---
 

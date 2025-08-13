@@ -51,7 +51,7 @@ It is critical for the next developer to be aware of the following issues, which
 
 ## 5. Pending Work: Next Immediate Steps
 
-The immediate next step is to **select the next highest-priority subsystem from the `TRACEABILITY_MATRIX.md` that requires documentation alignment and begin the update process** as defined in `HLD_LLD_ALIGNMENT_PLAN.md`.
+The immediate next step is to **review the `USECASES_GAP_ANALYSIS.md` document to identify missing features and consult the `TRACEABILITY_MATRIX.md` to select the next development or alignment task.** The gap analysis now serves as the primary source of truth for feature coverage status.
 
 ## 6. Key Documents for Onboarding
 
@@ -65,3 +65,5 @@ To get a full understanding of the project, please review the following document
 6.  **`project/LESSONS-LEARNT.md`**: To understand the project's process maturity and key takeaways.
 7.  **`project/BACKLOG.md`**: For a list of defined, pending tactical tasks.
 8.  **`project/HIGH_LEVEL_DESIGN.md` and `project/LOW_LEVEL_DESIGN.md`**: To understand the new, refactored architecture.
+9.  **`project/USECASES.md`**: To understand the target user scenarios.
+10. **`project/USECASES_GAP_ANALYSIS.md`**: To see the current feature coverage and identify development opportunities.
