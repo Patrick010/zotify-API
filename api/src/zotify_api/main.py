@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security.api_key import APIKeyHeader
 from zotify_api.config import settings
 from zotify_api.routes import auth, metadata, cache, logging, system, user, playlist, tracks, download, spotify, sync, search, webhooks, notifications
@@ -18,6 +19,15 @@ app = FastAPI(
     version="0.1.20",
     security=[{"APIKeyHeader": []}],
 )
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.add_middleware(RequestIDMiddleware)
 
 @app.on_event("startup")

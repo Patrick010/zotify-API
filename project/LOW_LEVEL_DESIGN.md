@@ -3,6 +3,23 @@
 ## Purpose
 This LLD describes the specific implementation details of the Zotify API's subsystems, with a focus on the new provider-agnostic architecture.
 
+---
+
+## API Middleware
+
+The FastAPI application uses several middleware to provide cross-cutting concerns.
+
+*   **CORS (Cross-Origin Resource Sharing)**:
+    *   **Module:** `api/src/zotify_api/main.py`
+    *   **Purpose:** To allow web-based clients (like `gonk-testUI`) hosted on different origins (IP/port) to communicate with the API. This is a browser security requirement.
+    *   **Configuration:** The middleware is configured to be permissive, allowing all origins, methods, and headers (`*`). This is suitable for a local development tool but would need to be reviewed for a production deployment.
+
+*   **Request ID**:
+    *   **Module:** `api/src/zotify_api/middleware/request_id.py`
+    *   **Purpose:** Injects a unique ID into every incoming request for improved logging and traceability.
+
+---
+
 ## Provider Abstraction Layer
 
 **Goal:** To decouple the core application logic from specific music service providers, allowing for future expansion to other services.

@@ -6,6 +6,25 @@
 
 ---
 
+## 10. Task: Add and Document CORS Policy
+
+**Date:** 2025-08-13
+**Status:** ✅ Done
+
+### 10.1. Problem
+During testing, the `gonk-testUI` was unable to connect to the Zotify API, despite network connectivity being correct. The root cause was identified as a missing CORS (Cross-Origin Resource Sharing) policy on the API server, which caused browsers to block cross-origin requests from the UI. This was a significant design oversight.
+
+### 10.2. Changes Made
+1.  **Code:** Added FastAPI's `CORSMiddleware` to `api/src/zotify_api/main.py` with a permissive default policy (`allow_origins=["*"]`) suitable for local development.
+2.  **Design Docs:** Updated `HIGH_LEVEL_DESIGN.md` and `LOW_LEVEL_DESIGN.md` to include the new CORS policy as a documented part of the architecture.
+3.  **Audit Docs:** Added a "CORS Policy" entry to `AUDIT_TRACEABILITY_MATRIX.md` to track this as a formal requirement.
+4.  **Operator Docs:** Updated `OPERATOR_GUIDE.md` to inform system administrators about the default CORS policy and considerations for production.
+
+### 10.3. Outcome
+The API now correctly handles cross-origin requests, allowing browser-based tools to function. The design oversight has been corrected in the code and is now fully documented across all relevant project artifacts, closing the gap.
+
+---
+
 ## 9. Task: Align Documentation Practices
 
 **Date:** 2025-08-12

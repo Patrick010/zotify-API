@@ -38,6 +38,15 @@ It is critical to back up the database regularly to prevent data loss. The backu
 
 Regular database maintenance, such as vacuuming (for SQLite) or other optimization tasks, should be performed as recommended by the documentation for your chosen database backend.
 
+## Network Configuration
+
+### CORS (Cross-Origin Resource Sharing)
+
+The API includes a permissive Cross-Origin Resource Sharing (CORS) policy by default. This is required for browser-based applications (like the provided `gonk-testUI`) to be able to communicate with the API when served from a different origin (i.e., a different port).
+
+-   **Default Policy:** The default configuration allows requests from all origins, with all methods and headers.
+-   **Production:** For a production deployment, you may want to review this policy and restrict the allowed origins to only trusted domains. This configuration is located in `api/src/zotify_api/main.py`.
+
 ## Privacy and Compliance
 
 -   **Audit Logs**: The application generates logs that can be used for auditing purposes. It is recommended to ship these logs to a centralized logging system for analysis and retention.
