@@ -16,6 +16,8 @@ ADMIN_API_KEY="your-super-secret-and-randomly-generated-key"
 ```
 The application will load this key on startup. In a production environment (`APP_ENV="production"`), the application will refuse to start unless an admin API key is provided.
 
+**Development Note:** If the `APP_ENV` is set to `development` (which is the default in `scripts/start.sh`) and no `ADMIN_API_KEY` is provided, the application will automatically use a default, non-secure key: `test_key`. A warning will be printed to the console when this happens.
+
 ### Using the Admin API Key
 
 To make requests to protected endpoints, include the API key in the `X-API-Key` header:

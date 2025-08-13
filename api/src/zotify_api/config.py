@@ -20,6 +20,11 @@ class Settings(BaseSettings):
 
 settings = Settings()
 
+# For development, if no key is provided, use a default for convenience.
+if settings.app_env == "development" and not settings.admin_api_key:
+    print("WARNING: No ADMIN_API_KEY set. Using default 'test_key' for development.")
+    settings.admin_api_key = "test_key"
+
 # Production check remains important.
 # This logic is moved out of the class constructor to avoid side-effects during instantiation.
 if settings.app_env == "production" and settings.require_admin_api_key_in_prod and not settings.admin_api_key:
