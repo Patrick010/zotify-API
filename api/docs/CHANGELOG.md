@@ -31,7 +31,7 @@ This is the initial documented release, capturing the state of the Zotify API af
 ### Changed
 
 -   **Unified Database:** All application data (including Spotify tokens, playlists, tracks, and download jobs) was migrated to a single, unified database backend using SQLAlchemy. This replaced multiple ad-hoc storage mechanisms (JSON files, in-memory dicts).
--   **Provider Abstraction Layer:** The architecture was refactored to be provider-agnostic. The Spotify-specific client was refactored into a stateless `SpotiClient` used by a `SpotifyAdapter` that implements a generic `BaseProvider` interface.
+-   **Provider Abstraction Layer:** The architecture was refactored to be provider-agnostic. The Spotify-specific client was refactored into a stateless `SpotiClient` used by a `SpotifyConnector` that implements a generic `BaseProvider` interface.
 
 ### Fixed
 

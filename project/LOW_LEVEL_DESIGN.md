@@ -11,14 +11,14 @@ This LLD describes the specific implementation details of the Zotify API's subsy
 
 *   **`base.py`**:
     *   Defines the `BaseProvider` abstract base class.
-    *   This class specifies the common interface that all provider adapters must implement (e.g., `search`, `get_playlist`).
+    *   This class specifies the common interface that all provider connectors must implement (e.g., `search`, `get_playlist`).
 
-*   **`spotify_adapter.py`**:
-    *   Contains the `SpotifyAdapter` class, which implements the `BaseProvider` interface for the Spotify service.
-    *   All Spotify-specific logic, including calls to the `SpotiClient`, is encapsulated within this adapter.
+*   **`spotify_connector.py`**:
+    *   Contains the `SpotifyConnector` class, which implements the `BaseProvider` interface for the Spotify service.
+    *   All Spotify-specific logic, including calls to the `SpotiClient`, is encapsulated within this connector.
 
 *   **Dependency (`services/deps.py`)**:
-    *   A new `get_provider` dependency is responsible for instantiating and returning the currently active provider adapter. For now, it always returns the `SpotifyAdapter`.
+    *   A new `get_provider` dependency is responsible for instantiating and returning the currently active provider connector. For now, it always returns the `SpotifyConnector`.
 
 ---
 
@@ -43,14 +43,14 @@ This LLD describes the specific implementation details of the Zotify API's subsy
 
 ## Spotify Integration Design
 
-**Goal:** To provide a robust integration with the Spotify Web API, implemented as the first adapter for the provider abstraction layer.
+**Goal:** To provide a robust integration with the Spotify Web API, implemented as the first connector for the provider abstraction layer.
 
 *   **Authentication & Token Storage**:
     *   The OAuth2 callback saves tokens to the unified database.
     *   The `get_spoti_client` dependency handles token fetching and refreshing from the database.
 
 *   **Playlist Synchronization**:
-    *   The `sync_playlists` method in the `SpotifyAdapter` saves all playlist data to the unified database.
+    *   The `sync_playlists` method in the `SpotifyConnector` saves all playlist data to the unified database.
 
 ---
 

@@ -8,6 +8,8 @@ This document serves as a comprehensive bootstrap prompt to bring any developer 
 
 **It is a mandatory requirement on this project that all documentation, from architectural diagrams to operator guides, be treated as a 'live' artifact. All documentation must be kept in constant alignment with the codebase. This is not optional or open to interpretation; outdated documentation is considered a defect.**
 
+**Furthermore, all significant changes, including but not limited to architectural refactors, feature additions, and process updates, must themselves be logged and reflected in the relevant project documentation (e.g., PID, HLD, LLD, CHANGELOG, etc.) as part of the implementation task.**
+
 The overarching goal of the recent work has been to execute a comprehensive audit and alignment of the project's documentation with its codebase, and to refactor the architecture to be more robust, maintainable, and scalable.
 
 ## 2. Current High-Level Goal
@@ -20,7 +22,11 @@ Work is performed incrementally, with a focus on updating the documentation for 
 
 ## 3. Recent Major Accomplishments
 
-*   **Provider Abstraction Layer Refactoring**: The application was successfully refactored from a Spotify-centric service to a provider-agnostic platform. The legacy Spotify client was replaced with a `SpotifyAdapter` that implements a new `BaseProvider` interface.
+*   **Terminology Refactor**: Renamed the "Provider Adapter" to "Provider Connector" across all code and documentation to improve terminological clarity.
+
+*   **Expanded Spotify Permissions**: The application now requests all available scopes from the Spotify API, enabling the broadest possible service functionality as per user requirements.
+
+*   **Provider Abstraction Layer Refactoring**: The application was successfully refactored from a Spotify-centric service to a provider-agnostic platform. The legacy Spotify client was replaced with a `SpotifyConnector` that implements a new `BaseProvider` interface.
 
 *   **Unified Database Architecture**: The application's persistence layer was completely refactored to use a unified, backend-agnostic database system built on **SQLAlchemy**, replacing all previous ad-hoc storage mechanisms.
 

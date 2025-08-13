@@ -4,7 +4,7 @@ from typing import List, Dict, Any, Tuple
 class BaseProvider(ABC):
     """
     Abstract Base Class for a music service provider.
-    Defines the interface that all provider adapters must implement.
+    Defines the interface that all provider connectors must implement.
     """
 
     @abstractmethod

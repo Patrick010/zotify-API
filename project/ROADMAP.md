@@ -41,7 +41,7 @@ This section tracks major architectural initiatives.
 | Task | Status | Notes |
 |------|--------|-------|
 | Unified Database Layer | ✅ | Migrated all persistence to a unified SQLAlchemy backend. |
-| Provider Abstraction Layer | ✅ | Implemented a provider interface and refactored Spotify into an adapter. |
+| Provider Abstraction Layer | ✅ | Implemented a provider interface and refactored Spotify into a connector. |
 
 ---
 

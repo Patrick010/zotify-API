@@ -129,13 +129,13 @@ async def get_tracks_metadata_from_spotify(track_ids: List[str], provider: BaseP
     # Note: The provider's search method returns a tuple (items, total). We only need the items here.
     # Also, this method is for getting metadata by ID, not searching. We need a method on the provider for that.
     # Let's assume the SpotiClient's get_tracks_metadata is what we need and it should be on the provider.
-    # I'll have to add get_tracks_metadata to the BaseProvider and SpotifyAdapter.
+    # I'll have to add get_tracks_metadata to the BaseProvider and SpotifyConnector.
 
     # This is getting too complex for a simple fix. Let's assume the SpotiClient is available
     # through the provider for now. This is a temporary solution to get the server running.
 
     # This reveals a gap in the provider abstraction. It doesn't have a get_tracks_metadata method.
-    # For now, I will access the client directly from the adapter to get this working.
+    # For now, I will access the client directly from the connector to get this working.
     # This is a temporary hack and should be fixed properly later.
     if hasattr(provider, 'client'):
         metadata = await provider.client.get_tracks_metadata(track_ids)

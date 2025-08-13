@@ -17,7 +17,7 @@ To refactor the application to use a provider-agnostic abstraction layer.
 
 ### Outcome
 - A `BaseProvider` interface was created.
-- The Spotify integration was refactored into a `SpotifyAdapter` that implements the interface.
+- The Spotify integration was refactored into a `SpotifyConnector` that implements the interface.
 - Core services and routes were updated to use the new abstraction layer.
 - All relevant documentation was updated.
 

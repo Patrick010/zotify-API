@@ -8,7 +8,7 @@ from zotify_api.database import crud
 from zotify_api.database.session import get_db
 from zotify_api.services.spoti_client import SpotiClient
 from zotify_api.providers.base import BaseProvider
-from zotify_api.providers.spotify_adapter import SpotifyAdapter
+from zotify_api.providers.spotify_connector import SpotifyConnector
 
 logger = logging.getLogger(__name__)
 

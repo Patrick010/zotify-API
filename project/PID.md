@@ -69,6 +69,7 @@ The Zotify API was originally built as a lightweight wrapper for a single use ca
   - Code reviews before merge.  
   - Unit/integration testing (test runner stability is a known issue).  
   - Continuous documentation updates in sync with code changes.  
+  - **Logging of Changes:** All significant changes (e.g., refactors, new features) must be logged and reflected in all relevant project documentation (PID, HLD, LLD, CHANGELOG, etc.) as part of the implementation task itself. This ensures the 'living documentation' principle is maintained.
 
 ---
 

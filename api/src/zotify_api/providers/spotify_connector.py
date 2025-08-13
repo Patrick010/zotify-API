@@ -4,9 +4,9 @@ from .base import BaseProvider
 from zotify_api.services.spoti_client import SpotiClient
 from zotify_api.database import crud
 
-class SpotifyAdapter(BaseProvider):
+class SpotifyConnector(BaseProvider):
     """
-    Provider adapter for the Spotify music service.
+    Provider connector for the Spotify music service.
     Implements the BaseProvider interface and uses the SpotiClient to interact with the Spotify API.
     """
 

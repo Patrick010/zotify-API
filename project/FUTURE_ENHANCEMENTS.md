@@ -132,11 +132,11 @@ The recent architectural refactor introducing a backend-agnostic database layer 
 
 ## Unified Provider Abstraction Layer
 
-To enable multi-provider support for music services without creating endpoint bloat, a unified abstraction layer will be developed. This layer will translate standardized API requests into provider-specific API calls through adapters or connectors.
+To enable multi-provider support for music services without creating endpoint bloat, a unified abstraction layer will be developed. This layer will translate standardized API requests into provider-specific API calls through connectors.
 
 **Key objectives:**
 - Define a core, normalized set of API endpoints and data models that cover common operations across providers.
-- Implement lightweight translation matrices or adapter modules to handle provider-specific API differences.
+- Implement lightweight translation matrices or connector modules to handle provider-specific API differences.
 - Support pluggable authentication and token management per provider.
 - Avoid duplicating full API gateway solutions like WSO2 by embedding the translation logic within the application layer.
 - Ensure extensibility for easy addition of new music service providers.
