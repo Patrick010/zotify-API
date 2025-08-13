@@ -7,6 +7,9 @@ set -e
 
 echo "Starting Zotify API server..."
 
+# Set the application environment to "development" to disable production checks
+export APP_ENV=development
+
 # Run the uvicorn server
 # We assume this script is run from the root of the project.
 # We set PYTHONPATH to include the `src` directory so that the local,
