@@ -27,6 +27,14 @@ The refactor aims to:
 4. Service queries database or external API.
 5. Response returned using schema.
 
+### 3.1 Supporting Modules
+
+The Zotify Platform includes supporting modules that are not part of the Core API but are essential to the platform's ecosystem.
+
+-   **Gonk-TestUI:** A standalone developer testing UI built with Flask and JavaScript. It provides a web-based interface for interacting with all API endpoints and includes an embedded database browser. Its architecture is a simple client-server model, where the frontend fetches the API schema dynamically to generate forms. It is designed to be run locally during development.
+
+-   **Snitch:** A planned helper application for managing the OAuth callback flow for CLI-based clients. The proposed architecture is a lightweight, self-contained Go application that runs a temporary local web server to capture the redirect from the authentication provider (e.g., Spotify) and securely forward the credentials to the Core API.
+
 ## 4. Non-Functional Requirements
 - **Test Coverage**: >90% unit test coverage.
 - **Performance**: <200ms average API response time for common queries.

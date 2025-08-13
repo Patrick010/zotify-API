@@ -99,5 +99,39 @@ The application uses a dual system for managing configuration, separating immuta
 
 ---
 
+---
+
+## Supporting Modules
+
+This section describes the low-level design of the official supporting modules for the Zotify Platform.
+
+### Gonk-TestUI
+
+**Purpose:** A standalone developer tool for testing the Zotify API.
+
+*   **Backend (`app.py`):** A lightweight Flask server.
+    *   Serves the static frontend files (`index.html`, `css`, `js`).
+    *   Provides server-side logic for launching and stopping the `sqlite-web` process.
+    *   Accepts command-line arguments (`--ip`, `--port`, `--api-url`) to configure the server and the target API URL.
+*   **Frontend (`static/`):** A single-page application built with plain JavaScript.
+    *   Dynamically fetches the API's `openapi.json` schema to build forms for each endpoint.
+    *   Uses `fetch` to make live API calls.
+    *   Includes a theme toggle with preferences saved to `localStorage`.
+*   **Templating:** The `index.html` is rendered as a Flask template to allow the backend to inject the configurable `--api-url` into the frontend at runtime.
+
+### Snitch
+
+**Purpose:** A planned helper application to manage the OAuth callback flow.
+
+*   **Proposed Architecture:** A self-contained Go application (`snitch.go`).
+*   **Functionality:**
+    *   Runs a temporary local web server on `localhost:4381`.
+    *   Listens for the redirect from an OAuth provider (e.g., Spotify).
+    *   Extracts the authentication `code` and `state` from the callback.
+    *   Securely forwards the credentials to the main Zotify API's callback endpoint via a `POST` request.
+*   **Status:** Conceptual. The design is documented in `snitch/docs/`, but the `snitch.go` implementation does not yet exist.
+
+---
+
 ## Ongoing Maintenance
 All development tasks must follow the [Task Execution Checklist](./task_checklist.md) to ensure consistency, quality, and security.

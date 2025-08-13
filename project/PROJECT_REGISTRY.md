@@ -30,7 +30,18 @@ This document serves as the master file, or single source of truth, for tracking
 
 ---
 
-## 3. Audit & Alignment Documents
+## 3. Supporting Modules
+
+This section lists the official supporting modules of the Zotify Platform.
+
+| Module | Maintainer | Repository Path | Status | Description |
+|---|---|---|---|---|
+| **Snitch** | Jules | [`snitch/`](./snitch/) | Conceptual | A planned Go-based helper application to manage OAuth callbacks for CLI clients. The design and planning documents are complete. |
+| **Gonk-TestUI** | Jules | [`gonk-testUI/`](./gonk-testUI/) | Active | A Flask and JavaScript-based web UI for developer testing and interaction with the Zotify API. |
+
+---
+
+## 4. Audit & Alignment Documents
 
 | Document | Location | Description |
 |---|---|---|

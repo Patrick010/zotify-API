@@ -56,6 +56,14 @@ Deferred features are tracked in `project/FUTURE_ENHANCEMENTS.md` until they are
 Example of a deferred feature:
 - *Webhook/Event System*
 
+### 2.5 Supporting Modules
+The Zotify Platform consists of the Core API and official supporting modules, currently:
+- Snitch — Integrated monitoring and intelligence toolset.
+- Gonk-TestUI — Frontend testing and interaction suite for validation and QA.
+
+Supporting modules are developed, tracked, and governed under the same policies, workflows, and quality standards as the Core API.
+**Note:** Retroactive work on these modules must be documented and incorporated into all relevant project files.
+
 ---
 
 ## 3. Stage Plans (High-Level)
