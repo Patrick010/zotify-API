@@ -7,8 +7,33 @@ document.addEventListener("DOMContentLoaded", () => {
     const launchSqliteBtn = document.getElementById("launch-sqlite");
     const stopSqliteBtn = document.getElementById("stop-sqlite");
     const sqliteIframe = document.getElementById("sqlite-iframe");
+    const themeToggleBtn = document.getElementById("theme-toggle");
 
     const ZOTIFY_API_BASE = window.ZOTIFY_API_URL || "http://localhost:8000";
+
+    // --- Theme Handling ---
+    function applyTheme(theme) {
+        if (theme === 'dark') {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        if (isDarkMode) {
+            localStorage.setItem('theme', 'light');
+            applyTheme('light');
+        } else {
+            localStorage.setItem('theme', 'dark');
+            applyTheme('dark');
+        }
+    });
+
+    // Apply saved theme on load
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    applyTheme(savedTheme);
 
     // Fetch OpenAPI schema and build the UI
     async function loadEndpoints() {

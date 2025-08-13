@@ -4,6 +4,23 @@
     <meta charset="UTF-8">
     <title>Gonk Test UI</title>
     <link rel="stylesheet" href="/styles.css">
+    <style>
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .theme-toggle svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-color);
+        }
+        .theme-toggle .moon-icon { display: none; }
+        .theme-toggle .sun-icon { display: block; }
+        .dark-mode .theme-toggle .moon-icon { display: block; }
+        .dark-mode .theme-toggle .sun-icon { display: none; }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -13,6 +30,10 @@
                 <button id="spotify-login">Login with Spotify</button>
                 <button id="launch-sqlite">Launch sqlite-web</button>
                 <button id="stop-sqlite">Stop sqlite-web</button>
+                <button id="theme-toggle" class="theme-toggle" title="Toggle theme">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM12 9c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3zm0-7c.55 0 1 .45 1 1v2c0 .55-.45 1-1 1s-1-.45-1-1V3c0-.55.45-1 1-1zm0 18c.55 0 1 .45 1 1v2c0 .55-.45 1-1 1s-1-.45-1-1v-2c0-.55.45-1 1-1zm-8-9c-.55 0-1-.45-1-1H1c-.55 0-1-.45-1-1s.45-1 1-1h2c.55 0 1 .45 1 1s-.45 1-1 1zm14 0c-.55 0-1-.45-1-1h-2c-.55 0-1-.45-1-1s.45-1 1-1h2c.55 0 1 .45 1 1s-.45 1-1 1zM4.22 4.22c-.39-.39-1.02-.39-1.41 0s-.39 1.02 0 1.41l1.41 1.41c.39.39 1.02.39 1.41 0s.39-1.02 0-1.41L4.22 4.22zm14.16 14.16c-.39-.39-1.02-.39-1.41 0s-.39 1.02 0 1.41l1.41 1.41c.39.39 1.02.39 1.41 0s.39-1.02 0-1.41l-1.41-1.41zM18.36 4.22c.39-.39.39-1.02 0-1.41s-1.02-.39-1.41 0l-1.41 1.41c-.39.39-.39 1.02 0 1.41s1.02.39 1.41 0l1.41-1.41zM5.64 18.36c.39-.39.39-1.02 0-1.41s-1.02-.39-1.41 0l-1.41 1.41c-.39.39-.39 1.02 0 1.41s1.02.39 1.41 0l1.41-1.41z"/></svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.62-.14 2.37-.38-.3-.6-.48-1.28-.48-2.02 0-2.21 1.79-4 4-4 .74 0 1.42.18 2.02.48.24-.75.38-1.54.38-2.37 0-4.97-4.03-9-9-9z"/></svg>
+                </button>
             </div>
         </header>
 
