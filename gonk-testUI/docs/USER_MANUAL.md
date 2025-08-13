@@ -47,14 +47,21 @@ Once the installation and configuration are complete, you can start the Gonk Tes
 
 From within the `gonk-testUI` directory, run the following command:
 ```bash
-# Run on the default IP (0.0.0.0) and port (8082)
+# Run with all defaults
+# Server on 0.0.0.0:8082, connects to API at http://localhost:8000
 python app.py
 
-# Or, run on a specific IP and port
+# Run on a specific IP and port
 python app.py --ip 127.0.0.1 --port 8083
+
+# Point to a specific Zotify API instance
+python app.py --api-url http://192.168.1.100:8000
 ```
 
-You should see output indicating that the Flask server is running. By default, the server runs on `0.0.0.0:8082`, but you can use the optional `--ip` and `--port` flags to run it on a different address.
+You should see output indicating that the Flask server is running. You can use the following optional flags:
+-   `--ip`: The IP address to bind the UI server to (default: `0.0.0.0`).
+-   `--port`: The port to run the UI server on (default: `8082`).
+-   `--api-url`: The base URL of the Zotify API to test (default: `http://localhost:8000`).
 
 ### 4. Accessing the UI
 

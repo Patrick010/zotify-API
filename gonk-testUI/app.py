@@ -1,14 +1,14 @@
 import os
 import subprocess
 import argparse
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, jsonify, request, send_from_directory, render_template
 
 app = Flask(__name__, static_folder='static')
 sqlite_web_process = None
 
 @app.route("/")
 def index():
-    return send_from_directory('static', 'index.html')
+    return render_template('index.html', api_url=args.api_url)
 
 @app.route("/<path:path>")
 def static_proxy(path):
@@ -57,6 +57,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run the Gonk Test UI server.")
     parser.add_argument("--ip", default="0.0.0.0", help="The IP address to bind the server to. Defaults to 0.0.0.0.")
     parser.add_argument("--port", type=int, default=8082, help="The port to run the server on. Defaults to 8082.")
+    parser.add_argument("--api-url", default="http://localhost:8000", help="The base URL of the Zotify API. Defaults to http://localhost:8000.")
     args = parser.parse_args()
 
     app.run(host=args.ip, port=args.port, debug=True)

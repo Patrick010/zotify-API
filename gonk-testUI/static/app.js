@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const stopSqliteBtn = document.getElementById("stop-sqlite");
     const sqliteIframe = document.getElementById("sqlite-iframe");
 
-    const ZOTIFY_API_BASE = "http://localhost:8000"; // Assuming the API runs on port 8000
+    const ZOTIFY_API_BASE = window.ZOTIFY_API_URL || "http://localhost:8000";
 
     // Fetch OpenAPI schema and build the UI
     async function loadEndpoints() {
