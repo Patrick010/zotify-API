@@ -97,6 +97,21 @@ The UI is divided into two main sections:
 
 3.  **Stopping sqlite-web**: When you are finished, click the **"Stop sqlite-web"** button to shut down the database browser server.
 
-### Spotify Authentication
+### Spotify Authentication and Session Management
 
-To test endpoints that require Spotify authentication, click the **"Login with Spotify"** button. This will open a new tab for the Spotify authorization flow. Once you complete it, the application will be able to make authenticated requests.
+The UI provides a dynamic button in the header to manage the Spotify authentication session.
+
+#### Checking Login Status
+On page load, the UI automatically checks with the Zotify API to see if you are already authenticated with Spotify. This requires a valid **Admin API Key** to be present in one of the generated forms on the page. If no key is provided, the login button will be disabled.
+
+#### Logging In
+1.  Ensure you have entered your Admin API Key in at least one of the API forms. The login button should now be enabled.
+2.  If the button says **"Login with Spotify"**, clicking it will open a small popup window with the Spotify authorization page.
+3.  Log in to your Spotify account in the popup.
+4.  After you approve the permissions, the popup will communicate with the Zotify API backend, save your credentials, and then close automatically.
+5.  The main UI page will detect the successful login, and the button will change to say **"Logout"**.
+
+#### Logging Out
+1.  If the button says **"Logout"**, clicking it will send a request to the Zotify API to clear your stored Spotify credentials from the database.
+2.  This requires a valid **Admin API Key** to be present in one of the API forms.
+3.  Upon success, the button will change back to **"Login with Spotify"**.

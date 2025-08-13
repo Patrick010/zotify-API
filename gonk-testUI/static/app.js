@@ -146,19 +146,82 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- Control Button Handlers ---
 
+    // --- Auth Flow ---
+
+    function getAdminApiKey() {
+        const apiKeyInput = document.querySelector('input[name="adminApiKey"]');
+        return apiKeyInput ? apiKeyInput.value : null;
+    }
+
+    async function updateLoginButtonState() {
+        if (!spotifyLoginBtn) return;
+
+        const apiKey = getAdminApiKey();
+        if (!apiKey) {
+            spotifyLoginBtn.textContent = "Login with Spotify";
+            spotifyLoginBtn.disabled = true;
+            spotifyLoginBtn.title = "Enter an Admin API Key to enable login.";
+            return;
+        }
+        spotifyLoginBtn.disabled = false;
+        spotifyLoginBtn.title = "";
+
+        try {
+            const response = await fetch(`${ZOTIFY_API_BASE}/api/auth/status`, {
+                headers: { "X-API-Key": apiKey }
+            });
+            const data = await response.json();
+            if (data.is_authenticated) {
+                spotifyLoginBtn.textContent = "Logout";
+            } else {
+                spotifyLoginBtn.textContent = "Login with Spotify";
+            }
+        } catch (error) {
+            spotifyLoginBtn.textContent = "Login (Status Error)";
+            console.error("Error fetching auth status:", error);
+        }
+    }
+
     if (spotifyLoginBtn) {
         spotifyLoginBtn.addEventListener("click", async () => {
-            try {
-                const response = await fetch(`${ZOTIFY_API_BASE}/api/spotify/login`);
-                const data = await response.json();
-                if (data.auth_url) {
-                    window.open(data.auth_url, "_blank");
+            if (spotifyLoginBtn.textContent === "Logout") {
+                const apiKey = getAdminApiKey();
+                if (!apiKey) {
+                    alert("Admin API Key is required to logout.");
+                    return;
                 }
-            } catch (error) {
-                apiResponse.textContent = `Error: ${error.message}`;
+                try {
+                    await fetch(`${ZOTIFY_API_BASE}/api/auth/logout`, {
+                        method: "POST",
+                        headers: { "X-API-Key": apiKey }
+                    });
+                    updateLoginButtonState();
+                } catch (error) {
+                    apiResponse.textContent = `Error: ${error.message}`;
+                }
+            } else {
+                // Login logic
+                try {
+                    const response = await fetch(`${ZOTIFY_API_BASE}/api/spotify/login`);
+                    const data = await response.json();
+                    if (data.auth_url) {
+                        const popup = window.open(data.auth_url, "spotify_login", "width=500,height=600");
+                    }
+                } catch (error) {
+                    apiResponse.textContent = `Error: ${error.message}`;
+                }
             }
         });
     }
+
+    // Listen for message from popup
+    window.addEventListener("message", (event) => {
+        if (event.data === "login_successful") {
+            updateLoginButtonState();
+            // The popup should close itself, but we can try to close it too
+            // if we still have a reference, though we don't in this simple setup.
+        }
+    }, false);
 
     if (launchSqliteBtn) {
         launchSqliteBtn.addEventListener("click", async () => {
@@ -195,4 +258,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Initial load
     loadEndpoints();
+    updateLoginButtonState();
+
+    // Listen for changes in any admin key input to re-evaluate button state
+    document.addEventListener('focusout', (event) => {
+        if (event.target && event.target.name === 'adminApiKey') {
+            updateLoginButtonState();
+        }
+    });
 });

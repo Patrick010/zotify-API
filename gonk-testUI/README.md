@@ -9,7 +9,7 @@ Gonk Test UI is a standalone developer tool for testing the Zotify API. It is a 
 -   **Dynamic API Endpoint Discovery**: Automatically fetches the OpenAPI schema from a running Zotify API instance and displays a list of all available endpoints.
 -   **Interactive API Forms**: Generates web forms for each endpoint, allowing you to easily provide parameters and request bodies.
 -   **Real-time API Responses**: Displays the full JSON response from the API immediately after a request is made.
--   **Spotify Authentication Helper**: Provides a simple button to initiate the Spotify OAuth2 login flow.
+-   **State-Aware Spotify Authentication**: Provides a dynamic button to initiate the Spotify OAuth2 login flow in a popup window. The button's state (Login/Logout) is automatically updated based on the API's true authentication status.
 -   **Integrated Database Browser**: Includes an embedded `sqlite-web` interface, allowing you to browse and query the development database directly from the UI.
 
 ## Getting Started
