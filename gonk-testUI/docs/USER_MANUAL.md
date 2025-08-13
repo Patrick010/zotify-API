@@ -47,16 +47,18 @@ Once the installation and configuration are complete, you can start the Gonk Tes
 
 From within the `gonk-testUI` directory, run the following command:
 ```bash
+# Run on the default IP (0.0.0.0) and port (8082)
 python app.py
+
+# Or, run on a specific IP and port
+python app.py --ip 127.0.0.1 --port 8083
 ```
 
-You should see output indicating that the Flask server is running. The server runs on port **8082** by default.
+You should see output indicating that the Flask server is running. By default, the server runs on `0.0.0.0:8082`, but you can use the optional `--ip` and `--port` flags to run it on a different address.
 
 ### 4. Accessing the UI
 
-Open your web browser and navigate to the following URL:
-
-**`http://localhost:8082`**
+Open your web browser and navigate to the address the server is running on (e.g., `http://localhost:8082` or `http://127.0.0.1:8083`).
 
 You should now see the Gonk Test UI interface.
 

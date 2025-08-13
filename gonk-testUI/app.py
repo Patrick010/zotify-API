@@ -1,5 +1,6 @@
 import os
 import subprocess
+import argparse
 from flask import Flask, jsonify, request, send_from_directory
 
 app = Flask(__name__, static_folder='static')
@@ -53,6 +54,9 @@ def stop_sqlite_web():
 
 
 if __name__ == "__main__":
-    # Note: The port is hardcoded here for simplicity. In a real app,
-    # this might also come from config.
-    app.run(port=8082, debug=True)
+    parser = argparse.ArgumentParser(description="Run the Gonk Test UI server.")
+    parser.add_argument("--ip", default="0.0.0.0", help="The IP address to bind the server to. Defaults to 0.0.0.0.")
+    parser.add_argument("--port", type=int, default=8082, help="The port to run the server on. Defaults to 8082.")
+    args = parser.parse_args()
+
+    app.run(host=args.ip, port=args.port, debug=True)

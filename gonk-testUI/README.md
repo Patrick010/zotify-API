@@ -55,16 +55,21 @@ set DATABASE_URI=sqlite:///../api/storage/zotify.db
 
 ### 3. Running the Application
 
-Once the dependencies are installed and the environment variable is set, you can run the application:
+Once the dependencies are installed and the environment variable is set, you can run the application.
 
+The server can be started with a configurable IP and port:
 ```bash
+# Run on the default IP (0.0.0.0) and port (8082)
 python app.py
+
+# Or, run on a specific IP and port
+python app.py --ip 127.0.0.1 --port 8083
 ```
 *(Make sure you are still inside the `gonk-testUI` directory when running this command.)*
 
-The Gonk Test UI server will start, and you can access it in your web browser at the following URL:
+The server defaults to running on `0.0.0.0:8082`. You can use the optional `--ip` and `--port` flags to bind it to a different address.
 
-**`http://localhost:8082`**
+You can then access the Gonk Test UI in your web browser at the address the server is running on (e.g., `http://localhost:8082` or `http://127.0.0.1:8083`).
 
 ### 4. How to Use the UI
 
