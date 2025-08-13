@@ -6,15 +6,22 @@
     <link rel="stylesheet" href="/styles.css">
     <style>
         .theme-toggle {
-            background: none;
-            border: none;
+            background-color: var(--button-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
             cursor: pointer;
-            padding: 5px;
+            padding: 8px 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .theme-toggle:hover {
+            background-color: var(--button-hover-bg);
         }
         .theme-toggle svg {
-            width: 24px;
-            height: 24px;
-            fill: var(--text-color);
+            width: 16px;
+            height: 16px;
+            stroke: var(--text-color);
         }
         .theme-toggle .moon-icon { display: none; }
         .theme-toggle .sun-icon { display: block; }
@@ -31,8 +38,8 @@
                 <button id="launch-sqlite">Launch sqlite-web</button>
                 <button id="stop-sqlite">Stop sqlite-web</button>
                 <button id="theme-toggle" class="theme-toggle" title="Toggle theme">
-                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM12 9c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3zm0-7c.55 0 1 .45 1 1v2c0 .55-.45 1-1 1s-1-.45-1-1V3c0-.55.45-1 1-1zm0 18c.55 0 1 .45 1 1v2c0 .55-.45 1-1 1s-1-.45-1-1v-2c0-.55.45-1 1-1zm-8-9c-.55 0-1-.45-1-1H1c-.55 0-1-.45-1-1s.45-1 1-1h2c.55 0 1 .45 1 1s-.45 1-1 1zm14 0c-.55 0-1-.45-1-1h-2c-.55 0-1-.45-1-1s.45-1 1-1h2c.55 0 1 .45 1 1s-.45 1-1 1zM4.22 4.22c-.39-.39-1.02-.39-1.41 0s-.39 1.02 0 1.41l1.41 1.41c.39.39 1.02.39 1.41 0s.39-1.02 0-1.41L4.22 4.22zm14.16 14.16c-.39-.39-1.02-.39-1.41 0s-.39 1.02 0 1.41l1.41 1.41c.39.39 1.02.39 1.41 0s.39-1.02 0-1.41l-1.41-1.41zM18.36 4.22c.39-.39.39-1.02 0-1.41s-1.02-.39-1.41 0l-1.41 1.41c-.39.39-.39 1.02 0 1.41s1.02.39 1.41 0l1.41-1.41zM5.64 18.36c.39-.39.39-1.02 0-1.41s-1.02-.39-1.41 0l-1.41 1.41c-.39.39-.39 1.02 0 1.41s1.02.39 1.41 0l1.41-1.41z"/></svg>
-                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.62-.14 2.37-.38-.3-.6-.48-1.28-.48-2.02 0-2.21 1.79-4 4-4 .74 0 1.42.18 2.02.48.24-.75.38-1.54.38-2.37 0-4.97-4.03-9-9-9z"/></svg>
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12"x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 </button>
             </div>
         </header>
