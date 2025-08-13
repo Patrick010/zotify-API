@@ -9,4 +9,6 @@ echo "Starting Zotify API server..."
 
 # Run the uvicorn server
 # We assume this script is run from the root of the project.
-cd api/ && uvicorn zotify_api.main:app --host 0.0.0.0 --port 8000 --reload --log-level debug
+# We set PYTHONPATH to include the `src` directory so that the local,
+# editable source code is used instead of a globally installed package.
+cd api/ && PYTHONPATH=./src uvicorn zotify_api.main:app --host 0.0.0.0 --port 8000 --reload --log-level debug
