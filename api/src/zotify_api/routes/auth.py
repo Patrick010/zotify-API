@@ -11,30 +11,13 @@ from zotify_api.services.deps import get_db
 router = APIRouter(prefix="/auth", tags=["auth"])
 logger = logging.getLogger(__name__)
 
-@router.post("/spotify/callback", response_class=HTMLResponse)
+@router.post("/spotify/callback", response_model=CallbackResponse)
 async def spotify_callback(payload: SpotifyCallbackPayload, db: Session = Depends(get_db)):
     """
     Handles the secure callback from the Snitch service after user authentication.
-    Returns an HTML page with a script to notify the parent window and close the popup.
     """
     await handle_spotify_callback(code=payload.code, state=payload.state, db=db)
-
-    html_content = """
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Authentication Successful</title>
-    </head>
-    <body>
-        <p>Authentication successful! You can now close this window.</p>
-        <script>
-            window.opener.postMessage("login_successful", "*");
-            window.close();
-        </script>
-    </body>
-    </html>
-    """
-    return HTMLResponse(content=html_content)
+    return {"status": "success"}
 
 @router.get("/status", response_model=AuthStatus, dependencies=[Depends(require_admin_api_key)])
 async def get_status(db: Session = Depends(get_db)):

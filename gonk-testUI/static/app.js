@@ -183,6 +183,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (spotifyLoginBtn) {
+        let loginPopup;
+        let pollingInterval;
+
         spotifyLoginBtn.addEventListener("click", async () => {
             if (spotifyLoginBtn.textContent === "Logout") {
                 const apiKey = getAdminApiKey();
@@ -200,12 +203,27 @@ document.addEventListener("DOMContentLoaded", () => {
                     apiResponse.textContent = `Error: ${error.message}`;
                 }
             } else {
-                // Login logic
+                // Login logic using polling
                 try {
                     const response = await fetch(`${ZOTIFY_API_BASE}/api/spotify/login`);
                     const data = await response.json();
                     if (data.auth_url) {
-                        const popup = window.open(data.auth_url, "spotify_login", "width=500,height=600");
+                        loginPopup = window.open(data.auth_url, "spotify_login", "width=500,height=600");
+
+                        // Start polling to check auth status
+                        pollingInterval = setInterval(async () => {
+                            await updateLoginButtonState();
+                            if (spotifyLoginBtn.textContent === "Logout") {
+                                clearInterval(pollingInterval);
+                                if (loginPopup) {
+                                    loginPopup.close();
+                                }
+                            }
+                            // Also check if popup was closed manually
+                            if (loginPopup && loginPopup.closed) {
+                                clearInterval(pollingInterval);
+                            }
+                        }, 2000); // Poll every 2 seconds
                     }
                 } catch (error) {
                     apiResponse.textContent = `Error: ${error.message}`;
@@ -213,15 +231,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-
-    // Listen for message from popup
-    window.addEventListener("message", (event) => {
-        if (event.data === "login_successful") {
-            updateLoginButtonState();
-            // The popup should close itself, but we can try to close it too
-            // if we still have a reference, though we don't in this simple setup.
-        }
-    }, false);
 
     if (launchSqliteBtn) {
         launchSqliteBtn.addEventListener("click", async () => {

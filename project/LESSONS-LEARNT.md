@@ -70,5 +70,6 @@ Covers insights from initial planning (Phase 0) through current active developme
 | Deliver iteratively, not as a single big launch. | **High** | (doc: projectplan/DELIVERY-MODEL.md) |
 | Use nested review loops (code → docs → process) to catch issues early. | **Medium** | (doc: projectplan/REVIEW-CYCLE.md) |
 | Providing sensible defaults (e.g., for `DATABASE_URI`) significantly improves the developer onboarding experience and reduces setup friction. | **Medium** | (doc: api/docs/manuals/DEVELOPER_GUIDE.md, api/src/zotify_api/config.py) |
+| Enforce unique filenames and directory names across the entire repository to prevent ambiguity and simplify searches. | **High** | (doc: project/LESSONS-LEARNT.md) |
 
 ---
