@@ -50,6 +50,12 @@ The Zotify API was originally built as a lightweight wrapper for a single use ca
 5. **`scripts/start.sh`:** Unified startup script.  
 6. **Spotify Two-Way Sync Module:** Bidirectional playlist sync, with conflict resolution.  
 
+### 2.4 Deferred Features
+Deferred features are tracked in `project/FUTURE_ENHANCEMENTS.md` until they are promoted to an active roadmap phase. These items are intentionally absent from design docs until scheduled for implementation.
+
+Example of a deferred feature:
+- *Webhook/Event System*
+
 ---
 
 ## 3. Stage Plans (High-Level)

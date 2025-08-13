@@ -1,7 +1,5 @@
 # HLD/LLD Traceability Matrix
 
-> **Note:** This document is the definitive Traceability Matrix for the HLD/LLD Alignment Audit (Phase 3). It should be used as the primary reference for this task, distinct from the main project `TRACEABILITY_MATRIX.md`.
-
 **Purpose:** This document tracks the alignment between the features and architectural principles described in the `HIGH_LEVEL_DESIGN.md` and `LOW_LEVEL_DESIGN.md` documents and the actual state of the codebase.
 
 | Feature / Component | Exists? | Matches Design? | Priority | Notes on Deviations & Context |
@@ -12,7 +10,7 @@
 | Role-Based Access Control (RBAC) | N | N | Low | **Context:** Planned for multi-user environments, but current model is single-user. Deferred until multi-user support is prioritized. |
 | **Spotify Integration** | | | | |
 | OAuth2 for Spotify Integration | Y | Y (partial) | Medium | **Context:** The design documents (`LOW_LEVEL_DESIGN.md`) have been updated to reflect the current reality, which is that the integration supports authentication and full playlist CRUD, but not write-sync or full library management. **Gap:** None from a documentation perspective. The unimplemented features are now tracked in `FUTURE_ENHANCEMENTS.md`. |
-| Webhook/Event System | N | Y | Low | **Context:** This feature is not specified in the HLD/LLD. It is mentioned as a future goal in `ROADMAP.md` (for Phase 8) and `FUTURE_ENHANCEMENTS.md`. The original gap description was inaccurate; this is a future roadmap item, not a current design-code mismatch. |
+| Webhook/Event System | N | Y (Deferred) | Low | **Status:** Planned — Deferred. This feature is tracked in `project/FUTURE_ENHANCEMENTS.md`. It will not appear in HLD/LLD until promoted to an active roadmap phase. |
 | **Core Subsystems** | | | | |
 | Provider Abstraction Layer | Y | Y | Critical | **Context:** A new provider-agnostic abstraction layer has been implemented. Spotify has been refactored into a connector for this layer. **Gap:** None. |
 | Unified Database System | Y | Y | Critical | **Context:** A new backend-agnostic database layer using SQLAlchemy has been implemented. It handles all data persistence for the application. **Gap:** None. |

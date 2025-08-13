@@ -4,7 +4,7 @@
 
 **Goal:** Get a clear picture of where the gaps and misalignments are.
 
-- **Task 1.1:** ✅ Done - Create a simple comparison spreadsheet (`AUDIT_TRACEABILITY_MATRIX.md`) listing all key features/components from HLD/LLD versus the roadmap and codebase.
+- **Task 1.1:** ✅ Done - Create a simple comparison spreadsheet (traceability matrix) listing all key features/components from HLD/LLD versus the roadmap and codebase.
   - Columns: Feature | Exists in Codebase? (Y/N) | Matches Design? (Y/N) | Notes on Deviations
 - **Task 1.2:** ✅ Done - Review the roadmap and execution plan to identify core functionalities currently implemented.
 - **Task 1.3:** ✅ Done - Collect input from devs and auditors about known design vs code mismatches.

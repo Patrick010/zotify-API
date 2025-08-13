@@ -157,6 +157,7 @@ This section tracks major architectural initiatives.
 
 ## 🧠 Notes
 
+- Certain planned items, such as the Webhook/Event System, are intentionally deferred and tracked in `FUTURE_ENHANCEMENTS.md` until they are activated in a roadmap phase.
 - `ROADMAP.md` is the only file allowed to define global task state.
 - Phase transitions are **not time-based** but milestone-based.
 - All Jules task prompts **must update this file** upon completion.
