@@ -1,4 +1,4 @@
-# Project State as of 2025-08-12
+# Project State as of 2025-08-13
 
 **Status:** Live Document
 
@@ -16,31 +16,38 @@ The overarching goal of the recent work has been to execute a comprehensive audi
 
 ## 2. Current High-Level Goal
 
-The project is currently in **Phase 3: Incremental Design Updates** of the HLD/LLD Alignment Plan.
-
-The immediate goal is to **continue the gradual alignment of the High-Level Design (HLD) and Low-Level Design (LLD) documents with the actual state of the codebase.** This process is guided by the Traceability Matrix, which identifies all known deviations.
-
-Work is performed incrementally, with a focus on updating the documentation for 1-2 subsystems at a time to reflect the ground truth of the implementation.
+The project is currently in a documentation and process refinement phase. The immediate goal is to fully integrate the `Snitch` and `Gonk-TestUI` supporting modules into the project's governance and documentation structure.
 
 ## 3. Recent Major Accomplishments
 
-* **Terminology Refactor**: Renamed the "Provider Adapter" to "Provider Connector" across all code and documentation to improve terminological clarity.
-* **Expanded Spotify Permissions**: The application now requests all available scopes from the Spotify API, enabling the broadest possible service functionality as per user requirements.
-* **Provider Abstraction Layer Refactoring**: The application was successfully refactored from a Spotify-centric service to a provider-agnostic platform. The legacy Spotify client was replaced with a `SpotifyConnector` implementing a new `BaseProvider` interface.
-* **Unified Database Architecture**: Refactored the persistence layer to use a unified, backend-agnostic database system built on **SQLAlchemy**, replacing previous ad-hoc storage mechanisms.
-* **`gonk-testUI` Developer Tool**: Created a standalone developer tool to facilitate API testing and development.
-* **System Documentation Overhaul**: Created comprehensive system documentation in the project documentation directories.
-* **Establishment of Live Project Documents**: A new process has been established using live documents, including this snapshot, the Activity Log, the Project Registry, Lessons Learnt, and the Backlog.
+*   **`gonk-testUI` Enhancements**:
+    *   The server is now fully configurable via command-line arguments (`--ip`, `--port`, `--api-url`).
+    *   A persistent dark/light mode theme toggle with new icons has been added to improve usability.
+    *   The UI layout has been improved to render API forms directly under the endpoint buttons.
+    *   The Spotify authentication flow has been completely revamped to use a state-aware button, a popup window, and a robust polling mechanism, decoupling it from the backend.
+
+*   **API Stability and Developer Experience Fixes**:
+    *   Fixed a critical API startup crash caused by a missing CORS policy. The policy has been implemented and documented across all relevant project files.
+    *   Improved the developer experience by providing a default `ADMIN_API_KEY` in development mode, preventing configuration-related startup errors.
+
+*   **Documentation and Process Improvements**:
+    *   Corrected several inconsistencies in the project's traceability matrices and audit logs.
+    *   Established a new convention for unique filenames and added a sequencing mechanism to the `ACTIVITY.md` log.
+
+*   **Terminology Refactor**: Renamed the "Provider Adapter" to "Provider Connector".
+*   **Provider Abstraction Layer Refactoring**: Refactored the application to a provider-agnostic platform.
+*   **Unified Database Architecture**: Refactored the persistence layer to use SQLAlchemy.
 
 ## 4. Known Issues & Limitations
 
 These issues relate to the development environment, not the application code:
 
-* **File System Tool Unreliability**: Tools for file system manipulation have proven to be unreliable.
-* **Test Runner Issues**: `pytest` has been difficult to configure correctly in this environment.
+*   **File System Tool Unreliability**: Tools for file system manipulation (`rename_file`) have proven to be unreliable.
+*   **Recursive Commands**: Recursive shell commands (`ls -R`, `grep -r`) have been observed to time out, requiring manual, level-by-level investigation as a workaround.
+*   **Test Runner Issues**: `pytest` has been difficult to configure correctly in this environment.
 
 **Recommendation for next developer**: Be aware of these tool limitations.
 
 ## 5. Pending Work: Next Immediate Steps
 
-The immediate next step is to **review the Use Cases Gap Analysis to identify missing features and consult the Traceability Matrix to select the next development or alignment task.** The gap analysis now serves as the primary source of truth for feature coverage status.
+The immediate next step is to **implement the new Feature Specification documentation system**, as outlined in the multi-part plan. This involves creating the new file structure (`docs/reference/FEATURE_SPECS.md`), integrating it into the project governance documents, and then retroactively documenting all existing features of the Core API and Supporting Modules.
