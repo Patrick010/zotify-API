@@ -40,6 +40,7 @@ The project is currently in a phase of audit and alignment, where the primary go
 - **Reality First**: The codebase is treated as the ground truth. Documentation is updated to reflect the actual, verified behavior of the application.
 - **Continuous Alignment**: All significant changes to code must be accompanied by corresponding updates to all relevant documentation (e.g., LLD, changelogs, user guides) in the same commit.
 - **Centralized Logging**: All work must be logged in the project's official logs (e.g., `AUDIT-PHASE-3.md`, `ACTIVITY.md`) to maintain a clear, traceable history of changes.
+- **Mandatory Verification**: When new documents are created, a verification step must confirm they are correctly integrated into the existing documentation hierarchy (e.g., linked in `PROJECT_REGISTRY.md`).
 
 Once the codebase and documentation have been fully aligned and the design has stabilized, the project may adopt a more formal "docs-first" workflow for future feature development, where design documents are created and approved before implementation begins.
 
@@ -65,12 +66,6 @@ Once the codebase and documentation have been fully aligned and the design has s
 
 A comprehensive overview of the security architecture, principles, and roadmap for the Zotify API project is available in the [Zotify API Security](./SECURITY.md) document. This document serves as the definitive security reference for the project.
 
-### Development Process / Task Completion
-
-**All development tasks must comply with the Task Execution Checklist.**
-The canonical checklist is located at `docs/projectplan/task_checklist.md`. Before a task is marked complete (including committing, creating a PR, or merging), follow the checklist: update HLD/LLD as needed, ensure security & privacy checks, update docs, write tests, and confirm all tests pass.
-
-This checklist is authoritative and enforced for every task.
 
 ---
 
