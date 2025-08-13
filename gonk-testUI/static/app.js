@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
     const endpointsList = document.getElementById("endpoints-list");
-    const formsContainer = document.getElementById("forms-container");
     const apiResponse = document.getElementById("api-response");
 
     const spotifyLoginBtn = document.getElementById("spotify-login");
@@ -51,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     button.textContent = `${method.toUpperCase()} ${path}`;
                     button.dataset.path = path;
                     button.dataset.method = method;
-                    button.addEventListener("click", () => renderForm(path, method, endpoint));
+                    button.addEventListener("click", (event) => renderForm(event, path, method, endpoint));
                     endpointsList.appendChild(button);
                 }
             }
@@ -62,8 +61,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Render the form for a specific endpoint
-    function renderForm(path, method, endpoint) {
-        formsContainer.innerHTML = ""; // Clear previous form
+    function renderForm(event, path, method, endpoint) {
+        // Remove any existing form
+        const existingForm = document.getElementById("api-form");
+        if (existingForm) {
+            existingForm.remove();
+        }
+
+        const clickedButton = event.currentTarget;
         const form = document.createElement("form");
         form.id = "api-form";
         form.dataset.path = path;
@@ -92,7 +97,8 @@ document.addEventListener("DOMContentLoaded", () => {
         formHtml += `<div><label>Admin API Key:</label><input type="text" name="adminApiKey"></div>`;
         formHtml += `<button type="submit">Send Request</button>`;
         form.innerHTML = formHtml;
-        formsContainer.appendChild(form);
+
+        clickedButton.after(form);
 
         form.addEventListener("submit", handleFormSubmit);
     }
