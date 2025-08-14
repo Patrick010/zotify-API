@@ -39,6 +39,9 @@ This section lists specific technical features and improvements that are candida
     *   Expand the system info endpoints to include detailed process stats, disk/network health, and dependency checks.
 *   **Unified Configuration Management:**
     *   Unify the two configuration systems (`config.py` and `config_service.py`). This would likely involve migrating the settings from `config.json` into the main database and providing a single, consistent API for managing all application settings at runtime.
+*   **Snitch Module Enhancement:**
+    *   Investigate the further development of the conceptual `Snitch` module.
+    *   Potential enhancements include running it as a persistent background service, developing it into a browser plugin for seamless integration, or expanding it to handle multi-service authentication flows.
 
 ---
 
