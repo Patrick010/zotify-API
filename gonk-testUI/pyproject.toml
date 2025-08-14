@@ -7,3 +7,6 @@ dependencies = [
     "Flask",
     "sqlite-web",
 ]
+
+[tool.setuptools]
+py-modules = ["app"]
