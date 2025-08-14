@@ -13,27 +13,6 @@ Tasks in this backlog are distinct from the strategic, high-level goals outlined
 Items are to be flagged with a priority (`[HIGH]`, `[MEDIUM]`, `[LOW]`) and a status marker to aid in work planning.
 
 ---
-
-### `P4-TASK-01` [HIGH]: Update Task Execution Checklist with Documentation Mandate
-- **Status:** ❌ Not Started
-- **Description:** This task involves adding a mandatory step to the project's `task_checklist.md`. This step will require developers to confirm they have updated all relevant project documentation as part of their pull request, making documentation updates an explicit part of the development workflow.
-- **Source:** `project/audit/HLD_LLD_ALIGNMENT_PLAN.md` (Phase 4, Task 4.1)
-
----
-
-### `P4-TASK-02` [MEDIUM]: Implement CI Check for Documentation Updates
-- **Status:** ❌ Not Started
-- **Description:** This task is to create an automated check within the CI/CD pipeline to enforce the documentation update mandate. This will serve as an automated safeguard to prevent code changes from being merged without corresponding documentation updates.
-- **Source:** `project/audit/HLD_LLD_ALIGNMENT_PLAN.md` (Phase 4, Task 4.2)
-
----
-
-### `P4-TASK-03` [LOW]: Formalize and Schedule Documentation Review Process
-- **Status:** ❌ Not Started
-- **Description:** This task involves defining and documenting a formal process for periodic reviews of the project's design documents. This process will specify the cadence, scope, and responsibilities for the reviews to proactively maintain documentation quality.
-- **Source:** `project/audit/HLD_LLD_ALIGNMENT_PLAN.md` (Phase 4, Task 4.3)
-
----
 ### `TD-TASK-01` [CRITICAL]: Resolve MyPy Blocker
 - **Status:** ❌ Not Started
 - **Description:** The `mypy` type checker currently fails to run due to a duplicate module name conflict between `api/src/zotify_api/routes/config.py` and `api/src/zotify_api/models/config.py`. This task is to rename one of the files (e.g., to `config_routes.py`) to resolve the conflict and allow the type checker to run across the codebase. This is a blocker for all future type safety work.
@@ -78,12 +57,53 @@ Items are to be flagged with a priority (`[HIGH]`, `[MEDIUM]`, `[LOW]`) and a st
 
 ### `SL-TASK-04` [LOW]: Update Task Checklist
 - **Status:** ❌ Not Started
-- **Description:** Update the project's `task_checklist.md` (or create a `CONTRIBUTING.md`) with a formal code review checklist for reviewers, as outlined in Stage 3 of the Super-Lint plan. This fulfills the original goal of `P4-TASK-01`.
+- **Description:** Update the project's `task_checklist.md` (or create a `CONTRIBUTING.md`) with a formal code review checklist for reviewers, as outlined in Stage 3 of the Super-Lint plan.
 - **Source:** `project/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md`
 
 ---
 
 ### `SL-TASK-05` [LOW]: Document Code Scoring Rubric
 - **Status:** ❌ Not Started
-- **Description:** Document the 0-10 code scoring rubric and the process for scheduled documentation reviews, as outlined in Stage 3 of the Super-Lint plan. This fulfills the original goal of `P4-TASK-03`.
+- **Description:** Document the 0-10 code scoring rubric and the process for scheduled documentation reviews, as outlined in Stage 3 of the Super-Lint plan.
 - **Source:** `project/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md`
+---
+### `LOG-TASK-01` [HIGH]: Implement Core Extendable Logging Service
+- **Status:** ❌ Not Started
+- **Description:** Implement the core `LoggingService` and the `BaseLogHandler` interface. The service will act as a dispatcher and manage a registry of different log handlers. This is the foundational task for the new logging system.
+- **Source:** `project/LOGGING_SYSTEM_DESIGN.md`
+
+---
+### `LOG-TASK-02` [HIGH]: Implement FileStreamHandler for System Logs
+- **Status:** ❌ Not Started
+- **Description:** Create the `FileStreamHandler` to tail the main application log file. Implement the logic for efficient, real-time streaming of new log lines.
+- **Source:** `project/LOGGING_SYSTEM_DESIGN.md`
+
+---
+### `LOG-TASK-03` [MEDIUM]: Implement JsonAuditHandler for Audit Logs
+- **Status:** ❌ Not Started
+- **Description:** Create the `JsonAuditHandler` to capture and format specific audit events into a structured JSON format and write them to a dedicated audit log file.
+- **Source:** `project/LOGGING_SYSTEM_DESIGN.md`
+
+---
+### `LOG-TASK-04` [MEDIUM]: Implement DatabaseJobLogHandler for Job Logs
+- **Status:** ❌ Not Started
+- **Description:** Create the `DatabaseJobLogHandler` to write logs for long-running tasks (like downloads) to a new `job_logs` table in the database, linking them with a `job_id`.
+- **Source:** `project/LOGGING_SYSTEM_DESIGN.md`
+
+---
+### `LOG-TASK-05` [HIGH]: Create API Endpoint for System Log Streaming
+- **Status:** ❌ Not Started
+- **Description:** Implement the `GET /api/logs/system/stream` endpoint using FastAPI's `StreamingResponse` to serve logs from the `FileStreamHandler`.
+- **Source:** `project/LOGGING_SYSTEM_DESIGN.md`
+
+---
+### `LOG-TASK-06` [MEDIUM]: Create API Endpoint for Audit Logs
+- **Status:** ❌ Not Started
+- **Description:** Implement the `GET /api/logs/audit` endpoint to allow querying of the structured JSON audit logs, with support for filtering.
+- **Source:** `project/LOGGING_SYSTEM_DESIGN.md`
+
+---
+### `LOG-TASK-07` [MEDIUM]: Create API Endpoint for Job Logs
+- **Status:** ❌ Not Started
+- **Description:** Implement the `GET /api/logs/jobs/{job_id}` endpoint to retrieve all logs associated with a specific job from the database.
+- **Source:** `project/LOGGING_SYSTEM_DESIGN.md`

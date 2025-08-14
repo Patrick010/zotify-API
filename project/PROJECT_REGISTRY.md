@@ -28,10 +28,20 @@ This document serves as the master file, or single source of truth, for tracking
 | **Use Cases** | [`USECASES.md`](./USECASES.md) | A collection of user-driven scenarios and requirements for the API. |
 | **Use Case Gap Analysis** | [`USECASES_GAP_ANALYSIS.md`](./USECASES_GAP_ANALYSIS.md) | An analysis of the gaps between the desired use cases and the current implementation. |
 | **Feature Specifications** | [`api/docs/reference/FEATURE_SPECS.md`](../api/docs/reference/FEATURE_SPECS.md) | The master index for detailed, standardized specifications for all system features. |
+| **Logging System Design** | [`LOGGING_SYSTEM_DESIGN.md`](./LOGGING_SYSTEM_DESIGN.md) | The architectural design for the extendable logging system. |
+| **Logging Traceability Matrix** | [`LOGGING_TRACEABILITY_MATRIX.md`](./LOGGING_TRACEABILITY_MATRIX.md) | A matrix that tracks the requirements for the logging system against implementation tasks. |
 
 ---
 
-## 3. Supporting Modules
+## 3. Developer Manuals
+
+| Document | Location | Description |
+|---|---|---|
+| **Logging Guide** | [`api/docs/manuals/LOGGING_GUIDE.md`](../api/docs/manuals/LOGGING_GUIDE.md) | A detailed guide for developers on how to use and extend the new logging system. |
+
+---
+
+## 4. Supporting Modules
 
 This section lists the official supporting modules of the Zotify Platform.
 
@@ -42,7 +52,7 @@ This section lists the official supporting modules of the Zotify Platform.
 
 ---
 
-## 4. Audit & Alignment Documents
+## 5. Audit & Alignment Documents
 
 | Document | Location | Description |
 |---|---|---|
@@ -52,10 +62,12 @@ This section lists the official supporting modules of the Zotify Platform.
 | **Audit Log: Phase 1** | [`audit/AUDIT-phase-1.md`](./audit/AUDIT-phase-1.md) | Log of activities and findings from Phase 1 of the alignment plan. |
 | **Audit Log: Phase 2** | [`audit/AUDIT-phase-2.md`](./audit/AUDIT-phase-2.md) | Log of activities and findings from Phase 2 of the alignment plan. |
 | **Audit Log: Phase 3** | [`audit/AUDIT-PHASE-3.md`](./audit/AUDIT-PHASE-3.md) | Log of activities and findings from Phase 3 of the alignment plan. |
+| **Phase 4 Action Plan** | [`audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md`](./audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md) | The detailed action plan for implementing the "Super-Lint" and other quality gates for Phase 4. |
+| **Phase 4 Traceability Matrix** | [`audit/PHASE_4_TRACEABILITY_MATRIX.md`](./audit/PHASE_4_TRACEABILITY_MATRIX.md) | A matrix that tracks the goals of Phase 4 against the specific tasks created to implement them. |
 
 ---
 
-## 4. Completion Reports
+## 6. Completion Reports
 
 | Document | Location |
 |---|---|
@@ -64,7 +76,7 @@ This section lists the official supporting modules of the Zotify Platform.
 
 ---
 
-## 5. Change Log
+## 7. Change Log
 
 | Date | Change | Author |
 |---|---|---|

@@ -6,44 +6,33 @@ This document provides a live, chronological log of all major tasks undertaken a
 
 ---
 
-## ACT-015: Fix Timezone Comparison Error in Auth Status
+## ACT-014: Design Phase 4 "Super-Lint" and Extendable Logging System
 
 **Date:** 2025-08-14
 **Status:** ✅ Done
 **Assignee:** Jules
 
 ### Objective
-To fix a `TypeError` in the `/api/auth/status` endpoint that caused a 500 Internal Server Error. The error was due to a comparison between a timezone-aware datetime and a timezone-naive datetime.
+To create and document a comprehensive, traceable plan for the next two major project initiatives: the Phase 4 quality gates ("Super-Lint") and a new, extendable logging system.
 
 ### Outcome
-- Identified that `token.expires_at` was being loaded from the database as a timezone-naive datetime, while it was being compared against a timezone-aware `datetime.now(timezone.utc)`.
-- The fix was applied in `api/src/zotify_api/services/auth.py` by using `.replace(tzinfo=timezone.utc)` on the naive datetime object before comparison and timestamp calculation.
-- This ensures that all datetime operations are performed on timezone-aware objects, making the logic robust and preventing the `TypeError`.
+- **Phase 4 Plan:**
+    - Created `project/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md` with a detailed implementation strategy.
+    - Created `project/audit/PHASE_4_TRACEABILITY_MATRIX.md` to track the work.
+- **Logging System Plan:**
+    - Created `project/LOGGING_SYSTEM_DESIGN.md` with a pluggable handler-based architecture.
+    - Created `project/LOGGING_TRACEABILITY_MATRIX.md` for the new feature.
+    - Created a detailed `api/docs/manuals/LOGGING_GUIDE.md` for developers.
+- **Project Integration:**
+    - Updated the `PID.md` with a new mandate for structured logging.
+    - Updated the `ROADMAP.md` to include the new logging system as Phase 11.
+    - Updated the `BACKLOG.md` with detailed tasks for both initiatives.
+    - Registered all new documents in the `PROJECT_REGISTRY.md`.
+- **Process Alignment:**
+    - Updated `HLD_LLD_ALIGNMENT_PLAN.md` to correctly scope Phase 4 to the new detailed plan.
 
 ### Related Documents
-- `api/src/zotify_api/services/auth.py`
-
----
-
-## ACT-014: Standardize and Apply Status Markers Across Project Docs
-
-**Date:** 2025-08-14
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Objective
-To improve project clarity and traceability by establishing a formal convention for status markers (`✅`, `🟡`, `❌`) and applying it retroactively to all relevant planning and tracking documents.
-
-### Outcome
-- A new "Status Conventions" rule was added to the `PID.md` to serve as the single source of truth.
-- The `HLD_LLD_ALIGNMENT_PLAN.md` was updated to mark all phases with the correct status.
-- The `BACKLOG.md` was populated and all pending tasks marked as "Not Started".
-- This change ensures a consistent, at-a-glance understanding of work status across the project.
-
-### Related Documents
-- `project/PID.md`
-- `project/audit/HLD_LLD_ALIGNMENT_PLAN.md`
-- `project/BACKLOG.md`
+- All created and updated documents listed above.
 
 ---
 

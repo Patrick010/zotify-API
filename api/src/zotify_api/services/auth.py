@@ -51,13 +51,13 @@ async def get_auth_status(db: Session = Depends(get_db)) -> AuthStatus:
     if not token or not token.access_token:
         return AuthStatus(authenticated=False, token_valid=False, expires_in=0)
 
-    if token.expires_at.replace(tzinfo=timezone.utc) <= datetime.now(timezone.utc):
+    if token.expires_at <= datetime.now(timezone.utc):
         return AuthStatus(authenticated=True, token_valid=False, expires_in=0)
 
     client = SpotiClient(access_token=token.access_token)
     try:
         user_data = await client.get_current_user()
-        expires_in = token.expires_at.replace(tzinfo=timezone.utc).timestamp() - time.time()
+        expires_in = token.expires_at.timestamp() - time.time()
         return AuthStatus(
             authenticated=True,
             user_id=user_data.get("id"),

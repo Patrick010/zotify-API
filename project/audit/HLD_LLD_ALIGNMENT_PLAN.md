@@ -3,7 +3,6 @@
 ## Phase 1: Prepare & Analyze (1–2 days)
 
 **Goal:** Get a clear picture of where the gaps and misalignments are.
-**Status:** ✅ Done
 
 - **Task 1.1:** ✅ Done - Create a simple comparison spreadsheet (traceability matrix) listing all key features/components from HLD/LLD versus the roadmap and codebase.
   - Columns: Feature | Exists in Codebase? (Y/N) | Matches Design? (Y/N) | Notes on Deviations
@@ -37,9 +36,7 @@
 **Goal:** Prevent future drift and keep design docs up to date.
 **Status:** ❌ Not Started
 
-- **Task 4.1:** Add doc update steps to the Task Execution Checklist as mandatory for all code PRs.
-- **Task 4.2:** Implement a simple CI check (could be a checklist or script) to verify that related docs are updated before merge.
-- **Task 4.3:** Schedule quarterly or sprint-end reviews for design docs to catch and fix drifts early.
+- **Task 4.1:** Execute the detailed action plan for code optimization and quality assurance as defined in the [`CODE_OPTIMIZATIONPLAN_PHASE_4.md`](./CODE_OPTIMIZATIONPLAN_PHASE_4.md) document. This includes remediating technical debt and implementing the "Super-Lint" quality gates.
 
 ## Phase 5: Ongoing Maintenance
 
