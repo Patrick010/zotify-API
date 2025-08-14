@@ -6,7 +6,7 @@ This document provides a live, chronological log of all major tasks undertaken a
 
 ---
 
-## Task 13: Revamp `gonk-testUI` Login Flow
+## ACT-013: Revamp `gonk-testUI` Login Flow
 
 **Date:** 2025-08-13
 **Status:** ✅ Done
@@ -30,7 +30,7 @@ To improve the usability and robustness of the Spotify authentication flow in th
 
 ---
 
-## Task 12: Fix `gonk-testUI` Unresponsive UI Bug
+## ACT-012: Fix `gonk-testUI` Unresponsive UI Bug
 
 **Date:** 2025-08-13
 **Status:** ✅ Done
@@ -48,7 +48,7 @@ To fix a critical bug where the `gonk-testUI` would become completely unresponsi
 
 ---
 
-## Task 11: Fix `gonk-testUI` Form Layout
+## ACT-011: Fix `gonk-testUI` Form Layout
 
 **Date:** 2025-08-13
 **Status:** ✅ Done
@@ -67,7 +67,7 @@ To improve the user experience of the `gonk-testUI` by placing the API endpoint 
 
 ---
 
-## Task 10: Add Theme Toggle to `gonk-testUI`
+## ACT-010: Add Theme Toggle to `gonk-testUI`
 
 **Date:** 2025-08-13
 **Status:** ✅ Done
@@ -88,7 +88,7 @@ To add a dark/light mode theme toggle to the `gonk-testUI` to improve usability.
 
 ---
 
-## Task 9: Make `gonk-testUI` Server Configurable
+## ACT-009: Make `gonk-testUI` Server Configurable
 
 **Date:** 2025-08-13
 **Status:** ✅ Done
@@ -110,7 +110,7 @@ To allow the `gonk-testUI` server's IP, port, and target API URL to be configure
 
 ---
 
-## Task 8: Fix API Startup Crash and Add CORS Policy
+## ACT-008: Fix API Startup Crash and Add CORS Policy
 
 **Date:** 2025-08-13
 **Status:** ✅ Done
@@ -136,7 +136,7 @@ To fix a `503 Service Unavailable` error that prevented the API from starting co
 
 ---
 
-## Task 7: Implement Provider Abstraction Layer
+## ACT-007: Implement Provider Abstraction Layer
 
 **Date:** 2025-08-12
 **Status:** ✅ Done
@@ -157,7 +157,7 @@ To refactor the application to use a provider-agnostic abstraction layer.
 
 ---
 
-## Task 6: Plan Provider Abstraction Layer
+## ACT-006: Plan Provider Abstraction Layer
 
 **Date:** 2025-08-12
 **Status:** ✅ Done
@@ -175,7 +175,7 @@ To create a comprehensive plan for refactoring the application to use a provider
 
 ---
 
-## Task 5: Create PRINCE2 Project Documents
+## ACT-005: Create PRINCE2 Project Documents
 
 **Date:** 2025-08-12
 **Status:** ✅ Done
@@ -195,7 +195,7 @@ To formalize the project's management structure by creating a PRINCE2-compliant 
 
 ---
 
-## Task 4: Reorganize Documentation Directories
+## ACT-004: Reorganize Documentation Directories
 
 **Date:** 2025-08-12
 **Status:** Obsolete
@@ -209,7 +209,7 @@ To refactor the documentation directory structure for better organization.
 
 ---
 
-## Task 3: Implement Startup Script and System Documentation
+## ACT-003: Implement Startup Script and System Documentation
 
 **Date:** 2025-08-12
 **Status:** ✅ Done
@@ -230,7 +230,7 @@ To create a robust startup script for the API and to overhaul the system documen
 
 ---
 
-## Task 2: Implement `gonk-testUI` Module
+## ACT-002: Implement `gonk-testUI` Module
 
 **Date:** 2025-08-11
 **Status:** ✅ Done
@@ -250,7 +250,7 @@ To create a standalone web-based UI for API testing and database browsing.
 
 ---
 
-## Task 1: Implement Unified Database Architecture
+## ACT-001: Implement Unified Database Architecture
 
 **Date:** 2025-08-11
 **Status:** ✅ Done
