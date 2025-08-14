@@ -6,8 +6,8 @@
 | :--- | :--- | :--- | :--- | :--- |
 | **Authentication & Authorization** | | | | |
 | Admin Endpoint Security | Y | Y | High | **Context:** The design documents (specifically `security.md`) have been updated to reflect the current reality, which is that security is handled by a static admin API key. **Gap:** None. The aspirational features are now documented as future enhancements. |
-| JWT for API Authentication | N | Y | Medium | **Context:** The HLD's NFR section has been updated to reflect that JWT is a future enhancement, not a current requirement. The design now matches the code. **Gap:** None. |
-| Role-Based Access Control (RBAC) | N | Y | Low | **Context:** The HLD's NFR section has been updated to reflect that RBAC is a future enhancement, not a current requirement. The design now matches the code. **Gap:** None. |
+| JWT for API Authentication | N | N | Medium | **Context:** Core design requirement for user-level auth. Not implemented. |
+| Role-Based Access Control (RBAC) | N | N | Low | **Context:** Planned for multi-user environments, but current model is single-user. Deferred until multi-user support is prioritized. |
 | **Spotify Integration** | | | | |
 | OAuth2 for Spotify Integration | Y | Y (partial) | Medium | **Context:** The design documents (`LOW_LEVEL_DESIGN.md`) have been updated to reflect the current reality, which is that the integration supports authentication and full playlist CRUD, but not write-sync or full library management. **Gap:** None from a documentation perspective. The unimplemented features are now tracked in `FUTURE_ENHANCEMENTS.md`. |
 | Webhook/Event System | N | Y (Deferred) | Low | **Status:** Planned — Deferred. This feature is tracked in `project/FUTURE_ENHANCEMENTS.md`. It will not appear in HLD/LLD until promoted to an active roadmap phase. |
@@ -21,5 +21,5 @@
 | Config Management via API | Y | Y | Medium | **Context:** The design documents (`LOW_LEVEL_DESIGN.md`) have been updated to reflect the current reality: there are two config systems. Core settings are startup-only, but a separate `ConfigService` handles mutable application settings at runtime via a JSON file and the `/api/config` endpoints. The aspirational goal of a single, unified config system is now tracked in `FUTURE_ENHANCEMENTS.md`. **Gap:** None. |
 | **General Processes & Security** | | | | |
 | Documentation Practices | Y | Y | High | **Context:** The `HIGH_LEVEL_DESIGN.md` has been updated to reflect the current, pragmatic "living documentation" process. The aspirational "docs-first" approach is preserved as a potential future-phase goal. **Gap:** None. |
-| Security Enhancements | N | Y | Medium | **Context:** The HLD's NFR section and `SECURITY.md` have been updated to reflect that advanced hardening features are future enhancements, not current requirements. The design now matches the code. **Gap:** None. |
-| Test Coverage > 90% & Gating | N | Y | Medium | **Context:** The HLD's NFR section has been updated to reflect that >90% coverage is a long-term goal, not a current, enforced requirement. The design now matches the code. **Gap:** None. |
+| Security Enhancements | N | N | Medium | **Context:** Deferred as not critical for internal-only MVP. **Gap:** Features like secret rotation and TLS hardening are in the design but not implemented. |
+| Test Coverage > 90% & Gating | N | N | Medium | **Context:** Basic tests exist, but coverage is not enforced in CI. **Gap:** HLD requires >90% coverage and CI gating, which is not implemented. |

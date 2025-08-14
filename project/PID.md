@@ -89,6 +89,10 @@ Supporting modules are developed, tracked, and governed under the same policies,
   - **Use Case Gap Analysis Maintenance:** Any time a new use case is added to `USECASES.md`, the `USECASES_GAP_ANALYSIS.md` must be updated to reflect its implementation status. The gap analysis will be formally reviewed once per major release cycle to ensure accuracy.
   - **Verification of Documentation Integration:** When new documents are created, a verification step must be performed to ensure they are correctly integrated and referenced in the existing documentation hierarchy (e.g., `PROJECT_REGISTRY.md`).
   - **Feature Specification Maintenance:** All new or modified functionality (including Core API, Supporting Modules, etc.) must have a corresponding, up-to-date entry in the Feature Specification documents (`api/docs/reference/FEATURE_SPECS.md`). This is a mandatory requirement for pull request approval.
+  - **Status Conventions:** All tasks, phases, or activities listed in planning and tracking documents (e.g., `HLD_LLD_ALIGNMENT_PLAN.md`, `BACKLOG.md`) must be marked with a status indicator to provide immediate visual clarity on the state of the work. The following markers are mandatory:
+    - `✅` = Done
+    - `🟡` = In Progress
+    - `❌` = Not Started
 
 ---
 
