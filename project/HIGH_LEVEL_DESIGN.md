@@ -36,9 +36,9 @@ The Zotify Platform includes supporting modules that are not part of the Core AP
 -   **Snitch:** A planned helper application for managing the OAuth callback flow for CLI-based clients. The proposed architecture is a lightweight, self-contained Go application that runs a temporary local web server to capture the redirect from the authentication provider (e.g., Spotify) and securely forward the credentials to the Core API.
 
 ## 4. Non-Functional Requirements
-- **Test Coverage**: >90% unit test coverage.
+- **Test Coverage**: The project maintains a suite of unit and integration tests. The long-term goal is to achieve >90% unit test coverage with CI gating, which is tracked as a future enhancement.
 - **Performance**: <200ms average API response time for common queries.
-- **Security**: Authentication for admin endpoints; input validation on all routes.
+- **Security**: The current security model uses a static API key for admin endpoints. More advanced features like JWT and RBAC are defined in the project's [Security Roadmap](./SECURITY.md#2-future-enhancements--security-roadmap) and tracked as future enhancements.
 - **Extensibility**: Minimal coupling; future modules plug into the service layer.
 
 ## 5. Documentation Governance

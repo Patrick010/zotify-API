@@ -6,6 +6,28 @@ This document provides a live, chronological log of all major tasks undertaken a
 
 ---
 
+## ACT-014: Finalize HLD/LLD Documentation Alignment
+
+**Date:** 2025-08-14
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To complete the final alignment tasks for Phase 3 of the `HLD_LLD_ALIGNMENT_PLAN`. This involves ensuring the design documents (`HIGH_LEVEL_DESIGN.md`) accurately reflect the current implementation status of non-functional requirements like advanced security and test coverage.
+
+### Outcome
+- The `HIGH_LEVEL_DESIGN.md` was updated to clarify that advanced security features (JWT, RBAC) and high test coverage targets are future enhancements, not current requirements.
+- The document now correctly points to `SECURITY.md` for the security roadmap.
+- This change resolves the remaining gaps identified in the `AUDIT_TRACEABILITY_MATRIX.md` and completes the documentation alignment for Phase 3.
+- `SECURITY.md` and `LOW_LEVEL_DESIGN.md` were reviewed and confirmed to be already in alignment, requiring no changes.
+
+### Related Documents
+- `project/HIGH_LEVEL_DESIGN.md`
+- `project/audit/HLD_LLD_ALIGNMENT_PLAN.md`
+- `project/audit/AUDIT_TRACEABILITY_MATRIX.md`
+
+---
+
 ## ACT-013: Revamp `gonk-testUI` Login Flow
 
 **Date:** 2025-08-13

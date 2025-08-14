@@ -6,6 +6,26 @@
 
 ---
 
+## 11. Task: Finalize HLD Alignment for NFRs
+
+**Date:** 2025-08-14
+**Status:** ✅ Done
+
+### 11.1. Problem
+The `AUDIT_TRACEABILITY_MATRIX.md` identified several remaining gaps where the `HIGH_LEVEL_DESIGN.md` made commitments to Non-Functional Requirements (NFRs) that were not met by the current implementation. Specifically, the HLD mandated a `>90%` test coverage and implied that advanced security features (like JWT and RBAC) were part of the core design.
+
+### 11.2. Changes Made
+1.  **`HIGH_LEVEL_DESIGN.md` Update:** The "Non-Functional Requirements" section was rewritten to align with the current reality.
+    *   The "Test Coverage" requirement was updated to state that >90% is a long-term goal, tracked as a future enhancement.
+    *   The "Security" requirement was updated to clarify that the current model uses a static API key, and that advanced features are part of the documented [Security Roadmap](./SECURITY.md#2-future-enhancements--security-roadmap).
+2.  **`AUDIT_TRACEABILITY_MATRIX.md` Alignment:** This change brings the HLD into alignment with the code, resolving the final remaining gaps for JWT, RBAC, Security Enhancements, and Test Coverage in the matrix.
+3.  **Other Docs Review:** `SECURITY.md` and `LOW_LEVEL_DESIGN.md` were reviewed and confirmed to be already aligned, requiring no changes.
+
+### 11.3. Outcome
+The High-Level Design document is now fully aligned with the current state of the codebase regarding non-functional requirements. This completes the final planned task of the Phase 3 documentation alignment, closing all known gaps between design and implementation.
+
+---
+
 ## 10. Task: Add and Document CORS Policy
 
 **Date:** 2025-08-13
