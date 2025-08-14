@@ -28,6 +28,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **Use Cases** | [`USECASES.md`](./USECASES.md) | A collection of user-driven scenarios and requirements for the API. |
 | **Use Case Gap Analysis** | [`USECASES_GAP_ANALYSIS.md`](./USECASES_GAP_ANALYSIS.md) | An analysis of the gaps between the desired use cases and the current implementation. |
 | **Feature Specifications** | [`api/docs/reference/FEATURE_SPECS.md`](../api/docs/reference/FEATURE_SPECS.md) | The master index for detailed, standardized specifications for all system features. |
+| **Provider-Agnostic Extensions Spec** | [`docs/reference/features/PROVIDER_AGNOSTIC_EXTENSIONS.md`](../docs/reference/features/PROVIDER_AGNOSTIC_EXTENSIONS.md) | A detailed proposal for a structured process to document all provider-agnostic and provider-specific features. |
 | **Logging System Design** | [`LOGGING_SYSTEM_DESIGN.md`](./LOGGING_SYSTEM_DESIGN.md) | The architectural design for the extendable logging system. |
 | **Logging Traceability Matrix** | [`LOGGING_TRACEABILITY_MATRIX.md`](./LOGGING_TRACEABILITY_MATRIX.md) | A matrix that tracks the requirements for the logging system against implementation tasks. |
 

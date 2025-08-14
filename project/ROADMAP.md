@@ -141,6 +141,7 @@ This section tracks major architectural initiatives.
 | API versioning headers | ❌ | Core schema lock-in |
 | Release packaging | ❌ | Makefile targets + GitHub release |
 | Docs polish | ❌ | Archive reports, blueprints |
+| Formalize Feature Specifications | ❌ | Implement the structured feature specification process defined in `PROVIDER_AGNOSTIC_EXTENSIONS.md`. |
 | Test suite coverage: 95% | ❌ | Stubbed + real endpoints |
 
 ---
