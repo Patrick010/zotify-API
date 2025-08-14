@@ -51,7 +51,17 @@ async def get_auth_status(db: Session = Depends(get_db)) -> AuthStatus:
     if not token or not token.access_token:
         return AuthStatus(authenticated=False, token_valid=False, expires_in=0)
 
-    if token.expires_at <= datetime.now(timezone.utc):
+    try:
+        is_expired = token.expires_at <= datetime.now(timezone.utc)
+    except TypeError:
+        log.warning(
+            "Could not compare datetimes for token expiration. "
+            "This may be due to an old, timezone-naive value in the database. "
+            "Treating token as invalid to force re-authentication."
+        )
+        is_expired = True
+
+    if is_expired:
         return AuthStatus(authenticated=True, token_valid=False, expires_in=0)
 
     client = SpotiClient(access_token=token.access_token)
