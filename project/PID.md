@@ -88,6 +88,7 @@ Supporting modules are developed, tracked, and governed under the same policies,
   - **Traceability Matrix Maintenance:** `TRACEABILITY_MATRIX.md` is a live document. All requirement, enhancement, or system-level changes must update the matrix in the same commit.
   - **Use Case Gap Analysis Maintenance:** Any time a new use case is added to `USECASES.md`, the `USECASES_GAP_ANALYSIS.md` must be updated to reflect its implementation status. The gap analysis will be formally reviewed once per major release cycle to ensure accuracy.
   - **Verification of Documentation Integration:** When new documents are created, a verification step must be performed to ensure they are correctly integrated and referenced in the existing documentation hierarchy (e.g., `PROJECT_REGISTRY.md`).
+  - **Feature Specification Maintenance:** All new or modified functionality (including Core API, Supporting Modules, etc.) must have a corresponding, up-to-date entry in the Feature Specification documents (`api/docs/reference/FEATURE_SPECS.md`). This is a mandatory requirement for pull request approval.
 
 ---
 
