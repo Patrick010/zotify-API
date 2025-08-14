@@ -6,6 +6,25 @@ This document provides a live, chronological log of all major tasks undertaken a
 
 ---
 
+## ACT-015: Fix Timezone Comparison Error in Auth Status
+
+**Date:** 2025-08-14
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To fix a `TypeError` in the `/api/auth/status` endpoint that caused a 500 Internal Server Error. The error was due to a comparison between a timezone-aware datetime and a timezone-naive datetime.
+
+### Outcome
+- Identified that `token.expires_at` was being loaded from the database as a timezone-naive datetime, while it was being compared against a timezone-aware `datetime.now(timezone.utc)`.
+- The fix was applied in `api/src/zotify_api/services/auth.py` by using `.replace(tzinfo=timezone.utc)` on the naive datetime object before comparison and timestamp calculation.
+- This ensures that all datetime operations are performed on timezone-aware objects, making the logic robust and preventing the `TypeError`.
+
+### Related Documents
+- `api/src/zotify_api/services/auth.py`
+
+---
+
 ## ACT-014: Standardize and Apply Status Markers Across Project Docs
 
 **Date:** 2025-08-14
