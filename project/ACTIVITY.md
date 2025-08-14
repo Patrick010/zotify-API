@@ -6,6 +6,25 @@ This document provides a live, chronological log of all major tasks undertaken a
 
 ---
 
+## ACT-015: Fix Authentication Token Datetime Comparison Bug
+
+**Date:** 2025-08-14
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To fix a critical `500 Internal Server Error` occurring during user authentication checks.
+
+### Outcome
+- The root cause was identified as a `TypeError` in `api/src/zotify_api/auth.py`. The error occurred when comparing a timezone-aware `datetime` object (from the database) with a timezone-naive `datetime.utcnow()` object.
+- The fix involved modifying the `is_token_expired` function to use the timezone-aware `datetime.now(timezone.utc)` for comparisons, ensuring both datetime objects are timezone-aware.
+- This change resolves the `TypeError` and ensures token expiration checks are handled correctly and robustly.
+
+### Related Documents
+- `api/src/zotify_api/auth.py`
+
+---
+
 ## ACT-014: Design Phase 4 "Super-Lint" and Extendable Logging System
 
 **Date:** 2025-08-14
@@ -19,6 +38,7 @@ To create and document a comprehensive, traceable plan for the next two major pr
 - **Phase 4 Plan:**
     - Created `project/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md` with a detailed implementation strategy.
     - Created `project/audit/PHASE_4_TRACEABILITY_MATRIX.md` to track the work.
+    - Updated `project/audit/HLD_LLD_ALIGNMENT_PLAN.md` to orchestrate Phase 4 via the new detailed plan.
 - **Logging System Plan:**
     - Created `project/LOGGING_SYSTEM_DESIGN.md` with a pluggable handler-based architecture.
     - Created `project/LOGGING_TRACEABILITY_MATRIX.md` for the new feature.
@@ -28,8 +48,6 @@ To create and document a comprehensive, traceable plan for the next two major pr
     - Updated the `ROADMAP.md` to include the new logging system as Phase 11.
     - Updated the `BACKLOG.md` with detailed tasks for both initiatives.
     - Registered all new documents in the `PROJECT_REGISTRY.md`.
-- **Process Alignment:**
-    - Updated `HLD_LLD_ALIGNMENT_PLAN.md` to correctly scope Phase 4 to the new detailed plan.
 
 ### Related Documents
 - All created and updated documents listed above.
