@@ -38,7 +38,6 @@
 - **Task 4.1:** Add doc update steps to the Task Execution Checklist as mandatory for all code PRs.
 - **Task 4.2:** Implement a simple CI check (could be a checklist or script) to verify that related docs are updated before merge.
 - **Task 4.3:** Schedule quarterly or sprint-end reviews for design docs to catch and fix drifts early.
-- **Task 4.4:** Execute the detailed action plan for code optimization and quality assurance as defined in the [`CODE_OPTIMIZATIONPLAN_PHASE_4.md`](./CODE_OPTIMIZATIONPLAN_PHASE_4.md) document. This includes remediating technical debt and implementing the "Super-Lint" quality gates.
 
 ## Phase 5: Ongoing Maintenance
 
