@@ -21,7 +21,7 @@
 ## Phase 3: Incremental Design Updates (Ongoing, sprint-based)
 
 **Goal:** Gradually update design docs to reflect reality, starting with critical subsystems.
-**Status:** ✅ Done
+**Status:** 🟡 In Progress
 
 - **Task 3.1:** Pick 1–2 core subsystems from the matrix with the biggest deviations.
 - **Task 3.2:** Update the HLD and LLD sections for those subsystems:
@@ -34,16 +34,12 @@
 ## Phase 4: Enforce & Automate (Post-alignment)
 
 **Goal:** Prevent future drift and keep design docs up to date.
-**Status:** ❌ Not Started
 
 - **Task 4.1:** Add doc update steps to the Task Execution Checklist as mandatory for all code PRs.
 - **Task 4.2:** Implement a simple CI check (could be a checklist or script) to verify that related docs are updated before merge.
 - **Task 4.3:** Schedule quarterly or sprint-end reviews for design docs to catch and fix drifts early.
-- **Task 4.4:** Execute the detailed action plan for code optimization and quality assurance as defined in the [`CODE_OPTIMIZATIONPLAN_PHASE_4.md`](./CODE_OPTIMIZATIONPLAN_PHASE_4.md) document. This includes remediating technical debt and implementing the "Super-Lint" quality gates.
 
 ## Phase 5: Ongoing Maintenance
-
-**Status:** ❌ Not Started
 
 - **Task 5.1:** Use audit findings as triggers for spot updates in design docs.
 - **Task 5.2:** Keep the alignment matrix updated as a living artifact.

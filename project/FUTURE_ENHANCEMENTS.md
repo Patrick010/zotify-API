@@ -149,22 +149,3 @@ To enable multi-provider support for music services without creating endpoint bl
 - Ensure extensibility for easy addition of new music service providers.
 
 This is a medium- to long-term goal and must be factored into future architectural decisions and design plans.
-
-### Provider-Agnostic Feature Specification Extension
-
-**Objective:** Extend the Unified Provider Abstraction Layer by establishing a structured, detailed, and discoverable feature specification process. This ensures all provider-agnostic and provider-specific features are fully documented and tracked.
-
-A detailed specification for extending the Unified Provider Abstraction Layer is available in [Provider-Agnostic Extensions Feature Specification](docs/reference/features/PROVIDER_AGNOSTIC_EXTENSIONS.md). This includes a metadata integration matrix, provider adapter interface, and full documentation workflow for provider-agnostic and provider-specific features.
-
-**Reference:** [Provider-Agnostic Extensions Feature Specification](docs/reference/features/PROVIDER_AGNOSTIC_EXTENSIONS.md)
-
-**Key Actions:**
-- Maintain a **metadata integration matrix** for all supported providers, tracking feature coverage, compatibility, and limitations.
-- Define a **Provider Adapter Interface** template to standardize connector modules and simplify integration of new services.
-- Enforce pre-merge checks to ensure new provider-specific or provider-agnostic features have completed spec entries.
-- Retroactively document existing provider integrations in the same structured format.
-- Cross-link specs to `ENDPOINTS.md`, `SYSTEM_SPECIFICATIONS.md`, `ROADMAP.md`, and `AUDIT_TRACEABILITY_MATRIX.md`.
-
-**Outcome:** Every provider-agnostic or provider-specific feature is discoverable, understandable, and traceable. Developers, maintainers, and auditors can confidently extend or troubleshoot functionality without reverse-engineering code.
-
-**Status:** Proposed – tracked under `docs/reference/features/PROVIDER_AGNOSTIC_EXTENSIONS.md`.

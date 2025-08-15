@@ -6,10 +6,26 @@ from zotify_api.routes import auth, metadata, cache, logging, system, user, play
 from .globals import app_start_time
 from .middleware.request_id import RequestIDMiddleware
 from .logging_config import setup_logging
+import logging as py_logging
+from .core.error_handler import (
+    initialize_error_handler,
+    register_system_hooks,
+    register_fastapi_hooks,
+    ErrorHandlerConfig,
+)
 
 from zotify_api.database.session import Base, engine
 
 setup_logging()
+
+# Initialize and register the global error handler
+log = py_logging.getLogger(__name__)
+log.info("Initializing global error handler...")
+# In a real app, this config would be loaded from a YAML file
+default_error_config = ErrorHandlerConfig()
+error_handler = initialize_error_handler(config=default_error_config, logger=log)
+register_system_hooks(handler=error_handler)
+
 
 api_key_scheme = APIKeyHeader(name="X-API-Key", auto_error=False)
 
@@ -33,6 +49,7 @@ app.add_middleware(RequestIDMiddleware)
 @app.on_event("startup")
 def startup_event():
     Base.metadata.create_all(bind=engine)
+    register_fastapi_hooks(app=app, handler=error_handler)
 
 from zotify_api.routes import config, network
 

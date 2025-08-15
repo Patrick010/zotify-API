@@ -101,6 +101,38 @@ The application uses a dual system for managing configuration, separating immuta
 
 ---
 
+## Generic Error Handling Module
+
+**Goal:** To centralize all exception handling in a single, configurable, and extensible module.
+
+**Module:** `api/src/zotify_api/core/error_handler/`
+
+*   **`main.py` or `__init__.py`**:
+    *   Contains the core `ErrorHandler` class.
+    *   This class will hold the logic for processing exceptions, formatting responses, and logging.
+    *   It will be instantiated as a singleton early in the application lifecycle.
+
+*   **`hooks.py`**:
+    *   Contains the functions responsible for integrating the `ErrorHandler` with the rest of the system.
+    *   `register_fastapi_hooks(app, handler)`: Adds a custom exception handler to the FastAPI application to catch `HTTPException` and standard `Exception`.
+    *   `register_system_hooks(handler)`: Sets `sys.excepthook` and the `asyncio` event loop's exception handler to route all other unhandled exceptions to the `ErrorHandler`.
+
+*   **`config.py`**:
+    *   Defines the Pydantic models for the error handler's configuration, including the schema for defining triggers and actions.
+    *   The configuration will be loaded from a separate file (e.g., `error_handler_config.yaml`).
+
+*   **`triggers.py`**:
+    *   Implements the logic for the trigger/action system.
+    *   A `TriggerManager` class will read the configuration and execute actions (e.g., calling a webhook, sending an email) when a matching exception is processed by the `ErrorHandler`.
+
+*   **`formatter.py`**:
+    *   Contains different formatter classes for standardizing the error output.
+    *   `JsonFormatter`: For API responses.
+    *   `PlainTextFormatter`: For CLI tools and logs.
+    *   The active formatter will be determined by the context (e.g., an API request vs. a background task).
+
+---
+
 ## Supporting Modules
 
 This section describes the low-level design of the official supporting modules for the Zotify Platform.

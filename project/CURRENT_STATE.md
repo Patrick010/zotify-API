@@ -1,53 +1,32 @@
-# Project State as of 2025-08-13
+# Project State as of 2025-08-15
 
 **Status:** Live Document
 
 ## 1. Introduction & Purpose
 
-This document serves as a comprehensive snapshot of the current state of the Zotify API project. It provides historical context, a summary of recent accomplishments, known issues, and a clear definition of the next steps.
-
-**It is a mandatory requirement on this project that all documentation, from architectural diagrams to operator guides, be treated as a 'live' artifact. All documentation must be kept in constant alignment with the codebase. This is not optional or open to interpretation; outdated documentation is considered a defect.**
-
-**Furthermore, all significant changes, including but not limited to architectural refactors, feature additions, and process updates, must themselves be logged and reflected in the relevant project documentation (e.g., PID, HLD, LLD, CHANGELOG, etc.) as part of the implementation task.**
-
-**To maintain clarity in the project's logs, any task that is postponed or paused must be moved from the Activity Log to the Backlog. This ensures the activity log remains a clear and accurate record of completed or actively in-progress work.**
-
-The overarching goal of the recent work has been to execute a comprehensive audit and alignment of the project's documentation with its codebase, and to refactor the architecture to be more robust, maintainable, and scalable.
+This document serves as a comprehensive snapshot of the current state of the Zotify API project. The primary goal of this session has been to debug a critical authentication bug and to design a new, platform-wide error handling system.
 
 ## 2. Current High-Level Goal
 
-The project is currently in a documentation and process refinement phase. The immediate goal is to fully integrate the `Snitch` and `Gonk-TestUI` supporting modules into the project's governance and documentation structure.
+The project is currently focused on a major architectural improvement: the implementation of a **Generic Error Handling Module**. This work was preceded by a critical bug fix.
 
-## 3. Recent Major Accomplishments
+## 3. Session Summary & Accomplishments
 
-*   **`gonk-testUI` Enhancements**:
-    *   The server is now fully configurable via command-line arguments (`--ip`, `--port`, `--api-url`).
-    *   A persistent dark/light mode theme toggle with new icons has been added to improve usability.
-    *   The UI layout has been improved to render API forms directly under the endpoint buttons.
-    *   The Spotify authentication flow has been completely revamped to use a state-aware button, a popup window, and a robust polling mechanism, decoupling it from the backend.
+*   **Authentication Timezone Bug (Fixed):**
+    *   A recurring `500 Internal Server Error` was diagnosed and fixed. The root cause was the database layer stripping timezone information from `datetime` objects.
+    *   The fix involved two parts:
+        1.  Updating the SQLAlchemy model to be timezone-aware (`DateTime(timezone=True)`).
+        2.  Making the authentication check service more resilient with a `try...except` block to gracefully handle any remaining legacy data.
 
-*   **API Stability and Developer Experience Fixes**:
-    *   Fixed a critical API startup crash caused by a missing CORS policy. The policy has been implemented and documented across all relevant project files.
-    *   Improved the developer experience by providing a default `ADMIN_API_KEY` in development mode, preventing configuration-related startup errors.
+*   **Generic Error Handling Module (Design Complete):**
+    *   A comprehensive design for a new, centralized error handling module was created.
+    *   This was fully documented with updates to the `PID`, `HLD`, `LLD`, and `ROADMAP`, and with the creation of new design documents and developer/operator guides.
 
-*   **Documentation and Process Improvements**:
-    *   Corrected several inconsistencies in the project's traceability matrices and audit logs.
-    *   Established a new convention for unique filenames and added a sequencing mechanism to the `ACTIVITY.md` log.
+## 4. Known Issues & Blockers
 
-*   **Terminology Refactor**: Renamed the "Provider Adapter" to "Provider Connector".
-*   **Provider Abstraction Layer Refactoring**: Refactored the application to a provider-agnostic platform.
-*   **Unified Database Architecture**: Refactored the persistence layer to use SQLAlchemy.
-
-## 4. Known Issues & Limitations
-
-These issues relate to the development environment, not the application code:
-
-*   **File System Tool Unreliability**: Tools for file system manipulation (`rename_file`) have proven to be unreliable.
-*   **Recursive Commands**: Recursive shell commands (`ls -R`, `grep -r`) have been observed to time out, requiring manual, level-by-level investigation as a workaround.
-*   **Test Runner Issues**: `pytest` has been difficult to configure correctly in this environment.
-
-**Recommendation for next developer**: Be aware of these tool limitations.
+*   **Environment Instability:** The development environment became unstable during the session, with core tools (`pytest`, `ls`) hanging indefinitely.
+*   **Forced Reset:** A `reset_all()` command was required to restore a functional environment. As a result, all in-progress implementation work for the Generic Error Handling Module was lost. The design and documentation work is preserved in session history and is being re-implemented.
 
 ## 5. Pending Work: Next Immediate Steps
 
-The immediate next step is to **implement the new Feature Specification documentation system**, as outlined in the multi-part plan. This involves creating the new file structure (`docs/reference/FEATURE_SPECS.md`), integrating it into the project governance documents, and then retroactively documenting all existing features of the Core API and Supporting Modules.
+The immediate next step is to **re-implement the Generic Error Handling Module**, following the comprehensive 7-step plan that has been established. The current task is to re-create the documentation and design artifacts that were lost in the reset.

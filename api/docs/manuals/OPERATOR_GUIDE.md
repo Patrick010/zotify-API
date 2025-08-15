@@ -49,6 +49,54 @@ The API includes a permissive Cross-Origin Resource Sharing (CORS) policy by def
 -   **Default Policy:** The default configuration allows requests from all origins, with all methods and headers.
 -   **Production:** For a production deployment, you may want to review this policy and restrict the allowed origins to only trusted domains. This configuration is located in `api/src/zotify_api/main.py`.
 
+## Error Handling and Monitoring
+
+The Zotify API includes a centralized error handling module that captures all unhandled exceptions across the platform. This system ensures consistent error responses and allows for automated actions in response to specific problems.
+
+### Configuration
+
+The behavior of the error handling module is controlled by a configuration file, which will be located at `api/config/error_handler_config.yaml`.
+
+#### 1. Verbosity
+
+You can control the level of detail in error responses by setting the `verbosity` key.
+
+-   **`production` (default):** Error responses are minimal and do not include sensitive internal details like tracebacks. This is the recommended setting for any user-facing environment.
+-   **`debug`:** Error responses include the full exception type, message, and traceback. This should only be used in controlled development or staging environments.
+
+**Example `error_handler_config.yaml`:**
+```yaml
+verbosity: production
+```
+
+#### 2. Automated Actions (Triggers)
+
+The system can be configured to automatically perform actions when specific types of errors occur. This is useful for sending alerts or notifications.
+
+**Example Configuration:**
+```yaml
+# error_handler_config.yaml
+verbosity: production
+triggers:
+  # This trigger will fire whenever a connection to an external service fails.
+  - exception_type: requests.exceptions.ConnectionError
+    actions:
+      # Action 1: Log a critical message to the main log file.
+      - type: log_critical
+        message: "CRITICAL: Connection to an external provider failed. Check network connectivity."
+
+      # Action 2: Send a notification to a Slack webhook.
+      - type: webhook
+        url: "https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK"
+        payload:
+          text: "🚨 Zotify API Alert: Provider connection error detected!"
+```
+To enable this, create the `error_handler_config.yaml` file and define your triggers and actions according to the schema in `ERROR_HANDLING_DESIGN.md`.
+
+### Interpreting Error Logs
+
+All unhandled exceptions are logged with a full traceback to the main application log. When an error occurs, look for a log entry containing the full exception details. The error message will include a unique `request_id` if the error originated from an API request, which can be used to correlate it with other log entries.
+
 ## Privacy and Compliance
 
 -   **Audit Logs**: The application generates logs that can be used for auditing purposes. It is recommended to ship these logs to a centralized logging system for analysis and retention.

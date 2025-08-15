@@ -19,6 +19,7 @@ The refactor aims to:
 4. **Persistence Layer** — A unified, backend-agnostic database system built on SQLAlchemy.
 5. **Provider Abstraction Layer** — An interface that decouples the core application from specific music service providers (e.g., Spotify). All interactions with external music services go through this layer.
 6. **Config Layer** — Centralized settings with environment-based overrides.
+7. **Generic Error Handling Layer** — A centralized, platform-wide module for catching, processing, and responding to all exceptions.
 
 **Data Flow Example (Search Request):**
 1. Request hits FastAPI route.
@@ -34,6 +35,17 @@ The Zotify Platform includes supporting modules that are not part of the Core AP
 -   **Gonk-TestUI:** A standalone developer testing UI built with Flask and JavaScript. It provides a web-based interface for interacting with all API endpoints and includes an embedded database browser. Its architecture is a simple client-server model, where the frontend fetches the API schema dynamically to generate forms. It is designed to be run locally during development.
 
 -   **Snitch:** A planned helper application for managing the OAuth callback flow for CLI-based clients. The proposed architecture is a lightweight, self-contained Go application that runs a temporary local web server to capture the redirect from the authentication provider (e.g., Spotify) and securely forward the credentials to the Core API.
+
+### 3.2 Generic Error Handling
+
+To ensure platform-wide stability and consistent behavior, the system implements a centralized error handling module. This layer is designed to be the single point of processing for all unhandled exceptions, whether they originate from API endpoints, background tasks, or internal service calls.
+
+**Key Principles:**
+-   **Global Interception:** The module hooks into FastAPI's middleware, `sys.excepthook`, and the `asyncio` event loop to provide global coverage.
+-   **Standardized Responses:** It formats all errors into a consistent, predictable schema (e.g., JSON for the API), preventing inconsistent or leaky error messages.
+-   **Configurable Automation:** It features a trigger/action system that can be configured to perform automated actions (e.g., send alerts, retry operations) in response to specific, predefined error types.
+
+This architectural component is critical for system resilience, maintainability, and providing a clean, professional experience for API consumers.
 
 ## 4. Non-Functional Requirements
 - **Test Coverage**: >90% unit test coverage.

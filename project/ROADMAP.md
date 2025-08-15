@@ -42,6 +42,7 @@ This section tracks major architectural initiatives.
 |------|--------|-------|
 | Unified Database Layer | ✅ | Migrated all persistence to a unified SQLAlchemy backend. |
 | Provider Abstraction Layer | ✅ | Implemented a provider interface and refactored Spotify into a connector. |
+| Generic Error Handling Module | ❌ | Implement a centralized, platform-wide error handling system. |
 
 ---
 
@@ -141,18 +142,7 @@ This section tracks major architectural initiatives.
 | API versioning headers | ❌ | Core schema lock-in |
 | Release packaging | ❌ | Makefile targets + GitHub release |
 | Docs polish | ❌ | Archive reports, blueprints |
-| Formalize Feature Specifications | ❌ | Implement the structured feature specification process defined in `PROVIDER_AGNOSTIC_EXTENSIONS.md`. |
 | Test suite coverage: 95% | ❌ | Stubbed + real endpoints |
-
----
-
----
-
-## ❌ Phase 11: Core Observability
-
-| Task | Status | Notes |
-|------|--------|-------|
-| Extendable Logging System | ❌ | Implement a new pluggable logging service for system, audit, and job logs. See `LOGGING_SYSTEM_DESIGN.md`. |
 
 ---
 
