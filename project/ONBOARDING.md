@@ -33,7 +33,7 @@ Once you have reviewed these documents, you will have a complete picture of the 
 
 This document is intended to bring a new developer up to speed on the project, providing guidance for understanding the architecture, workflows, and key artifacts.
 
-It is recommended that developers **review these materials in order** to efficiently onboard without affecting live project workflows.
+It is mandatory that developers **review these materials in order** to efficiently onboard without affecting live project workflows.
 
 ## 2. Key Onboarding Documents
 
