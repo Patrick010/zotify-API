@@ -31,9 +31,11 @@ def test_search_tracks_spotify_fallback():
     assert total == 0
     assert items == []
 
-def test_create_track_no_db():
+def test_create_track_no_db(monkeypatch):
+    monkeypatch.setattr("zotify_api.services.tracks_service.get_db_engine", lambda: None)
     with pytest.raises(Exception, match="No DB engine available"):
-        tracks_service.create_track(payload={}, engine=None)
+        payload = {"name": "test", "artist": "test", "album": "test", "duration_seconds": 1, "path": "test"}
+        tracks_service.create_track(payload=payload)
 
 def test_get_track_no_db():
     track = tracks_service.get_track(track_id="1", engine=None)

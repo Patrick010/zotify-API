@@ -57,15 +57,10 @@ async def test_spoti_client_get_current_user_success():
 @pytest.mark.asyncio
 async def test_spoti_client_no_token():
     """
-    Tests that the client raises an HTTPException if no access token is provided.
+    Tests that the client raises a ValueError if it is initialized with no token.
     """
-    client = SpotiClient(access_token=None)
-    with pytest.raises(HTTPException) as excinfo:
-        await client.get_current_user()
-
-    assert excinfo.value.status_code == 401
-    assert "Not authenticated" in excinfo.value.detail
-    await client.close()
+    with pytest.raises(ValueError, match="SpotiClient must be initialized with an access token."):
+        SpotiClient(access_token=None)
 
 @pytest.mark.asyncio
 async def test_spoti_client_http_error():
@@ -117,15 +112,8 @@ async def test_spoti_client_refresh_token_success():
         mock_response.json.return_value = mock_json_response
         mock_post.return_value = mock_response
 
-        client = SpotiClient(access_token="old_token", refresh_token="old_refresh")
-        await client.refresh_access_token()
-
-        # This is a bit of a tricky test as it modifies the global state
-        # We can assert the internal state of the client for now
-        assert client._access_token == "new_fake_token"
-        assert client._refresh_token == "new_refresh_token"
-        mock_post.assert_called_once()
-        await client.close()
+        result = await SpotiClient.refresh_access_token(refresh_token="old_refresh")
+        assert result["access_token"] == "new_fake_token"
 
 @pytest.mark.asyncio
 async def test_spoti_client_search_success():
@@ -224,7 +212,5 @@ async def test_spoti_client_exchange_code_for_token_success():
         mock_response.json.return_value = mock_json_response
         mock_post.return_value = mock_response
 
-        client = SpotiClient()
-        result = await client.exchange_code_for_token("auth_code", "code_verifier")
+        result = await SpotiClient.exchange_code_for_token("auth_code", "code_verifier")
         assert result == mock_json_response
-        await client.close()

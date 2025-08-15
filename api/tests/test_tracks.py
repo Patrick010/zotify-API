@@ -5,16 +5,15 @@ from zotify_api.main import app
 from zotify_api.services.db import get_db_engine
 
 @pytest.fixture
-def mock_db():
+def mock_db(client):
     """Fixture to mock the database engine."""
     mock_engine = MagicMock()
     mock_conn = MagicMock()
     mock_engine.connect.return_value.__enter__.return_value = mock_conn
 
-    original_override = app.dependency_overrides.get(get_db_engine)
     app.dependency_overrides[get_db_engine] = lambda: mock_engine
     yield mock_engine, mock_conn
-    app.dependency_overrides[get_db_engine] = original_override
+    del app.dependency_overrides[get_db_engine]
 
 def test_list_tracks_no_db(client):
     app.dependency_overrides[get_db_engine] = lambda: None
@@ -23,7 +22,7 @@ def test_list_tracks_no_db(client):
     body = response.json()
     assert body["data"] == []
     assert body["meta"]["total"] == 0
-    app.dependency_overrides.clear()
+    del app.dependency_overrides[get_db_engine]
 
 def test_list_tracks_with_db(client, mock_db):
     mock_engine, mock_conn = mock_db
@@ -93,8 +92,12 @@ def test_get_metadata_unauthorized(client):
 
 from unittest.mock import AsyncMock
 
+from zotify_api.services import auth as auth_service
+
+from fastapi.testclient import TestClient
+
 @patch("zotify_api.services.tracks_service.get_tracks_metadata_from_spotify", new_callable=AsyncMock)
-def test_get_metadata_success(mock_get_metadata, client):
+def test_get_metadata_success(mock_get_metadata, client, mock_provider):
     mock_metadata = [{"id": "track1", "name": "Test Track"}]
     mock_get_metadata.return_value = mock_metadata
 
@@ -106,10 +109,11 @@ def test_get_metadata_success(mock_get_metadata, client):
 
     assert response.status_code == 200
     assert response.json() == {"metadata": mock_metadata}
-    mock_get_metadata.assert_called_with(["track1"])
+    mock_get_metadata.assert_called_with(["track1"], provider=mock_provider)
+
 
 @patch("zotify_api.services.tracks_service.get_tracks_metadata_from_spotify", new_callable=AsyncMock)
-def test_get_metadata_spotify_error(mock_get_metadata, client):
+def test_get_metadata_spotify_error(mock_get_metadata, client, mock_provider):
     # Simulate an error from the service layer (e.g., Spotify is down)
     mock_get_metadata.side_effect = HTTPException(status_code=503, detail="Service unavailable")
 

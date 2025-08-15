@@ -17,7 +17,7 @@ def test_wrong_key(monkeypatch):
 
 from fastapi.testclient import TestClient
 from zotify_api.main import app
-from unittest.mock import patch, AsyncMock
+from unittest.mock import patch, AsyncMock, ANY
 
 client = TestClient(app)
 
@@ -35,4 +35,4 @@ def test_spotify_callback_success(mock_handle_callback, client):
 
     assert response.status_code == 200
     assert response.json() == {"status": "success"}
-    mock_handle_callback.assert_called_once_with(code="test_code", state="test_state")
+    mock_handle_callback.assert_called_once_with(code="test_code", state="test_state", db=ANY)

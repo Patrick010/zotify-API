@@ -12,34 +12,33 @@ class MockLogger(logging.Logger):
 
     def error(self, msg, *args, **kwargs):
         self.messages.append(msg)
-        # Create a mock log record
-        record = self.makeRecord(self.name, logging.ERROR, "(unknown file)", 0, msg, args, kwargs.get('exc_info'), **kwargs)
+        # Create a mock log record. The 'exc_info' key might be in kwargs.
+        record = self.makeRecord(self.name, logging.ERROR, "(unknown file)", 0, msg, args, **kwargs)
         self.records.append(record)
 
 @pytest.fixture
 def mock_logger():
     return MockLogger("test")
 
+import zotify_api.core.error_handler
+
 @pytest.fixture(autouse=True)
 def reset_singleton():
     """Fixture to automatically reset the singleton before and after each test."""
-    # Before the test
-    from zotify_api.core.error_handler import _error_handler_instance
-    _error_handler_instance = None
-
+    zotify_api.core.error_handler._error_handler_instance = None
     yield
-
-    # After the test
-    from zotify_api.core.error_handler import _error_handler_instance
-    _error_handler_instance = None
+    zotify_api.core.error_handler._error_handler_instance = None
 
 
-def test_error_handler_initialization(mock_logger):
+from unittest.mock import patch
+
+def test_error_handler_initialization():
     """Tests that the ErrorHandler can be initialized."""
     config = ErrorHandlerConfig()
-    handler = ErrorHandler(config, mock_logger)
-    assert handler is not None
-    assert "Generic Error Handler initialized." in mock_logger.messages
+    with patch("zotify_api.core.error_handler.log") as mock_log:
+        handler = ErrorHandler(config, mock_log)
+        assert handler is not None
+        mock_log.info.assert_called_with("Generic Error Handler initialized.")
 
 def test_singleton_pattern(mock_logger):
     """Tests that the singleton pattern works correctly."""
@@ -50,10 +49,18 @@ def test_singleton_pattern(mock_logger):
 
     assert handler1 is handler2
 
-    # Test that trying to get without initializing fails
-    reset_singleton() # manually call fixture logic to reset
-    with pytest.raises(RuntimeError):
+def test_get_handler_before_initialization():
+    """Tests that getting the handler before initialization fails."""
+    # The autouse reset_singleton fixture ensures the instance is None here.
+    with pytest.raises(RuntimeError, match="ErrorHandler has not been initialized"):
         get_error_handler()
+
+def test_double_initialization_fails(mock_logger):
+    """Tests that initializing the singleton twice fails."""
+    config = ErrorHandlerConfig()
+    initialize_error_handler(config, mock_logger) # first time
+    with pytest.raises(RuntimeError, match="ErrorHandler has already been initialized"):
+        initialize_error_handler(config, mock_logger) # second time
 
 @pytest.mark.parametrize("verbosity, expect_details", [("production", False), ("debug", True)])
 def test_json_formatter(verbosity, expect_details):

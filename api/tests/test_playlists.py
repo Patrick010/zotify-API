@@ -13,7 +13,7 @@ def test_list_playlists_no_db():
     body = resp.json()
     assert body["data"] == []
     assert body["meta"]["total"] == 0
-    app.dependency_overrides.clear()
+    del app.dependency_overrides[get_db_engine]
 
 def test_list_playlists_with_db():
     mock_engine = MagicMock()
@@ -26,7 +26,7 @@ def test_list_playlists_with_db():
     resp = client.get("/api/playlists?limit=10&offset=0")
     assert resp.status_code == 200
     assert resp.json()["data"][0]["name"] == "My List"
-    app.dependency_overrides.clear()
+    del app.dependency_overrides[get_db_engine]
 
 def test_create_playlist_validation():
     resp = client.post("/api/playlists", json={"name": ""})
@@ -41,7 +41,7 @@ def test_create_playlist_db_failure():
     app.dependency_overrides[get_db_engine] = lambda: broken_engine()
     resp = client.post("/api/playlists", json={"name": "abc"})
     assert resp.status_code == 503
-    app.dependency_overrides.clear()
+    del app.dependency_overrides[get_db_engine]
 
 def test_create_playlist():
     mock_engine = MagicMock()
@@ -52,4 +52,4 @@ def test_create_playlist():
     resp = client.post("/api/playlists", json={"name": "My new playlist"})
     assert resp.status_code == 201
     assert resp.json()["name"] == "My new playlist"
-    app.dependency_overrides.clear()
+    del app.dependency_overrides[get_db_engine]

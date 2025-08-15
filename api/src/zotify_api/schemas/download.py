@@ -35,7 +35,7 @@ class DownloadJob(DownloadJobBase):
     error_message: Optional[str]
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # --- Schema for the Queue Status Endpoint ---
 
@@ -45,3 +45,6 @@ class DownloadQueueStatus(BaseModel):
     completed: int
     failed: int
     jobs: List[DownloadJob]
+
+    class Config:
+        from_attributes = True

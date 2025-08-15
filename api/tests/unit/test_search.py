@@ -4,85 +4,68 @@ from zotify_api.main import app
 from unittest.mock import MagicMock
 from zotify_api.routes import search
 
-client = TestClient(app)
+from zotify_api.services import auth as auth_service
 
-def test_search_disabled_by_default():
-    def get_feature_flags_override():
-        return {"fork_features": False, "search_advanced": False}
-
-    app.dependency_overrides[search.get_feature_flags] = get_feature_flags_override
-    response = client.get("/api/search", params={"q": "test"})
+def test_search_disabled_by_default(client, mock_provider):
+    app.dependency_overrides[search.get_feature_flags] = lambda: {"fork_features": False, "search_advanced": False}
+    response = client.get("/api/search", params={"q": "test"}, headers={"X-API-Key": "test_key"})
     assert response.status_code == 404
-    app.dependency_overrides = {}
+    del app.dependency_overrides[search.get_feature_flags]
 
 from unittest.mock import AsyncMock
 
 @pytest.mark.asyncio
-async def test_search_spotify_fallback():
-    def get_feature_flags_override():
-        return {"fork_features": True, "search_advanced": True}
+async def test_search_spotify_fallback(client):
+    app.dependency_overrides[search.get_feature_flags] = lambda: {"fork_features": True, "search_advanced": True}
+    app.dependency_overrides[search.get_db_engine] = lambda: None
+    mock_provider = MagicMock()
+    mock_provider.search = AsyncMock(return_value=([{"id": "spotify:track:1", "name": "test", "type": "track", "artist": "test", "album": "test"}], 1))
+    app.dependency_overrides[search.get_provider] = lambda: mock_provider
 
-    def get_db_engine_override():
-        return None
-
-    mock_spotify_search = AsyncMock(return_value=([{"id": "spotify:track:1", "name": "test", "type": "track", "artist": "test", "album": "test"}], 1))
-
-    def get_spotify_search_func_override():
-        return mock_spotify_search
-
-    app.dependency_overrides[search.get_feature_flags] = get_feature_flags_override
-    app.dependency_overrides[search.get_db_engine] = get_db_engine_override
-    app.dependency_overrides[search.get_spotify_search_func] = get_spotify_search_func_override
-
-    response = client.get("/api/search", params={"q": "test"})
+    response = client.get("/api/search", params={"q": "test"}, headers={"X-API-Key": "test_key"})
     assert response.status_code == 200
     body = response.json()
     assert body["data"][0]["id"] == "spotify:track:1"
-    mock_spotify_search.assert_awaited_once()
-    app.dependency_overrides = {}
+    mock_provider.search.assert_awaited_once()
 
-def test_search_db_flow():
-    def get_feature_flags_override():
-        return {"fork_features": True, "search_advanced": True}
+    del app.dependency_overrides[search.get_feature_flags]
+    del app.dependency_overrides[search.get_db_engine]
+    del app.dependency_overrides[search.get_provider]
 
+
+def test_search_db_flow(client, mock_provider):
+    app.dependency_overrides[search.get_feature_flags] = lambda: {"fork_features": True, "search_advanced": True}
     mock_engine = MagicMock()
     mock_conn = MagicMock()
     mock_engine.connect.return_value.__enter__.return_value = mock_conn
     mock_conn.execute.return_value.mappings.return_value.all.return_value = [{"id": "local:track:1", "name": "test", "type": "track", "artist": "test", "album": "test"}]
+    app.dependency_overrides[search.get_db_engine] = lambda: mock_engine
 
-    def get_db_engine_override():
-        return mock_engine
-
-    app.dependency_overrides[search.get_feature_flags] = get_feature_flags_override
-    app.dependency_overrides[search.get_db_engine] = get_db_engine_override
-    response = client.get("/api/search", params={"q": "test"})
+    response = client.get("/api/search", params={"q": "test"}, headers={"X-API-Key": "test_key"})
     assert response.status_code == 200
     body = response.json()
     assert body["data"][0]["id"] == "local:track:1"
-    app.dependency_overrides = {}
+
+    del app.dependency_overrides[search.get_feature_flags]
+    del app.dependency_overrides[search.get_db_engine]
+
 
 @pytest.mark.asyncio
-async def test_search_db_fails_fallback_to_spotify():
-    def get_feature_flags_override():
-        return {"fork_features": True, "search_advanced": True}
-
+async def test_search_db_fails_fallback_to_spotify(client):
+    app.dependency_overrides[search.get_feature_flags] = lambda: {"fork_features": True, "search_advanced": True}
     mock_engine = MagicMock()
     mock_engine.connect.side_effect = Exception("DB error")
+    app.dependency_overrides[search.get_db_engine] = lambda: mock_engine
+    mock_provider = MagicMock()
+    mock_provider.search = AsyncMock(return_value=([{"id": "spotify:track:2", "name": "test2", "type": "track", "artist": "test2", "album": "test2"}], 1))
+    app.dependency_overrides[search.get_provider] = lambda: mock_provider
 
-    def get_db_engine_override():
-        return mock_engine
-
-    mock_spotify_search = AsyncMock(return_value=([{"id": "spotify:track:2", "name": "test2", "type": "track", "artist": "test2", "album": "test2"}], 1))
-
-    def get_spotify_search_func_override():
-        return mock_spotify_search
-
-    app.dependency_overrides[search.get_feature_flags] = get_feature_flags_override
-    app.dependency_overrides[search.get_db_engine] = get_db_engine_override
-    app.dependency_overrides[search.get_spotify_search_func] = get_spotify_search_func_override
-    response = client.get("/api/search", params={"q": "test"})
+    response = client.get("/api/search", params={"q": "test"}, headers={"X-API-Key": "test_key"})
     assert response.status_code == 200
     body = response.json()
     assert body["data"][0]["id"] == "spotify:track:2"
-    mock_spotify_search.assert_awaited_once()
-    app.dependency_overrides = {}
+    mock_provider.search.assert_awaited_once()
+
+    del app.dependency_overrides[search.get_feature_flags]
+    del app.dependency_overrides[search.get_db_engine]
+    del app.dependency_overrides[search.get_provider]

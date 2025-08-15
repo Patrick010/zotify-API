@@ -60,8 +60,9 @@ class ErrorHandler:
 def initialize_error_handler(config: ErrorHandlerConfig, logger: logging.Logger) -> "ErrorHandler":
     """Initializes the singleton error handler instance."""
     global _error_handler_instance
-    if _error_handler_instance is None:
-        _error_handler_instance = ErrorHandler(config, logger)
+    if _error_handler_instance is not None:
+        raise RuntimeError("ErrorHandler has already been initialized.")
+    _error_handler_instance = ErrorHandler(config, logger)
     return _error_handler_instance
 
 

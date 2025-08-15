@@ -28,7 +28,7 @@ def db_session():
     connection.close()
 
 @pytest.fixture(autouse=True)
-def override_get_db(db_session, monkeypatch):
+def override_get_db(db_session):
     """
     Fixture to override the `get_db` dependency with the isolated test session.
     `autouse=True` ensures this runs for every test.
@@ -37,9 +37,8 @@ def override_get_db(db_session, monkeypatch):
         yield db_session
 
     app.dependency_overrides[get_db] = override_db
-    monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
     yield
-    app.dependency_overrides.clear()
+    del app.dependency_overrides[get_db]
 
 client = TestClient(app)
 

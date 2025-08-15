@@ -58,4 +58,4 @@ def mock_provider(monkeypatch):
     fake_provider = FakeProvider()
     app.dependency_overrides[get_provider] = lambda: fake_provider
     yield fake_provider
-    app.dependency_overrides.clear()
+    del app.dependency_overrides[get_provider]
