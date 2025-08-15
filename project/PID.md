@@ -80,6 +80,16 @@ Supporting modules are developed, tracked, and governed under the same policies,
 - **Reporting:** Progress tracked in `project/` (`ACTIVITY.md`, `CURRENT_STATE.md`).  
 - **Change Control:** All changes require proposal, approval, and re-approval if scope deviates.  
 - **Handling of Postponed Tasks:** Postponed or paused tasks must be moved from the `ACTIVITY.md` log to the `BACKLOG.md` with an appropriate status. This ensures the activity log remains a clear record of completed or actively in-progress work.
+- **Backlog Management and Task Qualification:** To ensure a structured and traceable workflow, the following process is mandatory for managing the `BACKLOG.md`:
+  - **Task Generation:**
+    - Each task added to the backlog must reference at least one source item from a live project document (e.g., `TRACEABILITY_MATRIX.md`, `USECASES.md`, `FUTURE_ENHANCEMENTS.md`).
+    - All tasks must conform to the template defined in `BACKLOG.md`, including fields for Task ID, Source, Description, Dependencies, Acceptance Criteria, Effort, and Priority.
+  - **Task Qualification:**
+    - A task is only eligible for execution if all of its dependencies are resolved, its acceptance criteria are fully defined, and its source references are valid.
+    - Priority alone is not sufficient to begin work on a task; it must meet all readiness criteria.
+  - **Review and Audit:**
+    - A review of the backlog will be conducted at the start of each major work cycle to ensure tasks are traceable and meet readiness criteria.
+    - A periodic audit will be performed to remove unlinked or outdated tasks.
 - **Quality Assurance:**  
   - Code reviews before merge.  
   - Unit/integration testing (test runner stability is a known issue).  
