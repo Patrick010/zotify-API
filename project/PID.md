@@ -91,6 +91,7 @@ Supporting modules are developed, tracked, and governed under the same policies,
   - **Feature Specification Maintenance:** All new or modified functionality (including Core API, Supporting Modules, etc.) must have a corresponding, up-to-date entry in the Feature Specification documents (`api/docs/reference/FEATURE_SPECS.md`). This is a mandatory requirement for pull request approval.
   - **Structured Logging Mandate:** All new and existing functionality must use the centralized, extendable `LoggingService` for all logging. This includes structured events for auditing, job status, and performance metrics, as outlined in the `LOGGING_GUIDE.md`. Direct use of `print()` statements or basic loggers for application events is forbidden.
   - **Centralized Error Handling Mandate:** All unhandled exceptions across the entire platform (including API, background tasks, and CLI tools) must be processed by the Generic Error Handling Module. This module provides standardized error responses, structured logging, and a configurable trigger/action system for automated responses. Direct, unhandled exceptions that result in a crash or an inconsistent error format are forbidden. See `ERROR_HANDLING_DESIGN.md` and `ERROR_HANDLING_GUIDE.md` for details.
+  - **Preservation of Previous Versions:** Before modifying any existing project documentation (`.md` files), a copy of the file must be made with the suffix `_previous` (e.g., `PID_previous.md`). This ensures that a record of the last stable version is always available for easy rollback or comparison.
 
 ---
 
