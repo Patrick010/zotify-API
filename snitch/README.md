@@ -22,7 +22,7 @@ To ensure the security of the authentication flow, the Snitch listener will be h
 - **State & Nonce Validation:** The listener will enforce `state` and `nonce` validation to protect against CSRF and replay attacks.
 - **Secure Secret Handling:** The received authentication `code` is handled only in memory and never logged or persisted to disk.
 
-For full details, see the [`docs/snitch/PHASE_2_SECURE_CALLBACK.md`](./docs/PHASE_2_SECURE_CALLBACK.md) design document.
+For full details, see the [`PHASE_2_SECURE_CALLBACK.md`](./docs/PHASE_2_SECURE_CALLBACK.md) design document.
 
 ## Implementation
 
