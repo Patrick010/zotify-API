@@ -64,16 +64,72 @@ All new tasks added to this backlog **must** use the following template.
 
 ### Medium Priority
 
-- **Task ID:** `BACKLOG-001`
-- **Source:** `project/PID.md` (Implicit requirement from audit findings)
+- **Task ID:** `LOG-TASK-01`
+- **Source:** `project/LOGGING_TRACEABILITY_MATRIX.md#REQ-LOG-01`
 - **Priority:** `[MEDIUM]`
 - **Dependencies:** `None`
-- **Description:** `Refactor the logging service to use a structured, centralized logging format as per the design in LOGGING_SYSTEM_DESIGN.md.`
+- **Description:** `Implement the core LoggingService class and its dependency injection.`
 - **Acceptance Criteria:**
-  - `[ ]` All `print()` statements in the application are replaced with calls to the new `LoggingService`.
-  - `[ ]` The service supports distinct handlers for console output and structured JSON file output.
-  - `[ ]` The new logging system is documented in the `LOGGING_GUIDE.md`.
+  - `[ ]` `LoggingService` is implemented as a singleton.
+  - `[ ]` Service is injectable into FastAPI routes.
+- **Estimated Effort:** `Small`
+
+- **Task ID:** `LOG-TASK-02`
+- **Source:** `project/LOGGING_TRACEABILITY_MATRIX.md#REQ-LOG-02`
+- **Priority:** `[MEDIUM]`
+- **Dependencies:** `LOG-TASK-01`
+- **Description:** `Implement the BaseLogHandler interface and the handler registration mechanism.`
+- **Acceptance Criteria:**
+  - `[ ]` Abstract base class `BaseLogHandler` is created.
+  - `[ ]` `LoggingService` can register and dispatch to handlers from `logging_config.yml`.
+- **Estimated Effort:** `Medium`
+
+- **Task ID:** `LOG-TASK-03`
+- **Source:** `project/LOGGING_TRACEABILITY_MATRIX.md#REQ-LOG-03`
+- **Priority:** `[MEDIUM]`
+- **Dependencies:** `LOG-TASK-02`
+- **Description:** `Implement the ConsoleHandler for system/debug logs.`
+- **Acceptance Criteria:**
+  - `[ ]` `ConsoleHandler` writes formatted logs to standard output.
+- **Estimated Effort:** `Small`
+
+- **Task ID:** `LOG-TASK-04`
+- **Source:** `project/LOGGING_TRACEABILITY_MATRIX.md#REQ-LOG-04`
+- **Priority:** `[MEDIUM]`
+- **Dependencies:** `LOG-TASK-02`
+- **Description:** `Implement the JsonAuditHandler for structured audit logs.`
+- **Acceptance Criteria:**
+  - `[ ]` `JsonAuditHandler` writes structured JSON logs to a file with all mandatory fields.
+- **Estimated Effort:** `Medium`
+
+- **Task ID:** `LOG-TASK-05`
+- **Source:** `project/LOGGING_TRACEABILITY_MATRIX.md#REQ-LOG-05`
+- **Priority:** `[MEDIUM]`
+- **Dependencies:** `LOG-TASK-02`
+- **Description:** `Implement the DatabaseJobHandler for asynchronous job logging.`
+- **Acceptance Criteria:**
+  - `[ ]` `DatabaseJobHandler` writes job status updates to the `job_logs` table.
+- **Estimated Effort:** `Medium`
+
+- **Task ID:** `LOG-TASK-06`
+- **Source:** `project/LOGGING_TRACEABILITY_MATRIX.md#REQ-LOG-06`
+- **Priority:** `[HIGH]`
+- **Dependencies:** `LOG-TASK-01`
+- **Description:** `Integrate the LoggingService throughout the existing Zotify API codebase, replacing old logging mechanisms.`
+- **Acceptance Criteria:**
+  - `[ ]` All `print()` statements and old loggers are removed.
+  - `[ ]` All modules use the injected `LoggingService`.
 - **Estimated Effort:** `Large`
+
+- **Task ID:** `LOG-TASK-07`
+- **Source:** `project/LOGGING_TRACEABILITY_MATRIX.md#REQ-LOG-07`
+- **Priority:** `[HIGH]`
+- **Dependencies:** `None`
+- **Description:** `Update PID.md and ROADMAP.md to reflect the new logging system mandate and roadmap phase.`
+- **Acceptance Criteria:**
+  - `[ ]` `PID.md` is updated.
+  - `[ ]` `ROADMAP.md` is updated.
+- **Estimated Effort:** `Small`
 
 ### Low Priority
 

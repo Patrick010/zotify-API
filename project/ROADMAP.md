@@ -146,6 +146,15 @@ This section tracks major architectural initiatives.
 
 ---
 
+## ❌ Phase 11: Core Observability
+
+| Task | Status | Notes |
+|------|--------|-------|
+| Design Extendable Logging System | ✅ | New design documents created. |
+| Implement Logging System | ❌ | Implementation tasks added to backlog (`LOG-TASK-*`). |
+
+---
+
 ## 📋 Live TODO Queue (Sorted by Urgency)
 
 - [ ] Create mutation layer for playlist management
