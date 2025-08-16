@@ -6,6 +6,38 @@ This document provides a live, chronological log of all major tasks undertaken a
 
 ---
 
+## ACT-017: Design Extendable Logging System
+
+**Date:** 2025-08-15
+**Status:** ✅ Done (Design Phase)
+**Assignee:** Jules
+
+### Objective
+To design a centralized, extendable logging system for the Zotify API to unify logging, support multiple log types, and establish consistent, compliance-ready formats.
+
+### Outcome
+- **New Design Documents:**
+    - `project/LOGGING_SYSTEM_DESIGN.md`: Created to detail the core architecture, pluggable handlers, and initial handler designs.
+    - `api/docs/manuals/LOGGING_GUIDE.md`: Created to provide a comprehensive guide for developers.
+    - `project/LOGGING_TRACEABILITY_MATRIX.md`: Created to map logging requirements to design artifacts and implementation tasks.
+- **Process Integration:**
+    - `project/BACKLOG.md`: Updated with detailed `LOG-TASK` entries for the future implementation of the system.
+    - `project/ROADMAP.md`: Updated with a new "Phase 11: Core Observability" to formally track the initiative.
+    - `project/PID.md`: Verified to already contain the mandate for structured logging.
+    - `project/PROJECT_REGISTRY.md`: Updated to include all new logging-related documentation.
+- The design for the new logging system is now complete and fully documented, ready for future implementation.
+
+### Related Documents
+- `project/LOGGING_SYSTEM_DESIGN.md`
+- `api/docs/manuals/LOGGING_GUIDE.md`
+- `project/LOGGING_TRACEABILITY_MATRIX.md`
+- `project/BACKLOG.md`
+- `project/ROADMAP.md`
+- `project/PID.md`
+- `project/PROJECT_REGISTRY.md`
+
+---
+
 ## ACT-016: Environment Reset and Recovery
 
 **Date:** 2025-08-15

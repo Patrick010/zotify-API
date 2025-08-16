@@ -133,6 +133,16 @@ The application uses a dual system for managing configuration, separating immuta
 
 ---
 
+## Logging System
+
+**Goal:** To provide a centralized, extendable, and compliance-ready logging framework.
+
+For the detailed low-level design of this subsystem, including the core `LoggingService` architecture, the pluggable handler interface, initial handler implementations (Console, JSON Audit, Database), and developer integration guides, please refer to the canonical design document:
+
+- **[`LOGGING_SYSTEM_DESIGN.md`](./LOGGING_SYSTEM_DESIGN.md)**
+
+---
+
 ## Supporting Modules
 
 This section describes the low-level design of the official supporting modules for the Zotify Platform.

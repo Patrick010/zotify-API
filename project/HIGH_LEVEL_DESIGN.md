@@ -20,6 +20,7 @@ The refactor aims to:
 5. **Provider Abstraction Layer** — An interface that decouples the core application from specific music service providers (e.g., Spotify). All interactions with external music services go through this layer.
 6. **Config Layer** — Centralized settings with environment-based overrides.
 7. **Generic Error Handling Layer** — A centralized, platform-wide module for catching, processing, and responding to all exceptions.
+8. **Logging Layer** — A centralized, extendable service for handling all application logging, including system, audit, and job status logs.
 
 **Data Flow Example (Search Request):**
 1. Request hits FastAPI route.
@@ -46,6 +47,17 @@ To ensure platform-wide stability and consistent behavior, the system implements
 -   **Configurable Automation:** It features a trigger/action system that can be configured to perform automated actions (e.g., send alerts, retry operations) in response to specific, predefined error types.
 
 This architectural component is critical for system resilience, maintainability, and providing a clean, professional experience for API consumers.
+
+### 3.3 Logging Layer
+
+To ensure consistent and comprehensive observability, the platform implements a centralized and extendable logging system. This layer is designed to be the single point of entry for all logging activities across the application.
+
+**Key Principles:**
+- **Centralized Service:** A single `LoggingService` is responsible for receiving and dispatching all log messages.
+- **Pluggable Handlers:** The service uses a handler-based architecture, allowing new logging backends (e.g., console, file, database, external service) to be added without changing core application code.
+- **Multiple Log Types:** The system is designed to handle different types of logs, including standard system/debug messages, structured JSON audit logs for compliance, and database-backed logs for tracking asynchronous jobs.
+
+This component is critical for debugging, monitoring, and auditing the platform. For a more detailed breakdown, see the [`LOGGING_SYSTEM_DESIGN.md`](./LOGGING_SYSTEM_DESIGN.md) document.
 
 ## 4. Non-Functional Requirements
 - **Test Coverage**: >90% unit test coverage.
