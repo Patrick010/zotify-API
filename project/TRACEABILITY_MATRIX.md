@@ -39,4 +39,4 @@
 | SYS-03 | Security (Admin Auth) | HIGH_LEVEL_DESIGN.md | ✅ Implemented | `services/auth.py` | 🔍 Needs Verification | FE-01 | Basic API key auth is implemented |
 | SYS-04 | Extensibility | HIGH_LEVEL_DESIGN.md | ✅ Implemented | `providers/base.py` | N/A | | Provider model allows for extension |
 | SYS-05 | CORS Policy for Web UI | HIGH_LEVEL_DESIGN.md | ✅ Implemented | `zotify_api/main.py` | N/A | | Permissive CORS policy to allow browser-based clients. |
-| SYS-06 | Snitch Secure Callback | `docs/snitch/PHASE_2_SECURE_CALLBACK.md` | 🟡 Partial | `snitch/internal/listener/` | ✅ Implemented | | State/nonce validation and other hardening measures. |
+| SYS-06 | Snitch Secure Callback | `snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md` | 🟡 Partial | `snitch/internal/listener/` | ✅ Implemented | | Zero Trust model with end-to-end payload encryption and nonce-based replay protection. |

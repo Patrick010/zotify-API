@@ -163,15 +163,11 @@ This section describes the low-level design of the official supporting modules f
 
 ### Snitch
 
-**Purpose:** A planned helper application to manage the OAuth callback flow.
+**Purpose:** A helper application to securely manage the OAuth callback flow for CLI clients.
 
-*   **Proposed Architecture:** A self-contained Go application (`snitch.go`).
-*   **Functionality:**
-    *   Runs a temporary local web server on `localhost:4381`.
-    *   Listens for the redirect from an OAuth provider (e.g., Spotify).
-    *   Extracts the authentication `code` and `state` from the callback.
-    *   Securely forwards the credentials to the main Zotify API's callback endpoint via a `POST` request.
-*   **Status:** Conceptual. The design is documented in `snitch/docs/`, but the `snitch.go` implementation does not yet exist.
+*   **Architecture:** A self-contained Go application that runs a temporary local web server. It uses a Zero Trust security model with end-to-end payload encryption to protect the authorization code.
+*   **Detailed Design:** For the full low-level design, including the cryptographic workflow, please refer to the canonical design documents in the `snitch/docs/` directory, primarily:
+    - **[`PHASE_2_ZERO_TRUST_DESIGN.md`](../snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md)**
 
 ---
 

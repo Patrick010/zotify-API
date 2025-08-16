@@ -3,36 +3,33 @@
 **Status:** Active
 **Date:** 2025-08-16
 
-## 1. Core Design & Workflow
+## 1. Core Design & Workflow (Zero Trust Model)
 
-Snitch is designed as a minimal, self-contained Go application with a single responsibility: to act as a temporary, local callback listener for OAuth 2.0 authentication flows, specifically for headless or CLI-based clients.
+Snitch is a minimal, self-contained Go application that acts as a temporary, local callback listener for OAuth 2.0 flows. Its architecture is designed around a Zero Trust security model, where the sensitive authorization `code` is protected with end-to-end encryption.
 
 The standard workflow is as follows:
-1.  A user on a **client machine** initiates an action that requires OAuth 2.0 authentication (e.g., logging into the Zotify API from a command line).
-2.  The remote **Zotify API server** generates a unique authorization URL (with a `state` token) and sends it to the client.
-3.  The client application launches the local **Snitch process** and opens the authorization URL in the user's web browser.
-4.  The user authenticates with the OAuth provider (e.g., Spotify).
-5.  The provider redirects the user's browser to Snitch's local listener address (`http://127.0.0.1:4381/login`), including the authorization `code` and the original `state`.
-6.  Snitch receives this request, extracts the `code` and `state`, and makes a `POST` request over the network to the remote **Zotify API server's** callback endpoint.
-7.  The Zotify API validates the `state` and exchanges the `code` for an access token.
+1.  **Initiation (Zotify API):** A user action triggers the need for authentication. The Zotify API generates a short-lived, signed **JSON Web Token (JWT)** to use as the `state` parameter. This JWT contains a unique, single-use `nonce`.
+2.  **Launch (Client):** The client application receives the authorization URL (containing the `state` JWT) from the API. It also receives the API's **public key**. The client then launches the local Snitch process, providing it with the public key.
+3.  **Callback (Snitch):** The user authenticates with the OAuth provider, who redirects the browser to Snitch's `localhost` listener. The redirect includes the plain-text `code` and the `state` JWT.
+4.  **Encryption (Snitch):** Snitch receives the `code`. Using the API's public key, it **encrypts the `code`** with a strong asymmetric algorithm (e.g., RSA-OAEP).
+5.  **Handoff (Snitch to API):** Snitch makes a `POST` request over the network to the remote Zotify API, sending the `state` JWT and the **encrypted `code`**.
+6.  **Validation (Zotify API):** The API validates the `state` JWT's signature, checks that the `nonce` has not been used before, and then uses its **private key** to decrypt the `code`.
 
 ## 2. Security Model
 
-The security of Snitch relies on a defense-in-depth approach. It's critical to understand which parts of the communication are secured and which parts have security assumptions.
-
 ### 2.1. Browser-to-Snitch Channel (Local)
-This channel is between the user's browser and the Snitch listener, both on the same client machine.
--   **Security Mechanism:** The Snitch HTTP server is hardcoded to bind **only to the localhost interface (`127.0.0.1`)**.
--   **Protection:** This prevents any other device on the local network from connecting to or sniffing the traffic of the Snitch listener. While the connection is HTTP (not encrypted), the traffic never leaves the local machine, which is considered a secure boundary in this context.
+This channel is secured by **containment**. The Snitch server binds only to the `127.0.0.1` interface, meaning traffic never leaves the local machine and cannot be sniffed from the network. While the traffic is HTTP, the sensitive `code` is immediately encrypted by Snitch before being transmitted anywhere else, providing protection even from malicious software on the local machine that might inspect network traffic.
 
 ### 2.2. Snitch-to-API Channel (Remote)
-This channel is between the Snitch process on the client machine and the Zotify API on the remote server.
--   **Security Status:** **INSECURE**.
--   **Vulnerability:** This communication currently happens over plain HTTP. The authorization `code` is sent in the body of a POST request without encryption. This means it could be intercepted by a malicious actor with access to the network path between the client and the server (e.g., on a public Wi-Fi network).
+This channel is secured by **end-to-end payload encryption**.
+-   **Vulnerability Mitigated:** An attacker sniffing network traffic between the client and the server cannot read the sensitive authorization `code`, as it is asymmetrically encrypted. Only the Zotify API, with its secret private key, can decrypt it.
+-   **Defense-in-Depth:** This payload encryption is independent of transport encryption. For maximum security, the API endpoint should still use HTTPS, providing two separate layers of protection.
 
-### 2.3. Authentication and CSRF Protection
--   **Snitch Authentication:** Snitch itself has **no user authentication mechanism**. It is an open, transient listener.
--   **CSRF Protection:** The security of the overall flow is guaranteed by the `state` parameter. The remote Zotify API generates a unique, unpredictable `state` token and is responsible for validating it. This ensures that only a legitimate, user-initiated flow can be completed, protecting against Cross-Site Request Forgery attacks.
+### 2.3. Replay Attack Prevention
+-   **Vulnerability Mitigated:** Replay attacks are prevented by the use of a **nonce** inside the signed `state` JWT. The Zotify API server will reject any request containing a nonce that has already been used, rendering captured requests useless.
 
-### 2.4. Future Security Enhancements
--   **Critical Priority:** The insecure Snitch-to-API channel must be secured before this feature is considered production-ready. The recommended solution is to implement **mutual TLS (mTLS)**. This would involve both Snitch and the Zotify API presenting certificates to each other, ensuring that the communication is encrypted and that both parties are trusted. This is tracked as a future enhancement.
+### 2.4. Key Management
+-   The security of the system depends on the Zotify API's **private key** remaining secret. This key must be stored securely on the server using standard secret management practices.
+-   The key pair is designed to be **configurable**, allowing for integration with certificate authorities or custom key pairs.
+
+For a more detailed breakdown of this design, please refer to the canonical design document: **[`PHASE_2_ZERO_TRUST_DESIGN.md`](./PHASE_2_ZERO_TRUST_DESIGN.md)**.

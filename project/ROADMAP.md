@@ -17,7 +17,7 @@ This section tracks the development of the `snitch` helper application for handl
 | Phase | Status | Notes |
 |-------|--------|-------|
 | Phase 1: Initial Listener | ❌ | Conceptual design only. No implementation. |
-| Phase 2: Secure Callback | 🟡 | In Progress. Hardening the listener with state/nonce validation. |
+| Phase 2: Secure Callback (Zero Trust) | 🟡 | In Progress. Implementing end-to-end payload encryption. See `PHASE_2_ZERO_TRUST_DESIGN.md`. |
 | Phase 3: Code & Structure Refactor | ❌ | Not Started. |
 | Phase 4: Secure POST Endpoint | ❌ | Not Started. |
 | Phase 5: Cross-Platform IPC | ❌ | Not Started. |
