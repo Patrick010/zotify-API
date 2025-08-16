@@ -60,7 +60,45 @@ All new tasks added to this backlog **must** use the following template.
 
 ### High Priority
 
-*(No high priority tasks currently in the backlog.)*
+- **Task ID:** `LINT-TASK-01`
+- **Source:** `project/PHASE4_SUPERLINT_PLAN.md#phase-4a`
+- **Priority:** `[HIGH]`
+- **Dependencies:** `None`
+- **Description:** `Perform the foundational setup for the Super-Lint. Remediate existing mypy/security blockers and create baseline configurations for all linting tools.`
+- **Acceptance Criteria:**
+  - `[ ]` All `mypy` errors are resolved.
+  - `[ ]` Initial critical security vulnerabilities are fixed.
+  - `[ ]` Configuration files for `ruff`, `mypy`, `bandit`, `safety`, and `golangci-lint` are created and checked in.
+- **Estimated Effort:** `Large`
+
+- **Task ID:** `LINT-TASK-02`
+- **Source:** `project/PHASE4_SUPERLINT_PLAN.md#phase-4b`
+- **Priority:** `[HIGH]`
+- **Dependencies:** `LINT-TASK-01`
+- **Description:** `Integrate all Super-Lint checks into the CI/CD pipeline in "advisory mode".`
+- **Acceptance Criteria:**
+  - `[ ]` A new GitHub Actions workflow runs all linting and security checks on pull requests.
+  - `[ ]` The workflow is configured to report errors but not block merges.
+- **Estimated Effort:** `Medium`
+
+- **Task ID:** `LINT-TASK-03`
+- **Source:** `project/PHASE4_SUPERLINT_PLAN.md#phase-4c`
+- **Priority:** `[HIGH]`
+- **Dependencies:** `LINT-TASK-02`
+- **Description:** `Switch the Super-Lint CI/CD pipeline to "enforcement mode".`
+- **Acceptance Criteria:**
+  - `[ ]` The CI workflow is updated to fail the build and block merges if any Super-Lint checks fail.
+- **Estimated Effort:** `Small`
+
+- **Task ID:** `LINT-TASK-04`
+- **Source:** `project/PHASE4_SUPERLINT_PLAN.md#phase-4d`
+- **Priority:** `[MEDIUM]`
+- **Dependencies:** `LINT-TASK-01`
+- **Description:** `Implement local enforcement of linting rules using pre-commit hooks.`
+- **Acceptance Criteria:**
+  - `[ ]` A `.pre-commit-config.yaml` is created and configured.
+  - `[ ]` Developer documentation is updated with instructions on how to set up the hooks.
+- **Estimated Effort:** `Medium`
 
 ### Medium Priority
 

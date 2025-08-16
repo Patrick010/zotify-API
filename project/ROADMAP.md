@@ -155,6 +155,18 @@ This section tracks major architectural initiatives.
 
 ---
 
+## ❌ Phase 12: Code Quality & Enforcement (Super-Lint)
+
+| Task | Status | Notes |
+|------|--------|-------|
+| Define Super-Lint Action Plan | ✅ | New design document `PHASE4_SUPERLINT_PLAN.md` created. |
+| Foundational Setup | ❌ | Implementation tasks added to backlog (`LINT-TASK-01`). |
+| CI Integration (Advisory Mode) | ❌ | Implementation tasks added to backlog (`LINT-TASK-02`). |
+| CI Integration (Enforcement Mode) | ❌ | Implementation tasks added to backlog (`LINT-TASK-03`). |
+| Local Enforcement (Pre-commit) | ❌ | Implementation tasks added to backlog (`LINT-TASK-04`). |
+
+---
+
 ## 📋 Live TODO Queue (Sorted by Urgency)
 
 - [ ] Create mutation layer for playlist management
