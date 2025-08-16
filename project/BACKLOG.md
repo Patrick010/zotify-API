@@ -60,44 +60,99 @@ All new tasks added to this backlog **must** use the following template.
 
 ### High Priority
 
-- **Task ID:** `LINT-TASK-01`
-- **Source:** `project/PHASE4_SUPERLINT_PLAN.md#phase-4a`
+- **Task ID:** `LOG-TASK-06`
+- **Source:** `project/LOGGING_TRACEABILITY_MATRIX.md#REQ-LOG-06`
 - **Priority:** `[HIGH]`
-- **Dependencies:** `None`
-- **Description:** `Perform the foundational setup for the Super-Lint. Remediate existing mypy/security blockers and create baseline configurations for all linting tools.`
+- **Dependencies:** `LOG-TASK-01`
+- **Description:** `Integrate the LoggingService throughout the existing Zotify API codebase, replacing old logging mechanisms.`
 - **Acceptance Criteria:**
-  - `[ ]` All `mypy` errors are resolved.
-  - `[ ]` Initial critical security vulnerabilities are fixed.
-  - `[ ]` Configuration files for `ruff`, `mypy`, `bandit`, `safety`, and `golangci-lint` are created and checked in.
+  - `[ ]` All `print()` statements and old loggers are removed.
+  - `[ ]` All modules use the injected `LoggingService`.
 - **Estimated Effort:** `Large`
 
-- **Task ID:** `LINT-TASK-02`
-- **Source:** `project/PHASE4_SUPERLINT_PLAN.md#phase-4b`
+- **Task ID:** `LOG-TASK-07`
+- **Source:** `project/LOGGING_TRACEABILITY_MATRIX.md#REQ-LOG-07`
 - **Priority:** `[HIGH]`
-- **Dependencies:** `LINT-TASK-01`
+- **Dependencies:** `None`
+- **Description:** `Update PID.md and ROADMAP.md to reflect the new logging system mandate and roadmap phase.`
+- **Acceptance Criteria:**
+  - `[ ]` `PID.md` is updated.
+  - `[ ]` `ROADMAP.md` is updated.
+- **Estimated Effort:** `Small`
+
+- **Task ID:** `TD-TASK-01`
+- **Source:** `project/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md#phase-4a`
+- **Priority:** `[HIGH]`
+- **Dependencies:** `None`
+- **Description:** `Resolve mypy Blocker (e.g., conflicting module names) to enable static type checking.`
+- **Acceptance Criteria:**
+  - `[ ]` `mypy` runs successfully without configuration errors.
+- **Estimated Effort:** `Small`
+
+- **Task ID:** `TD-TASK-02`
+- **Source:** `project/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md#phase-4a`
+- **Priority:** `[HIGH]`
+- **Dependencies:** `None`
+- **Description:** `Remediate critical security vulnerabilities identified by initial bandit scan.`
+- **Acceptance Criteria:**
+  - `[ ]` High-priority `bandit` findings are resolved.
+- **Estimated Effort:** `Medium`
+
+- **Task ID:** `TD-TASK-03`
+- **Source:** `project/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md#phase-4a`
+- **Priority:** `[HIGH]`
+- **Dependencies:** `None`
+- **Description:** `Establish baseline configurations for all linting and security tools.`
+- **Acceptance Criteria:**
+  - `[ ]` Configuration files for `ruff`, `mypy`, `bandit`, `safety`, and `golangci-lint` are created and checked in.
+- **Estimated Effort:** `Medium`
+
+- **Task ID:** `SL-TASK-01`
+- **Source:** `project/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md#phase-4b`
+- **Priority:** `[HIGH]`
+- **Dependencies:** `TD-TASK-01, TD-TASK-02, TD-TASK-03`
 - **Description:** `Integrate all Super-Lint checks into the CI/CD pipeline in "advisory mode".`
 - **Acceptance Criteria:**
   - `[ ]` A new GitHub Actions workflow runs all linting and security checks on pull requests.
   - `[ ]` The workflow is configured to report errors but not block merges.
 - **Estimated Effort:** `Medium`
 
-- **Task ID:** `LINT-TASK-03`
-- **Source:** `project/PHASE4_SUPERLINT_PLAN.md#phase-4c`
+- **Task ID:** `SL-TASK-02`
+- **Source:** `project/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md#phase-4b`
 - **Priority:** `[HIGH]`
-- **Dependencies:** `LINT-TASK-02`
+- **Dependencies:** `SL-TASK-01`
 - **Description:** `Switch the Super-Lint CI/CD pipeline to "enforcement mode".`
 - **Acceptance Criteria:**
   - `[ ]` The CI workflow is updated to fail the build and block merges if any Super-Lint checks fail.
 - **Estimated Effort:** `Small`
 
-- **Task ID:** `LINT-TASK-04`
-- **Source:** `project/PHASE4_SUPERLINT_PLAN.md#phase-4d`
+- **Task ID:** `SL-TASK-03`
+- **Source:** `project/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md#phase-4c`
 - **Priority:** `[MEDIUM]`
-- **Dependencies:** `LINT-TASK-01`
+- **Dependencies:** `SL-TASK-01`
+- **Description:** `Develop a custom linting script for documentation and architectural checks.`
+- **Acceptance Criteria:**
+  - `[ ]` Script is created and integrated into the CI pipeline.
+  - `[ ]` Script checks for docstrings and `TRACEABILITY_MATRIX.md` updates.
+- **Estimated Effort:** `Large`
+
+- **Task ID:** `SL-TASK-04`
+- **Source:** `project/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md#phase-4d`
+- **Priority:** `[MEDIUM]`
+- **Dependencies:** `None`
+- **Description:** `Update TASK_CHECKLIST.md with a formal code review checklist and scoring rubric.`
+- **Acceptance Criteria:**
+  - `[ ]` `TASK_CHECKLIST.md` is updated with the new section.
+- **Estimated Effort:** `Small`
+
+- **Task ID:** `SL-TASK-05`
+- **Source:** `project/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md#phase-4d`
+- **Priority:** `[MEDIUM]`
+- **Dependencies:** `TD-TASK-03`
 - **Description:** `Implement local enforcement of linting rules using pre-commit hooks.`
 - **Acceptance Criteria:**
   - `[ ]` A `.pre-commit-config.yaml` is created and configured.
-  - `[ ]` Developer documentation is updated with instructions on how to set up the hooks.
+  - `[ ]` Developer documentation is updated with setup instructions.
 - **Estimated Effort:** `Medium`
 
 ### Medium Priority

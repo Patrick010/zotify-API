@@ -1,18 +1,17 @@
 # Phase 4 Traceability Matrix
 
-**Status:** Proposed
-**Date:** 2025-08-14
-**Related Documents:** `HLD_LLD_ALIGNMENT_PLAN.md`, `CODE_OPTIMIZATIONPLAN_PHASE_4.md`
+**Status:** Final
+**Date:** 2025-08-16
 
 ## 1. Purpose
 
-This document tracks the goals of the Phase 4 ("Enforce & Automate") plan against the specific, actionable tasks created to implement them. It ensures that all planned work is traceable back to a strategic objective.
+This document maps the high-level goals for Phase 4, as defined in the `HLD_LLD_ALIGNMENT_PLAN.md`, to the concrete action plan and the specific backlog tasks created to implement them. This ensures end-to-end traceability for the "Enforce & Automate" initiative.
 
 ## 2. Traceability Matrix
 
-| Goal ID (from HLD/LLD Plan) | Goal Description | Related Implementation Task(s) | Status |
+| Goal ID (from Alignment Plan) | Goal Description | Action Plan Document | Related Backlog Task(s) |
 | :--- | :--- | :--- | :--- |
-| **Task 4.1** | Add doc update steps to the Task Execution Checklist as mandatory for all code PRs. | `SL-TASK-04` | ❌ Not Started |
-| **Task 4.2** | Implement a simple CI check (could be a checklist or script) to verify that related docs are updated before merge. | `SL-TASK-01`, `SL-TASK-02`, `SL-TASK-03` | ❌ Not Started |
-| **Task 4.3** | Schedule quarterly or sprint-end reviews for design docs to catch and fix drifts early. | `SL-TASK-05` | ❌ Not Started |
-| **N/A** | Prerequisite: Remediate existing technical debt to establish a clean baseline for new quality gates. | `TD-TASK-01`, `TD-TASK-02`, `TD-TASK-03` | ❌ Not Started |
+| **Task 4.1** | Add doc update steps to the Task Execution Checklist. | [`CODE_OPTIMIZATIONPLAN_PHASE_4.md`](./CODE_OPTIMIZATIONPLAN_PHASE_4.md) | `SL-TASK-04` |
+| **Task 4.2** | Implement a CI check to verify that related docs are updated. | [`CODE_OPTIMIZATIONPLAN_PHASE_4.md`](./CODE_OPTIMIZATIONPLAN_PHASE_4.md) | `SL-TASK-01`, `SL-TASK-02`, `SL-TASK-03`, `SL-TASK-05` |
+| **Task 4.3** | Schedule quarterly or sprint-end reviews for design docs. | [`CODE_OPTIMIZATIONPLAN_PHASE_4.md`](./CODE_OPTIMIZATIONPLAN_PHASE_4.md) | `SL-TASK-04` |
+| **Task 4.4** | Execute the detailed action plan for code optimization and quality assurance. | [`CODE_OPTIMIZATIONPLAN_PHASE_4.md`](./CODE_OPTIMIZATIONPLAN_PHASE_4.md) | `TD-TASK-01`, `TD-TASK-02`, `TD-TASK-03`, `SL-TASK-01`, `SL-TASK-02`, `SL-TASK-03`, `SL-TASK-04`, `SL-TASK-05` |
