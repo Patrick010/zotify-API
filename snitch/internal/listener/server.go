@@ -7,22 +7,23 @@ import (
 
 // Server is the HTTP server for the Snitch listener.
 type Server struct {
-	// Addr is the address for the Snitch listener.
-	Addr string
+	// Port is the port for the Snitch listener.
+	Port string
 	// Logger is the logger for the Snitch listener.
 	Logger *log.Logger
 }
 
 // NewServer creates a new Server instance.
-func NewServer(addr string, logger *log.Logger) *Server {
+func NewServer(port string, logger *log.Logger) *Server {
 	return &Server{
-		Addr:   addr,
+		Port:   port,
 		Logger: logger,
 	}
 }
 
 // Run starts the Snitch listener.
 func (s *Server) Run(handler http.Handler) {
-	s.Logger.Printf("Listening on http://localhost%s", s.Addr)
-	s.Logger.Fatal(http.ListenAndServe(s.Addr, handler))
+	addr := "127.0.0.1:" + s.Port
+	s.Logger.Printf("Listening on http://%s", addr)
+	s.Logger.Fatal(http.ListenAndServe(addr, handler))
 }

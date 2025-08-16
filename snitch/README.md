@@ -15,6 +15,15 @@ Snitch is intended to be run as a standalone process during the authentication f
 
 When started, Snitch listens on `http://localhost:4381/login`. After receiving a callback from Spotify, it will make a `POST` request with a JSON body (`{"code": "...", "state": "..."}`) to the configured callback URL.
 
+## Security Enhancements (Phase 2)
+
+To ensure the security of the authentication flow, the Snitch listener will be hardened with the following features:
+- **Localhost Binding:** The server will only bind to `127.0.0.1` to prevent external access.
+- **State & Nonce Validation:** The listener will enforce `state` and `nonce` validation to protect against CSRF and replay attacks.
+- **Secure Secret Handling:** The received authentication `code` is handled only in memory and never logged or persisted to disk.
+
+For full details, see the [`docs/snitch/PHASE_2_SECURE_CALLBACK.md`](./docs/PHASE_2_SECURE_CALLBACK.md) design document.
+
 ## Implementation
 
 The entire implementation is contained within `snitch.go`. It is a self-contained Go application with no external dependencies, and can be built and run using standard Go tooling.

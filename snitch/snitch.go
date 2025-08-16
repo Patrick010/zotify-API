@@ -3,6 +3,7 @@ package snitch
 import (
 	"bytes"
 	"encoding/json"
+	"github.com/Patrick010/zotify-API/snitch/internal/listener"
 	"fmt"
 	"io"
 	"log"
@@ -60,9 +61,9 @@ func NewApp(config *Config, logger *log.Logger) *App {
 
 // Run starts the Snitch listener.
 func (a *App) Run() {
-	http.HandleFunc("/login", a.loginHandler)
-	a.Logger.Printf("Listening on http://localhost:%s/login", a.Config.Port)
-	a.Logger.Fatal(http.ListenAndServe(":"+a.Config.Port, nil))
+	server := listener.NewServer(a.Config.Port, a.Logger)
+	handler := listener.LoginHandler(a.Logger, a.Config.APICallbackURL)
+	server.Run(handler)
 }
 
 // loginHandler handles the OAuth callback from Spotify.
