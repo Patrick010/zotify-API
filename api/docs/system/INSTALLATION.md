@@ -33,33 +33,20 @@ pip install -e ./api
 ```
 This command installs all the necessary packages for the API to run.
 
-### 3. Create Storage Directory
+### 3. Configure the Environment
 
-The application requires a `storage` directory inside the `api` directory to store its database and other temporary files. Create it before running the application for the first time:
+The API now requires a database to function. You must configure the database connection string via an environment variable.
 
-```bash
-mkdir api/storage
-```
-
-### 4. Configure the Environment
-
-The API is configured using environment variables. `pydantic-settings` will automatically load them from a `.env` file in the `api/` directory.
-
-**For local development and testing, you must set the application environment to `development`.** This disables production security checks and enables helpful defaults.
+Create a `.env` file in the `api/` directory. This file will hold your environment-specific settings.
 
 **Example `.env` file:**
 ```
-# Set the environment to development mode
-APP_ENV="development"
-
 # Use a SQLite database located in the api/storage/ directory
 DATABASE_URI="sqlite:///storage/zotify.db"
-
-# You can optionally set the admin API key. If you don't, a default will be used in development mode.
-# ADMIN_API_KEY="your_secret_key_here"
 ```
+The application will automatically load this file on startup.
 
-### 5. Running the API
+### 4. Running the API
 
 A startup script is provided to manage the application's lifecycle. This script ensures that all necessary checks are performed before starting the server.
 

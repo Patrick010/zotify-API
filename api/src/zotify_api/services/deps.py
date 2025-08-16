@@ -1,6 +1,5 @@
 import logging
 from fastapi import Depends, HTTPException
-from zotify_api.core.log_service import LoggingService
 from sqlalchemy.orm import Session
 from datetime import datetime, timezone, timedelta
 
@@ -12,13 +11,6 @@ from zotify_api.providers.base import BaseProvider
 from zotify_api.providers.spotify_connector import SpotifyConnector
 
 logger = logging.getLogger(__name__)
-
-def get_logger() -> LoggingService:
-    """
-    FastAPI dependency that provides the LoggingService singleton instance.
-    The service is initialized at startup.
-    """
-    return LoggingService()
 
 def get_settings():
     return settings

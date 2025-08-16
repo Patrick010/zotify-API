@@ -63,14 +63,3 @@ class DownloadJob(Base):
     progress = Column(Float, default=0.0)
     created_at = Column(DateTime, server_default=func.now())
     error_message = Column(String, nullable=True)
-
-
-class JobLog(Base):
-    __tablename__ = "job_logs"
-    job_id = Column(String, primary_key=True)
-    job_type = Column(String)
-    status = Column(String, nullable=False)
-    progress = Column(Integer, default=0)
-    details = Column(String, nullable=True)
-    created_at = Column(DateTime, server_default=func.now())
-    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
