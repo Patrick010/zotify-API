@@ -6,6 +6,23 @@ This document provides a live, chronological log of all major tasks undertaken a
 
 ---
 
+## ACT-025: Final Correction of Endpoint Documentation
+
+**Date:** 2025-08-17
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To perform a final corrective action to ensure the `ENDPOINTS.md` file is complete and accurate.
+
+### Outcome
+- **`ENDPOINTS.md`:** The file was completely overwritten with a comprehensive list of all API endpoints generated directly from the application's `openapi.json` schema, ensuring its accuracy and completeness.
+
+### Related Documents
+- `project/ENDPOINTS.md`
+
+---
+
 ## ACT-024: Final Documentation Correction
 
 **Date:** 2025-08-17

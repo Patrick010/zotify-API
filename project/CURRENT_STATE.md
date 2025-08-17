@@ -20,9 +20,9 @@ This session involved a multi-stage effort to resolve documentation discrepancie
     *   The full test suite (133 tests) was run and confirmed to be passing after the integration.
 
 *   **Documentation Overhaul & Correction:**
-    *   A new canonical `ENDPOINTS.md` file was created and then completely rewritten using data generated from the codebase to ensure its accuracy.
+    *   A new canonical `ENDPOINTS.md` file was created and then completely rewritten using data generated from the application's OpenAPI schema to ensure its accuracy and completeness.
     *   Several critical documents were restored from the project archive.
-    *   The `PROJECT_REGISTRY.md` was given a final, exhaustive audit and updated to include every single project document, as per the user's explicit list.
+    *   The `PROJECT_REGISTRY.md` was given a final, exhaustive audit and updated to include every single project document.
     *   All "living documentation" files (`ACTIVITY.md`, `CURRENT_STATE.md`, `AUDIT-PHASE-4.md`) have been updated to reflect all work performed.
 
 ## 4. Known Issues & Blockers
