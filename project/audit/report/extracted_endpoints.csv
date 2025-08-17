@@ -1,0 +1,351 @@
+method,path_norm,sources,occurrences
+,/api,"['api/docs/manuals/DEVELOPER_GUIDE.md', 'api/docs/manuals/OPERATOR_MANUAL.md', 'api/docs/reference/features/authentication.md', 'api/docs/reference/full_api_reference.md', 'api/docs/system/INSTALLATION.md', 'project/audit/AUDIT-phase-1.md']",6
+,/api/auth/logout,"['api/docs/reference/full_api_reference.md', 'gonk-testUI/static/app.js', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md', 'project/reports/20250809-api-endpoints-completion-report.md']",6
+,/api/auth/refresh,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md', 'project/reports/20250809-api-endpoints-completion-report.md']",5
+,/api/auth/spotify/callback,"['api/docs/manuals/DEVELOPER_GUIDE.md', 'project/ACTIVITY.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md', 'snitch/README.md', 'snitch/docs/INSTALLATION.md', 'snitch/docs/USER_MANUAL.md']",8
+,/api/auth/status,"['api/docs/reference/full_api_reference.md', 'gonk-testUI/static/app.js', 'project/ACTIVITY.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md', 'project/reports/20250809-api-endpoints-completion-report.md']",7
+,/api/build/lib/zotify_api,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/auth_state,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/config,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/database,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/globals,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/logging_config,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/main,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/middleware/request_id,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/models/config,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/models/spotify,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/models/sync,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/routes/auth,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/routes/cache,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/routes/config,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/routes/downloads,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/routes/logging,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/routes/metadata,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/routes/network,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/routes/notifications,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/routes/playlist,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/routes/search,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/routes/spotify,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/routes/stubs,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/routes/sync,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/routes/system,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/routes/tracks,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/routes/user,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/routes/webhooks,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/schemas/auth,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/schemas/cache,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/schemas/downloads,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/schemas/generic,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/schemas/logging,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/schemas/metadata,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/schemas/network,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/schemas/notifications,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/schemas/playlists,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/schemas/spotify,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/schemas/system,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/schemas/tracks,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/schemas/user,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/services/__init__,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/services/auth,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/services/cache_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/services/config_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/services/db,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/services/deps,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/services/downloads_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/services/logging_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/services/metadata_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/services/network_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/services/notifications_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/services/playlists_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/services/search,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/services/spotify,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/services/sync_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/services/tracks_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/services/user_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/build/lib/zotify_api/services/webhooks,['project/audit/AUDIT-phase-1.md'],1
+,/api/cache,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",4
+,/api/config,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/LOW_LEVEL_DESIGN.md', 'project/LOW_LEVEL_DESIGN_previous.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/AUDIT_TRACEABILITY_MATRIX.md', 'project/audit/FIRST_AUDIT.md']",7
+,/api/config/reset,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md']",3
+,/api/docs,"['project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-final-cleanup-report.md']",2
+,/api/docs/CHANGELOG,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",3
+,/api/docs/CONTRIBUTING,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",4
+,/api/docs/DATABASE,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",4
+,/api/docs/INSTALLATION,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",4
+,/api/docs/MANUAL,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",4
+,/api/docs/full_api_reference,"['project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",3
+,/api/docs/manuals/DEVELOPER_GUIDE,['project/PROJECT_REGISTRY.md'],1
+,/api/docs/manuals/ERROR_HANDLING_GUIDE,['project/PROJECT_REGISTRY.md'],1
+,/api/docs/manuals/LOGGING_GUIDE,['project/LOGGING_TRACEABILITY_MATRIX.md'],1
+,/api/docs/manuals/OPERATOR_MANUAL,['project/PROJECT_REGISTRY.md'],1
+,/api/docs/manuals/USER_MANUAL,['project/PROJECT_REGISTRY.md'],1
+,/api/docs/providers/spotify,['project/PROJECT_REGISTRY.md'],1
+,/api/docs/reference/FEATURE_SPECS,['project/PROJECT_REGISTRY.md'],1
+,/api/docs/reference/features/authentication,['project/PROJECT_REGISTRY.md'],1
+,/api/docs/reference/features/provider_agnostic_extensions,['project/PROJECT_REGISTRY.md'],1
+,/api/docs/reference/full_api_reference,['project/PROJECT_REGISTRY.md'],1
+,/api/docs/system/ERROR_HANDLING_DESIGN,['project/PROJECT_REGISTRY.md'],1
+,/api/docs/system/INSTALLATION,['project/PROJECT_REGISTRY.md'],1
+,/api/docs/system/PRIVACY_COMPLIANCE,['project/PROJECT_REGISTRY.md'],1
+,/api/docs/system/REQUIREMENTS,['project/PROJECT_REGISTRY.md'],1
+,/api/docs/zotify-openapi-external-v1,['project/audit/FIRST_AUDIT.md'],1
+,/api/download,"['api/docs/manuals/DEVELOPER_GUIDE.md', 'api/docs/manuals/USER_MANUAL.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",5
+,/api/download/process,"['project/ENDPOINTS.md', 'project/LESSONS-LEARNT.md', 'project/audit/AUDIT-PHASE-3.md', 'project/reports/20250811-AUDIT-PHASE2-FINALIZATION-REPORT.md', 'project/reports/20250811-CONSOLIDATED-COMPLETION-REPORT.md']",5
+,/api/download/retry,['project/ENDPOINTS.md'],1
+,/api/download/status,"['api/docs/manuals/DEVELOPER_GUIDE.md', 'api/docs/manuals/USER_MANUAL.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",5
+,/api/downloads/retry,"['api/docs/reference/full_api_reference.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",3
+,/api/downloads/status,"['api/docs/reference/full_api_reference.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",3
+,/api/health,['api/docs/manuals/DEVELOPER_GUIDE.md'],1
+,/api/logging,"['api/docs/reference/full_api_reference.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",3
+,/api/metadata,['project/audit/FIRST_AUDIT.md'],1
+,/api/metadata/abc123,['api/docs/reference/full_api_reference.md'],1
+,/api/metadata/{id},['project/audit/AUDIT-phase-1.md'],1
+,/api/metadata/{track_id},['project/ENDPOINTS.md'],1
+,/api/minimal_test_app,['project/audit/AUDIT-phase-1.md'],1
+,/api/network,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",4
+,/api/notifications,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",4
+,/api/notifications/notif1,['api/docs/reference/full_api_reference.md'],1
+,/api/notifications/user1,['api/docs/reference/full_api_reference.md'],1
+,/api/notifications/{notification_id},"['project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md']",2
+,/api/notifications/{user_id},"['project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md']",2
+,/api/playlists,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",4
+,/api/route_audit,['project/audit/AUDIT-phase-1.md'],1
+,/api/schema,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md', 'project/reports/20250809-api-endpoints-completion-report.md']",5
+,/api/search,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md', 'project/reports/20250809-api-endpoints-completion-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",6
+,/api/spotify/callback,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",4
+,/api/spotify/devices,"['api/docs/reference/full_api_reference.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md', 'project/reports/20250809-api-endpoints-completion-report.md']",4
+,/api/spotify/login,"['api/docs/reference/full_api_reference.md', 'gonk-testUI/static/app.js', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",5
+,/api/spotify/me,"['api/docs/reference/full_api_reference.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md', 'project/reports/20250809-api-endpoints-completion-report.md', 'project/reports/20250809-phase5-endpoint-refactor-report.md']",5
+,/api/spotify/metadata/3n3Ppam7vgaVa1iaRUc9Lp,['api/docs/reference/full_api_reference.md'],1
+,/api/spotify/metadata/{track_id},['project/reports/20250809-phase5-search-cleanup-report.md'],1
+,/api/spotify/playlists,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md', 'project/reports/20250809-phase5-playlist-implementation-report.md']",5
+,/api/spotify/playlists/abc123,['api/docs/reference/full_api_reference.md'],1
+,/api/spotify/playlists/abc123/metadata,['api/docs/reference/full_api_reference.md'],1
+,/api/spotify/playlists/abc123/sync,['api/docs/reference/full_api_reference.md'],1
+,/api/spotify/playlists/abc123/tracks,['api/docs/reference/full_api_reference.md'],1
+,/api/spotify/playlists/{id},"['project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",2
+,/api/spotify/playlists/{id}/tracks,"['project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",2
+,/api/spotify/sync_playlists,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md', 'project/reports/20250809-phase5-final-cleanup-report.md']",5
+,/api/spotify/token_status,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",4
+,/api/src/zotify_api,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/auth_state,"['project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",2
+,/api/src/zotify_api/config,"['project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",2
+,/api/src/zotify_api/database,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/globals,"['project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",2
+,/api/src/zotify_api/logging_config,"['project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",2
+,/api/src/zotify_api/main,"['project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",2
+,/api/src/zotify_api/middleware,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/middleware/request_id,"['project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",2
+,/api/src/zotify_api/models,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/models/config,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/models/spotify,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/models/sync,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/routes,"['project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",2
+,/api/src/zotify_api/routes/auth,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/routes/cache,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/routes/config,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/routes/downloads,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/routes/logging,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/routes/metadata,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/routes/network,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/routes/notifications,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/routes/playlist,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/routes/search,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/routes/spotify,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/routes/stubs,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/routes/sync,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/routes/system,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/routes/tracks,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/routes/user,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/routes/webhooks,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/schemas,"['project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",2
+,/api/src/zotify_api/schemas/auth,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/schemas/cache,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/schemas/downloads,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/schemas/generic,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/schemas/logging,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/schemas/metadata,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/schemas/network,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/schemas/notifications,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/schemas/playlists,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/schemas/spotify,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/schemas/system,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/schemas/tracks,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/schemas/user,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/services,"['project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",2
+,/api/src/zotify_api/services/__init__,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/services/auth,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/services/cache_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/services/config_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/services/db,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/services/deps,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/services/downloads_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/services/logging_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/services/metadata_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/services/network_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/services/notifications_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/services/playlists_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/services/search,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/services/spoti_client,"['project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",2
+,/api/src/zotify_api/services/spotify,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/services/sync_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/services/tracks_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/services/user_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/src/zotify_api/services/webhooks,['project/audit/AUDIT-phase-1.md'],1
+,/api/storage/audit,['api/docs/manuals/OPERATOR_MANUAL.md'],1
+,/api/storage/zotify,"['api/docs/manuals/OPERATOR_MANUAL.md', 'gonk-testUI/README.md', 'gonk-testUI/app.py', 'gonk-testUI/docs/USER_MANUAL.md']",4
+,/api/sync/playlist/sync,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md']",3
+,/api/sync/trigger,"['project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md']",2
+,/api/system/env,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md', 'project/reports/20250809-api-endpoints-completion-report.md']",5
+,/api/system/logs,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",4
+,/api/system/reload,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",4
+,/api/system/reset,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",4
+,/api/system/status,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",4
+,/api/system/storage,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",4
+,/api/system/uptime,"['api/docs/reference/features/authentication.md', 'api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md', 'project/reports/20250809-api-endpoints-completion-report.md']",6
+,/api/test_minimal_app,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests,"['project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",2
+,/api/tests/__init__,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/conftest,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/test_cache,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/test_config,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/test_downloads,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/test_logging,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/test_metadata,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/test_network,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/test_notifications,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/test_playlists,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/test_spotify,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/test_stubs,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/test_sync,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/test_system,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/test_tracks,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/test_user,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/unit,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/unit/test_auth,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/unit/test_cache_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/unit/test_config,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/unit/test_downloads_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/unit/test_logging_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/unit/test_metadata_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/unit/test_network_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/unit/test_new_endpoints,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/unit/test_notifications_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/unit/test_playlists_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/unit/test_search,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/unit/test_spoti_client,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/unit/test_sync,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/unit/test_tracks_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/unit/test_user_service,['project/audit/AUDIT-phase-1.md'],1
+,/api/tests/unit/test_webhooks,['project/audit/AUDIT-phase-1.md'],1
+,/api/token,['project/reports/20250808-oauth-unification-completion-report.md'],1
+,/api/tracks,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",4
+,/api/tracks/abc123,['api/docs/reference/full_api_reference.md'],1
+,/api/tracks/abc123/cover,['api/docs/reference/full_api_reference.md'],1
+,/api/tracks/metadata,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md', 'project/reports/20250809-api-endpoints-completion-report.md', 'project/reports/20250809-phase5-endpoint-refactor-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",7
+,/api/tracks/{id},['project/audit/AUDIT-phase-1.md'],1
+,/api/tracks/{id}/cover,['project/audit/AUDIT-phase-1.md'],1
+,/api/tracks/{track_id},['project/ENDPOINTS.md'],1
+,/api/tracks/{track_id}/cover,['project/ENDPOINTS.md'],1
+,/api/user,['project/audit/FIRST_AUDIT.md'],1
+,/api/user/history,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md']",3
+,/api/user/liked,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md']",3
+,/api/user/preferences,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md']",3
+,/api/user/profile,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md']",3
+,/api/user/sync_liked,"['api/docs/reference/full_api_reference.md', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md']",3
+,/api/webhooks,"['project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",3
+,/api/webhooks/fire,"['project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md']",2
+,/api/webhooks/register,['project/ENDPOINTS.md'],1
+,/api/webhooks/{hook_id},"['project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md']",2
+,/docs,"['api/docs/manuals/DEVELOPER_GUIDE.md', 'project/ACTIVITY.md', 'project/ENDPOINTS.md', 'project/EXECUTION_PLAN.md', 'project/LOW_LEVEL_DESIGN.md', 'project/LOW_LEVEL_DESIGN_previous.md', 'project/ROADMAP.md', 'project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-final-cleanup-report.md', 'project/reports/20250809-phase5-playlist-implementation-report.md']",11
+,/docs/ARCHITECTURE,['project/PROJECT_REGISTRY.md'],1
+,/docs/CHANGELOG,"['project/PROJECT_REGISTRY.md', 'project/reports/20250809-phase5-endpoint-refactor-report.md', 'project/reports/20250809-phase5-final-cleanup-report.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",5
+,/docs/CONTRIBUTING,['project/PROJECT_REGISTRY.md'],1
+,/docs/INSTALLATION,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",3
+,/docs/INTEGRATION_CHECKLIST,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-final-cleanup-report.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",5
+,/docs/MANUAL,"['project/reports/20250807-doc-clarification-completion-report.md', 'project/reports/20250808-comprehensive-auth-and-docs-update-report.md', 'project/reports/20250808-oauth-unification-completion-report.md']",3
+,/docs/MILESTONES,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",3
+,/docs/MODULES,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",3
+,/docs/PHASES,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",3
+,/docs/PHASE_2_SECURE_CALLBACK,"['project/PROJECT_REGISTRY.md', 'snitch/README.md']",2
+,/docs/PHASE_2_ZERO_TRUST_DESIGN,"['project/LOW_LEVEL_DESIGN.md', 'project/PROJECT_REGISTRY.md', 'project/TRACEABILITY_MATRIX.md']",3
+,/docs/PROJECT_PLAN,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",3
+,/docs/ROADMAP,"['project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",2
+,/docs/STATUS,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",3
+,/docs/TASKS,"['project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",2
+,/docs/TEST_RUNBOOK,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",3
+,/docs/USER_MANUAL,"['gonk-testUI/README.md', 'project/ACTIVITY.md', 'project/PROJECT_REGISTRY.md']",3
+,/docs/developer_guide,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md', 'project/reports/20250809-phase5-final-cleanup-report.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",6
+,/docs/manuals/DEVELOPER_GUIDE,"['project/LESSONS-LEARNT.md', 'project/PROJECT_REGISTRY.md']",2
+,/docs/manuals/ERROR_HANDLING_GUIDE,"['project/ACTIVITY.md', 'project/BACKLOG.md', 'project/PROJECT_REGISTRY.md']",3
+,/docs/manuals/LOGGING_GUIDE,"['project/ACTIVITY.md', 'project/BACKLOG.md']",2
+,/docs/manuals/OPERATOR_MANUAL,['project/PROJECT_REGISTRY.md'],1
+,/docs/manuals/USER_MANUAL,['project/PROJECT_REGISTRY.md'],1
+,/docs/oauth2-redirect,['project/ENDPOINTS.md'],1
+,/docs/operator_guide,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-final-cleanup-report.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",5
+,/docs/phase5-ipc,"['project/ACTIVITY.md', 'project/PROJECT_REGISTRY.md']",2
+,/docs/projectplan,['project/audit/AUDIT-phase-1.md'],1
+,/docs/projectplan/HLD_Zotify_API,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md', 'project/reports/20250809-phase5-final-cleanup-report.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",6
+,/docs/projectplan/LLD_18step_plan_Zotify_API,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md', 'project/reports/20250809-phase5-final-cleanup-report.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",6
+,/docs/projectplan/admin_api_key_mitigation,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-final-cleanup-report.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",5
+,/docs/projectplan/admin_api_key_security_risk,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-final-cleanup-report.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",5
+,/docs/projectplan/audit,['project/audit/AUDIT-phase-1.md'],1
+,/docs/projectplan/audit/AUDIT-phase-1,['project/audit/AUDIT-phase-1.md'],1
+,/docs/projectplan/audit/README,['project/audit/AUDIT-phase-1.md'],1
+,/docs/projectplan/completions,['project/ROADMAP.md'],1
+,/docs/projectplan/doc_maintenance,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-final-cleanup-report.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",5
+,/docs/projectplan/next_steps_and_phases,"['project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md', 'project/reports/20250809-phase5-final-cleanup-report.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",5
+,/docs/projectplan/privacy_compliance,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md', 'project/reports/20250809-phase5-final-cleanup-report.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",6
+,/docs/projectplan/reports,['project/audit/AUDIT-phase-1.md'],1
+,/docs/projectplan/reports/20250807-doc-clarification-completion-report,['project/audit/AUDIT-phase-1.md'],1
+,/docs/projectplan/reports/20250807-spotify-blueprint-completion-report,['project/audit/AUDIT-phase-1.md'],1
+,/docs/projectplan/reports/20250808-comprehensive-auth-and-docs-update-report,['project/audit/AUDIT-phase-1.md'],1
+,/docs/projectplan/reports/20250808-oauth-unification-completion-report,['project/audit/AUDIT-phase-1.md'],1
+,/docs/projectplan/reports/20250809-api-endpoints-completion-report,['project/audit/AUDIT-phase-1.md'],1
+,/docs/projectplan/reports/20250809-phase5-endpoint-refactor-report,['project/audit/AUDIT-phase-1.md'],1
+,/docs/projectplan/reports/20250809-phase5-final-cleanup-report,['project/audit/AUDIT-phase-1.md'],1
+,/docs/projectplan/reports/20250809-phase5-playlist-implementation-report,['project/audit/AUDIT-phase-1.md'],1
+,/docs/projectplan/reports/20250809-phase5-search-cleanup-report,['project/audit/AUDIT-phase-1.md'],1
+,/docs/projectplan/reports/FIRST_AUDIT,['project/audit/AUDIT-phase-1.md'],1
+,/docs/projectplan/reports/README,['project/audit/AUDIT-phase-1.md'],1
+,/docs/projectplan/roadmap,"['project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-final-cleanup-report.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",4
+,/docs/projectplan/security,"['project/PROJECT_REGISTRY.md', 'project/SECURITY.md', 'project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-final-cleanup-report.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",6
+,/docs/projectplan/spotify_capability_audit,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-final-cleanup-report.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",5
+,/docs/projectplan/spotify_fullstack_capability_blueprint,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md', 'project/reports/20250809-phase5-final-cleanup-report.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",6
+,/docs/projectplan/spotify_gap_alignment_report,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md', 'project/reports/20250809-phase5-final-cleanup-report.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",6
+,/docs/projectplan/task_checklist,"['project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md', 'project/reports/20250809-phase5-final-cleanup-report.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",5
+,/docs/providers/spotify,"['project/ACTIVITY.md', 'project/PROJECT_REGISTRY.md']",2
+,/docs/reference,['project/ACTIVITY.md'],1
+,/docs/reference/FEATURE_SPECS,"['project/PID.md', 'project/PID_previous.md', 'project/PROJECT_REGISTRY.md']",3
+,/docs/reference/features/authentication,['project/PROJECT_REGISTRY.md'],1
+,/docs/reference/features/provider_agnostic_extensions,['project/PROJECT_REGISTRY.md'],1
+,/docs/reference/full_api_reference,"['project/ACTIVITY.md', 'project/PROJECT_REGISTRY.md']",2
+,/docs/roadmap,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",3
+,/docs/snitch,"['project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-final-cleanup-report.md']",2
+,/docs/snitch/PHASE_2_SECURE_CALLBACK,"['project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",3
+,/docs/snitch/TEST_RUNBOOK,"['project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",3
+,/docs/snitch/phase5-ipc,"['project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",3
+,/docs/system,['project/ACTIVITY.md'],1
+,/docs/system/ERROR_HANDLING_DESIGN,"['project/ACTIVITY.md', 'project/PROJECT_REGISTRY.md']",2
+,/docs/system/INSTALLATION,"['project/ACTIVITY.md', 'project/BACKLOG.md', 'project/PROJECT_REGISTRY.md']",3
+,/docs/system/PRIVACY_COMPLIANCE,"['project/ACTIVITY.md', 'project/PROJECT_REGISTRY.md']",2
+,/docs/system/REQUIREMENTS,['project/PROJECT_REGISTRY.md'],1
+,/docs/zotify-api-manual,"['project/PROJECT_REGISTRY.md', 'project/audit/AUDIT-phase-1.md', 'project/reports/20250809-phase5-final-cleanup-report.md', 'project/reports/20250809-phase5-playlist-implementation-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",5
+,/docs/zotify-openapi-external-v1,['project/audit/FIRST_AUDIT.md'],1
+,/openapi,"['gonk-testUI/docs/ARCHITECTURE.md', 'gonk-testUI/static/app.js', 'project/ENDPOINTS.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",5
+,/redoc,['project/ENDPOINTS.md'],1
+GET,/api/auth/refresh,['project/reports/20250809-api-endpoints-completion-report.md'],1
+GET,/api/auth/status,['project/reports/20250809-api-endpoints-completion-report.md'],1
+GET,/api/download/status,"['api/docs/manuals/USER_MANUAL.md', 'project/audit/AUDIT-phase-1.md', 'project/audit/FIRST_AUDIT.md']",3
+GET,/api/schema,['project/reports/20250809-api-endpoints-completion-report.md'],1
+GET,/api/search,['project/reports/20250809-phase5-search-cleanup-report.md'],1
+GET,/api/spotify/devices,['project/reports/20250809-api-endpoints-completion-report.md'],1
+GET,/api/spotify/login,['api/docs/reference/full_api_reference.md'],1
+GET,/api/spotify/me,"['project/reports/20250809-api-endpoints-completion-report.md', 'project/reports/20250809-phase5-endpoint-refactor-report.md']",2
+GET,/api/spotify/metadata/{track_id},['project/reports/20250809-phase5-search-cleanup-report.md'],1
+GET,/api/system/env,['project/reports/20250809-api-endpoints-completion-report.md'],1
+GET,/api/system/uptime,['project/reports/20250809-api-endpoints-completion-report.md'],1
+POST,/api/auth/logout,['project/reports/20250809-api-endpoints-completion-report.md'],1
+POST,/api/download,['api/docs/manuals/USER_MANUAL.md'],1
+POST,/api/download/process,"['project/audit/AUDIT-PHASE-3.md', 'project/reports/20250811-AUDIT-PHASE2-FINALIZATION-REPORT.md', 'project/reports/20250811-CONSOLIDATED-COMPLETION-REPORT.md']",3
+POST,/api/spotify/sync_playlists,['project/reports/20250809-phase5-final-cleanup-report.md'],1
+POST,/api/tracks/metadata,"['project/reports/20250809-api-endpoints-completion-report.md', 'project/reports/20250809-phase5-endpoint-refactor-report.md', 'project/reports/20250809-phase5-search-cleanup-report.md']",3
