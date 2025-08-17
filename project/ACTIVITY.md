@@ -4,6 +4,30 @@
 
 ---
 
+## ACT-030: Refactor Logging Documentation
+
+**Date:** 2025-08-17
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To refactor the documentation for the new logging framework to improve organization and create a single source of truth for the phased implementation plan.
+
+### Outcome
+- **New Document:** Created `project/LOGGING_PHASES.md` to serve as the authoritative tracker for the logging system's phased development.
+- **Refactoring:**
+  - Updated `project/ROADMAP.md` to remove the detailed logging task breakdown and instead point to the new `LOGGING_PHASES.md` document.
+  - Updated `project/TRACEABILITY_MATRIX.md` to include a new, dedicated section for tracing logging requirements to the phases defined in the new document.
+- **Registry Update:** Added `project/LOGGING_PHASES.md` to the `PROJECT_REGISTRY.md`.
+
+### Related Documents
+- `project/LOGGING_PHASES.md`
+- `project/ROADMAP.md`
+- `project/TRACEABILITY_MATRIX.md`
+- `project/PROJECT_REGISTRY.md`
+
+---
+
 ## ACT-029: Implement Flexible Logging Framework (MVP)
 
 **Date:** 2025-08-17
