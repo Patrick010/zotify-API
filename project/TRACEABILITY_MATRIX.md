@@ -29,8 +29,8 @@
 | FE-04 | Enhanced Download & Job Management | FUTURE_ENHANCEMENTS.md | ❌ Missing | N/A | N/A | | e.g., progress reporting, notifications |
 | FE-05 | API Governance | FUTURE_ENHANCEMENTS.md | ❌ Missing | N/A | N/A | | e.g., rate limiting, quotas |
 | FE-06 | Observability | FUTURE_ENHANCEMENTS.md | 🟡 Partial | `middleware/request_id.py` | 🔍 Needs Verification | | Lacks detailed audit trails. See FE-07a. |
-| FE-07 | Standardized Error Handling | FUTURE_ENHANCEMENTS.md | ❌ Missing | N/A | 🔍 Needs Verification | | Error schema and exception refactoring not started. |
-| FE-07a | Extendable Logging System | FUTURE_ENHANCEMENTS.md | 🟡 Partial | `LOGGING_SYSTEM_DESIGN.md` | N/A | FE-06 | **Design is complete.** Implementation is pending (`LOG-TASK-*`). |
+| FE-07 | Standardized Error Handling | FUTURE_ENHANCEMENTS.md | ✅ Implemented | `core/error_handler/` | ✅ Implemented | | Centralized error handling module is complete and integrated. |
+| FE-07a | Extendable Logging System | FUTURE_ENHANCEMENTS.md | ✅ Implemented | `services/logging_service.py` | ✅ Implemented | FE-06 | The logging system has been investigated, integrated, and verified as functional. |
 | FE-08 | Comprehensive Health Checks | FUTURE_ENHANCEMENTS.md | 🟡 Partial | `routes/system.py` | 🔍 Needs Verification | | Only basic uptime/env endpoints exist |
 | FE-09 | Unified Configuration Management | FUTURE_ENHANCEMENTS.md | 🟡 Partial | `services/config_service.py` | 🔍 Needs Verification | | Dual system exists, not unified |
 | **System Requirements (NFRs)** | | | | | | | |

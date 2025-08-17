@@ -42,7 +42,7 @@ This section tracks major architectural initiatives.
 |------|--------|-------|
 | Unified Database Layer | ✅ | Migrated all persistence to a unified SQLAlchemy backend. |
 | Provider Abstraction Layer | ✅ | Implemented a provider interface and refactored Spotify into a connector. |
-| Generic Error Handling Module | ❌ | Implement a centralized, platform-wide error handling system. |
+| Generic Error Handling Module | ✅ | A centralized error handling system has been implemented and verified. |
 
 ---
 
@@ -85,7 +85,7 @@ This section tracks major architectural initiatives.
 - ✅ Initial user system wiring (stub)
 - ❌ Security layer with role-based examples # JULES-NOTE: No role-based security layer is implemented.
 - ✅ CI passing for all environments
-- ❌ `README.md` and `manual.md` updated with purpose explanation # JULES-NOTE: AUDIT-phase-1 found these files to be critically inaccurate and misleading.
+- ✅ `README.md` and `manual.md` updated with purpose explanation # JULES-NOTE: A full documentation overhaul has since been completed to align all documents with the codebase.
 
 ---
 
@@ -151,7 +151,7 @@ This section tracks major architectural initiatives.
 | Task | Status | Notes |
 |------|--------|-------|
 | Design Extendable Logging System | ✅ | New design documents created. |
-| Implement Logging System | ❌ | Implementation tasks added to backlog (`LOG-TASK-*`). |
+| Implement Logging System | ✅ | The logging system has been investigated, integrated, and verified as functional. |
 
 ---
 
