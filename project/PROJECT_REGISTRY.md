@@ -5,7 +5,7 @@
 
 ## 1. Purpose
 
-This document serves as the master file, or single source of truth, for tracking all key documents, records, and artifacts for the Zotify API project. It provides a centralized index for all stakeholders to ensure traceability and transparency.
+This document serves as the master file, or single source of truth, for tracking all key documents, records, and artifacts for the Zotify API project. It provides a centralized index for all stakeholders to ensure traceability and transparency. To maintain this document's value, it is mandatory that any new markdown documentation file created anywhere in the project is added to this registry.
 
 ---
 
@@ -23,7 +23,6 @@ This document serves as the master file, or single source of truth, for tracking
 | **Future Enhancements** | [`FUTURE_ENHANCEMENTS.md`](./FUTURE_ENHANCEMENTS.md) | A "parking lot" for new ideas and long-term ambitions not on the current roadmap. |
 | **Lessons Learnt Log** | [`LESSONS-LEARNT.md`](./LESSONS-LEARNT.md) | A log of key takeaways and insights from each project phase. |
 | **Logging System Design** | [`LOGGING_SYSTEM_DESIGN.md`](./LOGGING_SYSTEM_DESIGN.md) | The detailed architectural design for the centralized logging system. |
-| **Logging Developer Guide** | [`api/docs/manuals/LOGGING_GUIDE.md`](../api/docs/manuals/LOGGING_GUIDE.md) | A guide for developers on how to use the logging service and create custom handlers. |
 | **Logging Traceability Matrix** | [`LOGGING_TRACEABILITY_MATRIX.md`](./LOGGING_TRACEABILITY_MATRIX.md) | Maps logging system requirements to design documents and backlog tasks. |
 | **Project Backlog** | [`BACKLOG.md`](./BACKLOG.md) | A tactical backlog of tasks managed by the formal qualification process defined in the PID. All tasks must conform to the template in this file. |
 | **Changelog** | [`api/docs/CHANGELOG.md`](./api/docs/CHANGELOG.md) | A log of all user-facing changes for each version. |
@@ -31,6 +30,25 @@ This document serves as the master file, or single source of truth, for tracking
 | **Use Cases** | [`USECASES.md`](./USECASES.md) | A collection of user-driven scenarios and requirements for the API. |
 | **Use Case Gap Analysis** | [`USECASES_GAP_ANALYSIS.md`](./USECASES_GAP_ANALYSIS.md) | An analysis of the gaps between the desired use cases and the current implementation. |
 | **Feature Specifications** | [`api/docs/reference/FEATURE_SPECS.md`](../api/docs/reference/FEATURE_SPECS.md) | The master index for detailed, standardized specifications for all system features. |
+
+---
+
+## 2.1. API Documentation
+
+This section lists documents that are specific to the API's implementation, operation, and usage.
+
+| Document | Location | Description |
+|---|---|---|
+| **Operator Manual** | [`api/docs/manuals/OPERATOR_MANUAL.md`](../api/docs/manuals/OPERATOR_MANUAL.md) | Provides guidance for deploying, configuring, and maintaining the Zotify API in a production environment, including process management and log rotation. |
+| **Developer Guide** | [`api/docs/manuals/DEVELOPER_GUIDE.md`](../api/docs/manuals/DEVELOPER_GUIDE.md) | A guide for developers on setting up a local environment, running the server, executing tests, and interacting with the API. |
+| **User Manual** | [`api/docs/manuals/USER_MANUAL.md`](../api/docs/manuals/USER_MANUAL.md) | A manual for end-users of the API, explaining the core workflow for downloading tracks and the standard error response format. |
+| **Error Handling Guide** | [`api/docs/manuals/ERROR_HANDLING_GUIDE.md`](../api/docs/manuals/ERROR_HANDLING_GUIDE.md) | A developer guide for the Generic Error Handling Module, explaining how to use it, extend it with custom actions, and best practices. |
+| **Spotify Provider** | [`api/docs/providers/spotify.md`](../api/docs/providers/spotify.md) | Describes the implementation of the Spotify provider connector, including its dependencies and provider-specific limitations. |
+| **Authentication Spec** | [`api/docs/reference/features/authentication.md`](../api/docs/reference/features/authentication.md) | A feature specification for the static Admin API Key authentication mechanism, detailing its purpose, technical implementation, and usage. |
+| **Provider Extensions Spec** | [`api/docs/reference/features/provider_agnostic_extensions.md`](../api/docs/reference/features/provider_agnostic_extensions.md) | A proposal document that defines the structure and requirements for creating detailed specifications for all API features, ensuring consistency across different provider integrations. |
+| **Error Handling Design** | [`api/docs/system/ERROR_HANDLING_DESIGN.md`](../api/docs/system/ERROR_HANDLING_DESIGN.md) | The technical design specification for the Generic Error Handling Module, detailing its components, class structure, and integration strategy. |
+| **Installation Guide** | [`api/docs/system/INSTALLATION.md`](../api/docs/system/INSTALLATION.md) | A guide detailing the steps to install the Zotify API from source, including dependency installation and environment configuration for both production and testing. |
+| **System Requirements** | [`api/docs/system/REQUIREMENTS.md`](../api/docs/system/REQUIREMENTS.md) | Lists the system and software requirements for running the Zotify API and its related tools. |
 
 ---
 
