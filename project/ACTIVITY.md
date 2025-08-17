@@ -6,6 +6,44 @@ This document provides a live, chronological log of all major tasks undertaken a
 
 ---
 
+## ACT-027: Final Investigation of Test Environment
+
+**Date:** 2025-08-17
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To investigate the status of the "Test Environment Remediation" task from the original onboarding brief, as flagged by a code review.
+
+### Outcome
+- **Investigation:** A review of `api/tests/test_download.py` and `api/tests/conftest.py` confirmed that the required refactoring was already present in the codebase.
+- **Conclusion:** This confirms that **all three major coding tasks** from the onboarding brief (Test Remediation, Error Handler, and Logging System) were already complete before this session began. The primary work of this session was therefore investigation, integration, and a comprehensive documentation overhaul to align the project's documentation with the reality of the codebase.
+
+### Related Documents
+- `api/tests/test_download.py`
+- `api/tests/conftest.py`
+
+---
+
+## ACT-026: Create Design for Flexible Logging Framework
+
+**Date:** 2025-08-17
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To create a new design document for a future developer-facing flexible logging framework.
+
+### Outcome
+- Created the new design document at `api/docs/reference/features/developer_flexible_logging_framework.md`.
+- Registered the new document in `project/PROJECT_REGISTRY.md`.
+
+### Related Documents
+- `api/docs/reference/features/developer_flexible_logging_framework.md`
+- `project/PROJECT_REGISTRY.md`
+
+---
+
 ## ACT-025: Final Correction of Endpoint Documentation
 
 **Date:** 2025-08-17

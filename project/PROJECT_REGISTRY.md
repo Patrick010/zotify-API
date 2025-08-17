@@ -58,6 +58,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **Installation Guide** | [`api/docs/system/INSTALLATION.md`](../api/docs/system/INSTALLATION.md) | A guide detailing the steps to install the Zotify API from source. |
 | **System Requirements** | [`api/docs/system/REQUIREMENTS.md`](../api/docs/system/REQUIREMENTS.md) | Lists the system and software requirements for running the Zotify API. |
 | **Full API Reference** | [`api/docs/reference/full_api_reference.md`](../api/docs/reference/full_api_reference.md) | A comprehensive, manually-created reference for all API endpoints. |
+| **Flexible Logging Framework Design** | [`api/docs/reference/features/developer_flexible_logging_framework.md`](../api/docs/reference/features/developer_flexible_logging_framework.md) | A design document for a developer-facing, programmable logging framework. |
 | **Privacy Compliance** | [`api/docs/system/PRIVACY_COMPLIANCE.md`](../api/docs/system/PRIVACY_COMPLIANCE.md) | An overview of how the Zotify API project complies with data protection laws like GDPR. |
 
 ### 3.2. Snitch Module Documentation
