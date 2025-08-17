@@ -1,5 +1,19 @@
 # Extendable Logging System – Phased Implementation
 
+> **Purpose of this Document**
+> This file is the **authoritative tracker** for the Extendable Logging System.
+> It defines each phase, current status, deliverables, and governance rules.
+>
+> **How to Maintain**
+> - Update the status markers (`In Progress`, `TODO`, `Done`) as work progresses.
+> - Add links to design docs, code directories, or reports under each phase.
+> - Keep this document in sync with:
+>   - `project/ROADMAP.md` (high-level timeline/phase overview).
+>   - `project/TRACEABILITY_MATRIX.md` (requirement-to-phase mapping).
+> - Do not remove phases, even if deferred — mark them as *Deferred* or *Obsolete*.
+>
+> This file ensures that logging development is transparent, traceable, and never “lost in the cracks.”
+
 This document tracks the phased design and implementation of the new Extendable Logging System.
 All phases are aligned with the project’s roadmap and traceability requirements.
 

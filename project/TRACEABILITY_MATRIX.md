@@ -41,3 +41,18 @@
 | SYS-04 | Extensibility | HIGH_LEVEL_DESIGN.md | ✅ Implemented | `providers/base.py` | N/A | | Provider model allows for extension |
 | SYS-05 | CORS Policy for Web UI | HIGH_LEVEL_DESIGN.md | ✅ Implemented | `zotify_api/main.py` | N/A | | Permissive CORS policy to allow browser-based clients. |
 | SYS-06 | Snitch Secure Callback | `snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md` | 🟡 Partial | `snitch/internal/listener/` | ✅ Implemented | | Zero Trust model with end-to-end payload encryption and nonce-based replay protection. |
+
+---
+
+## Logging System Traceability
+
+| Requirement | Source Doc | Phase(s) | Status |
+|-------------|------------|----------|--------|
+| Central LoggingService with async pipeline | LOGGING_SYSTEM_DESIGN.md | Phase 1 | In Progress |
+| Developer API with per-module log control | LOGGING_SYSTEM_DESIGN.md | Phase 2 | In Progress |
+| Multi-sink destinations (file, syslog, db, Kafka, RabbitMQ) | LOGGING_SYSTEM_DESIGN.md | Phase 3 | TODO |
+| Runtime triggers with hot reload | LOGGING_SYSTEM_DESIGN.md | Phase 4 | TODO |
+| Observability integration (OTel, Prometheus, JSON logs) | LOGGING_SYSTEM_DESIGN.md | Phase 5 | TODO |
+| Security & Compliance audit stream | LOGGING_SYSTEM_DESIGN.md | Phase 6 | TODO |
+| Extensibility framework for custom adapters | LOGGING_SYSTEM_DESIGN.md | Phase 7 | TODO |
+| Full observability suite (dashboard, anomaly detection) | LOGGING_SYSTEM_DESIGN.md | Phase 8 | TODO |
