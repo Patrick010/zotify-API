@@ -2,6 +2,41 @@
 
 **Status:** Live Document
 
+---
+
+## ACT-029: Implement Flexible Logging Framework (MVP)
+
+**Date:** 2025-08-17
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To implement the Minimum Viable Product (MVP) of the new developer-facing, flexible logging framework, as defined in the design document and clarified by the project sponsor.
+
+### Outcome
+- **New Module:** Created a new logging framework module at `api/src/zotify_api/core/logging_framework/`.
+  - `schemas.py`: Contains Pydantic models for validating the new `logging_framework.yml` configuration file.
+  - `service.py`: Contains the core `LoggingService`, which manages sinks and routes log events asynchronously. Implements Console, File (with rotation), and Webhook sinks.
+  - `__init__.py`: Exposes the public `log_event()` API for developers.
+- **New Configuration:** Added `api/logging_framework.yml` to define available sinks and triggers.
+- **New API Endpoint:** Created `POST /api/system/logging/reload` to allow for runtime reloading of the logging configuration.
+- **Integration:**
+  - The new framework is initialized on application startup in `main.py`.
+  - The global `ErrorHandler` was refactored to use the new `log_event()` API, routing all caught exceptions through the new system.
+- **New Documentation:**
+  - `DEPENDENCIES.md`: A new file created to document the policy for adding third-party libraries.
+  - `api/docs/manuals/LOGGING_GUIDE.md`: A new, comprehensive guide for developers on how to use the framework.
+- **New Tests:** Added `api/tests/unit/test_flexible_logging.py` with unit tests for the new framework's features.
+- **Dependencies:** Added `pytest-mock` to `api/pyproject.toml` to support the new tests.
+
+### Related Documents
+- `api/src/zotify_api/core/logging_framework/`
+- `api/logging_framework.yml`
+- `api/docs/manuals/LOGGING_GUIDE.md`
+- `DEPENDENCIES.md`
+- `api/pyproject.toml`
+- `api/src/zotify_api/main.py`
+
 This document provides a live, chronological log of all major tasks undertaken as part of the project's development and audit cycles. It serves as an authoritative source for work status and provides cross-references to other planning and documentation artifacts.
 
 ---

@@ -48,16 +48,18 @@ To ensure platform-wide stability and consistent behavior, the system implements
 
 This architectural component is critical for system resilience, maintainability, and providing a clean, professional experience for API consumers.
 
-### 3.3 Logging Layer
+### 3.3 Flexible Logging Framework
 
-To ensure consistent and comprehensive observability, the platform implements a centralized and extendable logging system. This layer is designed to be the single point of entry for all logging activities across the application.
+To ensure consistent and comprehensive observability, the platform implements a developer-facing, flexible logging framework. This layer is designed to be a core, programmable tool for developers, not just an internal utility.
 
 **Key Principles:**
-- **Centralized Service:** A single `LoggingService` is responsible for receiving and dispatching all log messages.
-- **Pluggable Handlers:** The service uses a handler-based architecture, allowing new logging backends (e.g., console, file, database, external service) to be added without changing core application code.
-- **Multiple Log Types:** The system is designed to handle different types of logs, including standard system/debug messages, structured JSON audit logs for compliance, and database-backed logs for tracking asynchronous jobs.
+- **Developer-Centric API:** The framework provides a simple `log_event()` function that allows developers to control logging behavior (level, destination, metadata) on a per-call basis, directly from their code.
+- **Configuration-Driven Sinks:** The available logging destinations ("sinks") like the console, rotating files, and webhooks are defined in an external `logging_framework.yml` file, decoupling the logging topology from the application code.
+- **Runtime Flexibility:** The logging configuration can be reloaded at runtime via an API endpoint, allowing administrators to change log levels or destinations on a live system without a restart.
+- **Asynchronous by Design:** The framework is built to be non-blocking. Log processing, especially for I/O-heavy sinks like webhooks, is handled asynchronously to minimize performance impact on the main application.
+- **Integration with Error Handling:** The framework serves as the backend for the `ErrorHandler`, ensuring that all system-level exceptions are processed through the same powerful and configurable routing system.
 
-This component is critical for debugging, monitoring, and auditing the platform. For a more detailed breakdown, see the [`LOGGING_SYSTEM_DESIGN.md`](./LOGGING_SYSTEM_DESIGN.md) document.
+This component is critical for debugging, monitoring, and creating detailed audit trails. For a comprehensive guide on its use, see the [`LOGGING_GUIDE.md`](../api/docs/manuals/LOGGING_GUIDE.md) document.
 
 ## 4. Non-Functional Requirements
 - **Test Coverage**: >90% unit test coverage.

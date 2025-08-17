@@ -146,12 +146,14 @@ This section tracks major architectural initiatives.
 
 ---
 
-## ❌ Phase 11: Core Observability
+## 🟡 Phase 11: Core Observability (MVP Complete)
 
 | Task | Status | Notes |
 |------|--------|-------|
-| Design Extendable Logging System | ✅ | New design documents created. |
-| Implement Logging System | ✅ | The logging system has been investigated, integrated, and verified as functional. |
+| Design Flexible Logging Framework | ✅ | The new developer-facing framework design is complete. |
+| Implement Flexible Logging Framework (MVP) | ✅ | The MVP is complete, with Console, File, and Webhook sinks, a developer API, and runtime configuration. |
+| Extend Framework with Advanced Sinks | ❌ | Future work: Syslog, Kafka, etc. |
+| Implement Advanced Trigger Actions | ❌ | Future work: More complex, chained actions. |
 
 ---
 

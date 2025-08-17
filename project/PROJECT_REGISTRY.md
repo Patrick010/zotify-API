@@ -33,6 +33,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **Use Cases** | [`USECASES.md`](./USECASES.md) | A collection of user-driven scenarios and requirements for the API. |
 | **Use Case Gap Analysis** | [`USECASES_GAP_ANALYSIS.md`](./USECASES_GAP_ANALYSIS.md) | An analysis of the gaps between the desired use cases and the current implementation. |
 | **Task Checklist** | [`TASK_CHECKLIST.md`](./TASK_CHECKLIST.md) | A checklist to be used for every task to ensure compliance with project standards. |
+| **Dependency Policy** | [`DEPENDENCIES.md`](./DEPENDENCIES.md) | The policy and registry for managing third-party dependencies. |
 | **Security Document** | [`SECURITY.md`](./SECURITY.md) | The definitive security reference for the project. |
 | **Previous PID** | [`PID_previous.md`](./PID_previous.md) | An archived version of the Project Initiation Document. |
 | **Previous HLD** | [`HIGH_LEVEL_DESIGN_previous.md`](./HIGH_LEVEL_DESIGN_previous.md) | An archived version of the High-Level Design document. |
@@ -51,6 +52,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **Developer Guide** | [`api/docs/manuals/DEVELOPER_GUIDE.md`](../api/docs/manuals/DEVELOPER_GUIDE.md) | A guide for developers on setting up a local environment, running the server, executing tests, and interacting with the API. |
 | **User Manual** | [`api/docs/manuals/USER_MANUAL.md`](../api/docs/manuals/USER_MANUAL.md) | A manual for end-users of the API, explaining the core workflow for downloading tracks and the standard error response format. |
 | **Error Handling Guide** | [`api/docs/manuals/ERROR_HANDLING_GUIDE.md`](../api/docs/manuals/ERROR_HANDLING_GUIDE.md) | A developer guide for the Generic Error Handling Module. |
+| **Logging Guide** | [`api/docs/manuals/LOGGING_GUIDE.md`](../api/docs/manuals/LOGGING_GUIDE.md) | A comprehensive developer guide for the new Flexible Logging Framework. |
 | **Spotify Provider** | [`api/docs/providers/spotify.md`](../api/docs/providers/spotify.md) | Describes the implementation of the Spotify provider connector. |
 | **Authentication Spec** | [`api/docs/reference/features/authentication.md`](../api/docs/reference/features/authentication.md) | A feature specification for the static Admin API Key authentication mechanism. |
 | **Provider Extensions Spec** | [`api/docs/reference/features/provider_agnostic_extensions.md`](../api/docs/reference/features/provider_agnostic_extensions.md) | A proposal for a standardized structure for feature specification documents. |

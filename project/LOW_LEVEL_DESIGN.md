@@ -133,13 +133,32 @@ The application uses a dual system for managing configuration, separating immuta
 
 ---
 
-## Logging System
+## Flexible Logging Framework
 
-**Goal:** To provide a centralized, extendable, and compliance-ready logging framework.
+**Goal:** To provide a developer-centric, configurable, and asynchronous logging framework.
 
-For the detailed low-level design of this subsystem, including the core `LoggingService` architecture, the pluggable handler interface, initial handler implementations (Console, JSON Audit, Database), and developer integration guides, please refer to the canonical design document:
+**Module:** `api/src/zotify_api/core/logging_framework/`
 
-- **[`LOGGING_SYSTEM_DESIGN.md`](./LOGGING_SYSTEM_DESIGN.md)**
+*   **`schemas.py`**:
+    *   Defines the Pydantic models for validating the `logging_framework.yml` configuration file.
+    *   Uses a discriminated union on the `type` field (`console`, `file`, `webhook`) to correctly parse different sink configurations into their respective Pydantic models.
+
+*   **`service.py`**:
+    *   **`LoggingService`**: Implemented as a singleton, this class is the core of the framework. It loads the validated configuration, instantiates the required sink objects, and dispatches log events.
+    *   **`BaseSink`**: An abstract base class that defines the common interface for all sinks (e.g., an `emit` method).
+    *   **Sink Implementations**:
+        *   `ConsoleSink`: A simple sink that prints formatted logs to standard output.
+        *   `FileSink`: Uses Python's built-in `logging.handlers.RotatingFileHandler` to provide robust, rotating file logs.
+        *   `WebhookSink`: Uses the `httpx` library to send logs to an external URL asynchronously, preventing I/O from blocking the main application.
+
+*   **`__init__.py`**:
+    *   Exposes the primary public API function, `log_event()`. This decouples the application code from the internal `LoggingService` implementation, providing a stable interface for developers.
+
+*   **Configuration (`api/logging_framework.yml`)**:
+    *   A YAML file where all sinks and basic triggers are defined. This file is read on application startup and can be re-read at runtime.
+
+*   **Reload Endpoint (`routes/system.py`)**:
+    *   The `POST /api/system/logging/reload` endpoint provides a mechanism to hot-reload the configuration from `logging_framework.yml` without an application restart. It reads the file, validates it with the Pydantic schemas, and re-initializes the `LoggingService` with the new configuration.
 
 ---
 
