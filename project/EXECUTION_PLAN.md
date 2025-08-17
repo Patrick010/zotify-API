@@ -21,7 +21,7 @@ This document provides a detailed breakdown of the tasks required to fulfill the
 - ✅ Implement core endpoints: albums, tracks, metadata.
 - ✅ Add notification endpoints, ensure proper response models.
 - ✅ Wire up Pytest suite with example test cases covering core API.
-- ❌ Integrate documentation and API specs (OpenAPI/Swagger). # JULES-NOTE: OpenAPI spec is outdated/incorrect per audit.
+- ✅ Integrate documentation and API specs (OpenAPI/Swagger). # JULES-NOTE: Completed. A new, canonical OpenAPI spec has been generated and integrated into the documentation.
 - ✅ Add reverse proxy support for `/docs`.
 - 🟡 Stub initial user system wiring (authentication placeholder). # JULES-NOTE: This is largely complete. Functional endpoints for profile, preferences, etc. exist.
 - ✅ Achieve stable CI passes across environments.

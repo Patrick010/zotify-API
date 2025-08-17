@@ -4,7 +4,7 @@ from zotify_api.schemas.generic import StandardResponse
 from zotify_api.services.cache_service import CacheService, get_cache_service
 from zotify_api.services.auth import require_admin_api_key
 
-router = APIRouter(prefix="/cache")
+router = APIRouter(prefix="/cache", tags=["cache"])
 
 @router.get("", response_model=StandardResponse[CacheStatusResponse], summary="Get Cache Stats", description="Returns statistics about the cache.", response_description="Cache statistics.")
 def get_cache(cache_service: CacheService = Depends(get_cache_service)):

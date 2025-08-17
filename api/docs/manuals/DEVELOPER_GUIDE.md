@@ -111,30 +111,33 @@ curl http://127.0.0.1:8000/api/health
 ### 3.2. Add a Track to the Download Queue
 #### Command
 \`\`\`bash
-curl -X POST http://127.0.0.1:8000/api/download \
+curl -X POST http://127.0.0.1:8000/api/downloads \
   -H "X-API-Key: dev_key" \
   -H "Content-Type: application/json" \
   -d '{"track_ids": ["spotify:track:4cOdK2wGLETOMsV3oDPEhB"]}'
 \`\`\`
 #### Expected Response
-A JSON array with the created job object(s).
+A JSON object with a `data` key containing an array of job objects.
 \`\`\`json
-[
-  {
-    "job_id": "some-uuid-string",
-    "track_id": "spotify:track:4cOdK2wGLETOMsV3oDPEhB",
-    "status": "pending",
-    "progress": 0.0,
-    "created_at": "...",
-    "error_message": null
-  }
-]
+{
+  "status": "success",
+  "data": [
+    {
+      "job_id": "some-uuid-string",
+      "track_id": "spotify:track:4cOdK2wGLETOMsV3oDPEhB",
+      "status": "pending",
+      "progress": 0.0,
+      "created_at": "...",
+      "error_message": null
+    }
+  ]
+}
 \`\`\`
 
 ### 3.3. Check Download Queue Status
 #### Command
 \`\`\`bash
-curl -X GET "http://127.0.0.1:8000/api/download/status" -H "X-API-Key: dev_key"
+curl -X GET "http://127.0.0.1:8000/api/downloads/status" -H "X-API-Key: dev_key"
 \`\`\`
 
 ### Troubleshooting
@@ -143,6 +146,7 @@ curl -X GET "http://127.0.0.1:8000/api/download/status" -H "X-API-Key: dev_key"
 - **`500 Internal Server Error`**: Check the `uvicorn` server logs for a full traceback. This often points to a misconfiguration or a bug.
 
 ### References
-- **API Documentation:** `http://127.0.0.1:8000/docs`
+- **Interactive API Docs (Swagger):** `http://127.0.0.1:8000/docs`
+- **Static API Reference:** `api/docs/reference/API_REFERENCE.md`
 - **Operator Manual:** `OPERATOR_MANUAL.md`
 - **Error Handling Guide:** `ERROR_HANDLING_GUIDE.md`

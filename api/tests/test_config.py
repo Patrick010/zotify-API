@@ -26,7 +26,7 @@ def config_service_override(temp_config_file: Path):
 def test_get_config(client, config_service_override):
     response = client.get("/api/config")
     assert response.status_code == 200
-    assert "library_path" in response.json()
+    assert "library_path" in response.json()["data"]
 
 def test_update_config_unauthorized(client, config_service_override):
     update_data = {"scan_on_startup": False}
@@ -37,7 +37,7 @@ def test_update_config(client, config_service_override):
     update_data = {"scan_on_startup": False}
     response = client.patch("/api/config", headers={"X-API-Key": "test_key"}, json=update_data)
     assert response.status_code == 200
-    assert response.json()["scan_on_startup"] is False
+    assert response.json()["data"]["scan_on_startup"] is False
 
 def test_reset_config_unauthorized(client, config_service_override):
     response = client.post("/api/config/reset")
@@ -51,14 +51,14 @@ def test_reset_config(client, config_service_override):
     # Then, reset it
     response = client.post("/api/config/reset", headers={"X-API-Key": "test_key"})
     assert response.status_code == 200
-    assert response.json()["scan_on_startup"] is True
+    assert response.json()["data"]["scan_on_startup"] is True
 
 def test_update_persists_across_requests(client, config_service_override):
     update_data = {"library_path": "/new/path"}
     client.patch("/api/config", headers={"X-API-Key": "test_key"}, json=update_data)
 
     response = client.get("/api/config")
-    assert response.json()["library_path"] == "/new/path"
+    assert response.json()["data"]["library_path"] == "/new/path"
 
 def test_reset_works_after_multiple_updates(client, config_service_override):
     client.patch("/api/config", headers={"X-API-Key": "test_key"}, json={"scan_on_startup": False})
@@ -66,8 +66,8 @@ def test_reset_works_after_multiple_updates(client, config_service_override):
 
     client.post("/api/config/reset", headers={"X-API-Key": "test_key"})
     response = client.get("/api/config")
-    assert response.json()["scan_on_startup"] is True
-    assert response.json()["library_path"] == "/music"
+    assert response.json()["data"]["scan_on_startup"] is True
+    assert response.json()["data"]["library_path"] == "/music"
 
 def test_bad_update_fails_gracefully(client, config_service_override):
     # Assuming the model will reject this

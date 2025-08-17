@@ -26,12 +26,12 @@ def test_register_webhook(monkeypatch):
         json={"url": "http://test.com", "events": ["test_event"]},
     )
     assert response.status_code == 201
-    assert "id" in response.json()
+    assert "id" in response.json()["data"]
 
 def test_list_webhooks():
     response = client.get("/api/webhooks", headers={"X-API-Key": "test_key"})
     assert response.status_code == 200
-    assert isinstance(response.json(), list)
+    assert isinstance(response.json()["data"], list)
 
 def test_unregister_webhook():
     reg_response = client.post(
@@ -39,11 +39,11 @@ def test_unregister_webhook():
         headers={"X-API-Key": "test_key"},
         json={"url": "http://test.com", "events": ["test_event"]},
     )
-    webhook_id = reg_response.json()["id"]
+    webhook_id = reg_response.json()["data"]["id"]
     response = client.delete(f"/api/webhooks/{webhook_id}", headers={"X-API-Key": "test_key"})
     assert response.status_code == 204
     response = client.get("/api/webhooks", headers={"X-API-Key": "test_key"})
-    assert len(response.json()) == 0
+    assert len(response.json()["data"]) == 0
 
 @patch("zotify_api.services.webhooks.httpx.post")
 def test_fire_webhook(mock_post):
@@ -59,5 +59,5 @@ def test_fire_webhook(mock_post):
 
     # Test with API key
     response = client.post("/api/webhooks/fire", headers={"X-API-Key": "test_key"}, json={"event": "test_event", "data": {}})
-    assert response.status_code == 200
+    assert response.status_code == 202
     mock_post.assert_called_once()

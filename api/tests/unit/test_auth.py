@@ -25,14 +25,27 @@ def test_correct_key(monkeypatch):
     monkeypatch.setattr(settings, "admin_api_key", "test_key")
     assert require_admin_api_key(x_api_key="test_key", settings=settings) is True
 
-@patch("zotify_api.routes.auth.handle_spotify_callback", new_callable=AsyncMock)
-def test_spotify_callback_success(mock_handle_callback, client):
+@patch("httpx.AsyncClient.post", new_callable=AsyncMock)
+@patch("zotify_api.routes.auth.crud.create_or_update_spotify_token")
+def test_spotify_callback_success(mock_crud_call, mock_httpx_post, client, monkeypatch):
     """
-    Tests the /auth/spotify/callback endpoint, mocking the service call.
+    Tests the new GET /auth/spotify/callback endpoint.
     """
-    payload = {"code": "test_code", "state": "test_state"}
-    response = client.post("/api/auth/spotify/callback", json=payload)
+    # Mock the response from Spotify's token endpoint
+    mock_httpx_post.return_value.json.return_value = {
+        "access_token": "test_access_token",
+        "refresh_token": "test_refresh_token",
+        "expires_in": 3600
+    }
+    mock_httpx_post.return_value.raise_for_status.return_value = None
+
+    # Set up the pending state
+    monkeypatch.setitem(__import__("zotify_api.auth_state").auth_state.pending_states, "test_state", "test_code_verifier")
+
+    response = client.get("/api/auth/spotify/callback?code=test_code&state=test_state")
 
     assert response.status_code == 200
-    assert response.json() == {"status": "success"}
-    mock_handle_callback.assert_called_once_with(code="test_code", state="test_state", db=ANY)
+    assert response.json()["status"] == "success"
+
+    # Check that the token was saved to the DB
+    mock_crud_call.assert_called_once()

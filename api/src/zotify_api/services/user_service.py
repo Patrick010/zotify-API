@@ -84,10 +84,10 @@ class UserService:
         self._notifications.append(notification)
         self._save_data()
 
-    def mark_notification_as_read(self, notification_id: str) -> None:
+    def mark_notification_as_read(self, notification_id: str, read: bool = True) -> None:
         for n in self._notifications:
             if n["id"] == notification_id:
-                n["read"] = True
+                n["read"] = read
                 break
         self._save_data()
 

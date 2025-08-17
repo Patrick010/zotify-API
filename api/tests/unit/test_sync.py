@@ -19,8 +19,8 @@ def test_trigger_sync(monkeypatch):
 
     app.dependency_overrides[sync.get_sync_runner] = get_sync_runner_override
     response = client.post("/api/sync/trigger", headers={"X-API-Key": "test_key"})
-    assert response.status_code == 200
-    assert response.json() == {"status": "scheduled"}
+    assert response.status_code == 202
+    assert response.json() == {"status": "success", "message": "Synchronization job triggered."}
     mock_runner.assert_called_once()
     app.dependency_overrides = {}
 

@@ -22,7 +22,7 @@ def network_service_override():
 def test_get_network(client, network_service_override):
     response = client.get("/api/network")
     assert response.status_code == 200
-    assert "proxy_enabled" in response.json()
+    assert "proxy_enabled" in response.json()["data"]
 
 def test_update_network_unauthorized(client, network_service_override):
     update_data = {
@@ -41,5 +41,5 @@ def test_update_network(client, network_service_override):
     }
     response = client.patch("/api/network", headers={"X-API-Key": "test_key"}, json=update_data)
     assert response.status_code == 200
-    assert response.json()["proxy_enabled"] is True
-    assert response.json()["http_proxy"] == "http://proxy.local:3128"
+    assert response.json()["data"]["proxy_enabled"] is True
+    assert response.json()["data"]["http_proxy"] == "http://proxy.local:3128"

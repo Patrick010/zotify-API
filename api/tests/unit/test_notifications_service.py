@@ -20,5 +20,5 @@ def test_get_notifications(mock_user_service):
 
 def test_mark_notification_as_read(mock_user_service):
     service = NotificationsService(user_service=mock_user_service)
-    service.mark_notification_as_read("notif1")
-    mock_user_service.mark_notification_as_read.assert_called_once_with("notif1")
+    service.mark_notification_as_read("notif1", True)
+    mock_user_service.mark_notification_as_read.assert_called_once_with("notif1", True)

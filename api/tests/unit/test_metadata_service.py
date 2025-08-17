@@ -20,7 +20,7 @@ def test_get_metadata_not_exists(metadata_service):
 def test_patch_metadata_exists(metadata_service):
     update_data = MetadataUpdate(mood="Energetic", rating=5)
     response = metadata_service.patch_metadata("abc123", update_data)
-    assert response["status"] == "updated"
+    assert response["status"] == "success"
 
     metadata = metadata_service.get_metadata("abc123")
     assert metadata["mood"] == "Energetic"
@@ -29,7 +29,7 @@ def test_patch_metadata_exists(metadata_service):
 def test_patch_metadata_not_exists(metadata_service):
     update_data = MetadataUpdate(mood="Happy")
     response = metadata_service.patch_metadata("new_track", update_data)
-    assert response["status"] == "updated"
+    assert response["status"] == "success"
 
     metadata = metadata_service.get_metadata("new_track")
     assert metadata["title"] == "Track new_track"

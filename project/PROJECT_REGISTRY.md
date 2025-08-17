@@ -60,7 +60,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **Error Handling Design** | [`api/docs/system/ERROR_HANDLING_DESIGN.md`](../api/docs/system/ERROR_HANDLING_DESIGN.md) | The technical design specification for the Generic Error Handling Module. |
 | **Installation Guide** | [`api/docs/system/INSTALLATION.md`](../api/docs/system/INSTALLATION.md) | A guide detailing the steps to install the Zotify API from source. |
 | **System Requirements** | [`api/docs/system/REQUIREMENTS.md`](../api/docs/system/REQUIREMENTS.md) | Lists the system and software requirements for running the Zotify API. |
-| **Full API Reference** | [`api/docs/reference/full_api_reference.md`](../api/docs/reference/full_api_reference.md) | A comprehensive, manually-created reference for all API endpoints. |
+| **Generated API Reference** | [`api/docs/reference/API_REFERENCE.md`](../api/docs/reference/API_REFERENCE.md) | A comprehensive, auto-generated reference for all API endpoints based on the OpenAPI spec. |
 | **Flexible Logging Framework Design** | [`api/docs/reference/features/developer_flexible_logging_framework.md`](../api/docs/reference/features/developer_flexible_logging_framework.md) | A design document for a developer-facing, programmable logging framework. |
 | **Privacy Compliance** | [`api/docs/system/PRIVACY_COMPLIANCE.md`](../api/docs/system/PRIVACY_COMPLIANCE.md) | An overview of how the Zotify API project complies with data protection laws like GDPR. |
 

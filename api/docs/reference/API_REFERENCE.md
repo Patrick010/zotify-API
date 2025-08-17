@@ -1,3 +1,123 @@
+# API Reference
+
+This document provides a detailed reference for the Zotify API. It is generated from the OpenAPI 3.0 specification.
+
+## General Information
+
+- **Title:** Zotify API
+- **Version:** 0.1.20
+- **Description:** A RESTful API for Zotify, a Spotify music downloader.
+
+## Endpoints Summary
+
+This summary is grouped by tags and provides a quick overview of all available endpoints.
+
+### `auth`
+
+- `GET /api/auth/spotify/login`: Spotify Login
+- `GET /api/auth/spotify/callback`: Spotify Callback
+- `GET /api/auth/status`: Get Status
+- `POST /api/auth/logout`: Logout
+- `GET /api/auth/refresh`: Refresh
+
+### `cache`
+
+- `GET /api/cache`: Get Cache Stats
+- `DELETE /api/cache`: Clear Cache
+
+### `config`
+
+- `GET /api/config`: Get Config
+- `PATCH /api/config`: Update Config
+- `POST /api/config/reset`: Reset Config
+
+### `downloads`
+
+- `POST /api/downloads`: Download
+- `GET /api/downloads/status`: Get Download Queue Status
+- `POST /api/downloads/retry`: Retry Failed Downloads
+- `POST /api/downloads/process`: Process Job
+
+### `health`
+
+- `GET /health`: Health Check
+
+### `network`
+
+- `GET /api/network`: Get Network
+- `PATCH /api/network`: Update Network
+
+### `notifications`
+
+- `POST /api/notifications`: Create Notification
+- `GET /api/notifications/{user_id}`: Get Notifications
+- `PATCH /api/notifications/{notification_id}`: Mark Notification As Read
+
+### `playlists`
+
+- `GET /api/playlists`: List Playlists
+- `POST /api/playlists`: Create New Playlist
+
+### `search`
+
+- `GET /api/search`: Search
+
+### `sync`
+
+- `POST /api/sync/trigger`: Trigger Sync
+
+### `system`
+
+- `POST /api/system/logging/reload`: Reload Logging Config
+- `GET /api/system/status`: Get System Status
+- `GET /api/system/storage`: Get System Storage
+- `GET /api/system/logs`: Get System Logs
+- `POST /api/system/reload`: Reload System Config
+- `POST /api/system/reset`: Reset System State
+- `GET /api/system/uptime`: Get Uptime
+- `GET /api/system/env`: Get Env
+- `GET /api/schema`: Get Schema
+
+### `tracks`
+
+- `GET /api/tracks`: List Tracks
+- `POST /api/tracks`: Create Track
+- `GET /api/tracks/{track_id}`: Get Track
+- `PATCH /api/tracks/{track_id}`: Update Track
+- `DELETE /api/tracks/{track_id}`: Delete Track
+- `POST /api/tracks/{track_id}/cover`: Upload Track Cover
+- `POST /api/tracks/metadata`: Get Tracks Metadata
+- `GET /api/tracks/{track_id}/metadata`: Get extended metadata for a track
+- `PATCH /api/tracks/{track_id}/metadata`: Update extended metadata for a track
+
+### `user`
+
+- `GET /api/user/profile`: Get User Profile
+- `PATCH /api/user/profile`: Update User Profile
+- `GET /api/user/preferences`: Get User Preferences
+- `PATCH /api/user/preferences`: Update User Preferences
+- `GET /api/user/liked`: Get User Liked
+- `POST /api/user/sync_liked`: Sync User Liked
+- `GET /api/user/history`: Get User History
+- `DELETE /api/user/history`: Delete User History
+
+### `webhooks`
+
+- `POST /api/webhooks/register`: Register Webhook
+- `GET /api/webhooks`: List Webhooks
+- `DELETE /api/webhooks/{hook_id}`: Unregister Webhook
+- `POST /api/webhooks/fire`: Fire Webhook
+
+<br>
+
+---
+
+<br>
+
+<details>
+<summary>Full OpenAPI Specification (JSON)</summary>
+
+```json
 {
   "openapi": "3.1.0",
   "info": {
@@ -132,7 +252,7 @@
           "auth"
         ],
         "summary": "Logout",
-        "description": "Clears stored Spotify credentials from the database.\n\nThis function deletes the token from local storage, effectively logging the user out\nfrom this application's perspective.",
+        "description": "Clears stored Spotify credentials from the database.\\n\\nThis function deletes the token from local storage, effectively logging the user out\\nfrom this application's perspective.",
         "operationId": "logout_api_auth_logout_post",
         "parameters": [
           {
@@ -305,7 +425,7 @@
           "system"
         ],
         "summary": "Reload Logging Config",
-        "description": "Reloads the logging framework's configuration from the\n`logging_framework.yml` file at runtime.",
+        "description": "Reloads the logging framework's configuration from the\\n`logging_framework.yml` file at runtime.",
         "operationId": "reload_logging_config_api_system_logging_reload_post",
         "parameters": [
           {
@@ -1410,7 +1530,7 @@
           "tracks"
         ],
         "summary": "Get extended metadata for a track",
-        "description": "Retrieves extended metadata for a specific track.\n\n- **track_id**: The ID of the track to retrieve metadata for.",
+        "description": "Retrieves extended metadata for a specific track.\\n\\n- **track_id**: The ID of the track to retrieve metadata for.",
         "operationId": "get_track_metadata_api_tracks__track_id__metadata_get",
         "parameters": [
           {
@@ -1451,7 +1571,7 @@
           "tracks"
         ],
         "summary": "Update extended metadata for a track",
-        "description": "Updates extended metadata for a specific track.\n\n- **track_id**: The ID of the track to update.\n- **meta**: A `MetadataUpdate` object with the fields to update.",
+        "description": "Updates extended metadata for a specific track.\\n\\n- **track_id**: The ID of the track to update.\\n- **meta**: A `MetadataUpdate` object with the fields to update.",
         "operationId": "patch_track_metadata_api_tracks__track_id__metadata_patch",
         "parameters": [
           {
@@ -1658,7 +1778,7 @@
           "sync"
         ],
         "summary": "Trigger Sync",
-        "description": "Triggers a global synchronization job.\nIn a real app, this would be a background task.",
+        "description": "Triggers a global synchronization job.\\nIn a real app, this would be a background task.",
         "operationId": "trigger_sync_api_sync_trigger_post",
         "parameters": [
           {
@@ -2670,7 +2790,7 @@
             "anyOf": [
               {
                 "type": "integer",
-                "exclusiveMinimum": 0.0
+                "exclusiveMinimum": 0
               },
               {
                 "type": "null"
@@ -3629,7 +3749,7 @@
             "anyOf": [
               {
                 "type": "integer",
-                "exclusiveMinimum": 0.0
+                "exclusiveMinimum": 0
               },
               {
                 "type": "null"
@@ -3831,3 +3951,6 @@
     }
   }
 }
+```
+
+</details>

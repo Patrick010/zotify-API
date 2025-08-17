@@ -6,7 +6,7 @@ from zotify_api.services.deps import get_provider
 from zotify_api.providers.base import BaseProvider
 from typing import Literal
 
-router = APIRouter(prefix="/search")
+router = APIRouter(prefix="/search", tags=["search"])
 
 def get_feature_flags():
     return {

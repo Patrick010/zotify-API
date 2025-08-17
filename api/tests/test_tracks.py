@@ -112,6 +112,19 @@ def test_get_metadata_success(mock_get_metadata, client, mock_provider):
     mock_get_metadata.assert_called_with(["track1"], provider=mock_provider)
 
 
+def test_get_extended_metadata(client):
+    response = client.get("/api/tracks/abc123/metadata")
+    assert response.status_code == 200
+    assert "title" in response.json()
+
+
+def test_patch_extended_metadata(client):
+    update_data = {"mood": "Energetic", "rating": 5}
+    response = client.patch("/api/tracks/abc123/metadata", json=update_data)
+    assert response.status_code == 200
+    assert response.json()["status"] == "success"
+
+
 @patch("zotify_api.services.tracks_service.get_tracks_metadata_from_spotify", new_callable=AsyncMock)
 def test_get_metadata_spotify_error(mock_get_metadata, client, mock_provider):
     # Simulate an error from the service layer (e.g., Spotify is down)

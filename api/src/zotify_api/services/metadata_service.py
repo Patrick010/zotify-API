@@ -22,7 +22,7 @@ class MetadataService:
             track_metadata[track_id] = {"title": f"Track {track_id}"}
         for k, v in meta.model_dump(exclude_unset=True).items():
             track_metadata[track_id][k] = v
-        return {"status": "updated", "track_id": track_id}
+        return {"status": "success", "track_id": track_id}
 
     def _reset_data(self):
         global track_metadata

@@ -66,6 +66,7 @@ from fastapi import Request
 from typing import Optional
 from zotify_api.globals import app_start_time
 from zotify_api.schemas.system import SystemUptime, SystemEnv
+from zotify_api.schemas.generic import StandardResponse
 from zotify_api.config import settings
 
 
@@ -79,20 +80,22 @@ def get_human_readable_uptime(seconds):
     minutes, seconds = divmod(rem, 60)
     return f"{int(days)}d {int(hours)}h {int(minutes)}m {int(seconds)}s"
 
-@router.get("/uptime", response_model=SystemUptime)
+@router.get("/uptime", response_model=StandardResponse[SystemUptime])
 def get_uptime():
     """ Returns uptime in seconds and human-readable format. """
     uptime_seconds = time.time() - app_start_time.timestamp()
-    return SystemUptime(
+    uptime_data = SystemUptime(
         uptime_seconds=uptime_seconds,
         uptime_human=get_human_readable_uptime(uptime_seconds)
     )
+    return {"data": uptime_data}
 
-@router.get("/env", response_model=SystemEnv)
+@router.get("/env", response_model=StandardResponse[SystemEnv])
 def get_env():
     """ Returns a safe subset of environment info """
-    return SystemEnv(
+    env_data = SystemEnv(
         version=settings.version,
         python_version=sys.version,
         platform=platform.system(),
     )
+    return {"data": env_data}

@@ -25,10 +25,10 @@ class NotificationsService:
     def get_notifications(self, user_id: str) -> List[Dict[str, Any]]:
         return self.user_service.get_notifications(user_id)
 
-    def mark_notification_as_read(self, notification_id: str) -> None:
-        log.info(f"Marking notification {notification_id} as read")
-        self.user_service.mark_notification_as_read(notification_id)
-        log.info(f"Notification {notification_id} marked as read")
+    def mark_notification_as_read(self, notification_id: str, read: bool = True) -> None:
+        log.info(f"Setting notification {notification_id} read status to {read}")
+        self.user_service.mark_notification_as_read(notification_id, read)
+        log.info(f"Notification {notification_id} read status set to {read}")
 
 def get_notifications_service(
     user_service: UserService = Depends(get_user_service),

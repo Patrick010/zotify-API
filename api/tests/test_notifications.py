@@ -20,7 +20,7 @@ def test_create_notification(notifications_service_override, monkeypatch):
     app.dependency_overrides[user_service.get_user_service] = notifications_service_override
     response = client.post("/api/notifications", headers={"X-API-Key": "test_key"}, json={"user_id": "user1", "message": "Test message"})
     assert response.status_code == 200
-    assert response.json()["message"] == "Test message"
+    assert response.json()["data"]["message"] == "Test message"
     app.dependency_overrides = {}
 
 def test_get_notifications(notifications_service_override, monkeypatch):
@@ -29,18 +29,18 @@ def test_get_notifications(notifications_service_override, monkeypatch):
     client.post("/api/notifications", headers={"X-API-Key": "test_key"}, json={"user_id": "user1", "message": "Test message"})
     response = client.get("/api/notifications/user1")
     assert response.status_code == 200
-    assert len(response.json()) == 1
-    assert response.json()[0]["message"] == "Test message"
+    assert len(response.json()["data"]) == 1
+    assert response.json()["data"][0]["message"] == "Test message"
     app.dependency_overrides = {}
 
 def test_mark_notification_as_read(notifications_service_override, monkeypatch):
     monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
     app.dependency_overrides[user_service.get_user_service] = notifications_service_override
     create_response = client.post("/api/notifications", headers={"X-API-Key": "test_key"}, json={"user_id": "user1", "message": "Test message"})
-    notification_id = create_response.json()["id"]
+    notification_id = create_response.json()["data"]["id"]
     response = client.patch(f"/api/notifications/{notification_id}", headers={"X-API-Key": "test_key"}, json={"read": True})
     assert response.status_code == 204
 
-    notifications = client.get("/api/notifications/user1").json()
+    notifications = client.get("/api/notifications/user1").json()["data"]
     assert notifications[0]["read"] is True
     app.dependency_overrides = {}

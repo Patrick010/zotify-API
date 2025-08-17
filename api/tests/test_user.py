@@ -41,28 +41,28 @@ def test_get_user_profile(user_service_override):
     app.dependency_overrides[user_service.get_user_service] = user_service_override
     response = client.get("/api/user/profile")
     assert response.status_code == 200
-    assert response.json()["name"] == "Test User"
+    assert response.json()["data"]["name"] == "Test User"
     app.dependency_overrides = {}
 
 def test_get_user_liked(user_service_override):
     app.dependency_overrides[user_service.get_user_service] = user_service_override
     response = client.get("/api/user/liked")
     assert response.status_code == 200
-    assert response.json()["items"] == ["track1", "track2"]
+    assert response.json()["data"] == ["track1", "track2"]
     app.dependency_overrides = {}
 
 def test_sync_user_liked(user_service_override):
     app.dependency_overrides[user_service.get_user_service] = user_service_override
     response = client.post("/api/user/sync_liked")
     assert response.status_code == 200
-    assert response.json()["status"] == "ok"
+    assert response.json()["data"]["status"] == "ok"
     app.dependency_overrides = {}
 
 def test_get_user_history(user_service_override):
     app.dependency_overrides[user_service.get_user_service] = user_service_override
     response = client.get("/api/user/history")
     assert response.status_code == 200
-    assert response.json()["items"] == ["track3", "track4"]
+    assert response.json()["data"] == ["track3", "track4"]
     app.dependency_overrides = {}
 
 def test_delete_user_history(user_service_override):
@@ -76,14 +76,14 @@ def test_update_user_profile(user_service_override):
     update_data = {"name": "New Name"}
     response = client.patch("/api/user/profile", json=update_data)
     assert response.status_code == 200
-    assert response.json()["name"] == "New Name"
+    assert response.json()["data"]["name"] == "New Name"
     app.dependency_overrides = {}
 
 def test_get_user_preferences(user_service_override):
     app.dependency_overrides[user_service.get_user_service] = user_service_override
     response = client.get("/api/user/preferences")
     assert response.status_code == 200
-    assert response.json()["theme"] == "dark"
+    assert response.json()["data"]["theme"] == "dark"
     app.dependency_overrides = {}
 
 def test_update_user_preferences(user_service_override):
@@ -91,5 +91,5 @@ def test_update_user_preferences(user_service_override):
     update_data = {"theme": "light"}
     response = client.patch("/api/user/preferences", json=update_data)
     assert response.status_code == 200
-    assert response.json()["theme"] == "light"
+    assert response.json()["data"]["theme"] == "light"
     app.dependency_overrides = {}

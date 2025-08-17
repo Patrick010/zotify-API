@@ -2,12 +2,14 @@ from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile, File
 from zotify_api.services.db import get_db_engine
 from zotify_api.services import tracks_service
 from zotify_api.schemas.tracks import CreateTrackModel, UpdateTrackModel, TrackResponseModel, TrackMetadataRequest, TrackMetadataResponse
+from zotify_api.schemas.metadata import MetadataUpdate, MetadataResponse, MetadataPatchResponse
+from zotify_api.services.metadata_service import MetadataService, get_metadata_service
 from zotify_api.services.auth import require_admin_api_key
 from typing import List, Any
 from zotify_api.providers.base import BaseProvider
 from zotify_api.services.deps import get_provider
 
-router = APIRouter(prefix="/tracks")
+router = APIRouter(prefix="/tracks", tags=["tracks"])
 
 @router.get("", response_model=dict)
 def list_tracks(limit: int = Query(25, ge=1, le=100), offset: int = 0, q: str | None = None, engine: Any = Depends(get_db_engine)):
@@ -51,10 +53,44 @@ async def upload_track_cover(track_id: str, cover_image: UploadFile = File(...),
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/metadata", response_model=TrackMetadataResponse, dependencies=[Depends(require_admin_api_key)])
-async def get_metadata(request: TrackMetadataRequest, provider: BaseProvider = Depends(get_provider)):
+async def get_tracks_metadata(request: TrackMetadataRequest, provider: BaseProvider = Depends(get_provider)):
     """ Returns metadata for all given tracks in one call. """
     if not request.track_ids:
         return TrackMetadataResponse(metadata=[])
 
     metadata = await tracks_service.get_tracks_metadata_from_spotify(request.track_ids, provider=provider)
     return TrackMetadataResponse(metadata=metadata)
+
+@router.get(
+    "/{track_id}/metadata",
+    response_model=MetadataResponse,
+    summary="Get extended metadata for a track"
+)
+def get_track_metadata(
+    track_id: str,
+    metadata_service: MetadataService = Depends(get_metadata_service)
+):
+    """
+    Retrieves extended metadata for a specific track.
+
+    - **track_id**: The ID of the track to retrieve metadata for.
+    """
+    return metadata_service.get_metadata(track_id)
+
+@router.patch(
+    "/{track_id}/metadata",
+    response_model=MetadataPatchResponse,
+    summary="Update extended metadata for a track"
+)
+def patch_track_metadata(
+    track_id: str,
+    meta: MetadataUpdate,
+    metadata_service: MetadataService = Depends(get_metadata_service)
+):
+    """
+    Updates extended metadata for a specific track.
+
+    - **track_id**: The ID of the track to update.
+    - **meta**: A `MetadataUpdate` object with the fields to update.
+    """
+    return metadata_service.patch_metadata(track_id, meta)

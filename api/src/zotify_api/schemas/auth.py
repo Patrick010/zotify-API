@@ -16,3 +16,6 @@ class SpotifyCallbackPayload(BaseModel):
 
 class CallbackResponse(BaseModel):
     status: str
+
+class OAuthLoginResponse(BaseModel):
+    auth_url: str
