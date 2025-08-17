@@ -56,10 +56,36 @@ This section lists documents that are specific to the API's implementation, oper
 
 This section lists the official supporting modules of the Zotify Platform.
 
-| Module | Maintainer | Repository Path | Status | Description |
-|---|---|---|---|---|
-| **Snitch** | Jules | [`snitch/`](./snitch/) | Conceptual | A planned Go-based helper application to manage OAuth callbacks for CLI clients. The design and planning documents are complete. |
-| **Gonk-TestUI** | Jules | [`gonk-testUI/`](./gonk-testUI/) | Active | A Flask and JavaScript-based web UI for developer testing and interaction with the Zotify API. |
+### 3.1. Snitch Module
+
+A planned Go-based helper application to manage OAuth callbacks for CLI clients. The design and planning documents are complete.
+
+| Document | Location | Description |
+|---|---|---|
+| **README** | [`snitch/README.md`](../snitch/README.md) | An overview of the Snitch module, a local OAuth callback listener in Go designed to handle headless authentication for the Zotify API. |
+| **Architecture** | [`snitch/docs/ARCHITECTURE.md`](../snitch/docs/ARCHITECTURE.md) | Details the architecture of the Snitch module, focusing on its Zero Trust security model with end-to-end payload encryption for the OAuth callback. |
+| **Installation Guide** | [`snitch/docs/INSTALLATION.md`](../snitch/docs/INSTALLATION.md) | A guide on how to install, configure, run, and build the Snitch module from source, including prerequisites and troubleshooting. |
+| **Milestones** | [`snitch/docs/MILESTONES.md`](../snitch/docs/MILESTONES.md) | A document for tracking key project milestones and events for the Snitch module's development. |
+| **Modules** | [`snitch/docs/MODULES.md`](../snitch/docs/MODULES.md) | An overview of the internal Go packages within the Snitch module, including the `cmd` entrypoint and the `listener` core logic. |
+| **Phases** | [`snitch/docs/PHASES.md`](../snitch/docs/PHASES.md) | The phased development plan for the Snitch subproject. |
+| **Project Plan** | [`snitch/docs/PROJECT_PLAN.md`](../snitch/docs/PROJECT_PLAN.md) | The project plan for Snitch, outlining the problem it solves, its integration with the main API, security constraints, and phased development plan. |
+| **Secure Callback Design** | [`snitch/docs/PHASE_2_SECURE_CALLBACK.md`](../snitch/docs/PHASE_2_SECURE_CALLBACK.md) | A superseded design document for the Snitch secure callback, now replaced by the Zero Trust model. |
+| **Status** | [`snitch/docs/STATUS.md`](../snitch/docs/STATUS.md) | A live status document tracking the progress of the Snitch subproject against its development phases. |
+| **Test Runbook** | [`snitch/docs/TEST_RUNBOOK.md`](../snitch/docs/TEST_RUNBOOK.md) | A runbook for testing the Snitch module, covering both automated unit tests and manual end-to-end testing procedures. |
+| **User Manual** | [`snitch/docs/USER_MANUAL.md`](../snitch/docs/USER_MANUAL.md) | A manual for end-users explaining the purpose of the Snitch helper application and how it works within the OAuth 2.0 authentication flow. |
+| **Zero Trust Design** | [`snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md`](../snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md) | The design specification for a Zero Trust secure callback flow for Snitch, using JWTs and asymmetric cryptography to protect the OAuth code. |
+
+### 3.2. Gonk-TestUI Module
+
+A Flask and JavaScript-based web UI for developer testing and interaction with the Zotify API.
+
+| Document | Location | Description |
+|---|---|---|
+| **README** | [`gonk-testUI/README.md`](../gonk-testUI/README.md) | The main README for the Gonk Test UI, a standalone developer tool for testing the Zotify API, including setup and usage instructions. |
+| **Architecture** | [`gonk-testUI/docs/ARCHITECTURE.md`](../gonk-testUI/docs/ARCHITECTURE.md) | An overview of the `gonk-testUI` architecture, detailing the Flask backend, dynamic frontend, and `sqlite-web` integration. |
+| **Changelog** | [`gonk-testUI/docs/CHANGELOG.md`](../gonk-testUI/docs/CHANGELOG.md) | A changelog for the `gonk-testUI` module, documenting notable changes for each version. |
+| **Contributing Guide** | [`gonk-testUI/docs/CONTRIBUTING.md`](../gonk-testUI/docs/CONTRIBUTING.md) | A standard contributing guide outlining the development process for making contributions to the `gonk-testUI` module. |
+| **User Manual** | [`gonk-testUI/docs/USER_MANUAL.md`](../gonk-testUI/docs/USER_MANUAL.md) | A detailed user manual for the `gonk-testUI`, explaining how to set up, configure, and use its features for API testing and database browsing. |
 
 ---
 
