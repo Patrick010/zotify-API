@@ -142,6 +142,13 @@ This section is for reference and should not be considered current.
 | **Archived Project Plan HLD** | [`archive/docs/projectplan/HLD_Zotify_API.md`](./archive/docs/projectplan/HLD_Zotify_API.md) |
 | **Archived Project Plan LLD** | [`archive/docs/projectplan/LLD_18step_plan_Zotify_API.md`](./archive/docs/projectplan/LLD_18step_plan_Zotify_API.md) |
 | **Archived Project Plan Security** | [`archive/docs/projectplan/security.md`](./archive/docs/projectplan/security.md) |
+| **Archived PP Admin Key Mitigation** | [`archive/docs/projectplan/admin_api_key_mitigation.md`](./archive/docs/projectplan/admin_api_key_mitigation.md) |
+| **Archived PP Admin Key Risk** | [`archive/docs/projectplan/admin_api_key_security_risk.md`](./archive/docs/projectplan/admin_api_key_security_risk.md) |
+| **Archived PP Doc Maintenance** | [`archive/docs/projectplan/doc_maintenance.md`](./archive/docs/projectplan/doc_maintenance.md) |
+| **Archived PP Privacy Compliance** | [`archive/docs/projectplan/privacy_compliance.md`](./archive/docs/projectplan/privacy_compliance.md) |
+| **Archived PP Spotify Audit** | [`archive/docs/projectplan/spotify_capability_audit.md`](./archive/docs/projectplan/spotify_capability_audit.md) |
+| **Archived PP Spotify Blueprint** | [`archive/docs/projectplan/spotify_fullstack_capability_blueprint.md`](./archive/docs/projectplan/spotify_fullstack_capability_blueprint.md) |
+| **Archived PP Spotify Gap Report** | [`archive/docs/projectplan/spotify_gap_alignment_report.md`](./archive/docs/projectplan/spotify_gap_alignment_report.md) |
 
 ---
 
