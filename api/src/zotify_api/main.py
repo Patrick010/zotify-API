@@ -12,7 +12,11 @@ from .core.error_handler import (
     register_fastapi_hooks,
     ErrorHandlerConfig,
 )
-from .services.logging_service import get_logging_service
+import yaml
+from pydantic import ValidationError
+from .core.logging_framework import log_event
+from .core.logging_framework.schemas import LoggingFrameworkConfig
+from .core.logging_framework.service import get_logging_service as get_flexible_logging_service
 
 from zotify_api.database.session import Base, engine
 
@@ -44,6 +48,26 @@ app.add_middleware(
 
 app.add_middleware(RequestIDMiddleware)
 
+def initialize_logging_framework():
+    """ Loads config and initializes the new flexible logging framework. """
+    try:
+        with open("api/logging_framework.yml", "r") as f:
+            config_data = yaml.safe_load(f)
+        validated_config = LoggingFrameworkConfig(**config_data)
+
+        logging_service = get_flexible_logging_service()
+        logging_service.load_config(validated_config)
+        log_event(
+            "Flexible logging framework initialized from config.",
+            level="INFO",
+            destinations=["default_console"] # Assumes a console sink named 'default_console' exists
+        )
+    except (FileNotFoundError, ValidationError, yaml.YAMLError) as e:
+        # Fallback to basic logging if the framework fails to initialize
+        log.error(f"FATAL: Could not initialize flexible logging framework: {e}")
+        log.error("Logging will be degraded. Please check logging_framework.yml.")
+
+
 @app.on_event("startup")
 def startup_event():
     """Application startup event handler."""
@@ -53,11 +77,8 @@ def startup_event():
     # Register FastAPI exception handlers
     register_fastapi_hooks(app=app, handler=error_handler)
 
-    # Initialize the logging service
-    logging_service = get_logging_service()
-    logging_service.log(
-        "INFO", "Application startup complete. Logging service successfully integrated."
-    )
+    # Initialize the new flexible logging framework
+    initialize_logging_framework()
 
 from zotify_api.routes import config, network
 

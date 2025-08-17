@@ -1,0 +1,32 @@
+# Configuration for the Flexible Logging Framework
+logging:
+  default_level: INFO
+  sinks:
+    - name: "default_console"
+      type: "console"
+      level: "INFO"
+
+    - name: "debug_file"
+      type: "file"
+      level: "DEBUG"
+      path: "/app/api/logs/debug.log"  # Using an absolute path within the container
+      max_bytes: 10485760 # 10 MB
+      backup_count: 3
+
+    - name: "critical_webhook"
+      type: "webhook"
+      level: "CRITICAL"
+      url: "https://example.com/webhook-for-critical-errors"
+
+triggers:
+  - event: "user_login_failed"
+    action: "log_security_event"
+    details:
+      level: "WARNING"
+      destinations: ["debug_file"]
+
+  - event: "database_connection_error"
+    action: "send_alert"
+    details:
+      level: "CRITICAL"
+      destinations: ["critical_webhook"]

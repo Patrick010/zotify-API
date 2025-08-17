@@ -26,7 +26,8 @@ dependencies = [
     "pydantic-settings",
     "sqlalchemy",
     "python-multipart",
-    "pyyaml"
+    "pyyaml",
+    "pytest-mock"
 ]
 
 [tool.pytest.ini_options]

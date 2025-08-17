@@ -1,7 +1,47 @@
-from fastapi import APIRouter, HTTPException, Depends
+import yaml
+from pydantic import ValidationError
+from fastapi import APIRouter, HTTPException, Depends, status
+
 from zotify_api.services.auth import require_admin_api_key
+from zotify_api.core.logging_framework.schemas import LoggingFrameworkConfig
+from zotify_api.core.logging_framework.service import get_logging_service
 
 router = APIRouter(prefix="/system", tags=["system"], dependencies=[Depends(require_admin_api_key)])
+
+@router.post("/logging/reload", status_code=status.HTTP_202_ACCEPTED)
+def reload_logging_config():
+    """
+    Reloads the logging framework's configuration from the
+    `logging_framework.yml` file at runtime.
+    """
+    try:
+        with open("api/logging_framework.yml", "r") as f:
+            config_data = yaml.safe_load(f)
+    except FileNotFoundError:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="logging_framework.yml not found.",
+        )
+    except yaml.YAMLError:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Error parsing logging_framework.yml.",
+        )
+
+    try:
+        validated_config = LoggingFrameworkConfig(**config_data)
+    except ValidationError as e:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail=f"Invalid configuration schema: {e}",
+        )
+
+    # Get the service and load the new config
+    logging_service = get_logging_service()
+    logging_service.load_config(validated_config)
+
+    return {"status": "success", "message": "Logging framework configuration reloaded."}
+
 
 @router.get("/status")
 def get_system_status():
