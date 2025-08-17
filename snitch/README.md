@@ -10,10 +10,10 @@ The primary purpose of Snitch is to solve the Spotify authentication redirect pr
 
 Snitch is intended to be run as a standalone process during the authentication flow. It is configured via an environment variable.
 
--   **`SNITCH_API_CALLBACK_URL`**: This environment variable must be set to the full URL of the backend API's callback endpoint.
+-   **`SNITCH_API_CALLBACK_URL`**: This environment variable must be set to the **full URL** (including `http://...`) of the backend API's callback endpoint.
     -   Example: `export SNITCH_API_CALLBACK_URL="http://localhost:8000/api/auth/spotify/callback"`
 
-When started, Snitch listens on `http://localhost:4381/login`. After receiving a callback from Spotify, it will make a `POST` request with a JSON body (`{"code": "...", "state": "..."}`) to the configured callback URL.
+When started, Snitch listens on `http://localhost:4381/login`. After receiving a callback from Spotify, it will make a `GET` request to the configured callback URL with the `code` and `state` as query parameters.
 
 ## Security Enhancements (Phase 2)
 

@@ -49,12 +49,12 @@ The main application is responsible for starting the OAuth flow. A simplified ex
 3.  The browser opens a popup to the Spotify authorization URL. Note that the `redirect_uri` is hardcoded to `http://127.0.0.1:4381/login`, which is where Snitch is listening.
 4.  The user logs in and grants permission on the Spotify page.
 5.  Spotify redirects the user's browser to `http://127.0.0.1:4381/login?code=...&state=...`.
-6.  Snitch "catches" this request, extracts the `code` and `state`, and securely forwards them to the main Zotify API.
+6.  Snitch "catches" this request, extracts the `code` and `state`, and securely forwards them to the main Zotify API via a `GET` request.
 7.  The browser window will then show a success or failure message and can be closed.
 
 ## 3. Configuration
 
 Snitch is configured with a single environment variable:
 
--   **`SNITCH_API_CALLBACK_URL`**: This **must** be set to the full URL of your main application's callback endpoint. Snitch will send the code it receives to this URL.
+-   **`SNITCH_API_CALLBACK_URL`**: This **must** be set to the **full URL** (including `http://...`) of your main application's callback endpoint. Snitch will send the code it receives to this URL as query parameters.
     -   **Example:** `export SNITCH_API_CALLBACK_URL="http://localhost:8000/api/auth/spotify/callback"`

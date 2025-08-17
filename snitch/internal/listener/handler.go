@@ -1,8 +1,6 @@
 package listener
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
 	"io"
 	"log"
@@ -66,18 +64,12 @@ func LoginHandler(logger *log.Logger, apiCallbackURL string) http.HandlerFunc {
 		// The 'code' is sensitive and should not be logged. We log its length as a proxy.
 		logger.Printf("event: callback.handoff.started, details: {code_len: %d}", len(code))
 
-		body, err := json.Marshal(map[string]string{
-			"code":  code,
-			"state": state,
-		})
-		if err != nil {
-			writeGenericError(w, logger, "callback.handoff.failure", map[string]interface{}{"reason": "json_marshal_error", "error": err.Error()})
-			return
-		}
+		// Construct the URL with query parameters
+		url := fmt.Sprintf("%s?code=%s&state=%s", apiCallbackURL, code, state)
 
-		resp, err := http.Post(apiCallbackURL, "application/json", bytes.NewBuffer(body))
+		resp, err := http.Get(url)
 		if err != nil {
-			writeGenericError(w, logger, "callback.handoff.failure", map[string]interface{}{"reason": "post_request_error", "error": err.Error()})
+			writeGenericError(w, logger, "callback.handoff.failure", map[string]interface{}{"reason": "get_request_error", "error": err.Error()})
 			return
 		}
 		defer resp.Body.Close()
