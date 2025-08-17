@@ -27,7 +27,7 @@ This session involved a multi-stage investigation that revealed the initial prem
     *   A new canonical `ENDPOINTS.md` file was created and populated with a complete list of API endpoints generated from the application's OpenAPI schema.
     *   Several critical documents were restored from the project archive.
     *   The `PROJECT_REGISTRY.md` was given a final, exhaustive audit and updated to include every single project document.
-    *   All "living documentation" files (`ACTIVITY.md`, `CURRENT_STATE.md`, `AUDIT-PHASE-4.md`) have been updated to reflect all work performed.
+    *   All "living documentation" files (`ACTIVITY.md`, `CURRENT_STATE.md`, `AUDIT-PHASE-4.md`) have been updated to reflect all work performed, and their formatting has been made consistent.
     *   A new design document for a future "Flexible Logging Framework" was created as requested.
 
 ## 4. Known Issues & Blockers

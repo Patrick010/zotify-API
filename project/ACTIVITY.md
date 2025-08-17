@@ -6,6 +6,23 @@ This document provides a live, chronological log of all major tasks undertaken a
 
 ---
 
+## ACT-028: Correct Audit File Formatting
+
+**Date:** 2025-08-17
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To perform a final corrective action on `AUDIT-PHASE-4.md` to ensure its structure is consistent with other log files like `ACTIVITY.md`.
+
+### Outcome
+- **`AUDIT-PHASE-4.md`:** The file was re-written to place the most recent session reports at the top of the document, with sections ordered from newest to oldest, while preserving the internal content of each section.
+
+### Related Documents
+- `project/audit/AUDIT-PHASE-4.md`
+
+---
+
 ## ACT-027: Final Investigation of Test Environment
 
 **Date:** 2025-08-17
