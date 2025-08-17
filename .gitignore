@@ -166,3 +166,7 @@ snitch/bin/
 
 # Ignore spotify tokens file
 api/src/storage/spotify_tokens.json
+
+# Ignore API storage directory and database files
+api/storage/
+api/*.db

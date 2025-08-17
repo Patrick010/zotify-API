@@ -9,58 +9,74 @@ Before you begin, ensure you have the following installed on your system:
 -   **Python 3.10 or greater**
 -   **pip**: The Python package installer.
 -   **Git**: For cloning the repository.
--   **FFmpeg**: (Optional, required for some download functionality) A cross-platform solution to record, convert and stream audio and video.
 
 ## Installation
 
-This installation guide is for developers who want to run the API from the source code.
+This installation guide is for developers and operators who want to run the API from the source code.
 
 ### 1. Clone the Repository
 
 First, clone the project repository from GitHub to your local machine:
 ```bash
-git clone <repository_url>
-cd <repository_directory>
+git clone https://github.com/Patrick010/zotify-API.git
+cd zotify-API
 ```
 
 ### 2. Install Dependencies
 
-The API's dependencies are listed in `api/pyproject.toml`. You can install them using `pip`. It is recommended to use a Python virtual environment.
+The API's dependencies are listed in `api/pyproject.toml`. It is highly recommended to use a Python virtual environment.
 
-From the root of the project directory, run:
 ```bash
+# Create and activate a virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
+# Install dependencies from within the project root
 pip install -e ./api
 ```
-This command installs all the necessary packages for the API to run.
 
 ### 3. Configure the Environment
 
-The API now requires a database to function. You must configure the database connection string via an environment variable.
+The API requires several environment variables to be set. The recommended way to manage these is with a `.env` file located in the `api/` directory. The application will automatically load this file on startup.
 
-Create a `.env` file in the `api/` directory. This file will hold your environment-specific settings.
-
-**Example `.env` file:**
+**Example `.env` file for Production:**
 ```
-# Use a SQLite database located in the api/storage/ directory
+APP_ENV="production"
+ADMIN_API_KEY="your_super_secret_admin_key"
 DATABASE_URI="sqlite:///storage/zotify.db"
 ```
-The application will automatically load this file on startup.
 
 ### 4. Running the API
 
-A startup script is provided to manage the application's lifecycle. This script ensures that all necessary checks are performed before starting the server.
+The application is run using `uvicorn`, a high-performance ASGI server.
 
-Before running the script, make sure it is executable:
+To run the server, execute the following command from the `/api` directory:
 ```bash
-chmod +x scripts/start.sh
+uvicorn zotify_api.main:app --host 0.0.0.0 --port 8000
 ```
 
-Now, you can run the API server using the script:
+For development, you can enable hot-reloading:
 ```bash
-./scripts/start.sh
+uvicorn zotify_api.main:app --reload
 ```
-The API server will start, and it will be accessible at **`http://localhost:8000`**.
 
-## Developer Tools (`gonk-testUI`)
+## Running the Test Suite
 
-The project includes a standalone developer UI for testing the API. For instructions on how to install and run it, please see the `README.md` file inside the `gonk-testUI/` directory.
+Follow these steps to run the test suite.
+
+### 1. Create the Storage Directory
+
+The API requires a `storage` directory for its database and other files during tests. From the root of the project, create it inside the `api` directory:
+```bash
+mkdir api/storage
+```
+
+### 2. Run Pytest
+
+The test suite requires the `APP_ENV` environment variable to be set to `test`. You must set this variable when you run `pytest`.
+
+From inside the `api` directory, run:
+```bash
+APP_ENV=test python3 -m pytest
+```
+This will discover and run all tests in the `tests/` directory.

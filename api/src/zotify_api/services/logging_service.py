@@ -1,30 +1,67 @@
-"""
-Logging service module.
+import logging
+import yaml
+import importlib
+from typing import List, Dict, Any
+from zotify_api.core.logging_handlers.base import BaseLogHandler
 
-This module contains the business logic for the logging subsystem.
-The functions in this module are designed to be called from the API layer.
-"""
-from typing import Dict, Any
+log = logging.getLogger(__name__)
 
 class LoggingService:
-    def __init__(self, log_config: Dict[str, Any]):
-        self._log_config = log_config
+    """
+    Centralized logging service that dispatches log messages to registered handlers.
+    Handlers are dynamically loaded from a configuration file.
+    """
 
-    def get_logging_config(self) -> Dict[str, Any]:
-        return self._log_config
+    def __init__(self, config_path: str):
+        self.handlers: List[BaseLogHandler] = self._load_handlers_from_config(config_path)
+        log.info(f"LoggingService initialized with {len(self.handlers)} handlers.")
 
-    def update_logging_config(self, update_data: Dict[str, Any]) -> Dict[str, Any]:
-        if "level" in update_data and update_data["level"] not in ["CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"]:
-            raise ValueError("Invalid log level")
-        for k, v in update_data.items():
-            self._log_config[k] = v
-        return self._log_config
+    def _load_handlers_from_config(self, config_path: str) -> List[BaseLogHandler]:
+        """Loads and instantiates handlers from a YAML configuration file."""
+        handlers = []
+        try:
+            with open(config_path, 'r') as f:
+                config = yaml.safe_load(f)
+        except Exception:
+            log.exception(f"Failed to load logging config file: {config_path}")
+            return []
 
+        handler_configs = config.get("handlers", [])
+        for handler_conf in handler_configs:
+            try:
+                handler_type = handler_conf.pop("type")
+                module_name = f"zotify_api.core.logging_handlers.{handler_type}"
+                class_name = "".join(word.capitalize() for word in handler_type.split('_'))
+
+                module = importlib.import_module(module_name)
+                handler_class = getattr(module, class_name)
+
+                # Pass the rest of the config as kwargs to the handler's constructor
+                instance = handler_class(**handler_conf)
+                handlers.append(instance)
+                log.debug(f"Successfully loaded and instantiated handler: {class_name}")
+            except Exception:
+                log.exception(f"Failed to load handler with config: {handler_conf}")
+
+        return handlers
+
+    def log(self, level: str, message: str, **kwargs):
+        """
+        Logs a message by dispatching it to all relevant handlers.
+        """
+        log_record = {
+            "level": level.upper(),
+            "message": message,
+            **kwargs
+        }
+        for handler in self.handlers:
+            if handler.can_handle(level):
+                try:
+                    handler.emit(log_record)
+                except Exception:
+                    log.exception(f"Failed to execute log handler: {handler.__class__.__name__}")
+
+# Singleton instance logic will be added later in main.py or deps.py
 def get_logging_service():
-    # This is a placeholder for a real implementation that would get the logging config from a persistent storage.
-    log_config = {
-        "level": "INFO",
-        "log_to_file": False,
-        "log_file": None
-    }
-    return LoggingService(log_config)
+    # This is a placeholder for a real implementation
+    return LoggingService(config_path="logging_config.yml")

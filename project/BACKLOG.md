@@ -60,25 +60,30 @@ All new tasks added to this backlog **must** use the following template.
 
 ### High Priority
 
-- **Task ID:** `LOG-TASK-06`
-- **Source:** `project/LOGGING_TRACEABILITY_MATRIX.md#REQ-LOG-06`
-- **Priority:** `[HIGH]`
-- **Dependencies:** `LOG-TASK-01`
-- **Description:** `Integrate the LoggingService throughout the existing Zotify API codebase, replacing old logging mechanisms.`
-- **Acceptance Criteria:**
-  - `[ ]` All `print()` statements and old loggers are removed.
-  - `[ ]` All modules use the injected `LoggingService`.
-- **Estimated Effort:** `Large`
-
-- **Task ID:** `LOG-TASK-07`
-- **Source:** `project/LOGGING_TRACEABILITY_MATRIX.md#REQ-LOG-07`
-- **Priority:** `[HIGH]`
+- **Task ID:** `REM-TASK-01`
+- **Source:** `project/audit/AUDIT-PHASE-4.md`
+- **Priority:** `HIGH`
 - **Dependencies:** `None`
-- **Description:** `Update PID.md and ROADMAP.md to reflect the new logging system mandate and roadmap phase.`
+- **Description:** `Correct key project files and documentation to align with the codebase reality and fix the developer environment. This addresses the key findings of the initial audit.`
 - **Acceptance Criteria:**
-  - `[ ]` `PID.md` is updated.
-  - `[ ]` `ROADMAP.md` is updated.
-- **Estimated Effort:** `Small`
+  - `[ ]` `api/storage/` and `api/*.db` are added to `.gitignore`.
+  - `[ ]` `api/docs/system/INSTALLATION.md` is updated with the missing setup steps (`mkdir api/storage`, set `APP_ENV=development`).
+  - `[ ]` The `ACT-015` entry in `project/ACTIVITY.md` is corrected to state that the Generic Error Handling Module was implemented.
+  - `[ ]` The error handling system is refactored to allow for pluggable "actions" in a new `actions` directory.
+  - `[ ]` `api/docs/manuals/ERROR_HANDLING_GUIDE.md` is updated to document the new action system.
+- **Estimated Effort:** `Medium`
+
+- **Task ID:** `LOG-TASK-01`
+- **Source:** `project/LOGGING_SYSTEM_DESIGN.md`
+- **Priority:** `HIGH`
+- **Dependencies:** `REM-TASK-01`
+- **Description:** `Implement the new, extendable logging system as defined in the official design document, replacing the old placeholder implementation.`
+- **Acceptance Criteria:**
+  - `[ ]` The old placeholder logging files (`logging_service.py`, its route, and its tests) are deleted.
+  - `[ ]` The new `LoggingService` and its handlers are implemented precisely as defined in `project/LOGGING_SYSTEM_DESIGN.md`.
+  - `[ ]` A new `api/docs/manuals/LOGGING_GUIDE.md` is created and `project/PROJECT_REGISTRY.md` is updated.
+  - `[ ]` Unit tests for the new service are written and the entire test suite passes.
+- **Estimated Effort:** `Large`
 
 - **Task ID:** `TD-TASK-01`
 - **Source:** `project/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md#phase-4a`
@@ -126,6 +131,8 @@ All new tasks added to this backlog **must** use the following template.
   - `[ ]` The CI workflow is updated to fail the build and block merges if any Super-Lint checks fail.
 - **Estimated Effort:** `Small`
 
+### Medium Priority
+
 - **Task ID:** `SL-TASK-03`
 - **Source:** `project/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md#phase-4c`
 - **Priority:** `[MEDIUM]`
@@ -154,75 +161,6 @@ All new tasks added to this backlog **must** use the following template.
   - `[ ]` A `.pre-commit-config.yaml` is created and configured.
   - `[ ]` Developer documentation is updated with setup instructions.
 - **Estimated Effort:** `Medium`
-
-### Medium Priority
-
-- **Task ID:** `LOG-TASK-01`
-- **Source:** `project/LOGGING_TRACEABILITY_MATRIX.md#REQ-LOG-01`
-- **Priority:** `[MEDIUM]`
-- **Dependencies:** `None`
-- **Description:** `Implement the core LoggingService class and its dependency injection.`
-- **Acceptance Criteria:**
-  - `[ ]` `LoggingService` is implemented as a singleton.
-  - `[ ]` Service is injectable into FastAPI routes.
-- **Estimated Effort:** `Small`
-
-- **Task ID:** `LOG-TASK-02`
-- **Source:** `project/LOGGING_TRACEABILITY_MATRIX.md#REQ-LOG-02`
-- **Priority:** `[MEDIUM]`
-- **Dependencies:** `LOG-TASK-01`
-- **Description:** `Implement the BaseLogHandler interface and the handler registration mechanism.`
-- **Acceptance Criteria:**
-  - `[ ]` Abstract base class `BaseLogHandler` is created.
-  - `[ ]` `LoggingService` can register and dispatch to handlers from `logging_config.yml`.
-- **Estimated Effort:** `Medium`
-
-- **Task ID:** `LOG-TASK-03`
-- **Source:** `project/LOGGING_TRACEABILITY_MATRIX.md#REQ-LOG-03`
-- **Priority:** `[MEDIUM]`
-- **Dependencies:** `LOG-TASK-02`
-- **Description:** `Implement the ConsoleHandler for system/debug logs.`
-- **Acceptance Criteria:**
-  - `[ ]` `ConsoleHandler` writes formatted logs to standard output.
-- **Estimated Effort:** `Small`
-
-- **Task ID:** `LOG-TASK-04`
-- **Source:** `project/LOGGING_TRACEABILITY_MATRIX.md#REQ-LOG-04`
-- **Priority:** `[MEDIUM]`
-- **Dependencies:** `LOG-TASK-02`
-- **Description:** `Implement the JsonAuditHandler for structured audit logs.`
-- **Acceptance Criteria:**
-  - `[ ]` `JsonAuditHandler` writes structured JSON logs to a file with all mandatory fields.
-- **Estimated Effort:** `Medium`
-
-- **Task ID:** `LOG-TASK-05`
-- **Source:** `project/LOGGING_TRACEABILITY_MATRIX.md#REQ-LOG-05`
-- **Priority:** `[MEDIUM]`
-- **Dependencies:** `LOG-TASK-02`
-- **Description:** `Implement the DatabaseJobHandler for asynchronous job logging.`
-- **Acceptance Criteria:**
-  - `[ ]` `DatabaseJobHandler` writes job status updates to the `job_logs` table.
-- **Estimated Effort:** `Medium`
-
-- **Task ID:** `LOG-TASK-06`
-- **Source:** `project/LOGGING_TRACEABILITY_MATRIX.md#REQ-LOG-06`
-- **Priority:** `[HIGH]`
-- **Dependencies:** `LOG-TASK-01`
-- **Description:** `Integrate the LoggingService throughout the existing Zotify API codebase, replacing old logging mechanisms.`
-- **Acceptance Criteria:**
-  - `[ ]` All `print()` statements and old loggers are removed.
-  - `[ ]` All modules use the injected `LoggingService`.
-- **Estimated Effort:** `Large`
-
-- **Task ID:** `LOG-TASK-07`
-- **Source:** `project/LOGGING_TRACEABILITY_MATRIX.md#REQ-LOG-07`
-- **Priority:** `[HIGH]`
-- **Dependencies:** `None`
-- **Description:** `Update PID.md and ROADMAP.md to reflect the new logging system mandate and roadmap phase.`
-- **Acceptance Criteria:**
-  - `[ ]` `PID.md` is updated.
-  - `[ ]` `ROADMAP.md` is updated.
-- **Estimated Effort:** `Small`
 
 ### Low Priority
 

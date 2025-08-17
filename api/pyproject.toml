@@ -25,7 +25,8 @@ dependencies = [
     "respx",
     "pydantic-settings",
     "sqlalchemy",
-    "python-multipart"
+    "python-multipart",
+    "pyyaml"
 ]
 
 [tool.pytest.ini_options]

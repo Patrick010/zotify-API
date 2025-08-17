@@ -7,6 +7,7 @@ from sqlalchemy import (
     ForeignKey,
     Table,
     Integer,
+    Text,
 )
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
@@ -61,5 +62,15 @@ class DownloadJob(Base):
     track_id = Column(String, nullable=False)
     status = Column(String, nullable=False, default="pending")
     progress = Column(Float, default=0.0)
-    created_at = Column(DateTime, server_default=func.now())
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
     error_message = Column(String, nullable=True)
+
+class JobLog(Base):
+    __tablename__ = "job_logs"
+    job_id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    job_type = Column(String, nullable=False)
+    status = Column(String, nullable=False)
+    progress = Column(Integer, default=0)
+    details = Column(Text)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())

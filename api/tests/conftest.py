@@ -59,3 +59,47 @@ def mock_provider(monkeypatch):
     app.dependency_overrides[get_provider] = lambda: fake_provider
     yield fake_provider
     del app.dependency_overrides[get_provider]
+
+
+import os
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from zotify_api.database.session import Base, get_db
+
+SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"
+
+engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
+
+@pytest.fixture(scope="function")
+def test_db_session():
+    """
+    Pytest fixture to set up a new in-memory SQLite database for each test function.
+    It creates a single connection for the test's duration, creates all tables on
+    that connection, and yields a session bound to it. This pattern is crucial
+    for ensuring the in-memory database persists across the test function.
+    """
+    # Import models here to ensure they are registered with Base.metadata
+    # before create_all is called.
+    from zotify_api.database import models
+
+    # A single connection is held for the duration of the test
+    connection = engine.connect()
+
+    # Begin a transaction
+    transaction = connection.begin()
+
+    # Create the tables on this connection
+    Base.metadata.create_all(bind=connection)
+
+    # Bind the session to this specific connection
+    TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=connection)
+    db = TestingSessionLocal()
+
+    try:
+        yield db
+    finally:
+        db.close()
+        # Rollback the transaction to ensure test isolation
+        transaction.rollback()
+        # Close the connection
+        connection.close()

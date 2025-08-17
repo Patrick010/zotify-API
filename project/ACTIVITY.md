@@ -6,6 +6,76 @@ This document provides a live, chronological log of all major tasks undertaken a
 
 ---
 
+## ACT-020: Refactor Error Handler for Extensibility
+
+**Date:** 2025-08-17
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To refactor the error handling system to allow for pluggable "actions," making it more modular and easier to extend, as defined in `REM-TASK-01`.
+
+### Outcome
+- **`TriggerManager` Refactored:**
+    - The `TriggerManager` in `triggers.py` was modified to dynamically discover and load action modules from a new `actions/` subdirectory.
+    - The hardcoded `log_critical` and `webhook` actions were moved into their own modules within the new `actions/` package.
+- **Documentation Updated:**
+    - `api/docs/manuals/ERROR_HANDLING_GUIDE.md` was updated to document the new, simpler process for adding custom actions.
+- **Verification:**
+    - The unit tests for the error handler were successfully run to confirm the refactoring did not introduce regressions.
+
+### Related Documents
+- `api/src/zotify_api/core/error_handler/triggers.py`
+- `api/src/zotify_api/core/error_handler/actions/`
+- `api/docs/manuals/ERROR_HANDLING_GUIDE.md`
+
+---
+
+## ACT-019: Remediate Environment and Documentation
+
+**Date:** 2025-08-17
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To correct key project files to fix the developer environment and align documentation with the codebase's reality, as defined in `REM-TASK-01`.
+
+### Outcome
+- **`.gitignore`:** Updated to include `api/storage/` and `api/*.db` to prevent local database files and storage from being committed.
+- **`api/docs/system/INSTALLATION.md`:** Updated to include the previously undocumented manual setup steps (`mkdir api/storage`, `APP_ENV=development`) required to run the test suite.
+- **`project/ACTIVITY.md`:** The `ACT-015` entry was corrected to accurately reflect that the Error Handling Module was, in fact, implemented and not lost.
+
+### Related Documents
+- `.gitignore`
+- `api/docs/system/INSTALLATION.md`
+- `project/ACTIVITY.md`
+
+---
+
+## ACT-018: Formalize Backlog for Remediation and Implementation
+
+**Date:** 2025-08-17
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To formally define and prioritize the next phase of work by updating the project backlog, based on the verified findings of the Phase 4 Audit.
+
+### Outcome
+- **Backlog Prioritization:**
+    - Obsolete `LOG-TASK-` entries related to the initial design phase were removed from `project/BACKLOG.md`.
+    - Two new, high-priority tasks were created to drive the implementation phase:
+        - `REM-TASK-01`: A comprehensive task to remediate documentation, fix the developer environment, and refactor the error handler for extensibility.
+        - `LOG-TASK-01`: A comprehensive task to implement the new logging system as per the approved design.
+- This provides a clear, actionable starting point for the next developer.
+
+### Related Documents
+- `project/BACKLOG.md`
+- `project/audit/AUDIT-PHASE-4.md`
+- `project/CURRENT_STATE.md`
+
+---
+
 ## ACT-017: Design Extendable Logging System
 
 **Date:** 2025-08-14
@@ -62,7 +132,7 @@ To recover from a critical environment instability that caused tool commands, in
 ## ACT-015: Design Generic Error Handling Module
 
 **Date:** 2025-08-15
-**Status:** 🟡 In Progress (Implementation Lost)
+**Status:** ✅ Done
 **Assignee:** Jules
 
 ### Objective
@@ -76,7 +146,7 @@ To design a robust, centralized, and extensible error handling module for the en
     - New developer and operator guides were created (`ERROR_HANDLING_GUIDE.md`, `OPERATOR_GUIDE.md`).
 - **Implementation Status:**
     - The core module skeleton and unit tests were implemented.
-    - **All implementation work was lost during the environment reset (see ACT-016).** The design and documentation work is preserved in session history and will be re-implemented.
+    - **Correction (2025-08-17):** The initial report that the implementation was lost was incorrect. The implementation was present and verified as fully functional during a subsequent audit.
 
 ### Related Documents
 - All created/updated documents mentioned above.

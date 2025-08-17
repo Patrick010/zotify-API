@@ -1,6 +1,6 @@
 # Developer Guide: Generic Error Handling Module
 
-**Status:** Proposed
+**Status:** Implemented
 **Author:** Jules
 
 ## 1. Introduction
@@ -35,13 +35,7 @@ async def some_function():
 
 The module is designed to be extensible without modifying its core code.
 
-### 4.1. Adding Custom Error Mappings
-
-To map a specific exception type to a custom error code and message, you can add an entry to the (planned) error mapping configuration.
-
-*(Note: The exact mechanism for this is TBD, but it will likely involve a dictionary in a configuration file.)*
-
-### 4.2. Adding Custom Triggers and Actions
+### 4.1. Adding Custom Triggers
 
 The trigger/action system allows you to automate responses to specific errors. This is configured entirely through the `error_handler_config.yaml` file.
 
@@ -59,10 +53,40 @@ triggers:
         message: "Database integrity violation detected!"
 ```
 
-**To add a new action type:**
-1.  Open `api/src/zotify_api/core/error_handler/triggers.py`.
-2.  Create a new function that performs the desired action (e.g., `send_sms_alert(config)`).
-3.  Register this new action type in the `TriggerManager`.
+### 4.2. Adding a New Action Type
+
+The system is now fully extensible. Adding a new action requires no modification of the core `TriggerManager`.
+
+1.  Create a new Python file in the `src/zotify_api/core/error_handler/actions/` directory. The name of the file will be the `type` of your action (e.g., `send_sms.py` would create an action of type `send_sms`).
+2.  In that file, create a class that inherits from `zotify_api.core.error_handler.actions.base.BaseAction`. The class name should be the PascalCase version of the filename (e.g., `SendSms`).
+3.  Implement the `run(self, context: dict)` method. The `context` dictionary contains the original exception and the action configuration from the YAML file.
+
+**Example `.../actions/send_sms.py`:**
+```python
+import logging
+from .base import BaseAction
+
+log = logging.getLogger(__name__)
+
+class SendSms(BaseAction):
+    def run(self, context: dict):
+        """
+        A custom action to send an SMS notification.
+        """
+        exc = context.get("exception")
+        action_config = context.get("action_config") # Details from the YAML
+
+        phone_number = action_config.get("phone_number")
+        if not phone_number:
+            log.error("SMS action is missing 'phone_number' in config.")
+            return
+
+        message = f"Critical error detected: {exc}"
+        log.info(f"Sending SMS to {phone_number}: {message}")
+        # In a real implementation, you would use a service like Twilio here.
+```
+
+The `TriggerManager` will automatically discover and load your new action at startup. You can then use the action `type` (e.g., `send_sms`) in your `error_handler_config.yaml`.
 
 ## 5. Best Practices
 

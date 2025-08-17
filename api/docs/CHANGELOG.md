@@ -7,6 +7,19 @@ and this project adheres to a custom versioning scheme for pre-releases.
 
 ## [Unreleased]
 
+### Added
+- **New Logging System**: Implemented a new, robust logging service that is fully configurable via `logging_config.yml`.
+  - Includes a `ConsoleHandler` for standard output.
+  - Includes a `JsonAuditHandler` for writing structured audit logs to a file.
+  - Includes a `DatabaseJobHandler` for persisting the status of long-running jobs to the database.
+
+### Changed
+- **Error Handler Extensibility**: Refactored the error handling module's action system. Actions are now discovered dynamically from files in the `actions/` directory, making the system fully extensible without modifying core code.
+
+### Fixed
+- **Test Suite Stability**: Resolved persistent `OperationalError` failures in the download-related tests by refactoring the faulty, module-level database setup in `test_download.py` to use the standardized, function-scoped fixtures from `conftest.py`.
+- **Test Environment Consistency**: Corrected a critical import-order issue related to SQLAlchemy model registration by ensuring the `models.py` module is loaded before `Base.metadata.create_all()` is called within the test database fixture. This fixed `no such table` errors for all tests.
+
 ---
 ## [0.1.0] - 2025-08-12
 
@@ -15,7 +28,7 @@ This is the initial documented release, capturing the state of the Zotify API af
 ### Added
 
 -   **API Feature Set:**
-    -   Spotify Authentication via OAuth2, including token refresh and secure callback handling.
+    -   Spotify Authentication via OAuth2, including token refresh, and secure callback handling.
     -   Full CRUD (Create, Read, Update, Delete) operations for Playlists.
     -   Full CRUD operations for Tracks (database-only, metadata is separate).
     -   Persistent Download Queue system to manage and track download jobs.
