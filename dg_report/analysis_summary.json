@@ -1,0 +1,21 @@
+{
+  "total_files": 97,
+  "by_category": {
+    "project": 48,
+    "snitch": 21,
+    "api-docs": 17,
+    "gonk": 11
+  },
+  "has_endpoints_md": false,
+  "unique_endpoints_detected": 350,
+  "unique_paths_detected": 334,
+  "missing_required_files": [
+    "docs/reference/ENDPOINTS.md",
+    "project/audit/TRACEABILITY_MATRIX.md",
+    "project/COMPLETE_DOCS_FOR_ANALYSIS.json"
+  ],
+  "missing_references_count": 183,
+  "snitch_mentions": 41,
+  "gonk_mentions": 24,
+  "logging_mentions": 30
+}
