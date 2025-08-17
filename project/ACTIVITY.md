@@ -6,6 +6,25 @@ This document provides a live, chronological log of all major tasks undertaken a
 
 ---
 
+## ACT-024: Final Documentation Correction
+
+**Date:** 2025-08-17
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To perform a final corrective action to ensure all documentation is complete and accurate, specifically addressing omissions in `ENDPOINTS.md` and `PROJECT_REGISTRY.md`.
+
+### Outcome
+- **`ENDPOINTS.md`:** The file was completely overwritten with a comprehensive list of all API endpoints generated directly from the application's code, ensuring its accuracy and completeness.
+- **`PROJECT_REGISTRY.md`:** The registry was updated one final time to include all remaining missing documents from the `project/` directory and its subdirectories, based on an exhaustive list provided by the user. The registry is now believed to be 100% complete.
+
+### Related Documents
+- `project/ENDPOINTS.md`
+- `project/PROJECT_REGISTRY.md`
+
+---
+
 ## ACT-023: Restore Archived Documentation
 
 **Date:** 2025-08-17
