@@ -24,16 +24,15 @@ The project is now in a stable state with a fully passing test suite (135/135 te
 
 ---
 
-## 4. Session Report (2025-08-17): Final Documentation Overhaul
+## 4. Session Report (2025-08-17): Final Documentation Overhaul & Correction
 
 This session focused on resolving all remaining documentation gaps and ensuring the project's documentation is fully aligned with the codebase.
 
 ### 4.1. Master Endpoint Reference
-- A new canonical endpoint reference, `project/ENDPOINTS.md`, was created to address a compliance gap and serve as a single source of truth for all API endpoints.
+- A new canonical endpoint reference, `project/ENDPOINTS.md`, was created and then completely rewritten using data generated from the application's OpenAPI schema to ensure its accuracy and completeness.
 
 ### 4.2. Documentation Restoration
 - Several critical documents (`full_api_reference.md`, `PRIVACY_COMPLIANCE.md`, `phase5-ipc.md`) were restored from the project archive and placed in their correct locations.
-- The `project/ENDPOINTS.md` file was updated to link to these restored documents.
 
 ### 4.3. Project Registry Audit
 - A full audit of the `project/PROJECT_REGISTRY.md` file was conducted.
