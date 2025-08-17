@@ -6,6 +6,50 @@ This document provides a live, chronological log of all major tasks undertaken a
 
 ---
 
+## ACT-023: Restore Archived Documentation
+
+**Date:** 2025-08-17
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To restore critical documentation from the project archive and fix broken links in the new `ENDPOINTS.md` file.
+
+### Outcome
+- Restored `full_api_reference.md` to `api/docs/reference/`.
+- Restored `privacy_compliance.md` to `api/docs/system/` after reading it from the `projectplan` archive.
+- Restored `phase5-ipc.md` to `snitch/docs/`.
+- Updated `project/ENDPOINTS.md` to point to the correct locations for all restored documents.
+- Updated `project/PROJECT_REGISTRY.md` to include all newly restored files.
+
+### Related Documents
+- `project/ENDPOINTS.md`
+- `project/PROJECT_REGISTRY.md`
+- `api/docs/reference/full_api_reference.md`
+- `api/docs/system/PRIVACY_COMPLIANCE.md`
+- `snitch/docs/phase5-ipc.md`
+
+---
+
+## ACT-022: Create Master Endpoint Reference
+
+**Date:** 2025-08-17
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To address a compliance gap by creating a canonical `ENDPOINTS.md` document, which serves as a single source of truth for all API endpoints.
+
+### Outcome
+- Created `project/ENDPOINTS.md` with the provided draft content.
+- Registered the new document in `project/PROJECT_REGISTRY.md`.
+
+### Related Documents
+- `project/ENDPOINTS.md`
+- `project/PROJECT_REGISTRY.md`
+
+---
+
 ## ACT-021: Verify and Integrate Existing Logging System
 
 **Date:** 2025-08-17
