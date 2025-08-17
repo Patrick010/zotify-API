@@ -13,7 +13,10 @@ This document serves as the master file, or single source of truth, for tracking
 
 | Document | Location | Description |
 |---|---|---|
+| **Project Registry** | [`PROJECT_REGISTRY.md`](./PROJECT_REGISTRY.md) | This document, the master index for all project artifacts. |
 | **Onboarding Guide** | [`ONBOARDING.md`](./ONBOARDING.md) | The primary entry point and guide for new developers to get up to speed on the project. |
+| **Current State** | [`CURRENT_STATE.md`](./CURRENT_STATE.md) | A live snapshot of the project's most recent status, goals, and pending work. |
+| **Live Activity Log** | [`ACTIVITY.md`](./ACTIVITY.md) | A live, chronological log of all major tasks and audit activities. |
 | **Project Brief** | [`PROJECT_BRIEF.md`](./PROJECT_BRIEF.md) | A high-level summary of the project's purpose, scope, and justification (PRINCE2). |
 | **Project Initiation Document (PID)** | [`PID.md`](./PID.md) | The formal 'living document' that defines the project's scope, plans, and controls (PRINCE2). |
 | **High-Level Design (HLD)** | [`HIGH_LEVEL_DESIGN.md`](./HIGH_LEVEL_DESIGN.md) | Outlines the high-level architecture, scope, and principles. |
@@ -25,7 +28,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **Lessons Learnt Log** | [`LESSONS-LEARNT.md`](./LESSONS-LEARNT.md) | A log of key takeaways and insights from each project phase. |
 | **Logging System Design** | [`LOGGING_SYSTEM_DESIGN.md`](./LOGGING_SYSTEM_DESIGN.md) | The detailed architectural design for the centralized logging system. |
 | **Logging Traceability Matrix** | [`LOGGING_TRACEABILITY_MATRIX.md`](./LOGGING_TRACEABILITY_MATRIX.md) | Maps logging system requirements to design documents and backlog tasks. |
-| **Project Backlog** | [`BACKLOG.md`](./BACKLOG.md) | A tactical backlog of tasks managed by the formal qualification process defined in the PID. All tasks must conform to the template in this file. |
+| **Project Backlog** | [`BACKLOG.md`](./BACKLOG.md) | A tactical backlog of tasks managed by the formal qualification process defined in the PID. |
 | **Traceability Matrix** | [`TRACEABILITY_MATRIX.md`](./TRACEABILITY_MATRIX.md) | A live matrix mapping requirements from use cases and design docs to implementation and test status. |
 | **Use Cases** | [`USECASES.md`](./USECASES.md) | A collection of user-driven scenarios and requirements for the API. |
 | **Use Case Gap Analysis** | [`USECASES_GAP_ANALYSIS.md`](./USECASES_GAP_ANALYSIS.md) | An analysis of the gaps between the desired use cases and the current implementation. |
@@ -40,8 +43,6 @@ This document serves as the master file, or single source of truth, for tracking
 ## 3. API & Module Documentation
 
 ### 3.1. Core API Documentation
-This section lists documents that are specific to the API's implementation, operation, and usage.
-
 | Document | Location | Description |
 |---|---|---|
 | **Changelog** | [`api/docs/CHANGELOG.md`](../api/docs/CHANGELOG.md) | A log of all user-facing changes for each version. |
@@ -60,8 +61,6 @@ This section lists documents that are specific to the API's implementation, oper
 | **Privacy Compliance** | [`api/docs/system/PRIVACY_COMPLIANCE.md`](../api/docs/system/PRIVACY_COMPLIANCE.md) | An overview of how the Zotify API project complies with data protection laws like GDPR. |
 
 ### 3.2. Snitch Module Documentation
-A planned Go-based helper application to manage OAuth callbacks for CLI clients.
-
 | Document | Location | Description |
 |---|---|---|
 | **README** | [`snitch/README.md`](../snitch/README.md) | An overview of the Snitch module. |
@@ -71,7 +70,7 @@ A planned Go-based helper application to manage OAuth callbacks for CLI clients.
 | **Modules** | [`snitch/docs/MODULES.md`](../snitch/docs/MODULES.md) | An overview of the internal Go packages within the Snitch module. |
 | **Phases** | [`snitch/docs/PHASES.md`](../snitch/docs/PHASES.md) | The phased development plan for the Snitch subproject. |
 | **Project Plan** | [`snitch/docs/PROJECT_PLAN.md`](../snitch/docs/PROJECT_PLAN.md) | The project plan for Snitch, outlining the problem it solves and its development plan. |
-| **Secure Callback Design** | [`snitch/docs/PHASE_2_SECURE_CALLBACK.md`](../snitch/docs/PHASE_2_SECURE_CALLBACK.md) | A superseded design document for the Snitch secure callback. |
+| **Secure Callback Design (Superseded)** | [`snitch/docs/PHASE_2_SECURE_CALLBACK.md`](../snitch/docs/PHASE_2_SECURE_CALLBACK.md) | A superseded design document for the Snitch secure callback. |
 | **Status** | [`snitch/docs/STATUS.md`](../snitch/docs/STATUS.md) | A live status document tracking the development progress of the Snitch subproject. |
 | **Test Runbook** | [`snitch/docs/TEST_RUNBOOK.md`](../snitch/docs/TEST_RUNBOOK.md) | A runbook for testing the Snitch module. |
 | **User Manual** | [`snitch/docs/USER_MANUAL.md`](../snitch/docs/USER_MANUAL.md) | A manual for end-users explaining the purpose of the Snitch helper application. |
@@ -79,8 +78,6 @@ A planned Go-based helper application to manage OAuth callbacks for CLI clients.
 | **IPC Communication** | [`snitch/docs/phase5-ipc.md`](../snitch/docs/phase5-ipc.md) | Outlines the secure IPC mechanism between the Zotify API and Snitch. |
 
 ### 3.3. Gonk-TestUI Module Documentation
-A Flask and JavaScript-based web UI for developer testing and interaction with the Zotify API.
-
 | Document | Location | Description |
 |---|---|---|
 | **README** | [`gonk-testUI/README.md`](../gonk-testUI/README.md) | The main README for the Gonk Test UI developer tool. |
@@ -92,13 +89,11 @@ A Flask and JavaScript-based web UI for developer testing and interaction with t
 ---
 
 ## 4. Audit & Alignment Documents
-
 | Document | Location | Description |
 |---|---|---|
 | **Audit README** | [`audit/README.md`](./audit/README.md) | An overview of the audit process and documentation. |
 | **First Audit** | [`audit/FIRST_AUDIT.md`](./audit/FIRST_AUDIT.md) | The initial audit report for the project. |
 | **HLD/LLD Alignment Plan** | [`audit/HLD_LLD_ALIGNMENT_PLAN.md`](./audit/HLD_LLD_ALIGNMENT_PLAN.md) | The phased plan for bringing design documents into alignment with the codebase. |
-| **Live Activity Log** | [`ACTIVITY.md`](./ACTIVITY.md) | A live, chronological log of all major tasks and audit activities. |
 | **Audit Log: Phase 1** | [`audit/AUDIT-phase-1.md`](./audit/AUDIT-phase-1.md) | Log of activities and findings from Phase 1 of the alignment plan. |
 | **Audit Log: Phase 2** | [`audit/AUDIT-phase-2.md`](./audit/AUDIT-phase-2.md) | Log of activities and findings from Phase 2 of the alignment plan. |
 | **Audit Log: Phase 3** | [`audit/AUDIT-PHASE-3.md`](./audit/AUDIT-PHASE-3.md) | Log of activities and findings from Phase 3 of the alignment plan. |
@@ -109,25 +104,49 @@ A Flask and JavaScript-based web UI for developer testing and interaction with t
 | **Audit Prompt** | [`audit/audit-prompt.md`](./audit/audit-prompt.md) | The prompt used for the audit process. |
 | **Previous HLD/LLD Plan** | [`audit/HLD_LLD_ALIGNMENT_PLAN_previous.md`](./audit/HLD_LLD_ALIGNMENT_PLAN_previous.md) | An archived version of the HLD/LLD Alignment Plan. |
 
-
 ---
 
 ## 5. Completion Reports
-
-This section tracks the completion reports generated at the end of major development phases.
-
 | Document | Location | Description |
 |---|---|---|
 | **Reports README** | [`reports/README.md`](./reports/README.md) | An overview of the completion reports. |
-| **2025-08-11 Consolidated** | [`reports/20250811-CONSOLIDATED-COMPLETION-REPORT.md`](./reports/20250811-CONSOLIDATED-COMPLETION-REPORT.md) | A consolidated completion report for phases 2 and 3 of the audit. |
+| **Report: 2025-08-07** | [`reports/20250807-doc-clarification-completion-report.md`](./reports/20250807-doc-clarification-completion-report.md) | Completion report for documentation clarification. |
+| **Report: 2025-08-07** | [`reports/20250807-spotify-blueprint-completion-report.md`](./reports/20250807-spotify-blueprint-completion-report.md) | Completion report for the Spotify blueprint. |
+| **Report: 2025-08-08** | [`reports/20250808-comprehensive-auth-and-docs-update-report.md`](./reports/20250808-comprehensive-auth-and-docs-update-report.md) | Completion report for auth and docs update. |
+| **Report: 2025-08-08** | [`reports/20250808-oauth-unification-completion-report.md`](./reports/20250808-oauth-unification-completion-report.md) | Completion report for OAuth unification. |
+| **Report: 2025-08-09** | [`reports/20250809-api-endpoints-completion-report.md`](./reports/20250809-api-endpoints-completion-report.md) | Completion report for API endpoints. |
+| **Report: 2025-08-09** | [`reports/20250809-phase5-endpoint-refactor-report.md`](./reports/20250809-phase5-endpoint-refactor-report.md) | Completion report for Phase 5 endpoint refactor. |
+| **Report: 2025-08-09** | [`reports/20250809-phase5-final-cleanup-report.md`](./reports/20250809-phase5-final-cleanup-report.md) | Completion report for Phase 5 final cleanup. |
+| **Report: 2025-08-09** | [`reports/20250809-phase5-playlist-implementation-report.md`](./reports/20250809-phase5-playlist-implementation-report.md) | Completion report for Phase 5 playlist implementation. |
+| **Report: 2025-08-09** | [`reports/20250809-phase5-search-cleanup-report.md`](./reports/20250809-phase5-search-cleanup-report.md) | Completion report for Phase 5 search cleanup. |
+| **Report: 2025-08-11** | [`reports/20250811-AUDIT-PHASE2-FINALIZATION-REPORT.md`](./reports/20250811-AUDIT-PHASE2-FINALIZATION-REPORT.md) | Finalization report for Audit Phase 2. |
+| **Report: 2025-08-11** | [`reports/20250811-CONSOLIDATED-COMPLETION-REPORT.md`](./reports/20250811-CONSOLIDATED-COMPLETION-REPORT.md) | A consolidated completion report for phases 2 and 3 of the audit. |
 
 ---
 
-## 6. Change Log
+## 6. Archived Documents
+This section is for reference and should not be considered current.
+| Document | Location |
+|---|---|
+| **Archived README** | [`archive/README.md`](./archive/README.md) |
+| **Archived API Changelog** | [`archive/api/docs/CHANGELOG.md`](./archive/api/docs/CHANGELOG.md) |
+| **Archived API Contributing** | [`archive/api/docs/CONTRIBUTING.md`](./archive/api/docs/CONTRIBUTING.md) |
+| **Archived API Database** | [`archive/api/docs/DATABASE.md`](./archive/api/docs/DATABASE.md) |
+| **Archived API Installation** | [`archive/api/docs/INSTALLATION.md`](./archive/api/docs/INSTALLATION.md) |
+| **Archived API Manual** | [`archive/api/docs/MANUAL.md`](./archive/api/docs/MANUAL.md) |
+| **Archived Docs Integration Checklist** | [`archive/docs/INTEGRATION_CHECKLIST.md`](./archive/docs/INTEGRATION_CHECKLIST.md) |
+| **Archived Docs Developer Guide** | [`archive/docs/developer_guide.md`](./archive/docs/developer_guide.md) |
+| **Archived Docs Operator Guide** | [`archive/docs/operator_guide.md`](./archive/docs/operator_guide.md) |
+| **Archived Docs Roadmap** | [`archive/docs/roadmap.md`](./archive/docs/roadmap.md) |
+| **Archived Zotify API Manual** | [`archive/docs/zotify-api-manual.md`](./archive/docs/zotify-api-manual.md) |
+| **Archived Project Plan HLD** | [`archive/docs/projectplan/HLD_Zotify_API.md`](./archive/docs/projectplan/HLD_Zotify_API.md) |
+| **Archived Project Plan LLD** | [`archive/docs/projectplan/LLD_18step_plan_Zotify_API.md`](./archive/docs/projectplan/LLD_18step_plan_Zotify_API.md) |
+| **Archived Project Plan Security** | [`archive/docs/projectplan/security.md`](./archive/docs/projectplan/security.md) |
 
+---
+
+## 7. Change Log
 | Date | Change | Author |
 |---|---|---|
 | 2025-08-11 | Initial creation of the project registry. | Jules |
-| 2025-08-11 | Updated LLD and Traceability Matrix for "Error Handling & Logging" alignment. | Jules |
-| 2025-08-11 | Updated LLD and Traceability Matrix for "Spotify Integration" alignment. | Jules |
 | 2025-08-17 | Comprehensive audit and update to include all project documentation. | Jules |
