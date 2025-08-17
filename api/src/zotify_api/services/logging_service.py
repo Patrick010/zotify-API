@@ -61,7 +61,15 @@ class LoggingService:
                 except Exception:
                     log.exception(f"Failed to execute log handler: {handler.__class__.__name__}")
 
-# Singleton instance logic will be added later in main.py or deps.py
+_logging_service_instance = None
+
 def get_logging_service():
-    # This is a placeholder for a real implementation
-    return LoggingService(config_path="logging_config.yml")
+    """
+    Initializes and returns a singleton instance of the LoggingService.
+    """
+    global _logging_service_instance
+    if _logging_service_instance is None:
+        # The config file is expected to be in the `api` directory,
+        # which is the root for the running application.
+        _logging_service_instance = LoggingService(config_path="logging_config.yml")
+    return _logging_service_instance

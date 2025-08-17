@@ -2,6 +2,7 @@ import pytest
 import yaml
 import json
 import sys
+import contextlib
 from io import StringIO
 from unittest.mock import patch, MagicMock, mock_open
 from zotify_api.services.logging_service import LoggingService
@@ -156,5 +157,3 @@ def test_database_job_handler(test_db_session):
         job = test_db_session.query(models.JobLog).filter(models.JobLog.job_id == "job-1").one()
         assert job.status == "COMPLETED"
         assert job.progress == 100
-
-import contextlib

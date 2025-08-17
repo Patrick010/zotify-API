@@ -5,7 +5,6 @@ from zotify_api.config import settings
 from zotify_api.routes import auth, metadata, cache, system, user, playlist, tracks, download, spotify, sync, search, webhooks, notifications
 from .globals import app_start_time
 from .middleware.request_id import RequestIDMiddleware
-from .logging_config import setup_logging
 import logging as py_logging
 from .core.error_handler import (
     initialize_error_handler,
@@ -13,10 +12,9 @@ from .core.error_handler import (
     register_fastapi_hooks,
     ErrorHandlerConfig,
 )
+from .services.logging_service import get_logging_service
 
 from zotify_api.database.session import Base, engine
-
-setup_logging()
 
 # Initialize and register the global error handler
 log = py_logging.getLogger(__name__)
@@ -48,8 +46,18 @@ app.add_middleware(RequestIDMiddleware)
 
 @app.on_event("startup")
 def startup_event():
+    """Application startup event handler."""
+    # Create database tables
     Base.metadata.create_all(bind=engine)
+
+    # Register FastAPI exception handlers
     register_fastapi_hooks(app=app, handler=error_handler)
+
+    # Initialize the logging service
+    logging_service = get_logging_service()
+    logging_service.log(
+        "INFO", "Application startup complete. Logging service successfully integrated."
+    )
 
 from zotify_api.routes import config, network
 
