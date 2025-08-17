@@ -1,44 +1,148 @@
-# Developer Guide
+# Zotify API - Developer Guide
 
-This guide provides instructions for setting up the Zotify API for local development and contributing to the project.
+This guide provides developers with the necessary information to run, test, and contribute to the Zotify API locally.
 
-## Getting Started
+---
 
-For a complete guide on how to install the project and run it for the first time, please see the [Installation Guide](./INSTALLATION.md).
+## 1. Local Development Setup
 
-In summary, the main steps are:
-1.  Clone the repository.
-2.  Install dependencies with `pip install -e ./api`.
-3.  Run the application with `./scripts/start.sh`.
+### Purpose
+To create a consistent and isolated local environment for developing and testing the Zotify API.
 
-By default, the application will create and use a SQLite database at `api/storage/zotify.db`. If you wish to use a different database, you can configure the `DATABASE_URI` environment variable before running the start script.
+### Prerequisites
+- Python 3.10+
+- `pip` for package installation
+- Git
+- An accessible database (SQLite is sufficient for local development)
 
-## Core Architecture
+### Setup Steps
 
-The Zotify API is built on a modern, service-oriented architecture using Python and FastAPI. Key architectural principles include:
+1.  **Clone the Repository**
+    \`\`\`bash
+    git clone https://github.com/Patrick010/zotify-API.git
+    cd zotify-API
+    \`\`\`
 
--   **Unified Database**: All application data is stored in a single, unified database managed by SQLAlchemy. This provides a consistent and scalable persistence layer. The database models are defined in `api/src/zotify_api/database/models.py`.
--   **Service Layer**: Business logic is encapsulated in stateless service functions. These services are responsible for interacting with the database via a dedicated CRUD layer.
--   **Provider Abstraction**: The application is being designed to be provider-agnostic. All interactions with external services (like Spotify) should be done through a provider interface layer.
+2.  **Install Dependencies**
+    It is crucial to use a virtual environment.
+    \`\`\`bash
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -e ./api
+    \`\`\`
 
-## API Endpoints
+3.  **Set Up Local Environment**
+    The application uses a `.env` file for configuration. Copy the example and fill in your details.
+    \`\`\`bash
+    # From the /api directory
+    cp .env.example .env
+    # Edit .env to set your local configuration.
+    nano .env
+    \`\`\`
+    **Required `.env` variables for local development:**
+    \`\`\`
+    APP_ENV="development"
+    ADMIN_API_KEY="dev_key"
+    DATABASE_URI="sqlite:///storage/zotify.db"
+    SPOTIFY_CLIENT_ID="your_spotify_client_id"
+    SPOTIFY_CLIENT_SECRET="your_spotify_client_secret"
+    SPOTIFY_REDIRECT_URI="http://127.0.0.1:8000/api/auth/spotify/callback"
+    \`\`\`
 
-The API provides a comprehensive set of endpoints for managing downloads, playlists, authentication, and more.
+4.  **Create Storage Directory & Database**
+    The application will create the database file on first run, but the directory must exist.
+    \`\`\`bash
+    # From the /api directory
+    mkdir -p storage
+    \`\`\`
 
-For a complete and up-to-date list of all available endpoints, their parameters, and their request/response schemas, please refer to the live OpenAPI schema, which is available at the `/openapi.json` endpoint of the running application.
+---
 
-The recommended way to explore and test the API is by using the **`gonk-testUI`** developer tool, which provides a user-friendly interface for interacting with all API endpoints.
+## 2. Running and Testing
 
-## Admin API Key
+### Purpose
+To run the API server locally with hot-reloading for active development and to execute the full test suite.
 
-Some administrative endpoints are protected and require an admin API key.
+### 2.1. Run the API Locally
+#### Command
+\`\`\`bash
+# Run from the /api directory
+uvicorn zotify_api.main:app --reload --host 127.0.0.1 --port 8000
+\`\`\`
+#### Expected Output
+\`\`\`
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [12345] using StatReload
+INFO:     Started server process [12347]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+\`\`\`
+#### Usage Notes
+- The interactive OpenAPI (Swagger) documentation is available at `http://127.0.0.1:8000/docs`. This is the best way to explore and test endpoints during development.
 
-To use these endpoints during development, you can set the `ADMIN_API_KEY` in your `api/.env` file:
-```
-ADMIN_API_KEY="your-secret-key"
-```
-When making requests to protected endpoints, include the API key in the `X-API-Key` header.
+### 2.2. Run the Test Suite
+#### Command
+\`\`\`bash
+# Run from the /api directory
+APP_ENV=test python3 -m pytest
+\`\`\`
+#### Usage Notes
+- `APP_ENV=test` is **required**. It configures the app to use an in-memory SQLite database and other test-specific settings, preventing interference with your development database.
 
-## Contributing
+---
 
-If you wish to contribute to the project, please start by reading the `CONTRIBUTING.md` file in the root of the project.
+## 3. Local API Interaction Examples
+
+### Purpose
+To provide practical `curl` examples for interacting with a locally running instance of the API.
+
+### 3.1. Health Check
+#### Command
+\`\`\`bash
+curl http://127.0.0.1:8000/api/health
+\`\`\`
+#### Expected Response
+\`\`\`json
+{
+  "status": "ok"
+}
+\`\`\`
+
+### 3.2. Add a Track to the Download Queue
+#### Command
+\`\`\`bash
+curl -X POST http://127.0.0.1:8000/api/download \
+  -H "X-API-Key: dev_key" \
+  -H "Content-Type: application/json" \
+  -d '{"track_ids": ["spotify:track:4cOdK2wGLETOMsV3oDPEhB"]}'
+\`\`\`
+#### Expected Response
+A JSON array with the created job object(s).
+\`\`\`json
+[
+  {
+    "job_id": "some-uuid-string",
+    "track_id": "spotify:track:4cOdK2wGLETOMsV3oDPEhB",
+    "status": "pending",
+    "progress": 0.0,
+    "created_at": "...",
+    "error_message": null
+  }
+]
+\`\`\`
+
+### 3.3. Check Download Queue Status
+#### Command
+\`\`\`bash
+curl -X GET "http://127.0.0.1:8000/api/download/status" -H "X-API-Key: dev_key"
+\`\`\`
+
+### Troubleshooting
+- **`ModuleNotFoundError: zotify_api`**: You are likely in the wrong directory. Ensure you run `uvicorn` and `pytest` from the `/api` directory.
+- **`401 Unauthorized`**: Ensure you are passing the `X-API-Key` header and that its value matches the `ADMIN_API_KEY` in your `.env` file.
+- **`500 Internal Server Error`**: Check the `uvicorn` server logs for a full traceback. This often points to a misconfiguration or a bug.
+
+### References
+- **API Documentation:** `http://127.0.0.1:8000/docs`
+- **Operator Manual:** `OPERATOR_MANUAL.md`
+- **Error Handling Guide:** `ERROR_HANDLING_GUIDE.md`
