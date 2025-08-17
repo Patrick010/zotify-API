@@ -50,6 +50,8 @@ This section lists documents that are specific to the API's implementation, oper
 | **Error Handling Design** | [`api/docs/system/ERROR_HANDLING_DESIGN.md`](../api/docs/system/ERROR_HANDLING_DESIGN.md) | The technical design specification for the Generic Error Handling Module, detailing its components, class structure, and integration strategy. |
 | **Installation Guide** | [`api/docs/system/INSTALLATION.md`](../api/docs/system/INSTALLATION.md) | A guide detailing the steps to install the Zotify API from source, including dependency installation and environment configuration for both production and testing. |
 | **System Requirements** | [`api/docs/system/REQUIREMENTS.md`](../api/docs/system/REQUIREMENTS.md) | Lists the system and software requirements for running the Zotify API and its related tools. |
+| **Full API Reference** | [`api/docs/reference/full_api_reference.md`](../api/docs/reference/full_api_reference.md) | A comprehensive, manually-created reference for all API endpoints. |
+| **Privacy Compliance** | [`api/docs/system/PRIVACY_COMPLIANCE.md`](../api/docs/system/PRIVACY_COMPLIANCE.md) | An overview of how the Zotify API project complies with data protection laws like GDPR. |
 
 ---
 
@@ -75,6 +77,7 @@ A planned Go-based helper application to manage OAuth callbacks for CLI clients.
 | **Test Runbook** | [`snitch/docs/TEST_RUNBOOK.md`](../snitch/docs/TEST_RUNBOOK.md) | A runbook for testing the Snitch module, covering both automated unit tests and manual end-to-end testing procedures. |
 | **User Manual** | [`snitch/docs/USER_MANUAL.md`](../snitch/docs/USER_MANUAL.md) | A manual for end-users explaining the purpose of the Snitch helper application and how it works within the OAuth 2.0 authentication flow. |
 | **Zero Trust Design** | [`snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md`](../snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md) | The design specification for a Zero Trust secure callback flow for Snitch, using JWTs and asymmetric cryptography to protect the OAuth code. |
+| **IPC Communication** | [`snitch/docs/phase5-ipc.md`](../snitch/docs/phase5-ipc.md) | Outlines the secure Inter-Process Communication (IPC) mechanism between the Zotify API and the Snitch helper application. |
 
 ### 3.2. Gonk-TestUI Module
 
