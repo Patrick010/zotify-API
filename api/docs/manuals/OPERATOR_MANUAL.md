@@ -1,124 +1,124 @@
-# Zotify API - Operator Manual
+# Zotify API - Operator's Manual
 
-This manual provides detailed, actionable guidance for deploying, configuring, and maintaining the Zotify API in a production environment.
+**Version:** 1.1
+**Date:** 2025-08-18
 
----
+## 1. Introduction
 
-## 1. Deployment Process
+This manual provides detailed, actionable guidance for deploying, configuring, and maintaining the Zotify API in a production or semi-production environment. It assumes you have a working knowledge of Linux system administration, process management, and networking.
 
-### Purpose
-This section outlines the complete process for deploying the Zotify API server from the source code. It covers everything from cloning the repository to running the application with a process manager for production use.
+## 2. Deployment
 
-### Command / Example
-A typical deployment consists of the following sequence of commands, executed from the server's command line:
-\`\`\`bash
-# 1. Clone the repository from GitHub
-git clone https://github.com/Patrick010/zotify-API.git
-cd zotify-API
+### 2.1. Initial Setup
 
-# 2. Set up a dedicated Python virtual environment to isolate dependencies
-python3 -m venv venv
-source venv/bin/activate
+The following steps will get the application code and dependencies installed on a fresh Debian/Ubuntu server.
 
-# 3. Install the application and its dependencies in editable mode
-pip install -e ./api
+1.  **Clone the Repository:**
+    ```bash
+    git clone https://github.com/Patrick010/zotify-API.git
+    cd zotify-API
+    ```
 
-# 4. Create required storage directories for the database and logs
-mkdir -p api/storage
+2.  **Install Dependencies:**
+    Use a virtual environment to isolate the application.
+    ```bash
+    python3 -m venv .venv
+    source .venv/bin/activate
+    pip install -e ./api
+    ```
 
-# 5. Create and populate the environment configuration file (see Configuration section)
-# nano api/.env
+### 2.2. Production Service (systemd)
 
-# 6. Run the application server using a process manager like systemd (see below)
-# For a quick foreground test, you can run uvicorn directly:
-# uvicorn zotify_api.main:app --host 127.0.0.1 --port 8000
-\`\`\`
+For a robust production deployment, it is essential to run the API as a managed service. The following is an example of a `systemd` service file.
 
-### Usage Notes
-- **User Permissions:** Ensure the user running the API has read/write permissions for the `api/storage` directory.
-- **Production Server:** For production, it is strongly recommended to run `uvicorn` behind a reverse proxy like Nginx and manage the process using `systemd`. This provides SSL termination, load balancing, and process resilience.
-- **Firewall:** Ensure the port the API runs on (e.g., 8000) is accessible from the reverse proxy, but not necessarily from the public internet.
+**Create the service file:**
+```bash
+sudo nano /etc/systemd/system/zotify-api.service
+```
 
----
+**Paste the following content:**
+```ini
+[Unit]
+Description=Zotify API Service
+After=network.target
 
-## 2. Uvicorn Process Management
+[Service]
+# Replace 'your_user' with the user you want to run the service as
+User=your_user
+Group=your_user
+# The working directory should be the /api folder
+WorkingDirectory=/path/to/zotify-API/api
+# The command to start the server. Note the absolute path to uvicorn in the venv.
+ExecStart=/path/to/zotify-API/.venv/bin/uvicorn zotify_api.main:app --host 127.0.0.1 --port 8000 --workers 4
+# Set environment variables here
+Environment="APP_ENV=production"
+Environment="ADMIN_API_KEY=your_super_secret_key"
+# Add other environment variables as needed
 
-### Purpose
-Run the Zotify API service using `uvicorn` for local development or production deployment.
+[Install]
+WantedBy=multi-user.target
+```
 
-### Command
-\`\`\`bash
-uvicorn zotify_api.main:app --host 127.0.0.1 --port 8000 --workers 4
-\`\`\`
+**Enable and start the service:**
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable zotify-api.service
+sudo systemctl start zotify-api.service
+sudo systemctl status zotify-api.service
+```
 
-### Parameters / Flags
-| Parameter/Flag        | Description                                                                                             | Notes                                                                                                                              |
-| --------------------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `zotify_api.main:app` | The Python import path to the FastAPI `app` instance.                                                   | A required positional argument for uvicorn.                                                                                        |
-| `--host <ip>`         | The IP address to bind the server to.                                                                   | Use `127.0.0.1` for production (to be accessed via reverse proxy). Use `0.0.0.0` inside a Docker container.                          |
-| `--port <port>`       | The TCP port to listen on.                                                                              | Default: `8000`.                                                                                                                   |
-| `--workers <int>`     | The number of worker processes to spawn.                                                                | For production use. A good starting point is `2 * (number of CPU cores) + 1`. Omit this flag for development.                      |
-| `--reload`            | Enables auto-reloading the server when code changes are detected.                                       | **For development use only.** Do not use in production.                                                                            |
+## 3. Configuration
 
-### Expected Output
-A successful server start will display the following log messages:
-\`\`\`
-INFO:     Started server process [12345]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
-\`\`\`
+Configuration is managed via environment variables and the `logging_framework.yml` file.
 
-### Common Issues / Troubleshooting
--   **Issue:** `Port 8000 already in use`
-    -   **Solution:** Change the `--port` or find and stop the process currently using it with `sudo lsof -i :8000`.
--   **Issue:** `Environment variables not loaded`
-    -   **Solution:** Confirm the `.env` file is located at `api/.env` and is readable by the service user. For `systemd`, ensure the `EnvironmentFile` path is correct.
+### 3.1. Environment Variables
 
----
+-   **`APP_ENV`**: The most critical variable. Set to `production` for any non-development environment. This enables security features like sensitive data redaction in logs.
+-   **`ADMIN_API_KEY`**: A mandatory secret key required to access any administrative or system-level endpoints.
+-   **`DATABASE_URI`**: The connection string for the database. Defaults to SQLite but can be pointed to a production PostgreSQL instance.
 
-## 3. Maintenance
+### 3.2. Logging Configuration
 
-### Purpose
-Regular maintenance tasks to ensure the health and stability of the Zotify API.
+The behavior of the logging system is controlled by `api/logging_framework.yml`. This file allows you to define log sinks, set levels, and create routing rules. This file can be reloaded at runtime without restarting the server.
 
-### 3.1. Database Backup
+**To reload the logging configuration:**
+Send an authenticated `POST` request to `/api/system/logging/reload`.
+```bash
+curl -X POST http://localhost:8000/api/system/logging/reload -H "X-API-Key: your_super_secret_key"
+```
 
-#### Command
-\`\`\`bash
-# For PostgreSQL
-pg_dump -U <db_user> -h <db_host> <db_name> > zotify_backup_$(date +%F).sql
+## 4. Maintenance
 
-# For SQLite
-sqlite3 /path/to/api/storage/zotify.db ".backup /path/to/backup/zotify_backup_$(date +%F).db"
-\`\`\`
+### 4.1. Log Rotation
 
-#### Usage Notes
-- This command should be run regularly via a `cron` job.
-- Store backups in a secure, remote location.
+The application creates log files in the `api/logs/` directory (e.g., `debug.log`, `security.log`). In a production environment, these files must be rotated to prevent them from consuming excessive disk space.
 
-### 3.2. Log Rotation
-
-#### Purpose
-The `json_audit.log` can grow indefinitely. Log rotation prevents it from consuming excessive disk space.
-
-#### Command / Example
-Configure `logrotate` by creating a file at `/etc/logrotate.d/zotify`:
-\`\`\`
-/path/to/api/storage/audit.log {
+**Example `logrotate` configuration:**
+Create a file at `/etc/logrotate.d/zotify-api`:
+```
+/path/to/zotify-API/api/logs/*.log {
     daily
-    rotate 7
+    rotate 14
     compress
+    delaycompress
     missingok
     notifempty
     create 0640 your_user your_group
 }
-\`\`\`
+```
+This configuration rotates all `.log` files in the directory daily, keeping 14 compressed archives.
 
-#### Usage Notes
-- This configuration rotates the log daily, keeps 7 compressed archives, and safely handles a missing log file.
-- Adjust `daily`, `rotate`, and permissions as needed.
+### 4.2. Database Backup
 
-### References
-- [Uvicorn Deployment Guide](https://www.uvicorn.org/deployment/)
-- [Logrotate Man Page](https://man7.org/linux/man-pages/man8/logrotate.8.html)
+Regular backups of the application database are critical.
+
+**Example SQLite backup command:**
+```bash
+sqlite3 /path/to/zotify-API/api/storage/zotify.db ".backup /path/to/backups/zotify_$(date +%F).db"
+```
+This command should be run regularly via a `cron` job, and backups should be stored securely.
+
+## 5. Monitoring
+
+-   **Health Check:** A simple health check endpoint is available at `/api/health`. Monitoring systems should be configured to check this endpoint regularly.
+-   **Log Monitoring:** The `api/logs/security.log` file should be monitored for any unusual activity. In a production environment, consider forwarding this log to a centralized security information and event management (SIEM) system.
