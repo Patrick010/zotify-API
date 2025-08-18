@@ -34,6 +34,7 @@
 | DOC-01 | Comprehensive Logging Guide | PID.md | ✅ Implemented | `docs/manuals/LOGGING_GUIDE.md` | N/A | FE-07a | A detailed developer guide for the new logging framework has been created as per the project's documentation-first principles. |
 | FE-08 | Comprehensive Health Checks | FUTURE_ENHANCEMENTS.md | 🟡 Partial | `routes/system.py` | 🔍 Needs Verification | | Only basic uptime/env endpoints exist |
 | FE-09 | Unified Configuration Management | FUTURE_ENHANCEMENTS.md | 🟡 Partial | `services/config_service.py` | 🔍 Needs Verification | | Dual system exists, not unified |
+| FE-10 | Dynamic Logging Plugin System | DYNAMIC_PLUGIN_PROPOSAL.md | ❌ Missing | N/A | N/A | FE-07a | A proposal for a dynamic plugin system to allow custom logging sinks. |
 | **System Requirements (NFRs)** | | | | | | | |
 | SYS-01 | Test Coverage >90% | HIGH_LEVEL_DESIGN.md | ❌ Missing | N/A | `pytest --cov` | | CI gating not implemented |
 | SYS-02 | Performance <200ms | HIGH_LEVEL_DESIGN.md | 🔍 Needs Verification | N/A | N/A | | No performance benchmarks exist |

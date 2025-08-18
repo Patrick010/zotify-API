@@ -42,6 +42,8 @@ This section lists specific technical features and improvements that are candida
 *   **Snitch Module Enhancement:**
     *   Investigate the further development of the conceptual `Snitch` module.
     *   Potential enhancements include running it as a persistent background service, developing it into a browser plugin for seamless integration, or expanding it to handle multi-service authentication flows.
+*   **Dynamic Logging Sink Plugin System:**
+    *   Implement a dynamic plugin system for the Flexible Logging Framework, based on Python's `entry_points`. This will allow third-party developers to create and install their own custom sink types without modifying the core API code. See the full proposal at [`DYNAMIC_PLUGIN_PROPOSAL.md`](./DYNAMIC_PLUGIN_PROPOSAL.md).
 
 ---
 

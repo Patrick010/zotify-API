@@ -164,6 +164,9 @@ The application uses a dual system for managing configuration, separating immuta
 *   **Reload Endpoint (`routes/system.py`)**:
     *   The `POST /api/system/logging/reload` endpoint allows for hot-reloading the configuration from `logging_framework.yml`.
 
+*   **Future Extensibility (Plugin System)**:
+    *   To allow for true extensibility without modifying the core API, a dynamic plugin system has been proposed. This would allow developers to create and install their own custom sink types as separate packages. See [`DYNAMIC_PLUGIN_PROPOSAL.md`](./DYNAMIC_PLUGIN_PROPOSAL.md) for details.
+
 ---
 
 ## Supporting Modules

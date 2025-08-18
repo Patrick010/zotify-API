@@ -60,6 +60,7 @@ To ensure consistent and comprehensive observability, the platform implements a 
 - **Runtime Flexibility:** The logging configuration can be reloaded at runtime via an API endpoint, allowing administrators to change log levels or destinations on a live system without a restart.
 - **Asynchronous by Design:** The framework is built to be non-blocking. Log processing is handled asynchronously to minimize performance impact on the main application.
 - **Integration with Error Handling:** The framework serves as the backend for the `ErrorHandler`, ensuring that all system-level exceptions are processed through the same powerful and configurable routing system.
+- **Extensibility via Plugins:** The framework is designed to be extensible. A proposal for a future dynamic plugin system, allowing developers to create custom sink types without modifying the core API, is tracked in `DYNAMIC_PLUGIN_PROPOSAL.md`.
 
 This component is critical for debugging, monitoring, and creating detailed audit trails. For a comprehensive guide on its use, see the [`LOGGING_GUIDE.md`](../api/docs/manuals/LOGGING_GUIDE.md) document.
 
