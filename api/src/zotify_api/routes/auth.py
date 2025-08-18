@@ -2,6 +2,7 @@ import logging
 import secrets
 import base64
 import hashlib
+import inspect
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from datetime import datetime, timezone, timedelta
@@ -66,7 +67,12 @@ async def spotify_callback(code: str, state: str, db: Session = Depends(get_db))
         try:
             resp = await client.post(SPOTIFY_TOKEN_URL, data=data, headers=headers)
             resp.raise_for_status()
-            tokens = await resp.json()
+
+            json_obj = resp.json()
+            if inspect.isawaitable(json_obj):
+                tokens = await json_obj
+            else:
+                tokens = json_obj
 
             token_data = {
                 "access_token": tokens["access_token"],
