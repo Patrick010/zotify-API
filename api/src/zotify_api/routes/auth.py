@@ -65,7 +65,7 @@ async def spotify_callback(code: str, state: str, db: Session = Depends(get_db))
         try:
             resp = await client.post(SPOTIFY_TOKEN_URL, data=data, headers=headers)
             resp.raise_for_status()
-            tokens = await resp.json()
+            tokens = resp.json()
 
             token_data = {
                 "access_token": tokens["access_token"],
