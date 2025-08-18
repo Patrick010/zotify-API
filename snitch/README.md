@@ -10,10 +10,21 @@ The primary purpose of Snitch is to solve the Spotify authentication redirect pr
 
 Snitch is intended to be run as a standalone process during the authentication flow. It is configured via an environment variable.
 
--   **`SNITCH_API_CALLBACK_URL`**: This environment variable must be set to the **full URL** (including `http://...`) of the backend API's callback endpoint.
+-   **`SNITCH_API_CALLBACK_URL`**: This environment variable must be set to the **full URL** of the backend API's callback endpoint. The application will validate this on startup and will exit if the URL does not start with `http://` or `https://`.
     -   Example: `export SNITCH_API_CALLBACK_URL="http://localhost:8000/api/auth/spotify/callback"`
 
 When started, Snitch listens on `http://localhost:4381/login`. After receiving a callback from Spotify, it will make a `GET` request to the configured callback URL with the `code` and `state` as query parameters.
+
+## Build
+
+The application has been simplified to a single file and has no external dependencies. To build the executable, run the following command from within the `snitch` directory:
+```bash
+go build snitch.go
+```
+
+## Implementation
+
+The entire implementation is contained within `snitch.go`. It is a self-contained Go application.
 
 ## Security Enhancements (Phase 2)
 
@@ -23,7 +34,3 @@ To ensure the security of the authentication flow, the Snitch listener will be h
 - **Secure Secret Handling:** The received authentication `code` is handled only in memory and never logged or persisted to disk.
 
 For full details, see the [`PHASE_2_SECURE_CALLBACK.md`](./docs/PHASE_2_SECURE_CALLBACK.md) design document.
-
-## Implementation
-
-The entire implementation is contained within `snitch.go`. It is a self-contained Go application with no external dependencies, and can be built and run using standard Go tooling.

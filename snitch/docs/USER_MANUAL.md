@@ -1,7 +1,7 @@
 # Snitch User Manual
 
 **Status:** Active
-**Date:** 2025-08-16
+**Date:** 2025-08-18
 
 ## 1. What is Snitch?
 
@@ -9,11 +9,26 @@ Snitch is a small helper application designed to securely handle the final step 
 
 When an application needs a user to authenticate with a service like Spotify, it typically opens a web browser and sends the user to a login page. After the user logs in, the service redirects the browser back to a special "callback URL". Snitch's job is to run a temporary web server on the user's local machine to *be* that callback URL. It catches the redirect, grabs the secret authentication code, and securely passes it back to the main application.
 
-## 2. How to Use Snitch
+## 2. How to Build Snitch
 
-Snitch is not meant to be run constantly. It should be launched by your main application (e.g., the Zotify API) just before it needs to authenticate a user, and it will automatically shut down (or can be shut down) after it has done its job.
+The application has been simplified to a single Go file and has no external dependencies. To build the executable, navigate to the `snitch` directory and run the following command:
+```bash
+go build snitch.go
+```
+This will create a `snitch.exe` (or `snitch` on Linux/macOS) executable in the same directory.
 
-### 2.1. Initiating the Authentication Flow (Example)
+## 3. How to Use Snitch
+
+Snitch is not meant to be run constantly. It should be launched by your main application (e.g., the Zotify API) just before it needs to authenticate a user.
+
+### 3.1. Configuration
+
+Snitch is configured with a single environment variable:
+
+-   **`SNITCH_API_CALLBACK_URL`**: This **must** be set to the **full URL** of your main application's callback endpoint. The application will validate this on startup and will exit with a clear error message if the URL does not start with `http://` or `https://`.
+    -   **Example:** `export SNITCH_API_CALLBACK_URL="http://localhost:8000/api/auth/spotify/callback"`
+
+### 3.2. Initiating the Authentication Flow (Example)
 
 The main application is responsible for starting the OAuth flow. A simplified example in a web browser context would look like this:
 
@@ -51,10 +66,3 @@ The main application is responsible for starting the OAuth flow. A simplified ex
 5.  Spotify redirects the user's browser to `http://127.0.0.1:4381/login?code=...&state=...`.
 6.  Snitch "catches" this request, extracts the `code` and `state`, and securely forwards them to the main Zotify API via a `GET` request.
 7.  The browser window will then show a success or failure message and can be closed.
-
-## 3. Configuration
-
-Snitch is configured with a single environment variable:
-
--   **`SNITCH_API_CALLBACK_URL`**: This **must** be set to the **full URL** (including `http://...`) of your main application's callback endpoint. Snitch will send the code it receives to this URL as query parameters.
-    -   **Example:** `export SNITCH_API_CALLBACK_URL="http://localhost:8000/api/auth/spotify/callback"`

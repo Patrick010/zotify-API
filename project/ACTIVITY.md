@@ -4,6 +4,43 @@
 
 ---
 
+## ACT-033: Fix API TypeError in Spotify Callback
+
+**Date:** 2025-08-18
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To fix a `TypeError` in the `/api/auth/spotify/callback` endpoint that occurred after the `snitch` helper application was repaired.
+
+### Outcome
+- **Root Cause Analysis:** A `TypeError: object dict can't be used in 'await' expression` was traced to line 68 of `api/src/zotify_api/routes/auth.py`. The code was attempting to `await resp.json()`, but the runtime environment was not treating this as an awaitable coroutine.
+- **Fix:** The `await` keyword was removed from the `resp.json()` call, resolving the `TypeError`.
+
+### Related Documents
+- `api/src/zotify_api/routes/auth.py`
+
+---
+
+## ACT-032: Debug and Refactor `snitch` Go Application
+
+**Date:** 2025-08-18
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To diagnose and resolve a persistent, complex build issue with the `snitch` helper application that was blocking all CLI-based authentication flows.
+
+### Outcome
+- **Investigation:** A deep investigation revealed the root cause was not a simple caching issue, but a structural conflict in the Go module. A legacy `snitch.go` file with a `main` package was conflicting with the intended entry point at `cmd/snitch/main.go`. This ambiguity caused the Go compiler to produce a binary with stale, incorrect code.
+- **Refactoring:** To resolve this, the `snitch` application was radically simplified. The `cmd/` and `internal/` directories were deleted, and all logic was consolidated into a single, self-contained `snitch.go` file. This file was rewritten to be a clean `package main` application with the correct `http.Get` logic, eliminating all structural ambiguity.
+- **Validation:** The new simplified `snitch.go` was successfully built by the user, and a subsequent `TypeError` in the Python backend was identified, proving the `snitch` application was now working correctly.
+
+### Related Documents
+- `snitch/snitch.go`
+
+---
+
 ## ACT-031: API Canonicalization, Documentation Overhaul, and Snitch Regression Fix
 
 **Date:** 2025-08-17
