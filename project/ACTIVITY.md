@@ -4,6 +4,27 @@
 
 ---
 
+## ACT-031: API Canonicalization, Documentation Overhaul, and Snitch Regression Fix
+
+**Date:** 2025-08-17
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+A comprehensive refactoring of the entire API was completed to enforce a canonical standard for endpoints, responses, and file structure. All API and project documentation was updated to align with this new reality. The test suite was updated and is 100% passing for the API.
+
+### Outcome
+- **API Refactoring:** Standardized all API routes and responses. Consolidated auth logic and removed redundant routers (`spotify.py`, `metadata.py`).
+- **Documentation:** Generated new `API_REFERENCE.md` from OpenAPI spec. Updated `DEVELOPER_GUIDE.md`, `ENDPOINTS.md`, `EXECUTION_PLAN.md`, and `PROJECT_REGISTRY.md`. Archived old files.
+- **Validation:** Updated all 135 tests in the API test suite to pass against the new canonical structure.
+-  **Snitch Regression:**
+   -   Discovered that the API refactoring broke the `snitch` helper application.
+   -   Modified `snitch` Go source code (`handler.go`) to use `GET` instead of `POST`.
+   -   Updated `snitch` documentation (`README.md`, `USER_MANUAL.md`).
+   -   **Issue:** Encountered a persistent build issue where the compiled `snitch.exe` does not reflect the source code changes. This issue is unresolved.
+
+---
+
 ## ACT-030: Refactor Logging Documentation
 
 **Date:** 2025-08-17

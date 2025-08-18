@@ -1,8 +1,25 @@
-# Audit Phase 4: Findings and Final Plan (Condensed)
+# Audit Phase 4: Findings and Final Plan
 
-## Session Report (2025-08-17): Independent Verification
+### 2025-08-17: API Canonicalization and `snitch` Regression
+
+**Audit Finding:**
+A major refactoring effort was undertaken to canonicalize the entire API. This successfully brought the API endpoints and response structures into a consistent, predictable standard, fulfilling a key goal of the "establish reality" audit. All API-level and project-level documentation was updated to reflect this new reality.
+
+**Regression Introduced:**
+The refactoring introduced a critical regression in the `snitch` helper application, breaking the CLI authentication flow. This demonstrates a gap in the project's testing strategy, as there were no automated tests covering the `snitch` tool's interaction with the API.
+
+**Current Status:**
+The `snitch` source code has been patched to align with the new API. However, a persistent and unresolved build issue is preventing the fix from being deployed.
+
+**Recommendation:**
+1.  The `snitch` build issue must be resolved as a high priority.
+2.  A simple integration test should be added to the project's CI/CD pipeline to run `snitch.exe` against the live API to prevent similar regressions in the future.
 
 This session focused on performing an independent verification of the project's state, as established by the previous developer's work. The goal was to "establish reality" by confirming that the codebase aligns with the extensive documentation overhaul that was recently completed.
+
+---
+
+## Session Report (2025-08-17): Independent Verification
 
 ### 1. Verification Activities
 
@@ -133,3 +150,5 @@ A new, formal "Task Backlog Mechanism" was implemented to enforce stricter proce
 ### 7.3 Documentation Cleanup
 - The missing `TASK_CHECKLIST.md` was located in the `project/archive` and restored to `project/`.
 - The outdated, hardcoded file list within `TASK_CHECKLIST.md` was removed and replaced with a reference to the `PROJECT_REGISTRY.md`.
+
+---
