@@ -29,7 +29,7 @@ def client():
 
 from zotify_api.providers.base import BaseProvider
 from zotify_api.services.deps import get_provider
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any, Tuple, Optional
 from unittest.mock import AsyncMock
 
 class FakeProvider(BaseProvider):
@@ -48,6 +48,14 @@ class FakeProvider(BaseProvider):
 
     async def sync_playlists(self) -> Dict[str, Any]:
         return {"status": "success", "count": 1}
+
+    async def get_oauth_login_url(self, state: str) -> str:
+        return f"http://fake.provider.com/login?state={state}"
+
+    async def handle_oauth_callback(self, code: Optional[str], error: Optional[str], state: str) -> str:
+        if error:
+            return f"<html><body>Error: {error}</body></html>"
+        return "<html><body>Success</body></html>"
 
 
 @pytest.fixture

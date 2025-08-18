@@ -18,6 +18,8 @@ def test_wrong_key(monkeypatch):
 from fastapi.testclient import TestClient
 from zotify_api.main import app
 from unittest.mock import patch, AsyncMock, ANY
+from zotify_api.services import deps
+from zotify_api.providers.base import BaseProvider
 
 client = TestClient(app)
 
@@ -25,30 +27,29 @@ def test_correct_key(monkeypatch):
     monkeypatch.setattr(settings, "admin_api_key", "test_key")
     assert require_admin_api_key(x_api_key="test_key", settings=settings) is True
 
-@patch("httpx.AsyncClient.post", new_callable=AsyncMock)
-@patch("zotify_api.routes.auth.crud.create_or_update_spotify_token")
-def test_spotify_callback_success(mock_crud_call, mock_httpx_post, client, monkeypatch):
+def test_provider_callback_route(monkeypatch):
     """
-    Tests the new GET /auth/spotify/callback endpoint.
+    Tests that the generic provider callback route correctly invokes the
+    provider's handle_oauth_callback method.
     """
-    # Mock the response from Spotify's token endpoint
-    mock_httpx_post.return_value.json = AsyncMock(return_value={
-        "access_token": "test_access_token",
-        "refresh_token": "test_refresh_token",
-        "expires_in": 3600
-    })
-    mock_httpx_post.return_value.raise_for_status.return_value = None
+    mock_provider = AsyncMock(spec=BaseProvider)
+    mock_provider.handle_oauth_callback.return_value = "<html>Success</html>"
 
-    # Set up the pending state
-    monkeypatch.setitem(__import__("zotify_api.auth_state").auth_state.pending_states, "test_state", "test_code_verifier")
+    def mock_get_provider_no_auth(provider_name: str):
+        return mock_provider
 
-    response = client.get("/api/auth/spotify/callback?code=test_code&state=test_state")
+    app.dependency_overrides[deps.get_provider_no_auth] = mock_get_provider_no_auth
+
+    response = client.get("/api/auth/spotify/callback?code=test_code&state=test_state&error=test_error")
 
     assert response.status_code == 200
-    assert response.json()["status"] == "success"
+    assert response.text == "<html>Success</html>"
+    mock_provider.handle_oauth_callback.assert_awaited_once_with(
+        code="test_code", state="test_state", error="test_error"
+    )
 
-    # Check that the token was saved to the DB
-    mock_crud_call.assert_called_once()
+    # Clean up the override
+    app.dependency_overrides = {}
 
 
 from datetime import datetime, timedelta, timezone
@@ -58,12 +59,10 @@ from datetime import datetime, timedelta, timezone
 def test_get_status_authenticated_and_token_not_expired(mock_get_token, mock_get_user, monkeypatch):
     """
     Tests that /api/auth/status returns authenticated if a valid, non-expired token exists.
-    This also implicitly tests the timezone comparison fix.
     """
     monkeypatch.setattr(settings, "admin_api_key", "test_key")
     mock_get_user.return_value = {"id": "test_user"}
 
-    # Mock a token that expires in the future
     class MockToken:
         def __init__(self, expires_at):
             self.expires_at = expires_at
@@ -86,7 +85,6 @@ def test_get_status_token_expired(mock_get_token, monkeypatch):
     """
     monkeypatch.setattr(settings, "admin_api_key", "test_key")
 
-    # Mock a token that has already expired
     class MockToken:
         def __init__(self, expires_at):
             self.expires_at = expires_at

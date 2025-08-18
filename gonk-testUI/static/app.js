@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 headers: { "X-API-Key": apiKey }
             });
             const data = await response.json();
-            if (data.is_authenticated) {
+            if (data.authenticated) {
                 spotifyLoginBtn.textContent = "Logout";
             } else {
                 spotifyLoginBtn.textContent = "Login with Spotify";

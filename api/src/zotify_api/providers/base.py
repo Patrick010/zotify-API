@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any, Tuple, Optional
 
 class BaseProvider(ABC):
     """
@@ -41,6 +41,19 @@ class BaseProvider(ABC):
     # @abstractmethod
     # async def get_artist(self, artist_id: str) -> Dict[str, Any]:
     #     pass
+
+    @abstractmethod
+    async def get_oauth_login_url(self, state: str) -> str:
+        """ Constructs the provider-specific URL for OAuth2 authorization. """
+        pass
+
+    @abstractmethod
+    async def handle_oauth_callback(self, code: Optional[str], error: Optional[str], state: str) -> str:
+        """
+        Handles the callback from the OAuth2 provider, processing either the authorization
+        code or an error. Returns HTML content for the popup window.
+        """
+        pass
 
     # For now, we will keep it simple and only include the methods that are
     # currently being used in the spotify service.

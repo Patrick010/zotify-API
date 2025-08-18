@@ -43,8 +43,17 @@ async def get_spoti_client(db: Session = Depends(get_db)) -> SpotiClient:
 
 async def get_provider(db: Session = Depends(get_db), client: SpotiClient = Depends(get_spoti_client)) -> BaseProvider:
     """
-    Provider manager dependency.
+    Provider manager dependency for routes that require prior authentication.
     For now, it always returns the SpotifyConnector. In the future, this could
     select a provider based on user settings or other criteria.
     """
     return SpotifyConnector(client=client, db=db)
+
+def get_provider_no_auth(provider_name: str, db: Session = Depends(get_db)) -> BaseProvider:
+    """
+    Provider manager dependency for routes that do not require prior authentication,
+    such as the OAuth login and callback endpoints.
+    """
+    if provider_name == "spotify":
+        return SpotifyConnector(db=db)
+    raise HTTPException(status_code=404, detail=f"Provider '{provider_name}' not found.")

@@ -25,7 +25,7 @@
 | **Future Enhancements** | | | | | | | |
 | FE-01 | Advanced Admin Endpoint Security | FUTURE_ENHANCEMENTS.md | ❌ Missing | N/A | N/A | | e.g., JWT, rate limiting |
 | FE-02 | Persistent & Distributed Job Queue | FUTURE_ENHANCEMENTS.md | 🟡 Partial | `services/download_service.py` | 🔍 Needs Verification | | Currently in-memory DB queue |
-| FE-03 | Full Spotify OAuth2 Integration & Library Sync | FUTURE_ENHANCEMENTS.md | 🟡 Partial | `providers/spotify_connector.py` | 🔍 Needs Verification | | Lacks write-sync and full library management |
+| FE-03 | Full Spotify OAuth2 Integration & Library Sync | FUTURE_ENHANCEMENTS.md | 🟡 Partial | `providers/spotify_connector.py` | 🔍 Needs Verification | | Lacks write-sync and full library management. Refactoring to a provider-agnostic auth model is in progress (see SYS-07). |
 | FE-04 | Enhanced Download & Job Management | FUTURE_ENHANCEMENTS.md | ❌ Missing | N/A | N/A | | e.g., progress reporting, notifications |
 | FE-05 | API Governance | FUTURE_ENHANCEMENTS.md | ❌ Missing | N/A | N/A | | e.g., rate limiting, quotas |
 | FE-06 | Observability | FUTURE_ENHANCEMENTS.md | 🟡 Partial | `middleware/request_id.py` | 🔍 Needs Verification | | Lacks detailed audit trails. See FE-07a. |
@@ -44,6 +44,7 @@
 | SYS-04 | Extensibility | HIGH_LEVEL_DESIGN.md | ✅ Implemented | `providers/base.py` | N/A | | Provider model allows for extension |
 | SYS-05 | CORS Policy for Web UI | HIGH_LEVEL_DESIGN.md | ✅ Implemented | `zotify_api/main.py` | N/A | | Permissive CORS policy to allow browser-based clients. |
 | SYS-06 | Snitch Secure Callback | `snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md` | 🟡 Partial | `snitch/snitch.go` | ✅ Implemented | | Zero Trust model with end-to-end payload encryption and nonce-based replay protection. |
+| SYS-07 | Provider-Agnostic OAuth2 Flow | LLD.md | ✅ Implemented | api/src/zotify_api/providers/ | ✅ Implemented | FE-03 | New requirement to handle OAuth2 callbacks generically in the provider layer. |
 
 ---
 

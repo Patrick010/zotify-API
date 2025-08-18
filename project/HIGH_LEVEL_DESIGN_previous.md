@@ -21,7 +21,6 @@ The refactor aims to:
 6. **Config Layer** — Centralized settings with environment-based overrides.
 7. **Generic Error Handling Layer** — A centralized, platform-wide module for catching, processing, and responding to all exceptions.
 8. **Logging Layer** — A centralized, extendable service for handling all application logging, including system, audit, and job status logs.
-9. **Authentication Provider Interface** — An extension of the Provider Abstraction Layer that standardizes how authentication flows (e.g., OAuth2) are initiated and handled. This ensures that provider-specific authentication logic is encapsulated within the provider connector, not in the main API routes.
 
 **Data Flow Example (Search Request):**
 1. Request hits FastAPI route.

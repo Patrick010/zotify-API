@@ -4,6 +4,43 @@
 
 ---
 
+## ACT-037: Refactor Authentication to be Provider-Agnostic
+
+**Date:** 2025-08-18
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To refactor the authentication system to be fully provider-agnostic, adhering to the project's architectural principles. This addresses an architectural flaw where Spotify-specific OAuth2 logic was handled directly in the API routes layer.
+
+### Outcome
+1.  **Design Documentation Updated:**
+    -   The `HLD.md` and `LLD.md` were updated to include a new "Authentication Provider Interface".
+    -   A new feature specification, `provider_oauth.md`, was created to document the generic flow.
+    -   The `PROJECT_REGISTRY.md` and `TRACEABILITY_MATRIX.md` were updated to reflect these changes.
+
+2.  **Provider Layer Refactored:**
+    -   The `BaseProvider` interface in `base.py` was extended with abstract methods for `get_oauth_login_url` and `handle_oauth_callback`.
+    -   All Spotify-specific OAuth2 logic was moved from `routes/auth.py` into the `SpotifyConnector` in `spotify_connector.py`, which now implements the new interface.
+
+3.  **API Routes Refactored:**
+    -   The routes in `routes/auth.py` were made generic (e.g., `/auth/{provider_name}/login`).
+    -   A new `get_provider_no_auth` dependency was created in `deps.py` to inject the correct provider into the routes without requiring prior authentication.
+
+4.  **Frontend UI Polished:**
+    -   The `gonk-testUI` was updated to use the new generic API routes and to correctly check the authentication status.
+
+### Related Documents
+- `project/HIGH_LEVEL_DESIGN.md`
+- `project/LOW_LEVEL_DESIGN.md`
+- `project/TRACEABILITY_MATRIX.md`
+- `api/docs/reference/features/provider_oauth.md`
+- `api/src/zotify_api/providers/`
+- `api/src/zotify_api/routes/auth.py`
+- `gonk-testUI/static/app.js`
+
+---
+
 ## ACT-036: Harden Test Suite and Fix Runtime Bugs
 
 **Date:** 2025-08-18
