@@ -9,7 +9,7 @@ logging:
     - name: "debug_file"
       type: "file"
       level: "DEBUG"
-      path: "/app/api/logs/debug.log"  # Using an absolute path within the container
+      path: "logs/debug.log"
       max_bytes: 10485760 # 10 MB
       backup_count: 3
 

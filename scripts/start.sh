@@ -15,4 +15,4 @@ export APP_ENV=development
 
 # Run the uvicorn server
 # We assume this script is run from the root of the project.
-cd api/ && mkdir -p storage && PYTHONPATH=./src uvicorn zotify_api.main:app --host 0.0.0.0 --port 8000 --reload --log-level debug
+cd api/ && mkdir -p storage && mkdir -p logs && PYTHONPATH=./src uvicorn zotify_api.main:app --host 0.0.0.0 --port 8000 --reload --log-level debug
