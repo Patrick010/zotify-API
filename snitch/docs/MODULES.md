@@ -1,27 +1,18 @@
 # Snitch Module Documentation
 
-This document provides an overview of the internal packages within the `snitch` module.
+**Status:** Active
+**Date:** 2025-08-18
 
-## Package Structure
+## 1. Application Structure
 
-```
-snitch/
-├── cmd/snitch/
-└── internal/listener/
-```
+The `snitch` application has been refactored into a single, self-contained Go file to resolve a persistent build issue.
 
-### `cmd/snitch`
+### `snitch.go`
 
--   **Purpose**: This is the main entry point for the `snitch` executable.
+-   **Purpose**: This single file contains the entire implementation for the `snitch` executable.
 -   **Responsibilities**:
-    -   Parsing command-line flags (e.g., `-state`).
-    -   Validating required flags.
-    -   Calling the `listener` package to start the server.
-    -   Handling fatal errors on startup.
-
-### `internal/listener`
-
--   **Purpose**: This package contains the core logic for the OAuth callback listener. It is considered `internal` to the `snitch` module, meaning its API is not intended to be imported by other modules.
--   **Files**:
-    -   `server.go`: Contains the logic for initializing, running, and gracefully shutting down the `http.Server`. It defines the port and endpoint path.
-    -   `handler.go`: Contains the `http.HandlerFunc` for the `/snitch/oauth-code` endpoint. It is responsible for validating the `POST` request method, decoding the JSON payload, checking the `state` token, printing the `code` to stdout, and signaling the server to shut down.
+    -   Reading the `SNITCH_API_CALLBACK_URL` environment variable.
+    -   Validating the provided URL.
+    -   Starting and configuring the local HTTP server.
+    -   Handling the `/login` callback request from the OAuth provider.
+    -   Forwarding the authentication code to the main Zotify API via a `GET` request.

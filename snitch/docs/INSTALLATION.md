@@ -1,7 +1,7 @@
 # Snitch Installation & Usage Guide
 
 **Status:** Active
-**Date:** 2025-08-16
+**Date:** 2025-08-18
 
 ## 1. Prerequisites
 
@@ -48,13 +48,6 @@ sudo apt-get update && sudo apt-get install -y git
     cd zotify-API/snitch
     ```
 
-3.  **Prepare Go modules:**
-    Snitch is a self-contained module. To ensure your environment is set up correctly, run:
-    ```bash
-    go mod tidy
-    ```
-    This command will verify the `go.mod` file.
-
 ---
 
 ## 3. Running Snitch
@@ -65,17 +58,18 @@ Snitch must be configured with the callback URL of the main Zotify API before ru
     ```bash
     export SNITCH_API_CALLBACK_URL="http://localhost:8000/api/auth/spotify/callback"
     ```
+    **Note:** The application will exit on startup if this URL is not a full URL (i.e., starting with `http://` or `https://`).
 
 2.  **Run the application:**
     From the `snitch` directory, execute the following command:
     ```bash
-    go run ./cmd/snitch
+    go run snitch.go
     ```
 
 3.  **Expected output:**
     You should see the following output, indicating Snitch is running:
     ```
-    SNITCH: Listening on http://127.0.0.1:4381
+    SNITCH: 2025/08/18 12:04:21 snitch.go:22: Starting snitch on 127.0.0.1:4381
     ```
 
 ---
@@ -87,9 +81,9 @@ You can compile Snitch into a single executable for different operating systems.
 ### 4.1. Building for your current OS
 From the `snitch` directory, run:
 ```bash
-go build -o snitch ./cmd/snitch
+go build snitch.go
 ```
-This will create an executable named `snitch` in the current directory.
+This will create an executable named `snitch` (or `snitch.exe` on Windows) in the current directory.
 
 ### 4.2. Cross-Compiling for Windows
 From a Linux or macOS machine, you can build a Windows executable (`.exe`).
@@ -102,7 +96,7 @@ From a Linux or macOS machine, you can build a Windows executable (`.exe`).
 
 2.  **Run the build command:**
     ```bash
-    go build -o snitch.exe ./cmd/snitch
+    go build -o snitch.exe snitch.go
     ```
 This will create an executable named `snitch.exe` in the current directory.
 
@@ -111,4 +105,4 @@ This will create an executable named `snitch.exe` in the current directory.
 ## 5. Troubleshooting
 -   **Port in use**: If you see an error like `bind: address already in use`, it means another application is using port `4381`. Ensure no other instances of Snitch are running.
 -   **`go` command not found**: Make sure the Go binary directory is in your system's `PATH`.
--   **`SNITCH_API_CALLBACK_URL` not set**: The application will panic on startup if this required environment variable is missing.
+-   **`SNITCH_API_CALLBACK_URL` not set**: The application will exit on startup if this required environment variable is missing or malformed.

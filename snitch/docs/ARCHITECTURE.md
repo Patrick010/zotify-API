@@ -1,7 +1,7 @@
 # Snitch Architecture
 
 **Status:** Active
-**Date:** 2025-08-16
+**Date:** 2025-08-18
 
 ## 1. Core Design & Workflow (Zero Trust Model)
 
@@ -12,7 +12,7 @@ The standard workflow is as follows:
 2.  **Launch (Client):** The client application receives the authorization URL (containing the `state` JWT) from the API. It also receives the API's **public key**. The client then launches the local Snitch process, providing it with the public key.
 3.  **Callback (Snitch):** The user authenticates with the OAuth provider, who redirects the browser to Snitch's `localhost` listener. The redirect includes the plain-text `code` and the `state` JWT.
 4.  **Encryption (Snitch):** Snitch receives the `code`. Using the API's public key, it **encrypts the `code`** with a strong asymmetric algorithm (e.g., RSA-OAEP).
-5.  **Handoff (Snitch to API):** Snitch makes a `POST` request over the network to the remote Zotify API, sending the `state` JWT and the **encrypted `code`**.
+5.  **Handoff (Snitch to API):** Snitch makes a `GET` request over the network to the remote Zotify API, sending the `state` JWT and the `code` as query parameters. (Note: The encryption of the `code` described in this design is a planned future enhancement and is not yet implemented).
 6.  **Validation (Zotify API):** The API validates the `state` JWT's signature, checks that the `nonce` has not been used before, and then uses its **private key** to decrypt the `code`.
 
 ## 2. Security Model
