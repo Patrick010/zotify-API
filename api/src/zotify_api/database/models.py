@@ -38,7 +38,7 @@ class SpotifyToken(Base):
     user_id = Column(String, ForeignKey("users.id"), nullable=True) # For multi-user support
     access_token = Column(String, nullable=False)
     refresh_token = Column(String, nullable=False)
-    expires_at = Column(DateTime, nullable=False)
+    expires_at = Column(DateTime(timezone=True), nullable=False)
 
 class Track(Base):
     __tablename__ = "tracks"

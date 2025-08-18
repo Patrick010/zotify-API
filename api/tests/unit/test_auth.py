@@ -49,3 +49,50 @@ def test_spotify_callback_success(mock_crud_call, mock_httpx_post, client, monke
 
     # Check that the token was saved to the DB
     mock_crud_call.assert_called_once()
+
+
+from datetime import datetime, timedelta, timezone
+
+@patch("zotify_api.services.auth.crud.get_spotify_token")
+def test_get_status_authenticated_and_token_not_expired(mock_get_token, monkeypatch):
+    """
+    Tests that /api/auth/status returns authenticated if a valid, non-expired token exists.
+    This also implicitly tests the timezone comparison fix.
+    """
+    monkeypatch.setattr(settings, "admin_api_key", "test_key")
+
+    # Mock a token that expires in the future
+    class MockToken:
+        def __init__(self, expires_at):
+            self.expires_at = expires_at
+            self.user_id = "test_user"
+
+    mock_get_token.return_value = MockToken(expires_at=datetime.now(timezone.utc) + timedelta(hours=1))
+
+    response = client.get("/api/auth/status", headers={"X-API-Key": "test_key"})
+
+    assert response.status_code == 200
+    data = response.json()
+    assert data["is_authenticated"] is True
+    assert data["user_id"] == "test_user"
+
+@patch("zotify_api.services.auth.crud.get_spotify_token")
+def test_get_status_token_expired(mock_get_token, monkeypatch):
+    """
+    Tests that /api/auth/status returns not authenticated if the token is expired.
+    """
+    monkeypatch.setattr(settings, "admin_api_key", "test_key")
+
+    # Mock a token that has already expired
+    class MockToken:
+        def __init__(self, expires_at):
+            self.expires_at = expires_at
+            self.user_id = "test_user"
+
+    mock_get_token.return_value = MockToken(expires_at=datetime.now(timezone.utc) - timedelta(hours=1))
+
+    response = client.get("/api/auth/status", headers={"X-API-Key": "test_key"})
+
+    assert response.status_code == 200
+    data = response.json()
+    assert data["is_authenticated"] is False
