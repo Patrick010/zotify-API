@@ -1,3 +1,17 @@
+### 2025-08-18: Post-Verification Hardening
+
+**Audit Finding:**
+Following the initial successful verification of the project documentation, a full run of the test suite was initiated as a final quality gate. This uncovered several latent bugs that were not apparent from the documentation or previous test runs.
+
+**Issues Discovered and Resolved:**
+1.  **Latent Unit Test Bugs:** A full `pytest` run revealed several failures in `api/tests/unit/test_auth.py`. These were caused by incorrect mocks (synchronous mocks for async calls), incomplete mock objects, incorrect test assertions, and a logic bug in the `get_auth_status` service itself. All failing tests were repaired.
+2.  **Runtime `TypeError`:** Subsequent manual testing revealed a `TypeError` on the `/api/auth/status` endpoint. This was traced to an unsafe comparison between a timezone-naive datetime from the database and a timezone-aware `datetime`. A fix was implemented in the `get_auth_status` service to make the comparison robust.
+
+**Conclusion:**
+The discovery and resolution of these issues have significantly hardened the stability and reliability of the codebase beyond the state described in the initial handover. The entire test suite (137 tests) is now confirmed to be passing.
+
+---
+
 ### 2025-08-18: Independent Verification by New Developer
 
 **Audit Task:**

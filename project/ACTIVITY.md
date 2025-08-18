@@ -4,6 +4,38 @@
 
 ---
 
+## ACT-036: Harden Test Suite and Fix Runtime Bugs
+
+**Date:** 2025-08-18
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To harden the project's stability by performing a full test run, fixing any discovered failures, and resolving any subsequent runtime bugs identified during manual testing.
+
+### Outcome
+1.  **Auth Unit Tests Fixed:**
+    -   A full run of the `pytest` suite revealed several latent bugs in `api/tests/unit/test_auth.py`.
+    -   Fixed a `TypeError` in the Spotify callback by adding a missing `await` and updating the corresponding test mock to be awaitable.
+    -   Fixed an `AttributeError` by adding the `access_token` attribute to the `MockToken` classes used in the tests.
+    -   Fixed a `KeyError` by correcting test assertions to use the proper `authenticated` key instead of `is_authenticated`.
+    -   Fixed a logic bug in the `get_auth_status` service where it would return `authenticated: True` for an expired token.
+    -   Properly isolated the `get_auth_status` tests by mocking the `SpotiClient.get_current_user` network call.
+
+2.  **Runtime Timezone Bug Fixed:**
+    -   Manual testing revealed a `TypeError` when calling the `/api/auth/status` endpoint.
+    -   The root cause was a comparison between a timezone-naive `datetime` from the database and a timezone-aware `datetime` from `datetime.now(timezone.utc)`.
+    -   The `get_auth_status` service was updated to safely handle naive datetimes by making them timezone-aware before comparison.
+
+- **Final Status:** The entire test suite of 137 tests is now passing.
+
+### Related Documents
+- `api/tests/unit/test_auth.py`
+- `api/src/zotify_api/services/auth.py`
+- `api/src/zotify_api/routes/auth.py`
+
+---
+
 ## ACT-035: Propose Future Architectural Enhancements
 
 **Date:** 2025-08-18
