@@ -35,6 +35,8 @@
 | FE-08 | Comprehensive Health Checks | FUTURE_ENHANCEMENTS.md | 🟡 Partial | `routes/system.py` | 🔍 Needs Verification | | Only basic uptime/env endpoints exist |
 | FE-09 | Unified Configuration Management | FUTURE_ENHANCEMENTS.md | 🟡 Partial | `services/config_service.py` | 🔍 Needs Verification | | Dual system exists, not unified |
 | FE-10 | Dynamic Logging Plugin System | DYNAMIC_PLUGIN_PROPOSAL.md | ❌ Missing | N/A | N/A | FE-07a | A proposal for a dynamic plugin system to allow custom logging sinks. |
+| FE-11 | Low-Code Platform Integration | LOW_CODE_PROPOSAL.md | ❌ Missing | N/A | N/A | | A proposal for integrating with platforms like Node-RED. |
+| FE-12 | Home Automation Integration | HOME_AUTOMATION_PROPOSAL.md | ❌ Missing | N/A | N/A | | A proposal for integrating with platforms like Home Assistant. |
 | **System Requirements (NFRs)** | | | | | | | |
 | SYS-01 | Test Coverage >90% | HIGH_LEVEL_DESIGN.md | ❌ Missing | N/A | `pytest --cov` | | CI gating not implemented |
 | SYS-02 | Performance <200ms | HIGH_LEVEL_DESIGN.md | 🔍 Needs Verification | N/A | N/A | | No performance benchmarks exist |

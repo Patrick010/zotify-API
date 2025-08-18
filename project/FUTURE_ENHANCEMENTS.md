@@ -44,6 +44,8 @@ This section lists specific technical features and improvements that are candida
     *   Potential enhancements include running it as a persistent background service, developing it into a browser plugin for seamless integration, or expanding it to handle multi-service authentication flows.
 *   **Dynamic Logging Sink Plugin System:**
     *   Implement a dynamic plugin system for the Flexible Logging Framework, based on Python's `entry_points`. This will allow third-party developers to create and install their own custom sink types without modifying the core API code. See the full proposal at [`DYNAMIC_PLUGIN_PROPOSAL.md`](./DYNAMIC_PLUGIN_PROPOSAL.md).
+*   **Home Automation Integration:**
+    *   Develop a dedicated integration for home automation platforms like Home Assistant. This would expose Zotify as a `media_player` entity and provide services for triggering downloads and other actions from within home automations. See the full proposal at [`HOME_AUTOMATION_PROPOSAL.md`](./HOME_AUTOMATION_PROPOSAL.md).
 
 ---
 
@@ -83,7 +85,7 @@ Beyond technical features, the long-term success of the API depends on making it
 
 *   **Goal:** To make the API's power accessible to non-programmers and citizen developers through visual, flow-based programming environments.
 *   **Vision:** While the Python plugin system extends the API's backend, integration with platforms like Node-RED or Zapier would extend its reach. This would involve creating a dedicated package of nodes or modules for that platform (e.g., `node-red-contrib-zotify`).
-*   **Synergy:** These nodes would act as well-designed clients for the Zotify API. The more powerful the backend API becomes (through Python plugins), the more powerful these visual building blocks become. This creates a synergistic ecosystem for both developers and power users.
+*   **Synergy:** These nodes would act as well-designed clients for the Zotify API. The more powerful the backend API becomes (through Python plugins), the more powerful these visual building blocks become. This creates a synergistic ecosystem for both developers and power users. See the full proposal at [`LOW_CODE_PROPOSAL.md`](./LOW_CODE_PROPOSAL.md).
 
 ---
 

@@ -4,6 +4,38 @@
 
 ---
 
+## ACT-035: Propose Future Architectural Enhancements
+
+**Date:** 2025-08-18
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To formalize and document the strategic vision for the platform's future extensibility, based on user feedback.
+
+### Outcome
+- **New Proposal: Low-Code/No-Code Integration:**
+  - A new formal proposal was created at `project/LOW_CODE_PROPOSAL.md`.
+  - This document outlines the vision for integrating the Zotify API with platforms like Node-RED by creating a dedicated set of custom nodes that act as API clients.
+  - The proposal was integrated into all relevant high-level project documents (`PROJECT_REGISTRY`, `FUTURE_ENHANCEMENTS`, `TRACEABILITY_MATRIX`).
+
+- **New Proposal: Home Automation Integration:**
+  - A second new proposal was created at `project/HOME_AUTOMATION_PROPOSAL.md`.
+  - This document outlines the vision for integrating with platforms like Home Assistant, exposing Zotify as a `media_player` entity and providing services for use in home automations.
+  - This proposal was also integrated into all relevant project documents.
+
+- **Architectural Vision Alignment:**
+  - The `DYNAMIC_PLUGIN_PROPOSAL.md` was updated to clarify that the plugin system is the intended long-term successor to the current Provider Abstraction Layer.
+  - The `HLD.md` and `LLD.md` were updated to reflect this strategic architectural goal.
+
+### Related Documents
+- `project/LOW_CODE_PROPOSAL.md`
+- `project/HOME_AUTOMATION_PROPOSAL.md`
+- `project/DYNAMIC_PLUGIN_PROPOSAL.md`
+- All high-level project planning documents.
+
+---
+
 ## ACT-034: Resolve `snitch` Regression and Harden Logging Framework
 
 **Date:** 2025-08-18
