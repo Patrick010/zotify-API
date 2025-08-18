@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security.api_key import APIKeyHeader
@@ -53,6 +54,17 @@ def initialize_logging_framework():
     try:
         with open("logging_framework.yml", "r") as f:
             config_data = yaml.safe_load(f)
+
+        # Get log path from env and inject into config for the file sink
+        log_path = os.getenv("LOG_FILE_PATH", "logs/debug.log")
+        if "sinks" in config_data.get("logging", {}):
+            for sink in config_data["logging"]["sinks"]:
+                if sink.get("type") == "file":
+                    sink["path"] = log_path
+                    # Assuming only one file sink for now, but this could be more specific
+                    # if there were multiple file sinks with different names.
+                    break
+
         validated_config = LoggingFrameworkConfig(**config_data)
 
         logging_service = get_flexible_logging_service()
