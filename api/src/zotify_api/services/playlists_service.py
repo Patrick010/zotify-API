@@ -50,10 +50,10 @@ class PlaylistsService:
         try:
             with self.db_engine.connect() as conn:
                 if search:
-                    stmt = text("SELECT id, name, description FROM playlists WHERE name LIKE :q LIMIT :limit OFFSET :offset")
+                    stmt = text("SELECT id, name FROM playlists WHERE name LIKE :q LIMIT :limit OFFSET :offset")
                     params = {"q": f"%{search}%", "limit": limit, "offset": offset}
                 else:
-                    stmt = text("SELECT id, name, description FROM playlists LIMIT :limit OFFSET :offset")
+                    stmt = text("SELECT id, name FROM playlists LIMIT :limit OFFSET :offset")
                     params = {"limit": limit, "offset": offset}
                 result = conn.execute(stmt, params)
                 rows = result.mappings().all()
@@ -72,10 +72,10 @@ class PlaylistsService:
             raise PlaylistsServiceError("No DB engine available")
         try:
             with self.db_engine.connect() as conn:
-                stmt = text("INSERT INTO playlists (name, description) VALUES (:name, :description)")
-                conn.execute(stmt, {"name": playlist_in["name"], "description": playlist_in.get("description", "")})
+                stmt = text("INSERT INTO playlists (name) VALUES (:name)")
+                conn.execute(stmt, {"name": playlist_in["name"]})
                 # In a real DB the insert should return an id. For now, return the payload (tests will mock DB).
-                return {"id": None, "name": playlist_in["name"], "description": playlist_in.get("description", "")}
+                return {"id": None, "name": playlist_in["name"]}
         except Exception as exc:
             log.exception("Error creating playlist")
             raise PlaylistsServiceError("Database error while creating playlist") from exc
