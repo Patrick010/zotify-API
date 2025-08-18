@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"regexp"
+	"strings"
 	"time"
 )
 
@@ -25,6 +26,11 @@ func main() {
 	apiCallbackURL := os.Getenv("SNITCH_API_CALLBACK_URL")
 	if apiCallbackURL == "" {
 		logger.Fatal("FATAL: Required environment variable SNITCH_API_CALLBACK_URL is not set")
+	}
+
+	// Validate the URL
+	if !strings.HasPrefix(apiCallbackURL, "http://") && !strings.HasPrefix(apiCallbackURL, "https://") {
+		logger.Fatalf("FATAL: SNITCH_API_CALLBACK_URL must be a full URL, including 'http://' or 'https://'. Current value is: %s", apiCallbackURL)
 	}
 
 	// The handler now gets the callback URL via a closure
