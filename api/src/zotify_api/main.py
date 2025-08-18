@@ -55,15 +55,12 @@ def initialize_logging_framework():
         with open("logging_framework.yml", "r") as f:
             config_data = yaml.safe_load(f)
 
-        # Get log path from env and inject into config for the file sink
+        # Get log path from env and inject it as a default for any file sink missing a path
         log_path = os.getenv("LOG_FILE_PATH", "logs/debug.log")
         if "sinks" in config_data.get("logging", {}):
             for sink in config_data["logging"]["sinks"]:
-                if sink.get("type") == "file":
+                if sink.get("type") == "file" and "path" not in sink:
                     sink["path"] = log_path
-                    # Assuming only one file sink for now, but this could be more specific
-                    # if there were multiple file sinks with different names.
-                    break
 
         validated_config = LoggingFrameworkConfig(**config_data)
 
