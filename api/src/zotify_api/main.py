@@ -1,4 +1,3 @@
-import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security.api_key import APIKeyHeader
@@ -54,11 +53,7 @@ def initialize_logging_framework():
     """ Loads config and initializes the new flexible logging framework. """
     try:
         with open("logging_framework.yml", "r") as f:
-            raw_config = f.read()
-
-        # Expand environment variables in the YAML content, e.g. ${VAR} or $VAR
-        expanded_config = os.path.expandvars(raw_config)
-        config_data = yaml.safe_load(expanded_config)
+            config_data = yaml.safe_load(f)
 
         validated_config = LoggingFrameworkConfig(**config_data)
 

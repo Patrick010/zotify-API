@@ -9,14 +9,14 @@ logging:
     - name: "debug_file"
       type: "file"
       level: "DEBUG"
-      path: "${DEBUG_LOG_PATH:-logs/debug.log}"
+      path: "logs/debug.log"
       max_bytes: 10485760 # 10 MB
       backup_count: 3
 
     - name: "security_log"
       type: "file"
       level: "INFO"
-      path: "${SECURITY_LOG_PATH:-logs/security.log}"
+      path: "logs/security.log"
       max_bytes: 10485760 # 10 MB
       backup_count: 3
 
