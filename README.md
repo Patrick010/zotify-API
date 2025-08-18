@@ -1,53 +1,50 @@
-# Zotify API
+# Zotify API Platform
 
-This repository contains the source code for the Zotify API, a RESTful service for interacting with the Zotify music and podcast downloader.
+Welcome to the Zotify API Platform, a powerful, extensible, and provider-agnostic backend for managing and interacting with your music library. This platform is designed for developers, automators, and power-users who want to build sophisticated workflows for their music collections.
 
-## Getting Started
+## 1. Core Philosophy
 
-### 1. Installation
+The Zotify API is built on a set of core principles:
 
-For detailed installation instructions, please see the [Installation Guide](./api/docs/system/INSTALLATION.md).
+-   **Extensibility:** The platform is designed to be extended. A dynamic plugin system allows developers to add new music providers, logging capabilities, and other features without modifying the core codebase.
+-   **Configuration over Code:** As much as possible, the behavior of the system is controlled by clear, declarative configuration files, not by hardcoded logic.
+-   **Living Documentation:** This project adheres to a strict "living documentation" policy. All documentation is versioned alongside the code and is continuously updated to reflect the reality of the implementation.
+-   **Developer-Centric Design:** The API and its surrounding tools are designed to be intuitive and powerful for developers, with features like a flexible logging framework and a standalone testing UI.
 
-In summary:
--   Clone the repository.
--   Install the API dependencies: `pip install -e ./api`
--   Install the developer UI dependencies: `pip install -e ./gonk-testUI`
+## 2. Platform Components
 
-### 2. Configuration
+The Zotify ecosystem consists of several key components:
 
-The API requires a database connection string to be configured via a `DATABASE_URI` environment variable.
+-   **The Core API:** A robust FastAPI application that provides a RESTful interface for all platform features.
+-   **`snitch`:** A secure helper application for managing OAuth2 callback flows for CLI-based clients.
+-   **`gonk-testUI`:** A standalone web UI for testing and interacting with the API during development.
 
-Create a `.env` file in the `api/` directory:
-```
-# Example for a SQLite database
-DATABASE_URI="sqlite:///storage/zotify.db"
-```
+## 3. Getting Started
 
-### 3. Running the API
+To get started with the Zotify API, please refer to the comprehensive guides in our documentation.
 
-A startup script is provided to run the API server.
+-   **For a full installation guide:** See the [**Installation Guide**](./api/docs/system/INSTALLATION.md).
+-   **To understand the API's features:** See the [**User Manual**](./api/docs/manuals/USER_MANUAL.md).
+-   **For developers who want to build on the platform:** See the [**Developer Guide**](./api/docs/manuals/DEVELOPER_GUIDE.md).
 
-First, make the script executable:
-```bash
-chmod +x scripts/start.sh
-```
+### Quick Start
 
-Then, run the script from the root of the project:
+A startup script is provided to get the API server running quickly in a development environment.
+
+From the root of the project, run:
 ```bash
 ./scripts/start.sh
 ```
-The API will be available at `http://localhost:8000`.
+This script will handle installing dependencies, creating necessary directories, and launching the server with the correct settings for development. The API will be available at `http://localhost:8000`.
 
-## Documentation
+## 4. Documentation
 
-Comprehensive system documentation is available in the `api/docs/system` directory.
+This project uses a comprehensive, tiered documentation system. For a master list of all project documents, please see the [**Project Registry**](./project/PROJECT_REGISTRY.md).
 
--   **[Installation Guide](./api/docs/manuals/INSTALLATION.md)**
--   **[User Manual](./api/docs/manuals/USER_MANUAL.md)**
--   **[Developer Guide](./api/`docs/manuals/DEVELOPER_GUIDE.md)**
--   **[Operator Guide](./api/docs/manuals/OPERATOR_GUIDE.md)**
--   **[System Requirements](./api/docs/system/REQUIREMENTS.md)**
+## 5. Project Status
 
-## Developer Testing UI (`gonk-testUI`)
+This project is under active development. For a detailed view of the current status, recent activities, and future plans, please see the following documents:
 
-This project includes a separate developer testing UI. For instructions on how to run it, please see the `README.md` file inside the `gonk-testUI/` directory.
+-   [**CURRENT_STATE.md**](./project/CURRENT_STATE.md)
+-   [**ACTIVITY.md**](./project/ACTIVITY.md)
+-   [**FUTURE_ENHANCEMENTS.md**](./project/FUTURE_ENHANCEMENTS.md)

@@ -1,152 +1,112 @@
 # Zotify API - Developer Guide
 
-This guide provides developers with the necessary information to run, test, and contribute to the Zotify API locally.
+**Version:** 1.1
+**Date:** 2025-08-18
 
----
+## 1. Introduction
 
-## 1. Local Development Setup
+This guide provides developers with the necessary information to set up a local development environment, run the server, execute tests, and interact with the Zotify API. It is intended for those who wish to contribute to the project or build applications on top of the API.
 
-### Purpose
-To create a consistent and isolated local environment for developing and testing the Zotify API.
+## 2. Local Development Setup
 
-### Prerequisites
-- Python 3.10+
-- `pip` for package installation
-- Git
-- An accessible database (SQLite is sufficient for local development)
+### 2.1. Prerequisites
+-   Python 3.10+
+-   `pip` and `venv` for package management
+-   Git for cloning the repository
 
-### Setup Steps
+### 2.2. Installation
 
 1.  **Clone the Repository**
-    \`\`\`bash
+    ```bash
     git clone https://github.com/Patrick010/zotify-API.git
     cd zotify-API
-    \`\`\`
+    ```
 
 2.  **Install Dependencies**
-    It is crucial to use a virtual environment.
-    \`\`\`bash
-    python3 -m venv venv
-    source venv/bin/activate
+    It is highly recommended to use a virtual environment to isolate dependencies. The `start.sh` script assumes this setup.
+    ```bash
+    # Create and activate a virtual environment
+    python3 -m venv .venv
+    source .venv/bin/activate
+
+    # Install the API and its dependencies in editable mode
     pip install -e ./api
-    \`\`\`
+    ```
 
-3.  **Set Up Local Environment**
-    The application uses a `.env` file for configuration. Copy the example and fill in your details.
-    \`\`\`bash
-    # From the /api directory
-    cp .env.example .env
-    # Edit .env to set your local configuration.
-    nano .env
-    \`\`\`
-    **Required `.env` variables for local development:**
-    \`\`\`
-    APP_ENV="development"
-    ADMIN_API_KEY="dev_key"
-    DATABASE_URI="sqlite:///storage/zotify.db"
-    SPOTIFY_CLIENT_ID="your_spotify_client_id"
-    SPOTIFY_CLIENT_SECRET="your_spotify_client_secret"
-    SPOTIFY_REDIRECT_URI="http://127.0.0.1:8000/api/auth/spotify/callback"
-    \`\`\`
+### 2.3. Configuration
 
-4.  **Create Storage Directory & Database**
-    The application will create the database file on first run, but the directory must exist.
-    \`\`\`bash
-    # From the /api directory
-    mkdir -p storage
-    \`\`\`
+The API is configured primarily through **environment variables**. The `pydantic-settings` library automatically reads these variables on startup. For a full list of available settings, see `api/src/zotify_api/config.py`.
 
----
+The most important variable is `APP_ENV`, which can be `development` or `production`. The provided startup script sets this to `development` for you.
 
-## 2. Running and Testing
+### 2.4. Running the API Server (Recommended Method)
 
-### Purpose
-To run the API server locally with hot-reloading for active development and to execute the full test suite.
+The easiest and recommended way to run the API for local development is to use the provided startup script.
 
-### 2.1. Run the API Locally
-#### Command
-\`\`\`bash
-# Run from the /api directory
-uvicorn zotify_api.main:app --reload --host 127.0.0.1 --port 8000
-\`\`\`
-#### Expected Output
-\`\`\`
-INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [12345] using StatReload
-INFO:     Started server process [12347]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-\`\`\`
-#### Usage Notes
-- The interactive OpenAPI (Swagger) documentation is available at `http://127.0.0.1:8000/docs`. This is the best way to explore and test endpoints during development.
+**Command (from the project root):**
+```bash
+./scripts/start.sh
+```
 
-### 2.2. Run the Test Suite
-#### Command
-\`\`\`bash
-# Run from the /api directory
-APP_ENV=test python3 -m pytest
-\`\`\`
-#### Usage Notes
-- `APP_ENV=test` is **required**. It configures the app to use an in-memory SQLite database and other test-specific settings, preventing interference with your development database.
+**What this script does:**
+-   Sets `APP_ENV=development`, which enables debug features and uses sensible defaults.
+-   Creates the necessary `api/storage` and `api/logs` directories.
+-   Launches the `uvicorn` server with hot-reloading, so the server will automatically restart when you save a file.
 
----
+The API will be available at `http://localhost:8000`. The interactive OpenAPI (Swagger) documentation will be at `http://localhost:8000/docs`.
 
-## 3. Local API Interaction Examples
+## 3. Running the Test Suite
 
-### Purpose
-To provide practical `curl` examples for interacting with a locally running instance of the API.
+The test suite is a critical part of the development process.
 
-### 3.1. Health Check
-#### Command
-\`\`\`bash
-curl http://127.0.0.1:8000/api/health
-\`\`\`
-#### Expected Response
-\`\`\`json
+**Command (from the project root):**
+```bash
+# Ensure you are in the virtual environment
+source .venv/bin/activate
+
+# Run the tests
+pytest api/
+```
+
+**Important:** The tests are designed to run in a test environment, which is automatically configured when `pytest` runs. They use a temporary, in-memory SQLite database to ensure they do not interfere with your local development database.
+
+## 4. Interacting with the API
+
+While the interactive docs at `http://localhost:8000/docs` are the easiest way to test endpoints, you can also use `curl`.
+
+**Note:** The `start.sh` script sets a default `ADMIN_API_KEY` of `test_key` for development. All administrative endpoints require this key to be passed in the `X-API-Key` header.
+
+### Example: Checking Health
+```bash
+curl http://localhost:8000/api/health
+```
+
+### Example: Getting Authentication Status
+```bash
+curl -X GET http://localhost:8000/api/auth/status -H "X-API-Key: test_key"
+```
+**Expected Response:**
+```json
 {
-  "status": "ok"
+  "data": {
+    "is_authenticated": false,
+    "expires_at": null
+  }
 }
-\`\`\`
+```
 
-### 3.2. Add a Track to the Download Queue
-#### Command
-\`\`\`bash
-curl -X POST http://127.0.0.1:8000/api/downloads \
-  -H "X-API-Key: dev_key" \
+### Example: Triggering a Download
+```bash
+curl -X POST http://localhost:8000/api/downloads \
+  -H "X-API-Key: test_key" \
   -H "Content-Type: application/json" \
   -d '{"track_ids": ["spotify:track:4cOdK2wGLETOMsV3oDPEhB"]}'
-\`\`\`
-#### Expected Response
-A JSON object with a `data` key containing an array of job objects.
-\`\`\`json
-{
-  "status": "success",
-  "data": [
-    {
-      "job_id": "some-uuid-string",
-      "track_id": "spotify:track:4cOdK2wGLETOMsV3oDPEhB",
-      "status": "pending",
-      "progress": 0.0,
-      "created_at": "...",
-      "error_message": null
-    }
-  ]
-}
-\`\`\`
+```
 
-### 3.3. Check Download Queue Status
-#### Command
-\`\`\`bash
-curl -X GET "http://127.0.0.1:8000/api/downloads/status" -H "X-API-Key: dev_key"
-\`\`\`
+## 5. Key Documentation
 
-### Troubleshooting
-- **`ModuleNotFoundError: zotify_api`**: You are likely in the wrong directory. Ensure you run `uvicorn` and `pytest` from the `/api` directory.
-- **`401 Unauthorized`**: Ensure you are passing the `X-API-Key` header and that its value matches the `ADMIN_API_KEY` in your `.env` file.
-- **`500 Internal Server Error`**: Check the `uvicorn` server logs for a full traceback. This often points to a misconfiguration or a bug.
-
-### References
-- **Interactive API Docs (Swagger):** `http://127.0.0.1:8000/docs`
-- **Static API Reference:** `api/docs/reference/API_REFERENCE.md`
-- **Operator Manual:** `OPERATOR_MANUAL.md`
-- **Error Handling Guide:** `ERROR_HANDLING_GUIDE.md`
+For more detailed information, please consult the following documents:
+-   **[Project Registry](./../../project/PROJECT_REGISTRY.md):** The master list of all project documents.
+-   **[Logging Guide](./LOGGING_GUIDE.md):** A deep dive into the Flexible Logging Framework.
+-   **[High-Level Design](./../../project/HIGH_LEVEL_DESIGN.md):** An overview of the platform's architecture.
+-   **[Low-Level Design](./../../project/LOW_LEVEL_DESIGN.md):** Detailed implementation notes for various subsystems.

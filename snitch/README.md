@@ -12,6 +12,7 @@ Snitch is intended to be run as a standalone process during the authentication f
 
 -   **`SNITCH_API_CALLBACK_URL`**: This environment variable must be set to the **full URL** of the backend API's callback endpoint. The application will validate this on startup and will exit if the URL does not start with `http://` or `https://`.
     -   Example: `export SNITCH_API_CALLBACK_URL="http://localhost:8000/api/auth/spotify/callback"`
+-   **`APP_ENV`**: Set to `production` to enable redaction of sensitive data in the log output.
 
 When started, Snitch listens on `http://localhost:4381/login`. After receiving a callback from Spotify, it will make a `GET` request to the configured callback URL with the `code` and `state` as query parameters.
 
