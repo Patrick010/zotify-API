@@ -75,6 +75,8 @@ async def spotify_callback(code: str, state: str, db: Session = Depends(get_db))
             }
             crud.create_or_update_spotify_token(db=db, token_data=token_data)
 
+            log_event("Spotify authentication successful", level="INFO", tags=["security"])
+
             return {"status": "success", "message": "Successfully authenticated with Spotify."}
         except httpx.HTTPStatusError as e:
             log_event(
