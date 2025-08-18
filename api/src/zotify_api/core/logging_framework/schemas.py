@@ -36,13 +36,24 @@ AnySinkConfig = Annotated[
     Field(discriminator="type")
 ]
 
+from typing import Optional
+from pydantic import root_validator
+
 # Configuration for a single trigger
 class TriggerConfig(BaseModel):
     """ Defines a rule for a trigger that can initiate an action. """
-    event: str
+    event: Optional[str] = None
+    tag: Optional[str] = None
     action: str
-    # Future enhancements could include more complex details here
     details: dict = Field(default_factory=dict)
+
+    @root_validator
+    def check_event_or_tag(cls, values):
+        if values.get('event') is not None and values.get('tag') is not None:
+            raise ValueError('A trigger cannot have both an "event" and a "tag".')
+        if values.get('event') is None and values.get('tag') is None:
+            raise ValueError('A trigger must have either an "event" or a "tag".')
+        return values
 
 # Main configuration for the logging section
 class LoggingConfig(BaseModel):

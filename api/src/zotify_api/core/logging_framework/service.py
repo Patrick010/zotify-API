@@ -80,9 +80,7 @@ class LoggingService:
         self.config = config
         self.sinks = {}  # Clear existing sinks
         for sink_config in config.logging.sinks:
-            # Use the user-defined name as the key
             if sink_config.name in self.sinks:
-                # Handle duplicate sink names gracefully
                 print(f"Warning: Duplicate sink name '{sink_config.name}' found. Skipping.")
                 continue
 
@@ -93,53 +91,70 @@ class LoggingService:
             elif sink_config.type == "webhook":
                 self.sinks[sink_config.name] = WebhookSink(sink_config)
 
-    def _handle_triggers(self, event: str, original_message: str) -> bool:
+    def _handle_event_trigger(self, event: str) -> bool:
         """
-        Checks for and processes any matching triggers for a given event.
+        Checks for and processes a matching event-based trigger.
+        Event-based triggers are destructive; they stop the original event.
         Returns True if a trigger was handled, False otherwise.
         """
         if not self.config or not self.config.triggers:
             return False
 
-        triggered = False
         for trigger in self.config.triggers:
             if trigger.event == event:
-                triggered = True
                 details = trigger.details
-                new_message = details.get("message", f"Triggered by event: {event}")
-                new_level = details.get("level", "INFO")
-                new_destinations = details.get("destinations")
-                new_extra = details.get("extra", {})
-                new_extra["is_triggered_event"] = True
-
                 self.log(
-                    message=new_message,
-                    level=new_level,
-                    destinations=new_destinations,
-                    **new_extra
+                    message=details.get("message", f"Triggered by event: {event}"),
+                    level=details.get("level", "INFO"),
+                    destinations=details.get("destinations"),
+                    **details.get("extra", {})
                 )
-        return triggered
+                return True
+        return False
+
+    def _handle_tag_triggers(self, tags: List[str], log_record: Dict[str, Any]):
+        """
+        Checks for and processes any matching tag-based triggers.
+        Tag-based triggers are non-destructive; they route a copy of the
+        original event to a new destination.
+        """
+        if not self.config or not self.config.triggers:
+            return
+
+        for tag in tags:
+            for trigger in self.config.triggers:
+                if trigger.tag == tag:
+                    # For now, we only support the "route_to_sink" action
+                    if trigger.action == "route_to_sink":
+                        dest_name = trigger.details.get("destination")
+                        if dest_name and dest_name in self.sinks:
+                            sink = self.sinks[dest_name]
+                            if sink.should_log(log_record["level"]):
+                                asyncio.create_task(sink.emit(log_record))
 
     def log(self, message: str, level: str = "INFO", destinations: Optional[List[str]] = None, **extra):
         """
         Primary method for logging an event.
         Dispatches the log to the appropriate sinks and handles triggers.
         """
-        # If a trigger is handled, we suppress the original log event.
-        if not extra.get("is_triggered_event"):
-            event_name = extra.get("event")
-            if event_name:
-                if self._handle_triggers(event_name, message):
-                    return
+        # Event triggers are handled first and are destructive (they replace the original log)
+        event_name = extra.get("event")
+        if event_name:
+            if self._handle_event_trigger(event_name):
+                return
 
         log_record = {"level": level, "message": message, **extra}
 
+        # Tag triggers are handled next and are non-destructive (they fork the log)
+        tags = extra.get("tags")
+        if tags and isinstance(tags, list):
+            self._handle_tag_triggers(tags, log_record)
+
+        # Finally, process the original log event
         sinks_to_log = []
         if destinations is None:
-            # If no specific destinations, log to all sinks.
             sinks_to_log = self.sinks.values()
         else:
-            # Log only to the specified, existing sinks.
             for dest_name in destinations:
                 if dest_name in self.sinks:
                     sinks_to_log.append(self.sinks[dest_name])
