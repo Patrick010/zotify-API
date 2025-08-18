@@ -32,11 +32,11 @@ def test_spotify_callback_success(mock_crud_call, mock_httpx_post, client, monke
     Tests the new GET /auth/spotify/callback endpoint.
     """
     # Mock the response from Spotify's token endpoint
-    mock_httpx_post.return_value.json.return_value = {
+    mock_httpx_post.return_value.json = AsyncMock(return_value={
         "access_token": "test_access_token",
         "refresh_token": "test_refresh_token",
         "expires_in": 3600
-    }
+    })
     mock_httpx_post.return_value.raise_for_status.return_value = None
 
     # Set up the pending state
@@ -53,19 +53,22 @@ def test_spotify_callback_success(mock_crud_call, mock_httpx_post, client, monke
 
 from datetime import datetime, timedelta, timezone
 
+@patch("zotify_api.services.auth.SpotiClient.get_current_user", new_callable=AsyncMock)
 @patch("zotify_api.services.auth.crud.get_spotify_token")
-def test_get_status_authenticated_and_token_not_expired(mock_get_token, monkeypatch):
+def test_get_status_authenticated_and_token_not_expired(mock_get_token, mock_get_user, monkeypatch):
     """
     Tests that /api/auth/status returns authenticated if a valid, non-expired token exists.
     This also implicitly tests the timezone comparison fix.
     """
     monkeypatch.setattr(settings, "admin_api_key", "test_key")
+    mock_get_user.return_value = {"id": "test_user"}
 
     # Mock a token that expires in the future
     class MockToken:
         def __init__(self, expires_at):
             self.expires_at = expires_at
             self.user_id = "test_user"
+            self.access_token = "mock_access_token"
 
     mock_get_token.return_value = MockToken(expires_at=datetime.now(timezone.utc) + timedelta(hours=1))
 
@@ -73,7 +76,7 @@ def test_get_status_authenticated_and_token_not_expired(mock_get_token, monkeypa
 
     assert response.status_code == 200
     data = response.json()
-    assert data["is_authenticated"] is True
+    assert data["authenticated"] is True
     assert data["user_id"] == "test_user"
 
 @patch("zotify_api.services.auth.crud.get_spotify_token")
@@ -88,6 +91,7 @@ def test_get_status_token_expired(mock_get_token, monkeypatch):
         def __init__(self, expires_at):
             self.expires_at = expires_at
             self.user_id = "test_user"
+            self.access_token = "mock_access_token"
 
     mock_get_token.return_value = MockToken(expires_at=datetime.now(timezone.utc) - timedelta(hours=1))
 
@@ -95,4 +99,4 @@ def test_get_status_token_expired(mock_get_token, monkeypatch):
 
     assert response.status_code == 200
     data = response.json()
-    assert data["is_authenticated"] is False
+    assert data["authenticated"] is False
