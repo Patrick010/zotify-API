@@ -37,7 +37,7 @@ AnySinkConfig = Annotated[
 ]
 
 from typing import Optional
-from pydantic import root_validator
+from pydantic import model_validator
 
 # Configuration for a single trigger
 class TriggerConfig(BaseModel):
@@ -47,7 +47,7 @@ class TriggerConfig(BaseModel):
     action: str
     details: dict = Field(default_factory=dict)
 
-    @root_validator
+    @model_validator(mode='before')
     def check_event_or_tag(cls, values):
         if values.get('event') is not None and values.get('tag') is not None:
             raise ValueError('A trigger cannot have both an "event" and a "tag".')
