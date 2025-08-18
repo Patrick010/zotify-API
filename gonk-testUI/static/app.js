@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const endpointsList = document.getElementById("endpoints-list");
-    const apiResponse = document.getElementById("api-response");
+    // The global apiResponse is no longer needed
+    // const apiResponse = document.getElementById("api-response");
 
     const spotifyLoginBtn = document.getElementById("spotify-login");
     const launchSqliteBtn = document.getElementById("launch-sqlite");
@@ -94,7 +95,6 @@ document.addEventListener("DOMContentLoaded", () => {
             formHtml += `<div><label>Request Body (JSON):</label><textarea name="requestBody" rows="5"></textarea></div>`;
         }
 
-        formHtml += `<div><label>Admin API Key:</label><input type="text" name="adminApiKey"></div>`;
         formHtml += `<button type="submit">Send Request</button>`;
         form.innerHTML = formHtml;
 
@@ -110,8 +110,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const method = form.dataset.method;
         let path = form.dataset.path;
 
+        // Remove previous response from this form, if it exists
+        const existingResponse = form.querySelector('.api-response-output');
+        if (existingResponse) {
+            existingResponse.remove();
+        }
+
+        const responseOutput = document.createElement('pre');
+        responseOutput.className = 'api-response-output';
+        form.appendChild(responseOutput);
+
         const headers = { "Content-Type": "application/json" };
-        const adminKey = form.elements.adminApiKey.value;
+        const adminKey = getAdminApiKey(); // Use the global getter
         if (adminKey) {
             headers["X-API-Key"] = adminKey;
         }
@@ -122,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
         for (const [key, value] of formData.entries()) {
             if (path.includes(`{${key}}`)) {
                 path = path.replace(`{${key}}`, encodeURIComponent(value));
-            } else if (key !== "requestBody" && key !== "adminApiKey" && value) {
+            } else if (key !== "requestBody" && value) { // No longer need to check for adminApiKey here
                 queryParams.set(key, value);
             }
         }
@@ -137,9 +147,9 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const response = await fetch(url, options);
             const data = await response.json();
-            apiResponse.textContent = JSON.stringify(data, null, 2);
+            responseOutput.textContent = JSON.stringify(data, null, 2);
         } catch (error) {
-            apiResponse.textContent = `Error: ${error.message}`;
+            responseOutput.textContent = `Error: ${error.message}`;
             console.error("API call error:", error);
         }
     }
@@ -149,22 +159,24 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Auth Flow ---
 
     function getAdminApiKey() {
-        const apiKeyInput = document.querySelector('input[name="adminApiKey"]');
+        const apiKeyInput = document.getElementById('global-admin-api-key');
         return apiKeyInput ? apiKeyInput.value : null;
     }
 
     async function updateLoginButtonState() {
         if (!spotifyLoginBtn) return;
 
+        // Login button should always be enabled.
+        spotifyLoginBtn.disabled = false;
+        spotifyLoginBtn.title = "Login with your Spotify account.";
+
         const apiKey = getAdminApiKey();
+        // A key is still needed to check status and to logout.
+        // If no key, we assume "Login" state and don't try to fetch status.
         if (!apiKey) {
             spotifyLoginBtn.textContent = "Login with Spotify";
-            spotifyLoginBtn.disabled = true;
-            spotifyLoginBtn.title = "Enter an Admin API Key to enable login.";
             return;
         }
-        spotifyLoginBtn.disabled = false;
-        spotifyLoginBtn.title = "";
 
         try {
             const response = await fetch(`${ZOTIFY_API_BASE}/api/auth/status`, {
@@ -200,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                     updateLoginButtonState();
                 } catch (error) {
-                    apiResponse.textContent = `Error: ${error.message}`;
+                    alert(`Error during logout: ${error.message}`);
                 }
             } else {
                 // Login logic using polling
@@ -226,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         }, 2000); // Poll every 2 seconds
                     }
                 } catch (error) {
-                    apiResponse.textContent = `Error: ${error.message}`;
+                    alert(`Error during login: ${error.message}`);
                 }
             }
         });
@@ -269,10 +281,9 @@ document.addEventListener("DOMContentLoaded", () => {
     loadEndpoints();
     updateLoginButtonState();
 
-    // Listen for changes in any admin key input to re-evaluate button state
-    document.addEventListener('focusout', (event) => {
-        if (event.target && event.target.name === 'adminApiKey') {
-            updateLoginButtonState();
-        }
-    });
+    // Listen for changes in the global admin key input to re-evaluate button state
+    const globalApiKeyInput = document.getElementById('global-admin-api-key');
+    if (globalApiKeyInput) {
+        globalApiKeyInput.addEventListener('input', updateLoginButtonState);
+    }
 });

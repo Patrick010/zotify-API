@@ -8,7 +8,9 @@ sqlite_web_process = None
 
 @app.route("/")
 def index():
-    return render_template('index.html', api_url=args.api_url)
+    # Use the same default dev key as the main API for convenience
+    admin_api_key = os.environ.get("ADMIN_API_KEY", "zotify-admin-key-dev")
+    return render_template('index.html', api_url=args.api_url, admin_api_key=admin_api_key)
 
 @app.route("/<path:path>")
 def static_proxy(path):

@@ -34,6 +34,10 @@
         <header>
             <h1>Gonk Test UI</h1>
             <div class="controls">
+                <div class="api-key-container">
+                    <label for="global-admin-api-key">Admin API Key:</label>
+                    <input type="text" id="global-admin-api-key" name="adminApiKey" placeholder="Enter Admin API Key" value="{{ admin_api_key or '' }}">
+                </div>
                 <button id="spotify-login">Login with Spotify</button>
                 <button id="launch-sqlite">Launch sqlite-web</button>
                 <button id="stop-sqlite">Stop sqlite-web</button>
@@ -48,10 +52,6 @@
             <div class="api-section">
                 <h2>API Endpoints</h2>
                 <div id="endpoints-list"></div>
-                <div class="response-container">
-                    <h3>API Response</h3>
-                    <pre id="api-response"></pre>
-                </div>
             </div>
 
             <div class="db-section">
