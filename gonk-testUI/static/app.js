@@ -217,7 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 // Login logic using polling
                 try {
-                    const response = await fetch(`${ZOTIFY_API_BASE}/api/spotify/login`);
+                    const response = await fetch(`${ZOTIFY_API_BASE}/api/auth/spotify/login`);
                     const data = await response.json();
                     if (data.auth_url) {
                         loginPopup = window.open(data.auth_url, "spotify_login", "width=500,height=600");
