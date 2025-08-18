@@ -1,102 +1,102 @@
 # Zotify API - User Manual
 
-This manual explains how to use the Zotify REST API to manage media downloads. This guide is intended for end-users consuming the API.
+**Version:** 1.1
+**Date:** 2025-08-18
 
----
+## 1. Introduction
 
-## 1. Authentication
+This manual explains how to consume the Zotify REST API to manage your music library. It is intended for end-users or client application developers. For a full, interactive list of all endpoints, please see the [Swagger UI documentation](./../../docs) available on your local server instance.
 
-For all protected endpoints, you must provide your API key in the `X-API-Key` header. There is no separate login step.
+## 2. Authentication
 
----
+All protected endpoints require a valid API key to be sent in the `X-API-Key` HTTP header.
 
-## 2. Core API Workflow
+`X-API-Key: your_secret_admin_key`
 
-### 2.1. Add a Track for Download
+If the key is missing or incorrect, you will receive a `401 Unauthorized` error.
 
-#### Purpose
-To submit a new track to the download queue.
+## 3. Core Workflow Example
 
-#### Endpoint
-`POST /api/download`
+### Step 1: Add a Track for Download
 
-#### Request Example
-\`\`\`bash
-curl -X POST "https://zotify.yourdomain.com/api/download" \
+To submit one or more tracks to the download queue, make a `POST` request to the `/downloads` endpoint.
+
+-   **Endpoint:** `POST /api/downloads`
+-   **Request Body:** A JSON object containing a list of Spotify track IDs.
+
+**Example Request:**
+```bash
+curl -X POST "http://localhost:8000/api/downloads" \
   -H "X-API-Key: your_secret_admin_key" \
   -H "Content-Type: application/json" \
-  -d '{"track_ids": ["spotify:track:3n3Ppam7vgaVa1iaRUc9Lp"]}'
-\`\`\`
+  -d '{"track_ids": ["spotify:track:4cOdK2wGLETOMsV3oDPEhB"]}'
+```
 
-#### Response Example
-\`\`\`json
-[
-  {
-    "job_id": "a1b2c3d4-...",
-    "track_id": "spotify:track:3n3Ppam7vgaVa1iaRUc9Lp",
-    "status": "pending",
-    "progress": 0.0,
-    "created_at": "2025-08-17T16:00:00Z",
-    "error_message": null
-  }
-]
-\`\`\`
-
-### 2.2. Check Download Queue Status
-
-#### Purpose
-To retrieve the status of all current and past download jobs.
-
-#### Endpoint
-`GET /api/download/status`
-
-#### Request Example
-\`\`\`bash
-curl -X GET "https://zotify.yourdomain.com/api/download/status" \
-  -H "X-API-Key: your_secret_admin_key"
-\`\`\`
-
-#### Response Example
-\`\`\`json
+**Example Success Response (`200 OK`):**
+The API will return a standard `{"data": ...}` response containing a list of the created download jobs.
+```json
 {
-  "total_jobs": 1,
-  "pending": 1,
-  "completed": 0,
-  "failed": 0,
-  "jobs": [
+  "data": [
     {
       "job_id": "a1b2c3d4-...",
-      "track_id": "spotify:track:3n3Ppam7vgaVa1iaRUc9Lp",
+      "track_id": "spotify:track:4cOdK2wGLETOMsV3oDPEhB",
       "status": "pending",
       "progress": 0.0,
-      "created_at": "2025-08-17T16:00:00Z",
+      "created_at": "2025-08-18T10:30:00Z",
       "error_message": null
     }
   ]
 }
-\`\`\`
+```
 
----
+### Step 2: Check Download Queue Status
 
-## 3. Error Handling
+To retrieve the status of all current and past download jobs, make a `GET` request to the `/downloads` endpoint.
 
-When an API request fails, you will receive a JSON response with a specific error code.
+-   **Endpoint:** `GET /api/downloads`
 
-| Status Code | Error Code | Description                                                                 |
-| ----------- | ---------- | --------------------------------------------------------------------------- |
-| `401`       | `E40101`   | Authentication failed. Your `X-API-Key` is missing or incorrect.            |
-| `404`       | `E40401`   | The requested resource (e.g., a specific job ID) could not be found.        |
-| `422`       | `E42201`   | Invalid request payload. The request body is missing required fields or has incorrect data types. |
-| `500`       | `E50001`   | An unexpected error occurred on the server.                                 |
+**Example Request:**
+```bash
+curl -X GET "http://localhost:8000/api/downloads" \
+  -H "X-API-Key: your_secret_admin_key"
+```
 
-**Example Error Response:**
-\`\`\`json
+**Example Success Response (`200 OK`):**
+The response will be a paginated list of all download jobs.
+```json
+{
+  "data": [
+    {
+      "job_id": "a1b2c3d4-...",
+      "track_id": "spotify:track:4cOdK2wGLETOMsV3oDPEhB",
+      "status": "pending",
+      "progress": 0.0,
+      "created_at": "2025-08-18T10:30:00Z",
+      "error_message": null
+    }
+  ],
+  "meta": {
+    "total_items": 1,
+    "total_pages": 1,
+    "current_page": 1,
+    "page_size": 50
+  }
+}
+```
+
+## 4. Error Handling
+
+When an API request fails, you will receive a JSON response with a standardized error schema.
+
+**Example Error Response (`401 Unauthorized`):**
+```json
 {
   "error": {
-    "code": "E40101",
+    "code": "E401_INVALID_CREDENTIALS",
     "message": "Authentication failed: Invalid or missing API key.",
-    "timestamp": "2025-08-17T16:05:00Z",
+    "timestamp": "2025-08-18T10:35:00Z",
     "request_id": "uuid-..."
   }
 }
-\`\`\`
+```
+For a full list of error codes and their meanings, please consult the `ERROR_HANDLING_GUIDE.md`.
