@@ -4,6 +4,7 @@ import base64
 import hashlib
 import inspect
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
 from datetime import datetime, timezone, timedelta
 import httpx
@@ -64,6 +65,7 @@ async def spotify_callback(code: str, state: str, db: Session = Depends(get_db))
     }
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
     async with httpx.AsyncClient() as client:
+        html_content = "<html><head><title>Authentication Status</title></head><body><p>Authentication complete. You can close this window.</p><script>window.close();</script></body></html>"
         try:
             resp = await client.post(SPOTIFY_TOKEN_URL, data=data, headers=headers)
             resp.raise_for_status()
@@ -88,7 +90,7 @@ async def spotify_callback(code: str, state: str, db: Session = Depends(get_db))
                 destinations=["default_console", "debug_file"],
             )
 
-            return {"status": "success", "message": "Successfully authenticated with Spotify."}
+            return HTMLResponse(content=html_content)
         except httpx.HTTPStatusError as e:
             log_event(
                 "Failed to get token from Spotify",
@@ -96,10 +98,10 @@ async def spotify_callback(code: str, state: str, db: Session = Depends(get_db))
                 tags=["security"],
                 details={"status_code": e.response.status_code, "response": e.response.text},
             )
-            raise HTTPException(status_code=e.response.status_code, detail="Failed to retrieve token from Spotify")
+            return HTMLResponse(content=html_content)
         except httpx.RequestError as e:
             logger.error(f"Request to Spotify failed: {e}")
-            raise HTTPException(status_code=503, detail="Could not connect to Spotify")
+            return HTMLResponse(content=html_content)
 
 
 @router.get("/status", response_model=AuthStatus, dependencies=[Depends(require_admin_api_key)])
