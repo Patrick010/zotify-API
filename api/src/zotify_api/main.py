@@ -51,7 +51,7 @@ app.add_middleware(RequestIDMiddleware)
 def initialize_logging_framework():
     """ Loads config and initializes the new flexible logging framework. """
     try:
-        with open("api/logging_framework.yml", "r") as f:
+        with open("logging_framework.yml", "r") as f:
             config_data = yaml.safe_load(f)
         validated_config = LoggingFrameworkConfig(**config_data)
 

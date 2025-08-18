@@ -15,7 +15,7 @@ def reload_logging_config():
     `logging_framework.yml` file at runtime.
     """
     try:
-        with open("api/logging_framework.yml", "r") as f:
+        with open("logging_framework.yml", "r") as f:
             config_data = yaml.safe_load(f)
     except FileNotFoundError:
         raise HTTPException(
