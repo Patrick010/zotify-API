@@ -4,6 +4,35 @@
 
 ---
 
+## ACT-034: Resolve `snitch` Regression and Harden Logging Framework
+
+**Date:** 2025-08-18
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To fix a critical regression in the `snitch` helper application, and then, based on user feedback, implement a series of significant enhancements to the Flexible Logging Framework to improve its security, flexibility, and configurability.
+
+### Outcome
+1.  **`snitch` Application Repaired:**
+    -   A persistent build issue, originally believed to be a caching problem, was diagnosed as a structural conflict in the Go module.
+    -   The application was radically refactored into a single, self-contained `snitch.go` file, which resolved the build issue.
+    -   A subsequent `TypeError` in the Python API's callback handler, revealed by the now-working `snitch` app, was also fixed.
+
+2.  **Flexible Logging Framework Hardened:**
+    -   **Security Redaction:** A `SensitiveDataFilter` was implemented to automatically redact sensitive data (tokens, codes) from all log messages when the `APP_ENV` is set to `production`. This was implemented in both the Python API and the `snitch` Go application.
+    -   **Tag-Based Routing:** The framework's trigger system was upgraded to support tag-based routing. This allows administrators to route logs to specific sinks based on tags (e.g., `"security"`) defined in `logging_framework.yml`, decoupling the logging of an event from its handling.
+    -   **Security Log:** A dedicated `security.log` sink was configured, and both successful and failed authentication events are now tagged to be routed to this log, providing a complete audit trail.
+    -   **Duplicate Log Fix:** A bug that caused duplicate entries in the security log was fixed by making the original `log_event` call more specific about its primary destinations.
+
+### Related Documents
+- `snitch/snitch.go`
+- `api/src/zotify_api/routes/auth.py`
+- `api/src/zotify_api/core/logging_framework/`
+- `api/logging_framework.yml`
+
+---
+
 ## ACT-033: Fix API TypeError in Spotify Callback
 
 **Date:** 2025-08-18

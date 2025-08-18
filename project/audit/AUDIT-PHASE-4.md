@@ -1,24 +1,23 @@
 # Audit Phase 4: Findings and Final Plan
 
-### 2025-08-18: `snitch` Regression and API Bug Fix
+### 2025-08-18: Final Report on `snitch` Regression and Logging Framework Hardening
 
 **Audit Finding:**
-Following the API canonicalization, a critical regression in the `snitch` helper application was identified. The application was non-functional due to a persistent build issue, which was initially believed to be a Go caching problem.
+This work session began with a critical regression in the `snitch` helper application. The investigation and resolution of this issue uncovered a series of deeper architectural problems and led to a significant hardening of the new Flexible Logging Framework.
 
-**Investigation and Resolution:**
-A deep and complex debugging process was undertaken.
-1.  **Initial attempts** to fix the build by cleaning Go caches were unsuccessful.
-2.  **The root cause** was eventually identified as a structural conflict within the `snitch` Go module itself. A legacy `main` package file (`snitch.go`) was conflicting with the modern, refactored entry point (`cmd/snitch/main.go`), causing the compiler to produce a binary with stale code.
-3.  **The `snitch` application was radically refactored** into a single, self-contained `package main` file (`snitch.go`) to eliminate all structural ambiguity. The `cmd/` and `internal/` directories were removed.
-4.  **A local caching issue** on the user's machine, where a locked process prevented the new executable from running, was diagnosed and resolved by the user.
-5.  **A secondary bug**, a `TypeError` in the main Python API's `/auth/spotify/callback` endpoint, was uncovered once `snitch` began working correctly.
-6.  **The API bug was fixed** by removing an incorrect `await` keyword from a `resp.json()` call in `api/src/zotify_api/routes/auth.py`.
+**Investigation and Resolution Summary:**
+1.  **`snitch` Build Failure:** The initial problem was a persistent build failure. This was eventually traced to a structural conflict in the `snitch` Go module. The issue was resolved by refactoring `snitch` into a single, self-contained Go application, which eliminated the build ambiguity.
+2.  **API `TypeError`:** The now-working `snitch` application revealed a latent `TypeError` in the API's `/auth/spotify/callback` endpoint, which was subsequently fixed.
+3.  **Logging Framework Hardening:** Based on iterative user feedback, the logging framework was significantly enhanced:
+    *   **Security Redaction:** A `SensitiveDataFilter` was implemented to automatically redact sensitive information from logs in production environments (`APP_ENV=production`).
+    *   **Tag-Based Routing:** The trigger system was upgraded to support routing based on tags (e.g., a `"security"` tag), making the framework more flexible and configurable.
+    *   **Comprehensive Audit Trail:** The system was updated to log both successful and failed authentication attempts to a dedicated `security.log`, providing a complete audit trail.
 
 **Current Status:**
-All identified code issues have been resolved. The `snitch` application has been simplified and fixed, and the subsequent API bug has been patched. The solution is pending final end-to-end confirmation from the user.
+All identified bugs and regressions have been resolved. The `snitch` application is functional, and the logging framework is now more secure, flexible, and robust. The project is in a stable state.
 
 **Recommendation:**
-The `snitch` application, being a critical component for CLI auth, should be brought into the standard CI/CD pipeline with a simple integration test to prevent future regressions.
+The recommendation to add an integration test for `snitch` to the CI/CD pipeline remains valid to prevent future regressions.
 
 ### 2025-08-17: API Canonicalization and `snitch` Regression
 
