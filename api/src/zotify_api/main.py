@@ -18,6 +18,7 @@ from pydantic import ValidationError
 from .core.logging_framework import log_event
 from .core.logging_framework.schemas import LoggingFrameworkConfig
 from .core.logging_framework.service import get_logging_service as get_flexible_logging_service
+from .core.logging_framework.filters import SensitiveDataFilter
 
 from zotify_api.database.session import Base, engine
 
@@ -71,6 +72,12 @@ def initialize_logging_framework():
             level="INFO",
             destinations=["default_console"] # Assumes a console sink named 'default_console' exists
         )
+
+        # If in production, add a filter to redact sensitive data from all logs
+        if settings.app_env == "production":
+            py_logging.getLogger().addFilter(SensitiveDataFilter())
+            log_event("Production mode detected. Applying sensitive data filter to all logs.", level="INFO")
+
     except (FileNotFoundError, ValidationError, yaml.YAMLError) as e:
         # Fallback to basic logging if the framework fails to initialize
         log.error(f"FATAL: Could not initialize flexible logging framework: {e}")

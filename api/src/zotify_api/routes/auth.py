@@ -10,6 +10,7 @@ from urllib.parse import quote_plus
 
 from zotify_api.database import crud
 from zotify_api.schemas.auth import AuthStatus, RefreshResponse, SpotifyCallbackPayload, CallbackResponse, OAuthLoginResponse
+from zotify_api.core.logging_framework import log_event
 from zotify_api.services.auth import require_admin_api_key, refresh_spotify_token, get_auth_status
 from zotify_api.services.deps import get_db
 from zotify_api.auth_state import (
@@ -76,7 +77,12 @@ async def spotify_callback(code: str, state: str, db: Session = Depends(get_db))
 
             return {"status": "success", "message": "Successfully authenticated with Spotify."}
         except httpx.HTTPStatusError as e:
-            logger.error(f"Failed to get token from Spotify: {e.response.text}")
+            log_event(
+                "Failed to get token from Spotify",
+                level="ERROR",
+                tags=["security"],
+                details={"status_code": e.response.status_code, "response": e.response.text},
+            )
             raise HTTPException(status_code=e.response.status_code, detail="Failed to retrieve token from Spotify")
         except httpx.RequestError as e:
             logger.error(f"Request to Spotify failed: {e}")

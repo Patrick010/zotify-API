@@ -97,7 +97,13 @@ func loginHandler(apiCallbackURL string) http.HandlerFunc {
 		}
 
 		if resp.StatusCode >= 400 {
-			logger.Printf("event: callback.handoff.failure, details: {status_code: %d, response: %s}", resp.StatusCode, string(respBody))
+			// In production, do not log the raw response body as it may contain sensitive details.
+			appEnv := os.Getenv("APP_ENV")
+			if appEnv == "production" {
+				logger.Printf("event: callback.handoff.failure, details: {status_code: %d, response: [REDACTED]}", resp.StatusCode)
+			} else {
+				logger.Printf("event: callback.handoff.failure, details: {status_code: %d, response: %s}", resp.StatusCode, string(respBody))
+			}
 			w.WriteHeader(resp.StatusCode)
 			fmt.Fprintln(w, "Authentication failed on the backend server.")
 			return
