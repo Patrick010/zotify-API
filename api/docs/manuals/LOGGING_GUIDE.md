@@ -1,6 +1,6 @@
 # Zotify Flexible Logging Framework: Developer's Guide
 
-**Version:** 1.0
+**Version:** 1.1
 **Credo:** "Documentation can never be too detailed."
 
 ## 1. Introduction & Philosophy
@@ -12,15 +12,6 @@ The core philosophy is **decentralized control**. Instead of modifying a central
 This guide will walk you through the architecture, API, configuration, and advanced usage of the framework.
 
 ## 2. Core Concepts
-
-### Logging vs. Error Handling
-
-It is crucial to understand the distinction between this framework and the global `ErrorHandler`:
-
--   **`ErrorHandler`**: This is a specialized system that **reacts to uncaught exceptions**. Its job is to be a safety net for the entire application. When an unexpected error occurs, it catches it and can trigger high-level actions (like sending an alert).
--   **`LoggingFramework`**: This is a general-purpose tool for **proactively creating log entries**. You use it to record informational messages, debug traces, audit trails, business events, and expected errors.
-
-The two systems are integrated. By default, the `ErrorHandler` uses this `LoggingFramework` to log the exceptions it catches. This means a critical exception can be routed to multiple destinations (e-mail, Slack, a log file, etc.) using the power of this framework.
 
 ### The `log_event` Function
 
@@ -34,166 +25,109 @@ def process_payment(user_id: str, amount: float):
         f"Processing payment for user {user_id}",
         level="INFO",
         destinations=["audit_log", "console"],
+        tags=["payment", "audit"],
         extra={"user_id": user_id, "amount": amount}
     )
-    # ... payment processing logic ...
 ```
 
-This single call allows you to specify the message, severity level, intended destinations, and any structured data you want to include.
+This single call allows you to specify the message, severity level, intended destinations, descriptive tags, and any structured data you want to include.
 
-## 3. Configuration (`logging_framework.yml`)
+### Tag-Based Routing
 
-While the framework is designed for inline control, a central configuration file is used to define the *available* destinations (sinks) and global trigger rules.
+The most powerful feature of the framework is **tag-based routing**. Developers can add a `tags` list to any `log_event` call. Administrators can then create `triggers` in the configuration file that watch for these tags and route copies of the log message to specific destinations.
 
-**File Location:** The configuration file must be located at `api/logging_framework.yml`.
+This decouples the *what* from the *where*. A developer can simply tag a log as `"security"` or `"performance"` without needing to know where it should be stored. An administrator can then, without any code changes, decide that all `"security"` events should go to a special `security.log` file.
 
-### Top-Level Structure
+## 3. Configuration
 
-The YAML file has two main sections: `logging` and `triggers`.
+The framework is controlled by two main mechanisms: the `logging_framework.yml` file and environment variables.
 
+### 3.1. Environment Variables
+
+-   `APP_ENV`: This is the most important variable. It determines the application's run mode.
+    -   `development` (default): In this mode, logs can be more verbose, and sensitive data (like tokens) may be logged for debugging purposes.
+    -   `production`: In this mode, **automatic sensitive data redaction is enabled**. Any log message containing tokens, codes, or other sensitive patterns will have that data automatically replaced with `[REDACTED]`.
+-   `SNITCH_API_CALLBACK_URL`: As used by the `snitch` application, must be a full URL.
+
+### 3.2. The `logging_framework.yml` File
+
+This file defines the *available* destinations (sinks) and the routing rules (triggers). It is located at `api/logging_framework.yml`.
+
+#### The `logging` Section: Sinks
+
+This section defines all available output destinations.
+
+-   `name`: A unique identifier for the sink.
+-   `type`: Can be `console`, `file`, or `webhook`.
+-   `level`: The minimum log level this sink will process.
+
+**Sink Type: `file`**
 ```yaml
-logging:
-  # ... defines sinks and default behavior ...
+- name: "debug_log"
+  type: "file"
+  level: "DEBUG"
+  path: "logs/debug.log" # Relative to the api/ directory
+  max_bytes: 5242880 # 5 MB
+  backup_count: 3
+```
+The `path` is relative to the `api/` directory. The `start.sh` script automatically creates the `api/logs` directory.
+
+#### The `triggers` Section: Routing Rules
+
+This section defines rules that route logs. The most powerful trigger is `tag`.
+
+**Tag-Based Trigger Example:**
+This trigger watches for any log event that has `"security"` in its `tags` list and routes a copy to the `security_log` sink.
+```yaml
 triggers:
-  # ... defines rules that react to log events ...
+  - tag: "security"
+    action: "route_to_sink"
+    details:
+      destination: "security_log"
 ```
-
-### The `logging` Section
-
-This section defines the default logging level and all available output destinations, called "sinks".
-
-```yaml
-logging:
-  default_level: INFO
-  sinks:
-    - # ... sink 1 config ...
-    - # ... sink 2 config ...
-```
-
--   `default_level`: The global log level. Messages below this level are ignored unless a sink specifies a more verbose level. Valid levels are `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`.
--   `sinks`: A list of all configured sink objects.
-
-### Sink Configuration
-
-Every sink configuration shares three common properties:
-
--   `name` (string, required): A unique identifier for the sink. You will use this name in `log_event` to target specific destinations. Must contain only letters, numbers, and underscores.
--   `type` (string, required): The type of the sink. Determines which other fields are required. Valid types for the MVP are `console`, `file`, and `webhook`.
--   `level` (string, optional): The minimum log level this sink will process. If omitted, it uses the `default_level`.
-
-#### Sink Type: `console`
-
-Logs messages to the standard console output.
-
--   **Fields:**
-    -   `name`, `type`, `level`
--   **Example:**
-    ```yaml
-    - name: "my_console"
-      type: "console"
-      level: "INFO"
-    ```
-
-#### Sink Type: `file`
-
-Logs messages to a file, with built-in support for log rotation.
-
--   **Fields:**
-    -   `name`, `type`, `level`
-    -   `path` (string, required): The absolute or relative path to the log file.
-    -   `max_bytes` (integer, optional): The maximum size of the log file in bytes before it is rotated. Defaults to `10485760` (10 MB).
-    -   `backup_count` (integer, optional): The number of old log files to keep. Defaults to `5`.
--   **Example:**
-    ```yaml
-    - name: "debug_log"
-      type: "file"
-      level: "DEBUG"
-      path: "/app/api/logs/debug.log"
-      max_bytes: 5242880 # 5 MB
-      backup_count: 3
-    ```
-
-#### Sink Type: `webhook`
-
-Sends log messages as a JSON payload to a specified HTTP/S URL via a POST request.
-
--   **Fields:**
-    -   `name`, `type`, `level`
-    -   `url` (string, required): The full URL to send the webhook to.
--   **Example:**
-    ```yaml
-    - name: "critical_alert_webhook"
-      type: "webhook"
-      level: "CRITICAL"
-      url: "https://hooks.example.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
-    ```
-
-### The `triggers` Section
-
-This section defines rules that can be triggered by log events. (Note: The action mechanism is basic in the MVP).
-
--   **Example:**
-    ```yaml
-    triggers:
-      - event: "user_login_failed"
-        action: "log_security_event"
-        details:
-          level: "WARNING"
-          destinations: ["debug_log"]
-    ```
 
 ## 4. The `log_event` API Reference
 
-This is the primary function for all logging operations.
-
 **Signature:**
-`log_event(message: str, level: str = "INFO", destinations: Optional[List[str]] = None, **extra)`
+`log_event(message: str, level: str = "INFO", destinations: Optional[List[str]] = None, tags: Optional[List[str]] = None, **extra)`
 
 -   `message` (str): The primary log message.
--   `level` (str): The log's severity. Defaults to `INFO`.
--   `destinations` (Optional[List[str]]): A list of sink `name`s to send this specific log to. If `None`, the log is sent to *all* configured sinks that meet the level threshold.
--   `**extra` (dict): Any additional key-value pairs will be included in the structured log record. This is useful for passing context like user IDs, request IDs, etc.
+-   `level` (str): The log's severity.
+-   `destinations` (Optional[List[str]]): A list of sink `name`s to send this specific log to. If `None`, the log is sent to *all* configured sinks.
+-   `tags` (Optional[List[str]]): A list of string tags to attach to the log event, used for tag-based routing.
+-   `**extra` (dict): Any additional key-value pairs will be included in the structured log record.
 
 ## 5. Runtime Configuration Reloading
 
-You can update the `logging_framework.yml` file and apply the changes without restarting the application. This is useful for changing log levels on a live system or adding a new temporary sink for debugging.
-
-To reload the configuration, send an authenticated `POST` request to the following endpoint:
-
-`POST /api/system/logging/reload`
-
-A successful request will return a `202 Accepted` status code and a JSON body confirming the reload. If the configuration file is missing or contains invalid syntax or schema errors, the endpoint will return an appropriate `4xx` error code with details.
+You can update the `logging_framework.yml` file and apply the changes without restarting the application by sending an authenticated `POST` request to `POST /api/system/logging/reload`.
 
 ## 6. Complete Example
 
-Here is a complete `logging_framework.yml` example demonstrating multiple sinks.
-
 ```yaml
 # /api/logging_framework.yml
-
 logging:
-  default_level: "INFO"  # Don't log DEBUG messages by default
+  default_level: "INFO"
   sinks:
-    # A console sink for general information during development
     - name: "default_console"
       type: "console"
       level: "INFO"
-
-    # A detailed log file for debugging and forensics
-    - name: "main_log_file"
+    - name: "debug_log"
       type: "file"
-      level: "DEBUG" # Capture everything in this file
-      path: "/app/api/logs/main.log"
-      max_bytes: 20971520 # 20MB
-      backup_count: 5
-
-    # A webhook to a Slack channel for critical errors
+      level: "DEBUG"
+      path: "logs/debug.log"
+    - name: "security_log"
+      type: "file"
+      level: "INFO"
+      path: "logs/security.log"
     - name: "slack_alerter"
       type: "webhook"
       level: "CRITICAL"
       url: "https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK"
-
 triggers:
+  - tag: "security"
+    action: "route_to_sink"
+    details:
+      destination: "security_log"
   - event: "database_timeout"
     action: "alert"
     details:

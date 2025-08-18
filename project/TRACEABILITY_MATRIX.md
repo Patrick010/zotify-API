@@ -30,7 +30,7 @@
 | FE-05 | API Governance | FUTURE_ENHANCEMENTS.md | ❌ Missing | N/A | N/A | | e.g., rate limiting, quotas |
 | FE-06 | Observability | FUTURE_ENHANCEMENTS.md | 🟡 Partial | `middleware/request_id.py` | 🔍 Needs Verification | | Lacks detailed audit trails. See FE-07a. |
 | FE-07 | Standardized Error Handling | FUTURE_ENHANCEMENTS.md | ✅ Implemented | `core/error_handler/` | ✅ Implemented | | Centralized error handling module is complete and integrated. |
-| FE-07a | Flexible Logging Framework (MVP) | FUTURE_ENHANCEMENTS.md | 🟡 Partial | `core/logging_framework/` | ✅ Implemented | FE-06 | MVP of the new developer-facing logging framework is complete, with configurable sinks and a `log_event` API. |
+| FE-07a | Flexible Logging Framework (MVP) | FUTURE_ENHANCEMENTS.md | ✅ Implemented | `core/logging_framework/` | ✅ Implemented | FE-06 | Core framework is complete, including configurable sinks (file, console, webhook), tag-based routing, and automatic redaction of sensitive data in production. |
 | DOC-01 | Comprehensive Logging Guide | PID.md | ✅ Implemented | `docs/manuals/LOGGING_GUIDE.md` | N/A | FE-07a | A detailed developer guide for the new logging framework has been created as per the project's documentation-first principles. |
 | FE-08 | Comprehensive Health Checks | FUTURE_ENHANCEMENTS.md | 🟡 Partial | `routes/system.py` | 🔍 Needs Verification | | Only basic uptime/env endpoints exist |
 | FE-09 | Unified Configuration Management | FUTURE_ENHANCEMENTS.md | 🟡 Partial | `services/config_service.py` | 🔍 Needs Verification | | Dual system exists, not unified |
@@ -40,7 +40,7 @@
 | SYS-03 | Security (Admin Auth) | HIGH_LEVEL_DESIGN.md | ✅ Implemented | `services/auth.py` | 🔍 Needs Verification | FE-01 | Basic API key auth is implemented |
 | SYS-04 | Extensibility | HIGH_LEVEL_DESIGN.md | ✅ Implemented | `providers/base.py` | N/A | | Provider model allows for extension |
 | SYS-05 | CORS Policy for Web UI | HIGH_LEVEL_DESIGN.md | ✅ Implemented | `zotify_api/main.py` | N/A | | Permissive CORS policy to allow browser-based clients. |
-| SYS-06 | Snitch Secure Callback | `snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md` | 🟡 Partial | `snitch/internal/listener/` | ✅ Implemented | | Zero Trust model with end-to-end payload encryption and nonce-based replay protection. |
+| SYS-06 | Snitch Secure Callback | `snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md` | 🟡 Partial | `snitch/snitch.go` | ✅ Implemented | | Zero Trust model with end-to-end payload encryption and nonce-based replay protection. |
 
 ---
 
@@ -48,10 +48,10 @@
 
 | Requirement | Source Doc | Phase(s) | Status |
 |-------------|------------|----------|--------|
-| Central LoggingService with async pipeline | LOGGING_SYSTEM_DESIGN.md | Phase 1 | In Progress |
-| Developer API with per-module log control | LOGGING_SYSTEM_DESIGN.md | Phase 2 | In Progress |
-| Multi-sink destinations (file, syslog, db, Kafka, RabbitMQ) | LOGGING_SYSTEM_DESIGN.md | Phase 3 | TODO |
-| Runtime triggers with hot reload | LOGGING_SYSTEM_DESIGN.md | Phase 4 | TODO |
+| Central LoggingService with async pipeline | LOGGING_SYSTEM_DESIGN.md | Phase 1 | ✅ Implemented |
+| Developer API with per-module log control | LOGGING_SYSTEM_DESIGN.md | Phase 2 | ✅ Implemented |
+| Multi-sink destinations (file, syslog, db, Kafka, RabbitMQ) | LOGGING_SYSTEM_DESIGN.md | Phase 3 | 🟡 Partial |
+| Runtime triggers with hot reload | LOGGING_SYSTEM_DESIGN.md | Phase 4 | 🟡 Partial |
 | Observability integration (OTel, Prometheus, JSON logs) | LOGGING_SYSTEM_DESIGN.md | Phase 5 | TODO |
 | Security & Compliance audit stream | LOGGING_SYSTEM_DESIGN.md | Phase 6 | TODO |
 | Extensibility framework for custom adapters | LOGGING_SYSTEM_DESIGN.md | Phase 7 | TODO |

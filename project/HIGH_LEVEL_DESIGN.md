@@ -54,9 +54,11 @@ To ensure consistent and comprehensive observability, the platform implements a 
 
 **Key Principles:**
 - **Developer-Centric API:** The framework provides a simple `log_event()` function that allows developers to control logging behavior (level, destination, metadata) on a per-call basis, directly from their code.
-- **Configuration-Driven Sinks:** The available logging destinations ("sinks") like the console, rotating files, and webhooks are defined in an external `logging_framework.yml` file, decoupling the logging topology from the application code.
+- **Tag-Based Routing:** The framework uses a tag-based system to decouple the logging of an event from its routing. Developers can add descriptive tags (e.g., `"security"`, `"database"`) to a log event, and administrators can then create rules in the configuration file to route all logs with a certain tag to a specific destination.
+- **Configuration-Driven Sinks:** The available logging destinations ("sinks") are defined in an external `logging_framework.yml` file. This configuration is also sensitive to environment variables, allowing for flexible path definitions.
+- **Security by Default:** When running in a `production` environment (as determined by the `APP_ENV` variable), the framework automatically redacts sensitive data (like tokens and API keys) from all log messages to prevent data leakage.
 - **Runtime Flexibility:** The logging configuration can be reloaded at runtime via an API endpoint, allowing administrators to change log levels or destinations on a live system without a restart.
-- **Asynchronous by Design:** The framework is built to be non-blocking. Log processing, especially for I/O-heavy sinks like webhooks, is handled asynchronously to minimize performance impact on the main application.
+- **Asynchronous by Design:** The framework is built to be non-blocking. Log processing is handled asynchronously to minimize performance impact on the main application.
 - **Integration with Error Handling:** The framework serves as the backend for the `ErrorHandler`, ensuring that all system-level exceptions are processed through the same powerful and configurable routing system.
 
 This component is critical for debugging, monitoring, and creating detailed audit trails. For a comprehensive guide on its use, see the [`LOGGING_GUIDE.md`](../api/docs/manuals/LOGGING_GUIDE.md) document.

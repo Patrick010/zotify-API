@@ -141,24 +141,28 @@ The application uses a dual system for managing configuration, separating immuta
 
 *   **`schemas.py`**:
     *   Defines the Pydantic models for validating the `logging_framework.yml` configuration file.
-    *   Uses a discriminated union on the `type` field (`console`, `file`, `webhook`) to correctly parse different sink configurations into their respective Pydantic models.
+    *   The `TriggerConfig` model now supports both `event` and `tag` based triggers, with a validator to ensure mutual exclusivity.
 
 *   **`service.py`**:
-    *   **`LoggingService`**: Implemented as a singleton, this class is the core of the framework. It loads the validated configuration, instantiates the required sink objects, and dispatches log events.
-    *   **`BaseSink`**: An abstract base class that defines the common interface for all sinks (e.g., an `emit` method).
-    *   **Sink Implementations**:
-        *   `ConsoleSink`: A simple sink that prints formatted logs to standard output.
-        *   `FileSink`: Uses Python's built-in `logging.handlers.RotatingFileHandler` to provide robust, rotating file logs.
-        *   `WebhookSink`: Uses the `httpx` library to send logs to an external URL asynchronously, preventing I/O from blocking the main application.
+    *   **`LoggingService`**: Implemented as a singleton, this class is the core of the framework. It loads the validated configuration, instantiates sinks, and dispatches log events.
+    *   **Trigger Handling**: The service now supports two types of triggers defined in the YAML: event-based triggers (which are destructive and replace the original log) and tag-based triggers (which are non-destructive and route a copy of the log to a new destination).
+
+*   **`filters.py`**:
+    *   Contains the `SensitiveDataFilter`, a `logging.Filter` subclass that uses regex to find and redact sensitive information (tokens, codes) from log messages before they are processed by any sink.
+
+*   **`main.py` (Application Entry Point)**:
+    *   The `initialize_logging_framework` function is called on startup.
+    *   It reads `logging_framework.yml`, expands any environment variables (e.g., `${VAR}`), and then loads the configuration.
+    *   If the `APP_ENV` is set to `production`, it programmatically adds the `SensitiveDataFilter` to the root logger, enabling global, automatic redaction of sensitive data.
 
 *   **`__init__.py`**:
-    *   Exposes the primary public API function, `log_event()`. This decouples the application code from the internal `LoggingService` implementation, providing a stable interface for developers.
+    *   Exposes the primary public API function, `log_event()`.
 
 *   **Configuration (`api/logging_framework.yml`)**:
-    *   A YAML file where all sinks and basic triggers are defined. This file is read on application startup and can be re-read at runtime.
+    *   A YAML file where all sinks and triggers (both event-based and tag-based) are defined.
 
 *   **Reload Endpoint (`routes/system.py`)**:
-    *   The `POST /api/system/logging/reload` endpoint provides a mechanism to hot-reload the configuration from `logging_framework.yml` without an application restart. It reads the file, validates it with the Pydantic schemas, and re-initializes the `LoggingService` with the new configuration.
+    *   The `POST /api/system/logging/reload` endpoint allows for hot-reloading the configuration from `logging_framework.yml`.
 
 ---
 
@@ -184,9 +188,9 @@ This section describes the low-level design of the official supporting modules f
 
 **Purpose:** A helper application to securely manage the OAuth callback flow for CLI clients.
 
-*   **Architecture:** A self-contained Go application that runs a temporary local web server. It uses a Zero Trust security model with end-to-end payload encryption to protect the authorization code.
-*   **Detailed Design:** For the full low-level design, including the cryptographic workflow, please refer to the canonical design documents in the `snitch/docs/` directory, primarily:
-    - **[`PHASE_2_ZERO_TRUST_DESIGN.md`](../snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md)**
+*   **Architecture:** A self-contained, single-file Go application (`snitch.go`) that runs a temporary local web server. The single-file structure was adopted to resolve a persistent and complex build issue.
+*   **Security:** It uses a Zero Trust security model with end-to-end payload encryption to protect the authorization code. It also redacts sensitive data from its logs when the `APP_ENV` is set to `production`.
+*   **Detailed Design:** For the full low-level design, including the cryptographic workflow, please refer to the canonical design documents in the `snitch/docs/` directory.
 
 ---
 
