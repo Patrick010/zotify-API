@@ -97,7 +97,59 @@ triggers:
 -   `tags` (Optional[List[str]]): A list of string tags to attach to the log event, used for tag-based routing.
 -   `**extra` (dict): Any additional key-value pairs will be included in the structured log record.
 
-## 5. Runtime Configuration Reloading
+## 5. Advanced Usage: Creating Custom Workflows
+
+The true power of the framework comes from combining the developer's ability to create custom tags with the administrator's ability to configure routing. The tags are not predefined or special; they are arbitrary strings that developers can invent to add meaning to an event.
+
+Here is a complete workflow for creating a new, custom log stream for a "podcast processing" feature.
+
+### Step 1: The Developer Tags a New Event
+
+A developer working on a podcast feature can decide to tag all related logs with `"podcast_processing"`. This requires no special registration; they simply add the tag to the `log_event` call.
+
+```python
+# In a hypothetical podcast_service.py
+from zotify_api.core.logging_framework import log_event
+
+def process_podcast_episode(episode_id: str):
+    log_event(
+        f"Starting processing for podcast episode {episode_id}",
+        level="INFO",
+        tags=["podcast_processing"], # A new, custom tag
+        extra={"episode_id": episode_id}
+    )
+    # ...
+```
+
+### Step 2: The Administrator Creates a New Log Stream
+
+An administrator, seeing that developers are now using the `"podcast_processing"` tag, can decide to route these specific logs to their own file. They can do this entirely by editing the `logging_framework.yml` file, without requiring any code changes from the developer.
+
+1.  **Define a new sink:**
+    ```yaml
+    # In logging_framework.yml, under `sinks:`
+    - name: "podcast_log_file"
+      type: "file"
+      level: "INFO"
+      path: "logs/podcasts.log"
+    ```
+
+2.  **Define a new trigger for the custom tag:**
+    ```yaml
+    # In logging_framework.yml, under `triggers:`
+    - tag: "podcast_processing"
+      action: "route_to_sink"
+      details:
+        destination: "podcast_log_file"
+    ```
+
+### Step 3: Reload the Configuration
+
+Finally, the administrator can apply these changes to a running server by calling `POST /api/system/logging/reload`.
+
+From this point on, every time a developer logs an event with the `"podcast_processing"` tag, it will be automatically routed to the `logs/podcasts.log` file, in addition to any other destinations it was sent to. This allows for the creation of highly specific, custom log streams for any feature or subsystem.
+
+## 6. Runtime Configuration Reloading
 
 You can update the `logging_framework.yml` file and apply the changes without restarting the application by sending an authenticated `POST` request to `POST /api/system/logging/reload`.
 
