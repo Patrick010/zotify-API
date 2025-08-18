@@ -79,6 +79,12 @@ Beyond technical features, the long-term success of the API depends on making it
     *   Focus on "how-to" guides and tutorials over purely theoretical references.
     *   Establish a developer community channel (e.g., Discord, forum) for feedback, support, and collaboration.
 
+### 3.5. Low-Code / No-Code Platform Integration
+
+*   **Goal:** To make the API's power accessible to non-programmers and citizen developers through visual, flow-based programming environments.
+*   **Vision:** While the Python plugin system extends the API's backend, integration with platforms like Node-RED or Zapier would extend its reach. This would involve creating a dedicated package of nodes or modules for that platform (e.g., `node-red-contrib-zotify`).
+*   **Synergy:** These nodes would act as well-designed clients for the Zotify API. The more powerful the backend API becomes (through Python plugins), the more powerful these visual building blocks become. This creates a synergistic ecosystem for both developers and power users.
+
 ---
 
 # Future Enhancements: Framework & Multi-Service Accessibility
