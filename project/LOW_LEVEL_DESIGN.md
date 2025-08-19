@@ -37,11 +37,6 @@ The FastAPI application uses several middleware to provide cross-cutting concern
 *   **Dependency (`services/deps.py`)**:
     *   A new `get_provider` dependency is responsible for instantiating and returning the currently active provider connector. For now, it always returns the `SpotifyConnector`.
 
-*   **Authentication Interface**:
-    *   To support provider-agnostic authentication, the `BaseProvider` will be extended with methods to handle the OAuth2 flow.
-    *   `get_oauth_login_url(state)`: This method will be responsible for constructing the provider-specific URL that the user must be redirected to in order to authorize the application.
-    *   `handle_oauth_callback(code, error, state)`: This method will process the callback from the provider. It will handle both success cases (by exchanging the `code` for a token) and failure cases (by processing the `error`). It will return HTML content suitable for display in the popup window.
-
 ---
 
 ## Unified Database Architecture
@@ -68,8 +63,8 @@ The FastAPI application uses several middleware to provide cross-cutting concern
 **Goal:** To provide a robust integration with the Spotify Web API, implemented as the first connector for the provider abstraction layer.
 
 *   **Authentication & Token Storage**:
-    *   The `SpotifyConnector` implements the provider-agnostic authentication interface. It contains all logic for handling the Spotify-specific OAuth2 callback, exchanging the authorization code for tokens, and saving them to the database.
-    *   The `get_spoti_client` dependency handles token fetching and refreshing from the database for subsequent API calls.
+    *   The OAuth2 callback saves tokens to the unified database.
+    *   The `get_spoti_client` dependency handles token fetching and refreshing from the database.
 
 *   **Playlist Synchronization**:
     *   The `sync_playlists` method in the `SpotifyConnector` saves all playlist data to the unified database.

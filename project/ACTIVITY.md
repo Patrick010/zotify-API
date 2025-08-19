@@ -4,6 +4,27 @@
 
 ---
 
+## ACT-038: Propose Plugin-Driven Metadata System
+
+**Date:** 2025-08-18
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To design a new, plugin-driven, multi-source metadata system, as a major architectural enhancement for the Zotify Platform.
+
+### Outcome
+- **New Proposal Created:** A new, detailed proposal document was created at `project/MULTI_SOURCE_METADATA_PROPOSAL.md`.
+- **Documentation Integrated:** The proposal was integrated into the project's living documentation by updating `FUTURE_ENHANCEMENTS.md`, `PROJECT_REGISTRY.md`, and `TRACEABILITY_MATRIX.md` to include and track the new feature.
+
+### Related Documents
+- `project/MULTI_SOURCE_METADATA_PROPOSAL.md`
+- `project/FUTURE_ENHANCEMENTS.md`
+- `project/PROJECT_REGISTRY.md`
+- `project/TRACEABILITY_MATRIX.md`
+
+---
+
 ## ACT-037: Refactor Authentication to be Provider-Agnostic
 
 **Date:** 2025-08-18

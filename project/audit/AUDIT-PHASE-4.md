@@ -1,3 +1,17 @@
+### 2025-08-18: Design of Plugin-Driven Metadata System
+
+**Audit Finding:**
+A new major feature, the Plugin-Driven Multi-Source Metadata System, was proposed and designed.
+
+**Verification Activities:**
+- A new proposal document, `MULTI_SOURCE_METADATA_PROPOSAL.md`, was created.
+- The proposal was integrated into the project's living documentation by updating `FUTURE_ENHANCEMENTS.md`, `PROJECT_REGISTRY.md`, and `TRACEABILITY_MATRIX.md`.
+
+**Conclusion:**
+The design task is complete. The new proposed architecture is fully documented and tracked in accordance with project standards, ready for future implementation.
+
+---
+
 ### 2025-08-18: Post-Verification Hardening
 
 **Audit Finding:**
