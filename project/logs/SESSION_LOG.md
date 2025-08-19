@@ -1,3 +1,18 @@
+## DOC-FIX-002: Align JWT Documentation with Reality
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To correct the `AUDIT_TRACEABILITY_MATRIX.md`, which incorrectly listed "JWT for API Authentication" as having a design gap.
+
+### Outcome
+- An investigation confirmed that the HLD and LLD already correctly describe JWT as a future enhancement.
+- The `AUDIT_TRACEABILITY_MATRIX.md` was updated to reflect this reality, closing the documentation gap.
+
+---
+
 ## AUDIT-FIX-001: Correct Phase 3 Audit Log
 
 **Date:** 2025-08-19

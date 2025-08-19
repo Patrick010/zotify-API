@@ -6,7 +6,7 @@
 | :--- | :--- | :--- | :--- | :--- |
 | **Authentication & Authorization** | | | | |
 | Admin Endpoint Security | Y | Y | High | **Context:** The design documents (specifically `security.md`) have been updated to reflect the current reality, which is that security is handled by a static admin API key. **Gap:** None. The aspirational features are now documented as future enhancements. |
-| JWT for API Authentication | N | N | Medium | **Context:** Core design requirement for user-level auth. Not implemented. |
+| JWT for API Authentication | N | Y | Medium | **Context:** The design documents now correctly reflect reality by listing JWT as a future enhancement. The gap is closed. |
 | Role-Based Access Control (RBAC) | N | N | Low | **Context:** Planned for multi-user environments, but current model is single-user. Deferred until multi-user support is prioritized. |
 | **Spotify Integration** | | | | |
 | OAuth2 for Spotify Integration | Y | Y (partial) | Medium | **Context:** The design documents (`LOW_LEVEL_DESIGN.md`) have been updated to reflect the current reality, which is that the integration supports authentication and full playlist CRUD, but not write-sync or full library management. **Gap:** None from a documentation perspective. The unimplemented features are now tracked in `FUTURE_ENHANCEMENTS.md`. |

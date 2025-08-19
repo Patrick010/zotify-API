@@ -4,6 +4,27 @@
 
 ---
 
+## ACT-039: Align JWT Documentation with Reality
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To correct the `AUDIT_TRACEABILITY_MATRIX.md`, which incorrectly listed "JWT for API Authentication" as having a design gap (`Matches Design? = N`). The goal is to align the traceability matrix with the reality of the design documents.
+
+### Outcome
+- **Investigation:** An analysis of the HLD and LLD documents revealed they already correctly describe JWT as a future enhancement, not a current feature. The design documents did not require any changes.
+- **Traceability Matrix Corrected:** The `AUDIT_TRACEABILITY_MATRIX.md` was updated. The entry for "JWT for API Authentication" now correctly shows `Matches Design? = Y`, and the context note was updated to reflect that the design docs are aligned with reality.
+- **Conclusion:** The documentation gap has been closed by correcting the traceability matrix itself.
+
+### Related Documents
+- `project/audit/AUDIT_TRACEABILITY_MATRIX.md`
+- `project/HIGH_LEVEL_DESIGN.md`
+- `project/FUTURE_ENHANCEMENTS.md`
+
+---
+
 ## ACT-038: Propose Plugin-Driven Metadata System
 
 **Date:** 2025-08-18
