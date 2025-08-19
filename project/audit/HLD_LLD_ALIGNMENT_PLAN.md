@@ -20,16 +20,25 @@
 
 ## Phase 3: Implementation & Alignment (Ongoing, sprint-based)
 
-**Goal:** Gradually resolve gaps from the traceability matrix by implementing missing features and aligning documentation with the code reality.
-**Status:** ✅ Done
+**Goal:** Gradually resolve gaps from the traceability matrix by implementing missing features and aligning documentation with the code reality. The end state for any task in this phase is that the corresponding matrix row shows `Exists? = Y` and `Matches Design? = Y`.
+**Status:** Ongoing
 
-- **Task 3.1:** Pick 1–2 core subsystems from the matrix with the biggest deviations.
-- **Task 3.2:** Update the HLD and LLD sections for those subsystems:
-  - Adjust descriptions and diagrams to match code.
-  - Add notes explaining any intentional design decisions preserved.
-- **Task 3.3:** Link updated design sections back to relevant roadmap/execution plan steps.
-- **Task 3.4:** Submit these as separate PRs for incremental review and merge.
-- **Task 3.5:** Repeat this cycle for next prioritized subsystems until full alignment.
+The following workflow applies to each item selected from the `AUDIT_TRACEABILITY_MATRIX.md` for this phase:
+
+1.  **If a design feature is missing in the code (`Exists? = N`):**
+    *   If the feature is still in the current project scope, **implement it**.
+    *   If the feature is no longer in scope, **update the design documents** to mark it as deferred or cut.
+
+2.  **If a code feature is missing in the design:**
+    *   **Update the HLD/LLD** to include and describe the feature. Note in the matrix whether it’s intentional, technical debt, or a scope creep that got absorbed.
+
+3.  **If code and design differ (mismatch):**
+    *   If the code is correct, **update the design** to reflect it.
+    *   If the code is wrong, **refactor the code** to match the design.
+
+4.  **Always update the traceability matrix** to reflect the resolution (e.g., Aligned, Deferred, Added, Refactored).
+
+5.  **Submit incremental PRs** with a short description of what was aligned and why.
 
 ## Phase 4: Enforce & Automate (Post-alignment)
 

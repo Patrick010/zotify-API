@@ -1,3 +1,18 @@
+## PROC-FIX-003: Correct and Clarify Phase 3 Alignment Plan
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To correct an error in the `HLD_LLD_ALIGNMENT_PLAN.md` and clarify the workflow for Phase 3.
+
+### Outcome
+- **Phase 3 Status Corrected:** The status of Phase 3 was changed to `Ongoing`.
+- **Phase 3 Workflow Clarified:** The task list for Phase 3 was replaced with a detailed, unambiguous rule set.
+
+---
+
 ## PROC-FIX-002: Clarify Phase 3 Process and Guidance
 
 **Date:** 2025-08-19

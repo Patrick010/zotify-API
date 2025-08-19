@@ -4,6 +4,24 @@
 
 ---
 
+## ACT-042: Correct and Clarify Phase 3 Alignment Plan
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To correct an error in the `HLD_LLD_ALIGNMENT_PLAN.md` where Phase 3 was marked as "Done", and to replace the vague Phase 3 task list with a clear, algorithmic rule set for all future alignment work.
+
+### Outcome
+- **Phase 3 Status Corrected:** The status of Phase 3 was changed from `✅ Done` to `Ongoing`.
+- **Phase 3 Workflow Clarified:** The task list for Phase 3 was replaced with a detailed, unambiguous set of rules defining how to handle different types of gaps (missing features, missing documentation, or mismatches) to ensure the end goal of `Exists? = Y` and `Matches Design? = Y` is clear.
+
+### Related Documents
+- `project/audit/HLD_LLD_ALIGNMENT_PLAN.md`
+
+---
+
 ## ACT-041: Clarify Phase 3 Process and Guidance
 
 **Date:** 2025-08-19
