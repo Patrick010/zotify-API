@@ -1,3 +1,18 @@
+## PROC-FIX-002: Clarify Phase 3 Process and Guidance
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To improve the project's process documentation to clarify the goal of "Phase 3".
+
+### Outcome
+- **`HLD_LLD_ALIGNMENT_PLAN.md` Updated:** The title and goal of Phase 3 were updated to make it explicit that the work involves implementing missing features and aligning code with the design.
+- **Handover Brief Template Improved:** A revised handover brief template was generated with a much clearer workflow description for Phase 3 tasks.
+
+---
+
 ## PROC-FIX-001: Improve Process Documentation
 
 **Date:** 2025-08-19

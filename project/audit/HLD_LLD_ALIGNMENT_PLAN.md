@@ -18,9 +18,9 @@
 - **Task 2.2:** ✅ Done - Highlight which mismatches require fixing vs which are acceptable tradeoffs for now.
 - **Task 2.3:** ✅ Done - Store this annotated matrix as the “alignment blueprint” in `docs/projectplan/audit/AUDIT_TRACEABILITY_MATRIX.md`.
 
-## Phase 3: Incremental Design Updates (Ongoing, sprint-based)
+## Phase 3: Implementation & Alignment (Ongoing, sprint-based)
 
-**Goal:** Gradually update design docs to reflect reality, starting with critical subsystems.
+**Goal:** Gradually resolve gaps from the traceability matrix by implementing missing features and aligning documentation with the code reality.
 **Status:** ✅ Done
 
 - **Task 3.1:** Pick 1–2 core subsystems from the matrix with the biggest deviations.

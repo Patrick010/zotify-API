@@ -4,6 +4,24 @@
 
 ---
 
+## ACT-041: Clarify Phase 3 Process and Guidance
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To improve the project's process documentation to clarify the goal of "Phase 3". The previous title and description were ambiguous and led to misinterpretation.
+
+### Outcome
+- **`HLD_LLD_ALIGNMENT_PLAN.md` Updated:** The title of Phase 3 was changed from "Incremental Design Updates" to "Implementation & Alignment". The goal description was also updated to make it explicit that the work involves implementing missing features and aligning code with the design.
+- **Handover Brief Template Improved:** A revised handover brief template was generated with a much clearer workflow description for Phase 3 tasks to ensure future developers understand the implementation-first nature of the work.
+
+### Related Documents
+- `project/audit/HLD_LLD_ALIGNMENT_PLAN.md`
+
+---
+
 ## ACT-040: Improve Process Documentation
 
 **Date:** 2025-08-19
