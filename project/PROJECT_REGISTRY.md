@@ -115,24 +115,6 @@ This document serves as the master file, or single source of truth, for tracking
 
 ---
 
-## 5. Completion Reports
-| Document | Location | Description |
-|---|---|---|
-| **Reports README** | [`reports/README.md`](./reports/README.md) | An overview of the completion reports. |
-| **Report: 2025-08-07** | [`reports/20250807-doc-clarification-completion-report.md`](./reports/20250807-doc-clarification-completion-report.md) | Completion report for documentation clarification. |
-| **Report: 2025-08-07** | [`reports/20250807-spotify-blueprint-completion-report.md`](./reports/20250807-spotify-blueprint-completion-report.md) | Completion report for the Spotify blueprint. |
-| **Report: 2025-08-08** | [`reports/20250808-comprehensive-auth-and-docs-update-report.md`](./reports/20250808-comprehensive-auth-and-docs-update-report.md) | Completion report for auth and docs update. |
-| **Report: 2025-08-08** | [`reports/20250808-oauth-unification-completion-report.md`](./reports/20250808-oauth-unification-completion-report.md) | Completion report for OAuth unification. |
-| **Report: 2025-08-09** | [`reports/20250809-api-endpoints-completion-report.md`](./reports/20250809-api-endpoints-completion-report.md) | Completion report for API endpoints. |
-| **Report: 2025-08-09** | [`reports/20250809-phase5-endpoint-refactor-report.md`](./reports/20250809-phase5-endpoint-refactor-report.md) | Completion report for Phase 5 endpoint refactor. |
-| **Report: 2025-08-09** | [`reports/20250809-phase5-final-cleanup-report.md`](./reports/20250809-phase5-final-cleanup-report.md) | Completion report for Phase 5 final cleanup. |
-| **Report: 2025-08-09** | [`reports/20250809-phase5-playlist-implementation-report.md`](./reports/20250809-phase5-playlist-implementation-report.md) | Completion report for Phase 5 playlist implementation. |
-| **Report: 2025-08-09** | [`reports/20250809-phase5-search-cleanup-report.md`](./reports/20250809-phase5-search-cleanup-report.md) | Completion report for Phase 5 search cleanup. |
-| **Report: 2025-08-11** | [`reports/20250811-AUDIT-PHASE2-FINALIZATION-REPORT.md`](./reports/20250811-AUDIT-PHASE2-FINALIZATION-REPORT.md) | Finalization report for Audit Phase 2. |
-| **Report: 2025-08-11** | [`reports/20250811-CONSOLIDATED-COMPLETION-REPORT.md`](./reports/20250811-CONSOLIDATED-COMPLETION-REPORT.md) | A consolidated completion report for phases 2 and 3 of the audit. |
-
----
-
 ## 6. Archived Documents
 This section is for reference and should not be considered current.
 | Document | Location |
