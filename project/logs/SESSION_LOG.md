@@ -1,3 +1,23 @@
+## REG-AUDIT-001: Audit and Correct Project Registry
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To audit the `project/PROJECT_REGISTRY.md` file for completeness and accuracy, ensuring all markdown documents in the `project/`, `api/docs/`, `snitch/`, and `gonk-testUI/` directories are correctly registered.
+
+### Outcome
+- **Audit Complete:** The registry was compared against the filesystem.
+- **Unregistered Files Added:** 2 files (`snitch/docs/TASKS.md` and `snitch/docs/ROADMAP.md`) that were present on disk but not in the registry have been added.
+- **Ghost Entries Removed:** 4 entries for files that no longer exist (`project/PID_previous.md`, `project/HIGH_LEVEL_DESIGN_previous.md`, `project/LOW_LEVEL_DESIGN_previous.md`, and `project/audit/HLD_LLD_ALIGNMENT_PLAN_previous.md`) have been removed from the registry.
+- **Conclusion:** The `PROJECT_REGISTRY.md` is now synchronized with the current state of the project's documentation files.
+
+### Related Documents
+- `project/PROJECT_REGISTRY.md`
+
+---
+
 ## AUDIT-4G-001: Independent Verification of Project State
 
 **Date:** 2025-08-19

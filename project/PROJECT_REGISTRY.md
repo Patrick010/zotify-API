@@ -41,9 +41,6 @@ This document serves as the master file, or single source of truth, for tracking
 | **Task Checklist** | [`TASK_CHECKLIST.md`](./TASK_CHECKLIST.md) | A checklist to be used for every task to ensure compliance with project standards. |
 | **Dependency Policy** | [`DEPENDENCIES.md`](./DEPENDENCIES.md) | The policy and registry for managing third-party dependencies. |
 | **Security Document** | [`SECURITY.md`](./SECURITY.md) | The definitive security reference for the project. |
-| **Previous PID** | [`PID_previous.md`](./PID_previous.md) | An archived version of the Project Initiation Document. |
-| **Previous HLD** | [`HIGH_LEVEL_DESIGN_previous.md`](./HIGH_LEVEL_DESIGN_previous.md) | An archived version of the High-Level Design document. |
-| **Previous LLD** | [`LOW_LEVEL_DESIGN_previous.md`](./LOW_LEVEL_DESIGN_previous.md) | An archived version of the Low-Level Design document. |
 
 ---
 
@@ -81,7 +78,9 @@ This document serves as the master file, or single source of truth, for tracking
 | **Phases** | [`snitch/docs/PHASES.md`](../snitch/docs/PHASES.md) | The phased development plan for the Snitch subproject. |
 | **Project Plan** | [`snitch/docs/PROJECT_PLAN.md`](../snitch/docs/PROJECT_PLAN.md) | The project plan for Snitch, outlining the problem it solves and its development plan. |
 | **Secure Callback Design (Superseded)** | [`snitch/docs/PHASE_2_SECURE_CALLBACK.md`](../snitch/docs/PHASE_2_SECURE_CALLBACK.md) | A superseded design document for the Snitch secure callback. |
+| **Roadmap** | [`snitch/docs/ROADMAP.md`](../snitch/docs/ROADMAP.md) | The high-level, phased development roadmap for the Snitch subproject. |
 | **Status** | [`snitch/docs/STATUS.md`](../snitch/docs/STATUS.md) | A live status document tracking the development progress of the Snitch subproject. |
+| **Tasks** | [`snitch/docs/TASKS.md`](../snitch/docs/TASKS.md) | A task list for the development of the Snitch module. |
 | **Test Runbook** | [`snitch/docs/TEST_RUNBOOK.md`](../snitch/docs/TEST_RUNBOOK.md) | A runbook for testing the Snitch module. |
 | **User Manual** | [`snitch/docs/USER_MANUAL.md`](../snitch/docs/USER_MANUAL.md) | A manual for end-users explaining the purpose of the Snitch helper application. |
 | **Zero Trust Design** | [`snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md`](../snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md) | The design specification for a Zero Trust secure callback flow for Snitch. |
@@ -112,7 +111,6 @@ This document serves as the master file, or single source of truth, for tracking
 | **Phase 4 Traceability Matrix** | [`audit/PHASE_4_TRACEABILITY_MATRIX.md`](./audit/PHASE_4_TRACEABILITY_MATRIX.md) | A traceability matrix specific to the Phase 4 audit. |
 | **Code Optimization Plan** | [`audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md`](./audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md) | A plan for code optimizations identified during Phase 4. |
 | **Audit Prompt** | [`audit/audit-prompt.md`](./audit/audit-prompt.md) | The prompt used for the audit process. |
-| **Previous HLD/LLD Plan** | [`audit/HLD_LLD_ALIGNMENT_PLAN_previous.md`](./audit/HLD_LLD_ALIGNMENT_PLAN_previous.md) | An archived version of the HLD/LLD Alignment Plan. |
 
 ---
 
