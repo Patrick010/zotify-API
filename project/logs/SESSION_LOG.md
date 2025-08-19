@@ -1,3 +1,18 @@
+## PROC-FIX-001: Improve Process Documentation
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To improve the project's process documentation to ensure the mandatory nature of the `TASK_CHECKLIST.md` is clearer to all developers.
+
+### Outcome
+- **`TASK_CHECKLIST.md` Enhanced:** The checklist was restructured for clarity and efficiency.
+- **`ONBOARDING.md` Clarified:** The onboarding flow was updated to explicitly reference the `TASK_CHECKLIST.md`.
+
+---
+
 ## DOC-FIX-002: Align JWT Documentation with Reality
 
 **Date:** 2025-08-19

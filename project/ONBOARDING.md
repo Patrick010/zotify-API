@@ -45,13 +45,13 @@ To get a full understanding of the project, review the following documents:
 3. **Design Alignment Plan**: Provides current primary project goals and process guidance.
 4. **Traceability Matrix**: Identifies gaps between design and implementation.
 5. **Activity Log**: Chronological record of recent tasks.
-6. **Session LOg**: Log of activities and findings from sessions.
-7. **Lessons Learnt**: Summary of process maturity and key takeaways
+6. **Session Log**: Log of activities and findings from sessions.
+7. **Lessons Learnt**: Summary of process maturity and key takeaways.
 8. **Project Initiation Document (PID)**: The formal 'living document' that defines the project's scope, plans, and controls.
-7. **Backlog**: List of defined, pending tactical tasks.
-8. **High-Level Design (HLD)** and **Low-Level Design (LLD)**: Refactored architecture documentation.
-9. **Use Cases**: Defines target user scenarios.
-10. **Use Cases Gap Analysis**: Shows current feature coverage and highlights development opportunities.
+9. **Backlog**: List of defined, pending tactical tasks.
+10. **High-Level Design (HLD)** and **Low-Level Design (LLD)**: Refactored architecture documentation.
+11. **Use Cases**: Defines target user scenarios.
+12. **Use Cases Gap Analysis**: Shows current feature coverage and highlights development opportunities.
 
 ---
 
@@ -61,7 +61,8 @@ To get a full understanding of the project, review the following documents:
 2. Review **Design and Traceability artifacts** to see what is complete and what requires attention.
 3. Consult the **Backlog** for actionable tasks.
 4. Explore **Use Cases and Gap Analysis** to understand feature priorities.
-5. Finally, review **Lessons Learnt** to internalize process insights.
+5. Review **Lessons Learnt** to internalize process insights.
+6. **Internalize the Definition of 'Done':** Review the `TASK_CHECKLIST.md`. This file defines the mandatory quality gate for all work. Before considering any task complete, ensure you have fulfilled all applicable checks it contains.
 
 ---
 

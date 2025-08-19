@@ -4,6 +4,25 @@
 
 ---
 
+## ACT-040: Improve Process Documentation
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To improve the project's process documentation to ensure the mandatory nature of the `TASK_CHECKLIST.md` is clearer to all developers.
+
+### Outcome
+- **`TASK_CHECKLIST.md` Enhanced:** The checklist was restructured to be clearer and more efficient. It now has a `NOTE` header emphasizing its importance and conditional sections for "All Changes" vs. "Code-Only Changes". All original detailed checks were preserved and reorganized under this new structure.
+- **`ONBOARDING.md` Clarified:** A new item was added to the "Recommended Onboarding Flow" explicitly instructing new developers to review the `TASK_CHECKLIST.md` to internalize the project's definition of "Done".
+
+### Related Documents
+- `project/TASK_CHECKLIST.md`
+- `project/ONBOARDING.md`
+
+---
+
 ## ACT-039: Align JWT Documentation with Reality
 
 **Date:** 2025-08-19

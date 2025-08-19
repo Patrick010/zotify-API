@@ -1,81 +1,58 @@
-# Task Execution Checklist
-
-**Purpose**
-This checklist must be followed for *every* development task before it is marked complete. It ensures security-by-design, privacy compliance, documentation maintenance, testing discipline, and overall project hygiene.
+**NOTE: This is a mandatory pre-submit checklist. All applicable steps must be verified before your work is considered complete.**
 
 ---
 
-## 1. Task Qualification
+### A. For ALL Changes (including documentation)
+
+#### 1. Task Qualification
 - [ ] **Task Readiness Verification:** Manually confirm the task conforms to the template in `BACKLOG.md` and meets all readiness criteria in `PID.md` before starting work.
 
-## 2. Security
-- Review code changes for **security risks**: injection, data leaks, improper authentication, unsafe file handling.
-- Ensure **admin API key handling** complies with the project's established security policies.
-- Confirm **least-privilege principle** is applied for endpoints, data access, and dependencies.
-- Add or update **`project/SECURITY.md`** with any new security considerations.
-- Verify any new dependencies or third-party components are vetted for security and properly licensed.
+#### 2. Documentation — Mandatory & Verifiable
+- [ ] Have all relevant documentation files, identified by consulting the `PROJECT_REGISTRY.md`, been updated to reflect the changes made?
+- [ ] Have the changes been cross-referenced in the `TRACEABILITY_MATRIX.md` or other relevant tracking documents?
+- [ ] Does the commit message clearly explain the "what" and the "why"?
+- [ ] **HLD & LLD**: Update or create high-level and low-level design docs if implementation deviates from specs. Include clear architectural change summaries.
+- [ ] **Roadmap**: Update `project/ROADMAP.md` or equivalent if timelines, scope, or priorities change.
+- [ ] **User & Operator Guides**: Update `developer_guide.md`, `operator_guide.md`, and related manuals for all functional changes, including API examples.
+- [ ] **CHANGELOG**: Add entries reflecting **all** functional changes: new/modified/removed endpoints, param changes, behavioral changes.
+- [ ] For traceability, all documentation changes must be included in the same commit as the code changes they relate to.
+- [ ] Document all functional changes in every relevant doc: API reference, developer/operator guides, README if user-facing. Include before/after request/response examples and behavior notes.
 
-## 3. Privacy
-- Review code changes for **privacy compliance** (GDPR, CCPA, or other applicable regulations).
-- Confirm sensitive data is **minimized**, **encrypted** where needed, and **never logged in plain text**.
-- Update **`api/docs/system/PRIVACY_COMPLIANCE.md`** reflecting new privacy impacts and controls.
-- Enforce user data rights: consent capture, data export, deletion, correction, and withdrawal mechanisms.
-- Extend audit logging to track all personal data access and changes securely.
-- Integrate privacy by design and default into the task's implementation.
+#### 3. Process & Workflow
+- [ ] Include **explicit approval steps** (code reviews, security/privacy sign-offs) if your project workflow requires them.
+- [ ] Follow a **clear branching and release process** if it can be fully automated as part of the task execution.
 
-## 4. Documentation — **Mandatory & Verifiable**
+---
 
-The task is **not complete** until every item below is satisfied and evidence is committed.
+### B. ONLY If Code Was Modified
 
-- **HLD & LLD**:
-  - Update or create high-level and low-level design docs if implementation deviates from specs.
-  - Include clear architectural change summaries.
+#### 1. Security
+- [ ] Review code changes for **security risks**: injection, data leaks, improper authentication, unsafe file handling.
+- [ ] Ensure **admin API key handling** complies with the project's established security policies.
+- [ ] Confirm **least-privilege principle** is applied for endpoints, data access, and dependencies.
+- [ ] Add or update **`project/SECURITY.md`** with any new security considerations.
+- [ ] Verify any new dependencies or third-party components are vetted for security and properly licensed.
 
-- **Roadmap**:
-  - Update `project/ROADMAP.md` or equivalent if timelines, scope, or priorities change.
+#### 2. Privacy
+- [ ] Review code changes for **privacy compliance** (GDPR, CCPA, or other applicable regulations).
+- [ ] Confirm sensitive data is **minimized**, **encrypted** where needed, and **never logged in plain text**.
+- [ ] Update **`api/docs/system/PRIVACY_COMPLIANCE.md`** reflecting new privacy impacts and controls.
+- [ ] Enforce user data rights: consent capture, data export, deletion, correction, and withdrawal mechanisms.
+- [ ] Extend audit logging to track all personal data access and changes securely.
+- [ ] Integrate privacy by design and default into the task's implementation.
 
-- **User & Operator Guides**:
-  - Update `developer_guide.md`, `operator_guide.md`, and related manuals for all functional changes, including API examples.
+#### 3. Code Quality
+- [ ] Follow established **naming conventions**, directory structures, and coding style guides strictly.
+- [ ] Maintain strict **modularity** — separate concerns cleanly, avoid cross-layer leakage (e.g., CLI logic leaking into API layer).
+- [ ] Ensure complete and correct **type hints** and **docstrings** for all functions, classes, and modules.
+- [ ] Perform **code reviews** with a focus on readability, maintainability, performance, and security.
+- [ ] Consider efficiency, scalability, and resource usage when writing or modifying code.
+- [ ] Refactor legacy or autogenerated code as needed to meet these quality standards.
 
-- **CHANGELOG**:
-  - Add entries reflecting **all** functional changes: new/modified/removed endpoints, param changes, behavioral changes.
-
-
-- **Project-Wide Documentation Review**:
-  - The `project/PROJECT_REGISTRY.md` file is the single source of truth for all project documentation.
-  - As part of task completion, you **must** review the registry and identify all documents potentially impacted by your changes.
-  - Update every impacted document, no matter how small the change.
-  - For traceability, all documentation changes must be included in the same commit as the code changes they relate to.
-
-- **Functional Change Documentation**:
-  - Document all functional changes in every relevant doc: API reference, developer/operator guides, README if user-facing.
-  - Include before/after request/response examples and behavior notes.
-
-- **Verification**:
-  - Task is incomplete without all above deliverables committed and verified.
-
-## 5. Tests
-- Write or update **unit tests** covering all new or changed logic, including edge cases and failure modes.
-- Update **integration tests** to reflect new API endpoints, flows, or behavioral changes.
-- Ensure **all tests pass** in continuous integration (CI) and locally before marking task complete.
-- For security- or privacy-sensitive features, write **negative tests** simulating invalid inputs, unauthorized access, or malformed data.
-- Automate running linting, static analysis, security scans, and documentation build tests as part of CI where applicable.
-
-## 6. Code Quality
-- Follow established **naming conventions**, directory structures, and coding style guides strictly.
-- Maintain strict **modularity** — separate concerns cleanly, avoid cross-layer leakage (e.g., CLI logic leaking into API layer).
-- Ensure complete and correct **type hints** and **docstrings** for all functions, classes, and modules.
-- Perform **code reviews** with a focus on readability, maintainability, performance, and security.
-- Use automated **linters** and **formatters** to enforce consistent style.
-- Where feasible, use static code analysis tools to detect potential bugs or anti-patterns.
-- Consider efficiency, scalability, and resource usage when writing or modifying code.
-- Refactor legacy or autogenerated code as needed to meet these quality standards.
-
-## 7. Automation and Workflow
-- Integrate **explicit approval steps** (code reviews, security/privacy sign-offs) if your project workflow requires them.
-- Include **automated checks** like linting, security scans, and documentation builds as part of task completion validation.
-- Follow a **clear branching and release process** if it can be fully automated as part of the task execution.
-- If the task is fully automatable and no manual review is needed, document this clearly and proceed with direct commits/pushes accordingly.
+#### 4. Tests
+- [ ] Have the relevant unit or integration tests been run and confirmed to pass?
+- [ ] Have new tests been added to cover the changes?
+- [ ] For security- or privacy-sensitive features, write **negative tests** simulating invalid inputs, unauthorized access, or malformed data.
 
 ---
 
@@ -84,15 +61,10 @@ No task is considered complete unless all applicable checklist items have been a
 
 ---
 
-### Notes on Privacy Compliance (Integrated)
+**Notes on Privacy Compliance (Integrated)**
 Privacy compliance is an integral part of every task, not a separate addendum. Ensure:
 - User consent is captured and stored where relevant.
 - API endpoints exposing personal data enforce RBAC and access controls.
 - Data minimization, encryption, and audit logging are applied consistently.
 - User rights such as data export, deletion, and correction are implemented and tested.
 - All privacy-related documentation is updated as part of normal doc maintenance.
-
----
-
-**Usage:**
-Include the full content of this checklist as part of your prompt or task instructions to ensure all aspects of security, privacy, documentation, testing, and code quality are covered before task completion.
