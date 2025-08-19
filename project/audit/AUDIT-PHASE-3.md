@@ -98,8 +98,8 @@ The application used multiple, inconsistent persistence mechanisms, including fi
     *   A new database layer was created at `api/src/zotify_api/database/` using SQLAlchemy.
     *   This layer includes a configurable session manager, ORM models for all application data, and a set of CRUD functions.
 2.  **Service Migration:**
-    *   The Download Service, Playlist Storage, and Spotify Token Storage were all refactored to use the new unified database layer.
-    *   The old persistence mechanisms (JSON files, standalone SQLite DB) were removed.
+    *   The Download Service, Playlist Storage, and Spotify Token Storage were all refactored to use the new unified database layer, as confirmed by code review.
+    *   **Correction:** The original audit log entry incorrectly stated that old persistence mechanisms (JSON files) were removed. A subsequent audit confirmed these files were made obsolete by the new database layer but were not deleted from the filesystem.
 3.  **Testing:**
     *   The test suite was updated to use the new database architecture, with isolated in-memory databases for each test run.
 4.  **Documentation:**
@@ -120,12 +120,11 @@ The `AUDIT_TRACEABILITY_MATRIX.md` identified a high-priority gap for the "Downl
 
 ### 5.2. Changes Made
 1.  **Code Implementation:**
-    *   Created a new database module `api/src/zotify_api/services/downloads_db.py` to manage a persistent queue using SQLite.
-    *   Refactored `api/src/zotify_api/services/download_service.py` to use the new database module, replacing the in-memory queue.
+    *   **Correction:** The original audit log entry incorrectly stated that a new `downloads_db.py` module was created. A subsequent audit confirmed that the `api/src/zotify_api/services/download_service.py` was instead refactored to use the **unified database layer** via the `database.crud` module. This correctly implements a persistent queue using the main application database.
 2.  **Testing:**
     *   Updated the test suite in `api/tests/test_download.py` to use a temporary, isolated database for each test, ensuring the new implementation is robustly tested.
 3.  **Documentation Updates:**
-    *   Updated `LOW_LEVEL_DESIGN.md` to describe the new SQLite-based persistent queue.
+    *   Updated `LOW_LEVEL_DESIGN.md` to describe the new persistent queue implementation.
     *   Updated `AUDIT_TRACEABILITY_MATRIX.md` to mark the "Downloads Subsystem" gap as fully closed (`Matches Design? = Y`).
 
 ### 5.3. Outcome
