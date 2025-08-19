@@ -1,6 +1,3 @@
-# Apply the Task Execution Checklist from docs/projectplan/task_checklist.md, ensuring all applicable points are fully covered for this task, including documentation updates across all `.md` files outside excluded directories.
-
-
 # Task Execution Checklist
 
 **Purpose**
@@ -13,15 +10,15 @@ This checklist must be followed for *every* development task before it is marked
 
 ## 2. Security
 - Review code changes for **security risks**: injection, data leaks, improper authentication, unsafe file handling.
-- Ensure **admin API key handling** complies with `docs/projectplan/admin_api_key_mitigation.md`.
+- Ensure **admin API key handling** complies with the project's established security policies.
 - Confirm **least-privilege principle** is applied for endpoints, data access, and dependencies.
-- Add or update **`docs/projectplan/security.md`** with any new security considerations.
+- Add or update **`project/SECURITY.md`** with any new security considerations.
 - Verify any new dependencies or third-party components are vetted for security and properly licensed.
 
 ## 3. Privacy
 - Review code changes for **privacy compliance** (GDPR, CCPA, or other applicable regulations).
 - Confirm sensitive data is **minimized**, **encrypted** where needed, and **never logged in plain text**.
-- Update **`docs/projectplan/privacy_compliance.md`** reflecting new privacy impacts and controls.
+- Update **`api/docs/system/PRIVACY_COMPLIANCE.md`** reflecting new privacy impacts and controls.
 - Enforce user data rights: consent capture, data export, deletion, correction, and withdrawal mechanisms.
 - Extend audit logging to track all personal data access and changes securely.
 - Integrate privacy by design and default into the task's implementation.
@@ -35,10 +32,7 @@ The task is **not complete** until every item below is satisfied and evidence is
   - Include clear architectural change summaries.
 
 - **Roadmap**:
-  - Update `docs/roadmap.md` or equivalent if timelines, scope, or priorities change.
-
-- **Audit References**:
-  - Update relevant audit documents (e.g., `docs/projectplan/spotify_capability_audit.md`) if impacted.
+  - Update `project/ROADMAP.md` or equivalent if timelines, scope, or priorities change.
 
 - **User & Operator Guides**:
   - Update `developer_guide.md`, `operator_guide.md`, and related manuals for all functional changes, including API examples.
@@ -46,19 +40,12 @@ The task is **not complete** until every item below is satisfied and evidence is
 - **CHANGELOG**:
   - Add entries reflecting **all** functional changes: new/modified/removed endpoints, param changes, behavioral changes.
 
-- **Task Completion Report**:
-  - Produce a detailed report in `docs/projectplan/reports/<taskname>.md` that includes:
-    - Summary of code and architectural changes.
-    - **Documentation review log**: A table listing every file from the Documentation Review File List with a “Changed” or “No Change” mark plus commit references.
-    - Explicit statement on API documentation updates.
 
-- **Reports Index**:
-  - Update `docs/projectplan/reports/README.md` to reference the new report.
-
-- **Full `.md` File Sweep**:
-  - **Carefully review every file on the Documentation Review File List for needed updates** related to the task.
-  - Apply updates wherever necessary.
-  - Mark each file in the documentation review log regardless of change status.
+- **Project-Wide Documentation Review**:
+  - The `project/PROJECT_REGISTRY.md` file is the single source of truth for all project documentation.
+  - As part of task completion, you **must** review the registry and identify all documents potentially impacted by your changes.
+  - Update every impacted document, no matter how small the change.
+  - For traceability, all documentation changes must be included in the same commit as the code changes they relate to.
 
 - **Functional Change Documentation**:
   - Document all functional changes in every relevant doc: API reference, developer/operator guides, README if user-facing.
@@ -66,10 +53,6 @@ The task is **not complete** until every item below is satisfied and evidence is
 
 - **Verification**:
   - Task is incomplete without all above deliverables committed and verified.
-
----
-
-the files listed in PROJECT_REGISTRY.md
 
 ## 5. Tests
 - Write or update **unit tests** covering all new or changed logic, including edge cases and failure modes.

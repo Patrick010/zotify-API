@@ -1,3 +1,24 @@
+## DOC-FIX-001: Correct and Modernize Task Checklist
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To fix the `project/TASK_CHECKLIST.md` file, which contained outdated paths and confusing instructions, making it unusable. The goal is to align it with the current project structure and documentation policies.
+
+### Outcome
+- **Paths Corrected:** All file paths referencing the obsolete `docs/projectplan/` directory have been updated to their correct locations as defined in the `PROJECT_REGISTRY.md`.
+- **Obsolete Items Removed:** References to archived documents and an outdated reporting process were removed.
+- **Process Clarified:** The section on documentation review was rewritten to remove ambiguity and to explicitly and clearly state that the `PROJECT_REGISTRY.md` is the single source of truth for identifying all documents for review.
+- **Header Cleaned:** The confusing, self-referential header was removed.
+- **Conclusion:** The `TASK_CHECKLIST.md` is now an accurate, usable tool that correctly reflects and enforces the project's documentation policies.
+
+### Related Documents
+- `project/TASK_CHECKLIST.md`
+
+---
+
 ## REG-AUDIT-001: Audit and Correct Project Registry
 
 **Date:** 2025-08-19
