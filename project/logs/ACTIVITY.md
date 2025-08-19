@@ -85,7 +85,7 @@ To harden the project's stability by performing a full test run, fixing any disc
     -   The root cause was a comparison between a timezone-naive `datetime` from the database and a timezone-aware `datetime` from `datetime.now(timezone.utc)`.
     -   The `get_auth_status` service was updated to safely handle naive datetimes by making them timezone-aware before comparison.
 
-- **Final Status:** The entire test suite of 137 tests is now passing.
+- **Final Status:** The entire test suite of 139 tests is now passing.
 
 ### Related Documents
 - `api/tests/unit/test_auth.py`

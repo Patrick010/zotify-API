@@ -1,3 +1,30 @@
+## AUDIT-4G-001: Independent Verification of Project State
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To perform a fresh, independent verification of the project's state, as documented in the "Trinity" of `CURRENT_STATE.md`, `ACTIVITY.md`, and `SESSION_LOG.md`. This audit covers the entire platform, including the API, `snitch`, and `gonk-testUI`, to ensure the "living documentation" accurately reflects the codebase reality.
+
+### Outcome
+- **Verification Complete:** The independent verification of the project state is complete. While the core application logic was found to be stable and aligned with the documentation, several issues were discovered and remediated in the project's documentation and setup procedures.
+- **Discrepancy Fixed: API Test Suite:** The documented test count was outdated (137). The test suite was run, and 139 tests passed. `ACTIVITY.md` and `SESSION_LOG.md` were updated to reflect the correct count.
+- **Discrepancy Fixed: Installation Guide:** The API server failed to start using the existing `INSTALLATION.md` guide. The guide was missing two critical setup steps: creating the `api/logs` directory for the logging framework and setting `APP_ENV=development` to avoid a crash in production mode. The `INSTALLATION.md` file has been updated with these instructions.
+- **`snitch` Verification:** The helper application was successfully built and tested. It functions as documented.
+- **`gonk-testUI` Verification:** A source code review of the UI's JavaScript confirmed that all recently documented features are implemented correctly.
+- **Logging Framework Verification:** The security hardening features (sensitive data redaction, tag-based routing, and security tagging of auth events) were all verified to be implemented as documented.
+- **Architectural Proposals:** Verified that all claimed proposal documents exist in the `project/proposals` directory.
+- **Conclusion:** The audit is complete. The project's documentation and setup procedures have been improved, and the "Trinity" of documents is now a more accurate reflection of the codebase reality.
+
+### Related Documents
+- `project/logs/CURRENT_STATE.md`
+- `project/logs/ACTIVITY.md`
+- `project/logs/SESSION_LOG.md`
+- `api/docs/system/INSTALLATION.md`
+
+---
+
 ### 2025-08-18: Design of Plugin-Driven Metadata System
 
 **Audit Finding:**
@@ -22,7 +49,7 @@ Following the initial successful verification of the project documentation, a fu
 2.  **Runtime `TypeError`:** Subsequent manual testing revealed a `TypeError` on the `/api/auth/status` endpoint. This was traced to an unsafe comparison between a timezone-naive datetime from the database and a timezone-aware `datetime`. A fix was implemented in the `get_auth_status` service to make the comparison robust.
 
 **Conclusion:**
-The discovery and resolution of these issues have significantly hardened the stability and reliability of the codebase beyond the state described in the initial handover. The entire test suite (137 tests) is now confirmed to be passing.
+The discovery and resolution of these issues have significantly hardened the stability and reliability of the codebase beyond the state described in the initial handover. The entire test suite (139 tests) is now confirmed to be passing.
 
 ---
 

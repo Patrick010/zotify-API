@@ -55,6 +55,11 @@ To run the server, execute the following command from the `/api` directory:
 uvicorn zotify_api.main:app --host 0.0.0.0 --port 8000
 ```
 
+**Note:** By default, the application runs in `production` mode and requires an `ADMIN_API_KEY` to be set via an environment variable or a `.env` file. For development or testing, you can run the server with `APP_ENV=development` to use a default key:
+```bash
+APP_ENV=development uvicorn zotify_api.main:app --host 0.0.0.0 --port 8000
+```
+
 For development, you can enable hot-reloading:
 ```bash
 uvicorn zotify_api.main:app --reload
@@ -64,11 +69,12 @@ uvicorn zotify_api.main:app --reload
 
 Follow these steps to run the test suite.
 
-### 1. Create the Storage Directory
+### 1. Create Required Directories
 
-The API requires a `storage` directory for its database and other files during tests. From the root of the project, create it inside the `api` directory:
+The API requires a `storage` directory for its database and a `logs` directory for the flexible logging framework. From the root of the project, create them inside the `api` directory:
 ```bash
 mkdir api/storage
+mkdir api/logs
 ```
 
 ### 2. Run Pytest
