@@ -17,9 +17,10 @@ This review is mandatory to ensure you are aligned with the project's immediate 
 
 **Required Reading Order:**
 
-1.  **`project/CURRENT_STATE.md`**: Start here. This document provides a narrative summary of the most recent activities, known issues, and the immediate next steps.
-2.  **`project/ACTIVITY.md`**: Read this second. It provides a reverse-chronological log of all significant tasks performed. This will give you a detailed history of how the project arrived at its current state.
-3.  **`project/audit/` Directory**: Finally, review the documents in this directory. They contain the detailed findings, plans, and traceability matrices for the ongoing architectural audit.
+1.  **`project/logs/CURRENT_STATE.md`**: Start here. This document provides a narrative summary of the most recent activities, known issues, and the immediate next steps.
+2.  **`project/logs/ACTIVITY.md`**: Read this second. It provides a reverse-chronological log of all significant tasks performed. This will give you a detailed history of how the project arrived at its current state.
+3.	**`project/logs/SESSION_LOG.md`: Session reporting progress and findings document.
+4.  **`project/audit/` Directory**: Finally, review the documents in this directory. They contain the detailed findings, plans, and traceability matrices for the ongoing architectural audit.
 
 Once you have reviewed these documents, you will have a complete picture of the project's status.
 
@@ -39,12 +40,14 @@ It is mandatory that developers **review these materials in order** to efficient
 
 To get a full understanding of the project, review the following documents:
 
-1. **Project Snapshot**: Review `CURRENT_STATE.md` to understand the latest context and project state.
+1. **Current State**: Review `CURRENT_STATE.md` to understand the latest context and project state.
 2. **Project Registry**: The master index for all project documents.
 3. **Design Alignment Plan**: Provides current primary project goals and process guidance.
 4. **Traceability Matrix**: Identifies gaps between design and implementation.
 5. **Activity Log**: Chronological record of recent tasks.
-6. **Lessons Learnt**: Summary of process maturity and key takeaways.
+6. **Session LOg**: Log of activities and findings from sessions.
+7. **Lessons Learnt**: Summary of process maturity and key takeaways
+8. **Project Initiation Document (PID)**: The formal 'living document' that defines the project's scope, plans, and controls.
 7. **Backlog**: List of defined, pending tactical tasks.
 8. **High-Level Design (HLD)** and **Low-Level Design (LLD)**: Refactored architecture documentation.
 9. **Use Cases**: Defines target user scenarios.
@@ -54,7 +57,7 @@ To get a full understanding of the project, review the following documents:
 
 ### 3. Recommended Onboarding Flow
 
-1. Start with the **Project Snapshot** to understand where the project stands.
+1. Start with the **Key Onboarding Documents** to understand where the project stands.
 2. Review **Design and Traceability artifacts** to see what is complete and what requires attention.
 3. Consult the **Backlog** for actionable tasks.
 4. Explore **Use Cases and Gap Analysis** to understand feature priorities.
@@ -66,3 +69,4 @@ To get a full understanding of the project, review the following documents:
 
 * All documents referenced are live and should be used as the primary source of truth.
 * Filename changes are possible; always reference documents by their **role** in the Project Registry rather than the filename itself.
+* Before a task or phase can be considered 'Done' or 'Completed', the Task Execution Checklist must be followed.

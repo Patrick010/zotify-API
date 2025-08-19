@@ -15,8 +15,9 @@ This document serves as the master file, or single source of truth, for tracking
 |---|---|---|
 | **Project Registry** | [`PROJECT_REGISTRY.md`](./PROJECT_REGISTRY.md) | This document, the master index for all project artifacts. |
 | **Onboarding Guide** | [`ONBOARDING.md`](./ONBOARDING.md) | The primary entry point and guide for new developers to get up to speed on the project. |
-| **Current State** | [`CURRENT_STATE.md`](./CURRENT_STATE.md) | A live snapshot of the project's most recent status, goals, and pending work. |
-| **Live Activity Log** | [`ACTIVITY.md`](./ACTIVITY.md) | A live, chronological log of all major tasks and audit activities. |
+| **Current State** | [`CURRENT_STATE.md`](./logs/CURRENT_STATE.md) | A live snapshot of the project's most recent status, goals, and pending work. |
+| **Session Log** | [`SESSION_LOG.md`](./logs/SESSION_LOG.md) |Log of activities and findings from sessions. |
+| **Live Activity Log** | [`ACTIVITY.md`](./logs/ACTIVITY.md) | A live, chronological log of all major tasks and audit activities. |
 | **Project Brief** | [`PROJECT_BRIEF.md`](./PROJECT_BRIEF.md) | A high-level summary of the project's purpose, scope, and justification (PRINCE2). |
 | **Project Initiation Document (PID)** | [`PID.md`](./PID.md) | The formal 'living document' that defines the project's scope, plans, and controls (PRINCE2). |
 | **High-Level Design (HLD)** | [`HIGH_LEVEL_DESIGN.md`](./HIGH_LEVEL_DESIGN.md) | Outlines the high-level architecture, scope, and principles. |
@@ -29,10 +30,10 @@ This document serves as the master file, or single source of truth, for tracking
 | **Logging System Design** | [`LOGGING_SYSTEM_DESIGN.md`](./LOGGING_SYSTEM_DESIGN.md) | The detailed architectural design for the centralized logging system. |
 | **Logging Phased Implementation** | [`LOGGING_PHASES.md`](./LOGGING_PHASES.md) | The authoritative document tracking the phased design and implementation of the Extendable Logging System. |
 | **Logging Traceability Matrix** | [`LOGGING_TRACEABILITY_MATRIX.md`](./LOGGING_TRACEABILITY_MATRIX.md) | Maps logging system requirements to design documents and backlog tasks. |
-| **Dynamic Plugin Proposal** | [`DYNAMIC_PLUGIN_PROPOSAL.md`](./DYNAMIC_PLUGIN_PROPOSAL.md) | A formal proposal for adding a dynamic plugin system for custom logging sinks. |
-| **Low-Code Integration Proposal** | [`LOW_CODE_PROPOSAL.md`](./LOW_CODE_PROPOSAL.md) | A formal proposal for integrating with low-code platforms like Node-RED. |
-| **Home Automation Proposal** | [`HOME_AUTOMATION_PROPOSAL.md`](./HOME_AUTOMATION_PROPOSAL.md) | A formal proposal for integrating with home automation platforms like Home Assistant. |
-| **Multi-Source Metadata Proposal** | [`MULTI_SOURCE_METADATA_PROPOSAL.md`](./MULTI_SOURCE_METADATA_PROPOSAL.md) | A formal proposal for a plugin-driven, multi-source metadata ingestion and querying system. |
+| **Dynamic Plugin Proposal** | [`DYNAMIC_PLUGIN_PROPOSAL.md`](./proposals/DYNAMIC_PLUGIN_PROPOSAL.md) | A formal proposal for adding a dynamic plugin system for custom logging sinks. |
+| **Low-Code Integration Proposal** | [`LOW_CODE_PROPOSAL.md`](./proposals/LOW_CODE_PROPOSAL.md) | A formal proposal for integrating with low-code platforms like Node-RED. |
+| **Home Automation Proposal** | [`HOME_AUTOMATION_PROPOSAL.md`](./proposals/HOME_AUTOMATION_PROPOSAL.md) | A formal proposal for integrating with home automation platforms like Home Assistant. |
+| **Multi-Source Metadata Proposal** | [`MULTI_SOURCE_METADATA_PROPOSAL.md`](./proposals/MULTI_SOURCE_METADATA_PROPOSAL.md) | A formal proposal for a plugin-driven, multi-source metadata ingestion and querying system. |
 | **Project Backlog** | [`BACKLOG.md`](./BACKLOG.md) | A tactical backlog of tasks managed by the formal qualification process defined in the PID. |
 | **Traceability Matrix** | [`TRACEABILITY_MATRIX.md`](./TRACEABILITY_MATRIX.md) | A live matrix mapping requirements from use cases and design docs to implementation and test status. |
 | **Use Cases** | [`USECASES.md`](./USECASES.md) | A collection of user-driven scenarios and requirements for the API. |
