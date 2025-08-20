@@ -6,6 +6,7 @@ from . import models
 
 # --- DownloadJob CRUD ---
 
+
 def create_download_job(
     db: Session, job: schemas.DownloadJobCreate
 ) -> models.DownloadJob:
@@ -18,15 +19,15 @@ def create_download_job(
     db.refresh(db_job)
     return db_job
 
+
 def get_download_job(db: Session, job_id: str) -> models.DownloadJob | None:
     """
     Get a single download job by its ID.
     """
     return (
-        db.query(models.DownloadJob)
-        .filter(models.DownloadJob.job_id == job_id)
-        .first()
+        db.query(models.DownloadJob).filter(models.DownloadJob.job_id == job_id).first()
     )
+
 
 def get_all_download_jobs(db: Session):
     """
@@ -38,6 +39,7 @@ def get_all_download_jobs(db: Session):
         .all()
     )
 
+
 def get_next_pending_download_job(db: Session) -> models.DownloadJob | None:
     """
     Get the oldest pending download job from the database.
@@ -48,6 +50,7 @@ def get_next_pending_download_job(db: Session) -> models.DownloadJob | None:
         .order_by(models.DownloadJob.created_at.asc())
         .first()
     )
+
 
 def update_download_job_status(
     db: Session,
@@ -67,6 +70,7 @@ def update_download_job_status(
     db.refresh(job)
     return job
 
+
 def retry_failed_download_jobs(db: Session) -> int:
     """
     Reset the status of all failed jobs to 'pending' and return the count.
@@ -82,6 +86,7 @@ def retry_failed_download_jobs(db: Session) -> int:
 
 # --- Playlist and Track CRUD ---
 
+
 def get_or_create_track(
     db: Session, track_id: str, track_name: str | None = None
 ) -> models.Track:
@@ -95,6 +100,7 @@ def get_or_create_track(
         db.commit()
         db.refresh(track)
     return track
+
 
 def create_or_update_playlist(
     db: Session, playlist_id: str, playlist_name: str, track_ids: list[str]
@@ -119,6 +125,7 @@ def create_or_update_playlist(
     db.refresh(playlist)
     return playlist
 
+
 def clear_all_playlists_and_tracks(db: Session):
     """
     Deletes all records from the playlist and track tables.
@@ -131,11 +138,13 @@ def clear_all_playlists_and_tracks(db: Session):
 
 # --- SpotifyToken CRUD ---
 
+
 def get_spotify_token(db: Session) -> models.SpotifyToken | None:
     """
     Get the Spotify token from the database. Assumes a single token for the app.
     """
     return db.query(models.SpotifyToken).first()
+
 
 def create_or_update_spotify_token(
     db: Session, token_data: dict

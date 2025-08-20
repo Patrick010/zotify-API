@@ -15,11 +15,9 @@ def run(exc: Exception, details: Dict[str, Any]):
         "exception_type": exc.__class__.__name__,
         "exception_module": exc.__class__.__module__,
         "triggered_by": "ErrorHandler",
-        **details  # Include any other details from the trigger config
+        **details,  # Include any other details from the trigger config
     }
 
     log_event(
-        message=f"[TRIGGERED ACTION] {message}",
-        level="CRITICAL",
-        **extra_context
+        message=f"[TRIGGERED ACTION] {message}", level="CRITICAL", **extra_context
     )

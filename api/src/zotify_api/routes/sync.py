@@ -7,13 +7,15 @@ from zotify_api.services.auth import require_admin_api_key
 
 router = APIRouter(prefix="/sync", tags=["sync"])
 
-def get_sync_runner() -> Callable:
+
+def get_sync_runner() -> Callable[[], None]:
     return sync_service.run_sync_job
+
 
 @router.post("/trigger", status_code=202)
 def trigger_sync(
     authorized: bool = Depends(require_admin_api_key),
-    sync_runner: Callable = Depends(get_sync_runner)
+    sync_runner: Callable = Depends(get_sync_runner),
 ):
     """
     Triggers a global synchronization job.

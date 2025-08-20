@@ -4,6 +4,7 @@ User service module.
 This module contains the business logic for the user subsystem.
 The functions in this module are designed to be called from the API layer.
 """
+
 import json
 import logging
 from pathlib import Path
@@ -12,6 +13,7 @@ from typing import Any, Dict, List
 log = logging.getLogger(__name__)
 
 STORAGE_FILE = Path(__file__).parent.parent / "storage" / "user_data.json"
+
 
 class UserService:
     def __init__(
@@ -55,7 +57,9 @@ class UserService:
     def get_user_preferences(self) -> Dict[str, Any]:
         return self._user_preferences
 
-    def update_user_preferences(self, preferences_data: Dict[str, Any]) -> Dict[str, Any]:
+    def update_user_preferences(
+        self, preferences_data: Dict[str, Any]
+    ) -> Dict[str, Any]:
         log.info(f"Updating user preferences with: {preferences_data}")
         self._user_preferences.update(preferences_data)
         self._save_data()
@@ -84,12 +88,15 @@ class UserService:
         self._notifications.append(notification)
         self._save_data()
 
-    def mark_notification_as_read(self, notification_id: str, read: bool = True) -> None:
+    def mark_notification_as_read(
+        self, notification_id: str, read: bool = True
+    ) -> None:
         for n in self._notifications:
             if n["id"] == notification_id:
                 n["read"] = read
                 break
         self._save_data()
+
 
 def get_user_service() -> "UserService":
     if not STORAGE_FILE.parent.exists():

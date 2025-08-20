@@ -1,5 +1,6 @@
 import subprocess
 
+
 def main():
     print("Running ruff to find errors...")
     result = subprocess.run(

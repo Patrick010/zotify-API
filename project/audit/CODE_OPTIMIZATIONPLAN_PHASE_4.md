@@ -20,7 +20,8 @@ This document provides a detailed, step-by-step action plan for implementing the
 
 ### 2.1. Chosen Tools
 - **Python:**
-    - **`ruff`:** For high-performance linting and formatting.
+    - **`ruff`:** For high-performance linting.
+    - **`black`:** For automated code formatting.
     - **`mypy`:** For strict static type checking.
     - **`bandit`:** For security-focused static analysis.
     - **`safety`:** For scanning dependencies for known vulnerabilities.

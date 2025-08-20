@@ -26,6 +26,7 @@ playlist_track_association = Table(
 
 # --- ORM Models ---
 
+
 class User(Base):
     __tablename__ = "users"
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
@@ -33,6 +34,7 @@ class User(Base):
     hashed_password = Column(String, nullable=False)
     # A simple role system for future use
     role = Column(String, default="user", nullable=False)
+
 
 class SpotifyToken(Base):
     __tablename__ = "spotify_tokens"
@@ -43,6 +45,7 @@ class SpotifyToken(Base):
     refresh_token = Column(String, nullable=False)
     expires_at = Column(DateTime(timezone=True), nullable=False)
 
+
 class Track(Base):
     __tablename__ = "tracks"
     id = Column(String, primary_key=True)  # Spotify track ID
@@ -50,6 +53,7 @@ class Track(Base):
     playlists = relationship(
         "Playlist", secondary=playlist_track_association, back_populates="tracks"
     )
+
 
 class Playlist(Base):
     __tablename__ = "playlists"
@@ -59,6 +63,7 @@ class Playlist(Base):
         "Track", secondary=playlist_track_association, back_populates="playlists"
     )
 
+
 class DownloadJob(Base):
     __tablename__ = "download_jobs"
     job_id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
@@ -67,6 +72,7 @@ class DownloadJob(Base):
     progress = Column(Float, default=0.0)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     error_message = Column(String, nullable=True)
+
 
 class JobLog(Base):
     __tablename__ = "job_logs"

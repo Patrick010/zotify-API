@@ -32,8 +32,12 @@ async def test_spoti_client_get_tracks_metadata_success():
 
         assert metadata == mock_json_response["tracks"]
         mock_request.assert_called_once()
-        assert mock_request.call_args.kwargs['headers']['Authorization'] == "Bearer fake_token"
+        assert (
+            mock_request.call_args.kwargs["headers"]["Authorization"]
+            == "Bearer fake_token"
+        )
         await client.close()
+
 
 @pytest.mark.asyncio
 async def test_spoti_client_get_current_user_success():
@@ -56,13 +60,17 @@ async def test_spoti_client_get_current_user_success():
         mock_request.assert_called_once()
         await client.close()
 
+
 @pytest.mark.asyncio
 async def test_spoti_client_no_token():
     """
     Tests that the client raises a ValueError if it is initialized with no token.
     """
-    with pytest.raises(ValueError, match="SpotiClient must be initialized with an access token."):
+    with pytest.raises(
+        ValueError, match="SpotiClient must be initialized with an access token."
+    ):
         SpotiClient(access_token=None)
+
 
 @pytest.mark.asyncio
 async def test_spoti_client_http_error():
@@ -72,7 +80,9 @@ async def test_spoti_client_http_error():
     with patch("httpx.AsyncClient.request", new_callable=AsyncMock) as mock_request:
         # The async request itself raises an exception
         mock_request.side_effect = httpx.HTTPStatusError(
-            "Error", request=MagicMock(), response=MagicMock(status_code=404, text="Not Found")
+            "Error",
+            request=MagicMock(),
+            response=MagicMock(status_code=404, text="Not Found"),
         )
 
         client = SpotiClient(access_token="fake_token")
@@ -82,6 +92,7 @@ async def test_spoti_client_http_error():
         assert excinfo.value.status_code == 404
         assert excinfo.value.detail == "Not Found"
         await client.close()
+
 
 @pytest.mark.asyncio
 async def test_spoti_client_get_devices_success():
@@ -99,15 +110,22 @@ async def test_spoti_client_get_devices_success():
         devices = await client.get_devices()
 
         assert devices == mock_json_response["devices"]
-        mock_request.assert_called_once_with("GET", "/me/player/devices", headers={"Authorization": "Bearer fake_token"})
+        mock_request.assert_called_once_with(
+            "GET", "/me/player/devices", headers={"Authorization": "Bearer fake_token"}
+        )
         await client.close()
+
 
 @pytest.mark.asyncio
 async def test_spoti_client_refresh_token_success():
     """
     Tests that the SpotiClient can successfully refresh an access token.
     """
-    mock_json_response = {"access_token": "new_fake_token", "expires_in": 3600, "refresh_token": "new_refresh_token"}
+    mock_json_response = {
+        "access_token": "new_fake_token",
+        "expires_in": 3600,
+        "refresh_token": "new_refresh_token",
+    }
 
     with patch("httpx.AsyncClient.post", new_callable=AsyncMock) as mock_post:
         mock_response = MagicMock()
@@ -117,12 +135,15 @@ async def test_spoti_client_refresh_token_success():
         result = await SpotiClient.refresh_access_token(refresh_token="old_refresh")
         assert result["access_token"] == "new_fake_token"
 
+
 @pytest.mark.asyncio
 async def test_spoti_client_search_success():
     """
     Tests that the SpotiClient can successfully perform a search.
     """
-    mock_json_response = {"tracks": {"items": [{"id": "track1", "name": "Search Result"}]}}
+    mock_json_response = {
+        "tracks": {"items": [{"id": "track1", "name": "Search Result"}]}
+    }
 
     with patch("httpx.AsyncClient.request", new_callable=AsyncMock) as mock_request:
         mock_response = MagicMock()
@@ -136,6 +157,7 @@ async def test_spoti_client_search_success():
         mock_request.assert_called_once()
         await client.close()
 
+
 @pytest.mark.asyncio
 async def test_spoti_client_get_playlists_success():
     mock_json_response = {"items": [{"id": "p1", "name": "Playlist 1"}]}
@@ -146,8 +168,14 @@ async def test_spoti_client_get_playlists_success():
         client = SpotiClient(access_token="fake_token")
         result = await client.get_current_user_playlists()
         assert result == mock_json_response
-        mock_request.assert_called_once_with("GET", "/me/playlists", params={"limit": 20, "offset": 0}, headers={"Authorization": "Bearer fake_token"})
+        mock_request.assert_called_once_with(
+            "GET",
+            "/me/playlists",
+            params={"limit": 20, "offset": 0},
+            headers={"Authorization": "Bearer fake_token"},
+        )
         await client.close()
+
 
 @pytest.mark.asyncio
 async def test_spoti_client_create_playlist_success():
@@ -157,9 +185,12 @@ async def test_spoti_client_create_playlist_success():
         mock_response.json.return_value = mock_json_response
         mock_request.return_value = mock_response
         client = SpotiClient(access_token="fake_token")
-        result = await client.create_playlist("user1", "New Playlist", True, False, "Desc")
+        result = await client.create_playlist(
+            "user1", "New Playlist", True, False, "Desc"
+        )
         assert result == mock_json_response
         await client.close()
+
 
 @pytest.mark.asyncio
 async def test_spoti_client_add_tracks_success():
@@ -173,19 +204,14 @@ async def test_spoti_client_add_tracks_success():
         assert result == mock_json_response
         await client.close()
 
+
 @pytest.mark.asyncio
 async def test_spoti_client_get_all_playlists_pagination():
     """
     Tests that the client correctly handles pagination when fetching all playlists.
     """
-    mock_page1 = {
-        "items": [{"id": "p1"}],
-        "next": "/me/playlists?offset=1&limit=1"
-    }
-    mock_page2 = {
-        "items": [{"id": "p2"}],
-        "next": None
-    }
+    mock_page1 = {"items": [{"id": "p1"}], "next": "/me/playlists?offset=1&limit=1"}
+    mock_page2 = {"items": [{"id": "p2"}], "next": None}
 
     with patch("httpx.AsyncClient.request", new_callable=AsyncMock) as mock_request:
         mock_response1 = MagicMock()
@@ -202,6 +228,7 @@ async def test_spoti_client_get_all_playlists_pagination():
         assert results[1]["id"] == "p2"
         assert mock_request.call_count == 2
         await client.close()
+
 
 @pytest.mark.asyncio
 async def test_spoti_client_exchange_code_for_token_success():

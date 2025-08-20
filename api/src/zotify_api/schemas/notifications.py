@@ -1,4 +1,3 @@
-
 from pydantic import BaseModel
 
 
@@ -8,9 +7,11 @@ class Notification(BaseModel):
     message: str
     read: bool
 
+
 class NotificationCreate(BaseModel):
     user_id: str
     message: str
+
 
 class NotificationUpdate(BaseModel):
     read: bool

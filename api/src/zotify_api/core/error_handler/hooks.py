@@ -14,12 +14,14 @@ if TYPE_CHECKING:
 
 log = logging.getLogger(__name__)
 
+
 def _get_request_id(request: Request) -> str:
     """Safely get request_id from request state."""
     try:
         return request.state.request_id
     except AttributeError:
         return "N/A"
+
 
 def register_fastapi_hooks(app: FastAPI, handler: "ErrorHandler"):
     """
@@ -43,6 +45,7 @@ def register_fastapi_hooks(app: FastAPI, handler: "ErrorHandler"):
         # map exception types to different status codes.
         return JSONResponse(status_code=500, content=response_data)
 
+
 def register_system_hooks(handler: "ErrorHandler"):
     """
     Registers exception handlers for non-FastAPI contexts (e.g., background tasks).
@@ -64,8 +67,7 @@ def register_system_hooks(handler: "ErrorHandler"):
             handler.handle_exception(exception, context={"hook": "asyncio"})
         else:
             log.warning(
-                "Asyncio exception handler called without an exception.",
-                extra=context
+                "Asyncio exception handler called without an exception.", extra=context
             )
 
     sys.excepthook = sync_excepthook

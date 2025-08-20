@@ -1,8 +1,9 @@
 import inspect
-from fastapi import FastAPI
-from fastapi.routing import APIRoute
 import sys
 from pathlib import Path
+
+from fastapi import FastAPI
+from fastapi.routing import APIRoute
 
 # Add the project source to the Python path
 project_root = Path(__file__).parent
@@ -28,7 +29,8 @@ def analyze_route_status(app: FastAPI):
             source = ""
 
 
-        # Heuristic: look for '501' or 'NotImplementedError' in source code to flag stubs
+        # Heuristic: look for '501' or 'NotImplementedError' in source code to
+        # flag stubs
         if "501" in source or "NotImplementedError" in source:
             status = "Stub"
         # Another heuristic: check for a placeholder response

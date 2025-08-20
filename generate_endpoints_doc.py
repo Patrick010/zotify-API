@@ -1,5 +1,6 @@
 import json
 
+
 def generate_endpoints_md():
     with open("openapi.json", "r") as f:
         openapi_spec = json.load(f)
@@ -26,14 +27,19 @@ def generate_endpoints_md():
 
                 summary = operation.get("summary", "")
                 endpoints_by_tag[tag].append(
-                    f"| {method.upper()} | `{path}` | {summary} | {'Yes' if auth_required else 'No'} |"
+                    (
+                        f"| {method.upper()} | `{path}` | {summary} | "
+                        f"{'Yes' if auth_required else 'No'} |"
+                    )
                 )
 
     markdown_content = """# Project API Endpoints Reference
 
 ## Overview
 
-This file lists all public API endpoints for the Zotify API project, generated from the OpenAPI schema. It provides a high-level reference for developers, operators, and auditors.
+This file lists all public API endpoints for the Zotify API project,
+generated from the OpenAPI schema. It provides a high-level reference for
+developers, operators, and auditors.
 
 ### Notes:
 

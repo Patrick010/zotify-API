@@ -10,14 +10,17 @@ def metadata_service():
     service._reset_data()
     return service
 
+
 def test_get_metadata_exists(metadata_service):
     metadata = metadata_service.get_metadata("abc123")
     assert metadata["title"] == "Track Title"
     assert metadata["mood"] == "Chill"
 
+
 def test_get_metadata_not_exists(metadata_service):
     metadata = metadata_service.get_metadata("nonexistent")
     assert metadata["status"] == "not found"
+
 
 def test_patch_metadata_exists(metadata_service):
     update_data = MetadataUpdate(mood="Energetic", rating=5)
@@ -27,6 +30,7 @@ def test_patch_metadata_exists(metadata_service):
     metadata = metadata_service.get_metadata("abc123")
     assert metadata["mood"] == "Energetic"
     assert metadata["rating"] == 5
+
 
 def test_patch_metadata_not_exists(metadata_service):
     update_data = MetadataUpdate(mood="Happy")

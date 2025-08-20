@@ -1,6 +1,7 @@
 # save as list_routes.py and run with `python list_routes.py`
 
 import importlib
+
 from fastapi import FastAPI
 
 # Adjust this to your actual app import path:
