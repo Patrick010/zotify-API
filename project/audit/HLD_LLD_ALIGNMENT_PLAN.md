@@ -37,6 +37,8 @@ For each item selected from the `AUDIT_TRACEABILITY_MATRIX.md`:
 3.  **If code and design differ (mismatch):**
     *   If the code is correct, **update the design** to reflect it.
     *   If the code is wrong, **refactor the code** to match the design.
+4.  **N/N (Not in Codebase, Not in Design, but appears in Roadmap/Scope/Future Enhancements):**
+    *   → Clarify scope. If still valid: implement in code and document it. If no longer valid: mark it explicitly as “dropped requirement” in design/docs and update the matrix accordingly.
 
 ### Repeatable Task Cycle
 - **Task 3.1:** Pick 1–2 core subsystems from the matrix with the biggest deviations.
