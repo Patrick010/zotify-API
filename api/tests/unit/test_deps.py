@@ -1,12 +1,14 @@
-import pytest
-from unittest.mock import patch, AsyncMock, MagicMock
-from fastapi import HTTPException
 from datetime import datetime, timedelta, timezone
+from unittest.mock import AsyncMock, MagicMock, patch
 
-from zotify_api.services import deps
+import pytest
+from fastapi import HTTPException
+
 from zotify_api.config import settings
 from zotify_api.database.models import SpotifyToken
 from zotify_api.providers.spotify_connector import SpotifyConnector
+from zotify_api.services import deps
+
 
 def test_get_settings():
     """ Test that get_settings returns the global settings object. """

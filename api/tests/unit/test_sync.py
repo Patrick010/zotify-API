@@ -1,8 +1,9 @@
-import pytest
+from unittest.mock import MagicMock
+
 from fastapi.testclient import TestClient
+
 from zotify_api.main import app
 from zotify_api.routes import sync
-from unittest.mock import MagicMock
 
 client = TestClient(app)
 

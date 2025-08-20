@@ -1,5 +1,7 @@
-from typing import Literal, List, Dict, Any
+from typing import Any, Dict, List, Literal
+
 from pydantic import BaseModel, Field
+
 
 class ActionConfig(BaseModel):
     """

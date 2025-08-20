@@ -1,8 +1,8 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from zotify_api.main import app
 from zotify_api.config import Settings
+from zotify_api.main import app
 from zotify_api.services.deps import get_settings
 
 
@@ -27,10 +27,11 @@ def client():
     app.dependency_overrides.clear()
 
 
+from typing import Any, Dict, List, Optional, Tuple
+
 from zotify_api.providers.base import BaseProvider
 from zotify_api.services.deps import get_provider
-from typing import List, Dict, Any, Tuple, Optional
-from unittest.mock import AsyncMock
+
 
 class FakeProvider(BaseProvider):
     """
@@ -69,10 +70,10 @@ def mock_provider(monkeypatch):
     del app.dependency_overrides[get_provider]
 
 
-import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from zotify_api.database.session import Base, get_db
+
+from zotify_api.database.session import Base
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"
 
@@ -88,7 +89,6 @@ def test_db_session():
     """
     # Import models here to ensure they are registered with Base.metadata
     # before create_all is called.
-    from zotify_api.database import models
 
     # A single connection is held for the duration of the test
     connection = engine.connect()

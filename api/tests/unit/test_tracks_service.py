@@ -1,6 +1,9 @@
+from unittest.mock import AsyncMock, MagicMock, patch
+
 import pytest
-from unittest.mock import MagicMock, patch, AsyncMock
+
 from zotify_api.services import tracks_service
+
 
 def test_get_tracks_no_db():
     items, total = tracks_service.get_tracks(engine=None)

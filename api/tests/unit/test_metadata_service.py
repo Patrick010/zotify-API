@@ -1,6 +1,8 @@
 import pytest
-from zotify_api.services.metadata_service import MetadataService
+
 from zotify_api.schemas.metadata import MetadataUpdate
+from zotify_api.services.metadata_service import MetadataService
+
 
 @pytest.fixture
 def metadata_service():

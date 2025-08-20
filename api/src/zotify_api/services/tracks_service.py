@@ -1,12 +1,11 @@
-from typing import List, Tuple, Dict, Any
 import logging
+from typing import Any, Dict, List, Tuple
+
 from sqlalchemy import text
-from fastapi import Depends
 
 from zotify_api.config import settings
-from zotify_api.services.db import get_db_engine
 from zotify_api.providers.base import BaseProvider
-from zotify_api.services.deps import get_provider
+from zotify_api.services.db import get_db_engine
 
 log = logging.getLogger(__name__)
 
@@ -56,6 +55,7 @@ def get_track(track_id: str, engine: Any = None) -> Dict | None:
 
 from datetime import datetime
 
+
 def create_track(payload: Dict, engine: Any = None) -> Dict:
     engine = engine or get_db_engine()
     if not engine:
@@ -79,16 +79,23 @@ def update_track(track_id: str, payload: Dict, engine: Any = None) -> Dict:
     if not engine:
         raise Exception("No DB engine available")
 
+    allowed_columns = ["name", "artist", "album", "duration_seconds", "path"]
+    update_payload = {key: payload[key] for key in payload if key in allowed_columns}
+
+    if not update_payload:
+        raise ValueError("No valid fields to update.")
+
     try:
         with engine.connect() as conn:
-            set_clause = ", ".join([f"{key} = :{key}" for key in payload.keys()])
+            set_clause = ", ".join([f"{key} = :{key}" for key in update_payload.keys()])
             stmt = text(f"UPDATE tracks SET {set_clause} WHERE id = :track_id")
-            conn.execute(stmt, {"track_id": track_id, **payload})
+            conn.execute(stmt, {"track_id": track_id, **update_payload})
             now = datetime.now()
             # We need to fetch the full track to get all the fields
             track = get_track(track_id, engine)
-            track.update(payload)
-            track["updated_at"] = now
+            if track:
+                track.update(update_payload)
+                track["updated_at"] = now
             return track
     except Exception as exc:
         if settings.app_env == "development":

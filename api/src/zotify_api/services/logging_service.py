@@ -1,7 +1,9 @@
-import logging
-import yaml
 import importlib
-from typing import List, Dict, Any
+import logging
+from typing import List
+
+import yaml
+
 from zotify_api.core.logging_handlers.base import BaseLogHandler
 
 log = logging.getLogger(__name__)

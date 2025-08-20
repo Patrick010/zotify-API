@@ -1,6 +1,9 @@
-import pytest
 from unittest.mock import MagicMock
+
+import pytest
+
 from zotify_api.services.notifications_service import NotificationsService
+
 
 @pytest.fixture
 def mock_user_service():

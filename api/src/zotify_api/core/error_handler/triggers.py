@@ -1,9 +1,10 @@
+import importlib
 import logging
 import pkgutil
-import importlib
-from typing import List, Dict, Any, Callable
-from .config import TriggerConfig
+from typing import Callable, Dict, List
+
 from . import actions
+from .config import TriggerConfig
 
 log = logging.getLogger(__name__)
 
@@ -16,7 +17,10 @@ class TriggerManager:
     def __init__(self, triggers: List[TriggerConfig]):
         self.triggers = triggers
         self.action_map: Dict[str, Callable] = self._load_actions()
-        log.info(f"TriggerManager initialized with {len(triggers)} triggers and {len(self.action_map)} actions.")
+        log.info(
+            f"TriggerManager initialized with {len(triggers)} triggers "
+            f"and {len(self.action_map)} actions."
+        )
 
     def _load_actions(self) -> Dict[str, Callable]:
         """Dynamically loads all actions from the 'actions' sub-package."""
@@ -44,13 +48,21 @@ class TriggerManager:
 
         for trigger in self.triggers:
             if trigger.exception_type == exc_type_str:
-                log.info(f"Exception '{exc_type_str}' matched a trigger. Executing actions.")
+                log.info(
+                    f"Exception '{exc_type_str}' matched a trigger. "
+                    "Executing actions."
+                )
                 for action_config in trigger.actions:
                     action_func = self.action_map.get(action_config.type)
                     if action_func:
                         try:
                             action_func(exc, action_config.details)
                         except Exception:
-                            log.exception(f"Failed to execute action of type '{action_config.type}'")
+                            log.exception(
+                                "Failed to execute action of type "
+                                f"'{action_config.type}'"
+                            )
                     else:
-                        log.warning(f"Unknown action type '{action_config.type}' configured.")
+                        log.warning(
+                            f"Unknown action type '{action_config.type}' configured."
+                        )

@@ -1,6 +1,7 @@
 import logging
 import re
 
+
 class SensitiveDataFilter(logging.Filter):
     """
     A logging filter that redacts sensitive data from log records.
@@ -17,7 +18,11 @@ class SensitiveDataFilter(logging.Filter):
         # We can filter based on both the raw message and the args
         record.msg = self._redact(record.msg)
         if record.args:
-            record.args = tuple(self._redact(arg) if isinstance(arg, str) else arg for arg in record.args)
+            redacted_args = [
+                self._redact(arg) if isinstance(arg, str) else arg
+                for arg in record.args
+            ]
+            record.args = tuple(redacted_args)
         return True
 
     def _redact(self, message: str) -> str:

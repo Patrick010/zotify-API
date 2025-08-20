@@ -1,7 +1,8 @@
-import sys
 import asyncio
 import logging
+import sys
 from typing import TYPE_CHECKING
+
 from fastapi import FastAPI, Request
 from starlette.responses import JSONResponse
 
@@ -62,7 +63,10 @@ def register_system_hooks(handler: "ErrorHandler"):
         if exception:
             handler.handle_exception(exception, context={"hook": "asyncio"})
         else:
-            log.warning("Asyncio exception handler called without an exception.", extra=context)
+            log.warning(
+                "Asyncio exception handler called without an exception.",
+                extra=context
+            )
 
     sys.excepthook = sync_excepthook
 

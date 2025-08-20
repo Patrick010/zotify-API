@@ -1,6 +1,8 @@
+
 import pytest
+
 from zotify_api.services.user_service import UserService
-import json
+
 
 @pytest.fixture
 def user_data():

@@ -1,6 +1,7 @@
-from typing import Optional, List
+from typing import List, Optional
 
 from .service import get_logging_service
+
 
 def log_event(
     message: str,

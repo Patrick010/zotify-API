@@ -1,7 +1,10 @@
-import pytest
 from pathlib import Path
+
+import pytest
+
 from zotify_api.main import app
 from zotify_api.services import config_service
+
 
 @pytest.fixture
 def temp_config_file(tmp_path: Path):

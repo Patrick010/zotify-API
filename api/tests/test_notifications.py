@@ -1,9 +1,9 @@
+
 import pytest
 from fastapi.testclient import TestClient
+
 from zotify_api.main import app
 from zotify_api.services import user_service
-from pathlib import Path
-import json
 
 client = TestClient(app)
 

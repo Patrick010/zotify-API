@@ -1,6 +1,6 @@
 # Action Plan: Phase 4 "Super-Lint" (Comprehensive)
 
-**Status:** Proposed
+**Status:** Active
 **Author:** Jules
 **Date:** 2025-08-16
 
@@ -31,7 +31,7 @@ This document provides a detailed, step-by-step action plan for implementing the
     - **`pre-commit`:** A framework to manage and run git hooks for local enforcement.
 
 ### 2.2. Coding Standards
-- **Python:** Adherence to PEP 8 (enforced by `ruff`). Strict typing enforced by `mypy`.
+- **Python:** Adherence to PEP 8 (enforced by `ruff`). Strict typing enforced by `mypy`. The baseline strictness will be `--strict`, but gradual typing will be tolerated during the initial remediation phase (`Phase 4a`), allowing for `# type: ignore` comments where immediate fixes are not feasible.
 - **Go:** Standard Go formatting (`gofmt`) and best practices enforced by `golangci-lint`.
 - **Compliance Targets:** All new code must pass all Super-Lint checks to be merged.
 
@@ -48,7 +48,7 @@ Before implementing new quality gates, the existing codebase must be brought to 
 ### Phase 4b: Foundational Static Analysis
 - **Goal:** Automatically enforce baseline code quality, style, and security.
 - **Tasks:**
-    - **SL-TASK-01:** Integrate `ruff`, `mypy`, `bandit`, and `golangci-lint` into the CI pipeline in "advisory mode" (reports errors but does not block merges).
+    - **SL-TASK-01:** Integrate `ruff`, `mypy`, `bandit`, `safety`, and `golangci-lint` into the CI pipeline in "advisory mode" (reports errors but does not block merges).
     - **SL-TASK-02:** After a review period, switch the CI pipeline to "enforcement mode," blocking merges on any failure.
 
 ### Phase 4c: Custom Architectural & Documentation Linting
@@ -59,6 +59,8 @@ Before implementing new quality gates, the existing codebase must be brought to 
         2. Verify significant new logic is linked to a feature specification.
         3. Check for the presence of docstrings on all public functions/classes.
         4. Flag PRs that modify core logic but do not update `TRACEABILITY_MATRIX.md`.
+      This check will also begin in "advisory mode" before being moved to enforcement.
+    - **Note on Flexibility:** The script will include a simple override mechanism (e.g., a specific tag like `[DOC-LINT-IGNORE]` in the PR description) for cases where a PR legitimately does not require documentation changes, preventing developers from being blocked by false positives.
 
 ### Phase 4d: Deep Code Review Process & Local Enforcement
 - **Goal:** Formalize the human review process and provide immediate local feedback.

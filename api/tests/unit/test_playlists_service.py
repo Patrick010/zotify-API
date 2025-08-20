@@ -1,6 +1,12 @@
-import pytest
 from unittest.mock import MagicMock
-from zotify_api.services.playlists_service import PlaylistsService, PlaylistsServiceError
+
+import pytest
+
+from zotify_api.services.playlists_service import (
+    PlaylistsService,
+    PlaylistsServiceError,
+)
+
 
 @pytest.fixture
 def mock_db_engine():
@@ -76,7 +82,6 @@ def test_get_limits():
 
 def test_get_playlists_service_dependency():
     from zotify_api.services.playlists_service import get_playlists_service
-    from zotify_api.services.db import get_db_engine
 
     def mock_get_db_engine():
         return MagicMock()

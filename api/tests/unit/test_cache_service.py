@@ -1,5 +1,7 @@
 import pytest
+
 from zotify_api.services.cache_service import CacheService
+
 
 @pytest.fixture
 def cache_state():

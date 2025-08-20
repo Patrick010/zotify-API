@@ -1,14 +1,15 @@
 import logging
+from datetime import datetime, timedelta, timezone
+
 from fastapi import Depends, HTTPException
 from sqlalchemy.orm import Session
-from datetime import datetime, timezone, timedelta
 
 from zotify_api.config import settings
 from zotify_api.database import crud
 from zotify_api.database.session import get_db
-from zotify_api.services.spoti_client import SpotiClient
 from zotify_api.providers.base import BaseProvider
 from zotify_api.providers.spotify_connector import SpotifyConnector
+from zotify_api.services.spoti_client import SpotiClient
 
 logger = logging.getLogger(__name__)
 

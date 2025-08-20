@@ -1,8 +1,7 @@
-from pydantic import BaseModel, Field, FilePath, HttpUrl
-from typing import List, Literal, Union
+from typing import Annotated, List, Literal, Optional, Union
 
-# Base model for common sink properties
-from pydantic import constr
+from pydantic import BaseModel, Field, HttpUrl, constr, model_validator
+
 
 class BaseSinkConfig(BaseModel):
     """ Base configuration for all sinks. """
@@ -21,7 +20,7 @@ class ConsoleSinkConfig(BaseSinkConfig):
 class FileSinkConfig(BaseSinkConfig):
     """ Configuration for a file log sink with rotation. """
     type: Literal["file"]
-    path: str  # Changed from FilePath to avoid existence check in unit tests
+    path: str
     max_bytes: int = 10485760  # 10 MB
     backup_count: int = 5
 
@@ -30,17 +29,12 @@ class WebhookSinkConfig(BaseSinkConfig):
     type: Literal["webhook"]
     url: HttpUrl
 
-from typing import Annotated
-
 # A union of all possible sink configurations
 # The 'type' field is used by Pydantic to determine which model to use
 AnySinkConfig = Annotated[
     Union[ConsoleSinkConfig, FileSinkConfig, WebhookSinkConfig],
     Field(discriminator="type")
 ]
-
-from typing import Optional
-from pydantic import model_validator
 
 # Configuration for a single trigger
 class TriggerConfig(BaseModel):

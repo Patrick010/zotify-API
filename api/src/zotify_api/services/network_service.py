@@ -4,7 +4,8 @@ Network service module.
 This module contains the business logic for the network subsystem.
 The functions in this module are designed to be called from the API layer.
 """
-from typing import Dict, Any
+from typing import Any, Dict
+
 
 class NetworkService:
     def __init__(self, network_config: Dict[str, Any]):

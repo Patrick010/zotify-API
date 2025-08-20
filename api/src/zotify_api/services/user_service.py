@@ -4,10 +4,10 @@ User service module.
 This module contains the business logic for the user subsystem.
 The functions in this module are designed to be called from the API layer.
 """
-from typing import Dict, Any, List
 import json
-from pathlib import Path
 import logging
+from pathlib import Path
+from typing import Any, Dict, List
 
 log = logging.getLogger(__name__)
 

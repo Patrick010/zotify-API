@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 from zotify_api.database.session import get_db
 from zotify_api.providers.base import BaseProvider
 from zotify_api.schemas.auth import AuthStatus, OAuthLoginResponse
-from zotify_api.services.auth import require_admin_api_key, get_auth_status
+from zotify_api.services.auth import get_auth_status, require_admin_api_key
 from zotify_api.services.deps import get_provider_no_auth
 
 router = APIRouter(prefix="/auth", tags=["auth"])
@@ -40,9 +40,13 @@ async def provider_callback(
     return HTMLResponse(content=html_content)
 
 
-@router.get("/status", response_model=AuthStatus, dependencies=[Depends(require_admin_api_key)])
+@router.get(
+    "/status",
+    response_model=AuthStatus,
+    dependencies=[Depends(require_admin_api_key)],
+)
 async def get_status(db: Session = Depends(get_db)):
-    """ Returns the current authentication status """
+    """Returns the current authentication status"""
     return await get_auth_status(db=db)
 
 
@@ -53,5 +57,6 @@ def logout(db: Session = Depends(get_db)):
     TODO: This is currently provider-specific and should be moved to the provider layer.
     """
     from zotify_api.database import crud
+
     crud.delete_spotify_token(db=db)
     return {}

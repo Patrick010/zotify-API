@@ -1,8 +1,10 @@
 import logging
-from typing import Dict, Any, List
-from .base import BaseLogHandler
-from zotify_api.database.session import get_db
+from typing import Any, Dict, List
+
 from zotify_api.database.models import JobLog
+from zotify_api.database.session import get_db
+
+from .base import BaseLogHandler
 
 log = logging.getLogger(__name__)
 
@@ -51,5 +53,7 @@ class DatabaseJobHandler(BaseLogHandler):
 
                 session.commit()
             except Exception:
-                log.exception(f"Failed to write to job log in database for job_id: {job_id}")
+                log.exception(
+                    "Failed to write to job log in database for job_id: %s", job_id
+                )
                 session.rollback()

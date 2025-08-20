@@ -1,7 +1,8 @@
-import sys
 import logging
+import sys
 from datetime import datetime
-from typing import Dict, Any, List
+from typing import Any, Dict, List
+
 from .base import BaseLogHandler
 
 log = logging.getLogger(__name__)

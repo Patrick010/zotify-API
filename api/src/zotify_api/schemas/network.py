@@ -1,5 +1,7 @@
-from pydantic import BaseModel
 from typing import Optional
+
+from pydantic import BaseModel
+
 
 class ProxyConfig(BaseModel):
     proxy_enabled: Optional[bool] = None

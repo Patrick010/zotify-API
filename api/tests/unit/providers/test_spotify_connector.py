@@ -1,7 +1,10 @@
+from unittest.mock import AsyncMock, patch
+
 import pytest
-from unittest.mock import patch, AsyncMock
 from sqlalchemy.orm import Session
+
 from zotify_api.providers.spotify_connector import SpotifyConnector
+
 
 @pytest.mark.asyncio
 @patch("zotify_api.providers.spotify_connector.crud.create_or_update_spotify_token")

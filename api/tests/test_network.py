@@ -1,6 +1,8 @@
 import pytest
+
 from zotify_api.main import app
 from zotify_api.services import network_service
+
 
 @pytest.fixture
 def network_service_override():

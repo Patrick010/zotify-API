@@ -1,10 +1,13 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+
 from zotify_api.config import settings
 
 if not settings.database_uri:
-    raise RuntimeError("DATABASE_URI must be set in the environment to use the unified database.")
+    raise RuntimeError(
+        "DATABASE_URI must be set in the environment to use the unified database."
+    )
 
 engine = create_engine(
     settings.database_uri,

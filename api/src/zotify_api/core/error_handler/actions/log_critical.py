@@ -1,5 +1,7 @@
-from typing import Dict, Any
+from typing import Any, Dict
+
 from zotify_api.core.logging_framework import log_event
+
 
 def run(exc: Exception, details: Dict[str, Any]):
     """

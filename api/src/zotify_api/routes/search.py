@@ -1,10 +1,12 @@
-from fastapi import APIRouter, Query, HTTPException, Depends
-from zotify_api.config import settings
+from typing import Literal
+
+from fastapi import APIRouter, Depends, HTTPException, Query
+
 import zotify_api.services.db as db_service
 import zotify_api.services.search as search_service
-from zotify_api.services.deps import get_provider
+from zotify_api.config import settings
 from zotify_api.providers.base import BaseProvider
-from typing import Literal
+from zotify_api.services.deps import get_provider
 
 router = APIRouter(prefix="/search", tags=["search"])
 

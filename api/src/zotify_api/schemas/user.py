@@ -1,5 +1,7 @@
+from typing import List, Optional
+
 from pydantic import BaseModel
-from typing import List, Dict, Any, Optional
+
 
 class UserProfileUpdate(BaseModel):
     name: Optional[str] = None

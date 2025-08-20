@@ -4,7 +4,8 @@ Cache service module.
 This module contains the business logic for the cache subsystem.
 The functions in this module are designed to be called from the API layer.
 """
-from typing import Dict, Any, Optional
+from typing import Any, Dict, Optional
+
 
 class CacheService:
     def __init__(self, cache_state: Dict[str, Any]):

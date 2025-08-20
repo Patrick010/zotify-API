@@ -1,9 +1,11 @@
-from fastapi import APIRouter, Depends, BackgroundTasks
-from zotify_api.services.auth import require_admin_api_key
+from typing import Any, Dict
+
+from fastapi import APIRouter, BackgroundTasks, Depends
+
 import zotify_api.services.webhooks as webhooks_service
-from zotify_api.schemas.webhooks import Webhook, WebhookPayload, FirePayload
 from zotify_api.schemas.generic import StandardResponse
-from typing import List, Dict, Any
+from zotify_api.schemas.webhooks import FirePayload, Webhook, WebhookPayload
+from zotify_api.services.auth import require_admin_api_key
 
 router = APIRouter(prefix="/webhooks", tags=["webhooks"], dependencies=[Depends(require_admin_api_key)])
 

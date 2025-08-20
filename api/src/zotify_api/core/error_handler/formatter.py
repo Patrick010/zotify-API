@@ -1,6 +1,7 @@
 import traceback
 from datetime import datetime, timezone
-from typing import Dict, Any
+from typing import Any, Dict
+
 
 class BaseFormatter:
     """Base class for error formatters."""

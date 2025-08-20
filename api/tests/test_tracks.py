@@ -1,8 +1,11 @@
-import pytest
-from unittest.mock import MagicMock
 from io import BytesIO
+from unittest.mock import MagicMock
+
+import pytest
+
 from zotify_api.main import app
 from zotify_api.services.db import get_db_engine
+
 
 @pytest.fixture
 def mock_db(client):
@@ -74,7 +77,9 @@ def test_upload_cover_unauthorized(client):
     assert response.status_code == 401
 
 from unittest.mock import patch
+
 from fastapi import HTTPException
+
 
 def test_upload_cover(client, mock_db):
     file_content = b"fake image data"
@@ -92,9 +97,6 @@ def test_get_metadata_unauthorized(client):
 
 from unittest.mock import AsyncMock
 
-from zotify_api.services import auth as auth_service
-
-from fastapi.testclient import TestClient
 
 @patch("zotify_api.services.tracks_service.get_tracks_metadata_from_spotify", new_callable=AsyncMock)
 def test_get_metadata_success(mock_get_metadata, client, mock_provider):

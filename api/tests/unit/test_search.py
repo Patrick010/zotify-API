@@ -1,10 +1,10 @@
-import pytest
-from fastapi.testclient import TestClient
-from zotify_api.main import app
 from unittest.mock import MagicMock
+
+import pytest
+
+from zotify_api.main import app
 from zotify_api.routes import search
 
-from zotify_api.services import auth as auth_service
 
 def test_search_disabled_by_default(client, mock_provider):
     app.dependency_overrides[search.get_feature_flags] = lambda: {"fork_features": False, "search_advanced": False}
@@ -13,6 +13,7 @@ def test_search_disabled_by_default(client, mock_provider):
     del app.dependency_overrides[search.get_feature_flags]
 
 from unittest.mock import AsyncMock
+
 
 @pytest.mark.asyncio
 async def test_search_spotify_fallback(client):

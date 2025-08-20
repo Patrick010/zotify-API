@@ -2,7 +2,8 @@ import json
 import logging
 import uuid
 from datetime import datetime, timezone
-from typing import Dict, Any, List
+from typing import Any, Dict, List
+
 from .base import BaseLogHandler
 
 log = logging.getLogger(__name__)
@@ -15,7 +16,11 @@ class JsonAuditHandler(BaseLogHandler):
     def __init__(self, levels: List[str], filename: str):
         self.levels = [level.upper() for level in levels]
         self.filename = filename
-        log.debug(f"JsonAuditHandler initialized for levels: {self.levels} -> {self.filename}")
+        log.debug(
+            "JsonAuditHandler initialized for levels: %s -> %s",
+            self.levels,
+            self.filename,
+        )
 
     def can_handle(self, level: str) -> bool:
         return level.upper() in self.levels

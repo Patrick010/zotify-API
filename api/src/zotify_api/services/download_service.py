@@ -1,9 +1,11 @@
 import time
 from typing import List
+
 from sqlalchemy.orm import Session
-from zotify_api.database import crud
-from zotify_api.database import models
+
+from zotify_api.database import crud, models
 from zotify_api.schemas import download as schemas
+
 
 def add_downloads_to_queue(db: Session, track_ids: List[str]) -> List[models.DownloadJob]:
     """Creates new download jobs and adds them to the database queue."""

@@ -1,30 +1,35 @@
-import logging
-import secrets
 import base64
 import hashlib
 import inspect
-import httpx
+import logging
+import secrets
+from datetime import datetime, timedelta, timezone
+from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import quote_plus
-from datetime import datetime, timezone, timedelta
-from typing import List, Dict, Any, Tuple, Optional
 
+import httpx
 from sqlalchemy.orm import Session
 
-from .base import BaseProvider
-from zotify_api.services.spoti_client import SpotiClient
-from zotify_api.database import crud
-from zotify_api.core.logging_framework import log_event
 from zotify_api.auth_state import (
-    pending_states, CLIENT_ID, REDIRECT_URI,
-    SPOTIFY_AUTH_URL, SPOTIFY_TOKEN_URL
+    CLIENT_ID,
+    REDIRECT_URI,
+    SPOTIFY_AUTH_URL,
+    SPOTIFY_TOKEN_URL,
+    pending_states,
 )
+from zotify_api.core.logging_framework import log_event
+from zotify_api.database import crud
+from zotify_api.services.spoti_client import SpotiClient
+
+from .base import BaseProvider
 
 logger = logging.getLogger(__name__)
 
+
 class SpotifyConnector(BaseProvider):
     """
-    Provider connector for the Spotify music service.
-    Implements the BaseProvider interface and uses the SpotiClient to interact with the Spotify API.
+    Provider connector for the Spotify music service. It uses the SpotiClient
+    to interact with the Spotify API.
     """
 
     def __init__(self, db: Session, client: Optional[SpotiClient] = None):
@@ -32,10 +37,22 @@ class SpotifyConnector(BaseProvider):
         self.client = client
 
     async def get_oauth_login_url(self, state: str) -> str:
-        """ Constructs the provider-specific URL for OAuth2 authorization. """
-        scope = "ugc-image-upload user-read-playback-state user-modify-playback-state user-read-currently-playing app-remote-control streaming playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public user-follow-modify user-follow-read user-read-playback-position user-top-read user-read-recently-played user-library-modify user-library-read user-read-email user-read-private"
+        """Constructs the provider-specific URL for OAuth2 authorization."""
+        scopes = [
+            "ugc-image-upload", "user-read-playback-state",
+            "user-modify-playback-state", "user-read-currently-playing",
+            "app-remote-control", "streaming", "playlist-read-private",
+            "playlist-read-collaborative", "playlist-modify-private",
+            "playlist-modify-public", "user-follow-modify", "user-follow-read",
+            "user-read-playback-position", "user-top-read",
+            "user-read-recently-played", "user-library-modify",
+            "user-library-read", "user-read-email", "user-read-private"
+        ]
+        scope = " ".join(scopes)
 
-        code_verifier = base64.urlsafe_b64encode(secrets.token_bytes(32)).rstrip(b"=").decode()
+        code_verifier = base64.urlsafe_b64encode(
+            secrets.token_bytes(32)
+        ).rstrip(b"=").decode()
         code_challenge = base64.urlsafe_b64encode(
             hashlib.sha256(code_verifier.encode()).digest()
         ).rstrip(b"=").decode()
@@ -53,10 +70,14 @@ class SpotifyConnector(BaseProvider):
         )
         return auth_url
 
-    async def handle_oauth_callback(self, code: Optional[str], error: Optional[str], state: str) -> str:
+    async def handle_oauth_callback(
+        self, code: Optional[str], error: Optional[str], state: str
+    ) -> str:
         """
-        Handles the callback from the OAuth2 provider, processing either the authorization
-        code or an error. Returns HTML content for the popup window.
+        Handles the callback from the OAuth2 provider.
+
+        This processes either the authorization code or an error. Returns HTML
+        content for the popup window.
         """
         if error:
             log_event(
@@ -79,8 +100,17 @@ class SpotifyConnector(BaseProvider):
 
         code_verifier = pending_states.pop(state, None)
         if not code_verifier:
-            log_event("Invalid or expired state received in Spotify callback", level="ERROR", tags=["security"], details={"state": state})
-            return "<html><body><h2>Error</h2><p>Invalid or expired state token. Please try logging in again.</p></body></html>"
+            log_event(
+                "Invalid or expired state received in Spotify callback",
+                level="ERROR",
+                tags=["security"],
+                details={"state": state}
+            )
+            return """
+            <html><body><h2>Error</h2>
+            <p>Invalid or expired state token. Please try logging in again.</p>
+            </body></html>
+            """
 
         data = {
             "grant_type": "authorization_code",
@@ -93,7 +123,9 @@ class SpotifyConnector(BaseProvider):
 
         try:
             async with httpx.AsyncClient() as client:
-                resp = await client.post(SPOTIFY_TOKEN_URL, data=data, headers=headers)
+                resp = await client.post(
+                    SPOTIFY_TOKEN_URL, data=data, headers=headers
+                )
                 resp.raise_for_status()
 
                 json_obj = resp.json()
@@ -102,25 +134,47 @@ class SpotifyConnector(BaseProvider):
                 else:
                     tokens = json_obj
 
+                expires_at = datetime.now(timezone.utc) + timedelta(
+                    seconds=tokens["expires_in"] - 60
+                )
                 token_data = {
                     "access_token": tokens["access_token"],
                     "refresh_token": tokens.get("refresh_token"),
-                    "expires_at": datetime.now(timezone.utc) + timedelta(seconds=tokens["expires_in"] - 60)
+                    "expires_at": expires_at,
                 }
                 crud.create_or_update_spotify_token(self.db, token_data=token_data)
 
-                log_event("Spotify authentication successful", level="INFO", tags=["security"])
-                return "<html><head><title>Authentication Success</title></head><body><p>Successfully authenticated. You can close this window.</p><script>window.close();</script></body></html>"
+                log_event(
+                    "Spotify authentication successful", level="INFO", tags=["security"]
+                )
+                return """
+                <html><head><title>Authentication Success</title></head>
+                <body><p>Successfully authenticated. You can close this window.</p>
+                <script>window.close();</script></body></html>
+                """
 
         except httpx.HTTPStatusError as e:
-            log_event("Failed to get token from Spotify", level="ERROR", tags=["security"], details={"status_code": e.response.status_code, "response": e.response.text})
-            return f"<html><body><h2>Error</h2><p>Failed to retrieve token from Spotify. Status: {e.response.status_code}</p></body></html>"
+            log_event(
+                "Failed to get token from Spotify",
+                level="ERROR",
+                tags=["security"],
+                details={
+                    "status_code": e.response.status_code, "response": e.response.text
+                },
+            )
+            return f"""
+            <html><body><h2>Error</h2>
+            <p>Failed to retrieve token. Status: {e.response.status_code}</p>
+            </body></html>
+            """
         except Exception as e:
             logger.error(f"An unexpected error occurred during Spotify callback: {e}")
             return "<html><body><h2>Error</h2><p>An unexpected error occurred.</p></body></html>"
 
-    async def search(self, q: str, type: str, limit: int, offset: int) -> Tuple[List[Dict[str, Any]], int]:
-        """ Search for tracks, albums, or artists on Spotify. """
+    async def search(
+        self, q: str, type: str, limit: int, offset: int
+    ) -> Tuple[List[Dict[str, Any]], int]:
+        """Search for tracks, albums, or artists on Spotify."""
         if not self.client:
             raise Exception("SpotiClient not initialized.")
         results = await self.client.search(q=q, type=type, limit=limit, offset=offset)
@@ -130,19 +184,23 @@ class SpotifyConnector(BaseProvider):
         return [], 0
 
     async def get_playlist(self, playlist_id: str) -> Dict[str, Any]:
-        """ Get a single playlist from Spotify. """
+        """Get a single playlist from Spotify."""
         if not self.client:
             raise Exception("SpotiClient not initialized.")
         return await self.client.get_playlist(playlist_id)
 
-    async def get_playlist_tracks(self, playlist_id: str, limit: int, offset: int) -> Dict[str, Any]:
-        """ Get the tracks in a playlist from Spotify. """
+    async def get_playlist_tracks(
+        self, playlist_id: str, limit: int, offset: int
+    ) -> Dict[str, Any]:
+        """Get the tracks in a playlist from Spotify."""
         if not self.client:
             raise Exception("SpotiClient not initialized.")
-        return await self.client.get_playlist_tracks(playlist_id, limit=limit, offset=offset)
+        return await self.client.get_playlist_tracks(
+            playlist_id, limit=limit, offset=offset
+        )
 
     async def sync_playlists(self) -> Dict[str, Any]:
-        """ Fetches all of the user's playlists from Spotify and saves them to the database. """
+        """Fetch user's playlists from Spotify and save to the database."""
         if not self.client:
             raise Exception("SpotiClient not initialized.")
         spotify_playlists = await self.client.get_all_current_user_playlists()
@@ -153,11 +211,20 @@ class SpotifyConnector(BaseProvider):
             if not playlist_id or not playlist_name:
                 continue
             track_items = playlist_data.get("tracks", {}).get("items", [])
-            track_ids = [item.get("track", {}).get("id") for item in track_items if item.get("track")]
+            track_ids = []
+            for item in track_items:
+                if track := item.get("track"):
+                    if track_id := track.get("id"):
+                        track_ids.append(track_id)
+
             crud.create_or_update_playlist(
                 db=self.db,
                 playlist_id=playlist_id,
                 playlist_name=playlist_name,
                 track_ids=track_ids,
             )
-        return {"status": "success", "message": f"Successfully synced {len(spotify_playlists)} playlists.", "count": len(spotify_playlists)}
+        return {
+            "status": "success",
+            "message": f"Successfully synced {len(spotify_playlists)} playlists.",
+            "count": len(spotify_playlists)
+        }

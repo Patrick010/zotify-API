@@ -1,5 +1,7 @@
 from unittest.mock import patch
+
 from zotify_api.logging_config import setup_logging
+
 
 @patch("zotify_api.logging_config.logging.basicConfig")
 def test_setup_logging(mock_basic_config):

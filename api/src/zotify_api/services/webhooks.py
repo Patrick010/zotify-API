@@ -1,7 +1,8 @@
-import uuid
-import httpx
 import logging
-from typing import List, Dict
+import uuid
+from typing import Dict
+
+import httpx
 
 log = logging.getLogger(__name__)
 

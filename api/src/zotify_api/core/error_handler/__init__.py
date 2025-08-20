@@ -47,7 +47,9 @@ class ErrorHandler:
         )
         self.trigger_manager.process_triggers(exc)
 
-    async def handle_exception_async(self, exc: Exception, context: Optional[dict] = None):
+    async def handle_exception_async(
+        self, exc: Exception, context: Optional[dict] = None
+    ):
         """Handles an asynchronous exception."""
         self.logger.error(
             "An unhandled asynchronous exception occurred",
@@ -57,7 +59,9 @@ class ErrorHandler:
         self.trigger_manager.process_triggers(exc)
 
 
-def initialize_error_handler(config: ErrorHandlerConfig, logger: logging.Logger) -> "ErrorHandler":
+def initialize_error_handler(
+    config: ErrorHandlerConfig, logger: logging.Logger
+) -> "ErrorHandler":
     """Initializes the singleton error handler instance."""
     global _error_handler_instance
     if _error_handler_instance is not None:
@@ -72,5 +76,8 @@ def get_error_handler() -> "ErrorHandler":
     Raises an exception if it has not been initialized.
     """
     if _error_handler_instance is None:
-        raise RuntimeError("ErrorHandler has not been initialized. Call initialize_error_handler() first.")
+        raise RuntimeError(
+            "ErrorHandler has not been initialized. "
+            "Call initialize_error_handler() first."
+        )
     return _error_handler_instance

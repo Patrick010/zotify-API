@@ -1,16 +1,18 @@
 import uuid
+
 from sqlalchemy import (
     Column,
-    String,
-    Float,
     DateTime,
+    Float,
     ForeignKey,
-    Table,
     Integer,
+    String,
+    Table,
     Text,
 )
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
+
 from .session import Base
 
 # --- Association Table for Playlists and Tracks (Many-to-Many) ---
@@ -34,16 +36,17 @@ class User(Base):
 
 class SpotifyToken(Base):
     __tablename__ = "spotify_tokens"
-    id = Column(Integer, primary_key=True) # Simple auto-incrementing ID
-    user_id = Column(String, ForeignKey("users.id"), nullable=True) # For multi-user support
+    id = Column(Integer, primary_key=True)  # Simple auto-incrementing ID
+    # For multi-user support
+    user_id = Column(String, ForeignKey("users.id"), nullable=True)
     access_token = Column(String, nullable=False)
     refresh_token = Column(String, nullable=False)
     expires_at = Column(DateTime(timezone=True), nullable=False)
 
 class Track(Base):
     __tablename__ = "tracks"
-    id = Column(String, primary_key=True) # Spotify track ID
-    name = Column(String, nullable=True) # Optional: store track name for convenience
+    id = Column(String, primary_key=True)  # Spotify track ID
+    name = Column(String, nullable=True)  # Optional: store track name for convenience
     playlists = relationship(
         "Playlist", secondary=playlist_track_association, back_populates="tracks"
     )

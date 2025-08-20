@@ -1,7 +1,15 @@
 import logging
+
 import pytest
-from zotify_api.core.error_handler import ErrorHandler, initialize_error_handler, get_error_handler, ErrorHandlerConfig
+
+from zotify_api.core.error_handler import (
+    ErrorHandler,
+    ErrorHandlerConfig,
+    get_error_handler,
+    initialize_error_handler,
+)
 from zotify_api.core.error_handler.formatter import JsonFormatter, PlainTextFormatter
+
 
 # A mock logger to capture log messages
 class MockLogger(logging.Logger):
@@ -22,6 +30,7 @@ def mock_logger():
 
 import zotify_api.core.error_handler
 
+
 @pytest.fixture(autouse=True)
 def reset_singleton():
     """Fixture to automatically reset the singleton before and after each test."""
@@ -31,6 +40,7 @@ def reset_singleton():
 
 
 from unittest.mock import patch
+
 
 def test_error_handler_initialization():
     """Tests that the ErrorHandler can be initialized."""

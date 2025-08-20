@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from typing import List, Dict, Any, Tuple, Optional
+from typing import Any, Dict, List, Optional, Tuple
+
 
 class BaseProvider(ABC):
     """
@@ -8,23 +9,27 @@ class BaseProvider(ABC):
     """
 
     @abstractmethod
-    async def search(self, q: str, type: str, limit: int, offset: int) -> Tuple[List[Dict[str, Any]], int]:
-        """ Search for tracks, albums, or artists. """
+    async def search(
+        self, q: str, type: str, limit: int, offset: int
+    ) -> Tuple[List[Dict[str, Any]], int]:
+        """Search for tracks, albums, or artists."""
         pass
 
     @abstractmethod
     async def get_playlist(self, playlist_id: str) -> Dict[str, Any]:
-        """ Get a single playlist. """
+        """Get a single playlist."""
         pass
 
     @abstractmethod
-    async def get_playlist_tracks(self, playlist_id: str, limit: int, offset: int) -> Dict[str, Any]:
-        """ Get the tracks in a playlist. """
+    async def get_playlist_tracks(
+        self, playlist_id: str, limit: int, offset: int
+    ) -> Dict[str, Any]:
+        """Get the tracks in a playlist."""
         pass
 
     @abstractmethod
     async def sync_playlists(self) -> Dict[str, Any]:
-        """ Sync all playlists from the provider to the local database. """
+        """Sync all playlists from the provider to the local database."""
         pass
 
     # Add other abstract methods for all the operations that need to be supported
@@ -44,14 +49,18 @@ class BaseProvider(ABC):
 
     @abstractmethod
     async def get_oauth_login_url(self, state: str) -> str:
-        """ Constructs the provider-specific URL for OAuth2 authorization. """
+        """Constructs the provider-specific URL for OAuth2 authorization."""
         pass
 
     @abstractmethod
-    async def handle_oauth_callback(self, code: Optional[str], error: Optional[str], state: str) -> str:
+    async def handle_oauth_callback(
+        self, code: Optional[str], error: Optional[str], state: str
+    ) -> str:
         """
-        Handles the callback from the OAuth2 provider, processing either the authorization
-        code or an error. Returns HTML content for the popup window.
+        Handles the callback from the OAuth2 provider.
+
+        This processes either the authorization code or an error. Returns HTML
+        content for the popup window.
         """
         pass
 

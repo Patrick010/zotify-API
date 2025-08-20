@@ -1,5 +1,6 @@
 from zotify_api.schemas.metadata import MetadataUpdate
 
+
 # Simulated backend storage
 def get_initial_metadata():
     return {

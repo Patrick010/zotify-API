@@ -1,5 +1,7 @@
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
+
 from zotify_api.core.error_handler.actions import log_critical, webhook
+
 
 def test_log_critical_action():
     """

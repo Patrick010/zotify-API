@@ -1,8 +1,10 @@
-from typing import List, Dict, Any
-from fastapi import Depends
-from zotify_api.services.user_service import UserService, get_user_service
-import uuid
 import logging
+import uuid
+from typing import Any, Dict, List
+
+from fastapi import Depends
+
+from zotify_api.services.user_service import UserService, get_user_service
 
 log = logging.getLogger(__name__)
 

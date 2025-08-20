@@ -7,7 +7,7 @@ The dependencies are injected into the functions, which makes them easy to test.
 """
 import json
 from pathlib import Path
-from typing import Dict, Any
+from typing import Any, Dict
 
 CONFIG_PATH = Path(__file__).parent.parent / "storage" / "config.json"
 
@@ -38,7 +38,7 @@ class ConfigService:
         return self._config
 
     def update_config(self, update_data: Dict[str, Any]) -> Dict[str, Any]:
-        from zotify_api.models.config import ConfigUpdate
+        from zotify_api.models.config_models import ConfigUpdate
         validated_update = ConfigUpdate(**update_data)
         for k, v in validated_update.model_dump(exclude_unset=True).items():
             self._config[k] = v

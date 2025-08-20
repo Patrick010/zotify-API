@@ -1,8 +1,11 @@
-import pytest
 from unittest.mock import MagicMock, patch
+
+import pytest
+
 from zotify_api.database import crud
-from zotify_api.database.models import DownloadJob, SpotifyToken, Track, Playlist
+from zotify_api.database.models import DownloadJob, SpotifyToken, Track
 from zotify_api.schemas import download as schemas
+
 
 @pytest.fixture
 def db_session():

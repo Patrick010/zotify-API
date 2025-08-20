@@ -1,14 +1,16 @@
 import asyncio
-import logging
 import unittest.mock
-from typing import Dict, Any
+from typing import Any, Dict
 
 import pytest
 import yaml
 from pydantic import ValidationError
 
 from zotify_api.core.logging_framework.schemas import LoggingFrameworkConfig
-from zotify_api.core.logging_framework.service import get_logging_service, LoggingService
+from zotify_api.core.logging_framework.service import (
+    LoggingService,
+    get_logging_service,
+)
 
 # A valid YAML configuration for testing
 VALID_CONFIG_YAML = """

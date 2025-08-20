@@ -1,5 +1,7 @@
 from sqlalchemy import text
+
 from zotify_api.providers.base import BaseProvider
+
 
 async def perform_search(q: str, type: str, limit: int, offset: int, db_engine: any, provider: BaseProvider):
     search_type = type

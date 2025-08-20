@@ -1,9 +1,10 @@
 # api/src/zotify_api/services/playlists_service.py
-from typing import List, Tuple, Optional, Dict
 import logging
-from sqlalchemy import text
+from typing import Dict, List, Optional, Tuple
+
 from fastapi import Depends
-from zotify_api.config import settings
+from sqlalchemy import text
+
 from zotify_api.services.db import get_db_engine
 
 log = logging.getLogger(__name__)

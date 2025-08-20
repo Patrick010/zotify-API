@@ -1,4 +1,5 @@
 from fastapi.testclient import TestClient
+
 from zotify_api.main import app
 
 client = TestClient(app)
@@ -46,9 +47,8 @@ def test_get_env(monkeypatch):
     assert "version" in data["data"]
     assert "python_version" in data["data"]
 
-from unittest.mock import patch, mock_open, MagicMock
-import yaml
-from pydantic import ValidationError
+from unittest.mock import MagicMock, mock_open, patch
+
 
 def test_get_human_readable_uptime():
     from zotify_api.routes.system import get_human_readable_uptime

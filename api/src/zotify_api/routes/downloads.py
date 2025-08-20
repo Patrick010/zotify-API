@@ -1,11 +1,13 @@
-from fastapi import APIRouter, Depends
 from typing import List, Optional
+
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
+
+from zotify_api.database.session import get_db
 from zotify_api.schemas import download as schemas
 from zotify_api.schemas.generic import StandardResponse
 from zotify_api.services import download_service
-from zotify_api.database.session import get_db
 from zotify_api.services.auth import require_admin_api_key
 
 router = APIRouter(prefix="/downloads", tags=["downloads"])

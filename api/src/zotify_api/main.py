@@ -1,25 +1,46 @@
-from fastapi import FastAPI
+import logging as py_logging
+import time
+from typing import Optional
+
+import yaml
+from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security.api_key import APIKeyHeader
+from pydantic import ValidationError
+
 from zotify_api.config import settings
-from zotify_api.routes import auth, cache, system, user, playlists, tracks, downloads, sync, search, webhooks, notifications
+from zotify_api.database.session import Base, engine
+from zotify_api.routes import (
+    auth,
+    cache,
+    config,
+    downloads,
+    network,
+    notifications,
+    playlists,
+    search,
+    sync,
+    system,
+    tracks,
+    user,
+    webhooks,
+)
+from zotify_api.services.auth import require_admin_api_key
+
+from .core.error_handler import (
+    ErrorHandlerConfig,
+    initialize_error_handler,
+    register_fastapi_hooks,
+    register_system_hooks,
+)
+from .core.logging_framework import log_event
+from .core.logging_framework.filters import SensitiveDataFilter
+from .core.logging_framework.schemas import LoggingFrameworkConfig
+from .core.logging_framework.service import (
+    get_logging_service as get_flexible_logging_service,
+)
 from .globals import app_start_time
 from .middleware.request_id import RequestIDMiddleware
-import logging as py_logging
-from .core.error_handler import (
-    initialize_error_handler,
-    register_system_hooks,
-    register_fastapi_hooks,
-    ErrorHandlerConfig,
-)
-import yaml
-from pydantic import ValidationError
-from .core.logging_framework import log_event
-from .core.logging_framework.schemas import LoggingFrameworkConfig
-from .core.logging_framework.service import get_logging_service as get_flexible_logging_service
-from .core.logging_framework.filters import SensitiveDataFilter
-
-from zotify_api.database.session import Base, engine
 
 # Initialize and register the global error handler
 log = py_logging.getLogger(__name__)
@@ -49,8 +70,9 @@ app.add_middleware(
 
 app.add_middleware(RequestIDMiddleware)
 
+
 def initialize_logging_framework():
-    """ Loads config and initializes the new flexible logging framework. """
+    """Loads config and initializes the new flexible logging framework."""
     try:
         with open("logging_framework.yml", "r") as f:
             config_data = yaml.safe_load(f)
@@ -62,13 +84,17 @@ def initialize_logging_framework():
         log_event(
             "Flexible logging framework initialized from config.",
             level="INFO",
-            destinations=["default_console"] # Assumes a console sink named 'default_console' exists
+            # Assumes a console sink named 'default_console' exists
+            destinations=["default_console"],
         )
 
         # If in production, add a filter to redact sensitive data from all logs
         if settings.app_env == "production":
             py_logging.getLogger().addFilter(SensitiveDataFilter())
-            log_event("Production mode detected. Applying sensitive data filter to all logs.", level="INFO")
+            log_event(
+                "Production mode detected. Applying sensitive data filter to all logs.",
+                level="INFO",
+            )
 
     except (FileNotFoundError, ValidationError, yaml.YAMLError) as e:
         # Fallback to basic logging if the framework fails to initialize
@@ -88,31 +114,31 @@ def startup_event():
     # Initialize the new flexible logging framework
     initialize_logging_framework()
 
-from zotify_api.routes import config, network
 
 prefix = settings.api_prefix
 
-modules = [auth, cache, system, user, playlists, tracks, downloads, sync, config, network, search, webhooks, notifications]
+modules = [
+    auth, cache, system, user, playlists, tracks, downloads, sync, config,
+    network, search, webhooks, notifications
+]
 for m in modules:
     app.include_router(m.router, prefix=prefix)
+
 
 @app.get("/ping")
 async def ping():
     return {"pong": True}
 
+
 @app.get("/health", tags=["health"])
 async def health_check():
     return {"status": "ok", "message": "API is running"}
+
 
 @app.get("/openapi.json", include_in_schema=False)
 async def get_open_api_endpoint():
     return app.openapi()
 
-import time
-
-from typing import Optional
-from fastapi import Depends, HTTPException, Request
-from zotify_api.services.auth import require_admin_api_key
 
 @app.get("/version")
 async def version():
@@ -123,12 +149,17 @@ async def version():
         "uptime": time.time() - app_start_time,
     }
 
+
 @app.get("/api/schema", tags=["system"], dependencies=[Depends(require_admin_api_key)])
 def get_schema(request: Request, q: Optional[str] = None):
-    """ Returns either full OpenAPI spec or schema fragment for requested object type (via query param). """
+    """Returns OpenAPI spec or a specific schema fragment."""
     openapi_schema = request.app.openapi()
     if q:
-        if "components" in openapi_schema and "schemas" in openapi_schema["components"] and q in openapi_schema["components"]["schemas"]:
+        if (
+            "components" in openapi_schema
+            and "schemas" in openapi_schema["components"]
+            and q in openapi_schema["components"]["schemas"]
+        ):
             return openapi_schema["components"]["schemas"][q]
         else:
             raise HTTPException(status_code=404, detail=f"Schema '{q}' not found.")

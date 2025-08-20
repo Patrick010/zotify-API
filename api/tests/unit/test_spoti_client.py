@@ -1,9 +1,11 @@
-import pytest
 from unittest.mock import AsyncMock, MagicMock, patch
-import httpx
 
+import httpx
+import pytest
 from fastapi import HTTPException
+
 from zotify_api.services.spoti_client import SpotiClient
+
 
 @pytest.mark.asyncio
 async def test_spoti_client_get_tracks_metadata_success():

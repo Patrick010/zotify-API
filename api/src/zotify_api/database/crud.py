@@ -1,10 +1,14 @@
 from sqlalchemy.orm import Session
-from . import models
+
 from zotify_api.schemas import download as schemas
+
+from . import models
 
 # --- DownloadJob CRUD ---
 
-def create_download_job(db: Session, job: schemas.DownloadJobCreate) -> models.DownloadJob:
+def create_download_job(
+    db: Session, job: schemas.DownloadJobCreate
+) -> models.DownloadJob:
     """
     Create a new download job in the database.
     """
@@ -18,13 +22,21 @@ def get_download_job(db: Session, job_id: str) -> models.DownloadJob | None:
     """
     Get a single download job by its ID.
     """
-    return db.query(models.DownloadJob).filter(models.DownloadJob.job_id == job_id).first()
+    return (
+        db.query(models.DownloadJob)
+        .filter(models.DownloadJob.job_id == job_id)
+        .first()
+    )
 
 def get_all_download_jobs(db: Session):
     """
     Get all download jobs from the database.
     """
-    return db.query(models.DownloadJob).order_by(models.DownloadJob.created_at.desc()).all()
+    return (
+        db.query(models.DownloadJob)
+        .order_by(models.DownloadJob.created_at.desc())
+        .all()
+    )
 
 def get_next_pending_download_job(db: Session) -> models.DownloadJob | None:
     """
@@ -38,7 +50,11 @@ def get_next_pending_download_job(db: Session) -> models.DownloadJob | None:
     )
 
 def update_download_job_status(
-    db: Session, job: models.DownloadJob, status: schemas.DownloadJobStatus, error: str | None = None, progress: float | None = None
+    db: Session,
+    job: models.DownloadJob,
+    status: schemas.DownloadJobStatus,
+    error: str | None = None,
+    progress: float | None = None,
 ) -> models.DownloadJob:
     """
     Update the status, error message, and progress of a download job.
@@ -66,7 +82,9 @@ def retry_failed_download_jobs(db: Session) -> int:
 
 # --- Playlist and Track CRUD ---
 
-def get_or_create_track(db: Session, track_id: str, track_name: str | None = None) -> models.Track:
+def get_or_create_track(
+    db: Session, track_id: str, track_name: str | None = None
+) -> models.Track:
     """
     Get a track by its ID, or create it if it doesn't exist.
     """
@@ -78,11 +96,15 @@ def get_or_create_track(db: Session, track_id: str, track_name: str | None = Non
         db.refresh(track)
     return track
 
-def create_or_update_playlist(db: Session, playlist_id: str, playlist_name: str, track_ids: list[str]) -> models.Playlist:
+def create_or_update_playlist(
+    db: Session, playlist_id: str, playlist_name: str, track_ids: list[str]
+) -> models.Playlist:
     """
     Create a new playlist or update an existing one with a new set of tracks.
     """
-    playlist = db.query(models.Playlist).filter(models.Playlist.id == playlist_id).first()
+    playlist = (
+        db.query(models.Playlist).filter(models.Playlist.id == playlist_id).first()
+    )
     if not playlist:
         playlist = models.Playlist(id=playlist_id, name=playlist_name)
         db.add(playlist)
@@ -115,7 +137,9 @@ def get_spotify_token(db: Session) -> models.SpotifyToken | None:
     """
     return db.query(models.SpotifyToken).first()
 
-def create_or_update_spotify_token(db: Session, token_data: dict) -> models.SpotifyToken:
+def create_or_update_spotify_token(
+    db: Session, token_data: dict
+) -> models.SpotifyToken:
     """
     Create or update the Spotify token in the database.
     """

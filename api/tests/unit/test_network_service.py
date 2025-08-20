@@ -1,5 +1,7 @@
 import pytest
+
 from zotify_api.services.network_service import NetworkService
+
 
 @pytest.fixture
 def network_config():

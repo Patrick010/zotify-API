@@ -1,8 +1,10 @@
 import pytest
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
-from zotify_api.services.auth import require_admin_api_key
+
 from zotify_api.config import settings
+from zotify_api.services.auth import require_admin_api_key
+
 
 def test_no_admin_key_config(monkeypatch):
     monkeypatch.setattr(settings, "admin_api_key", None)
@@ -16,11 +18,13 @@ def test_wrong_key(monkeypatch):
         require_admin_api_key(x_api_key="bad", settings=settings)
     assert exc.value.status_code == 401
 
+from unittest.mock import AsyncMock, patch
+
 from fastapi.testclient import TestClient
+
 from zotify_api.main import app
-from unittest.mock import patch, AsyncMock, ANY
-from zotify_api.services import deps
 from zotify_api.providers.base import BaseProvider
+from zotify_api.services import deps
 
 client = TestClient(app)
 
@@ -54,6 +58,7 @@ def test_provider_callback_route(monkeypatch):
 
 
 from datetime import datetime, timedelta, timezone
+
 
 @patch("zotify_api.services.auth.SpotiClient.get_current_user", new_callable=AsyncMock)
 @patch("zotify_api.services.auth.crud.get_spotify_token")

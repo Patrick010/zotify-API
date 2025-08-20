@@ -1,15 +1,16 @@
 import logging
 import time
+from datetime import datetime, timedelta, timezone
 from typing import Optional
+
 from fastapi import Depends, Header, HTTPException
 from sqlalchemy.orm import Session
-from datetime import datetime, timezone, timedelta
 
-from zotify_api.services.deps import get_settings, get_db
-from zotify_api.services.spoti_client import SpotiClient
 from zotify_api.auth_state import pending_states
 from zotify_api.database import crud
 from zotify_api.schemas.auth import AuthStatus
+from zotify_api.services.deps import get_db, get_settings
+from zotify_api.services.spoti_client import SpotiClient
 
 log = logging.getLogger(__name__)
 

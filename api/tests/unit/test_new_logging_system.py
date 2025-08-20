@@ -1,14 +1,13 @@
-import pytest
-import yaml
-import json
-import sys
 import contextlib
+import json
 from io import StringIO
-from unittest.mock import patch, MagicMock, mock_open
-from zotify_api.services.logging_service import LoggingService
+from unittest.mock import MagicMock, mock_open, patch
+
+import yaml
+
 from zotify_api.core.logging_handlers.base import BaseLogHandler
-from zotify_api.database.session import get_db
 from zotify_api.database import models
+from zotify_api.services.logging_service import LoggingService
 
 CONFIG_YAML = """
 handlers:

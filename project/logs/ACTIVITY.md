@@ -1,5 +1,30 @@
 # Activity Log
 
+---
+
+## ACT-048: Establish Static Analysis Baseline
+
+**Date:** 2025-08-20
+**Status:** ⏸️ Paused / Blocked
+**Assignee:** Jules
+
+### Objective
+To begin the work of Phase 4a by introducing a suite of static analysis tools (`ruff`, `mypy`, `bandit`, `golangci-lint`) to establish a clean, high-quality baseline for the codebase and prevent future design drift.
+
+### Outcome
+- **Tooling Configured:** Created baseline configuration files (`ruff.toml`, `mypy.ini`, `.golangci.yml`) to enable the new quality gates.
+- **Initial Remediation:**
+    - Fixed `mypy` module name conflicts by renaming and deleting files.
+    - Ran `bandit` and fixed one medium-severity security issue related to request timeouts.
+    - Ran `ruff check . --fix` to auto-correct a large number of linting errors.
+- **Blocker Identified:** Further progress is blocked by a `ruff` configuration issue. The linter appears to be using an incorrect path configuration from the root `pyproject.toml`, preventing the manual remediation of 213 outstanding linting errors. Work was paused at this point by user request to commit all changes.
+
+### Related Documents
+- `ruff.toml`
+- `mypy.ini`
+- `.golangci.yml`
+- `project/audit/AUDIT-PHASE-4a.md`
+
 **Status:** Live Document
 
 ---

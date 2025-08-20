@@ -1,9 +1,10 @@
-import httpx
 import logging
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List, Optional
+
+import httpx
+from fastapi import HTTPException
 
 from zotify_api.auth_state import SPOTIFY_API_BASE
-from fastapi import HTTPException
 
 logger = logging.getLogger(__name__)
 

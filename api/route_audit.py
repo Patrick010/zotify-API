@@ -1,12 +1,13 @@
 import json
 
+
 def summarize_routes(file_path):
     missing = []
     empty = []
     valid = []
 
     with open(file_path) as f:
-        # The file contains multiple JSON objects separated by newlines, parse them one by one
+        # The file contains JSON objects separated by newlines.
         for line in f:
             line = line.strip()
             if not line:

@@ -1,11 +1,16 @@
 import asyncio
 import logging
 from logging.handlers import RotatingFileHandler
-from typing import Dict, Any, Optional, List
+from typing import Any, Dict, List, Optional
 
 import httpx
 
-from .schemas import LoggingFrameworkConfig, AnySinkConfig, ConsoleSinkConfig, FileSinkConfig, WebhookSinkConfig
+from .schemas import (
+    AnySinkConfig,
+    FileSinkConfig,
+    LoggingFrameworkConfig,
+    WebhookSinkConfig,
+)
 
 # Global instance of the service
 _logging_service_instance = None
@@ -81,7 +86,10 @@ class LoggingService:
         self.sinks = {}  # Clear existing sinks
         for sink_config in config.logging.sinks:
             if sink_config.name in self.sinks:
-                print(f"Warning: Duplicate sink name '{sink_config.name}' found. Skipping.")
+                print(
+                    f"Warning: Duplicate sink name '{sink_config.name}' found. "
+                    "Skipping."
+                )
                 continue
 
             if sink_config.type == "console":
@@ -132,12 +140,19 @@ class LoggingService:
                             if sink.should_log(log_record["level"]):
                                 asyncio.create_task(sink.emit(log_record))
 
-    def log(self, message: str, level: str = "INFO", destinations: Optional[List[str]] = None, **extra):
+    def log(
+        self,
+        message: str,
+        level: str = "INFO",
+        destinations: Optional[List[str]] = None,
+        **extra,
+    ):
         """
         Primary method for logging an event.
         Dispatches the log to the appropriate sinks and handles triggers.
         """
-        # Event triggers are handled first and are destructive (they replace the original log)
+        # Event triggers are handled first and are destructive
+        # (they replace the original log)
         event_name = extra.get("event")
         if event_name:
             if self._handle_event_trigger(event_name):

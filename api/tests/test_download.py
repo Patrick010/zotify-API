@@ -1,7 +1,7 @@
 import pytest
-from fastapi.testclient import TestClient
-from zotify_api.main import app
+
 from zotify_api.database.session import get_db
+from zotify_api.main import app
 from zotify_api.services import download_service
 
 # The custom, module-level database setup has been removed.
