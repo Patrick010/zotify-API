@@ -1,4 +1,4 @@
-name: Run Tests
+name: CI
 
 on:
   push:
@@ -7,26 +7,24 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v2
       with:
-        python-version: '3.11'
+        python-version: '3.12'
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        pip install -r api/requirements.txt
         pip install pytest-cov
-        cd api
-        pip install .
 
-    - name: Run tests with coverage check
+    - name: Run tests with coverage
       run: |
         cd api
-        mkdir -p storage
-        APP_ENV=development pytest --cov=src/zotify_api --cov-fail-under=85 tests/
+        APP_ENV=development pytest --cov=src/zotify_api --cov-report=term-missing --cov-fail-under=85

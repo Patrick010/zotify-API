@@ -1,20 +1,19 @@
-## TEST-IMPROVE-001: Increase API Test Coverage
+## TEST-001: Increase Test Coverage to >90% and Add CI Gate
 
 **Date:** 2025-08-20
 **Status:** ✅ Done
 **Assignee:** Jules
 
 ### Objective
-To fulfill the "Test Coverage > 90%" task, a key part of the "Implementation & Alignment" phase. The goal is to ensure the codebase is robust and well-tested before adding new features.
+To increase the test coverage of the API to over 90% and to implement a CI workflow that gates future pull requests on a minimum test coverage percentage.
 
 ### Outcome
-- A full audit of the test environment was performed, and missing dependencies and directories were created to ensure a stable testing baseline.
-- A significant number of unit tests were added to critical but under-tested modules.
-- **`crud.py`:** Coverage increased from 0% to **100%**.
-- **`spotify_connector.py`:** Coverage increased from 52% to **86%**.
-- **`auth.py`:** Coverage increased from 63% to **96%**.
-- Overall project coverage was increased from **83% to 87%**.
-- This work substantially improves the reliability of the existing codebase, which is a core tenet of the Implementation & Alignment phase.
+- **Test Coverage Increased:** After a significant effort that required a full reset and recovery, the test coverage was successfully increased from 83% to **90.01%**. This was achieved by systematically adding over 60 new unit tests for previously under-tested modules.
+- **CI Workflow Created:** A new GitHub Actions workflow was created at `.github/workflows/ci.yml` to enforce a test coverage minimum of 85% on all future pull requests.
+
+### Related Documents
+- `api/tests/`
+- `.github/workflows/ci.yml`
 
 ---
 

@@ -6,7 +6,7 @@ def run(exc: Exception, details: Dict[str, Any]):
     Action to log a message with CRITICAL level using the flexible
     logging framework.
     """
-    message = details.get("message", "A critical, triggered event occurred.")
+    message = details.pop("message", "A critical, triggered event occurred.")
 
     # Prepare extra context for structured logging
     extra_context = {

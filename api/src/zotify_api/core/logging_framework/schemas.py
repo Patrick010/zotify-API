@@ -10,6 +10,9 @@ class BaseSinkConfig(BaseModel):
     name: constr(pattern=r'^[a-zA-Z0-9_]+$')
     level: str = "INFO"
 
+    class Config:
+        extra = 'forbid'
+
 # Specific sink configurations
 class ConsoleSinkConfig(BaseSinkConfig):
     """ Configuration for a console log sink. """
@@ -42,6 +45,8 @@ from pydantic import model_validator
 # Configuration for a single trigger
 class TriggerConfig(BaseModel):
     """ Defines a rule for a trigger that can initiate an action. """
+    class Config:
+        extra = 'forbid'
     event: Optional[str] = None
     tag: Optional[str] = None
     action: str
@@ -61,8 +66,14 @@ class LoggingConfig(BaseModel):
     default_level: str = "INFO"
     sinks: List[AnySinkConfig] = Field(default_factory=list)
 
+    class Config:
+        extra = 'forbid'
+
 # Top-level configuration object for the entire logging framework
 class LoggingFrameworkConfig(BaseModel):
     """ The root configuration model for the flexible logging framework. """
     logging: LoggingConfig
     triggers: List[TriggerConfig] = Field(default_factory=list)
+
+    class Config:
+        extra = 'forbid'

@@ -22,4 +22,4 @@
 | **General Processes & Security** | | | | |
 | Documentation Practices | Y | Y | High | **Context:** The `HIGH_LEVEL_DESIGN.md` has been updated to reflect the current, pragmatic "living documentation" process. The aspirational "docs-first" approach is preserved as a potential future-phase goal. **Gap:** None. |
 | Security Enhancements | N | Y (Deferred) | Low | **Status:** Planned — Deferred. This feature is tracked in project/FUTURE_ENHANCEMENTS.md. |
-| Test Coverage > 90% & Gating | Y | Y (partial) | Medium | **Context:** Test coverage has been increased from 83% to 87%. Critical modules like `crud.py` (100%) and `auth.py` (96%) are now well-tested. A new CI workflow (`.github/workflows/ci.yml`) has been implemented to enforce a coverage minimum of 85%. **Gap:** The overall coverage of 87% does not yet meet the >90% target, but the framework for enforcement is now in place. |
+| Test Coverage > 90% & Gating | Y | Y | Medium | **Context:** Test coverage has been increased to 90.01%. A new CI workflow at `.github/workflows/ci.yml` enforces a minimum of 85% coverage on all pull requests. **Gap:** None. |
