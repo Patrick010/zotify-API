@@ -4,6 +4,26 @@
 
 ---
 
+## ACT-045: Align Security Enhancements in Traceability Matrix
+
+**Date:** 2025-08-20
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To correctly align the "Security Enhancements" feature in the `AUDIT_TRACEABILITY_MATRIX.md` according to the defined project process for future enhancements.
+
+### Outcome
+- **Verification:** A review of the codebase confirmed that features like secret rotation and TLS hardening are not implemented (`Exists? = N`). A review of the design documents confirmed that these are tracked as future enhancements.
+- **Traceability Matrix Corrected:** The matrix row for this feature was updated to `Exists? = N`, `Matches Design? = Y (Deferred)`, with a note clarifying that it is a planned feature. This brings the matrix into alignment with both the code and design reality.
+
+### Related Documents
+- `project/audit/AUDIT_TRACEABILITY_MATRIX.md`
+- `project/FUTURE_ENHANCEMENTS.md`
+- `project/SECURITY.md`
+
+---
+
 ## ACT-044: Correctly Align JWT Feature in Traceability Matrix
 
 **Date:** 2025-08-19

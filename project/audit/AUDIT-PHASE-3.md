@@ -1,3 +1,115 @@
+## PROC-FIX-004: Finalize Phase 3 Alignment Plan Documentation
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To perform a final update to the `HLD_LLD_ALIGNMENT_PLAN.md` to merge high-level workflow rules with a concrete, repeatable task list for Phase 3.
+
+### Outcome
+- The `HLD_LLD_ALIGNMENT_PLAN.md` was finalized to include both an "Alignment Workflow" and a "Repeatable Task Cycle", providing a comprehensive and unambiguous guide for all Phase 3 activities.
+
+### Related Documents
+- `project/audit/HLD_LLD_ALIGNMENT_PLAN.md`
+
+---
+
+## PROC-FIX-003: Correct and Clarify Phase 3 Alignment Plan
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To correct an error in the `HLD_LLD_ALIGNMENT_PLAN.md` and replace the vague task list with a clear, algorithmic rule set for alignment work.
+
+### Outcome
+- The status of Phase 3 was corrected to `Ongoing`.
+- The task list was replaced with a detailed, unambiguous set of rules for handling documentation and code gaps.
+
+### Related Documents
+- `project/audit/HLD_LLD_ALIGNMENT_PLAN.md`
+
+---
+
+## PROC-FIX-002: Clarify Phase 3 Process and Guidance
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To improve process documentation to clarify the ambiguous goal of "Phase 3".
+
+### Outcome
+- The title of Phase 3 in `HLD_LLD_ALIGNMENT_PLAN.md` was changed to "Implementation & Alignment".
+- The goal description was updated to make it explicit that the work involves implementing missing features.
+- A revised handover brief template was generated to improve clarity for future developers.
+
+### Related Documents
+- `project/audit/HLD_LLD_ALIGNMENT_PLAN.md`
+
+---
+
+## PROC-FIX-001: Improve Core Process Documentation
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To improve core process documentation to ensure the mandatory nature of the `TASK_CHECKLIST.md` is clearer.
+
+### Outcome
+- The `TASK_CHECKLIST.md` was restructured for clarity and efficiency.
+- `ONBOARDING.md` was updated to explicitly instruct developers to review the `TASK_CHECKLIST.md`.
+
+### Related Documents
+- `project/TASK_CHECKLIST.md`
+- `project/ONBOARDING.md`
+
+---
+
+## DOC-FIX-004: Correctly Align JWT Feature in Traceability Matrix
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To correctly align the "JWT for API Authentication" feature in the `AUDIT_TRACEABILITY_MATRIX.md` according to the defined project process for future enhancements, correcting a previous flawed alignment.
+
+### Outcome
+- **Verification:** A review of the codebase confirmed that JWT is not implemented (`Exists? = N`). A review of the design documents confirmed that JWT is tracked as a future enhancement.
+- **Traceability Matrix Corrected:** The matrix row for JWT was updated to `Exists? = N`, `Matches Design? = Y (Deferred)`, with a note clarifying that it is a planned feature. This brings the matrix into alignment with both the code and design reality.
+
+### Related Documents
+- `project/audit/AUDIT_TRACEABILITY_MATRIX.md`
+- `project/FUTURE_ENHANCEMENTS.md`
+
+---
+
+## DOC-FIX-003: Align Security Enhancements in Traceability Matrix
+
+**Date:** 2025-08-20
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To correctly align the "Security Enhancements" feature in the `AUDIT_TRACEABILITY_MATRIX.md` according to the defined project process for future enhancements.
+
+### Outcome
+- **Verification:** A review of the codebase confirmed that features like secret rotation and TLS hardening are not implemented (`Exists? = N`). A review of the design documents confirmed that these are tracked as future enhancements.
+- **Traceability Matrix Corrected:** The matrix row for this feature was updated to `Exists? = N`, `Matches Design? = Y (Deferred)`, with a note clarifying that it is a planned feature. This brings the matrix into alignment with both the code and design reality.
+
+### Related Documents
+- `project/audit/AUDIT_TRACEABILITY_MATRIX.md`
+- `project/FUTURE_ENHANCEMENTS.md`
+- `project/SECURITY.md`
+
+---
+
 ## DOC-FIX-002: Align JWT Documentation with Reality
 
 **Date:** 2025-08-19

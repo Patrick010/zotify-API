@@ -21,5 +21,5 @@
 | Config Management via API | Y | Y | Medium | **Context:** The design documents (`LOW_LEVEL_DESIGN.md`) have been updated to reflect the current reality: there are two config systems. Core settings are startup-only, but a separate `ConfigService` handles mutable application settings at runtime via a JSON file and the `/api/config` endpoints. The aspirational goal of a single, unified config system is now tracked in `FUTURE_ENHANCEMENTS.md`. **Gap:** None. |
 | **General Processes & Security** | | | | |
 | Documentation Practices | Y | Y | High | **Context:** The `HIGH_LEVEL_DESIGN.md` has been updated to reflect the current, pragmatic "living documentation" process. The aspirational "docs-first" approach is preserved as a potential future-phase goal. **Gap:** None. |
-| Security Enhancements | N | N | Medium | **Context:** Deferred as not critical for internal-only MVP. **Gap:** Features like secret rotation and TLS hardening are in the design but not implemented. |
+| Security Enhancements | N | Y (Deferred) | Low | **Status:** Planned — Deferred. This feature is tracked in project/FUTURE_ENHANCEMENTS.md. |
 | Test Coverage > 90% & Gating | N | N | Medium | **Context:** Basic tests exist, but coverage is not enforced in CI. **Gap:** HLD requires >90% coverage and CI gating, which is not implemented. |
