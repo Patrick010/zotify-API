@@ -1,5 +1,5 @@
 import pytest
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch, ANY
 import httpx
 
 from fastapi import HTTPException
@@ -79,6 +79,22 @@ async def test_spoti_client_http_error():
 
         assert excinfo.value.status_code == 404
         assert excinfo.value.detail == "Not Found"
+        await client.close()
+
+
+@pytest.mark.asyncio
+async def test_spoti_client_request_error():
+    """
+    Tests that the client handles generic request errors (e.g., network issues).
+    """
+    with patch("httpx.AsyncClient.request", new_callable=AsyncMock) as mock_request:
+        mock_request.side_effect = httpx.RequestError("Network error", request=MagicMock())
+
+        client = SpotiClient(access_token="fake_token")
+        with pytest.raises(HTTPException) as excinfo:
+            await client.get_current_user()
+
+        assert excinfo.value.status_code == 503
         await client.close()
 
 @pytest.mark.asyncio
@@ -214,3 +230,37 @@ async def test_spoti_client_exchange_code_for_token_success():
 
         result = await SpotiClient.exchange_code_for_token("auth_code", "code_verifier")
         assert result == mock_json_response
+
+
+@pytest.mark.asyncio
+async def test_spoti_client_update_playlist_details():
+    with patch("httpx.AsyncClient.request", new_callable=AsyncMock) as mock_request:
+        mock_request.return_value = MagicMock(status_code=200)
+        client = SpotiClient(access_token="fake_token")
+        await client.update_playlist_details("p1", "New Name", False, True, "New Desc")
+
+        mock_request.assert_called_once()
+        assert mock_request.call_args.kwargs['json']['name'] == "New Name"
+        await client.close()
+
+@pytest.mark.asyncio
+async def test_spoti_client_remove_tracks_from_playlist():
+    with patch("httpx.AsyncClient.request", new_callable=AsyncMock) as mock_request:
+        mock_request.return_value = MagicMock(status_code=200, json=lambda: {"snapshot_id": "snap2"})
+        client = SpotiClient(access_token="fake_token")
+        result = await client.remove_tracks_from_playlist("p1", ["uri1"])
+
+        mock_request.assert_called_once()
+        assert mock_request.call_args.kwargs['json']['tracks'][0]['uri'] == "uri1"
+        assert result["snapshot_id"] == "snap2"
+        await client.close()
+
+@pytest.mark.asyncio
+async def test_spoti_client_unfollow_playlist():
+    with patch("httpx.AsyncClient.request", new_callable=AsyncMock) as mock_request:
+        mock_request.return_value = MagicMock(status_code=200)
+        client = SpotiClient(access_token="fake_token")
+        await client.unfollow_playlist("p1")
+
+        mock_request.assert_called_once_with("DELETE", "/playlists/p1/followers", headers=ANY)
+        await client.close()
