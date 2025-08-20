@@ -23,3 +23,7 @@
 | Documentation Practices | Y | Y | High | **Context:** The `HIGH_LEVEL_DESIGN.md` has been updated to reflect the current, pragmatic "living documentation" process. The aspirational "docs-first" approach is preserved as a potential future-phase goal. **Gap:** None. |
 | Security Enhancements | N | Y (Deferred) | Low | **Status:** Planned — Deferred. This feature is tracked in project/FUTURE_ENHANCEMENTS.md. |
 | Test Coverage > 90% & Gating | Y | Y | Medium | **Context:** Test coverage has been increased to 90.01%. A new CI workflow at `.github/workflows/ci.yml` enforces a minimum of 85% coverage on all pull requests. **Gap:** None. |
+
+---
+
+**Note:** All deferred (N/Y) features are documented in `FUTURE_ENHANCEMENTS.md` to preserve traceability and prevent orphaned design intentions.

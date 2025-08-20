@@ -17,6 +17,8 @@ This section lists specific technical features and improvements that are candida
 
 *   **Advanced Admin Endpoint Security:**
     *   Transition from a static admin API key to a more robust, layered security model, including rate limiting, JWT/OAuth2 for user-level endpoints, and dynamic key rotation.
+*   **Role-Based Access Control (RBAC):**
+    *   Implement a full RBAC system to support multi-user environments with different permission levels. This is a prerequisite for any significant multi-user functionality.
 *   **Persistent & Distributed Job Queue:**
     *   Replace the current in-memory download queue with a persistent, database or Redis-backed system to ensure job durability across restarts and to support distributed workers.
 *   **Full Spotify OAuth2 Integration & Library Sync:**
