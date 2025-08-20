@@ -4,6 +4,25 @@
 
 ---
 
+## ACT-044: Correctly Align JWT Feature in Traceability Matrix
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To correctly align the "JWT for API Authentication" feature in the `AUDIT_TRACEABILITY_MATRIX.md` according to the defined project process for future enhancements.
+
+### Outcome
+- **Verification:** A review of the codebase confirmed that JWT is not implemented (`Exists? = N`). A review of the design documents confirmed that JWT is tracked as a future enhancement.
+- **Traceability Matrix Corrected:** The matrix row for JWT was updated to `Exists? = N`, `Matches Design? = Y (Deferred)`, with a note clarifying that it is a planned feature and not part of the active roadmap. This brings the matrix into alignment with both the code and design reality.
+
+### Related Documents
+- `project/audit/AUDIT_TRACEABILITY_MATRIX.md`
+- `project/FUTURE_ENHANCEMENTS.md`
+
+---
+
 ## ACT-043: Finalize Phase 3 Alignment Plan Documentation
 
 **Date:** 2025-08-19
