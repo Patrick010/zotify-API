@@ -19,7 +19,6 @@ class Settings(BaseSettings):
     # Pydantic's BaseSettings now handles loading from environment variables.
     # This fixes test failures where the test-specific API key was ignored.
 
-
 settings = Settings()
 
 # For development, if no key is provided, use a default for convenience.

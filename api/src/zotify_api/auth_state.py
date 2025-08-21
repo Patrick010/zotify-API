@@ -1,4 +1,5 @@
 import logging
+import os
 
 # This module holds the shared constants for the authentication process.
 # The state management (tokens, PKCE state) is now handled by the
@@ -8,8 +9,8 @@ logger = logging.getLogger(__name__)
 
 # --- Constants ---
 # In a production app, these should be loaded from a secure config (e.g., env vars)
-CLIENT_ID = "65b708073fc0480ea92a077233ca87bd"
-CLIENT_SECRET = "832bc60deeb147db86dd1cc521d9e4bf"
+CLIENT_ID = os.environ.get("SPOTIFY_CLIENT_ID", "65b708073fc0480ea92a077233ca87bd")
+CLIENT_SECRET = os.environ.get("SPOTIFY_CLIENT_SECRET")
 REDIRECT_URI = "http://127.0.0.1:4381/login"  # Must match Snitch listener URL
 SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize"
 SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"

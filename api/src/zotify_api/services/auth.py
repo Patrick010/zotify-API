@@ -14,24 +14,16 @@ from zotify_api.services.spoti_client import SpotiClient
 
 log = logging.getLogger(__name__)
 
-
-def get_admin_api_key_header(
-    x_api_key: Optional[str] = Header(None, alias="X-API-Key")
-) -> Optional[str]:
+def get_admin_api_key_header(x_api_key: Optional[str] = Header(None, alias="X-API-Key")) -> Optional[str]:
     return x_api_key
 
-
-def require_admin_api_key(
-    x_api_key: Optional[str] = Depends(get_admin_api_key_header),
-    settings=Depends(get_settings),
-):
+def require_admin_api_key(x_api_key: Optional[str] = Depends(get_admin_api_key_header), settings = Depends(get_settings)):
     if not settings.admin_api_key:
         raise HTTPException(status_code=503, detail="Admin API key not configured")
     if x_api_key != settings.admin_api_key:
         log.warning("Unauthorized admin attempt", extra={"path": "unknown"})
         raise HTTPException(status_code=401, detail="Unauthorized")
     return True
-
 
 async def refresh_spotify_token(db: Session = Depends(get_db)) -> int:
     """
@@ -40,21 +32,17 @@ async def refresh_spotify_token(db: Session = Depends(get_db)) -> int:
     """
     token = crud.get_spotify_token(db)
     if not token or not token.refresh_token:
-        raise HTTPException(
-            status_code=401, detail="No refresh token available to refresh with."
-        )
+        raise HTTPException(status_code=401, detail="No refresh token available to refresh with.")
 
     new_token_data = await SpotiClient.refresh_access_token(token.refresh_token)
 
     token_data_to_save = {
         "access_token": new_token_data["access_token"],
         "refresh_token": new_token_data.get("refresh_token", token.refresh_token),
-        "expires_at": datetime.now(timezone.utc)
-        + timedelta(seconds=new_token_data["expires_in"] - 60),
+        "expires_at": datetime.now(timezone.utc) + timedelta(seconds=new_token_data["expires_in"] - 60),
     }
     updated_token = crud.create_or_update_spotify_token(db, token_data_to_save)
     return int(updated_token.expires_at.timestamp())
-
 
 async def get_auth_status(db: Session = Depends(get_db)) -> AuthStatus:
     """
@@ -79,7 +67,7 @@ async def get_auth_status(db: Session = Depends(get_db)) -> AuthStatus:
             authenticated=True,
             user_id=user_data.get("id"),
             token_valid=True,
-            expires_in=int(expires_in),
+            expires_in=int(expires_in)
         )
     except HTTPException as e:
         if e.status_code == 401:
@@ -88,10 +76,7 @@ async def get_auth_status(db: Session = Depends(get_db)) -> AuthStatus:
     finally:
         await client.close()
 
-
-async def handle_spotify_callback(
-    code: str, state: str, db: Session = Depends(get_db)
-) -> None:
+async def handle_spotify_callback(code: str, state: str, db: Session = Depends(get_db)) -> None:
     """
     Handles the OAuth callback, exchanges the code for tokens, and saves them to the database.
     """
@@ -105,8 +90,7 @@ async def handle_spotify_callback(
     token_data_to_save = {
         "access_token": tokens["access_token"],
         "refresh_token": tokens.get("refresh_token"),
-        "expires_at": datetime.now(timezone.utc)
-        + timedelta(seconds=tokens["expires_in"] - 60),
+        "expires_at": datetime.now(timezone.utc) + timedelta(seconds=tokens["expires_in"] - 60),
     }
     crud.create_or_update_spotify_token(db, token_data_to_save)
     log.info("Successfully exchanged code for token and stored them.")

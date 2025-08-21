@@ -2,117 +2,140 @@ from io import BytesIO
 from unittest.mock import MagicMock
 
 import pytest
-from fastapi.testclient import TestClient
 
 from zotify_api.main import app
+from zotify_api.services.db import get_db_engine
 
-client = TestClient(app)
 
+@pytest.fixture
+def mock_db(client):
+    """Fixture to mock the database engine."""
+    mock_engine = MagicMock()
+    mock_conn = MagicMock()
+    mock_engine.connect.return_value.__enter__.return_value = mock_conn
 
-def test_list_tracks_no_db():
-    """Test listing tracks when the database is empty."""
-    response = client.get("/api/tracks/")
+    app.dependency_overrides[get_db_engine] = lambda: mock_engine
+    yield mock_engine, mock_conn
+    del app.dependency_overrides[get_db_engine]
+
+def test_list_tracks_no_db(client):
+    app.dependency_overrides[get_db_engine] = lambda: None
+    response = client.get("/api/tracks")
     assert response.status_code == 200
-    assert response.json() == {"data": [], "total": 0}
+    body = response.json()
+    assert body["data"] == []
+    assert body["meta"]["total"] == 0
+    del app.dependency_overrides[get_db_engine]
 
-
-def test_list_tracks_with_db(test_db_session):
-    """Test listing tracks with a populated database."""
-    # Add some dummy tracks
-    from zotify_api.database import crud, models
-
-    crud.create_track(
-        test_db_session,
-        models.Track(
-            name="Track 1",
-            artist="Artist 1",
-            album="Album 1",
-            spotify_id="spotify_id_1",
-            duration_ms=180000,
-            cover_url="http://example.com/cover1.jpg",
-        ),
-    )
-    crud.create_track(
-        test_db_session,
-        models.Track(
-            name="Track 2",
-            artist="Artist 2",
-            album="Album 2",
-            spotify_id="spotify_id_2",
-            duration_ms=240000,
-            cover_url="http://example.com/cover2.jpg",
-        ),
-    )
-
-    response = client.get("/api/tracks/")
+def test_list_tracks_with_db(client, mock_db):
+    mock_engine, mock_conn = mock_db
+    mock_conn.execute.return_value.mappings.return_value.all.return_value = [
+        {"id": "1", "name": "Test Track", "artist": "Test Artist", "album": "Test Album"},
+    ]
+    response = client.get("/api/tracks")
     assert response.status_code == 200
-    data = response.json()
-    assert data["total"] == 2
-    assert len(data["data"]) == 2
-    assert data["data"][0]["name"] == "Track 1"
+    body = response.json()
+    assert len(body["data"]) == 1
+    assert body["data"][0]["name"] == "Test Track"
 
+def test_crud_flow_unauthorized(client):
+    response = client.post("/api/tracks", json={"name": "New Track", "artist": "New Artist"})
+    assert response.status_code == 401
 
-def test_crud_flow_unauthorized():
-    """Test that CRUD operations fail without an API key."""
+def test_crud_flow(client, mock_db):
+    mock_engine, mock_conn = mock_db
+
     # Create
-    response = client.post(
-        "/api/tracks/", json={"name": "test", "artist": "test", "album": "test"}
-    )
-    assert response.status_code == 401
+    mock_conn.execute.return_value.lastrowid = 1
+    create_payload = {"name": "New Track", "artist": "New Artist"}
+    response = client.post("/api/tracks", headers={"X-API-Key": "test_key"}, json=create_payload)
+    assert response.status_code == 201
+    track_id = response.json()["id"]
 
-    # Read
-    response = client.get("/api/tracks/123")
-    assert response.status_code == 401
+    # Get
+    mock_conn.execute.return_value.mappings.return_value.first.return_value = {"id": track_id, **create_payload}
+    response = client.get(f"/api/tracks/{track_id}")
+    assert response.status_code == 200
+    assert response.json()["name"] == "New Track"
 
-    # Update
-    response = client.put(
-        "/api/tracks/123", json={"name": "updated", "artist": "updated"}
-    )
-    assert response.status_code == 401
+    # Patch
+    update_payload = {"name": "Updated Track"}
+    response = client.patch(f"/api/tracks/{track_id}", headers={"X-API-Key": "test_key"}, json=update_payload)
+    assert response.status_code == 200
+    assert response.json()["name"] == "Updated Track"
 
     # Delete
-    response = client.delete("/api/tracks/123")
+    response = client.delete(f"/api/tracks/{track_id}", headers={"X-API-Key": "test_key"})
+    assert response.status_code == 204
+
+def test_upload_cover_unauthorized(client):
+    file_content = b"fake image data"
+    response = client.post(
+        "/api/tracks/1/cover",
+        files={"cover_image": ("test.jpg", BytesIO(file_content), "image/jpeg")}
+    )
     assert response.status_code == 401
 
+from unittest.mock import patch
 
-def test_upload_cover_unauthorized():
-    """Test that cover upload fails without an API key."""
-    file_content = b"test_image_content"
-    files = {"file": ("test.jpg", BytesIO(file_content), "image/jpeg")}
-    response = client.post("/api/tracks/123/cover", files=files)
-    assert response.status_code == 401
+from fastapi import HTTPException
 
 
-@pytest.mark.parametrize(
-    "track_id, expected_status", [(1, 200), (999, 404)]  # Existing and non-existing
-)
-def test_get_metadata(track_id, expected_status, test_db_session, monkeypatch):
-    # Setup: Ensure track 1 exists for the success case
-    if track_id == 1:
-        from zotify_api.database import crud, models
+def test_upload_cover(client, mock_db):
+    file_content = b"fake image data"
+    response = client.post(
+        "/api/tracks/1/cover",
+        headers={"X-API-Key": "test_key"},
+        files={"cover_image": ("test.jpg", BytesIO(file_content), "image/jpeg")}
+    )
+    assert response.status_code == 200
+    assert "cover_url" in response.json()
 
-        crud.create_track(
-            test_db_session,
-            models.Track(
-                id=1,
-                name="Test Track",
-                artist="Test Artist",
-                album="Test Album",
-                spotify_id="test_id",
-            ),
-        )
+def test_get_metadata_unauthorized(client):
+    response = client.post("/api/tracks/metadata", json={"track_ids": ["id1"]})
+    assert response.status_code == 401 # No X-API-Key
 
-    # Mock the metadata service
-    mock_metadata_service = MagicMock()
-    mock_metadata_service.get_metadata.return_value = {"spotify": {"id": "test_id"}}
-    monkeypatch.setattr(
-        "zotify_api.routes.tracks.get_metadata_service",
-        lambda: mock_metadata_service,
+from unittest.mock import AsyncMock
+
+
+@patch("zotify_api.services.tracks_service.get_tracks_metadata_from_spotify", new_callable=AsyncMock)
+def test_get_metadata_success(mock_get_metadata, client, mock_provider):
+    mock_metadata = [{"id": "track1", "name": "Test Track"}]
+    mock_get_metadata.return_value = mock_metadata
+
+    response = client.post(
+        "/api/tracks/metadata",
+        headers={"X-API-Key": "test_key"},
+        json={"track_ids": ["track1"]}
     )
 
-    response = client.get(
-        f"/api/tracks/{track_id}/metadata", headers={"X-API-Key": "test_key"}
+    assert response.status_code == 200
+    assert response.json() == {"metadata": mock_metadata}
+    mock_get_metadata.assert_called_with(["track1"], provider=mock_provider)
+
+
+def test_get_extended_metadata(client):
+    response = client.get("/api/tracks/abc123/metadata")
+    assert response.status_code == 200
+    assert "title" in response.json()
+
+
+def test_patch_extended_metadata(client):
+    update_data = {"mood": "Energetic", "rating": 5}
+    response = client.patch("/api/tracks/abc123/metadata", json=update_data)
+    assert response.status_code == 200
+    assert response.json()["status"] == "success"
+
+
+@patch("zotify_api.services.tracks_service.get_tracks_metadata_from_spotify", new_callable=AsyncMock)
+def test_get_metadata_spotify_error(mock_get_metadata, client, mock_provider):
+    # Simulate an error from the service layer (e.g., Spotify is down)
+    mock_get_metadata.side_effect = HTTPException(status_code=503, detail="Service unavailable")
+
+    response = client.post(
+        "/api/tracks/metadata",
+        headers={"X-API-Key": "test_key"},
+        json={"track_ids": ["track1"]}
     )
-    assert response.status_code == expected_status
-    if expected_status == 200:
-        mock_metadata_service.get_metadata.assert_called_once_with(track_id)
+    assert response.status_code == 503
+    assert "Service unavailable" in response.json()["detail"]

@@ -8,7 +8,6 @@ from .config import TriggerConfig
 
 log = logging.getLogger(__name__)
 
-
 class TriggerManager:
     """
     Manages the execution of actions based on configured triggers.
@@ -33,7 +32,7 @@ class TriggerManager:
             try:
                 module = importlib.import_module(name)
                 if hasattr(module, "run") and callable(module.run):
-                    action_name = name.split(".")[-1]
+                    action_name = name.split('.')[-1]
                     action_map[action_name] = module.run
                     log.debug(f"Successfully loaded action: {action_name}")
             except Exception:

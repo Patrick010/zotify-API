@@ -3,7 +3,11 @@ from typing import Any
 from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile
 
 from zotify_api.providers.base import BaseProvider
-from zotify_api.schemas.metadata import MetadataPatchResponse, MetadataResponse, MetadataUpdate
+from zotify_api.schemas.metadata import (
+    MetadataPatchResponse,
+    MetadataResponse,
+    MetadataUpdate,
+)
 from zotify_api.schemas.tracks import (
     CreateTrackModel,
     TrackMetadataRequest,

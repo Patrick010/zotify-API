@@ -8,19 +8,15 @@ def get_initial_metadata():
             "title": "Track Title",
             "mood": "Chill",
             "rating": 4,
-            "source": "Manual Import",
+            "source": "Manual Import"
         }
     }
 
-
 track_metadata = get_initial_metadata()
-
 
 class MetadataService:
     def get_metadata(self, track_id: str):
-        return track_metadata.get(
-            track_id, {"track_id": track_id, "status": "not found"}
-        )
+        return track_metadata.get(track_id, {"track_id": track_id, "status": "not found"})
 
     def patch_metadata(self, track_id: str, meta: MetadataUpdate):
         if track_id not in track_metadata:
@@ -32,7 +28,6 @@ class MetadataService:
     def _reset_data(self):
         global track_metadata
         track_metadata = get_initial_metadata()
-
 
 def get_metadata_service():
     return MetadataService()

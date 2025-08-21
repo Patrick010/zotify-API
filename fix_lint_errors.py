@@ -1,8 +1,8 @@
-import subprocess
+import subprocess  # nosec B404
 
 def main():
     print("Running ruff to find errors...")
-    result = subprocess.run(
+    result = subprocess.run(  # nosec B603 B607
         ["ruff", "check", "."],
         capture_output=True,
         text=True,

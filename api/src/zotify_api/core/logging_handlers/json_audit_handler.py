@@ -8,7 +8,6 @@ from .base import BaseLogHandler
 
 log = logging.getLogger(__name__)
 
-
 class JsonAuditHandler(BaseLogHandler):
     """
     A log handler that writes structured JSON audit logs to a file.
@@ -34,7 +33,7 @@ class JsonAuditHandler(BaseLogHandler):
             "event_name": log_record.get("event_name", "undefined.event"),
             "user_id": log_record.get("user_id"),
             "source_ip": log_record.get("source_ip"),
-            "details": log_record.get("details", {}),
+            "details": log_record.get("details", {})
         }
         return json.dumps(audit_record)
 

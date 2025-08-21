@@ -1,5 +1,5 @@
-import httpx
 import pytest
+import httpx
 
 BASE_URL = "http://localhost:8000/api"  # Adjust if your host/port differ
 TEST_TOKEN = "test_key"  # Replace with a valid token or mock token

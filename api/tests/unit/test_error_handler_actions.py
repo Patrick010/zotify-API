@@ -7,12 +7,9 @@ def test_log_critical_action():
     """
     Tests that the log_critical action logs a critical error.
     """
-    with patch(
-        "zotify_api.core.error_handler.actions.log_critical.log_event"
-    ) as mock_log_event:
+    with patch("zotify_api.core.error_handler.actions.log_critical.log_event") as mock_log_event:
         log_critical.run(Exception("Test"), {"message": "Test message"})
         mock_log_event.assert_called_once()
-
 
 def test_webhook_action_success():
     """
@@ -20,13 +17,8 @@ def test_webhook_action_success():
     """
     mock_logger = MagicMock()
     with patch("zotify_api.core.error_handler.actions.webhook.log", mock_logger):
-        webhook.run(
-            Exception("Test"), {"url": "http://test.com", "payload": {"key": "value"}}
-        )
-        mock_logger.info.assert_called_once_with(
-            "Sending webhook to http://test.com..."
-        )
-
+        webhook.run(Exception("Test"), {"url": "http://test.com", "payload": {"key": "value"}})
+        mock_logger.info.assert_called_once_with("Sending webhook to http://test.com...")
 
 def test_webhook_action_missing_details():
     """
@@ -35,6 +27,4 @@ def test_webhook_action_missing_details():
     mock_logger = MagicMock()
     with patch("zotify_api.core.error_handler.actions.webhook.log", mock_logger):
         webhook.run(Exception("Test"), {})
-        mock_logger.error.assert_called_once_with(
-            "Webhook action is missing 'url' or 'payload' in details."
-        )
+        mock_logger.error.assert_called_once_with("Webhook action is missing 'url' or 'payload' in details.")

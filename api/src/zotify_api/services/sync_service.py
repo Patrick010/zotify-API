@@ -6,7 +6,6 @@ The functions in this module are designed to be called from the API layer.
 The dependencies are injected into the functions, which makes them easy to test.
 """
 
-
 def run_sync_job():
     """
     This function runs the sync job.

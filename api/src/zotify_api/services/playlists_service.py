@@ -12,10 +12,8 @@ log = logging.getLogger(__name__)
 DEFAULT_LIMIT = 25
 MAX_LIMIT = 250
 
-
 class PlaylistsServiceError(Exception):
     pass
-
 
 class PlaylistsService:
     def __init__(self, db_engine):
@@ -43,9 +41,7 @@ class PlaylistsService:
             offset = 0
         return max(0, offset)
 
-    def get_playlists(
-        self, limit: int = DEFAULT_LIMIT, offset: int = 0, search: Optional[str] = None
-    ) -> Tuple[List[Dict], int]:
+    def get_playlists(self, limit: int = DEFAULT_LIMIT, offset: int = 0, search: Optional[str] = None) -> Tuple[List[Dict], int]:
         limit = self._normalize_limit(limit)
         offset = self._normalize_offset(offset)
         if not self.db_engine:
@@ -55,14 +51,10 @@ class PlaylistsService:
         try:
             with self.db_engine.connect() as conn:
                 if search:
-                    stmt = text(
-                        "SELECT id, name FROM playlists WHERE name LIKE :q LIMIT :limit OFFSET :offset"
-                    )
+                    stmt = text("SELECT id, name FROM playlists WHERE name LIKE :q LIMIT :limit OFFSET :offset")
                     params = {"q": f"%{search}%", "limit": limit, "offset": offset}
                 else:
-                    stmt = text(
-                        "SELECT id, name FROM playlists LIMIT :limit OFFSET :offset"
-                    )
+                    stmt = text("SELECT id, name FROM playlists LIMIT :limit OFFSET :offset")
                     params = {"limit": limit, "offset": offset}
                 result = conn.execute(stmt, params)
                 rows = result.mappings().all()
@@ -72,9 +64,7 @@ class PlaylistsService:
         except Exception as exc:
             log.exception("Error fetching playlists")
             # Surface a service-level error to the route
-            raise PlaylistsServiceError(
-                "Database error while fetching playlists"
-            ) from exc
+            raise PlaylistsServiceError("Database error while fetching playlists") from exc
 
     def create_playlist(self, playlist_in: Dict) -> Dict:
         # Minimal validation is performed in Pydantic at the route layer, but check here too.
@@ -89,10 +79,7 @@ class PlaylistsService:
                 return {"id": None, "name": playlist_in["name"]}
         except Exception as exc:
             log.exception("Error creating playlist")
-            raise PlaylistsServiceError(
-                "Database error while creating playlist"
-            ) from exc
-
+            raise PlaylistsServiceError("Database error while creating playlist") from exc
 
 def get_playlists_service(db_engine: any = Depends(get_db_engine)):
     return PlaylistsService(db_engine)

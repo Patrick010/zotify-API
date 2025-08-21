@@ -5,10 +5,8 @@ from typing import Any, Dict
 
 class BaseFormatter:
     """Base class for error formatters."""
-
     def format(self, exc: Exception, context: Dict[str, Any]) -> Any:
         raise NotImplementedError
-
 
 class JsonFormatter(BaseFormatter):
     """Formats errors into a standardized JSON structure for API responses."""
@@ -34,7 +32,6 @@ class JsonFormatter(BaseFormatter):
             }
 
         return error_data
-
 
 class PlainTextFormatter(BaseFormatter):
     """Formats errors into a plain text string for logs or CLI output."""

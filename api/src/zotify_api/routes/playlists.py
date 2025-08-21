@@ -3,7 +3,11 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 
 from zotify_api.schemas.playlists import PlaylistIn, PlaylistOut, PlaylistsResponse
-from zotify_api.services.playlists_service import PlaylistsService, PlaylistsServiceError, get_playlists_service
+from zotify_api.services.playlists_service import (
+    PlaylistsService,
+    PlaylistsServiceError,
+    get_playlists_service,
+)
 
 router = APIRouter(prefix="/playlists", tags=["playlists"])
 

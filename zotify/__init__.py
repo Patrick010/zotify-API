@@ -181,7 +181,7 @@ class ApiClient(LibrespotApiClient):
         params["limit"] = limit
         params["offset"] = offset
         
-        response = get(BASE_URL + url, headers=headers, params=params)
+        response = get(BASE_URL + url, headers=headers, params=params, timeout=10)
         data = response.json()
         
         try:
@@ -233,7 +233,7 @@ class OAuth:
     def __init__(self, username: str, redirect_address: str | None, oauth_address: str | None) -> None:
         self.username = username
         self.port = 4381
-        self.oauth_address = oauth_address if oauth_address else "0.0.0.0"
+        self.oauth_address = oauth_address if oauth_address else "0.0.0.0"  # nosec B104
         self.redirect_uri = f"http://{redirect_address if redirect_address else '127.0.0.1'}:{self.port}/login"
     
     def auth_interactive(self) -> str:
@@ -299,7 +299,7 @@ class OAuth:
                 "refresh_token": code,
                 "client_id": CLIENT_ID,
             }
-        response = post(token_url, headers=headers, data=body)
+        response = post(token_url, headers=headers, data=body, timeout=10)
         if response.status_code != 200:
             raise IOError(
                 f"Error fetching token: {response.status_code}, {response.text}"

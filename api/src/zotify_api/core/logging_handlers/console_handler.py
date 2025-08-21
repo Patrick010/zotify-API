@@ -7,7 +7,6 @@ from .base import BaseLogHandler
 
 log = logging.getLogger(__name__)
 
-
 class ConsoleHandler(BaseLogHandler):
     """
     A log handler that prints formatted messages to the console (stdout).
@@ -22,7 +21,7 @@ class ConsoleHandler(BaseLogHandler):
 
     def format(self, log_record: Dict[str, Any]) -> str:
         """Formats the log record into a human-readable string."""
-        timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
+        timestamp = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
         level = log_record.get("level", "UNKNOWN").upper()
         message = log_record.get("message", "")
         return f"[{timestamp}] [{level}] {message}"

@@ -14,12 +14,12 @@ CALLBACK_POLL_URL = f"{API_BASE_URL}/login"  # Adjust if needed
 
 def check_api():
     try:
-        r = requests.get(f"{API_BASE_URL}/health")
+        r = requests.get(f"{API_BASE_URL}/health", timeout=5)
         if r.status_code == 200:
             print(f"[INFO] API reachable at {API_BASE_URL}")
             return True
-    except Exception:
-        pass
+    except requests.RequestException:
+        pass  # The error is logged below
     print(f"[ERROR] Cannot reach API at {API_BASE_URL}")
     return False
 

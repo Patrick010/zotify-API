@@ -1,7 +1,7 @@
 import os
-import subprocess
+import subprocess  # nosec B404
 import argparse
-from flask import Flask, jsonify, send_from_directory, render_template
+from flask import Flask, jsonify, request, send_from_directory, render_template
 
 app = Flask(__name__, static_folder='static')
 sqlite_web_process = None
@@ -35,7 +35,7 @@ def launch_sqlite_web():
 
     try:
         command = ["sqlite_web", db_abs_path, "--port", "8081", "--no-browser"]
-        sqlite_web_process = subprocess.Popen(command)
+        sqlite_web_process = subprocess.Popen(command)  # nosec B603
         return jsonify({"status": "success", "message": f"sqlite-web launched on port 8081 for database {db_abs_path}. PID: {sqlite_web_process.pid}"})
     except Exception as e:
         return jsonify({"status": "error", "message": f"Failed to launch sqlite-web: {e}"}), 500
@@ -57,9 +57,10 @@ def stop_sqlite_web():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run the Gonk Test UI server.")
-    parser.add_argument("--ip", default="0.0.0.0", help="The IP address to bind the server to. Defaults to 0.0.0.0.")
+    parser.add_argument("--ip", default="0.0.0.0", help="The IP address to bind the server to. Defaults to 0.0.0.0.")  # nosec B104
     parser.add_argument("--port", type=int, default=8082, help="The port to run the server on. Defaults to 8082.")
     parser.add_argument("--api-url", default="http://localhost:8000", help="The base URL of the Zotify API. Defaults to http://localhost:8000.")
+    parser.add_argument("--debug", action="store_true", help="Enable debug mode. Defaults to False.")
     args = parser.parse_args()
 
-    app.run(host=args.ip, port=args.port, debug=True)
+    app.run(host=args.ip, port=args.port, debug=args.debug)

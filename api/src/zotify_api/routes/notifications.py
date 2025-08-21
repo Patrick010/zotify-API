@@ -3,9 +3,16 @@ from typing import Any, Dict
 from fastapi import APIRouter, Depends
 
 from zotify_api.schemas.generic import StandardResponse
-from zotify_api.schemas.notifications import Notification, NotificationCreate, NotificationUpdate
+from zotify_api.schemas.notifications import (
+    Notification,
+    NotificationCreate,
+    NotificationUpdate,
+)
 from zotify_api.services.auth import require_admin_api_key
-from zotify_api.services.notifications_service import NotificationsService, get_notifications_service
+from zotify_api.services.notifications_service import (
+    NotificationsService,
+    get_notifications_service,
+)
 
 router = APIRouter(prefix="/notifications", tags=["notifications"])
 

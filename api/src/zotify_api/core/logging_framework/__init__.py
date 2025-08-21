@@ -4,7 +4,10 @@ from .service import get_logging_service
 
 
 def log_event(
-    message: str, level: str = "INFO", destinations: Optional[List[str]] = None, **extra
+    message: str,
+    level: str = "INFO",
+    destinations: Optional[List[str]] = None,
+    **extra
 ):
     """
     Public API for the flexible logging framework.
@@ -21,7 +24,6 @@ def log_event(
     """
     service = get_logging_service()
     service.log(message, level=level, destinations=destinations, **extra)
-
 
 # This makes `from zotify_api.core.logging_framework import log_event` possible.
 __all__ = ["log_event"]

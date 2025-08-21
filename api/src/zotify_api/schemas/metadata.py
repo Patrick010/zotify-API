@@ -8,13 +8,11 @@ class MetadataUpdate(BaseModel):
     rating: Optional[int] = None
     source: Optional[str] = None
 
-
 class MetadataResponse(BaseModel):
     title: str
     mood: Optional[str] = None
     rating: Optional[int] = None
     source: Optional[str] = None
-
 
 class MetadataPatchResponse(BaseModel):
     status: str

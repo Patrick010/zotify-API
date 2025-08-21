@@ -10,7 +10,13 @@ from urllib.parse import quote_plus
 import httpx
 from sqlalchemy.orm import Session
 
-from zotify_api.auth_state import CLIENT_ID, REDIRECT_URI, SPOTIFY_AUTH_URL, SPOTIFY_TOKEN_URL, pending_states
+from zotify_api.auth_state import (
+    CLIENT_ID,
+    REDIRECT_URI,
+    SPOTIFY_AUTH_URL,
+    SPOTIFY_TOKEN_URL,
+    pending_states,
+)
 from zotify_api.core.logging_framework import log_event
 from zotify_api.database import crud
 from zotify_api.services.spoti_client import SpotiClient
@@ -33,36 +39,23 @@ class SpotifyConnector(BaseProvider):
     async def get_oauth_login_url(self, state: str) -> str:
         """Constructs the provider-specific URL for OAuth2 authorization."""
         scopes = [
-            "ugc-image-upload",
-            "user-read-playback-state",
-            "user-modify-playback-state",
-            "user-read-currently-playing",
-            "app-remote-control",
-            "streaming",
-            "playlist-read-private",
-            "playlist-read-collaborative",
-            "playlist-modify-private",
-            "playlist-modify-public",
-            "user-follow-modify",
-            "user-follow-read",
-            "user-read-playback-position",
-            "user-top-read",
-            "user-read-recently-played",
-            "user-library-modify",
-            "user-library-read",
-            "user-read-email",
-            "user-read-private",
+            "ugc-image-upload", "user-read-playback-state",
+            "user-modify-playback-state", "user-read-currently-playing",
+            "app-remote-control", "streaming", "playlist-read-private",
+            "playlist-read-collaborative", "playlist-modify-private",
+            "playlist-modify-public", "user-follow-modify", "user-follow-read",
+            "user-read-playback-position", "user-top-read",
+            "user-read-recently-played", "user-library-modify",
+            "user-library-read", "user-read-email", "user-read-private"
         ]
         scope = " ".join(scopes)
 
-        code_verifier = (
-            base64.urlsafe_b64encode(secrets.token_bytes(32)).rstrip(b"=").decode()
-        )
-        code_challenge = (
-            base64.urlsafe_b64encode(hashlib.sha256(code_verifier.encode()).digest())
-            .rstrip(b"=")
-            .decode()
-        )
+        code_verifier = base64.urlsafe_b64encode(
+            secrets.token_bytes(32)
+        ).rstrip(b"=").decode()
+        code_challenge = base64.urlsafe_b64encode(
+            hashlib.sha256(code_verifier.encode()).digest()
+        ).rstrip(b"=").decode()
 
         pending_states[state] = code_verifier
 
@@ -111,7 +104,7 @@ class SpotifyConnector(BaseProvider):
                 "Invalid or expired state received in Spotify callback",
                 level="ERROR",
                 tags=["security"],
-                details={"state": state},
+                details={"state": state}
             )
             return """
             <html><body><h2>Error</h2>
@@ -130,7 +123,9 @@ class SpotifyConnector(BaseProvider):
 
         try:
             async with httpx.AsyncClient() as client:
-                resp = await client.post(SPOTIFY_TOKEN_URL, data=data, headers=headers)
+                resp = await client.post(
+                    SPOTIFY_TOKEN_URL, data=data, headers=headers
+                )
                 resp.raise_for_status()
 
                 json_obj = resp.json()
@@ -164,8 +159,7 @@ class SpotifyConnector(BaseProvider):
                 level="ERROR",
                 tags=["security"],
                 details={
-                    "status_code": e.response.status_code,
-                    "response": e.response.text,
+                    "status_code": e.response.status_code, "response": e.response.text
                 },
             )
             return f"""
@@ -185,8 +179,8 @@ class SpotifyConnector(BaseProvider):
             raise Exception("SpotiClient not initialized.")
         results = await self.client.search(q=q, type=type, limit=limit, offset=offset)
         for key in results:
-            if "items" in results[key]:
-                return results[key]["items"], results[key].get("total", 0)
+            if 'items' in results[key]:
+                return results[key]['items'], results[key].get('total', 0)
         return [], 0
 
     async def get_playlist(self, playlist_id: str) -> Dict[str, Any]:
@@ -232,5 +226,5 @@ class SpotifyConnector(BaseProvider):
         return {
             "status": "success",
             "message": f"Successfully synced {len(spotify_playlists)} playlists.",
-            "count": len(spotify_playlists),
+            "count": len(spotify_playlists)
         }

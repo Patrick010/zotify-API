@@ -8,7 +8,6 @@ class LogUpdate(BaseModel):
     log_to_file: Optional[bool] = None
     log_file: Optional[str] = None
 
-
 class LoggingConfigResponse(BaseModel):
     level: str
     log_to_file: bool

@@ -5,43 +5,47 @@ from typing import Any, Dict, List, Optional
 
 import httpx
 
-from .schemas import AnySinkConfig, FileSinkConfig, LoggingFrameworkConfig, WebhookSinkConfig
+from .schemas import (
+    AnySinkConfig,
+    FileSinkConfig,
+    LoggingFrameworkConfig,
+    WebhookSinkConfig,
+)
 
 # Global instance of the service
 _logging_service_instance = None
 
 
 class BaseSink:
-    """Base class for all log sinks."""
-
+    """ Base class for all log sinks. """
     def __init__(self, config: AnySinkConfig):
         self.config = config
         self.level = logging.getLevelName(config.level)
 
     async def emit(self, log_record: Dict[str, Any]):
-        """Abstract method to emit a log record."""
+        """ Abstract method to emit a log record. """
         raise NotImplementedError
 
     def should_log(self, level: str) -> bool:
-        """Determines if a log should be processed based on its level."""
+        """ Determines if a log should be processed based on its level. """
         return logging.getLevelName(level) >= self.level
 
 
 class ConsoleSink(BaseSink):
-    """A sink that logs to the console."""
-
+    """ A sink that logs to the console. """
     async def emit(self, log_record: Dict[str, Any]):
         # In a real implementation, this would use a more robust formatter.
         print(f"CONSOLE: {log_record}")
 
 
 class FileSink(BaseSink):
-    """A sink that logs to a rotating file."""
-
+    """ A sink that logs to a rotating file. """
     def __init__(self, config: FileSinkConfig):
         super().__init__(config)
         self.handler = RotatingFileHandler(
-            config.path, maxBytes=config.max_bytes, backupCount=config.backup_count
+            config.path,
+            maxBytes=config.max_bytes,
+            backupCount=config.backup_count
         )
         # A unique logger name to prevent conflicts
         self.logger = logging.getLogger(f"file_sink.{config.path}")
@@ -57,8 +61,7 @@ class FileSink(BaseSink):
 
 
 class WebhookSink(BaseSink):
-    """A sink that sends logs to a webhook URL."""
-
+    """ A sink that sends logs to a webhook URL. """
     def __init__(self, config: WebhookSinkConfig):
         super().__init__(config)
         self.client = httpx.AsyncClient()
@@ -73,8 +76,7 @@ class WebhookSink(BaseSink):
 
 
 class LoggingService:
-    """The main service for managing and dispatching logs."""
-
+    """ The main service for managing and dispatching logs. """
     def __init__(self):
         self.sinks: Dict[str, BaseSink] = {}
         self.config: Optional[LoggingFrameworkConfig] = None
@@ -113,7 +115,7 @@ class LoggingService:
                     message=details.get("message", f"Triggered by event: {event}"),
                     level=details.get("level", "INFO"),
                     destinations=details.get("destinations"),
-                    **details.get("extra", {}),
+                    **details.get("extra", {})
                 )
                 return True
         return False

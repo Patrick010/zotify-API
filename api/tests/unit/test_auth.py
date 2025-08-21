@@ -142,10 +142,7 @@ def test_get_status_no_token(mock_get_token, monkeypatch):
 @patch("zotify_api.services.auth.crud.get_spotify_token")
 def test_get_status_http_exception(mock_get_token, mock_get_user, monkeypatch):
     from zotify_api.database.models import SpotifyToken
-    mock_get_token.return_value = SpotifyToken(
-        access_token="valid",
-        expires_at=datetime.now(timezone.utc) + timedelta(hours=1),
-    )
+    mock_get_token.return_value = SpotifyToken(access_token="valid", expires_at=datetime.now(timezone.utc) + timedelta(hours=1))
     mock_get_user.side_effect = HTTPException(status_code=401)
 
     response = client.get("/api/auth/status", headers={"X-API-Key": "test_key"})

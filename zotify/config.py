@@ -1,322 +1,116 @@
 import json
-import re
 import sys
+import re
 from pathlib import Path, PurePath
 from typing import Any, Callable
 
-from zotify.const import (ALBUM_ART_JPG_FILE, ALWAYS_CHECK_LYRICS,
-                          BULK_WAIT_TIME, CHUNK_SIZE, CREDENTIALS_LOCATION,
-                          DEBUG, DISABLE_DIRECTORY_ARCHIVES,
-                          DISABLE_SONG_ARCHIVE, DOWNLOAD_FORMAT,
-                          DOWNLOAD_LYRICS, DOWNLOAD_PARENT_ALBUM,
-                          DOWNLOAD_QUALITY, DOWNLOAD_REAL_TIME, EXPORT_M3U8,
-                          FFMPEG_LOG_LEVEL, LANGUAGE, LIKED_SONGS_ARCHIVE_M3U8,
-                          LYRICS_LOCATION, LYRICS_MD_HEADER, M3U8_LOCATION,
-                          M3U8_REL_PATHS, MAX_FILENAME_LENGTH, MD_ALLGENRES,
-                          MD_ARTISTDELIMITER, MD_DISC_TRACK_TOTALS,
-                          MD_GENREDELIMITER, MD_SAVE_GENRES, MD_SAVE_LYRICS,
-                          NO_COMPILATION_ALBUMS, OAUTH_ADDRESS, OUTPUT,
-                          OUTPUT_ALBUM, OUTPUT_LIKED_SONGS, OUTPUT_PLAYLIST,
-                          OUTPUT_PLAYLIST_EXT, OUTPUT_SINGLE,
-                          PRINT_ALBUM_PROGRESS, PRINT_API_ERRORS,
-                          PRINT_ARTIST_PROGRESS, PRINT_DOWNLOAD_PROGRESS,
-                          PRINT_DOWNLOADS, PRINT_ERRORS,
-                          PRINT_PLAYLIST_PROGRESS, PRINT_PROGRESS_INFO,
-                          PRINT_SKIPS, PRINT_SPLASH, PRINT_URL_PROGRESS,
-                          PRINT_WARNINGS, REDIRECT_ADDRESS, REGEX_ALBUM_SKIP,
-                          REGEX_ENABLED, REGEX_EPISODE_SKIP, REGEX_TRACK_SKIP,
-                          RETRY_ATTEMPTS, ROOT_PATH, ROOT_PODCAST_PATH,
-                          SAVE_CREDENTIALS, SKIP_EXISTING,
-                          SKIP_PREVIOUSLY_DOWNLOADED, SONG_ARCHIVE_LOCATION,
-                          SPLIT_ALBUM_DISCS, STRICT_LIBRARY_VERIFY,
-                          TEMP_DOWNLOAD_DIR, TRANSCODE_BITRATE)
-from zotify.termoutput import PrintChannel, Printer
+from zotify.const import *
+from zotify.termoutput import Printer, PrintChannel
+
 
 CONFIG_VALUES = {
     # Main Options
-    ROOT_PATH: {
-        "default": "~/Music/Zotify Music",
-        "type": str,
-        "arg": (
-            "-rp",
-            "--root-path",
-        ),
-    },
-    SAVE_CREDENTIALS: {"default": "True", "type": bool, "arg": ("--save-credentials",)},
-    CREDENTIALS_LOCATION: {
-        "default": "",
-        "type": str,
-        "arg": (
-            "--creds",
-            "--credentials-location",
-        ),
-    },
+    ROOT_PATH:                  { 'default': '~/Music/Zotify Music',    'type': str,    'arg': ('-rp', '--root-path'                     ,) },
+    SAVE_CREDENTIALS:           { 'default': 'True',                    'type': bool,   'arg': ('--save-credentials'                     ,) },
+    CREDENTIALS_LOCATION:       { 'default': '',                        'type': str,    'arg': ('--creds', '--credentials-location'      ,) },
+
     # File Options
-    OUTPUT: {"default": "", "type": str, "arg": ("--output",)},
-    OUTPUT_PLAYLIST: {
-        "default": "{playlist}/{artist}_{song_name}",
-        "type": str,
-        "arg": (
-            "-op",
-            "--output-playlist",
-        ),
-    },
-    OUTPUT_PLAYLIST_EXT: {
-        "default": "{playlist}/{playlist_num}_{artist}_{song_name}",
-        "type": str,
-        "arg": (
-            "-oe",
-            "--output-ext-playlist",
-        ),
-    },
-    OUTPUT_LIKED_SONGS: {
-        "default": "Liked Songs/{artist}_{song_name}",
-        "type": str,
-        "arg": (
-            "-ol",
-            "--output-liked-songs",
-        ),
-    },
-    OUTPUT_SINGLE: {
-        "default": "{artist}/{album}/{artist}_{song_name}",
-        "type": str,
-        "arg": (
-            "-os",
-            "--output-single",
-        ),
-    },
-    OUTPUT_ALBUM: {
-        "default": "{artist}/{album}/{album_num}_{artist}_{song_name}",
-        "type": str,
-        "arg": (
-            "-oa",
-            "--output-album",
-        ),
-    },
-    ROOT_PODCAST_PATH: {
-        "default": "~/Music/Zotify Podcasts",
-        "type": str,
-        "arg": (
-            "-rpp",
-            "--root-podcast-path",
-        ),
-    },
-    SPLIT_ALBUM_DISCS: {
-        "default": "False",
-        "type": bool,
-        "arg": ("--split-album-discs",),
-    },
-    MAX_FILENAME_LENGTH: {
-        "default": "0",
-        "type": int,
-        "arg": ("--max-filename-length",),
-    },
+    OUTPUT:                     { 'default': '',                        'type': str,    'arg': ('--output'                               ,) },
+    OUTPUT_PLAYLIST:            { 'default': '{playlist}/{artist}_{song_name}',
+                                  'type': str,
+                                  'arg': ('-op', '--output-playlist' ,) },
+    OUTPUT_PLAYLIST_EXT:        { 'default': '{playlist}/{playlist_num}_{artist}_{song_name}',
+                                  'type': str,
+                                  'arg': ('-oe', '--output-ext-playlist' ,) },
+    OUTPUT_LIKED_SONGS:         { 'default': 'Liked Songs/{artist}_{song_name}',
+                                  'type': str,
+                                  'arg': ('-ol', '--output-liked-songs' ,) },
+    OUTPUT_SINGLE:              { 'default': '{artist}/{album}/{artist}_{song_name}',
+                                  'type': str,
+                                  'arg': ('-os', '--output-single' ,) },
+    OUTPUT_ALBUM:               { 'default': '{artist}/{album}/{album_num}_{artist}_{song_name}',
+                                  'type': str,
+                                  'arg': ('-oa', '--output-album' ,) },
+    ROOT_PODCAST_PATH:          { 'default': '~/Music/Zotify Podcasts', 'type': str,    'arg': ('-rpp', '--root-podcast-path'            ,) },
+    SPLIT_ALBUM_DISCS:          { 'default': 'False',                   'type': bool,   'arg': ('--split-album-discs'                    ,) },
+    MAX_FILENAME_LENGTH:        { 'default': '0',                       'type': int,    'arg': ('--max-filename-length'                  ,) },
+
     # Download Options
-    BULK_WAIT_TIME: {"default": "1", "type": int, "arg": ("--bulk-wait-time",)},
-    DOWNLOAD_REAL_TIME: {
-        "default": "False",
-        "type": bool,
-        "arg": (
-            "-rt",
-            "--download-real-time",
-        ),
-    },
-    TEMP_DOWNLOAD_DIR: {
-        "default": "",
-        "type": str,
-        "arg": (
-            "-td",
-            "--temp-download-dir",
-        ),
-    },
-    DOWNLOAD_PARENT_ALBUM: {
-        "default": "False",
-        "type": bool,
-        "arg": ("--download-parent-album",),
-    },
-    NO_COMPILATION_ALBUMS: {
-        "default": "False",
-        "type": bool,
-        "arg": ("--no-compilation-albums",),
-    },
+    BULK_WAIT_TIME:             { 'default': '1',                       'type': int,    'arg': ('--bulk-wait-time'                       ,) },
+    DOWNLOAD_REAL_TIME:         { 'default': 'False',                   'type': bool,   'arg': ('-rt', '--download-real-time'            ,) },
+    TEMP_DOWNLOAD_DIR:          { 'default': '',                        'type': str,    'arg': ('-td', '--temp-download-dir'             ,) },
+    DOWNLOAD_PARENT_ALBUM:      { 'default': 'False',                   'type': bool,   'arg': ('--download-parent-album'                ,) },
+    NO_COMPILATION_ALBUMS:      { 'default': 'False',                   'type': bool,   'arg': ('--no-compilation-albums'                ,) },
+
     # Regex Options
-    REGEX_ENABLED: {"default": "False", "type": bool, "arg": ("--regex-enabled",)},
-    REGEX_TRACK_SKIP: {"default": "", "type": str, "arg": ("--regex-track-skip",)},
-    REGEX_EPISODE_SKIP: {"default": "", "type": str, "arg": ("--regex-episode-skip",)},
-    REGEX_ALBUM_SKIP: {"default": "", "type": str, "arg": ("--regex-album-skip",)},
+    REGEX_ENABLED:              { 'default': 'False',                   'type': bool,   'arg': ('--regex-enabled'                        ,) },
+    REGEX_TRACK_SKIP:           { 'default': '',                        'type': str,    'arg': ('--regex-track-skip'                     ,) },
+    REGEX_EPISODE_SKIP:         { 'default': '',                        'type': str,    'arg': ('--regex-episode-skip'                   ,) },
+    REGEX_ALBUM_SKIP:           { 'default': '',                        'type': str,    'arg': ('--regex-album-skip'                     ,) },
+
     # Encoding Options
-    DOWNLOAD_FORMAT: {
-        "default": "copy",
-        "type": str,
-        "arg": (
-            "--codec",
-            "--download-format",
-        ),
-    },
-    DOWNLOAD_QUALITY: {
-        "default": "auto",
-        "type": str,
-        "arg": (
-            "-q",
-            "--download-quality",
-        ),
-    },
-    TRANSCODE_BITRATE: {
-        "default": "auto",
-        "type": str,
-        "arg": (
-            "-b",
-            "--bitrate",
-            "--transcode-bitrate",
-        ),
-    },
+    DOWNLOAD_FORMAT:            { 'default': 'copy',                    'type': str,    'arg': ('--codec', '--download-format'           ,) },
+    DOWNLOAD_QUALITY:           { 'default': 'auto',                    'type': str,    'arg': ('-q', '--download-quality'               ,) },
+    TRANSCODE_BITRATE:          { 'default': 'auto',                    'type': str,    'arg': ('-b', '--bitrate', '--transcode-bitrate' ,) },
+
     # Archive Options
-    SONG_ARCHIVE_LOCATION: {
-        "default": "",
-        "type": str,
-        "arg": ("--song-archive-location",),
-    },
-    DISABLE_SONG_ARCHIVE: {
-        "default": "False",
-        "type": bool,
-        "arg": ("--disable-song-archive",),
-    },
-    DISABLE_DIRECTORY_ARCHIVES: {
-        "default": "False",
-        "type": bool,
-        "arg": ("--disable-directory-archives",),
-    },
-    SKIP_EXISTING: {
-        "default": "True",
-        "type": bool,
-        "arg": (
-            "-ie",
-            "--skip-existing",
-        ),
-    },
-    SKIP_PREVIOUSLY_DOWNLOADED: {
-        "default": "False",
-        "type": bool,
-        "arg": (
-            "-ip",
-            "--skip-prev-downloaded",
-            "--skip-previously-downloaded",
-        ),
-    },
+    SONG_ARCHIVE_LOCATION:      { 'default': '',                        'type': str,    'arg': ('--song-archive-location'                ,) },
+    DISABLE_SONG_ARCHIVE:       { 'default': 'False',                   'type': bool,   'arg': ('--disable-song-archive'                 ,) },
+    DISABLE_DIRECTORY_ARCHIVES: { 'default': 'False',                   'type': bool,   'arg': ('--disable-directory-archives'           ,) },
+    SKIP_EXISTING:              { 'default': 'True',                    'type': bool,   'arg': ('-ie', '--skip-existing'                 ,) },
+    SKIP_PREVIOUSLY_DOWNLOADED: { 'default': 'False',                   'type': bool,   'arg': ('-ip', '--skip-prev-downloaded',
+                                                                                                '--skip-previously-downloaded'           ,) },
+
     # Playlist File Options
-    EXPORT_M3U8: {"default": "False", "type": bool, "arg": ("-e, --export-m3u8",)},
-    M3U8_LOCATION: {"default": "", "type": str, "arg": ("--m3u8-location",)},
-    M3U8_REL_PATHS: {
-        "default": "True",
-        "type": bool,
-        "arg": ("--m3u8-relative-paths",),
-    },
-    LIKED_SONGS_ARCHIVE_M3U8: {
-        "default": "True",
-        "type": bool,
-        "arg": ("--liked-songs-archive-m3u8",),
-    },
+    EXPORT_M3U8:                { 'default': 'False',                   'type': bool,   'arg': ('-e, --export-m3u8'                      ,) },
+    M3U8_LOCATION:              { 'default': '',                        'type': str,    'arg': ('--m3u8-location'                        ,) },
+    M3U8_REL_PATHS:             { 'default': 'True',                    'type': bool,   'arg': ('--m3u8-relative-paths'                  ,) },
+    LIKED_SONGS_ARCHIVE_M3U8:   { 'default': 'True',                    'type': bool,   'arg': ('--liked-songs-archive-m3u8'             ,) },
+
     # Lyric File Options
-    DOWNLOAD_LYRICS: {"default": "True", "type": bool, "arg": ("--download-lyrics",)},
-    LYRICS_LOCATION: {"default": "", "type": str, "arg": ("--lyrics-location",)},
-    ALWAYS_CHECK_LYRICS: {
-        "default": "False",
-        "type": bool,
-        "arg": ("--always-check-lyrics",),
-    },
-    LYRICS_MD_HEADER: {
-        "default": "False",
-        "type": bool,
-        "arg": ("--lyrics-md-header",),
-    },
+    DOWNLOAD_LYRICS:            { 'default': 'True',                    'type': bool,   'arg': ('--download-lyrics'                      ,) },
+    LYRICS_LOCATION:            { 'default': '',                        'type': str,    'arg': ('--lyrics-location'                      ,) },
+    ALWAYS_CHECK_LYRICS:        { 'default': 'False',                   'type': bool,   'arg': ('--always-check-lyrics'                  ,) },
+    LYRICS_MD_HEADER:           { 'default': 'False',                   'type': bool,   'arg': ('--lyrics-md-header'                     ,) },
+
     # Metadata Options
-    LANGUAGE: {"default": "en", "type": str, "arg": ("--language",)},
-    STRICT_LIBRARY_VERIFY: {
-        "default": "True",
-        "type": bool,
-        "arg": ("--strict-library-verify",),
-    },
-    MD_DISC_TRACK_TOTALS: {
-        "default": "True",
-        "type": bool,
-        "arg": ("--md-disc-track-totals",),
-    },
-    MD_SAVE_GENRES: {"default": "True", "type": bool, "arg": ("--md-save-genres",)},
-    MD_ALLGENRES: {"default": "False", "type": bool, "arg": ("--md-allgenres",)},
-    MD_GENREDELIMITER: {"default": ", ", "type": str, "arg": ("--md-genredelimiter",)},
-    MD_ARTISTDELIMITER: {
-        "default": ", ",
-        "type": str,
-        "arg": ("--md-artistdelimiter",),
-    },
-    MD_SAVE_LYRICS: {"default": "True", "type": bool, "arg": ("--md-save-lyrics",)},
-    ALBUM_ART_JPG_FILE: {
-        "default": "False",
-        "type": bool,
-        "arg": ("--album-art-jpg-file",),
-    },
+    LANGUAGE:                   { 'default': 'en',                      'type': str,    'arg': ('--language'                             ,) },
+    STRICT_LIBRARY_VERIFY:      { 'default': 'True',                    'type': bool,   'arg': ('--strict-library-verify'                ,) },
+    MD_DISC_TRACK_TOTALS:       { 'default': 'True',                    'type': bool,   'arg': ('--md-disc-track-totals'                 ,) },
+    MD_SAVE_GENRES:             { 'default': 'True',                    'type': bool,   'arg': ('--md-save-genres'                       ,) },
+    MD_ALLGENRES:               { 'default': 'False',                   'type': bool,   'arg': ('--md-allgenres'                         ,) },
+    MD_GENREDELIMITER:          { 'default': ', ',                      'type': str,    'arg': ('--md-genredelimiter'                    ,) },
+    MD_ARTISTDELIMITER:         { 'default': ', ',                      'type': str,    'arg': ('--md-artistdelimiter'                   ,) },
+    MD_SAVE_LYRICS:             { 'default': 'True',                    'type': bool,   'arg': ('--md-save-lyrics'                       ,) },
+    ALBUM_ART_JPG_FILE:         { 'default': 'False',                   'type': bool,   'arg': ('--album-art-jpg-file'                   ,) },
+
     # API Options
-    RETRY_ATTEMPTS: {"default": "1", "type": int, "arg": ("--retry-attempts",)},
-    CHUNK_SIZE: {"default": "20000", "type": int, "arg": ("--chunk-size",)},
-    OAUTH_ADDRESS: {"default": "0.0.0.0", "type": str, "arg": ("--oauth-address",)},
-    REDIRECT_ADDRESS: {
-        "default": "127.0.0.1",
-        "type": str,
-        "arg": ("--redirect-address",),
-    },
+    RETRY_ATTEMPTS:             { 'default': '1',                       'type': int,    'arg': ('--retry-attempts'                       ,) },
+    CHUNK_SIZE:                 { 'default': '20000',                   'type': int,    'arg': ('--chunk-size'                           ,) },
+    OAUTH_ADDRESS:              { 'default': '0.0.0.0',                 'type': str,    'arg': ('--oauth-address'                        ,) },  # nosec B104
+    REDIRECT_ADDRESS:           { 'default': '127.0.0.1',               'type': str,    'arg': ('--redirect-address'                     ,) },
+
     # Terminal & Logging Options
-    PRINT_SPLASH: {"default": "False", "type": bool, "arg": ("--print-splash",)},
-    PRINT_PROGRESS_INFO: {
-        "default": "True",
-        "type": bool,
-        "arg": ("--print-progress-info",),
-    },
-    PRINT_SKIPS: {"default": "True", "type": bool, "arg": ("--print-skips",)},
-    PRINT_DOWNLOADS: {"default": "True", "type": bool, "arg": ("--print-downloads",)},
-    PRINT_DOWNLOAD_PROGRESS: {
-        "default": "True",
-        "type": bool,
-        "arg": ("--print-download-progress",),
-    },
-    PRINT_URL_PROGRESS: {
-        "default": "True",
-        "type": bool,
-        "arg": ("--print-url-progress",),
-    },
-    PRINT_ALBUM_PROGRESS: {
-        "default": "True",
-        "type": bool,
-        "arg": ("--print-album-progress",),
-    },
-    PRINT_ARTIST_PROGRESS: {
-        "default": "True",
-        "type": bool,
-        "arg": ("--print-artist-progress",),
-    },
-    PRINT_PLAYLIST_PROGRESS: {
-        "default": "True",
-        "type": bool,
-        "arg": ("--print-playlist-progress",),
-    },
-    PRINT_WARNINGS: {"default": "True", "type": bool, "arg": ("--print-warnings",)},
-    PRINT_ERRORS: {"default": "True", "type": bool, "arg": ("--print-errors",)},
-    PRINT_API_ERRORS: {"default": "True", "type": bool, "arg": ("--print-api-errors",)},
-    FFMPEG_LOG_LEVEL: {"default": "error", "type": str, "arg": ("--ffmpeg-log-level",)},
+    PRINT_SPLASH:               { 'default': 'False',                   'type': bool,   'arg': ('--print-splash'                         ,) },
+    PRINT_PROGRESS_INFO:        { 'default': 'True',                    'type': bool,   'arg': ('--print-progress-info'                  ,) },
+    PRINT_SKIPS:                { 'default': 'True',                    'type': bool,   'arg': ('--print-skips'                          ,) },
+    PRINT_DOWNLOADS:            { 'default': 'True',                    'type': bool,   'arg': ('--print-downloads'                      ,) },
+    PRINT_DOWNLOAD_PROGRESS:    { 'default': 'True',                    'type': bool,   'arg': ('--print-download-progress'              ,) },
+    PRINT_URL_PROGRESS:         { 'default': 'True',                    'type': bool,   'arg': ('--print-url-progress'                   ,) },
+    PRINT_ALBUM_PROGRESS:       { 'default': 'True',                    'type': bool,   'arg': ('--print-album-progress'                 ,) },
+    PRINT_ARTIST_PROGRESS:      { 'default': 'True',                    'type': bool,   'arg': ('--print-artist-progress'                ,) },
+    PRINT_PLAYLIST_PROGRESS:    { 'default': 'True',                    'type': bool,   'arg': ('--print-playlist-progress'              ,) },
+    PRINT_WARNINGS:             { 'default': 'True',                    'type': bool,   'arg': ('--print-warnings'                       ,) },
+    PRINT_ERRORS:               { 'default': 'True',                    'type': bool,   'arg': ('--print-errors'                         ,) },
+    PRINT_API_ERRORS:           { 'default': 'True',                    'type': bool,   'arg': ('--print-api-errors'                     ,) },
+    FFMPEG_LOG_LEVEL:           { 'default': 'error',                   'type': str,    'arg': ('--ffmpeg-log-level'                     ,) },
 }
 
 
 DEPRECIATED_CONFIGS = {
-    "SONG_ARCHIVE": {"default": "", "type": str, "arg": ("--song-archive",)},
-    "OVERRIDE_AUTO_WAIT": {
-        "default": "False",
-        "type": bool,
-        "arg": ("--override-auto-wait",),
-    },
-    "REDIRECT_URI": {
-        "default": "127.0.0.1:4381",
-        "type": str,
-        "arg": ("--redirect-uri",),
-    },
+    "SONG_ARCHIVE":               { 'default': '',                        'type': str,    'arg': ('--song-archive'                         ,) },
+    "OVERRIDE_AUTO_WAIT":         { 'default': 'False',                   'type': bool,   'arg': ('--override-auto-wait'                   ,) },
+    "REDIRECT_URI":               { 'default': '127.0.0.1:4381',          'type': str,    'arg': ('--redirect-uri'                         ,) },
 }
 
 
@@ -326,18 +120,18 @@ class Config:
     @classmethod
     def load(cls, args) -> None:
         system_paths = {
-            "win32": Path.home() / "AppData/Roaming/Zotify",
-            "linux": Path.home() / ".config/zotify",
-            "darwin": Path.home() / "Library/Application Support/Zotify",
+            'win32': Path.home() / 'AppData/Roaming/Zotify',
+            'linux': Path.home() / '.config/zotify',
+            'darwin': Path.home() / 'Library/Application Support/Zotify'
         }
         if sys.platform not in system_paths:
-            config_fp = Path.cwd() / ".zotify/config.json"
+            config_fp = Path.cwd() / '.zotify/config.json'
         else:
-            config_fp = system_paths[sys.platform] / "config.json"
+            config_fp = system_paths[sys.platform] / 'config.json'
         if args.config_location:
             config_fp = Path(args.config_location)
             if config_fp.is_dir():
-                config_fp = config_fp / "config.json"
+                config_fp = config_fp / 'config.json'
         full_config_path = Path(config_fp).expanduser()
 
         cls.Values = {}
@@ -347,61 +141,35 @@ class Config:
 
         # Load default values
         for key in CONFIG_VALUES:
-            cls.Values[key] = cls.parse_arg_value(key, CONFIG_VALUES[key]["default"])
+            cls.Values[key] = cls.parse_arg_value(key, CONFIG_VALUES[key]['default'])
 
         # Load config from config.json
         Path(PurePath(full_config_path).parent).mkdir(parents=True, exist_ok=True)
         if not Path(full_config_path).exists():
-            if not cls.Values[DEBUG]:
-                del cls.Values[DEBUG]
-            with open(full_config_path, "w", encoding="utf-8") as config_file:
+            if cls.Values[DEBUG] == False: del cls.Values[DEBUG]
+            with open(full_config_path, 'w', encoding='utf-8') as config_file:
                 json.dump(cls.get_default_json(), config_file, indent=4)
-            Printer.hashtaged(
-                PrintChannel.MANDATORY,
-                f"config.json saved to {full_config_path.resolve().parent}",
-            )
+            Printer.hashtaged(PrintChannel.MANDATORY, f"config.json saved to {full_config_path.resolve().parent}")
         else:
-            with open(full_config_path, encoding="utf-8") as config_file:
+            with open(full_config_path, encoding='utf-8') as config_file:
                 jsonvalues: dict[str, dict[str, Any]] = json.load(config_file)
             for key in jsonvalues:
                 if key == DEBUG and not cls.Values[DEBUG]:
-                    cls.Values[DEBUG] = str(jsonvalues[key]).lower() in [
-                        "yes",
-                        "true",
-                        "1",
-                    ]
+                    cls.Values[DEBUG] = str(jsonvalues[key]).lower() in ['yes', 'true', '1']
                 elif key in CONFIG_VALUES:
                     cls.Values[key] = cls.parse_arg_value(key, jsonvalues[key])
-                elif (
-                    key in DEPRECIATED_CONFIGS
-                ):  # keep, warn, and place at the bottom (don't delete)
-                    Printer.depreciated_warning(
-                        key,
-                        f'Delete the "{key}": "{jsonvalues[key]}" line from your config.json',
-                    )
-                    cls.Values["vvv___DEPRECIATED_BELOW_HERE___vvv"] = (
-                        "vvv___REMOVE_THESE___vvv"
-                    )
-                    cls.Values[key] = cls.parse_arg_value(
-                        key, jsonvalues[key], DEPRECIATED_CONFIGS
-                    )
+                elif key in DEPRECIATED_CONFIGS: # keep, warn, and place at the bottom (don't delete)
+                    Printer.depreciated_warning(key, f'Delete the "{key}": "{jsonvalues[key]}" line from your config.json')
+                    cls.Values["vvv___DEPRECIATED_BELOW_HERE___vvv"] = "vvv___REMOVE_THESE___vvv"
+                    cls.Values[key] = cls.parse_arg_value(key, jsonvalues[key], DEPRECIATED_CONFIGS)
 
         # Standardize config.json if debugging or refreshing
         if cls.debug() or args.update_config:
             if cls.debug() and not full_config_path.name.endswith("_DEBUG.json"):
-                full_config_path = full_config_path.parent / (
-                    full_config_path.stem + "_DEBUG.json"
-                )
-            with open(
-                full_config_path,
-                "w" if full_config_path.exists() else "x",
-                encoding="utf-8",
-            ) as debug_file:
+                full_config_path = full_config_path.parent / (full_config_path.stem + "_DEBUG.json")
+            with open(full_config_path, 'w' if full_config_path.exists() else 'x', encoding='utf-8') as debug_file:
                 json.dump(cls.parse_config_jsonstr(), debug_file, indent=4)
-            Printer.hashtaged(
-                PrintChannel.MANDATORY,
-                f"{full_config_path.name} saved to {full_config_path.resolve().parent}",
-            )
+            Printer.hashtaged(PrintChannel.MANDATORY, f"{full_config_path.name} saved to {full_config_path.resolve().parent}")
 
         # Override config from commandline arguments
         for key in CONFIG_VALUES:
@@ -411,14 +179,8 @@ class Config:
         # Confirm regex patterns
         if cls.get_regex_enabled():
             for mode in ["Track", "Episode", "Album"]:
-                regex_method: Callable[[None], None | re.Pattern] = getattr(
-                    cls, f"get_regex_{mode.lower()}"
-                )
-                if regex_method():
-                    Printer.hashtaged(
-                        PrintChannel.MANDATORY,
-                        f'{mode} Regex Filter:  r"{regex_method().pattern}"',
-                    )
+                regex_method: Callable[[None], None | re.Pattern] = getattr(cls, f"get_regex_{mode.lower()}")
+                if regex_method(): Printer.hashtaged(PrintChannel.MANDATORY, f'{mode} Regex Filter:  r"{regex_method().pattern}"')
 
         # Check no-splash
         if args.no_splash:
@@ -430,30 +192,29 @@ class Config:
         # if DEBUG in cls.Values and cls.Values[DEBUG]:
         #     r[DEBUG] = True
         for key in CONFIG_VALUES:
-            r[key] = CONFIG_VALUES[key]["default"]
+            r[key] = CONFIG_VALUES[key]['default']
         return r
 
     @classmethod
     def parse_config_jsonstr(cls, key_subset: tuple | dict | None = None) -> dict:
         d = {}
-        if key_subset is None:
-            key_subset = cls.Values
+        if key_subset is None: key_subset = cls.Values
         for key in key_subset:
             d[key] = str(cls.Values[key])
         return d
 
     @classmethod
-    def parse_arg_value(cls, key: str, value: Any, dict_source=CONFIG_VALUES) -> Any:
-        if isinstance(value, dict_source[key]["type"]):
+    def parse_arg_value(cls, key: str, value: Any, dict_source = CONFIG_VALUES) -> Any:
+        if isinstance(value, dict_source[key]['type']):
             return value
-        if dict_source[key]["type"] is str:
+        if dict_source[key]['type'] == str:
             return str(value)
-        if dict_source[key]["type"] is int:
+        if dict_source[key]['type'] == int:
             return int(value)
-        if dict_source[key]["type"] is bool:
-            if str(value).lower() in ["yes", "true", "1"]:
+        if dict_source[key]['type'] == bool:
+            if str(value).lower() in ['yes', 'true', '1']:
                 return True
-            if str(value).lower() in ["no", "false", "0"]:
+            if str(value).lower() in ['no', 'false', '0']:
                 return False
             raise ValueError("Not a boolean: " + value)
         raise ValueError("Unknown Type: " + value)
@@ -468,8 +229,8 @@ class Config:
 
     @classmethod
     def get_root_path(cls) -> PurePath:
-        if cls.get(ROOT_PATH) == "":
-            root_path = PurePath(Path.home() / "Music/Zotify Music/")
+        if cls.get(ROOT_PATH) == '':
+            root_path = PurePath(Path.home() / 'Music/Zotify Music/')
         else:
             root_path = PurePath(Path(cls.get(ROOT_PATH)).expanduser())
         Path(root_path).mkdir(parents=True, exist_ok=True)
@@ -477,14 +238,12 @@ class Config:
 
     @classmethod
     def get_root_podcast_path(cls) -> PurePath:
-        if cls.get(ROOT_PODCAST_PATH) == "":
-            root_podcast_path = PurePath(Path.home() / "Music/Zotify Podcasts/")
+        if cls.get(ROOT_PODCAST_PATH) == '':
+            root_podcast_path = PurePath(Path.home() / 'Music/Zotify Podcasts/')
         else:
-            root_podcast_path: str = cls.get(ROOT_PODCAST_PATH)
+            root_podcast_path:str = cls.get(ROOT_PODCAST_PATH)
             if root_podcast_path[0] == ".":
-                root_podcast_path = cls.get_root_path() / PurePath(
-                    root_podcast_path
-                ).relative_to(".")
+                root_podcast_path = cls.get_root_path() / PurePath(root_podcast_path).relative_to(".")
             root_podcast_path = PurePath(Path(root_podcast_path).expanduser())
         Path(root_podcast_path).mkdir(parents=True, exist_ok=True)
         return root_podcast_path
@@ -535,25 +294,21 @@ class Config:
 
     @classmethod
     def get_song_archive_location(cls) -> PurePath:
-        if cls.get(SONG_ARCHIVE_LOCATION) == "":
+        if cls.get(SONG_ARCHIVE_LOCATION) == '':
             system_paths = {
-                "win32": Path.home() / "AppData/Roaming/Zotify",
-                "linux": Path.home() / ".local/share/zotify",
-                "darwin": Path.home() / "Library/Application Support/Zotify",
+                'win32': Path.home() / 'AppData/Roaming/Zotify',
+                'linux': Path.home() / '.local/share/zotify',
+                'darwin': Path.home() / 'Library/Application Support/Zotify'
             }
             if sys.platform not in system_paths:
-                song_archive = PurePath(Path.cwd() / ".zotify/.song_archive")
+                song_archive =  PurePath(Path.cwd() / '.zotify/.song_archive')
             else:
-                song_archive = PurePath(system_paths[sys.platform] / ".song_archive")
+                song_archive = PurePath(system_paths[sys.platform] / '.song_archive')
         else:
             song_archive_path: str = cls.get(SONG_ARCHIVE_LOCATION)
             if song_archive_path[0] == ".":
-                song_archive_path = cls.get_root_path() / PurePath(
-                    song_archive_path
-                ).relative_to(".")
-            song_archive = PurePath(
-                Path(song_archive_path).expanduser() / ".song_archive"
-            )
+                song_archive_path = cls.get_root_path() / PurePath(song_archive_path).relative_to(".")
+            song_archive = PurePath(Path(song_archive_path).expanduser() / ".song_archive")
         Path(song_archive.parent).mkdir(parents=True, exist_ok=True)
         return song_archive
 
@@ -563,37 +318,31 @@ class Config:
 
     @classmethod
     def get_credentials_location(cls) -> PurePath:
-        if cls.get(CREDENTIALS_LOCATION) == "":
+        if cls.get(CREDENTIALS_LOCATION) == '':
             system_paths = {
-                "win32": Path.home() / "AppData/Roaming/Zotify",
-                "linux": Path.home() / ".local/share/zotify",
-                "darwin": Path.home() / "Library/Application Support/Zotify",
+                'win32': Path.home() / 'AppData/Roaming/Zotify',
+                'linux': Path.home() / '.local/share/zotify',
+                'darwin': Path.home() / 'Library/Application Support/Zotify'
             }
             if sys.platform not in system_paths:
-                credentials = PurePath(Path.cwd() / ".zotify/credentials.json")
+                credentials = PurePath(Path.cwd() / '.zotify/credentials.json')
             else:
-                credentials = PurePath(system_paths[sys.platform] / "credentials.json")
+                credentials = PurePath(system_paths[sys.platform] / 'credentials.json')
         else:
             credentials_path: str = cls.get(CREDENTIALS_LOCATION)
             if credentials_path[0] == ".":
-                credentials_path = cls.get_root_path() / PurePath(
-                    credentials_path
-                ).relative_to(".")
-            credentials = PurePath(
-                Path(credentials_path).expanduser() / "credentials.json"
-            )
+                credentials_path = cls.get_root_path() / PurePath(credentials_path).relative_to(".")
+            credentials = PurePath(Path(credentials_path).expanduser() / 'credentials.json')
         Path(credentials.parent).mkdir(parents=True, exist_ok=True)
         return credentials
 
     @classmethod
     def get_temp_download_dir(cls) -> str | PurePath:
-        if cls.get(TEMP_DOWNLOAD_DIR) == "":
-            return ""
+        if cls.get(TEMP_DOWNLOAD_DIR) == '':
+            return ''
         temp_download_path: str = cls.get(TEMP_DOWNLOAD_DIR)
         if temp_download_path[0] == ".":
-            temp_download_path = cls.get_root_path() / PurePath(
-                temp_download_path
-            ).relative_to(".")
+            temp_download_path = cls.get_root_path() / PurePath(temp_download_path).relative_to(".")
         return PurePath(Path(temp_download_path).expanduser())
 
     @classmethod
@@ -624,21 +373,21 @@ class Config:
             # User must include {disc_number} in OUTPUT if they want split album discs
             return v
 
-        if mode == "playlist":
+        if mode == 'playlist':
             v = cls.get(OUTPUT_PLAYLIST)
-        elif mode == "extplaylist":
+        elif mode == 'extplaylist':
             v = cls.get(OUTPUT_PLAYLIST_EXT)
-        elif mode == "liked":
+        elif mode == 'liked':
             v = cls.get(OUTPUT_LIKED_SONGS)
-        elif mode == "single":
+        elif mode == 'single':
             v = cls.get(OUTPUT_SINGLE)
-        elif mode == "album":
+        elif mode == 'album':
             v = cls.get(OUTPUT_ALBUM)
         else:
             raise ValueError()
 
         if cls.get_split_album_discs() and mode == "album":
-            return str(PurePath(v).parent / "Disc {disc_number}" / PurePath(v).name)
+            return str(PurePath(v).parent / 'Disc {disc_number}' / PurePath(v).name)
         return v
 
     @classmethod
@@ -655,15 +404,13 @@ class Config:
 
     @classmethod
     def get_lyrics_location(cls) -> PurePath | None:
-        if cls.get(LYRICS_LOCATION) == "":
+        if cls.get(LYRICS_LOCATION) == '':
             # Use OUTPUT path as default location
             return None
         else:
             lyrics_path = cls.get(LYRICS_LOCATION)
             if lyrics_path[0] == ".":
-                lyrics_path = cls.get_root_path() / PurePath(lyrics_path).relative_to(
-                    "."
-                )
+                lyrics_path = cls.get_root_path() / PurePath(lyrics_path).relative_to(".")
             lyrics_path = PurePath(Path(lyrics_path).expanduser())
 
         return lyrics_path
@@ -671,16 +418,7 @@ class Config:
     @classmethod
     def get_ffmpeg_log_level(cls) -> str:
         level = cls.get(FFMPEG_LOG_LEVEL)
-        if level not in {
-            "trace",
-            "verbose",
-            "info",
-            "warning",
-            "error",
-            "fatal",
-            "panic",
-            "quiet",
-        }:
+        if level not in {"trace", "verbose", "info", "warning", "error", "fatal", "panic", "quiet"}:
             raise ValueError()
         return level
 
@@ -706,13 +444,9 @@ class Config:
 
     @classmethod
     def get_show_any_progress(cls) -> bool:
-        return (
-            cls.get(PRINT_DOWNLOAD_PROGRESS)
-            or cls.get(PRINT_URL_PROGRESS)
-            or cls.get(PRINT_ALBUM_PROGRESS)
-            or cls.get(PRINT_ARTIST_PROGRESS)
-            or cls.get(PRINT_PLAYLIST_PROGRESS)
-        )
+        return cls.get(PRINT_DOWNLOAD_PROGRESS) or cls.get(PRINT_URL_PROGRESS) \
+           or cls.get(PRINT_ALBUM_PROGRESS) or cls.get(PRINT_ARTIST_PROGRESS) \
+        or cls.get(PRINT_PLAYLIST_PROGRESS)
 
     @classmethod
     def get_export_m3u8(cls) -> bool:
@@ -740,7 +474,7 @@ class Config:
 
     @classmethod
     def get_m3u8_location(cls) -> PurePath | None:
-        if cls.get(M3U8_LOCATION) == "":
+        if cls.get(M3U8_LOCATION) == '':
             # Use OUTPUT path as default location
             return None
         else:

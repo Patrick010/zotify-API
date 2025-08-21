@@ -8,7 +8,6 @@ from .base import BaseLogHandler
 
 log = logging.getLogger(__name__)
 
-
 class DatabaseJobHandler(BaseLogHandler):
     """
     A log handler that writes job status updates to the database.
