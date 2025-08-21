@@ -7,10 +7,7 @@ import yaml
 from pydantic import ValidationError
 
 from zotify_api.core.logging_framework.schemas import LoggingFrameworkConfig
-from zotify_api.core.logging_framework.service import (
-    LoggingService,
-    get_logging_service,
-)
+from zotify_api.core.logging_framework.service import LoggingService, get_logging_service
 
 # A valid YAML configuration for testing
 VALID_CONFIG_YAML = """

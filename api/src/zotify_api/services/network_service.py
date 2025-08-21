@@ -22,7 +22,6 @@ class NetworkService:
 
 
 def get_network_service():
-    # This is a placeholder for a real implementation that would get the network
-    # config from a persistent storage.
+    # This is a placeholder for a real implementation that would get the network config from a persistent storage.
     network_config = {"proxy_enabled": False, "http_proxy": None, "https_proxy": None}
     return NetworkService(network_config)

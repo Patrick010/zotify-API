@@ -8,9 +8,7 @@ from zotify_api.schemas.webhooks import FirePayload, Webhook, WebhookPayload
 from zotify_api.services.auth import require_admin_api_key
 
 router = APIRouter(
-    prefix="/webhooks",
-    tags=["webhooks"],
-    dependencies=[Depends(require_admin_api_key)],
+    prefix="/webhooks", tags=["webhooks"], dependencies=[Depends(require_admin_api_key)]
 )
 
 

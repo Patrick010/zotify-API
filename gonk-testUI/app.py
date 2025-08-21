@@ -1,7 +1,7 @@
 import os
 import subprocess
 import argparse
-from flask import Flask, jsonify, request, send_from_directory, render_template
+from flask import Flask, jsonify, send_from_directory, render_template
 
 app = Flask(__name__, static_folder='static')
 sqlite_web_process = None

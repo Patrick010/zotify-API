@@ -88,7 +88,7 @@ func loginHandler(apiCallbackURL string) http.HandlerFunc {
 			writeGenericError(w, "callback.handoff.failure", map[string]interface{}{"reason": "get_request_error", "error": err.Error()})
 			return
 		}
-		defer func() { _ = resp.Body.Close() }()
+		defer resp.Body.Close()
 
 		respBody, err := io.ReadAll(resp.Body)
 		if err != nil {
@@ -105,13 +105,13 @@ func loginHandler(apiCallbackURL string) http.HandlerFunc {
 				logger.Printf("event: callback.handoff.failure, details: {status_code: %d, response: %s}", resp.StatusCode, string(respBody))
 			}
 			w.WriteHeader(resp.StatusCode)
-			_, _ = fmt.Fprintln(w, "Authentication failed on the backend server.")
+			fmt.Fprintln(w, "Authentication failed on the backend server.")
 			return
 		}
 
 		logger.Printf("event: callback.handoff.success, details: {status_code: %d}", resp.StatusCode)
 		w.WriteHeader(resp.StatusCode)
-		_, _ = w.Write(respBody)
+		w.Write(respBody)
 	}
 }
 

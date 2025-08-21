@@ -77,7 +77,6 @@ def mock_provider(monkeypatch):
     yield fake_provider
     del app.dependency_overrides[get_provider]
 
-
 SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"
 
 engine = create_engine(

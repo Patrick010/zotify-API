@@ -39,8 +39,7 @@ class SpotiClient:
             if e.response.status_code == 401:
                 logger.warning("Spotify access token is invalid or expired.")
             logger.error(
-                f"Spotify API request failed: {e.response.status_code} - "
-                f"{e.response.text}"
+                f"Spotify API request failed: {e.response.status_code} - {e.response.text}"
             )
             raise HTTPException(
                 status_code=e.response.status_code, detail=e.response.text
@@ -123,8 +122,7 @@ class SpotiClient:
 
     async def get_all_current_user_playlists(self) -> List[Dict[str, Any]]:
         """
-        Gets a list of all playlists owned or followed by the current user,
-        handling pagination.
+        Gets a list of all playlists owned or followed by the current user, handling pagination.
         """
         all_playlists = []
         url = "/me/playlists"
@@ -204,8 +202,7 @@ class SpotiClient:
 
     async def unfollow_playlist(self, playlist_id: str) -> None:
         """
-        Unfollows a playlist for the current user. (Spotify's way of
-        "deleting" a playlist from a user's library)
+        Unfollows a playlist for the current user. (Spotify's way of "deleting" a playlist from a user's library)
         """
         await self._request("DELETE", f"/playlists/{playlist_id}/followers")
 

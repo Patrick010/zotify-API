@@ -10,13 +10,7 @@ from urllib.parse import quote_plus
 import httpx
 from sqlalchemy.orm import Session
 
-from zotify_api.auth_state import (
-    CLIENT_ID,
-    REDIRECT_URI,
-    SPOTIFY_AUTH_URL,
-    SPOTIFY_TOKEN_URL,
-    pending_states,
-)
+from zotify_api.auth_state import CLIENT_ID, REDIRECT_URI, SPOTIFY_AUTH_URL, SPOTIFY_TOKEN_URL, pending_states
 from zotify_api.core.logging_framework import log_event
 from zotify_api.database import crud
 from zotify_api.services.spoti_client import SpotiClient
@@ -109,10 +103,7 @@ class SpotifyConnector(BaseProvider):
             """
 
         if not code:
-            return (
-                "<html><body><h2>Error</h2>"
-                "<p>Missing authorization code.</p></body></html>"
-            )
+            return "<html><body><h2>Error</h2><p>Missing authorization code.</p></body></html>"
 
         code_verifier = pending_states.pop(state, None)
         if not code_verifier:
@@ -184,10 +175,7 @@ class SpotifyConnector(BaseProvider):
             """
         except Exception as e:
             logger.error(f"An unexpected error occurred during Spotify callback: {e}")
-            return (
-                "<html><body><h2>Error</h2>"
-                "<p>An unexpected error occurred.</p></body></html>"
-            )
+            return "<html><body><h2>Error</h2><p>An unexpected error occurred.</p></body></html>"
 
     async def search(
         self, q: str, type: str, limit: int, offset: int

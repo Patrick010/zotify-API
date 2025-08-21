@@ -8,7 +8,7 @@ from zotify_api.services.auth import require_admin_api_key
 router = APIRouter(prefix="/sync", tags=["sync"])
 
 
-def get_sync_runner() -> Callable[[], None]:
+def get_sync_runner() -> Callable:
     return sync_service.run_sync_job
 
 

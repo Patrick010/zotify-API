@@ -1,10 +1,9 @@
 import os
-import secrets
-import string
 import sys
 import time
+import secrets
+import string
 import webbrowser
-
 import requests
 
 API_BASE_URL = os.getenv("API_BASE_URL", "http://127.0.0.1:8000")
@@ -69,9 +68,7 @@ def main():
     state = generate_state()
     auth_url = build_auth_url(SPOTIFY_CLIENT_ID, REDIRECT_URI, state)
 
-    print(
-        "\n[STEP] Open this URL in your Windows browser to start Spotify auth flow:\n"
-    )
+    print("\n[STEP] Open this URL in your Windows browser to start Spotify auth flow:\n")
     print(auth_url + "\n")
 
     print("[STEP] Then manually run 'snitch_debug.exe' on your Windows machine.")

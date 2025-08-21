@@ -103,32 +103,7 @@ curl -X POST http://localhost:8000/api/downloads \
   -d '{"track_ids": ["spotify:track:4cOdK2wGLETOMsV3oDPEhB"]}'
 ```
 
-## 5. Code Quality and Linting
-
-To ensure a high standard of code quality, the project uses a suite of static analysis and formatting tools. The configuration for these tools is centralized in the `pyproject.toml` file at the root of the repository.
-
-### 5.1. Running the Linters
-
--   **Ruff (Linter):**
-    To check for linting errors, run the following command from the repository root:
-    ```bash
-    ruff check .
-    ```
-
--   **Black (Formatter):**
-    To automatically format the code, run the following command from the repository root:
-    ```bash
-    black api/
-    ```
-
--   **Mypy (Type Checker):**
-    To perform static type checking, run the following command from the `api/` directory:
-    ```bash
-    cd api
-    mypy .
-    ```
-
-## 6. Key Documentation
+## 5. Key Documentation
 
 For more detailed information, please consult the following documents:
 -   **[Project Registry](./../../project/PROJECT_REGISTRY.md):** The master list of all project documents.

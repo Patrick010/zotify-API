@@ -35,10 +35,7 @@ async def get_spoti_client(db: Session = Depends(get_db)) -> SpotiClient:
         if not token.refresh_token:
             raise HTTPException(
                 status_code=401,
-                detail=(
-                    "Spotify token is expired and no refresh token is available. "
-                    "Please login again."
-                ),
+                detail="Spotify token is expired and no refresh token is available. Please login again.",
             )
 
         new_token_data = await SpotiClient.refresh_access_token(token.refresh_token)
@@ -46,10 +43,8 @@ async def get_spoti_client(db: Session = Depends(get_db)) -> SpotiClient:
         token_data_to_save = {
             "access_token": new_token_data["access_token"],
             "refresh_token": new_token_data.get("refresh_token", token.refresh_token),
-            "expires_at": (
-                datetime.now(timezone.utc)
-                + timedelta(seconds=new_token_data["expires_in"] - 60)
-            ),
+            "expires_at": datetime.now(timezone.utc)
+            + timedelta(seconds=new_token_data["expires_in"] - 60),
         }
         token = crud.create_or_update_spotify_token(db, token_data_to_save)
 

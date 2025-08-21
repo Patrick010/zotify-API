@@ -36,9 +36,7 @@ from .core.error_handler import (
 from .core.logging_framework import log_event
 from .core.logging_framework.filters import SensitiveDataFilter
 from .core.logging_framework.schemas import LoggingFrameworkConfig
-from .core.logging_framework.service import (
-    get_logging_service as get_flexible_logging_service,
-)
+from .core.logging_framework.service import get_logging_service as get_flexible_logging_service
 from .globals import app_start_time
 from .middleware.request_id import RequestIDMiddleware
 

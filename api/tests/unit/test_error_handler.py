@@ -1,9 +1,7 @@
 import logging
-from unittest.mock import patch
 
 import pytest
 
-import zotify_api.core.error_handler
 from zotify_api.core.error_handler import (
     ErrorHandler,
     ErrorHandlerConfig,
@@ -23,15 +21,14 @@ class MockLogger(logging.Logger):
     def error(self, msg, *args, **kwargs):
         self.messages.append(msg)
         # Create a mock log record. The 'exc_info' key might be in kwargs.
-        record = self.makeRecord(
-            self.name, logging.ERROR, "(unknown file)", 0, msg, args, **kwargs
-        )
+        record = self.makeRecord(self.name, logging.ERROR, "(unknown file)", 0, msg, args, **kwargs)
         self.records.append(record)
-
 
 @pytest.fixture
 def mock_logger():
     return MockLogger("test")
+
+import zotify_api.core.error_handler
 
 
 @pytest.fixture(autouse=True)
@@ -42,6 +39,9 @@ def reset_singleton():
     zotify_api.core.error_handler._error_handler_instance = None
 
 
+from unittest.mock import patch
+
+
 def test_error_handler_initialization():
     """Tests that the ErrorHandler can be initialized."""
     config = ErrorHandlerConfig()
@@ -49,7 +49,6 @@ def test_error_handler_initialization():
         handler = ErrorHandler(config, mock_log)
         assert handler is not None
         mock_log.info.assert_called_with("Generic Error Handler initialized.")
-
 
 def test_singleton_pattern(mock_logger):
     """Tests that the singleton pattern works correctly."""
@@ -60,25 +59,20 @@ def test_singleton_pattern(mock_logger):
 
     assert handler1 is handler2
 
-
 def test_get_handler_before_initialization():
     """Tests that getting the handler before initialization fails."""
     # The autouse reset_singleton fixture ensures the instance is None here.
     with pytest.raises(RuntimeError, match="ErrorHandler has not been initialized"):
         get_error_handler()
 
-
 def test_double_initialization_fails(mock_logger):
     """Tests that initializing the singleton twice fails."""
     config = ErrorHandlerConfig()
-    initialize_error_handler(config, mock_logger)  # first time
+    initialize_error_handler(config, mock_logger) # first time
     with pytest.raises(RuntimeError, match="ErrorHandler has already been initialized"):
-        initialize_error_handler(config, mock_logger)  # second time
+        initialize_error_handler(config, mock_logger) # second time
 
-
-@pytest.mark.parametrize(
-    "verbosity, expect_details", [("production", False), ("debug", True)]
-)
+@pytest.mark.parametrize("verbosity, expect_details", [("production", False), ("debug", True)])
 def test_json_formatter(verbosity, expect_details):
     """Tests the JsonFormatter in both production and debug modes."""
     formatter = JsonFormatter(verbosity=verbosity)
@@ -99,10 +93,7 @@ def test_json_formatter(verbosity, expect_details):
     else:
         assert "details" not in result["error"]
 
-
-@pytest.mark.parametrize(
-    "verbosity, expect_details", [("production", False), ("debug", True)]
-)
+@pytest.mark.parametrize("verbosity, expect_details", [("production", False), ("debug", True)])
 def test_plain_text_formatter(verbosity, expect_details):
     """Tests the PlainTextFormatter in both production and debug modes."""
     formatter = PlainTextFormatter(verbosity=verbosity)
@@ -121,7 +112,6 @@ def test_plain_text_formatter(verbosity, expect_details):
         assert "-- Exception:" not in result
         assert "-- Traceback:" not in result
 
-
 def test_handler_logs_exception(mock_logger):
     """Tests that the handle_exception method logs the error."""
     config = ErrorHandlerConfig()
@@ -134,8 +124,5 @@ def test_handler_logs_exception(mock_logger):
 
     assert len(mock_logger.records) == 1
     assert mock_logger.records[0].levelname == "ERROR"
-    assert (
-        "An unhandled synchronous exception occurred"
-        in mock_logger.records[0].getMessage()
-    )
+    assert "An unhandled synchronous exception occurred" in mock_logger.records[0].getMessage()
     assert mock_logger.records[0].exc_info is not None

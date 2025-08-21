@@ -2,14 +2,13 @@ import json
 import sys
 from pathlib import Path
 
-from api.src.zotify_api.main import app
-
 # Add project root to path
 project_root = Path(__file__).parent
 api_src_path = project_root / "api" / "src"
 sys.path.insert(0, str(api_src_path))
 sys.path.insert(0, str(project_root))
 
+from api.src.zotify_api.main import app
 
 def generate_openapi_spec():
     with open("openapi.json", "w") as f:

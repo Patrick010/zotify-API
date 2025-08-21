@@ -56,8 +56,7 @@ class PlaylistsService:
             with self.db_engine.connect() as conn:
                 if search:
                     stmt = text(
-                        "SELECT id, name FROM playlists "
-                        "WHERE name LIKE :q LIMIT :limit OFFSET :offset"
+                        "SELECT id, name FROM playlists WHERE name LIKE :q LIMIT :limit OFFSET :offset"
                     )
                     params = {"q": f"%{search}%", "limit": limit, "offset": offset}
                 else:
@@ -68,8 +67,7 @@ class PlaylistsService:
                 result = conn.execute(stmt, params)
                 rows = result.mappings().all()
                 items = [dict(r) for r in rows]
-                # For now the DB doesn’t return a total — return len(items)
-                # (okay for pagination tests)
+                # For now the DB doesn’t return a total — return len(items) (okay for pagination tests)
                 return items, len(items)
         except Exception as exc:
             log.exception("Error fetching playlists")
@@ -79,8 +77,7 @@ class PlaylistsService:
             ) from exc
 
     def create_playlist(self, playlist_in: Dict) -> Dict:
-        # Minimal validation is performed in Pydantic at the route layer, but
-        # check here too.
+        # Minimal validation is performed in Pydantic at the route layer, but check here too.
         if not self.db_engine:
             # Not able to persist — raise so route can return 503 or fallback.
             raise PlaylistsServiceError("No DB engine available")
@@ -88,8 +85,7 @@ class PlaylistsService:
             with self.db_engine.connect() as conn:
                 stmt = text("INSERT INTO playlists (name) VALUES (:name)")
                 conn.execute(stmt, {"name": playlist_in["name"]})
-                # In a real DB the insert should return an id. For now, return
-                # the payload (tests will mock DB).
+                # In a real DB the insert should return an id. For now, return the payload (tests will mock DB).
                 return {"id": None, "name": playlist_in["name"]}
         except Exception as exc:
             log.exception("Error creating playlist")

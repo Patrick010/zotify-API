@@ -35,8 +35,8 @@ def require_admin_api_key(
 
 async def refresh_spotify_token(db: Session = Depends(get_db)) -> int:
     """
-    Refreshes the access token using the stored refresh token and saves the new
-    token to the database. Returns the new expiration timestamp.
+    Refreshes the access token using the stored refresh token and saves the new token to the database.
+    Returns the new expiration timestamp.
     """
     token = crud.get_spotify_token(db)
     if not token or not token.refresh_token:
@@ -49,10 +49,8 @@ async def refresh_spotify_token(db: Session = Depends(get_db)) -> int:
     token_data_to_save = {
         "access_token": new_token_data["access_token"],
         "refresh_token": new_token_data.get("refresh_token", token.refresh_token),
-        "expires_at": (
-            datetime.now(timezone.utc)
-            + timedelta(seconds=new_token_data["expires_in"] - 60)
-        ),
+        "expires_at": datetime.now(timezone.utc)
+        + timedelta(seconds=new_token_data["expires_in"] - 60),
     }
     updated_token = crud.create_or_update_spotify_token(db, token_data_to_save)
     return int(updated_token.expires_at.timestamp())
@@ -60,8 +58,7 @@ async def refresh_spotify_token(db: Session = Depends(get_db)) -> int:
 
 async def get_auth_status(db: Session = Depends(get_db)) -> AuthStatus:
     """
-    Checks the current authentication status with Spotify by using the token
-    from the database.
+    Checks the current authentication status with Spotify by using the token from the database.
     """
     token = crud.get_spotify_token(db)
     if not token or not token.access_token:
@@ -96,8 +93,7 @@ async def handle_spotify_callback(
     code: str, state: str, db: Session = Depends(get_db)
 ) -> None:
     """
-    Handles the OAuth callback, exchanges the code for tokens, and saves them
-    to the database.
+    Handles the OAuth callback, exchanges the code for tokens, and saves them to the database.
     """
     code_verifier = pending_states.pop(state, None)
     if not code_verifier:
@@ -109,9 +105,8 @@ async def handle_spotify_callback(
     token_data_to_save = {
         "access_token": tokens["access_token"],
         "refresh_token": tokens.get("refresh_token"),
-        "expires_at": (
-            datetime.now(timezone.utc) + timedelta(seconds=tokens["expires_in"] - 60)
-        ),
+        "expires_at": datetime.now(timezone.utc)
+        + timedelta(seconds=tokens["expires_in"] - 60),
     }
     crud.create_or_update_spotify_token(db, token_data_to_save)
     log.info("Successfully exchanged code for token and stored them.")

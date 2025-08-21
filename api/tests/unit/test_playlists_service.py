@@ -2,10 +2,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from zotify_api.services.playlists_service import (
-    PlaylistsService,
-    PlaylistsServiceError,
-)
+from zotify_api.services.playlists_service import PlaylistsService, PlaylistsServiceError
 
 
 @pytest.fixture

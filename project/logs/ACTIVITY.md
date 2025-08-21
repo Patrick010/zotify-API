@@ -2,37 +2,10 @@
 
 ---
 
-## ACT-049: Remediate Static Analysis Issues and Establish Clean Baseline
-
-**Date:** 2025-08-20
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Objective
-To resolve all outstanding static analysis and linting issues reported by the new tooling suite (`ruff`, `mypy`, `bandit`, `safety`, `golangci-lint`) and establish a "clean baseline" for the codebase, unblocking Phase 4a.
-
-### Outcome
-- **Tooling Configuration Fixed:** Resolved complex configuration issues with `ruff` and `mypy` by centralizing their configurations in a root `pyproject.toml` file. This stabilized the tools and fixed incorrect path reporting.
-- **Linting and Type Errors Remediated:**
-    - Fixed all 226 `ruff` linting errors by using the `black` formatter and then manually correcting the remaining issues.
-    - Fixed all `mypy` type errors after adjusting the configuration to be less strict, which unblocked the tool.
-- **Security and Dependency Scans Passed:**
-    - Mitigated the one medium-severity SQL injection issue reported by `bandit`.
-    - Confirmed the project has no vulnerable dependencies with `safety`.
-- **Go Microservice Linted:** Repaired the `.golangci.yml` configuration and fixed all reported issues in the `snitch` microservice.
-- **Conclusion:** All static analysis tools now pass. The codebase has a verified clean baseline, and Phase 4a is unblocked.
-
-### Related Documents
-- `pyproject.toml`
-- `snitch/.golangci.yml`
-- `api/docs/manuals/DEVELOPER_GUIDE.md`
-
----
-
 ## ACT-048: Establish Static Analysis Baseline
 
 **Date:** 2025-08-20
-**Status:** ✅ Done
+**Status:** ⏸️ Paused / Blocked
 **Assignee:** Jules
 
 ### Objective

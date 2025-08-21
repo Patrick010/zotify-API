@@ -14,8 +14,7 @@ def client():
 def test_health_endpoint(client):
     r = client.get("/health")
     assert r.status_code == 200
-    # Basic check for a field in response, adjust as per your API's actual
-    # health response
+    # Basic check for a field in response, adjust as per your API's actual health response
     json_resp = r.json()
     assert "status" in json_resp or "uptime" in json_resp
 

@@ -5,12 +5,7 @@ from typing import Any, Dict, List, Optional
 
 import httpx
 
-from .schemas import (
-    AnySinkConfig,
-    FileSinkConfig,
-    LoggingFrameworkConfig,
-    WebhookSinkConfig,
-)
+from .schemas import AnySinkConfig, FileSinkConfig, LoggingFrameworkConfig, WebhookSinkConfig
 
 # Global instance of the service
 _logging_service_instance = None

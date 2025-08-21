@@ -7,7 +7,7 @@ The dependencies are injected into the functions, which makes them easy to test.
 """
 
 
-def run_sync_job() -> None:
+def run_sync_job():
     """
     This function runs the sync job.
     In a real application, this function would perform the actual synchronization.

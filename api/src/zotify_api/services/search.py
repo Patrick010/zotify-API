@@ -1,16 +1,10 @@
-from typing import Any
 from sqlalchemy import text
 
 from zotify_api.providers.base import BaseProvider
 
 
 async def perform_search(
-    q: str,
-    type: str,
-    limit: int,
-    offset: int,
-    db_engine: Any,
-    provider: BaseProvider,
+    q: str, type: str, limit: int, offset: int, db_engine: any, provider: BaseProvider
 ):
     search_type = type
     if type == "all":

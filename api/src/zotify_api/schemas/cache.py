@@ -6,10 +6,7 @@ from pydantic import BaseModel, Field
 class CacheClearRequest(BaseModel):
     type: Optional[str] = Field(
         None,
-        description=(
-            "The type of cache to clear (e.g., 'search', 'metadata'). "
-            "If omitted, the entire cache is cleared."
-        ),
+        description="The type of cache to clear (e.g., 'search', 'metadata'). If omitted, the entire cache is cleared.",
     )
 
 
