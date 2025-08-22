@@ -1,5 +1,6 @@
 import subprocess  # nosec B404
 
+
 def main():
     print("Running ruff to find errors...")
     result = subprocess.run(  # nosec B603 B607
@@ -13,6 +14,7 @@ def main():
         print(result.stdout)
     else:
         print("No ruff errors found.")
+
 
 if __name__ == "__main__":
     main()

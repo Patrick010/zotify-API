@@ -1,5 +1,6 @@
 import json
 
+
 def generate_endpoints_md():
     with open("openapi.json", "r") as f:
         openapi_spec = json.load(f)
@@ -56,6 +57,7 @@ This file lists all public API endpoints for the Zotify API project, generated f
         f.write(markdown_content)
 
     print("project/ENDPOINTS.md generated successfully.")
+
 
 if __name__ == "__main__":
     generate_endpoints_md()

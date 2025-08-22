@@ -3,6 +3,7 @@ from typing import Any, Dict
 
 log = logging.getLogger(__name__)
 
+
 def run(exc: Exception, details: Dict[str, Any]):
     """Action to send a notification to a webhook."""
     url = details.get("url")

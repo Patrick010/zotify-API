@@ -10,14 +10,17 @@ from zotify_api.services.deps import get_provider
 
 router = APIRouter(prefix="/search", tags=["search"])
 
+
 def get_feature_flags():
     return {
         "fork_features": settings.enable_fork_features,
-        "search_advanced": settings.feature_search_advanced
+        "search_advanced": settings.feature_search_advanced,
     }
+
 
 def get_db_engine():
     return db_service.get_db_engine()
+
 
 @router.get("")
 async def search(
@@ -27,7 +30,7 @@ async def search(
     offset: int = 0,
     feature_flags: dict = Depends(get_feature_flags),
     db_engine: any = Depends(get_db_engine),
-    provider: BaseProvider = Depends(get_provider)
+    provider: BaseProvider = Depends(get_provider),
 ):
     if not feature_flags["fork_features"] or not feature_flags["search_advanced"]:
         raise HTTPException(status_code=404, detail="Advanced search disabled")

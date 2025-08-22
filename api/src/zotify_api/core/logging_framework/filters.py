@@ -6,6 +6,7 @@ class SensitiveDataFilter(logging.Filter):
     """
     A logging filter that redacts sensitive data from log records.
     """
+
     _PATTERNS = {
         "access_token": re.compile(r"\"access_token\":\s*\"[^\"]+\""),
         "refresh_token": re.compile(r"\"refresh_token\":\s*\"[^\"]+\""),

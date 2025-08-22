@@ -12,6 +12,7 @@ REDIRECT_URI = "http://127.0.0.1:4381/login"
 AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
 CALLBACK_POLL_URL = f"{API_BASE_URL}/login"  # Adjust if needed
 
+
 def check_api():
     try:
         r = requests.get(f"{API_BASE_URL}/health", timeout=5)
@@ -23,9 +24,11 @@ def check_api():
     print(f"[ERROR] Cannot reach API at {API_BASE_URL}")
     return False
 
+
 def generate_state(length=32):
     alphabet = string.ascii_letters + string.digits
-    return ''.join(secrets.choice(alphabet) for _ in range(length))
+    return "".join(secrets.choice(alphabet) for _ in range(length))
+
 
 def build_auth_url(client_id, redirect_uri, state, scope="user-read-email"):
     params = {
@@ -37,7 +40,9 @@ def build_auth_url(client_id, redirect_uri, state, scope="user-read-email"):
         "show_dialog": "true",
     }
     from urllib.parse import urlencode
+
     return f"{AUTH_ENDPOINT}?{urlencode(params)}"
+
 
 def poll_callback(state, timeout=180, interval=3):
     print(f"[WAITING] Polling for callback for up to {timeout} seconds...")
@@ -58,6 +63,7 @@ def poll_callback(state, timeout=180, interval=3):
     print("[ERROR] Timeout waiting for callback.")
     return False
 
+
 def main():
     if not SPOTIFY_CLIENT_ID:
         print("[ERROR] SPOTIFY_CLIENT_ID environment variable is not set.")
@@ -68,7 +74,9 @@ def main():
     state = generate_state()
     auth_url = build_auth_url(SPOTIFY_CLIENT_ID, REDIRECT_URI, state)
 
-    print("\n[STEP] Open this URL in your Windows browser to start Spotify auth flow:\n")
+    print(
+        "\n[STEP] Open this URL in your Windows browser to start Spotify auth flow:\n"
+    )
     print(auth_url + "\n")
 
     print("[STEP] Then manually run 'snitch_debug.exe' on your Windows machine.")
@@ -84,6 +92,7 @@ def main():
         print("[SUCCESS] Auth flow completed.")
     else:
         print("[FAILURE] Auth flow did not complete successfully.")
+
 
 if __name__ == "__main__":
     main()

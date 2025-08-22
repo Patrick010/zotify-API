@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional
+from typing import List, Optional
 
 from pydantic import BaseModel, Field
 
@@ -11,12 +11,14 @@ class CreateTrackModel(BaseModel):
     duration_seconds: Optional[int] = Field(None, gt=0)
     path: Optional[str] = None
 
+
 class UpdateTrackModel(BaseModel):
     name: Optional[str] = Field(None, min_length=1, max_length=200)
     artist: Optional[str] = Field(None, max_length=200)
     album: Optional[str] = Field(None, max_length=200)
     duration_seconds: Optional[int] = Field(None, gt=0)
     path: Optional[str] = None
+
 
 class TrackResponseModel(BaseModel):
     id: str
@@ -28,11 +30,10 @@ class TrackResponseModel(BaseModel):
     updated_at: datetime
     cover_url: Optional[str] = None
 
-from typing import List
-
 
 class TrackMetadataRequest(BaseModel):
     track_ids: List[str]
+
 
 class TrackMetadataResponse(BaseModel):
     metadata: List[dict]

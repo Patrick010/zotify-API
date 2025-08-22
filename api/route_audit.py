@@ -28,5 +28,6 @@ def summarize_routes(file_path):
     print(f"Routes with empty/null data: {empty}")
     print(f"Routes with valid data: {valid}")
 
+
 if __name__ == "__main__":
     summarize_routes("api_all_routes.json")

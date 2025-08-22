@@ -7,6 +7,7 @@ from zotify_api.services.db import get_db_engine
 
 client = TestClient(app)
 
+
 def test_list_playlists_no_db():
     app.dependency_overrides[get_db_engine] = lambda: None
     resp = client.get("/api/playlists")
@@ -15,6 +16,7 @@ def test_list_playlists_no_db():
     assert body["data"] == []
     assert body["meta"]["total"] == 0
     del app.dependency_overrides[get_db_engine]
+
 
 def test_list_playlists_with_db():
     mock_engine = MagicMock()
@@ -29,20 +31,25 @@ def test_list_playlists_with_db():
     assert resp.json()["data"][0]["name"] == "My List"
     del app.dependency_overrides[get_db_engine]
 
+
 def test_create_playlist_validation():
     resp = client.post("/api/playlists", json={"name": ""})
     assert resp.status_code == 422
+
 
 def test_create_playlist_db_failure():
     def broken_engine():
         class Broken:
             def connect(self):
                 raise Exception("boom")
+
         return Broken()
+
     app.dependency_overrides[get_db_engine] = lambda: broken_engine()
     resp = client.post("/api/playlists", json={"name": "abc"})
     assert resp.status_code == 503
     del app.dependency_overrides[get_db_engine]
+
 
 def test_create_playlist():
     mock_engine = MagicMock()

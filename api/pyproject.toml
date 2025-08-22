@@ -33,7 +33,6 @@ dependencies = [
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-v"
-pythonpath = "src"
 filterwarnings = [
     "ignore:Support for class-based `config` is deprecated:pydantic.PydanticDeprecatedSince20"
 ]

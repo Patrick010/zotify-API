@@ -1,9 +1,15 @@
+from typing import Any, Dict, List, Optional, Tuple
+
 import pytest
 from fastapi.testclient import TestClient
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 from zotify_api.config import Settings
+from zotify_api.database.session import Base
 from zotify_api.main import app
-from zotify_api.services.deps import get_settings
+from zotify_api.providers.base import BaseProvider
+from zotify_api.services.deps import get_provider, get_settings
 
 
 @pytest.fixture
@@ -13,6 +19,7 @@ def client():
     It has the authentication dependency overridden to use a static test API key.
     This fixture is function-scoped to ensure test isolation.
     """
+
     def get_settings_override():
         # Use app_env='testing' to match the pytest commandline argument
         return Settings(admin_api_key="test_key", app_env="testing")
@@ -27,24 +34,23 @@ def client():
     app.dependency_overrides.clear()
 
 
-from typing import Any, Dict, List, Optional, Tuple
-
-from zotify_api.providers.base import BaseProvider
-from zotify_api.services.deps import get_provider
-
-
 class FakeProvider(BaseProvider):
     """
     A mock provider for testing purposes.
     Implements the BaseProvider interface and returns mock data.
     """
-    async def search(self, q: str, type: str, limit: int, offset: int) -> Tuple[List[Dict[str, Any]], int]:
+
+    async def search(
+        self, q: str, type: str, limit: int, offset: int
+    ) -> Tuple[List[Dict[str, Any]], int]:
         return [{"id": "test_track"}], 1
 
     async def get_playlist(self, playlist_id: str) -> Dict[str, Any]:
         return {"id": playlist_id, "name": "Test Playlist"}
 
-    async def get_playlist_tracks(self, playlist_id: str, limit: int, offset: int) -> Dict[str, Any]:
+    async def get_playlist_tracks(
+        self, playlist_id: str, limit: int, offset: int
+    ) -> Dict[str, Any]:
         return {"items": [{"track": {"id": "test_track"}}]}
 
     async def sync_playlists(self) -> Dict[str, Any]:
@@ -53,7 +59,9 @@ class FakeProvider(BaseProvider):
     async def get_oauth_login_url(self, state: str) -> str:
         return f"http://fake.provider.com/login?state={state}"
 
-    async def handle_oauth_callback(self, code: Optional[str], error: Optional[str], state: str) -> str:
+    async def handle_oauth_callback(
+        self, code: Optional[str], error: Optional[str], state: str
+    ) -> str:
         if error:
             return f"<html><body>Error: {error}</body></html>"
         return "<html><body>Success</body></html>"
@@ -70,14 +78,12 @@ def mock_provider(monkeypatch):
     del app.dependency_overrides[get_provider]
 
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
-from zotify_api.database.session import Base
-
 SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
+)
+
 
 @pytest.fixture(scope="function")
 def test_db_session():
@@ -100,7 +106,9 @@ def test_db_session():
     Base.metadata.create_all(bind=connection)
 
     # Bind the session to this specific connection
-    TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=connection)
+    TestingSessionLocal = sessionmaker(
+        autocommit=False, autoflush=False, bind=connection
+    )
     db = TestingSessionLocal()
 
     try:

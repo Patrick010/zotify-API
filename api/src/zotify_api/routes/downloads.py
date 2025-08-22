@@ -12,8 +12,10 @@ from zotify_api.services.auth import require_admin_api_key
 
 router = APIRouter(prefix="/downloads", tags=["downloads"])
 
+
 class DownloadRequest(BaseModel):
     track_ids: List[str]
+
 
 @router.post("", response_model=StandardResponse[List[schemas.DownloadJob]])
 def download(
@@ -21,21 +23,21 @@ def download(
     db: Session = Depends(get_db),
     _admin: bool = Depends(require_admin_api_key),
 ):
-    """ Queue one or more tracks for download. """
+    """Queue one or more tracks for download."""
     jobs = download_service.add_downloads_to_queue(db=db, track_ids=payload.track_ids)
     return {"data": jobs}
 
 
 @router.get("/status", response_model=StandardResponse[schemas.DownloadQueueStatus])
 def get_download_queue_status(db: Session = Depends(get_db)):
-    """ Get the current status of the download queue. """
+    """Get the current status of the download queue."""
     status = download_service.get_queue_status(db=db)
     return {"data": status}
 
 
 @router.post("/retry", response_model=StandardResponse[schemas.DownloadQueueStatus])
 def retry_failed_downloads(db: Session = Depends(get_db)):
-    """ Retry all failed downloads in the queue. """
+    """Retry all failed downloads in the queue."""
     download_service.retry_failed_jobs(db=db)
     status = download_service.get_queue_status(db=db)
     return {"data": status}
@@ -46,6 +48,6 @@ def process_job(
     db: Session = Depends(get_db),
     _admin: bool = Depends(require_admin_api_key),
 ):
-    """ Manually process one job from the download queue. """
+    """Manually process one job from the download queue."""
     job = download_service.process_download_queue(db=db)
     return {"data": job}

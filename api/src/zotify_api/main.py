@@ -118,8 +118,19 @@ def startup_event():
 prefix = settings.api_prefix
 
 modules = [
-    auth, cache, system, user, playlists, tracks, downloads, sync, config,
-    network, search, webhooks, notifications
+    auth,
+    cache,
+    system,
+    user,
+    playlists,
+    tracks,
+    downloads,
+    sync,
+    config,
+    network,
+    search,
+    webhooks,
+    notifications,
 ]
 for m in modules:
     app.include_router(m.router, prefix=prefix)

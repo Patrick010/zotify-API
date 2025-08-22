@@ -7,7 +7,9 @@ from zotify_api.database import crud, models
 from zotify_api.schemas import download as schemas
 
 
-def add_downloads_to_queue(db: Session, track_ids: List[str]) -> List[models.DownloadJob]:
+def add_downloads_to_queue(
+    db: Session, track_ids: List[str]
+) -> List[models.DownloadJob]:
     """Creates new download jobs and adds them to the database queue."""
     new_jobs = []
     for track_id in track_ids:
@@ -15,6 +17,7 @@ def add_downloads_to_queue(db: Session, track_ids: List[str]) -> List[models.Dow
         job = crud.create_download_job(db=db, job=job_create)
         new_jobs.append(job)
     return new_jobs
+
 
 def get_queue_status(db: Session) -> schemas.DownloadQueueStatus:
     """Returns the current status of the download queue from the database."""
@@ -40,7 +43,10 @@ def get_queue_status(db: Session) -> schemas.DownloadQueueStatus:
         jobs=all_jobs,
     )
 
-def process_download_queue(db: Session, force_fail: bool = False) -> models.DownloadJob | None:
+
+def process_download_queue(
+    db: Session, force_fail: bool = False
+) -> models.DownloadJob | None:
     """
     Processes one job from the download queue.
     This method is designed to be called manually to simulate a background worker.
@@ -49,7 +55,9 @@ def process_download_queue(db: Session, force_fail: bool = False) -> models.Down
     if not job:
         return None
 
-    crud.update_download_job_status(db=db, job=job, status=schemas.DownloadJobStatus.IN_PROGRESS)
+    crud.update_download_job_status(
+        db=db, job=job, status=schemas.DownloadJobStatus.IN_PROGRESS
+    )
 
     try:
         # Simulate the download process
@@ -67,6 +75,7 @@ def process_download_queue(db: Session, force_fail: bool = False) -> models.Down
         )
 
     return job
+
 
 def retry_failed_jobs(db: Session) -> int:
     """Resets the status of all failed jobs to pending in the database."""

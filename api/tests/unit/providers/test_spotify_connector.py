@@ -9,8 +9,10 @@ from zotify_api.providers.spotify_connector import SpotifyConnector
 @pytest.mark.asyncio
 @patch("zotify_api.providers.spotify_connector.crud.create_or_update_spotify_token")
 @patch("httpx.AsyncClient")
-async def test_handle_oauth_callback_success(mock_AsyncClient, mock_crud_call, monkeypatch):
-    """ Tests the happy path for the OAuth callback handler """
+async def test_handle_oauth_callback_success(
+    mock_AsyncClient, mock_crud_call, monkeypatch
+):
+    """Tests the happy path for the OAuth callback handler"""
     mock_db = Session()
     connector = SpotifyConnector(db=mock_db)
 
@@ -22,7 +24,7 @@ async def test_handle_oauth_callback_success(mock_AsyncClient, mock_crud_call, m
     mock_post_response.json.return_value = {
         "access_token": "test_access_token",
         "refresh_token": "test_refresh_token",
-        "expires_in": 3600
+        "expires_in": 3600,
     }
     mock_post_response.raise_for_status.return_value = None
     mock_client_instance.post.return_value = mock_post_response
@@ -30,20 +32,29 @@ async def test_handle_oauth_callback_success(mock_AsyncClient, mock_crud_call, m
     # Make the AsyncClient return our configured instance when used as a context manager
     mock_AsyncClient.return_value.__aenter__.return_value = mock_client_instance
 
-    monkeypatch.setitem(__import__("zotify_api.auth_state").auth_state.pending_states, "test_state", "test_code_verifier")
+    monkeypatch.setitem(
+        __import__("zotify_api.auth_state").auth_state.pending_states,
+        "test_state",
+        "test_code_verifier",
+    )
 
-    html_response = await connector.handle_oauth_callback(code="test_code", error=None, state="test_state")
+    html_response = await connector.handle_oauth_callback(
+        code="test_code", error=None, state="test_state"
+    )
 
     mock_crud_call.assert_called_once()
     assert "Successfully authenticated" in html_response
 
+
 @pytest.mark.asyncio
 async def test_handle_oauth_callback_error():
-    """ Tests the failure path for the OAuth callback handler """
+    """Tests the failure path for the OAuth callback handler"""
     mock_db = Session()
     connector = SpotifyConnector(db=mock_db)
 
-    html_response = await connector.handle_oauth_callback(code=None, error="access_denied", state="test_state")
+    html_response = await connector.handle_oauth_callback(
+        code=None, error="access_denied", state="test_state"
+    )
 
     assert "Authentication Failed" in html_response
     assert "access_denied" in html_response
@@ -51,12 +62,15 @@ async def test_handle_oauth_callback_error():
 
 @pytest.mark.asyncio
 async def test_get_oauth_login_url(monkeypatch):
-    monkeypatch.setattr("zotify_api.providers.spotify_connector.CLIENT_ID", "test_client_id")
+    monkeypatch.setattr(
+        "zotify_api.providers.spotify_connector.CLIENT_ID", "test_client_id"
+    )
     connector = SpotifyConnector(db=Session())
     url = await connector.get_oauth_login_url("test_state")
     assert "test_client_id" in url
     assert "test_state" in url
     assert "code_challenge" in url
+
 
 @pytest.mark.asyncio
 async def test_search_success():
@@ -67,11 +81,13 @@ async def test_search_success():
     assert items == ["track1"]
     assert total == 1
 
+
 @pytest.mark.asyncio
 async def test_search_no_client():
     connector = SpotifyConnector(db=Session())
     with pytest.raises(Exception, match="SpotiClient not initialized."):
         await connector.search("test", "track", 1, 0)
+
 
 @pytest.mark.asyncio
 async def test_get_playlist_success():
@@ -81,11 +97,13 @@ async def test_get_playlist_success():
     playlist = await connector.get_playlist("playlist_id")
     assert playlist["name"] == "Test Playlist"
 
+
 @pytest.mark.asyncio
 async def test_get_playlist_no_client():
     connector = SpotifyConnector(db=Session())
     with pytest.raises(Exception, match="SpotiClient not initialized."):
         await connector.get_playlist("playlist_id")
+
 
 @pytest.mark.asyncio
 async def test_get_playlist_tracks_success():
@@ -95,18 +113,24 @@ async def test_get_playlist_tracks_success():
     tracks = await connector.get_playlist_tracks("playlist_id", 1, 0)
     assert tracks["items"] == ["track1"]
 
+
 @pytest.mark.asyncio
 async def test_get_playlist_tracks_no_client():
     connector = SpotifyConnector(db=Session())
     with pytest.raises(Exception, match="SpotiClient not initialized."):
         await connector.get_playlist_tracks("playlist_id", 1, 0)
 
+
 @pytest.mark.asyncio
 @patch("zotify_api.providers.spotify_connector.crud")
 async def test_sync_playlists_success(mock_crud):
     mock_client = AsyncMock()
     mock_client.get_all_current_user_playlists.return_value = [
-        {"id": "p1", "name": "Playlist 1", "tracks": {"items": [{"track": {"id": "t1"}}]}}
+        {
+            "id": "p1",
+            "name": "Playlist 1",
+            "tracks": {"items": [{"track": {"id": "t1"}}]},
+        }
     ]
     connector = SpotifyConnector(db=Session(), client=mock_client)
     result = await connector.sync_playlists()
@@ -114,6 +138,7 @@ async def test_sync_playlists_success(mock_crud):
     assert result["count"] == 1
     mock_crud.clear_all_playlists_and_tracks.assert_called_once()
     mock_crud.create_or_update_playlist.assert_called_once()
+
 
 @pytest.mark.asyncio
 async def test_sync_playlists_no_client():

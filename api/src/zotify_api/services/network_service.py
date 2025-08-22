@@ -4,6 +4,7 @@ Network service module.
 This module contains the business logic for the network subsystem.
 The functions in this module are designed to be called from the API layer.
 """
+
 from typing import Any, Dict
 
 
@@ -19,11 +20,9 @@ class NetworkService:
             self._network_config[k] = v
         return self._network_config
 
+
 def get_network_service():
-    # This is a placeholder for a real implementation that would get the network config from a persistent storage.
-    network_config = {
-        "proxy_enabled": False,
-        "http_proxy": None,
-        "https_proxy": None
-    }
+    # This is a placeholder for a real implementation that would get the network
+    # config from a persistent storage.
+    network_config = {"proxy_enabled": False, "http_proxy": None, "https_proxy": None}
     return NetworkService(network_config)

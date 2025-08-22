@@ -7,6 +7,7 @@ from fastapi import FastAPI
 app_module = "zotify_api.main"
 app_attr = "app"
 
+
 def main():
     module = importlib.import_module(app_module)
     app: FastAPI = getattr(module, app_attr)
@@ -15,6 +16,7 @@ def main():
     for route in app.routes:
         methods = ",".join(route.methods) if route.methods else "N/A"
         print(f"{methods:10} {route.path}")
+
 
 if __name__ == "__main__":
     main()

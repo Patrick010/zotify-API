@@ -3,7 +3,9 @@ from sqlalchemy import text
 from zotify_api.providers.base import BaseProvider
 
 
-async def perform_search(q: str, type: str, limit: int, offset: int, db_engine: any, provider: BaseProvider):
+async def perform_search(
+    q: str, type: str, limit: int, offset: int, db_engine: any, provider: BaseProvider
+):
     search_type = type
     if type == "all":
         search_type = "track,album,artist,playlist"
@@ -12,7 +14,9 @@ async def perform_search(q: str, type: str, limit: int, offset: int, db_engine: 
         return await provider.search(q, type=search_type, limit=limit, offset=offset)
     try:
         with db_engine.connect() as conn:
-            sql_query = "SELECT id, name, type, artist, album FROM tracks WHERE name LIKE :q"
+            sql_query = (
+                "SELECT id, name, type, artist, album " "FROM tracks WHERE name LIKE :q"
+            )
             params = {"q": f"%{q}%", "limit": limit, "offset": offset}
             if type != "all":
                 sql_query += " AND type = :type"

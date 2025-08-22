@@ -27,7 +27,6 @@ def analyze_route_status(app: FastAPI):
             # We'll assume these are not stubs for this analysis.
             source = ""
 
-
         # Heuristic: look for '501' or 'NotImplementedError' in source code to flag stubs
         if "501" in source or "NotImplementedError" in source:
             status = "Stub"
@@ -37,14 +36,17 @@ def analyze_route_status(app: FastAPI):
         else:
             status = "Functional"
 
-        route_status.append({
-            "path": path,
-            "methods": sorted(list(methods)),
-            "status": status,
-            "doc": doc.strip()
-        })
+        route_status.append(
+            {
+                "path": path,
+                "methods": sorted(list(methods)),
+                "status": status,
+                "doc": doc.strip(),
+            }
+        )
 
     return route_status
+
 
 if __name__ == "__main__":
     try:
@@ -58,4 +60,6 @@ if __name__ == "__main__":
 
     # This is not for the final report, just for me to parse
     for route in status_report:
-        print(f"{'|'.join(route['methods'])}|{route['path']}|{route['status']}|{route['doc']}")
+        print(
+            f"{'|'.join(route['methods'])}|{route['path']}|{route['status']}|{route['doc']}"
+        )

@@ -5,19 +5,22 @@ This module contains the business logic for the config subsystem.
 The functions in this module are designed to be called from the API layer.
 The dependencies are injected into the functions, which makes them easy to test.
 """
+
 import json
 from pathlib import Path
 from typing import Any, Dict
 
 CONFIG_PATH = Path(__file__).parent.parent / "storage" / "config.json"
 
+
 def get_default_config() -> Dict[str, Any]:
     """Returns the default configuration."""
     return {
         "library_path": "/music",
         "scan_on_startup": True,
-        "cover_art_embed_enabled": True
+        "cover_art_embed_enabled": True,
     }
+
 
 class ConfigService:
     def __init__(self, storage_path: Path = CONFIG_PATH):
@@ -39,6 +42,7 @@ class ConfigService:
 
     def update_config(self, update_data: Dict[str, Any]) -> Dict[str, Any]:
         from zotify_api.models.config_models import ConfigUpdate
+
         validated_update = ConfigUpdate(**update_data)
         for k, v in validated_update.model_dump(exclude_unset=True).items():
             self._config[k] = v
@@ -49,6 +53,7 @@ class ConfigService:
         self._config = get_default_config()
         self._save_config()
         return self._config
+
 
 def get_config_service():
     return ConfigService()

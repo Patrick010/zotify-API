@@ -8,6 +8,7 @@ from zotify_api.services import download_service
 # This test file will now use the fixtures defined in conftest.py,
 # which is the standard for this project.
 
+
 @pytest.fixture(autouse=True)
 def override_get_db(test_db_session):
     """
@@ -15,6 +16,7 @@ def override_get_db(test_db_session):
     provided by the `test_db_session` fixture from conftest.py.
     `autouse=True` ensures this runs for every test in this file.
     """
+
     def override_db():
         yield test_db_session
 
@@ -30,6 +32,7 @@ def override_get_db(test_db_session):
 
 # --- Tests ---
 
+
 def test_get_initial_queue_status(client):
     response = client.get("/api/downloads/status")
     assert response.status_code == 200
@@ -40,8 +43,13 @@ def test_get_initial_queue_status(client):
     assert data["failed"] == 0
     assert data["jobs"] == []
 
+
 def test_add_new_downloads(client):
-    response = client.post("/api/downloads", headers={"X-API-Key": "test_key"}, json={"track_ids": ["track1", "track2"]})
+    response = client.post(
+        "/api/downloads",
+        headers={"X-API-Key": "test_key"},
+        json={"track_ids": ["track1", "track2"]},
+    )
     assert response.status_code == 200
     jobs = response.json()["data"]
     assert len(jobs) == 2
@@ -55,8 +63,13 @@ def test_add_new_downloads(client):
     assert data["total_jobs"] == 2
     assert data["pending"] == 2
 
+
 def test_process_job_success(client):
-    client.post("/api/downloads", headers={"X-API-Key": "test_key"}, json={"track_ids": ["track_success"]})
+    client.post(
+        "/api/downloads",
+        headers={"X-API-Key": "test_key"},
+        json={"track_ids": ["track_success"]},
+    )
     response = client.post("/api/downloads/process", headers={"X-API-Key": "test_key"})
     assert response.status_code == 200
     job = response.json()["data"]
@@ -69,13 +82,20 @@ def test_process_job_success(client):
     assert data["total_jobs"] == 1
     assert data["completed"] == 1
 
+
 def test_process_job_failure(client, monkeypatch):
-    client.post("/api/downloads", headers={"X-API-Key": "test_key"}, json={"track_ids": ["track_fail"]})
+    client.post(
+        "/api/downloads",
+        headers={"X-API-Key": "test_key"},
+        json={"track_ids": ["track_fail"]},
+    )
 
     # Force a failure
     original_method = download_service.process_download_queue
+
     def mock_process_fail(*args, **kwargs):
         return original_method(*args, **kwargs, force_fail=True)
+
     monkeypatch.setattr(download_service, "process_download_queue", mock_process_fail)
 
     response = client.post("/api/downloads/process", headers={"X-API-Key": "test_key"})
@@ -90,12 +110,19 @@ def test_process_job_failure(client, monkeypatch):
     assert data["total_jobs"] == 1
     assert data["failed"] == 1
 
+
 def test_retry_failed_jobs(client, monkeypatch):
     # Add and fail a job
-    client.post("/api/downloads", headers={"X-API-Key": "test_key"}, json={"track_ids": ["track_to_retry"]})
+    client.post(
+        "/api/downloads",
+        headers={"X-API-Key": "test_key"},
+        json={"track_ids": ["track_to_retry"]},
+    )
     original_method = download_service.process_download_queue
+
     def mock_process_fail(*args, **kwargs):
         return original_method(*args, **kwargs, force_fail=True)
+
     monkeypatch.setattr(download_service, "process_download_queue", mock_process_fail)
     client.post("/api/downloads/process", headers={"X-API-Key": "test_key"})
 
@@ -112,6 +139,7 @@ def test_retry_failed_jobs(client, monkeypatch):
     assert data["failed"] == 0
     assert data["pending"] == 1
     assert data["jobs"][0]["status"] == "pending"
+
 
 def test_process_empty_queue(client):
     response = client.post("/api/downloads/process", headers={"X-API-Key": "test_key"})
