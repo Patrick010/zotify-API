@@ -100,7 +100,6 @@ This document serves as the master file, or single source of truth, for tracking
 ## 4. Audit & Alignment Documents
 | Document | Location | Description |
 |---|---|---|
-| **Audit README** | [`audit/README.md`](./audit/README.md) | An overview of the audit process and documentation. |
 | **First Audit** | [`audit/FIRST_AUDIT.md`](./audit/FIRST_AUDIT.md) | The initial audit report for the project. |
 | **HLD/LLD Alignment Plan** | [`audit/HLD_LLD_ALIGNMENT_PLAN.md`](./audit/HLD_LLD_ALIGNMENT_PLAN.md) | The phased plan for bringing design documents into alignment with the codebase. |
 | **Audit Log: Phase 1** | [`audit/AUDIT-phase-1.md`](./audit/AUDIT-phase-1.md) | Log of activities and findings from Phase 1 of the alignment plan. |
@@ -109,7 +108,6 @@ This document serves as the master file, or single source of truth, for tracking
 | **Audit Log: Phase 4** | [`audit/AUDIT-PHASE-4.md`](./audit/AUDIT-PHASE-4.md) | Log of activities and findings from Phase 4 of the alignment plan. |
 | **Audit Traceability Matrix** | [`audit/AUDIT_TRACEABILITY_MATRIX.md`](./audit/AUDIT_TRACEABILITY_MATRIX.md) | A matrix for tracking audit-related requirements and their implementation status. |
 | **Phase 4 Traceability Matrix** | [`audit/PHASE_4_TRACEABILITY_MATRIX.md`](./audit/PHASE_4_TRACEABILITY_MATRIX.md) | A traceability matrix specific to the Phase 4 audit. |
-| **Code Optimization Plan** | [`audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md`](./audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md) | A plan for code optimizations identified during Phase 4. |
 | **Audit Prompt** | [`audit/audit-prompt.md`](./audit/audit-prompt.md) | The prompt used for the audit process. |
 
 ---
