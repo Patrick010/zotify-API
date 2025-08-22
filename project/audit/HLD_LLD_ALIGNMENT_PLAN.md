@@ -1,62 +1,103 @@
-# Phased Execution Plan for Aligning HLD/LLD with Roadmap and Codebase
+# HLD/LLD Alignment Plan
 
-## Phase 1: Prepare & Analyze (1–2 days)
+**Status:** Live Document
 
-**Goal:** Get a clear picture of where the gaps and misalignments are.
+This document outlines the plan to align the High-Level Design (HLD) and Low-Level Design (LLD) with the current implementation of the Zotify project.
 
-- **Task 1.1:** ✅ Done - Create a simple comparison spreadsheet (traceability matrix) listing all key features/components from HLD/LLD versus the roadmap and codebase.
-  - Columns: Feature | Exists in Codebase? (Y/N) | Matches Design? (Y/N) | Notes on Deviations
-- **Task 1.2:** ✅ Done - Review the roadmap and execution plan to identify core functionalities currently implemented.
-- **Task 1.3:** ✅ Done - Collect input from devs and auditors about known design vs code mismatches.
+---
 
-## Phase 2: Document Deviations (2–3 days)
+## Phase 1: Initial Audit & Reality Check (Done)
 
-**Goal:** Record and explain every gap or deviation clearly for context.
+**Objective:** To establish a definitive baseline of the project's current state.
 **Status:** ✅ Done
 
-- **Task 2.1:** ✅ Done - For each mismatch in the spreadsheet, add a brief note explaining why it exists (e.g., intentional change, technical debt, scope creep).
-- **Task 2.2:** ✅ Done - Highlight which mismatches require fixing vs which are acceptable tradeoffs for now.
-- **Task 2.3:** ✅ Done - Store this annotated matrix as the “alignment blueprint” in `docs/projectplan/audit/AUDIT_TRACEABILITY_MATRIX.md`.
+**Activities:**
+- A comprehensive audit was performed, comparing the codebase against all available documentation.
+- The `AUDIT_TRACEABILITY_MATRIX.md` was created to serve as the single source of truth for tracking alignment.
 
-## Phase 3: Implementation & Alignment (Ongoing, sprint-based)
+---
 
-**Goal:** Gradually resolve gaps from the traceability matrix by implementing missing features and aligning documentation with the code reality. The end state for any task in this phase is that the corresponding matrix row shows `Exists? = Y` and `Matches Design? = Y`.
+## Phase 2: Documentation Overhaul (Done)
+
+**Objective:** To create a "single source of truth" by consolidating, archiving, and updating all project documentation.
 **Status:** ✅ Done
 
-### Core Principle: The Two-Way Street
-Alignment is a two-way street. Sometimes code must move to meet design, and sometimes design must move to meet code. The result must always be that the matrix, design, and code are in sync.
+**Activities:**
+- All project documents were reviewed. Obsolete files were archived.
+- Key documents like `HLD.md`, `LLD.md`, and `PID.md` were updated.
+- The `PROJECT_REGISTRY.md` was created to track all official project documents.
 
-### Alignment Workflow
-For each item selected from the `AUDIT_TRACEABILITY_MATRIX.md`:
+---
 
-1.  **If a design feature is missing in the code (`Exists? = N`):**
-    *   If the feature is still in the current project scope, **implement it**.
-    *   If the feature is no longer in scope, **update the design documents** to mark it as deferred or cut.
-2.  **If a code feature is missing in the design:**
-    *   **Update the HLD/LLD** to include and describe the feature. Note in the matrix whether it’s intentional, technical debt, or a scope creep that got absorbed.
-3.  **If code and design differ (mismatch):**
-    *   If the code is correct, **update the design** to reflect it.
-    *   If the code is wrong, **refactor the code** to match the design.
+## Phase 3: Implementation & Alignment (Done)
 
-### Repeatable Task Cycle
-- **Task 3.1:** Pick 1–2 core subsystems from the matrix with the biggest deviations.
-- **Task 3.2:** Apply the Alignment Workflow above to the selected subsystem(s).
-- **Task 3.3:** Link updated design sections and code changes back to relevant roadmap/execution plan steps.
-- **Task 3.4:** Submit these as separate PRs for incremental review and merge.
-- **Task 3.5:** Repeat this cycle for the next prioritized subsystems until full alignment is achieved.
+**Objective:** To implement missing features and align existing code with the design documents, based on the findings of the traceability matrix.
+**Status:** ✅ Done
 
-## Phase 4: Enforce & Automate (Post-alignment)
+**Activities:**
+- All features marked as `Exists? = N` in the `AUDIT_TRACEABILITY_MATRIX.md` were reviewed.
+- Features that were in scope were implemented.
+- Features that were out of scope were formally deferred and tracked in `FUTURE_ENHANCEMENTS.md`.
+- All related documentation was updated to reflect the final state.
 
-**Goal:** Prevent future drift and keep design docs up to date.
+---
 
-- **Task 4.1:** Add doc update steps to the Task Execution Checklist as mandatory for all code PRs.
-- **Task 4.2:** Implement a simple CI check (could be a checklist or script) to verify that related docs are updated before merge.
-- **Task 4.3:** Schedule quarterly or sprint-end reviews for design docs to catch and fix drifts early.
-- **Task 4.4:** Execute the detailed action plan for code optimization and quality assurance as defined in the [`CODE_OPTIMIZATIONPLAN_PHASE_4.md`](./CODE_OPTIMIZATIONPLAN_PHASE_4.md) document. This includes remediating technical debt and implementing the "Super-Lint" quality gates.
-  - **Note:** This is the primary plan for Phase 4. The relationship between these goals and the specific implementation tasks is defined in the [`PHASE_4_TRACEABILITY_MATRIX.md`](./PHASE_4_TRACEABILITY_MATRIX.md). Progress and detailed findings for this phase are logged in [`AUDIT-PHASE-4.md`](./AUDIT-PHASE-4.md).
+## Phase 4: Enforce & Automate (Ongoing)
+
+**Objective:** To introduce and enforce a suite of quality gates and automation to prevent future design drift and maintain a high-quality codebase.
+**Status:** 🏃 Ongoing
+
+### Phase 4a: Technical Debt Remediation
+**Objective:** Before implementing new quality gates, the existing codebase must be brought to a clean baseline by running and remediating findings from a suite of static analysis tools.
+**Status:** 🏃 Ongoing
+
+**Tasks:**
+- [x] **`ruff` Linter Remediation:**
+    - Run `ruff` linter and remediate all findings.
+    - *Note: This task is complete. All 395 linting errors were fixed, and the test suite was stabilized.*
+- [ ] **`mypy` Static Type Checking:**
+    - Resolve any blockers (e.g., conflicting module names).
+    - Run `mypy` and remediate all findings.
+- [ ] **`bandit` Security Scan:**
+    - Run `bandit` and remediate all critical/high-severity findings.
+- [ ] **`safety` Dependency Scan:**
+    - Run `safety` to check for insecure dependencies and remediate all findings.
+- [ ] **`golangci-lint` for `snitch`:**
+    - Run `golangci-lint` on the `snitch` microservice and remediate all findings.
+
+### Phase 4b: CI/CD Hardening
+**Objective:** To integrate the new quality gates into the CI/CD pipeline.
+**Status:** 📝 To Do
+
+**Tasks:**
+- [ ] Add a `lint` job to the CI workflow (`ruff`, `golangci-lint`).
+- [ ] Add a `type-check` job to the CI workflow (`mypy`).
+- [ ] Add a `security-scan` job to the CI workflow (`bandit`, `safety`).
+- [ ] Gate pull requests on the successful completion of all new jobs.
+
+### Phase 4c: Custom Architectural & Documentation Linting
+**Objective:** To automatically enforce the project's "living documentation" philosophy.
+**Status:** 📝 To Do
+
+**Tasks:**
+- [ ] Develop a custom linting script to verify documentation changes alongside code changes.
+
+### Phase 4d: Deep Code Review Process & Local Enforcement
+**Objective:** To formalize the human review process and provide immediate local feedback.
+**Status:** 📝 To Do
+
+**Tasks:**
+- [ ] Update `TASK_CHECKLIST.md` with a formal code review checklist.
+- [ ] Implement `pre-commit` hooks for local, instant feedback.
+
+---
 
 ## Phase 5: Ongoing Maintenance
 
-- **Task 5.1:** Use audit findings as triggers for spot updates in design docs.
-- **Task 5.2:** Keep the alignment matrix updated as a living artifact.
-- **Task 5.3:** Continue incremental updates as new features or refactors happen.
+**Objective:** To ensure the established quality gates and processes are maintained over the long term.
+**Status:** 📝 To Do
+
+**Tasks:**
+- [ ] Use audit findings as triggers for spot updates in design docs.
+- [ ] Keep the alignment matrix updated as a living artifact.
+- [ ] Continue incremental updates as new features or refactors happen.
