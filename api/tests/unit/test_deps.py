@@ -10,14 +10,14 @@ from zotify_api.providers.spotify_connector import SpotifyConnector
 from zotify_api.services import deps
 
 
-def test_get_settings():
+def test_get_settings() -> None:
     """Test that get_settings returns the global settings object."""
     assert deps.get_settings() is settings
 
 
 @pytest.mark.asyncio
 @patch("zotify_api.services.deps.crud")
-async def test_get_spoti_client_success(mock_crud):
+async def test_get_spoti_client_success(mock_crud: MagicMock) -> None:
     """Test successfully getting a SpotiClient with a valid token."""
     mock_token = SpotifyToken(
         access_token="valid_token",
@@ -32,7 +32,7 @@ async def test_get_spoti_client_success(mock_crud):
 
 @pytest.mark.asyncio
 @patch("zotify_api.services.deps.crud")
-async def test_get_spoti_client_no_token(mock_crud):
+async def test_get_spoti_client_no_token(mock_crud: MagicMock) -> None:
     """Test that get_spoti_client raises HTTPException if no token is found."""
     mock_crud.get_spotify_token.return_value = None
 
@@ -46,7 +46,9 @@ async def test_get_spoti_client_no_token(mock_crud):
     "zotify_api.services.deps.SpotiClient.refresh_access_token", new_callable=AsyncMock
 )
 @patch("zotify_api.services.deps.crud")
-async def test_get_spoti_client_refreshes_token(mock_crud, mock_refresh):
+async def test_get_spoti_client_refreshes_token(
+    mock_crud: MagicMock, mock_refresh: AsyncMock
+) -> None:
     """Test that get_spoti_client refreshes an expired token."""
     expired_token = SpotifyToken(
         access_token="expired_token",
@@ -73,7 +75,7 @@ async def test_get_spoti_client_refreshes_token(mock_crud, mock_refresh):
 
 @pytest.mark.asyncio
 @patch("zotify_api.services.deps.crud")
-async def test_get_spoti_client_expired_no_refresh(mock_crud):
+async def test_get_spoti_client_expired_no_refresh(mock_crud: MagicMock) -> None:
     """Test get_spoti_client fails if token is expired and has no refresh token."""
     expired_token = SpotifyToken(
         access_token="expired_token",
@@ -88,13 +90,13 @@ async def test_get_spoti_client_expired_no_refresh(mock_crud):
     assert "no refresh token" in exc.value.detail
 
 
-def test_get_provider_no_auth_success():
+def test_get_provider_no_auth_success() -> None:
     """Test getting a provider without auth succeeds for a valid provider."""
     provider = deps.get_provider_no_auth("spotify", db=MagicMock())
     assert isinstance(provider, SpotifyConnector)
 
 
-def test_get_provider_no_auth_not_found():
+def test_get_provider_no_auth_not_found() -> None:
     """Test getting a provider without auth fails for an invalid provider."""
     with pytest.raises(HTTPException) as exc:
         deps.get_provider_no_auth("tidal", db=MagicMock())
@@ -102,7 +104,7 @@ def test_get_provider_no_auth_not_found():
 
 
 @pytest.mark.asyncio
-async def test_get_provider():
+async def test_get_provider() -> None:
     """Test the authenticated get_provider dependency."""
     mock_client = MagicMock()
     mock_db = MagicMock()

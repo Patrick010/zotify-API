@@ -9,7 +9,8 @@ from fastapi.security.api_key import APIKeyHeader
 from pydantic import ValidationError
 
 from zotify_api.config import settings
-from zotify_api.database.session import Base, engine
+from zotify_api.database.models import Base
+from zotify_api.database.session import engine
 from zotify_api.routes import (
     auth,
     cache,

@@ -103,7 +103,44 @@ curl -X POST http://localhost:8000/api/downloads \
   -d '{"track_ids": ["spotify:track:4cOdK2wGLETOMsV3oDPEhB"]}'
 ```
 
-## 5. Key Documentation
+## 5. Code Quality & Verification
+
+Maintaining code quality is essential. All contributions must pass both static analysis checks and the full test suite.
+
+### 5.1. Static Analysis with `mypy`
+
+This project uses `mypy` to enforce strict static type checking. All code is fully type-hinted. Before submitting any code, you must run `mypy` and ensure there are no errors.
+
+**Command (from the project root):**
+```bash
+# Ensure you are in the virtual environment
+source .venv/bin/activate
+
+# Run mypy with the project's config file
+mypy --config-file api/mypy.ini api/src api/tests
+```
+Any `mypy` errors must be resolved before a pull request will be accepted.
+
+### 5.2. Running the Test Suite
+
+The test suite is built on `pytest`. It is critical to run the full suite to ensure your changes have not introduced any regressions.
+
+**Prerequisites:**
+- Ensure you are in the activated virtual environment.
+- Make sure the required directories exist, as the application will fail to start without them:
+  ```bash
+  mkdir -p api/storage api/logs
+  ```
+
+**Command (from the project root):**
+```bash
+# Run the tests with the correct environment setting
+APP_ENV=test pytest api/
+```
+
+**Important:** The tests are designed to run in a `test` environment, which is automatically configured when `pytest` runs. They use a temporary, in-memory SQLite database for most tests to ensure they do not interfere with your local development database, but some components may interact with the file system, hence the need for the directories above.
+
+## 6. Key Documentation
 
 For more detailed information, please consult the following documents:
 -   **[Project Registry](./../../project/PROJECT_REGISTRY.md):** The master list of all project documents.

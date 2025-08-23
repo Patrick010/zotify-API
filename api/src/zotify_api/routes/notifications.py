@@ -50,6 +50,6 @@ def mark_notification_as_read(
     notification_id: str,
     payload: NotificationUpdate,
     notifications_service: NotificationsService = Depends(get_notifications_service),
-) -> Dict[str, Any]:
+) -> None:
     notifications_service.mark_notification_as_read(notification_id, payload.read)
-    return {}
+    return

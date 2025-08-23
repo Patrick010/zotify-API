@@ -66,7 +66,7 @@ def test_search_db_flow(client: TestClient, mock_provider: MagicMock) -> None:
     mock_engine = MagicMock()
     mock_conn = MagicMock()
     mock_engine.connect.return_value.__enter__.return_value = mock_conn
-    mock_conn.execute.return_value.mappings.return_value.all.return_value = [
+    mock_conn.execute.return_value.mappings.return_value = [
         {
             "id": "local:track:1",
             "name": "test",

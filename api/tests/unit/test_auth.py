@@ -1,9 +1,11 @@
 from datetime import datetime, timedelta, timezone
-from unittest.mock import AsyncMock, patch
+from typing import Any
+from unittest.mock import AsyncMock, MagicMock, Mock, patch
 
 import pytest
 from fastapi import HTTPException
 from fastapi.testclient import TestClient
+from pytest import MonkeyPatch
 from sqlalchemy.orm import Session
 
 from zotify_api.config import settings
@@ -13,29 +15,36 @@ from zotify_api.services import deps
 from zotify_api.services.auth import require_admin_api_key
 
 
-def test_no_admin_key_config(monkeypatch):
+class MockToken:
+    def __init__(self, expires_at: datetime):
+        self.expires_at = expires_at
+        self.user_id = "test_user"
+        self.access_token = "mock_access_token"
+        self.refresh_token = "mock_refresh_token"
+
+
+def test_no_admin_key_config(monkeypatch: MonkeyPatch) -> None:
     monkeypatch.setattr(settings, "admin_api_key", None)
     with pytest.raises(HTTPException) as exc:
         require_admin_api_key(x_api_key=None, settings=settings)
     assert exc.value.status_code == 503
 
 
-def test_wrong_key(monkeypatch):
+def test_wrong_key(monkeypatch: MonkeyPatch) -> None:
     monkeypatch.setattr(settings, "admin_api_key", "test_key")
     with pytest.raises(HTTPException) as exc:
         require_admin_api_key(x_api_key="bad", settings=settings)
     assert exc.value.status_code == 401
 
 
-client = TestClient(app)
-
-
-def test_correct_key(monkeypatch):
+def test_correct_key(monkeypatch: MonkeyPatch) -> None:
     monkeypatch.setattr(settings, "admin_api_key", "test_key")
     assert require_admin_api_key(x_api_key="test_key", settings=settings) is True
 
 
-def test_provider_callback_route(monkeypatch):
+def test_provider_callback_route(
+    monkeypatch: MonkeyPatch, client: TestClient
+) -> None:
     """
     Tests that the generic provider callback route correctly invokes the
     provider's handle_oauth_callback method.
@@ -43,7 +52,7 @@ def test_provider_callback_route(monkeypatch):
     mock_provider = AsyncMock(spec=BaseProvider)
     mock_provider.handle_oauth_callback.return_value = "<html>Success</html>"
 
-    def mock_get_provider_no_auth(provider_name: str):
+    def mock_get_provider_no_auth(provider_name: str) -> AsyncMock:
         return mock_provider
 
     app.dependency_overrides[deps.get_provider_no_auth] = mock_get_provider_no_auth
@@ -65,20 +74,17 @@ def test_provider_callback_route(monkeypatch):
 @patch("zotify_api.services.auth.SpotiClient.get_current_user", new_callable=AsyncMock)
 @patch("zotify_api.services.auth.crud.get_spotify_token")
 def test_get_status_authenticated_and_token_not_expired(
-    mock_get_token, mock_get_user, monkeypatch
-):
+    mock_get_token: AsyncMock,
+    mock_get_user: AsyncMock,
+    monkeypatch: MonkeyPatch,
+    client: TestClient,
+) -> None:
     """
     Tests that /api/auth/status returns authenticated if a valid, non-expired
     token exists.
     """
     monkeypatch.setattr(settings, "admin_api_key", "test_key")
     mock_get_user.return_value = {"id": "test_user"}
-
-    class MockToken:
-        def __init__(self, expires_at):
-            self.expires_at = expires_at
-            self.user_id = "test_user"
-            self.access_token = "mock_access_token"
 
     mock_get_token.return_value = MockToken(
         expires_at=datetime.now(timezone.utc) + timedelta(hours=1)
@@ -93,17 +99,13 @@ def test_get_status_authenticated_and_token_not_expired(
 
 
 @patch("zotify_api.services.auth.crud.get_spotify_token")
-def test_get_status_token_expired(mock_get_token, monkeypatch):
+def test_get_status_token_expired(
+    mock_get_token: MagicMock, monkeypatch: MonkeyPatch, client: TestClient
+) -> None:
     """
     Tests that /api/auth/status returns not authenticated if the token is expired.
     """
     monkeypatch.setattr(settings, "admin_api_key", "test_key")
-
-    class MockToken:
-        def __init__(self, expires_at):
-            self.expires_at = expires_at
-            self.user_id = "test_user"
-            self.access_token = "mock_access_token"
 
     mock_get_token.return_value = MockToken(
         expires_at=datetime.now(timezone.utc) - timedelta(hours=1)
@@ -121,7 +123,9 @@ def test_get_status_token_expired(mock_get_token, monkeypatch):
 @patch(
     "zotify_api.services.auth.SpotiClient.refresh_access_token", new_callable=AsyncMock
 )
-async def test_refresh_spotify_token_success(mock_refresh, mock_crud):
+async def test_refresh_spotify_token_success(
+    mock_refresh: AsyncMock, mock_crud: Mock
+) -> None:
     from zotify_api.database.models import SpotifyToken
     from zotify_api.services.auth import refresh_spotify_token
 
@@ -141,7 +145,7 @@ async def test_refresh_spotify_token_success(mock_refresh, mock_crud):
 
 @pytest.mark.asyncio
 @patch("zotify_api.services.auth.crud")
-async def test_refresh_spotify_token_no_token(mock_crud):
+async def test_refresh_spotify_token_no_token(mock_crud: Mock) -> None:
     from zotify_api.services.auth import refresh_spotify_token
 
     mock_crud.get_spotify_token.return_value = None
@@ -152,7 +156,9 @@ async def test_refresh_spotify_token_no_token(mock_crud):
 
 
 @patch("zotify_api.services.auth.crud.get_spotify_token")
-def test_get_status_no_token(mock_get_token, monkeypatch):
+def test_get_status_no_token(
+    mock_get_token: Mock, monkeypatch: MonkeyPatch, client: TestClient
+) -> None:
     mock_get_token.return_value = None
     response = client.get("/api/auth/status", headers={"X-API-Key": "test_key"})
     assert response.status_code == 200
@@ -161,7 +167,12 @@ def test_get_status_no_token(mock_get_token, monkeypatch):
 
 @patch("zotify_api.services.auth.SpotiClient.get_current_user", new_callable=AsyncMock)
 @patch("zotify_api.services.auth.crud.get_spotify_token")
-def test_get_status_http_exception(mock_get_token, mock_get_user, monkeypatch):
+def test_get_status_http_exception(
+    mock_get_token: Mock,
+    mock_get_user: AsyncMock,
+    monkeypatch: MonkeyPatch,
+    client: TestClient,
+) -> None:
     from zotify_api.database.models import SpotifyToken
 
     mock_get_token.return_value = SpotifyToken(
@@ -180,7 +191,9 @@ def test_get_status_http_exception(mock_get_token, mock_get_user, monkeypatch):
     "zotify_api.services.auth.SpotiClient.exchange_code_for_token",
     new_callable=AsyncMock,
 )
-async def test_handle_spotify_callback(mock_exchange, mock_crud, monkeypatch):
+async def test_handle_spotify_callback(
+    mock_exchange: AsyncMock, mock_crud: Mock, monkeypatch: MonkeyPatch
+) -> None:
     from zotify_api.services.auth import handle_spotify_callback
 
     monkeypatch.setitem(
@@ -204,7 +217,9 @@ async def test_handle_spotify_callback(mock_exchange, mock_crud, monkeypatch):
     "zotify_api.services.auth.SpotiClient.exchange_code_for_token",
     new_callable=AsyncMock,
 )
-async def test_handle_spotify_callback_invalid_state(mock_exchange, monkeypatch):
+async def test_handle_spotify_callback_invalid_state(
+    mock_exchange: AsyncMock, monkeypatch: MonkeyPatch
+) -> None:
     from zotify_api.services.auth import handle_spotify_callback
 
     # Ensure state is not in pending_states

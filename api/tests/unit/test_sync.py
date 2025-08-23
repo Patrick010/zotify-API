@@ -1,6 +1,7 @@
 from unittest.mock import MagicMock
 
 from fastapi.testclient import TestClient
+from pytest import MonkeyPatch
 
 from zotify_api.main import app
 from zotify_api.routes import sync
@@ -8,17 +9,17 @@ from zotify_api.routes import sync
 client = TestClient(app)
 
 
-def test_trigger_sync_unauthorized(monkeypatch):
+def test_trigger_sync_unauthorized(monkeypatch: MonkeyPatch) -> None:
     monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
     response = client.post("/api/sync/trigger", headers={"X-API-Key": "wrong_key"})
     assert response.status_code == 401
 
 
-def test_trigger_sync(monkeypatch):
+def test_trigger_sync(monkeypatch: MonkeyPatch) -> None:
     monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
     mock_runner = MagicMock()
 
-    def get_sync_runner_override():
+    def get_sync_runner_override() -> MagicMock:
         return mock_runner
 
     app.dependency_overrides[sync.get_sync_runner] = get_sync_runner_override
@@ -32,11 +33,11 @@ def test_trigger_sync(monkeypatch):
     app.dependency_overrides = {}
 
 
-def test_trigger_sync_runner_fails(monkeypatch):
+def test_trigger_sync_runner_fails(monkeypatch: MonkeyPatch) -> None:
     monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
     mock_runner = MagicMock(side_effect=Exception("Sync failed"))
 
-    def get_sync_runner_override():
+    def get_sync_runner_override() -> MagicMock:
         return mock_runner
 
     app.dependency_overrides[sync.get_sync_runner] = get_sync_runner_override

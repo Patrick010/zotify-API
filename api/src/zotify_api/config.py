@@ -2,6 +2,8 @@ from pathlib import Path
 
 from pydantic_settings import BaseSettings
 
+API_ROOT = Path(__file__).parent.parent.parent
+
 
 class Settings(BaseSettings):
     version: str = "0.1.0"
@@ -12,7 +14,7 @@ class Settings(BaseSettings):
     feature_search_advanced: bool = False
     feature_sync_automation: bool = False
     api_prefix: str = "/api"
-    database_uri: str = "sqlite:///./storage/zotify.db"
+    database_uri: str = f"sqlite:///{API_ROOT / 'storage' / 'zotify.db'}"
     redis_uri: str | None = None
 
     # The complex __init__ method was removed.

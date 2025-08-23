@@ -1,7 +1,8 @@
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 import pytest
 from fastapi.testclient import TestClient
+from pytest import MonkeyPatch
 
 from zotify_api.main import app
 
@@ -9,12 +10,12 @@ client = TestClient(app)
 
 
 @pytest.fixture(autouse=True)
-def setup_webhooks(monkeypatch):
+def setup_webhooks(monkeypatch: MonkeyPatch) -> None:
     monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
     monkeypatch.setattr("zotify_api.services.webhooks.webhooks", {})
 
 
-def test_register_webhook_unauthorized(monkeypatch):
+def test_register_webhook_unauthorized(monkeypatch: MonkeyPatch) -> None:
     monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
     response = client.post(
         "/api/webhooks/register",
@@ -24,7 +25,7 @@ def test_register_webhook_unauthorized(monkeypatch):
     assert response.status_code == 401
 
 
-def test_register_webhook(monkeypatch):
+def test_register_webhook(monkeypatch: MonkeyPatch) -> None:
     response = client.post(
         "/api/webhooks/register",
         headers={"X-API-Key": "test_key"},
@@ -34,13 +35,13 @@ def test_register_webhook(monkeypatch):
     assert "id" in response.json()["data"]
 
 
-def test_list_webhooks():
+def test_list_webhooks() -> None:
     response = client.get("/api/webhooks", headers={"X-API-Key": "test_key"})
     assert response.status_code == 200
     assert isinstance(response.json()["data"], list)
 
 
-def test_unregister_webhook():
+def test_unregister_webhook() -> None:
     reg_response = client.post(
         "/api/webhooks/register",
         headers={"X-API-Key": "test_key"},
@@ -56,7 +57,7 @@ def test_unregister_webhook():
 
 
 @patch("zotify_api.services.webhooks.httpx.post")
-def test_fire_webhook(mock_post):
+def test_fire_webhook(mock_post: MagicMock) -> None:
     client.post(
         "/api/webhooks/register",
         headers={"X-API-Key": "test_key"},

@@ -21,7 +21,7 @@ class BaseSink:
 
     def __init__(self, config: AnySinkConfig):
         self.config = config
-        self.level = logging.getLevelName(config.level)
+        self.level = cast(int, logging.getLevelName(config.level))
 
     async def emit(self, log_record: Dict[str, Any]) -> None:
         """Abstract method to emit a log record."""

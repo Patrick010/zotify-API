@@ -1,4 +1,5 @@
 import logging
+from typing import Any, Dict, Generator, List
 from unittest.mock import patch
 
 import pytest
@@ -15,34 +16,35 @@ from zotify_api.core.error_handler.formatter import JsonFormatter, PlainTextForm
 
 # A mock logger to capture log messages
 class MockLogger(logging.Logger):
-    def __init__(self, name):
+    def __init__(self, name: str) -> None:
         super().__init__(name)
-        self.messages = []
-        self.records = []
+        self.messages: List[str] = []
+        self.records: List[logging.LogRecord] = []
 
-    def error(self, msg, *args, **kwargs):
+    def error(self, msg: Any, *args: Any, **kwargs: Any) -> None:
         self.messages.append(msg)
+        exc_info = kwargs.get("exc_info")
         # Create a mock log record. The 'exc_info' key might be in kwargs.
         record = self.makeRecord(
-            self.name, logging.ERROR, "(unknown file)", 0, msg, args, **kwargs
+            self.name, logging.ERROR, "(unknown file)", 0, msg, args, exc_info
         )
         self.records.append(record)
 
 
 @pytest.fixture
-def mock_logger():
+def mock_logger() -> MockLogger:
     return MockLogger("test")
 
 
 @pytest.fixture(autouse=True)
-def reset_singleton():
+def reset_singleton() -> Generator[None, None, None]:
     """Fixture to automatically reset the singleton before and after each test."""
     zotify_api.core.error_handler._error_handler_instance = None
     yield
     zotify_api.core.error_handler._error_handler_instance = None
 
 
-def test_error_handler_initialization():
+def test_error_handler_initialization() -> None:
     """Tests that the ErrorHandler can be initialized."""
     config = ErrorHandlerConfig()
     with patch("zotify_api.core.error_handler.log") as mock_log:
@@ -51,7 +53,7 @@ def test_error_handler_initialization():
         mock_log.info.assert_called_with("Generic Error Handler initialized.")
 
 
-def test_singleton_pattern(mock_logger):
+def test_singleton_pattern(mock_logger: MockLogger) -> None:
     """Tests that the singleton pattern works correctly."""
     config = ErrorHandlerConfig()
 
@@ -61,14 +63,14 @@ def test_singleton_pattern(mock_logger):
     assert handler1 is handler2
 
 
-def test_get_handler_before_initialization():
+def test_get_handler_before_initialization() -> None:
     """Tests that getting the handler before initialization fails."""
     # The autouse reset_singleton fixture ensures the instance is None here.
     with pytest.raises(RuntimeError, match="ErrorHandler has not been initialized"):
         get_error_handler()
 
 
-def test_double_initialization_fails(mock_logger):
+def test_double_initialization_fails(mock_logger: MockLogger) -> None:
     """Tests that initializing the singleton twice fails."""
     config = ErrorHandlerConfig()
     initialize_error_handler(config, mock_logger)  # first time
@@ -79,7 +81,7 @@ def test_double_initialization_fails(mock_logger):
 @pytest.mark.parametrize(
     "verbosity, expect_details", [("production", False), ("debug", True)]
 )
-def test_json_formatter(verbosity, expect_details):
+def test_json_formatter(verbosity: str, expect_details: bool) -> None:
     """Tests the JsonFormatter in both production and debug modes."""
     formatter = JsonFormatter(verbosity=verbosity)
     exc = ValueError("Test error")
@@ -103,7 +105,7 @@ def test_json_formatter(verbosity, expect_details):
 @pytest.mark.parametrize(
     "verbosity, expect_details", [("production", False), ("debug", True)]
 )
-def test_plain_text_formatter(verbosity, expect_details):
+def test_plain_text_formatter(verbosity: str, expect_details: bool) -> None:
     """Tests the PlainTextFormatter in both production and debug modes."""
     formatter = PlainTextFormatter(verbosity=verbosity)
     exc = KeyError("Test key error")
@@ -122,7 +124,7 @@ def test_plain_text_formatter(verbosity, expect_details):
         assert "-- Traceback:" not in result
 
 
-def test_handler_logs_exception(mock_logger):
+def test_handler_logs_exception(mock_logger: MockLogger) -> None:
     """Tests that the handle_exception method logs the error."""
     config = ErrorHandlerConfig()
     handler = ErrorHandler(config, mock_logger)

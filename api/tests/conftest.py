@@ -1,26 +1,27 @@
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, Generator, List, Optional, Tuple
 
 import pytest
 from fastapi.testclient import TestClient
+from pytest import MonkeyPatch
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import Session, sessionmaker
 
 from zotify_api.config import Settings
-from zotify_api.database.session import Base
+from zotify_api.database.models import Base
 from zotify_api.main import app
 from zotify_api.providers.base import BaseProvider
 from zotify_api.services.deps import get_provider, get_settings
 
 
 @pytest.fixture
-def client():
+def client() -> Generator[TestClient, None, None]:
     """
     A TestClient instance that can be used in all tests.
     It has the authentication dependency overridden to use a static test API key.
     This fixture is function-scoped to ensure test isolation.
     """
 
-    def get_settings_override():
+    def get_settings_override() -> Settings:
         # Use app_env='testing' to match the pytest commandline argument
         return Settings(admin_api_key="test_key", app_env="testing")
 
@@ -34,7 +35,7 @@ def client():
     app.dependency_overrides.clear()
 
 
-class FakeProvider(BaseProvider):
+class FakeProvider(BaseProvider):  # type: ignore[misc]
     """
     A mock provider for testing purposes.
     Implements the BaseProvider interface and returns mock data.
@@ -68,7 +69,9 @@ class FakeProvider(BaseProvider):
 
 
 @pytest.fixture
-def mock_provider(monkeypatch):
+def mock_provider(
+    monkeypatch: MonkeyPatch,
+) -> Generator[FakeProvider, None, None]:
     """
     Fixture to override the get_provider dependency with the FakeProvider.
     """
@@ -86,7 +89,7 @@ engine = create_engine(
 
 
 @pytest.fixture(scope="function")
-def test_db_session():
+def test_db_session() -> Generator[Session, None, None]:
     """
     Pytest fixture to set up a new in-memory SQLite database for each test function.
     It creates a single connection for the test's duration, creates all tables on

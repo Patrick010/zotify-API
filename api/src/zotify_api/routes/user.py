@@ -80,6 +80,6 @@ def get_user_history(
 @router.delete("/history", status_code=204)
 def delete_user_history(
     user_service: UserService = Depends(get_user_service),
-) -> Dict[str, Any]:
+) -> None:
     user_service.delete_user_history()
-    return {}
+    return

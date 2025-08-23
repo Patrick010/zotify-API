@@ -140,9 +140,9 @@ class SpotifyConnector(BaseProvider):
         try:
             async with httpx.AsyncClient() as client:
                 resp = await client.post(SPOTIFY_TOKEN_URL, data=data, headers=headers)
-                resp.raise_for_status()
+                await resp.raise_for_status()
 
-                tokens = resp.json()
+                tokens = await resp.json()
 
                 expires_at = datetime.now(timezone.utc) + timedelta(
                     seconds=tokens["expires_in"] - 60

@@ -1,6 +1,8 @@
+from typing import Any
 from unittest.mock import AsyncMock, patch
 
 import pytest
+from pytest import MonkeyPatch
 from sqlalchemy.orm import Session
 
 from zotify_api.providers.spotify_connector import SpotifyConnector
@@ -10,8 +12,8 @@ from zotify_api.providers.spotify_connector import SpotifyConnector
 @patch("zotify_api.providers.spotify_connector.crud.create_or_update_spotify_token")
 @patch("httpx.AsyncClient")
 async def test_handle_oauth_callback_success(
-    mock_AsyncClient, mock_crud_call, monkeypatch
-):
+    mock_AsyncClient: AsyncMock, mock_crud_call: AsyncMock, monkeypatch: MonkeyPatch
+) -> None:
     """Tests the happy path for the OAuth callback handler"""
     mock_db = Session()
     connector = SpotifyConnector(db=mock_db)
@@ -47,7 +49,7 @@ async def test_handle_oauth_callback_success(
 
 
 @pytest.mark.asyncio
-async def test_handle_oauth_callback_error():
+async def test_handle_oauth_callback_error() -> None:
     """Tests the failure path for the OAuth callback handler"""
     mock_db = Session()
     connector = SpotifyConnector(db=mock_db)
@@ -61,7 +63,7 @@ async def test_handle_oauth_callback_error():
 
 
 @pytest.mark.asyncio
-async def test_get_oauth_login_url(monkeypatch):
+async def test_get_oauth_login_url(monkeypatch: MonkeyPatch) -> None:
     monkeypatch.setattr(
         "zotify_api.providers.spotify_connector.CLIENT_ID", "test_client_id"
     )
@@ -73,7 +75,7 @@ async def test_get_oauth_login_url(monkeypatch):
 
 
 @pytest.mark.asyncio
-async def test_search_success():
+async def test_search_success() -> None:
     mock_client = AsyncMock()
     mock_client.search.return_value = {"tracks": {"items": ["track1"], "total": 1}}
     connector = SpotifyConnector(db=Session(), client=mock_client)
@@ -83,14 +85,14 @@ async def test_search_success():
 
 
 @pytest.mark.asyncio
-async def test_search_no_client():
+async def test_search_no_client() -> None:
     connector = SpotifyConnector(db=Session())
     with pytest.raises(Exception, match="SpotiClient not initialized."):
         await connector.search("test", "track", 1, 0)
 
 
 @pytest.mark.asyncio
-async def test_get_playlist_success():
+async def test_get_playlist_success() -> None:
     mock_client = AsyncMock()
     mock_client.get_playlist.return_value = {"name": "Test Playlist"}
     connector = SpotifyConnector(db=Session(), client=mock_client)
@@ -99,14 +101,14 @@ async def test_get_playlist_success():
 
 
 @pytest.mark.asyncio
-async def test_get_playlist_no_client():
+async def test_get_playlist_no_client() -> None:
     connector = SpotifyConnector(db=Session())
     with pytest.raises(Exception, match="SpotiClient not initialized."):
         await connector.get_playlist("playlist_id")
 
 
 @pytest.mark.asyncio
-async def test_get_playlist_tracks_success():
+async def test_get_playlist_tracks_success() -> None:
     mock_client = AsyncMock()
     mock_client.get_playlist_tracks.return_value = {"items": ["track1"]}
     connector = SpotifyConnector(db=Session(), client=mock_client)
@@ -115,7 +117,7 @@ async def test_get_playlist_tracks_success():
 
 
 @pytest.mark.asyncio
-async def test_get_playlist_tracks_no_client():
+async def test_get_playlist_tracks_no_client() -> None:
     connector = SpotifyConnector(db=Session())
     with pytest.raises(Exception, match="SpotiClient not initialized."):
         await connector.get_playlist_tracks("playlist_id", 1, 0)
@@ -123,7 +125,7 @@ async def test_get_playlist_tracks_no_client():
 
 @pytest.mark.asyncio
 @patch("zotify_api.providers.spotify_connector.crud")
-async def test_sync_playlists_success(mock_crud):
+async def test_sync_playlists_success(mock_crud: AsyncMock) -> None:
     mock_client = AsyncMock()
     mock_client.get_all_current_user_playlists.return_value = [
         {
@@ -141,7 +143,7 @@ async def test_sync_playlists_success(mock_crud):
 
 
 @pytest.mark.asyncio
-async def test_sync_playlists_no_client():
+async def test_sync_playlists_no_client() -> None:
     connector = SpotifyConnector(db=Session())
     with pytest.raises(Exception, match="SpotiClient not initialized."):
         await connector.sync_playlists()

@@ -53,7 +53,7 @@ async def get_status(db: Session = Depends(get_db)) -> AuthStatus:
 
 
 @router.post("/logout", status_code=204, dependencies=[Depends(require_admin_api_key)])
-def logout(db: Session = Depends(get_db)) -> Dict[str, Any]:
+def logout(db: Session = Depends(get_db)) -> None:
     """
     Clears stored provider credentials from the database.
     TODO: This is currently provider-specific and should be moved to the provider layer.
@@ -61,4 +61,4 @@ def logout(db: Session = Depends(get_db)) -> Dict[str, Any]:
     from zotify_api.database import crud
 
     crud.delete_spotify_token(db=db)
-    return {}
+    return

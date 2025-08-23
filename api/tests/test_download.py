@@ -1,10 +1,11 @@
-from typing import Generator
+from typing import Any, Generator, Optional
 
 import pytest
 from fastapi.testclient import TestClient
 from pytest import MonkeyPatch
 from sqlalchemy.orm import Session
 
+from zotify_api.database.models import DownloadJob
 from zotify_api.database.session import get_db
 from zotify_api.main import app
 from zotify_api.services import download_service
@@ -100,7 +101,7 @@ def test_process_job_failure(client: TestClient, monkeypatch: MonkeyPatch) -> No
     # Force a failure
     original_method = download_service.process_download_queue
 
-    def mock_process_fail(*args, **kwargs):
+    def mock_process_fail(*args: Any, **kwargs: Any) -> Optional[DownloadJob]:
         return original_method(*args, **kwargs, force_fail=True)
 
     monkeypatch.setattr(download_service, "process_download_queue", mock_process_fail)
@@ -127,7 +128,7 @@ def test_retry_failed_jobs(client: TestClient, monkeypatch: MonkeyPatch) -> None
     )
     original_method = download_service.process_download_queue
 
-    def mock_process_fail(*args, **kwargs):
+    def mock_process_fail(*args: Any, **kwargs: Any) -> Optional[DownloadJob]:
         return original_method(*args, **kwargs, force_fail=True)
 
     monkeypatch.setattr(download_service, "process_download_queue", mock_process_fail)

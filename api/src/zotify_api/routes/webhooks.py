@@ -25,9 +25,9 @@ def list_webhooks() -> Dict[str, Any]:
 
 
 @router.delete("/{hook_id}", status_code=204)
-def unregister_webhook(hook_id: str) -> Dict[str, Any]:
+def unregister_webhook(hook_id: str) -> None:
     webhooks_service.unregister_hook(hook_id)
-    return {}
+    return
 
 
 @router.post("/fire", status_code=202)

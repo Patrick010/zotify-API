@@ -30,6 +30,7 @@ This phase focused on refactoring the core architecture, resolving critical regr
 
 This next major phase of work will focus on making the Zotify API a truly extensible platform, allowing the community to build and share new functionality.
 
+-   **Archive Cleanup & Documentation Consolidation:** Clean up the `project/archive/` directory by reviewing old `.md` files, extracting anything still relevant, and discarding what is obsolete. The goal is to reduce noise while preserving useful material without corrupting the authoritative documentation.
 -   **Dynamic Plugin System:** Implement a dynamic plugin system based on the `entry_points` mechanism, allowing developers to create custom logging sinks.
     -   **Source:** [`DYNAMIC_PLUGIN_PROPOSAL.md`](./DYNAMIC_PLUGIN_PROPOSAL.md)
 -   **Refactor Providers as Plugins:** As a proof-of-concept, refactor the existing Spotify provider to be a standalone plugin, solidifying the new architectural pattern.

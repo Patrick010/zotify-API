@@ -1,3 +1,4 @@
+from typing import Any
 from unittest.mock import MagicMock
 
 from fastapi.testclient import TestClient
@@ -8,7 +9,7 @@ from zotify_api.services.db import get_db_engine
 client = TestClient(app)
 
 
-def test_list_playlists_no_db():
+def test_list_playlists_no_db() -> None:
     app.dependency_overrides[get_db_engine] = lambda: None
     resp = client.get("/api/playlists")
     assert resp.status_code == 200
@@ -18,7 +19,7 @@ def test_list_playlists_no_db():
     del app.dependency_overrides[get_db_engine]
 
 
-def test_list_playlists_with_db():
+def test_list_playlists_with_db() -> None:
     mock_engine = MagicMock()
     mock_conn = MagicMock()
     mock_engine.connect.return_value.__enter__.return_value = mock_conn
@@ -32,15 +33,15 @@ def test_list_playlists_with_db():
     del app.dependency_overrides[get_db_engine]
 
 
-def test_create_playlist_validation():
+def test_create_playlist_validation() -> None:
     resp = client.post("/api/playlists", json={"name": ""})
     assert resp.status_code == 422
 
 
-def test_create_playlist_db_failure():
-    def broken_engine():
+def test_create_playlist_db_failure() -> None:
+    def broken_engine() -> Any:
         class Broken:
-            def connect(self):
+            def connect(self) -> None:
                 raise Exception("boom")
 
         return Broken()
@@ -51,7 +52,7 @@ def test_create_playlist_db_failure():
     del app.dependency_overrides[get_db_engine]
 
 
-def test_create_playlist():
+def test_create_playlist() -> None:
     mock_engine = MagicMock()
     mock_conn = MagicMock()
     mock_engine.connect.return_value.__enter__.return_value = mock_conn
