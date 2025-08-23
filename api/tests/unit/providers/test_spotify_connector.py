@@ -1,5 +1,5 @@
 from typing import Any
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 from pytest import MonkeyPatch
@@ -28,7 +28,7 @@ async def test_handle_oauth_callback_success(
         "refresh_token": "test_refresh_token",
         "expires_in": 3600,
     }
-    mock_post_response.raise_for_status.return_value = None
+    mock_post_response.raise_for_status = MagicMock(return_value=None)
     mock_client_instance.post.return_value = mock_post_response
 
     # Make the AsyncClient return our configured instance when used as a context manager

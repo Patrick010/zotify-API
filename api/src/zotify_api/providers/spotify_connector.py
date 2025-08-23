@@ -140,7 +140,7 @@ class SpotifyConnector(BaseProvider):
         try:
             async with httpx.AsyncClient() as client:
                 resp = await client.post(SPOTIFY_TOKEN_URL, data=data, headers=headers)
-                await resp.raise_for_status()
+                resp.raise_for_status()
 
                 tokens = await resp.json()
 
