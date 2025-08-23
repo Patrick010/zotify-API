@@ -1,3 +1,22 @@
+## MYPY-001: Full `mypy` Strict Remediation for API Module
+
+**Date:** 2025-08-23
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To perform a full static analysis remediation for the Zotify `api` module, with the goal of achieving a clean run with a strict `mypy` configuration. This includes fixing all resulting type errors and any runtime bugs uncovered by the process.
+
+### Outcome
+- **Full Type Coverage:** Added type hints to all functions, methods, and variables across the `api/src` and `api/tests` directories.
+- **SQLAlchemy 2.0 Refactor:** Refactored all database models to use the modern SQLAlchemy 2.0 ORM syntax, fixing dozens of `mypy` plugin errors.
+- **Test Suite Stabilized:** Fixed numerous bugs in the test suite that were preventing a clean run, including database connection errors, test isolation issues, incorrect mocks, and `async/await` bugs. All 201 tests now pass.
+- **Production Bugs Fixed:** Corrected several bugs in the application code uncovered during testing, including incorrect endpoint signatures for `204 No Content` responses.
+- **Documentation Updated:** Updated the `DEVELOPER_GUIDE.md` with new sections on running `mypy` and the test suite.
+- **Verification:** The `api` module now passes a strict `mypy` check with zero errors.
+
+---
+
 ## LINT-003: Remediate All Linter Errors and Stabilize Test Suite
 
 **Date:** 2025-08-22
