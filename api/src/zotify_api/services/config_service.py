@@ -8,7 +8,7 @@ The dependencies are injected into the functions, which makes them easy to test.
 
 import json
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, cast
 
 CONFIG_PATH = Path(__file__).parent.parent / "storage" / "config.json"
 
@@ -31,10 +31,10 @@ class ConfigService:
         if self._storage_path.exists():
             content = self._storage_path.read_text()
             if content:
-                return json.loads(content)
+                return cast(Dict[str, Any], json.loads(content))
         return get_default_config()
 
-    def _save_config(self):
+    def _save_config(self) -> None:
         self._storage_path.write_text(json.dumps(self._config, indent=2))
 
     def get_config(self) -> Dict[str, Any]:
@@ -55,5 +55,5 @@ class ConfigService:
         return self._config
 
 
-def get_config_service():
+def get_config_service() -> "ConfigService":
     return ConfigService()

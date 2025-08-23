@@ -1,15 +1,18 @@
+from typing import Any, Generator
+
 import pytest
+from fastapi.testclient import TestClient
 
 from zotify_api.main import app
 from zotify_api.services import cache_service
 
 
 @pytest.fixture
-def cache_service_override():
+def cache_service_override() -> Generator[None, None, None]:
     """Fixture to override the cache service with a predictable state."""
     cache_state = {"search": 80, "metadata": 222}
 
-    def get_cache_service_override():
+    def get_cache_service_override() -> cache_service.CacheService:
         return cache_service.CacheService(cache_state)
 
     original_override = app.dependency_overrides.get(cache_service.get_cache_service)
@@ -22,18 +25,22 @@ def cache_service_override():
         app.dependency_overrides[cache_service.get_cache_service] = original_override
 
 
-def test_get_cache(client, cache_service_override):
+def test_get_cache(client: TestClient, cache_service_override: Any) -> None:
     response = client.get("/api/cache")
     assert response.status_code == 200
     assert "total_items" in response.json()["data"]
 
 
-def test_clear_cache_all_unauthorized(client, cache_service_override):
+def test_clear_cache_all_unauthorized(
+    client: TestClient, cache_service_override: Any
+) -> None:
     response = client.request("DELETE", "/api/cache", json={})
     assert response.status_code == 401
 
 
-def test_clear_cache_all(client, cache_service_override):
+def test_clear_cache_all(
+    client: TestClient, cache_service_override: Any
+) -> None:
     # Get initial state
     initial_response = client.get("/api/cache")
     initial_total = initial_response.json()["data"]["total_items"]
@@ -53,12 +60,16 @@ def test_clear_cache_all(client, cache_service_override):
     assert final_response.json()["data"]["total_items"] == 0
 
 
-def test_clear_cache_by_type_unauthorized(client, cache_service_override):
+def test_clear_cache_by_type_unauthorized(
+    client: TestClient, cache_service_override: Any
+) -> None:
     response = client.request("DELETE", "/api/cache", json={"type": "search"})
     assert response.status_code == 401
 
 
-def test_clear__by_type(client, cache_service_override):
+def test_clear__by_type(
+    client: TestClient, cache_service_override: Any
+) -> None:
     # Clear by type with correct API key
     response = client.request(
         "DELETE",

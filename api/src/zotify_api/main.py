@@ -1,6 +1,6 @@
 import logging as py_logging
 import time
-from typing import Optional
+from typing import Any, Dict, Optional, cast
 
 import yaml
 from fastapi import Depends, FastAPI, HTTPException, Request
@@ -71,7 +71,7 @@ app.add_middleware(
 app.add_middleware(RequestIDMiddleware)
 
 
-def initialize_logging_framework():
+def initialize_logging_framework() -> None:
     """Loads config and initializes the new flexible logging framework."""
     try:
         with open("logging_framework.yml", "r") as f:
@@ -103,7 +103,7 @@ def initialize_logging_framework():
 
 
 @app.on_event("startup")
-def startup_event():
+def startup_event() -> None:
     """Application startup event handler."""
     # Create database tables
     Base.metadata.create_all(bind=engine)
@@ -137,22 +137,22 @@ for m in modules:
 
 
 @app.get("/ping")
-async def ping():
+async def ping() -> Dict[str, bool]:
     return {"pong": True}
 
 
 @app.get("/health", tags=["health"])
-async def health_check():
+async def health_check() -> Dict[str, str]:
     return {"status": "ok", "message": "API is running"}
 
 
 @app.get("/openapi.json", include_in_schema=False)
-async def get_open_api_endpoint():
+async def get_open_api_endpoint() -> Dict[str, Any]:
     return app.openapi()
 
 
 @app.get("/version")
-async def version():
+async def version() -> Dict[str, Any]:
     return {
         "api": "v0.1.28",
         "cli_version": "v0.1.54",
@@ -162,16 +162,18 @@ async def version():
 
 
 @app.get("/api/schema", tags=["system"], dependencies=[Depends(require_admin_api_key)])
-def get_schema(request: Request, q: Optional[str] = None):
+def get_schema(request: Request, q: Optional[str] = None) -> Dict[str, Any]:
     """Returns OpenAPI spec or a specific schema fragment."""
-    openapi_schema = request.app.openapi()
+    openapi_schema = cast(Dict[str, Any], request.app.openapi())
     if q:
         if (
             "components" in openapi_schema
             and "schemas" in openapi_schema["components"]
             and q in openapi_schema["components"]["schemas"]
         ):
-            return openapi_schema["components"]["schemas"][q]
+            return cast(
+                Dict[str, Any], openapi_schema["components"]["schemas"][q]
+            )
         else:
             raise HTTPException(status_code=404, detail=f"Schema '{q}' not found.")
     return openapi_schema

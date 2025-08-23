@@ -1,7 +1,7 @@
 import importlib
 import logging
 import pkgutil
-from typing import Callable, Dict, List
+from typing import Any, Callable, Dict, List
 
 from . import actions
 from .config import TriggerConfig
@@ -17,13 +17,15 @@ class TriggerManager:
 
     def __init__(self, triggers: List[TriggerConfig]):
         self.triggers = triggers
-        self.action_map: Dict[str, Callable] = self._load_actions()
+        self.action_map: Dict[str, Callable[[Exception, Dict[str, Any]], None]] = (
+            self._load_actions()
+        )
         log.info(
             f"TriggerManager initialized with {len(triggers)} triggers "
             f"and {len(self.action_map)} actions."
         )
 
-    def _load_actions(self) -> Dict[str, Callable]:
+    def _load_actions(self) -> Dict[str, Callable[[Exception, Dict[str, Any]], None]]:
         """Dynamically loads all actions from the 'actions' sub-package."""
         action_map = {}
         action_pkg_path = actions.__path__
@@ -40,7 +42,7 @@ class TriggerManager:
                 log.exception(f"Failed to load action module: {name}")
         return action_map
 
-    def process_triggers(self, exc: Exception):
+    def process_triggers(self, exc: Exception) -> None:
         """
         Checks if the given exception matches any configured triggers and
         executes the associated actions.

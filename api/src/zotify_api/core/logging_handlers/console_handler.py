@@ -27,7 +27,7 @@ class ConsoleHandler(BaseLogHandler):
         message = log_record.get("message", "")
         return f"[{timestamp}] [{level}] {message}"
 
-    def emit(self, log_record: Dict[str, Any]):
+    def emit(self, log_record: Dict[str, Any]) -> None:
         """Prints the formatted log record to stdout."""
         formatted_message = self.format(log_record)
         print(formatted_message, file=sys.stdout)

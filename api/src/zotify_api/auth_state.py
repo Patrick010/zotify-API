@@ -1,5 +1,6 @@
 import logging
 import os
+from typing import Dict
 
 # This module holds the shared constants for the authentication process.
 # The state management (tokens, PKCE state) is now handled by the
@@ -21,4 +22,4 @@ SPOTIFY_API_BASE = "https://api.spotify.com/v1"
 # This is kept in memory as it's only needed for the duration of a single
 # OAuth2 login flow. A more robust solution for a multi-replica setup
 # might use a shared cache like Redis.
-pending_states = {}  # state -> code_verifier mapping
+pending_states: Dict[str, str] = {}  # state -> code_verifier mapping

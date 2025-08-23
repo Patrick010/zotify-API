@@ -1,13 +1,13 @@
-from typing import Annotated, List, Literal, Optional, Union
+from typing import Annotated, Any, Dict, List, Literal, Optional, Union
 
-from pydantic import BaseModel, Field, HttpUrl, constr, model_validator
+from pydantic import BaseModel, Field, HttpUrl, model_validator
 
 
 class BaseSinkConfig(BaseModel):
     """Base configuration for all sinks."""
 
     # The name must be a valid identifier (no spaces, etc.)
-    name: constr(pattern=r"^[a-zA-Z0-9_]+$")
+    name: Annotated[str, Field(pattern=r"^[a-zA-Z0-9_]+$")]
     level: str = "INFO"
 
     class Config:
@@ -55,10 +55,10 @@ class TriggerConfig(BaseModel):
     event: Optional[str] = None
     tag: Optional[str] = None
     action: str
-    details: dict = Field(default_factory=dict)
+    details: Dict[str, Any] = Field(default_factory=dict)
 
     @model_validator(mode="before")
-    def check_event_or_tag(cls, values):
+    def check_event_or_tag(cls: Any, values: Dict[str, Any]) -> Dict[str, Any]:
         if values.get("event") is not None and values.get("tag") is not None:
             raise ValueError('A trigger cannot have both an "event" and a "tag".')
         if values.get("event") is None and values.get("tag") is None:

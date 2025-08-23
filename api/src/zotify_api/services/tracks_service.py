@@ -1,6 +1,6 @@
 import logging
 from datetime import datetime
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Tuple, cast
 
 from sqlalchemy import text
 
@@ -13,7 +13,7 @@ log = logging.getLogger(__name__)
 
 def get_tracks(
     limit: int = 25, offset: int = 0, q: str | None = None, engine: Any = None
-) -> Tuple[List[Dict], int]:
+) -> Tuple[List[Dict[str, Any]], int]:
     engine = engine or get_db_engine()
     if not engine:
         return [], 0
@@ -47,7 +47,7 @@ def get_tracks(
         return [], 0
 
 
-def get_track(track_id: str, engine: Any = None) -> Dict | None:
+def get_track(track_id: str, engine: Any = None) -> Dict[str, Any] | None:
     engine = engine or get_db_engine()
     if not engine:
         return None
@@ -70,7 +70,7 @@ def get_track(track_id: str, engine: Any = None) -> Dict | None:
         return None
 
 
-def create_track(payload: Dict, engine: Any = None) -> Dict:
+def create_track(payload: Dict[str, Any], engine: Any = None) -> Dict[str, Any]:
     engine = engine or get_db_engine()
     if not engine:
         raise Exception("No DB engine available")
@@ -97,7 +97,7 @@ def create_track(payload: Dict, engine: Any = None) -> Dict:
         raise
 
 
-def update_track(track_id: str, payload: Dict, engine: Any = None) -> Dict:
+def update_track(track_id: str, payload: Dict[str, Any], engine: Any = None) -> Dict[str, Any] | None:
     engine = engine or get_db_engine()
     if not engine:
         raise Exception("No DB engine available")
@@ -149,11 +149,11 @@ def delete_track(track_id: str, engine: Any = None) -> None:
 
 def search_tracks(
     q: str, limit: int, offset: int, engine: Any = None
-) -> Tuple[List[Dict], int]:
+) -> Tuple[List[Dict[str, Any]], int]:
     return get_tracks(limit, offset, q, engine)
 
 
-def upload_cover(track_id: str, file_bytes: bytes, engine: Any = None) -> Dict:
+def upload_cover(track_id: str, file_bytes: bytes, engine: Any = None) -> Dict[str, Any]:
     # This is a stub for now
     return {"track_id": track_id, "cover_url": f"/static/covers/{track_id}.jpg"}
 
@@ -186,5 +186,5 @@ async def get_tracks_metadata_from_spotify(
     # This is a temporary hack and should be fixed properly later.
     if hasattr(provider, "client"):
         metadata = await provider.client.get_tracks_metadata(track_ids)
-        return metadata
+        return cast(List[Dict[str, Any]], metadata)
     return []

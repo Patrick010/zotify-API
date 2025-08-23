@@ -8,7 +8,7 @@ from zotify_api.services.spoti_client import SpotiClient
 
 
 @pytest.mark.asyncio
-async def test_spoti_client_get_tracks_metadata_success():
+async def test_spoti_client_get_tracks_metadata_success() -> None:
     """
     Tests that the SpotiClient can successfully fetch track metadata.
     """
@@ -40,7 +40,7 @@ async def test_spoti_client_get_tracks_metadata_success():
 
 
 @pytest.mark.asyncio
-async def test_spoti_client_get_current_user_success():
+async def test_spoti_client_get_current_user_success() -> None:
     """
     Tests that the SpotiClient can successfully fetch the current user.
     """
@@ -62,7 +62,7 @@ async def test_spoti_client_get_current_user_success():
 
 
 @pytest.mark.asyncio
-async def test_spoti_client_no_token():
+async def test_spoti_client_no_token() -> None:
     """
     Tests that the client raises a ValueError if it is initialized with no token.
     """
@@ -73,7 +73,7 @@ async def test_spoti_client_no_token():
 
 
 @pytest.mark.asyncio
-async def test_spoti_client_http_error():
+async def test_spoti_client_http_error() -> None:
     """
     Tests that the client propagates HTTP exceptions from the API.
     """
@@ -95,7 +95,7 @@ async def test_spoti_client_http_error():
 
 
 @pytest.mark.asyncio
-async def test_spoti_client_get_devices_success():
+async def test_spoti_client_get_devices_success() -> None:
     """
     Tests that the SpotiClient can successfully fetch devices.
     """
@@ -117,7 +117,7 @@ async def test_spoti_client_get_devices_success():
 
 
 @pytest.mark.asyncio
-async def test_spoti_client_refresh_token_success():
+async def test_spoti_client_refresh_token_success() -> None:
     """
     Tests that the SpotiClient can successfully refresh an access token.
     """
@@ -137,7 +137,7 @@ async def test_spoti_client_refresh_token_success():
 
 
 @pytest.mark.asyncio
-async def test_spoti_client_search_success():
+async def test_spoti_client_search_success() -> None:
     """
     Tests that the SpotiClient can successfully perform a search.
     """
@@ -159,7 +159,7 @@ async def test_spoti_client_search_success():
 
 
 @pytest.mark.asyncio
-async def test_spoti_client_get_playlists_success():
+async def test_spoti_client_get_playlists_success() -> None:
     mock_json_response = {"items": [{"id": "p1", "name": "Playlist 1"}]}
     with patch("httpx.AsyncClient.request", new_callable=AsyncMock) as mock_request:
         mock_response = MagicMock()
@@ -178,7 +178,7 @@ async def test_spoti_client_get_playlists_success():
 
 
 @pytest.mark.asyncio
-async def test_spoti_client_create_playlist_success():
+async def test_spoti_client_create_playlist_success() -> None:
     mock_json_response = {"id": "new_p1", "name": "New Playlist"}
     with patch("httpx.AsyncClient.request", new_callable=AsyncMock) as mock_request:
         mock_response = MagicMock()
@@ -193,7 +193,7 @@ async def test_spoti_client_create_playlist_success():
 
 
 @pytest.mark.asyncio
-async def test_spoti_client_add_tracks_success():
+async def test_spoti_client_add_tracks_success() -> None:
     mock_json_response = {"snapshot_id": "snapshot1"}
     with patch("httpx.AsyncClient.request", new_callable=AsyncMock) as mock_request:
         mock_response = MagicMock()
@@ -206,7 +206,7 @@ async def test_spoti_client_add_tracks_success():
 
 
 @pytest.mark.asyncio
-async def test_spoti_client_get_all_playlists_pagination():
+async def test_spoti_client_get_all_playlists_pagination() -> None:
     """
     Tests that the client correctly handles pagination when fetching all playlists.
     """
@@ -231,7 +231,7 @@ async def test_spoti_client_get_all_playlists_pagination():
 
 
 @pytest.mark.asyncio
-async def test_spoti_client_exchange_code_for_token_success():
+async def test_spoti_client_exchange_code_for_token_success() -> None:
     """
     Tests that the client can successfully exchange an auth code for a token.
     """

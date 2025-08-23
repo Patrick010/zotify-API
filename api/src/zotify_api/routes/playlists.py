@@ -1,4 +1,5 @@
 # api/src/zotify_api/routes/playlists.py
+from typing import Any, Dict
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 
@@ -18,7 +19,7 @@ def list_playlists(
     offset: int = Query(0, ge=0),
     search: str | None = Query(None),
     playlists_service: PlaylistsService = Depends(get_playlists_service),
-):
+) -> Dict[str, Any]:
     try:
         items, total = playlists_service.get_playlists(
             limit=limit, offset=offset, search=search
@@ -32,7 +33,7 @@ def list_playlists(
 def create_new_playlist(
     payload: PlaylistIn,
     playlists_service: PlaylistsService = Depends(get_playlists_service),
-):
+) -> PlaylistOut:
     try:
         out = playlists_service.create_playlist(payload.model_dump())
     except PlaylistsServiceError as exc:

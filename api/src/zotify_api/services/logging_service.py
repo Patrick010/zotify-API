@@ -1,6 +1,6 @@
 import importlib
 import logging
-from typing import List
+from typing import Any, List
 
 import yaml
 
@@ -52,7 +52,7 @@ class LoggingService:
 
         return handlers
 
-    def log(self, level: str, message: str, **kwargs):
+    def log(self, level: str, message: str, **kwargs: Any) -> None:
         """
         Logs a message by dispatching it to all relevant handlers.
         """
@@ -70,7 +70,7 @@ class LoggingService:
 _logging_service_instance = None
 
 
-def get_logging_service():
+def get_logging_service() -> "LoggingService":
     """
     Initializes and returns a singleton instance of the LoggingService.
     """

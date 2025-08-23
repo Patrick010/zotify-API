@@ -25,7 +25,7 @@ router = APIRouter(prefix="/notifications", tags=["notifications"])
 def create_notification(
     payload: NotificationCreate,
     notifications_service: NotificationsService = Depends(get_notifications_service),
-):
+) -> Dict[str, Any]:
     notification = notifications_service.create_notification(
         payload.user_id, payload.message
     )
@@ -36,7 +36,7 @@ def create_notification(
 def get_notifications(
     user_id: str,
     notifications_service: NotificationsService = Depends(get_notifications_service),
-):
+) -> Dict[str, Any]:
     items = notifications_service.get_notifications(user_id)
     return {"data": items, "meta": {"total": len(items)}}
 
@@ -50,6 +50,6 @@ def mark_notification_as_read(
     notification_id: str,
     payload: NotificationUpdate,
     notifications_service: NotificationsService = Depends(get_notifications_service),
-):
+) -> Dict[str, Any]:
     notifications_service.mark_notification_as_read(notification_id, payload.read)
     return {}

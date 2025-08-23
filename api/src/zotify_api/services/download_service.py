@@ -1,5 +1,5 @@
 import time
-from typing import List
+from typing import List, cast
 
 from sqlalchemy.orm import Session
 
@@ -79,4 +79,4 @@ def process_download_queue(
 
 def retry_failed_jobs(db: Session) -> int:
     """Resets the status of all failed jobs to pending in the database."""
-    return crud.retry_failed_download_jobs(db=db)
+    return cast(int, crud.retry_failed_download_jobs(db=db))

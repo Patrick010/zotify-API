@@ -1,7 +1,7 @@
 import asyncio
 import logging
 import sys
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, cast
 
 from fastapi import FastAPI, Request
 from starlette.responses import JSONResponse
@@ -18,12 +18,12 @@ log = logging.getLogger(__name__)
 def _get_request_id(request: Request) -> str:
     """Safely get request_id from request state."""
     try:
-        return request.state.request_id
+        return cast(str, request.state.request_id)
     except AttributeError:
         return "N/A"
 
 
-def register_fastapi_hooks(app: FastAPI, handler: "ErrorHandler"):
+def register_fastapi_hooks(app: FastAPI, handler: "ErrorHandler") -> None:
     """
     Registers a global exception handler for the FastAPI application.
     """
@@ -31,7 +31,9 @@ def register_fastapi_hooks(app: FastAPI, handler: "ErrorHandler"):
     json_formatter = JsonFormatter(verbosity=handler.config.verbosity)
 
     @app.exception_handler(Exception)
-    async def global_exception_handler(request: Request, exc: Exception):
+    async def global_exception_handler(
+        request: Request, exc: Exception
+    ) -> JSONResponse:
         request_id = _get_request_id(request)
         context = {"request_id": request_id}
 
@@ -46,13 +48,13 @@ def register_fastapi_hooks(app: FastAPI, handler: "ErrorHandler"):
         return JSONResponse(status_code=500, content=response_data)
 
 
-def register_system_hooks(handler: "ErrorHandler"):
+def register_system_hooks(handler: "ErrorHandler") -> None:
     """
     Registers exception handlers for non-FastAPI contexts (e.g., background tasks).
     """
     log.info("Registering system-level exception handlers.")
 
-    def sync_excepthook(exc_type, exc_value, exc_traceback):
+    def sync_excepthook(exc_type: Any, exc_value: Any, exc_traceback: Any) -> None:
         # This hook handles exceptions in the main thread and other non-async contexts
         if issubclass(exc_type, (KeyboardInterrupt, SystemExit)):
             # Don't intercept standard exit signals
@@ -60,7 +62,7 @@ def register_system_hooks(handler: "ErrorHandler"):
             return
         handler.handle_exception(exc_value, context={"hook": "sys.excepthook"})
 
-    def asyncio_exception_handler(loop, context):
+    def asyncio_exception_handler(loop: Any, context: Any) -> None:
         # This hook handles exceptions in asyncio tasks that are not awaited
         exception = context.get("exception")
         if exception:

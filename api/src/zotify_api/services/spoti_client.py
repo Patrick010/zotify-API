@@ -1,12 +1,12 @@
-import logging
-from typing import Any, Dict, List, Optional
+import logging as py_logging
+from typing import Any, Dict, List, Optional, cast
 
 import httpx
 from fastapi import HTTPException
 
 from zotify_api.auth_state import SPOTIFY_API_BASE
 
-logger = logging.getLogger(__name__)
+logger = py_logging.getLogger(__name__)
 
 
 class SpotiClient:
@@ -22,7 +22,9 @@ class SpotiClient:
         self._refresh_token = refresh_token
         self._client = httpx.AsyncClient(base_url=SPOTIFY_API_BASE)
 
-    async def _request(self, method: str, url: str, **kwargs) -> httpx.Response:
+    async def _request(
+        self, method: str, url: str, **kwargs: Any
+    ) -> httpx.Response:
         """
         Makes an authenticated request to the Spotify API.
         """
@@ -61,21 +63,21 @@ class SpotiClient:
 
         params = {"ids": ",".join(track_ids)}
         response = await self._request("GET", "/tracks", params=params)
-        return response.json().get("tracks", [])
+        return cast(List[Dict[str, Any]], response.json().get("tracks", []))
 
     async def get_current_user(self) -> Dict[str, Any]:
         """
         Retrieves the profile of the current user.
         """
         response = await self._request("GET", "/me")
-        return response.json()
+        return cast(Dict[str, Any], response.json())
 
     async def get_devices(self) -> List[Dict[str, Any]]:
         """
         Retrieves the list of available playback devices for the current user.
         """
         response = await self._request("GET", "/me/player/devices")
-        return response.json().get("devices", [])
+        return cast(List[Dict[str, Any]], response.json().get("devices", []))
 
     async def search(
         self, q: str, type: str, limit: int, offset: int
@@ -90,7 +92,7 @@ class SpotiClient:
             "offset": offset,
         }
         response = await self._request("GET", "/search", params=params)
-        return response.json()
+        return cast(Dict[str, Any], response.json())
 
     async def get_current_user_playlists(
         self, limit: int = 20, offset: int = 0
@@ -100,14 +102,14 @@ class SpotiClient:
         """
         params = {"limit": limit, "offset": offset}
         response = await self._request("GET", "/me/playlists", params=params)
-        return response.json()
+        return cast(Dict[str, Any], response.json())
 
     async def get_playlist(self, playlist_id: str) -> Dict[str, Any]:
         """
         Gets a playlist owned by a Spotify user.
         """
         response = await self._request("GET", f"/playlists/{playlist_id}")
-        return response.json()
+        return cast(Dict[str, Any], response.json())
 
     async def get_playlist_tracks(
         self, playlist_id: str, limit: int = 100, offset: int = 0
@@ -119,7 +121,7 @@ class SpotiClient:
         response = await self._request(
             "GET", f"/playlists/{playlist_id}/tracks", params=params
         )
-        return response.json()
+        return cast(Dict[str, Any], response.json())
 
     async def get_all_current_user_playlists(self) -> List[Dict[str, Any]]:
         """
@@ -127,8 +129,8 @@ class SpotiClient:
         handling pagination.
         """
         all_playlists = []
-        url = "/me/playlists"
-        params = {"limit": 50}
+        url: Optional[str] = "/me/playlists"
+        params: Dict[str, Any] = {"limit": 50}
 
         while url:
             response = await self._request("GET", url, params=params)
@@ -157,7 +159,7 @@ class SpotiClient:
             "description": description,
         }
         response = await self._request("POST", f"/users/{user_id}/playlists", json=data)
-        return response.json()
+        return cast(Dict[str, Any], response.json())
 
     async def update_playlist_details(
         self,
@@ -188,7 +190,7 @@ class SpotiClient:
         response = await self._request(
             "POST", f"/playlists/{playlist_id}/tracks", json=data
         )
-        return response.json()
+        return cast(Dict[str, Any], response.json())
 
     async def remove_tracks_from_playlist(
         self, playlist_id: str, uris: List[str]
@@ -200,7 +202,7 @@ class SpotiClient:
         response = await self._request(
             "DELETE", f"/playlists/{playlist_id}/tracks", json=data
         )
-        return response.json()
+        return cast(Dict[str, Any], response.json())
 
     async def unfollow_playlist(self, playlist_id: str) -> None:
         """
@@ -209,7 +211,7 @@ class SpotiClient:
         """
         await self._request("DELETE", f"/playlists/{playlist_id}/followers")
 
-    async def close(self):
+    async def close(self) -> None:
         """Closes the underlying httpx client."""
         await self._client.aclose()
 
@@ -235,7 +237,7 @@ class SpotiClient:
                     SPOTIFY_TOKEN_URL, data=data, auth=(CLIENT_ID, CLIENT_SECRET)
                 )
                 resp.raise_for_status()
-                return resp.json()
+                return cast(Dict[str, Any], resp.json())
             except httpx.HTTPStatusError as e:
                 raise HTTPException(
                     status_code=400,
@@ -268,7 +270,7 @@ class SpotiClient:
             try:
                 resp = await client.post(SPOTIFY_TOKEN_URL, data=data, headers=headers)
                 resp.raise_for_status()
-                return resp.json()
+                return cast(Dict[str, Any], resp.json())
             except httpx.HTTPStatusError as e:
                 raise HTTPException(
                     status_code=400,

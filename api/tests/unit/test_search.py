@@ -1,12 +1,15 @@
 from unittest.mock import AsyncMock, MagicMock
 
 import pytest
+from fastapi.testclient import TestClient
 
 from zotify_api.main import app
 from zotify_api.routes import search
 
 
-def test_search_disabled_by_default(client, mock_provider):
+def test_search_disabled_by_default(
+    client: TestClient, mock_provider: MagicMock
+) -> None:
     app.dependency_overrides[search.get_feature_flags] = lambda: {
         "fork_features": False,
         "search_advanced": False,
@@ -19,7 +22,7 @@ def test_search_disabled_by_default(client, mock_provider):
 
 
 @pytest.mark.asyncio
-async def test_search_spotify_fallback(client):
+async def test_search_spotify_fallback(client: TestClient) -> None:
     app.dependency_overrides[search.get_feature_flags] = lambda: {
         "fork_features": True,
         "search_advanced": True,
@@ -55,7 +58,7 @@ async def test_search_spotify_fallback(client):
     del app.dependency_overrides[search.get_provider]
 
 
-def test_search_db_flow(client, mock_provider):
+def test_search_db_flow(client: TestClient, mock_provider: MagicMock) -> None:
     app.dependency_overrides[search.get_feature_flags] = lambda: {
         "fork_features": True,
         "search_advanced": True,
@@ -86,7 +89,7 @@ def test_search_db_flow(client, mock_provider):
 
 
 @pytest.mark.asyncio
-async def test_search_db_fails_fallback_to_spotify(client):
+async def test_search_db_fails_fallback_to_spotify(client: TestClient) -> None:
     app.dependency_overrides[search.get_feature_flags] = lambda: {
         "fork_features": True,
         "search_advanced": True,

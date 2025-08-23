@@ -142,11 +142,7 @@ class SpotifyConnector(BaseProvider):
                 resp = await client.post(SPOTIFY_TOKEN_URL, data=data, headers=headers)
                 resp.raise_for_status()
 
-                json_obj = resp.json()
-                if inspect.isawaitable(json_obj):
-                    tokens = await json_obj
-                else:
-                    tokens = json_obj
+                tokens = resp.json()
 
                 expires_at = datetime.now(timezone.utc) + timedelta(
                     seconds=tokens["expires_in"] - 60
@@ -203,19 +199,23 @@ class SpotifyConnector(BaseProvider):
 
     async def get_playlist(self, playlist_id: str) -> Dict[str, Any]:
         """Get a single playlist from Spotify."""
-        if not self.client:
+        client = self.client
+        if not client:
             raise Exception("SpotiClient not initialized.")
-        return await self.client.get_playlist(playlist_id)
+        playlist_data: Dict[str, Any] = await client.get_playlist(playlist_id)
+        return playlist_data
 
     async def get_playlist_tracks(
         self, playlist_id: str, limit: int, offset: int
     ) -> Dict[str, Any]:
         """Get the tracks in a playlist from Spotify."""
-        if not self.client:
+        client = self.client
+        if not client:
             raise Exception("SpotiClient not initialized.")
-        return await self.client.get_playlist_tracks(
+        tracks_data: Dict[str, Any] = await client.get_playlist_tracks(
             playlist_id, limit=limit, offset=offset
         )
+        return tracks_data
 
     async def sync_playlists(self) -> Dict[str, Any]:
         """Fetch user's playlists from Spotify and save to the database."""

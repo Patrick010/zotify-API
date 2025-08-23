@@ -28,7 +28,7 @@ class CacheService:
         return self.get_cache_status()
 
 
-def get_cache_service():
+def get_cache_service() -> "CacheService":
     # This is a placeholder for a real implementation that would get the cache
     # state from a persistent storage.
     cache_state = {"search": 80, "metadata": 222}

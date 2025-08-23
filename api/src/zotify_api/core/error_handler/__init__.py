@@ -1,5 +1,5 @@
 import logging
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from .config import ErrorHandlerConfig
 from .formatter import BaseFormatter, JsonFormatter, PlainTextFormatter
@@ -38,7 +38,9 @@ class ErrorHandler:
         self.trigger_manager = TriggerManager(config.triggers)
         log.info("Generic Error Handler initialized.")
 
-    def handle_exception(self, exc: Exception, context: Optional[dict] = None):
+    def handle_exception(
+        self, exc: Exception, context: Optional[Dict[str, Any]] = None
+    ) -> None:
         """Handles a synchronous exception."""
         self.logger.error(
             "An unhandled synchronous exception occurred",
@@ -48,8 +50,8 @@ class ErrorHandler:
         self.trigger_manager.process_triggers(exc)
 
     async def handle_exception_async(
-        self, exc: Exception, context: Optional[dict] = None
-    ):
+        self, exc: Exception, context: Optional[Dict[str, Any]] = None
+    ) -> None:
         """Handles an asynchronous exception."""
         self.logger.error(
             "An unhandled asynchronous exception occurred",

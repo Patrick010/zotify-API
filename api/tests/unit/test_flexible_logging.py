@@ -1,10 +1,11 @@
 import asyncio
 import unittest.mock
-from typing import Any, Dict
+from typing import Any, Dict, cast
 
 import pytest
 import yaml
 from pydantic import ValidationError
+from pytest_mock import MockerFixture
 
 from zotify_api.core.logging_framework.schemas import LoggingFrameworkConfig
 from zotify_api.core.logging_framework.service import (
@@ -59,10 +60,10 @@ def logging_service() -> LoggingService:
 @pytest.fixture
 def valid_config() -> Dict[str, Any]:
     """Fixture to provide a parsed valid config."""
-    return yaml.safe_load(VALID_CONFIG_YAML)
+    return cast(Dict[str, Any], yaml.safe_load(VALID_CONFIG_YAML))
 
 
-def test_config_validation_success(valid_config):
+def test_config_validation_success(valid_config: Dict[str, Any]) -> None:
     """Tests that a valid config is parsed correctly by Pydantic."""
     config = LoggingFrameworkConfig(**valid_config)
     assert len(config.logging.sinks) == 3
@@ -70,14 +71,18 @@ def test_config_validation_success(valid_config):
     assert config.logging.sinks[0].name == "test_console"
 
 
-def test_config_validation_failure():
+def test_config_validation_failure() -> None:
     """Tests that an invalid config raises a ValidationError."""
     with pytest.raises(ValidationError):
         LoggingFrameworkConfig(**yaml.safe_load(INVALID_CONFIG_YAML))
 
 
 @pytest.mark.asyncio
-async def test_log_routing_no_destination(logging_service, valid_config, mocker):
+async def test_log_routing_no_destination(
+    logging_service: LoggingService,
+    valid_config: Dict[str, Any],
+    mocker: MockerFixture,
+) -> None:
     """Tests that a log event with no destination goes to all applicable sinks."""
     mocker.patch("asyncio.create_task")
     config = LoggingFrameworkConfig(**valid_config)
@@ -105,7 +110,11 @@ async def test_log_routing_no_destination(logging_service, valid_config, mocker)
 
 
 @pytest.mark.asyncio
-async def test_log_routing_with_destination(logging_service, valid_config, mocker):
+async def test_log_routing_with_destination(
+    logging_service: LoggingService,
+    valid_config: Dict[str, Any],
+    mocker: MockerFixture,
+) -> None:
     """Tests that a log event with a specific destination is routed correctly."""
     mocker.patch("asyncio.create_task")
     config = LoggingFrameworkConfig(**valid_config)
@@ -126,7 +135,11 @@ async def test_log_routing_with_destination(logging_service, valid_config, mocke
 
 
 @pytest.mark.asyncio
-async def test_trigger_handling(logging_service, valid_config, mocker):
+async def test_trigger_handling(
+    logging_service: LoggingService,
+    valid_config: Dict[str, Any],
+    mocker: MockerFixture,
+) -> None:
     """Tests that a log event with an 'event' key correctly fires a trigger."""
     mocker.patch("asyncio.create_task")
     config = LoggingFrameworkConfig(**valid_config)

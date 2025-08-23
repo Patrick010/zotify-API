@@ -1,3 +1,5 @@
+from typing import Any, Dict
+
 from fastapi import APIRouter, Depends
 
 from zotify_api.schemas.generic import StandardResponse
@@ -9,7 +11,9 @@ router = APIRouter(prefix="/network", tags=["network"])
 
 
 @router.get("", response_model=StandardResponse[NetworkConfigResponse])
-def get_network(network_service: NetworkService = Depends(get_network_service)):
+def get_network(
+    network_service: NetworkService = Depends(get_network_service),
+) -> Dict[str, Any]:
     config = network_service.get_network_config()
     return {"data": config}
 
@@ -21,6 +25,6 @@ def get_network(network_service: NetworkService = Depends(get_network_service)):
 )
 def update_network(
     cfg: ProxyConfig, network_service: NetworkService = Depends(get_network_service)
-):
+) -> Dict[str, Any]:
     config = network_service.update_network_config(cfg.model_dump(exclude_unset=True))
     return {"data": config}

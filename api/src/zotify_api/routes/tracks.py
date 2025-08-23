@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Dict
 
 from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile
 
@@ -30,7 +30,7 @@ def list_tracks(
     offset: int = 0,
     q: str | None = None,
     engine: Any = Depends(get_db_engine),
-):
+) -> Dict[str, Any]:
     items, total = tracks_service.get_tracks(
         limit=limit, offset=offset, q=q, engine=engine
     )
@@ -38,7 +38,9 @@ def list_tracks(
 
 
 @router.get("/{track_id}", response_model=TrackResponseModel)
-def get_track(track_id: str, engine: Any = Depends(get_db_engine)):
+def get_track(
+    track_id: str, engine: Any = Depends(get_db_engine)
+) -> TrackResponseModel:
     track = tracks_service.get_track(track_id, engine)
     if not track:
         raise HTTPException(status_code=404, detail="Track not found")
@@ -51,7 +53,9 @@ def get_track(track_id: str, engine: Any = Depends(get_db_engine)):
     status_code=201,
     dependencies=[Depends(require_admin_api_key)],
 )
-def create_track(payload: CreateTrackModel, engine: Any = Depends(get_db_engine)):
+def create_track(
+    payload: CreateTrackModel, engine: Any = Depends(get_db_engine)
+) -> TrackResponseModel:
     try:
         return tracks_service.create_track(payload.model_dump(), engine)
     except Exception as e:
@@ -65,7 +69,7 @@ def create_track(payload: CreateTrackModel, engine: Any = Depends(get_db_engine)
 )
 def update_track(
     track_id: str, payload: UpdateTrackModel, engine: Any = Depends(get_db_engine)
-):
+) -> TrackResponseModel:
     try:
         return tracks_service.update_track(
             track_id, payload.model_dump(exclude_unset=True), engine
@@ -77,7 +81,7 @@ def update_track(
 @router.delete(
     "/{track_id}", status_code=204, dependencies=[Depends(require_admin_api_key)]
 )
-def delete_track(track_id: str, engine: Any = Depends(get_db_engine)):
+def delete_track(track_id: str, engine: Any = Depends(get_db_engine)) -> None:
     try:
         tracks_service.delete_track(track_id, engine)
     except Exception as e:
@@ -89,10 +93,13 @@ async def upload_track_cover(
     track_id: str,
     cover_image: UploadFile = File(...),
     engine: Any = Depends(get_db_engine),
-):
+) -> Dict[str, Any]:
     try:
         file_bytes = await cover_image.read()
-        return tracks_service.upload_cover(track_id, file_bytes, engine)
+        result: Dict[str, Any] = tracks_service.upload_cover(
+            track_id, file_bytes, engine
+        )
+        return result
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -104,7 +111,7 @@ async def upload_track_cover(
 )
 async def get_tracks_metadata(
     request: TrackMetadataRequest, provider: BaseProvider = Depends(get_provider)
-):
+) -> TrackMetadataResponse:
     """Returns metadata for all given tracks in one call."""
     if not request.track_ids:
         return TrackMetadataResponse(metadata=[])
@@ -122,7 +129,7 @@ async def get_tracks_metadata(
 )
 def get_track_metadata(
     track_id: str, metadata_service: MetadataService = Depends(get_metadata_service)
-):
+) -> MetadataResponse:
     """
     Retrieves extended metadata for a specific track.
 
@@ -140,7 +147,7 @@ def patch_track_metadata(
     track_id: str,
     meta: MetadataUpdate,
     metadata_service: MetadataService = Depends(get_metadata_service),
-):
+) -> MetadataPatchResponse:
     """
     Updates extended metadata for a specific track.
 

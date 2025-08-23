@@ -1,17 +1,18 @@
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
+from pytest import MonkeyPatch
 
 from zotify_api.services import tracks_service
 
 
-def test_get_tracks_no_db():
+def test_get_tracks_no_db() -> None:
     items, total = tracks_service.get_tracks(engine=None)
     assert items == []
     assert total == 0
 
 
-def test_get_tracks_with_db():
+def test_get_tracks_with_db() -> None:
     mock_engine = MagicMock()
     mock_conn = MagicMock()
     mock_engine.connect.return_value.__enter__.return_value = mock_conn
@@ -29,7 +30,7 @@ def test_get_tracks_with_db():
     assert items[0]["name"] == "Test Track"
 
 
-def test_get_tracks_db_fails():
+def test_get_tracks_db_fails() -> None:
     mock_engine = MagicMock()
     mock_engine.connect.side_effect = Exception("DB error")
     items, total = tracks_service.get_tracks(engine=mock_engine)
@@ -37,7 +38,7 @@ def test_get_tracks_db_fails():
     assert total == 0
 
 
-def test_search_tracks_spotify_fallback():
+def test_search_tracks_spotify_fallback() -> None:
     items, total = tracks_service.search_tracks(
         q="test", limit=10, offset=0, engine=None
     )
@@ -45,7 +46,7 @@ def test_search_tracks_spotify_fallback():
     assert items == []
 
 
-def test_create_track_no_db(monkeypatch):
+def test_create_track_no_db(monkeypatch: MonkeyPatch) -> None:
     monkeypatch.setattr(
         "zotify_api.services.tracks_service.get_db_engine", lambda: None
     )
@@ -60,12 +61,12 @@ def test_create_track_no_db(monkeypatch):
         tracks_service.create_track(payload=payload)
 
 
-def test_get_track_no_db():
+def test_get_track_no_db() -> None:
     track = tracks_service.get_track(track_id="1", engine=None)
     assert track is None
 
 
-def test_get_track_success():
+def test_get_track_success() -> None:
     mock_engine = MagicMock()
     mock_conn = MagicMock()
     mock_engine.connect.return_value.__enter__.return_value = mock_conn
@@ -78,14 +79,14 @@ def test_get_track_success():
     assert track["name"] == "Test"
 
 
-def test_get_track_db_fails():
+def test_get_track_db_fails() -> None:
     mock_engine = MagicMock()
     mock_engine.connect.side_effect = Exception("DB error")
     track = tracks_service.get_track("1", engine=mock_engine)
     assert track is None
 
 
-def test_create_track_success():
+def test_create_track_success() -> None:
     mock_engine = MagicMock()
     mock_conn = MagicMock()
     mock_engine.connect.return_value.__enter__.return_value = mock_conn
@@ -101,7 +102,7 @@ def test_create_track_success():
     mock_conn.execute.assert_called_once()
 
 
-def test_create_track_db_fails():
+def test_create_track_db_fails() -> None:
     mock_engine = MagicMock()
     mock_engine.connect.side_effect = Exception("DB error")
     with pytest.raises(Exception, match="DB error"):
@@ -115,7 +116,7 @@ def test_create_track_db_fails():
         tracks_service.create_track(payload, engine=mock_engine)
 
 
-def test_update_track_success():
+def test_update_track_success() -> None:
     mock_engine = MagicMock()
     mock_conn = MagicMock()
     mock_engine.connect.return_value.__enter__.return_value = mock_conn
@@ -123,11 +124,12 @@ def test_update_track_success():
         mock_get.return_value = {"id": "1", "name": "Old Name"}
         payload = {"name": "New Name"}
         track = tracks_service.update_track("1", payload, engine=mock_engine)
+        assert track is not None
         assert track["name"] == "New Name"
         mock_conn.execute.assert_called_once()
 
 
-def test_delete_track_success():
+def test_delete_track_success() -> None:
     mock_engine = MagicMock()
     mock_conn = MagicMock()
     mock_engine.connect.return_value.__enter__.return_value = mock_conn
@@ -135,21 +137,21 @@ def test_delete_track_success():
     mock_conn.execute.assert_called_once()
 
 
-def test_delete_track_db_fails():
+def test_delete_track_db_fails() -> None:
     mock_engine = MagicMock()
     mock_engine.connect.side_effect = Exception("DB error")
     with pytest.raises(Exception, match="DB error"):
         tracks_service.delete_track("1", engine=mock_engine)
 
 
-def test_upload_cover():
+def test_upload_cover() -> None:
     result = tracks_service.upload_cover("1", b"")
     assert result["track_id"] == "1"
     assert "cover_url" in result
 
 
 @pytest.mark.asyncio
-async def test_get_tracks_metadata_from_spotify():
+async def test_get_tracks_metadata_from_spotify() -> None:
     from zotify_api.providers.base import BaseProvider
 
     mock_provider = MagicMock(spec=BaseProvider)

@@ -1,9 +1,11 @@
 import contextlib
 import json
 from io import StringIO
-from unittest.mock import MagicMock, mock_open, patch
+from typing import Any
+from unittest.mock import MagicMock, Mock, mock_open, patch
 
 import yaml
+from sqlalchemy.orm import Session
 
 from zotify_api.core.logging_handlers.base import BaseLogHandler
 from zotify_api.database import models
@@ -25,7 +27,9 @@ handlers:
 @patch("zotify_api.services.logging_service.importlib")
 @patch("zotify_api.services.logging_service.yaml")
 @patch("builtins.open")
-def test_logging_service_initialization(mock_open, mock_yaml, mock_importlib):
+def test_logging_service_initialization(
+    mock_open: Mock, mock_yaml: Mock, mock_importlib: Mock
+) -> None:
     """Tests that the LoggingService loads all handlers from the config."""
     mock_yaml.safe_load.return_value = yaml.safe_load(CONFIG_YAML)
 
@@ -34,7 +38,7 @@ def test_logging_service_initialization(mock_open, mock_yaml, mock_importlib):
     mock_json_handler_class = MagicMock()
     mock_db_handler_class = MagicMock()
 
-    def import_side_effect(module_name):
+    def import_side_effect(module_name: str) -> MagicMock:
         mock_module = MagicMock()
         if "console_handler" in module_name:
             mock_module.ConsoleHandler = mock_console_handler_class
@@ -59,7 +63,7 @@ def test_logging_service_initialization(mock_open, mock_yaml, mock_importlib):
 @patch("zotify_api.services.logging_service.importlib")
 @patch("zotify_api.services.logging_service.yaml")
 @patch("builtins.open")
-def test_log_dispatch(mock_open, mock_yaml, mock_importlib):
+def test_log_dispatch(mock_open: Mock, mock_yaml: Mock, mock_importlib: Mock) -> None:
     """Tests that the log method dispatches to the correct handlers."""
     mock_yaml.safe_load.return_value = yaml.safe_load(CONFIG_YAML)
 
@@ -71,7 +75,7 @@ def test_log_dispatch(mock_open, mock_yaml, mock_importlib):
     mock_json_handler_class = MagicMock(return_value=mock_json_handler)
     mock_db_handler_class = MagicMock(return_value=mock_db_handler)
 
-    def import_side_effect(module_name):
+    def import_side_effect(module_name: str) -> MagicMock:
         mock_module = MagicMock()
         if "console_handler" in module_name:
             mock_module.ConsoleHandler = mock_console_handler_class
@@ -96,7 +100,7 @@ def test_log_dispatch(mock_open, mock_yaml, mock_importlib):
 
 
 @patch("sys.stdout", new_callable=StringIO)
-def test_console_handler(mock_stdout):
+def test_console_handler(mock_stdout: Mock) -> None:
     from zotify_api.core.logging_handlers.console_handler import ConsoleHandler
 
     handler = ConsoleHandler(levels=["INFO"])
@@ -108,7 +112,7 @@ def test_console_handler(mock_stdout):
 
 
 @patch("builtins.open", new_callable=mock_open)
-def test_json_audit_handler(mock_file):
+def test_json_audit_handler(mock_file: Mock) -> None:
     from zotify_api.core.logging_handlers.json_audit_handler import JsonAuditHandler
 
     handler = JsonAuditHandler(levels=["AUDIT"], filename="dummy.log")
@@ -128,7 +132,7 @@ def test_json_audit_handler(mock_file):
     assert log_data["user_id"] == "user123"
 
 
-def test_database_job_handler(test_db_session):
+def test_database_job_handler(test_db_session: Session) -> None:
     from zotify_api.core.logging_handlers.database_job_handler import DatabaseJobHandler
 
     # We need to patch get_db in the module where it's used
@@ -137,7 +141,7 @@ def test_database_job_handler(test_db_session):
     ) as mock_get_db:
         # Make get_db return a context manager that yields the test session
         @contextlib.contextmanager
-        def db_context_manager():
+        def db_context_manager() -> Any:
             yield test_db_session
 
         mock_get_db.side_effect = db_context_manager

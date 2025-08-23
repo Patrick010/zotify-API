@@ -1,7 +1,7 @@
 import json
 
 
-def summarize_routes(file_path):
+def summarize_routes(file_path: str) -> None:
     missing = []
     empty = []
     valid = []

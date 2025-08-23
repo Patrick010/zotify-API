@@ -1,3 +1,5 @@
+from typing import Any, Dict, List
+
 from sqlalchemy.orm import Session
 
 from zotify_api.schemas import download as schemas
@@ -29,7 +31,7 @@ def get_download_job(db: Session, job_id: str) -> models.DownloadJob | None:
     )
 
 
-def get_all_download_jobs(db: Session):
+def get_all_download_jobs(db: Session) -> List[models.DownloadJob]:
     """
     Get all download jobs from the database.
     """
@@ -126,7 +128,7 @@ def create_or_update_playlist(
     return playlist
 
 
-def clear_all_playlists_and_tracks(db: Session):
+def clear_all_playlists_and_tracks(db: Session) -> None:
     """
     Deletes all records from the playlist and track tables.
     """
@@ -147,7 +149,7 @@ def get_spotify_token(db: Session) -> models.SpotifyToken | None:
 
 
 def create_or_update_spotify_token(
-    db: Session, token_data: dict
+    db: Session, token_data: Dict[str, Any]
 ) -> models.SpotifyToken:
     """
     Create or update the Spotify token in the database.
@@ -170,7 +172,7 @@ def create_or_update_spotify_token(
     return token
 
 
-def delete_spotify_token(db: Session):
+def delete_spotify_token(db: Session) -> None:
     """
     Deletes the Spotify token from the database.
     """

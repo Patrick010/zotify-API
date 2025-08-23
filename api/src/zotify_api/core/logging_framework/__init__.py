@@ -1,11 +1,14 @@
-from typing import List, Optional
+from typing import Any, List, Optional
 
 from .service import get_logging_service
 
 
 def log_event(
-    message: str, level: str = "INFO", destinations: Optional[List[str]] = None, **extra
-):
+    message: str,
+    level: str = "INFO",
+    destinations: Optional[List[str]] = None,
+    **extra: Any,
+) -> None:
     """
     Public API for the flexible logging framework.
 

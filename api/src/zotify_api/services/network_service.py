@@ -21,7 +21,7 @@ class NetworkService:
         return self._network_config
 
 
-def get_network_service():
+def get_network_service() -> "NetworkService":
     # This is a placeholder for a real implementation that would get the network
     # config from a persistent storage.
     network_config = {"proxy_enabled": False, "http_proxy": None, "https_proxy": None}

@@ -120,7 +120,7 @@ This table provides the definitive list of all `.py` and `.go` source files as p
 | `./api/src/zotify_api/schemas/notifications.py`| Pydantic models for the Notifications module. |
 | `./api/src/zotify_api/schemas/cache.py` | Pydantic models for the Cache module. |
 | `./api/src/zotify_api/schemas/tracks.py` | Pydantic models for the local Tracks module. |
-| `./api/src/zotify_api/schemas/logging.py` | Pydantic models for the Logging module. |
+| `./api/src/zotify_api/schemas/logging_schemas.py` | Pydantic models for the Logging module. |
 | `./api/src/zotify_api/schemas/auth.py` | Pydantic models for the Authentication module. |
 | `./api/src/zotify_api/schemas/metadata.py` | Pydantic models for the local Metadata module. |
 | `./api/src/zotify_api/schemas/playlists.py`| Pydantic models for the local Playlists module. |
@@ -219,7 +219,7 @@ This table provides the definitive list of all `.py` and `.go` source files as p
 | `./api/build/lib/zotify_api/schemas/notifications.py`| Build artifact of the notifications schema. |
 | `./api/build/lib/zotify_api/schemas/cache.py`| Build artifact of the cache schema. |
 | `./api/build/lib/zotify_api/schemas/tracks.py`| Build artifact of the tracks schema. |
-| `./api/build/lib/zotify_api/schemas/logging.py`| Build artifact of the logging schema. |
+| `./api/build/lib/zotify_api/schemas/logging_schemas.py`| Build artifact of the logging schema. |
 | `./api/build/lib/zotify_api/schemas/auth.py`| Build artifact of the auth schema. |
 | `./api/build/lib/zotify_api/schemas/metadata.py`| Build artifact of the metadata schema. |
 | `./api/build/lib/zotify_api/schemas/playlists.py`| Build artifact of the playlists schema. |

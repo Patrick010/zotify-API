@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, Field
 
@@ -36,7 +36,7 @@ class TrackMetadataRequest(BaseModel):
 
 
 class TrackMetadataResponse(BaseModel):
-    metadata: List[dict]
+    metadata: List[Dict[str, Any]]
 
     class Config:
         from_attributes = True

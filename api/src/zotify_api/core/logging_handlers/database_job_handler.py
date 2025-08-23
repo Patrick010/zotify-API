@@ -21,7 +21,7 @@ class DatabaseJobHandler(BaseLogHandler):
     def can_handle(self, level: str) -> bool:
         return level.upper() in self.levels
 
-    def emit(self, log_record: Dict[str, Any]):
+    def emit(self, log_record: Dict[str, Any]) -> None:
         """
         Creates or updates a job log entry in the database.
         """

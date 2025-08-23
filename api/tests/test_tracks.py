@@ -1,15 +1,17 @@
 from io import BytesIO
+from typing import Any, Generator
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 from fastapi import HTTPException
+from fastapi.testclient import TestClient
 
 from zotify_api.main import app
 from zotify_api.services.db import get_db_engine
 
 
 @pytest.fixture
-def mock_db(client):
+def mock_db(client: TestClient) -> Generator[Any, None, None]:
     """Fixture to mock the database engine."""
     mock_engine = MagicMock()
     mock_conn = MagicMock()
@@ -20,7 +22,7 @@ def mock_db(client):
     del app.dependency_overrides[get_db_engine]
 
 
-def test_list_tracks_no_db(client):
+def test_list_tracks_no_db(client: TestClient) -> None:
     app.dependency_overrides[get_db_engine] = lambda: None
     response = client.get("/api/tracks")
     assert response.status_code == 200
@@ -30,7 +32,7 @@ def test_list_tracks_no_db(client):
     del app.dependency_overrides[get_db_engine]
 
 
-def test_list_tracks_with_db(client, mock_db):
+def test_list_tracks_with_db(client: TestClient, mock_db: Any) -> None:
     mock_engine, mock_conn = mock_db
     mock_conn.execute.return_value.mappings.return_value.all.return_value = [
         {
@@ -47,14 +49,14 @@ def test_list_tracks_with_db(client, mock_db):
     assert body["data"][0]["name"] == "Test Track"
 
 
-def test_crud_flow_unauthorized(client):
+def test_crud_flow_unauthorized(client: TestClient) -> None:
     response = client.post(
         "/api/tracks", json={"name": "New Track", "artist": "New Artist"}
     )
     assert response.status_code == 401
 
 
-def test_crud_flow(client, mock_db):
+def test_crud_flow(client: TestClient, mock_db: Any) -> None:
     mock_engine, mock_conn = mock_db
 
     # Create
@@ -92,7 +94,7 @@ def test_crud_flow(client, mock_db):
     assert response.status_code == 204
 
 
-def test_upload_cover_unauthorized(client):
+def test_upload_cover_unauthorized(client: TestClient) -> None:
     file_content = b"fake image data"
     response = client.post(
         "/api/tracks/1/cover",
@@ -101,7 +103,7 @@ def test_upload_cover_unauthorized(client):
     assert response.status_code == 401
 
 
-def test_upload_cover(client, mock_db):
+def test_upload_cover(client: TestClient, mock_db: Any) -> None:
     file_content = b"fake image data"
     response = client.post(
         "/api/tracks/1/cover",
@@ -112,7 +114,7 @@ def test_upload_cover(client, mock_db):
     assert "cover_url" in response.json()
 
 
-def test_get_metadata_unauthorized(client):
+def test_get_metadata_unauthorized(client: TestClient) -> None:
     response = client.post("/api/tracks/metadata", json={"track_ids": ["id1"]})
     assert response.status_code == 401  # No X-API-Key
 
@@ -121,7 +123,9 @@ def test_get_metadata_unauthorized(client):
     "zotify_api.services.tracks_service.get_tracks_metadata_from_spotify",
     new_callable=AsyncMock,
 )
-def test_get_metadata_success(mock_get_metadata, client, mock_provider):
+def test_get_metadata_success(
+    mock_get_metadata: AsyncMock, client: TestClient, mock_provider: MagicMock
+) -> None:
     mock_metadata = [{"id": "track1", "name": "Test Track"}]
     mock_get_metadata.return_value = mock_metadata
 
@@ -136,13 +140,13 @@ def test_get_metadata_success(mock_get_metadata, client, mock_provider):
     mock_get_metadata.assert_called_with(["track1"], provider=mock_provider)
 
 
-def test_get_extended_metadata(client):
+def test_get_extended_metadata(client: TestClient) -> None:
     response = client.get("/api/tracks/abc123/metadata")
     assert response.status_code == 200
     assert "title" in response.json()
 
 
-def test_patch_extended_metadata(client):
+def test_patch_extended_metadata(client: TestClient) -> None:
     update_data = {"mood": "Energetic", "rating": 5}
     response = client.patch("/api/tracks/abc123/metadata", json=update_data)
     assert response.status_code == 200
@@ -153,7 +157,9 @@ def test_patch_extended_metadata(client):
     "zotify_api.services.tracks_service.get_tracks_metadata_from_spotify",
     new_callable=AsyncMock,
 )
-def test_get_metadata_spotify_error(mock_get_metadata, client, mock_provider):
+def test_get_metadata_spotify_error(
+    mock_get_metadata: AsyncMock, client: TestClient, mock_provider: MagicMock
+) -> None:
     # Simulate an error from the service layer (e.g., Spotify is down)
     mock_get_metadata.side_effect = HTTPException(
         status_code=503, detail="Service unavailable"

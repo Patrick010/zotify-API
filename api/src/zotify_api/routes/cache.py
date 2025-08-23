@@ -1,3 +1,5 @@
+from typing import Any, Dict
+
 from fastapi import APIRouter, Depends
 
 from zotify_api.schemas.cache import CacheClearRequest, CacheStatusResponse
@@ -15,7 +17,9 @@ router = APIRouter(prefix="/cache", tags=["cache"])
     description="Returns statistics about the cache.",
     response_description="Cache statistics.",
 )
-def get_cache(cache_service: CacheService = Depends(get_cache_service)):
+def get_cache(
+    cache_service: CacheService = Depends(get_cache_service),
+) -> Dict[str, Any]:
     return {"data": cache_service.get_cache_status()}
 
 
@@ -29,5 +33,5 @@ def get_cache(cache_service: CacheService = Depends(get_cache_service)):
 )
 def clear_cache(
     req: CacheClearRequest, cache_service: CacheService = Depends(get_cache_service)
-):
+) -> Dict[str, Any]:
     return {"data": cache_service.clear_cache(req.type)}

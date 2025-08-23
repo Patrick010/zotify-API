@@ -1,9 +1,10 @@
 # api/src/zotify_api/services/playlists_service.py
 import logging
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 from fastapi import Depends
 from sqlalchemy import text
+from sqlalchemy.engine import Engine
 
 from zotify_api.services.db import get_db_engine
 
@@ -18,7 +19,7 @@ class PlaylistsServiceError(Exception):
 
 
 class PlaylistsService:
-    def __init__(self, db_engine):
+    def __init__(self, db_engine: Optional[Engine]):
         self.db_engine = db_engine
 
     def get_default_limit(self) -> int:
@@ -48,7 +49,7 @@ class PlaylistsService:
         limit: int = DEFAULT_LIMIT,
         offset: int = 0,
         search: Optional[str] = None,
-    ) -> Tuple[List[Dict], int]:
+    ) -> Tuple[List[Dict[str, Any]], int]:
         limit = self._normalize_limit(limit)
         offset = self._normalize_offset(offset)
         if not self.db_engine:
@@ -81,7 +82,7 @@ class PlaylistsService:
                 "Database error while fetching playlists"
             ) from exc
 
-    def create_playlist(self, playlist_in: Dict) -> Dict:
+    def create_playlist(self, playlist_in: Dict[str, Any]) -> Dict[str, Any]:
         # Minimal validation is performed in Pydantic at the route layer,
         # but check here too.
         if not self.db_engine:
@@ -101,5 +102,7 @@ class PlaylistsService:
             ) from exc
 
 
-def get_playlists_service(db_engine: any = Depends(get_db_engine)):
+def get_playlists_service(
+    db_engine: Engine = Depends(get_db_engine),
+) -> PlaylistsService:
     return PlaylistsService(db_engine)

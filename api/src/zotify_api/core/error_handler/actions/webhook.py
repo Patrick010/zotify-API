@@ -4,7 +4,7 @@ from typing import Any, Dict
 log = logging.getLogger(__name__)
 
 
-def run(exc: Exception, details: Dict[str, Any]):
+def run(exc: Exception, details: Dict[str, Any]) -> None:
     """Action to send a notification to a webhook."""
     url = details.get("url")
     payload = details.get("payload")

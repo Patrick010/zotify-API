@@ -7,6 +7,7 @@ from fastapi import Depends, Header, HTTPException
 from sqlalchemy.orm import Session
 
 from zotify_api.auth_state import pending_states
+from zotify_api.config import Settings
 from zotify_api.database import crud
 from zotify_api.schemas.auth import AuthStatus
 from zotify_api.services.deps import get_db, get_settings
@@ -23,8 +24,8 @@ def get_admin_api_key_header(
 
 def require_admin_api_key(
     x_api_key: Optional[str] = Depends(get_admin_api_key_header),
-    settings=Depends(get_settings),
-):
+    settings: Settings = Depends(get_settings),
+) -> bool:
     if not settings.admin_api_key:
         raise HTTPException(status_code=503, detail="Admin API key not configured")
     if x_api_key != settings.admin_api_key:

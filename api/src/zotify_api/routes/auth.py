@@ -1,5 +1,5 @@
 import secrets
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from fastapi import APIRouter, Depends
 from fastapi.responses import HTMLResponse
@@ -15,13 +15,15 @@ router = APIRouter(prefix="/auth", tags=["auth"])
 
 
 @router.get("/{provider_name}/login", response_model=OAuthLoginResponse)
-async def provider_login(provider: BaseProvider = Depends(get_provider_no_auth)):
+async def provider_login(
+    provider: BaseProvider = Depends(get_provider_no_auth),
+) -> OAuthLoginResponse:
     """
     Initiates the OAuth2 login flow for a given provider.
     """
     state = secrets.token_urlsafe(16)
     auth_url = await provider.get_oauth_login_url(state)
-    return {"auth_url": auth_url}
+    return OAuthLoginResponse(auth_url=auth_url)
 
 
 @router.get("/{provider_name}/callback")
@@ -30,7 +32,7 @@ async def provider_callback(
     code: Optional[str] = None,
     error: Optional[str] = None,
     state: Optional[str] = None,
-):
+) -> HTMLResponse:
     """
     Handles the OAuth2 callback from the provider.
     """
@@ -45,13 +47,13 @@ async def provider_callback(
     response_model=AuthStatus,
     dependencies=[Depends(require_admin_api_key)],
 )
-async def get_status(db: Session = Depends(get_db)):
+async def get_status(db: Session = Depends(get_db)) -> AuthStatus:
     """Returns the current authentication status"""
     return await get_auth_status(db=db)
 
 
 @router.post("/logout", status_code=204, dependencies=[Depends(require_admin_api_key)])
-def logout(db: Session = Depends(get_db)):
+def logout(db: Session = Depends(get_db)) -> Dict[str, Any]:
     """
     Clears stored provider credentials from the database.
     TODO: This is currently provider-specific and should be moved to the provider layer.

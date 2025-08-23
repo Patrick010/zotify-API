@@ -1,6 +1,7 @@
 import platform
 import sys
 import time
+from typing import Any, Dict
 
 import yaml
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -22,7 +23,7 @@ router = APIRouter(
 
 
 @router.post("/logging/reload", status_code=status.HTTP_202_ACCEPTED)
-def reload_logging_config():
+def reload_logging_config() -> Dict[str, str]:
     """
     Reloads the logging framework's configuration from the
     `logging_framework.yml` file at runtime.
@@ -57,31 +58,31 @@ def reload_logging_config():
 
 
 @router.get("/status")
-def get_system_status():
+def get_system_status() -> None:
     raise HTTPException(status_code=501, detail="Not Implemented")
 
 
 @router.get("/storage")
-def get_system_storage():
+def get_system_storage() -> None:
     raise HTTPException(status_code=501, detail="Not Implemented")
 
 
 @router.get("/logs")
-def get_system_logs():
+def get_system_logs() -> None:
     raise HTTPException(status_code=501, detail="Not Implemented")
 
 
 @router.post("/reload")
-def reload_system_config():
+def reload_system_config() -> None:
     raise HTTPException(status_code=501, detail="Not Implemented")
 
 
 @router.post("/reset")
-def reset_system_state():
+def reset_system_state() -> None:
     raise HTTPException(status_code=501, detail="Not Implemented")
 
 
-def get_human_readable_uptime(seconds):
+def get_human_readable_uptime(seconds: float) -> str:
     days, rem = divmod(seconds, 86400)
     hours, rem = divmod(rem, 3600)
     minutes, seconds = divmod(rem, 60)
@@ -89,7 +90,7 @@ def get_human_readable_uptime(seconds):
 
 
 @router.get("/uptime", response_model=StandardResponse[SystemUptime])
-def get_uptime():
+def get_uptime() -> Dict[str, Any]:
     """Returns uptime in seconds and human-readable format."""
     uptime_seconds = time.time() - app_start_time.timestamp()
     uptime_data = SystemUptime(
@@ -100,7 +101,7 @@ def get_uptime():
 
 
 @router.get("/env", response_model=StandardResponse[SystemEnv])
-def get_env():
+def get_env() -> Dict[str, Any]:
     """Returns a safe subset of environment info"""
     env_data = SystemEnv(
         version=settings.version,

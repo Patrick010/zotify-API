@@ -1,4 +1,9 @@
+from typing import Generator
+
 import pytest
+from fastapi.testclient import TestClient
+from pytest import MonkeyPatch
+from sqlalchemy.orm import Session
 
 from zotify_api.database.session import get_db
 from zotify_api.main import app
@@ -10,14 +15,16 @@ from zotify_api.services import download_service
 
 
 @pytest.fixture(autouse=True)
-def override_get_db(test_db_session):
+def override_get_db(
+    test_db_session: Session,
+) -> Generator[None, None, None]:
     """
     Fixture to override the `get_db` dependency with the isolated test session
     provided by the `test_db_session` fixture from conftest.py.
     `autouse=True` ensures this runs for every test in this file.
     """
 
-    def override_db():
+    def override_db() -> Generator[Session, None, None]:
         yield test_db_session
 
     app.dependency_overrides[get_db] = override_db
@@ -33,7 +40,7 @@ def override_get_db(test_db_session):
 # --- Tests ---
 
 
-def test_get_initial_queue_status(client):
+def test_get_initial_queue_status(client: TestClient) -> None:
     response = client.get("/api/downloads/status")
     assert response.status_code == 200
     data = response.json()["data"]
@@ -44,7 +51,7 @@ def test_get_initial_queue_status(client):
     assert data["jobs"] == []
 
 
-def test_add_new_downloads(client):
+def test_add_new_downloads(client: TestClient) -> None:
     response = client.post(
         "/api/downloads",
         headers={"X-API-Key": "test_key"},
@@ -64,7 +71,7 @@ def test_add_new_downloads(client):
     assert data["pending"] == 2
 
 
-def test_process_job_success(client):
+def test_process_job_success(client: TestClient) -> None:
     client.post(
         "/api/downloads",
         headers={"X-API-Key": "test_key"},
@@ -83,7 +90,7 @@ def test_process_job_success(client):
     assert data["completed"] == 1
 
 
-def test_process_job_failure(client, monkeypatch):
+def test_process_job_failure(client: TestClient, monkeypatch: MonkeyPatch) -> None:
     client.post(
         "/api/downloads",
         headers={"X-API-Key": "test_key"},
@@ -111,7 +118,7 @@ def test_process_job_failure(client, monkeypatch):
     assert data["failed"] == 1
 
 
-def test_retry_failed_jobs(client, monkeypatch):
+def test_retry_failed_jobs(client: TestClient, monkeypatch: MonkeyPatch) -> None:
     # Add and fail a job
     client.post(
         "/api/downloads",
@@ -141,7 +148,7 @@ def test_retry_failed_jobs(client, monkeypatch):
     assert data["jobs"][0]["status"] == "pending"
 
 
-def test_process_empty_queue(client):
+def test_process_empty_queue(client: TestClient) -> None:
     response = client.post("/api/downloads/process", headers={"X-API-Key": "test_key"})
     assert response.status_code == 200
     assert response.json()["data"] is None

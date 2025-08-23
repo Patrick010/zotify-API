@@ -3,7 +3,7 @@ from unittest.mock import MagicMock, patch
 from zotify_api.core.error_handler.actions import log_critical, webhook
 
 
-def test_log_critical_action():
+def test_log_critical_action() -> None:
     """
     Tests that the log_critical action logs a critical error.
     """
@@ -14,7 +14,7 @@ def test_log_critical_action():
         mock_log_event.assert_called_once()
 
 
-def test_webhook_action_success():
+def test_webhook_action_success() -> None:
     """
     Tests that the webhook action logs the intent to send a webhook.
     """
@@ -28,7 +28,7 @@ def test_webhook_action_success():
         )
 
 
-def test_webhook_action_missing_details():
+def test_webhook_action_missing_details() -> None:
     """
     Tests that the webhook action logs an error if details are missing.
     """

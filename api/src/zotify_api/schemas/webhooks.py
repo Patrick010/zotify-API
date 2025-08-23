@@ -1,4 +1,4 @@
-from typing import List
+from typing import Any, Dict, List
 
 from pydantic import BaseModel
 
@@ -14,4 +14,4 @@ class Webhook(WebhookPayload):
 
 class FirePayload(BaseModel):
     event: str
-    data: dict
+    data: Dict[str, Any]

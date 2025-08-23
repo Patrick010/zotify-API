@@ -8,7 +8,7 @@ The functions in this module are designed to be called from the API layer.
 import json
 import logging
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, cast
 
 log = logging.getLogger(__name__)
 
@@ -23,7 +23,7 @@ class UserService:
         user_history: List[str],
         user_preferences: Dict[str, Any],
         notifications: List[Dict[str, Any]],
-        storage_file: Path = None,
+        storage_file: Path | None = None,
     ):
         self._user_profile = user_profile
         self._user_liked = user_liked
@@ -32,7 +32,7 @@ class UserService:
         self._notifications = notifications
         self._storage_file = storage_file
 
-    def _save_data(self):
+    def _save_data(self) -> None:
         if self._storage_file:
             data = {
                 "profile": self._user_profile,
@@ -103,7 +103,7 @@ def get_user_service() -> "UserService":
         STORAGE_FILE.parent.mkdir(parents=True, exist_ok=True)
 
     if not STORAGE_FILE.exists():
-        default_data = {
+        default_data: Dict[str, Any] = {
             "profile": {"name": "Test User", "email": "test@example.com"},
             "liked": ["track1", "track2"],
             "history": ["track3", "track4"],
@@ -113,21 +113,21 @@ def get_user_service() -> "UserService":
         with open(STORAGE_FILE, "w") as f:
             json.dump(default_data, f, indent=4)
         return UserService(
-            user_profile=default_data["profile"],
-            user_liked=default_data["liked"],
-            user_history=default_data["history"],
-            user_preferences=default_data["preferences"],
-            notifications=default_data["notifications"],
+            user_profile=cast(Dict[str, Any], default_data["profile"]),
+            user_liked=cast(List[str], default_data["liked"]),
+            user_history=cast(List[str], default_data["history"]),
+            user_preferences=cast(Dict[str, Any], default_data["preferences"]),
+            notifications=cast(List[Dict[str, Any]], default_data["notifications"]),
             storage_file=STORAGE_FILE,
         )
     else:
         with open(STORAGE_FILE, "r") as f:
             data = json.load(f)
         return UserService(
-            user_profile=data.get("profile", {}),
-            user_liked=data.get("liked", []),
-            user_history=data.get("history", []),
-            user_preferences=data.get("preferences", {}),
-            notifications=data.get("notifications", []),
+            user_profile=cast(Dict[str, Any], data.get("profile", {})),
+            user_liked=cast(List[str], data.get("liked", [])),
+            user_history=cast(List[str], data.get("history", [])),
+            user_preferences=cast(Dict[str, Any], data.get("preferences", {})),
+            notifications=cast(List[Dict[str, Any]], data.get("notifications", [])),
             storage_file=STORAGE_FILE,
         )

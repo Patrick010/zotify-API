@@ -3,7 +3,7 @@ from typing import Any, Dict
 from zotify_api.core.logging_framework import log_event
 
 
-def run(exc: Exception, details: Dict[str, Any]):
+def run(exc: Exception, details: Dict[str, Any]) -> None:
     """
     Action to log a message with CRITICAL level using the flexible
     logging framework.

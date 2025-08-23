@@ -15,7 +15,7 @@ class BaseLogHandler(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def emit(self, log_record: Dict[str, Any]):
+    def emit(self, log_record: Dict[str, Any]) -> None:
         """
         Processes the log record (e.g., writes it to a file, console, or database).
         """

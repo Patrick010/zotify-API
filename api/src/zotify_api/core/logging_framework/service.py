@@ -1,7 +1,7 @@
 import asyncio
 import logging
 from logging.handlers import RotatingFileHandler
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, cast
 
 import httpx
 
@@ -23,19 +23,19 @@ class BaseSink:
         self.config = config
         self.level = logging.getLevelName(config.level)
 
-    async def emit(self, log_record: Dict[str, Any]):
+    async def emit(self, log_record: Dict[str, Any]) -> None:
         """Abstract method to emit a log record."""
         raise NotImplementedError
 
     def should_log(self, level: str) -> bool:
         """Determines if a log should be processed based on its level."""
-        return logging.getLevelName(level) >= self.level
+        return cast(int, logging.getLevelName(level)) >= self.level
 
 
 class ConsoleSink(BaseSink):
     """A sink that logs to the console."""
 
-    async def emit(self, log_record: Dict[str, Any]):
+    async def emit(self, log_record: Dict[str, Any]) -> None:
         # In a real implementation, this would use a more robust formatter.
         print(f"CONSOLE: {log_record}")
 
@@ -54,7 +54,7 @@ class FileSink(BaseSink):
         self.logger.setLevel(self.level)
         self.logger.propagate = False
 
-    async def emit(self, log_record: Dict[str, Any]):
+    async def emit(self, log_record: Dict[str, Any]) -> None:
         # The logging call itself is synchronous, but we run it in a way
         # that doesn't block the main event loop if it were I/O heavy.
         # For standard file logging, this is fast enough.
@@ -67,8 +67,9 @@ class WebhookSink(BaseSink):
     def __init__(self, config: WebhookSinkConfig):
         super().__init__(config)
         self.client = httpx.AsyncClient()
+        self.config: WebhookSinkConfig = config
 
-    async def emit(self, log_record: Dict[str, Any]):
+    async def emit(self, log_record: Dict[str, Any]) -> None:
         try:
             await self.client.post(str(self.config.url), json=log_record)
         except httpx.RequestError as e:
@@ -80,11 +81,11 @@ class WebhookSink(BaseSink):
 class LoggingService:
     """The main service for managing and dispatching logs."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.sinks: Dict[str, BaseSink] = {}
         self.config: Optional[LoggingFrameworkConfig] = None
 
-    def load_config(self, config: LoggingFrameworkConfig):
+    def load_config(self, config: LoggingFrameworkConfig) -> None:
         self.config = config
         self.sinks = {}  # Clear existing sinks
         for sink_config in config.logging.sinks:
@@ -123,7 +124,7 @@ class LoggingService:
                 return True
         return False
 
-    def _handle_tag_triggers(self, tags: List[str], log_record: Dict[str, Any]):
+    def _handle_tag_triggers(self, tags: List[str], log_record: Dict[str, Any]) -> None:
         """
         Checks for and processes any matching tag-based triggers.
         Tag-based triggers are non-destructive; they route a copy of the
@@ -148,8 +149,8 @@ class LoggingService:
         message: str,
         level: str = "INFO",
         destinations: Optional[List[str]] = None,
-        **extra,
-    ):
+        **extra: Any,
+    ) -> None:
         """
         Primary method for logging an event.
         Dispatches the log to the appropriate sinks and handles triggers.
@@ -169,9 +170,9 @@ class LoggingService:
             self._handle_tag_triggers(tags, log_record)
 
         # Finally, process the original log event
-        sinks_to_log = []
+        sinks_to_log: List[BaseSink] = []
         if destinations is None:
-            sinks_to_log = self.sinks.values()
+            sinks_to_log = list(self.sinks.values())
         else:
             for dest_name in destinations:
                 if dest_name in self.sinks:

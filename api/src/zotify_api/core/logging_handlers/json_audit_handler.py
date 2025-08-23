@@ -38,7 +38,7 @@ class JsonAuditHandler(BaseLogHandler):
         }
         return json.dumps(audit_record)
 
-    def emit(self, log_record: Dict[str, Any]):
+    def emit(self, log_record: Dict[str, Any]) -> None:
         """Appends the formatted JSON log record to the audit log file."""
         formatted_message = self.format(log_record)
         try:

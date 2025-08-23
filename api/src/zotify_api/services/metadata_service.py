@@ -1,8 +1,10 @@
+from typing import Any, Dict, List
+
 from zotify_api.schemas.metadata import MetadataUpdate
 
 
 # Simulated backend storage
-def get_initial_metadata():
+def get_initial_metadata() -> Dict[str, Dict[str, Any]]:
     return {
         "abc123": {
             "title": "Track Title",
@@ -17,22 +19,22 @@ track_metadata = get_initial_metadata()
 
 
 class MetadataService:
-    def get_metadata(self, track_id: str):
+    def get_metadata(self, track_id: str) -> Dict[str, Any]:
         return track_metadata.get(
             track_id, {"track_id": track_id, "status": "not found"}
         )
 
-    def patch_metadata(self, track_id: str, meta: MetadataUpdate):
+    def patch_metadata(self, track_id: str, meta: MetadataUpdate) -> Dict[str, str]:
         if track_id not in track_metadata:
             track_metadata[track_id] = {"title": f"Track {track_id}"}
         for k, v in meta.model_dump(exclude_unset=True).items():
             track_metadata[track_id][k] = v
         return {"status": "success", "track_id": track_id}
 
-    def _reset_data(self):
+    def _reset_data(self) -> None:
         global track_metadata
         track_metadata = get_initial_metadata()
 
 
-def get_metadata_service():
+def get_metadata_service() -> "MetadataService":
     return MetadataService()
