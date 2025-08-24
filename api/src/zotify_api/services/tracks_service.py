@@ -114,8 +114,8 @@ def update_track(
         with engine.connect() as conn:
             set_clause = ", ".join([f"{key} = :{key}" for key in update_payload.keys()])
             stmt = text(
-                f"UPDATE tracks SET {set_clause} WHERE id = :track_id"
-            )  # nosec B608
+                f"UPDATE tracks SET {set_clause} WHERE id = :track_id"  # nosec B608
+            )
             conn.execute(stmt, {"track_id": track_id, **update_payload})
             now = datetime.now()
             # We need to fetch the full track to get all the fields
