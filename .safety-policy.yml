@@ -12,9 +12,11 @@ report:
   dependency-vulnerabilities:
     enabled: true
     auto-ignore-in-report:
-      ids:
-        - "51167"
-        - "77740"
+      vulnerabilities:
+        "51167":
+          reason: "Acknowledged vulnerability in protobuf 3.20.1"
+        "77740":
+          reason: "Acknowledged vulnerability in protobuf 3.20.1"
       python:
         environment-results: true
         unpinned-requirements: true
