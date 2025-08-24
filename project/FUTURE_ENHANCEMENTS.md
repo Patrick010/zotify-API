@@ -53,6 +53,14 @@ This section lists specific technical features and improvements that are candida
     *   This feature is a major step towards making the platform truly provider-agnostic and will serve as the foundation for advanced cross-source library management and content discovery. See the full proposal at [`MULTI_SOURCE_METADATA_PROPOSAL.md`](./MULTI_SOURCE_METADATA_PROPOSAL.md).
 *   **Home Automation Integration:**
     *   Develop a dedicated integration for home automation platforms like Home Assistant. This would expose Zotify as a `media_player` entity and provide services for triggering downloads and other actions from within home automations. See the full proposal at [`HOME_AUTOMATION_PROPOSAL.md`](./HOME_AUTOMATION_PROPOSAL.md).
+*   **Decouple from `librespot` to Mitigate Dependency Risk:**
+    *   **Problem:** The project is currently locked to an old version of `protobuf` (`3.20.1`) due to a strict dependency pin in `librespot`. This version has known security vulnerabilities.
+    *   **Goal:** Mitigate this security and maintenance risk by investigating alternatives to the direct `librespot` dependency.
+    *   **Proposed Action:** A research spike to investigate options, including:
+        1.  Finding a more up-to-date and maintained fork of `librespot`.
+        2.  Isolating `librespot` in its own process to decouple its dependencies from the main application.
+        3.  Researching alternative libraries to replace `librespot`'s functionality.
+    *   **Outcome:** A recommendation document outlining the best path forward to resolve the dependency-pinning issue.
 
 ---
 
