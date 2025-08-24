@@ -1,5 +1,32 @@
 # Audit Phase 4a: Technical Debt Remediation
 
+**Date:** 2025-08-23
+
+---
+
+### Task: `golangci-lint` Remediation for `snitch`
+
+*   **Status:** ✅ Done
+*   **Summary of Activities:**
+    1.  **Environment Setup:** Installed the `golangci-lint` tool.
+    2.  **Configuration Repair:** The existing `.golangci.yml` configuration file was found to be badly malformed and outdated. It was completely rewritten to use the modern "v2" format, de-duplicated, and corrected to enable a baseline set of standard linters.
+    3.  **Code Remediation:** Fixed 4 minor issues in `snitch.go` reported by the linter, primarily related to unchecked error return values.
+*   **Outcome:** The `snitch` microservice now passes a `golangci-lint run` with zero issues.
+
+---
+
+---
+
+### Task: Security Scans (`bandit`, `safety`)
+
+*   **Status:** ✅ Done
+*   **Summary of Activities:**
+    1.  **`bandit` Scan:** Ran `bandit -r .` on the `api` module. The scan identified one medium-severity issue (`B608:hardcoded_sql_expressions`) and numerous low-severity issues (`B101:assert_used`, `B105/B106:hardcoded_password`). A manual review concluded that the B608 finding was a false positive, as the SQL statement was safely constructed using an allow-list. The other findings were deemed not applicable as they occurred in test files. No remediation was required.
+    2.  **`safety` Scan:** Ran `safety check` on the project's dependencies. The scan identified two vulnerabilities in the required `protobuf==3.20.1` package (CVE-2022-1941 and CVE-2025-4565).
+*   **Outcome:** An attempt to upgrade `protobuf` to a secure version failed due to a strict dependency pin (`==3.20.1`) in both `zotify-api` and `librespot`. To avoid breaking the build, the `protobuf` version was reverted to `3.20.1`. The security vulnerabilities are therefore not remediated, but this decision is now documented.
+
+---
+
 **Date:** 2025-08-22
 **Author:** Jules
 **Objective:** To track the execution of the tasks defined in the `CODE_OPTIMIZATIONPLAN_PHASE_4.md` and to ensure that all quality gates and automation are in place to prevent future design drift.

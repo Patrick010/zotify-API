@@ -63,8 +63,9 @@ This document outlines the plan to align the High-Level Design (HLD) and Low-Lev
     - Run `bandit` and remediate all critical/high-severity findings.
 - [ ] **`safety` Dependency Scan:**
     - Run `safety` to check for insecure dependencies and remediate all findings.
-- [ ] **`golangci-lint` for `snitch`:**
+- [x] **`golangci-lint` for `snitch`:**
     - Run `golangci-lint` on the `snitch` microservice and remediate all findings.
+    - *Note: This task is complete.*
 
 ### Phase 4b: CI/CD Hardening
 **Objective:** To integrate the new quality gates into the CI/CD pipeline.
