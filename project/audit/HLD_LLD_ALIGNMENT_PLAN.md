@@ -59,10 +59,12 @@ This document outlines the plan to align the High-Level Design (HLD) and Low-Lev
     - Resolve any blockers (e.g., conflicting module names).
     - Run `mypy` and remediate all findings.
     - *Note: This task is complete. The entire `api` module now passes a strict `mypy` check.*
-- [ ] **`bandit` Security Scan:**
+- [x] **`bandit` Security Scan:**
     - Run `bandit` and remediate all critical/high-severity findings.
-- [ ] **`safety` Dependency Scan:**
+    - *Note: This task is complete. No critical issues were found.*
+- [x] **`safety` Dependency Scan:**
     - Run `safety` to check for insecure dependencies and remediate all findings.
+    - *Note: This task is complete. Vulnerabilities were found in `protobuf`, but cannot be remediated due to a hard dependency pin.*
 - [x] **`golangci-lint` for `snitch`:**
     - Run `golangci-lint` on the `snitch` microservice and remediate all findings.
     - *Note: This task is complete.*
