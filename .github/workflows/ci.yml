@@ -127,7 +127,7 @@ jobs:
     - name: Run bandit
       run: |
         cd api
-        python -m bandit -r .
+        python -m bandit -r . -c bandit.yml
 
     - name: Run safety
       run: |
