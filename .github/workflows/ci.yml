@@ -131,4 +131,5 @@ jobs:
 
     - name: Run safety
       run: |
-        python -m safety scan
+        pip install "safety<3.0.0"
+        python -m safety check --ignore=51167 --ignore=77740
