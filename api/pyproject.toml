@@ -27,7 +27,13 @@ dependencies = [
     "sqlalchemy",
     "python-multipart",
     "pyyaml",
-    "pytest-mock"
+    "pytest-mock",
+    "mypy",
+    "ruff",
+    "bandit",
+    "safety",
+    "types-pyyaml",
+    "sqlalchemy[mypy]"
 ]
 
 [tool.pytest.ini_options]
