@@ -49,7 +49,7 @@ This document outlines the plan to align the High-Level Design (HLD) and Low-Lev
 
 ### Phase 4a: Technical Debt Remediation
 **Objective:** Before implementing new quality gates, the existing codebase must be brought to a clean baseline by running and remediating findings from a suite of static analysis tools.
-**Status:** 🏃 Ongoing
+**Status:** ✅ Done
 
 **Tasks:**
 - [x] **`ruff` Linter Remediation:**
@@ -71,13 +71,13 @@ This document outlines the plan to align the High-Level Design (HLD) and Low-Lev
 
 ### Phase 4b: CI/CD Hardening
 **Objective:** To integrate the new quality gates into the CI/CD pipeline.
-**Status:** 📝 To Do
+**Status:** ✅ Done
 
 **Tasks:**
-- [ ] Add a `lint` job to the CI workflow (`ruff`, `golangci-lint`).
-- [ ] Add a `type-check` job to the CI workflow (`mypy`).
-- [ ] Add a `security-scan` job to the CI workflow (`bandit`, `safety`).
-- [ ] Gate pull requests on the successful completion of all new jobs.
+- [x] Add a `lint` job to the CI workflow (`ruff`, `golangci-lint`).
+- [x] Add a `type-check` job to the CI workflow (`mypy`).
+- [x] Add a `security-scan` job to the CI workflow (`bandit`, `safety`).
+- [x] Gate pull requests on the successful completion of all new jobs.
 
 ### Phase 4c: Custom Architectural & Documentation Linting
 **Objective:** To automatically enforce the project's "living documentation" philosophy.
