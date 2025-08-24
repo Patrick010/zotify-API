@@ -15,8 +15,10 @@ report:
       vulnerabilities:
         "51167":
           reason: "Acknowledged vulnerability in protobuf 3.20.1"
+          expires: "2099-12-31"
         "77740":
           reason: "Acknowledged vulnerability in protobuf 3.20.1"
+          expires: "2099-12-31"
       python:
         environment-results: true
         unpinned-requirements: true
