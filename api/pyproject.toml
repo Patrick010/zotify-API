@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zotify-api"
+version = "0.1.0"
+description = "A REST API for the Zotify music and podcast downloader."
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "librespot @ git+https://github.com/kokarare1212/librespot-python.git",
+    "ffmpy",
+    "music_tag",
+    "Pillow",
+    "pkce",
+    "protobuf==3.20.1",
+    "pwinput",
+    "tabulate[widechars]",
+    "tqdm",
+    "pytest",
+    "pytest-asyncio",
+    "httpx",
+    "respx",
+    "pydantic-settings",
+    "sqlalchemy",
+    "python-multipart",
+    "pyyaml",
+    "pytest-mock",
+    "mypy",
+    "ruff",
+    "bandit",
+    "safety",
+    "types-pyyaml",
+    "sqlalchemy[mypy]"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"
+filterwarnings = [
+    "ignore:Support for class-based `config` is deprecated:pydantic.PydanticDeprecatedSince20"
+]
+
+[tool.pytest-asyncio]
+mode = "auto"

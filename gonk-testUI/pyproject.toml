@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gonk-testUI"
+version = "0.1.0"
+description = "A development and testing UI for the Zotify API."
+requires-python = ">=3.10"
+dependencies = [
+    "Flask",
+    "sqlite-web",
+]
+
+[tool.setuptools]
+py-modules = ["app"]

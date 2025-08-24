@@ -1,0 +1,27 @@
+[
+{"route":"config", "data": {"library_path":"/mnt/media","scan_on_startup":false,"cover_art_embed_enabled":true}}
+,
+{"route":"playlist", "data": {"detail":"Not Found"}}
+,
+{"route":"tracks", "data": {"detail":"Not Found"}}
+,
+{"route":"logging", "data": {"level":"INFO","log_to_file":false,"log_file":null}}
+,
+{"route":"cache", "data": {"total_items":302,"by_type":{"search":80,"metadata":222}}}
+,
+{"route":"network", "data": {"proxy_enabled":false,"http_proxy":null,"https_proxy":null}}
+,
+{"route":"sync", "data": {"detail":"Not Found"}}
+,
+{"route":"downloads", "data": {"detail":"Not Found"}}
+,
+{"route":"metadata", "data": {"detail":"Not Found"}}
+,
+{"route":"spotify", "data": {"detail":"Not Found"}}
+,
+{"route":"stubs", "data": {"detail":"Not Found"}}
+,
+{"route":"user", "data": {"detail":"Not Found"}}
+,
+{"route":"system", "data": {"detail":"Not Found"}}
+]
