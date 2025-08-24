@@ -97,7 +97,9 @@ def create_track(payload: Dict[str, Any], engine: Any = None) -> Dict[str, Any]:
         raise
 
 
-def update_track(track_id: str, payload: Dict[str, Any], engine: Any = None) -> Dict[str, Any] | None:
+def update_track(
+    track_id: str, payload: Dict[str, Any], engine: Any = None
+) -> Dict[str, Any] | None:
     engine = engine or get_db_engine()
     if not engine:
         raise Exception("No DB engine available")
@@ -153,7 +155,9 @@ def search_tracks(
     return get_tracks(limit, offset, q, engine)
 
 
-def upload_cover(track_id: str, file_bytes: bytes, engine: Any = None) -> Dict[str, Any]:
+def upload_cover(
+    track_id: str, file_bytes: bytes, engine: Any = None
+) -> Dict[str, Any]:
     # This is a stub for now
     return {"track_id": track_id, "cover_url": f"/static/covers/{track_id}.jpg"}
 

@@ -3,6 +3,7 @@ import uuid
 from typing import List
 
 from sqlalchemy import (
+    Column,
     DateTime,
     Float,
     ForeignKey,
@@ -10,7 +11,6 @@ from sqlalchemy import (
     String,
     Table,
     Text,
-    Column,
     func,
 )
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
@@ -37,7 +37,9 @@ class User(Base):
     id: Mapped[str] = mapped_column(
         String, primary_key=True, default=lambda: str(uuid.uuid4())
     )
-    username: Mapped[str] = mapped_column(String, unique=True, index=True, nullable=False)
+    username: Mapped[str] = mapped_column(
+        String, unique=True, index=True, nullable=False
+    )
     hashed_password: Mapped[str] = mapped_column(String, nullable=False)
     # A simple role system for future use
     role: Mapped[str] = mapped_column(String, default="user", nullable=False)
@@ -45,12 +47,17 @@ class User(Base):
 
 class SpotifyToken(Base):
     __tablename__ = "spotify_tokens"
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)  # Simple auto-incrementing ID
+    # Simple auto-incrementing ID
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
     # For multi-user support
-    user_id: Mapped[str | None] = mapped_column(String, ForeignKey("users.id"), nullable=True)
+    user_id: Mapped[str | None] = mapped_column(
+        String, ForeignKey("users.id"), nullable=True
+    )
     access_token: Mapped[str] = mapped_column(String, nullable=False)
     refresh_token: Mapped[str] = mapped_column(String, nullable=False)
-    expires_at: Mapped[datetime.datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    expires_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False
+    )
 
 
 class Track(Base):

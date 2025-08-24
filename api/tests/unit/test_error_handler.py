@@ -1,5 +1,5 @@
 import logging
-from typing import Any, Dict, Generator, List
+from typing import Any, Generator, List
 from unittest.mock import patch
 
 import pytest

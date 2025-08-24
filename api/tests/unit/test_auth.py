@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta, timezone
-from typing import Any
 from unittest.mock import AsyncMock, MagicMock, Mock, patch
 
 import pytest

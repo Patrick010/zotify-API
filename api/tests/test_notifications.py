@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Callable, Generator
+from typing import Callable
 
 import pytest
 from fastapi.testclient import TestClient
