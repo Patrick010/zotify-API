@@ -36,6 +36,11 @@ dependencies = [
     "sqlalchemy[mypy]"
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pre-commit"
+]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-v"

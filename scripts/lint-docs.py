@@ -5,6 +5,7 @@ This script checks a git diff for modified source files and ensures their
 corresponding documentation, as inferred by module path, has also been modified.
 """
 
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -21,16 +22,26 @@ DOC_PREFIXES = ["api/docs", "snitch/docs", "gonk-testUI/docs", "project/"]
 
 def get_changed_files() -> Set[str]:
     """
-    Gets the set of changed files compared to the main branch.
-    This is intended for use in a CI environment.
+    Gets the set of changed files.
+
+    In a pre-commit environment, it checks staged files.
+    In a CI environment, it checks files changed against the main branch.
     """
-    try:
-        # In CI, we need to compare against the target branch, which is typically 'main'
+    is_precommit = os.environ.get("PRE_COMMIT") == "1"
+
+    command = []
+    if is_precommit:
+        print("Running in pre-commit mode (checking staged files)...")
+        command = ["git", "diff", "--name-only", "--cached"]
+    else:
+        print("Running in CI mode (checking against main branch)...")
         # First, ensure we have the target branch available
         subprocess.run(["git", "fetch", "origin", "main"], check=True, capture_output=True)
-        # Then, get the list of changed files
+        command = ["git", "diff", "--name-only", "origin/main...HEAD"]
+
+    try:
         result = subprocess.run(
-            ["git", "diff", "--name-only", "origin/main...HEAD"],
+            command,
             check=True,
             capture_output=True,
             text=True,
@@ -38,7 +49,6 @@ def get_changed_files() -> Set[str]:
         return set(line for line in result.stdout.strip().split("\n") if line)
     except (subprocess.CalledProcessError, FileNotFoundError) as e:
         print(f"FATAL: Could not get changed files from git: {e}", file=sys.stderr)
-        # If git diff fails, we cannot proceed.
         return set()
 
 

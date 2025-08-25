@@ -1,0 +1,9 @@
+repos:
+-   repo: local
+    hooks:
+    -   id: doc-linter
+        name: Documentation Linter
+        entry: python scripts/lint-docs.py
+        language: python
+        types: [file] # Run on all staged files
+        pass_filenames: false # The script gets filenames from git, not as arguments

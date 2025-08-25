@@ -41,6 +41,8 @@ This document serves as the master file, or single source of truth, for tracking
 | **Task Checklist** | [`TASK_CHECKLIST.md`](./TASK_CHECKLIST.md) | A checklist to be used for every task to ensure compliance with project standards. |
 | **Dependency Policy** | [`DEPENDENCIES.md`](./DEPENDENCIES.md) | The policy and registry for managing third-party dependencies. |
 | **Security Document** | [`SECURITY.md`](./SECURITY.md) | The definitive security reference for the project. |
+| **CI/CD Guide** | [`CICD.md`](./CICD.md) | A guide explaining the CI/CD pipeline, linters, and pre-commit hooks. |
+| **CI/CD Template** | [`../templates/CICD.md`](../templates/CICD.md) | A reusable template version of the CI/CD guide for porting to other projects. |
 
 ---
 

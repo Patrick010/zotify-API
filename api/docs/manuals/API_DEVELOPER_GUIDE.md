@@ -38,6 +38,8 @@ Follow these steps for every contribution:
 
 ## 3. Running Quality Checks
 
+For a comprehensive overview of the project's CI/CD pipeline and local quality checks, please refer to the main [`CICD.md`](../../../project/CICD.md) guide.
+
 Before committing, you must run the following checks from the project root.
 
 -   **Linter (`ruff`):**
