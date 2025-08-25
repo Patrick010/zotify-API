@@ -57,6 +57,8 @@ Before committing, you must run the following checks from the project root.
     # Run from the project root
     bandit -c api/bandit.yml -r api
     ```
+-   **Documentation Linter (CI Only):**
+    The documentation linter runs automatically in the CI/CD pipeline. It checks that code changes are accompanied by corresponding documentation changes. See the dedicated section below for more details.
 
 ---
 
@@ -119,3 +121,26 @@ For significant architectural changes (e.g., adding a new major component, chang
     -   The new proposal document must be added to `project/PROJECT_REGISTRY.md`.
 4.  **Seek Approval:**
     -   Submit the changes for review and approval before beginning implementation.
+
+---
+
+## 6. Documentation Linter
+
+To automatically enforce the "living documentation" principle, the project includes a custom linter that runs in the CI pipeline. This linter ensures that code changes are accompanied by corresponding documentation updates.
+
+### How It Works
+
+The linter's logic is based on a "module" system, which is inferred from the top-level directory structure. The primary modules are `api`, `snitch`, and `gonk-testUI`.
+
+The rule is as follows:
+
+> If a pull request contains changes to source code or tests within a module (e.g., `api/src` or `api/tests`), it **must** also contain changes to a documentation file.
+
+### What Counts as a Documentation Change?
+
+A documentation change can be one of two things:
+
+1.  **A change to a document within the same module.** For example, a change to `api/src/main.py` can be accompanied by a change to `api/docs/USER_MANUAL.md`.
+2.  **A change to any document in the top-level `project/` directory.** This allows high-level design documents (like `project/HIGH_LEVEL_DESIGN.md`) or logs to serve as valid documentation for a code change in any module.
+
+If this rule is violated, the `doc-linter` job in the CI pipeline will fail, blocking the pull request until a valid documentation change is added.
