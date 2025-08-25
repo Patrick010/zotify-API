@@ -1,3 +1,36 @@
+## ACT-054: Implement Developer Tooling and Finalize CI
+
+**Date:** 2025-08-25
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To complete Phase 4c of the audit alignment plan by implementing a custom documentation linter, integrating it into the CI/CD pipeline, and hardening the development workflow with pre-commit hooks and standardized documentation templates. This also includes fixing all outstanding CI failures.
+
+### Outcome
+- **CI Pipeline Stabilized:**
+    - A persistent `golangci-lint` failure was debugged and resolved. The root cause was a mismatch between the Go version in the `snitch/go.mod` file (`1.24.3`) and the version used by the CI runner (`1.22`). The `go.mod` file was downgraded to align with the CI environment.
+- **Custom Documentation Linter:**
+    - A new script, `scripts/lint-docs.py`, was created to enforce that code changes are accompanied by corresponding documentation changes.
+    - The linter was integrated into the CI pipeline as a new `doc-linter` job.
+- **Pre-commit Hooks:**
+    - The `pre-commit` framework was introduced to run the documentation linter locally, preventing developers from committing code that violates documentation policies.
+    - A `.pre-commit-config.yaml` file was created to configure the hook.
+- **Documentation Overhaul:**
+    - A new file naming convention was established (`FILENAME.md` for markdown, `lowercase` for all other files).
+    - A comprehensive set of reusable documentation templates was imported into the `templates/` directory.
+    - New `CICD.md` guides were created for both project management (`project/CICD.md`) and developer (`api/docs/manuals/CICD.md`) audiences.
+    - All project registries were updated to reflect the new files and conventions.
+
+### Related Documents
+- `.github/workflows/ci.yml`
+- `scripts/lint-docs.py`
+- `.pre-commit-config.yaml`
+- `templates/`
+- `project/PROJECT_REGISTRY.md`
+- `snitch/go.mod`
+
+---
 ## ACT-053: Fix CI Pipeline and Refactor Documentation
 
 **Date:** 2025-08-25

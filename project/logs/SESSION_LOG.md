@@ -1,22 +1,25 @@
-## CI-DOC-001: Fix CI Pipeline and Refactor Developer Documentation
+## DEVOPS-001: Stabilize CI and Implement Developer Tooling
 
 **Date:** 2025-08-25
 **Status:** ✅ Done
 **Assignee:** Jules
 
 ### Objective
-To unblock the project by fixing the failing `security-scan` CI job, and to perform a major documentation refactoring to prepare for a future documentation linter.
+To resolve all outstanding CI/CD pipeline failures and to implement a new suite of developer tooling to enforce documentation-as-code principles, including a custom linter and pre-commit hooks.
 
 ### Outcome
-- **CI Pipeline Fixed:**
-    - The `security-scan` job was repaired by resolving issues in both the `bandit` and `safety` steps.
-    - A `bandit.yml` config was added to ignore false positives, a `#nosec` comment was corrected, and the `safety` command was reverted to a version that does not require an API key.
-- **Documentation Refactored:**
-    - `DEVELOPER_GUIDE.md` was renamed to `SYSTEM_INTEGRATION_GUIDE.md`.
-    - A new `API_DEVELOPER_GUIDE.md` was created.
-    - Both new guides were populated with comprehensive content covering project setup, testing, architecture, and contribution guidelines.
-- **Project Logs Aligned:**
-    - All relevant logs (`ACTIVITY.md`, `AUDIT-PHASE-4.md`, `SESSION_LOG.md`) have been updated to accurately reflect the completed work, including separating the "Phase 4b" CI hardening work in the audit log.
+- **CI Pipeline Stabilized:**
+    - Fixed the `security-scan` job by adding a `bandit.yml` config and reverting `safety` to a non-API key version.
+    - Fixed the `golangci-lint` job after a lengthy debugging process. The final fix involved downgrading the Go version in `snitch/go.mod` to `1.22` to match the CI runner's toolchain.
+- **Developer Tooling Implemented:**
+    - Created a custom documentation linter (`scripts/lint-docs.py`) that is run in CI and locally via pre-commit hooks.
+    - Established the `pre-commit` framework with a `.pre-commit-config.yaml` file.
+- **Documentation Overhauled:**
+    - Established a new file naming convention for all markdown files (UPPERCASE).
+    - Imported and created a full suite of reusable documentation templates in the `templates/` directory.
+    - Created two distinct `CICD.md` guides for developer and project management audiences.
+    - Updated all project registries and guides to reflect the new structure and conventions.
+- **Conclusion:** The project is now in a highly stable state with a green CI pipeline and robust, automated quality gates.
 
 ---
 
