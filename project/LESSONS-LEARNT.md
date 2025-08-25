@@ -69,7 +69,7 @@ Covers insights from initial planning (Phase 0) through current active developme
 | Provide safe admin/test endpoints for faster iteration. | **Medium** | (code: app/routers/admin.py) |
 | Deliver iteratively, not as a single big launch. | **High** | (doc: projectplan/DELIVERY-MODEL.md) |
 | Use nested review loops (code → docs → process) to catch issues early. | **Medium** | (doc: projectplan/REVIEW-CYCLE.md) |
-| Providing sensible defaults (e.g., for `DATABASE_URI`) significantly improves the developer onboarding experience and reduces setup friction. | **Medium** | (doc: api/docs/manuals/DEVELOPER_GUIDE.md, api/src/zotify_api/config.py) |
+| Providing sensible defaults (e.g., for `DATABASE_URI`) significantly improves the developer onboarding experience and reduces setup friction. | **Medium** | (doc: api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md, api/src/zotify_api/config.py) |
 | Enforce unique filenames and directory names across the entire repository to prevent ambiguity and simplify searches. | **High** | (doc: project/LESSONS-LEARNT.md) |
 | A hanging command can destabilize the entire execution environment. Long-running processes like test suites must be wrapped in a timeout to prevent them from blocking all other operations. | **Critical** | (doc: project/CURRENT_STATE.md) |
 | Project state documents (`ACTIVITY.md`, `CURRENT_STATE.md`) must be updated *during* the work session, not after. Failure to do so leads to confusion, incorrect assumptions, and wasted effort. | **High** | (doc: project/ACTIVITY.md, project/CURRENT_STATE.md) |

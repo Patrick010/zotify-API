@@ -25,7 +25,8 @@ To get started with the Zotify API, please refer to the comprehensive guides in 
 
 -   **For a full installation guide:** See the [**Installation Guide**](./api/docs/system/INSTALLATION.md).
 -   **To understand the API's features:** See the [**User Manual**](./api/docs/manuals/USER_MANUAL.md).
--   **For developers who want to build on the platform:** See the [**Developer Guide**](./api/docs/manuals/DEVELOPER_GUIDE.md).
+-   **For developers integrating our API:** See the [**System Integration Guide**](./api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md).
+-   **For developers contributing to this project:** See the [**API Developer Guide**](./api/docs/manuals/API_DEVELOPER_GUIDE.md).
 
 ### Quick Start
 

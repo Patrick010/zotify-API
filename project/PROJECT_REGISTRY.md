@@ -52,7 +52,8 @@ This document serves as the master file, or single source of truth, for tracking
 | **Changelog** | [`api/docs/CHANGELOG.md`](../api/docs/CHANGELOG.md) | A log of all user-facing changes for each version. |
 | **Feature Specifications** | [`api/docs/reference/FEATURE_SPECS.md`](../api/docs/reference/FEATURE_SPECS.md) | The master index for detailed, standardized specifications for all system features. |
 | **Operator Manual** | [`api/docs/manuals/OPERATOR_MANUAL.md`](../api/docs/manuals/OPERATOR_MANUAL.md) | Provides guidance for deploying, configuring, and maintaining the Zotify API in a production environment. |
-| **Developer Guide** | [`api/docs/manuals/DEVELOPER_GUIDE.md`](../api/docs/manuals/DEVELOPER_GUIDE.md) | A guide for developers on setting up a local environment, running the server, executing tests, and interacting with the API. |
+| **System Integration Guide** | [`api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md`](../api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md) | A guide for external developers on how to integrate with and consume the Zotify API. |
+| **API Developer Guide** | [`api/docs/manuals/API_DEVELOPER_GUIDE.md`](../api/docs/manuals/API_DEVELOPER_GUIDE.md) | A guide for internal developers on setting up a local environment, running tests, and contributing to the API codebase. |
 | **User Manual** | [`api/docs/manuals/USER_MANUAL.md`](../api/docs/manuals/USER_MANUAL.md) | A manual for end-users of the API, explaining the core workflow for downloading tracks and the standard error response format. |
 | **Error Handling Guide** | [`api/docs/manuals/ERROR_HANDLING_GUIDE.md`](../api/docs/manuals/ERROR_HANDLING_GUIDE.md) | A developer guide for the Generic Error Handling Module. |
 | **Logging Guide** | [`api/docs/manuals/LOGGING_GUIDE.md`](../api/docs/manuals/LOGGING_GUIDE.md) | A comprehensive developer guide for the new Flexible Logging Framework. |
