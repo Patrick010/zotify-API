@@ -133,3 +133,18 @@ jobs:
       run: |
         pip install "safety<3.0.0"
         python -m safety check --ignore=51167 --ignore=77740
+
+  doc-linter:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0 # Fetch all history for git diff to work
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: Run documentation linter
+      run: python scripts/lint-docs.py
