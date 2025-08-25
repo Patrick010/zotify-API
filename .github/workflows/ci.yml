@@ -67,8 +67,8 @@ jobs:
     - name: Run golangci-lint
       uses: golangci/golangci-lint-action@v4
       with:
-        # Optional: version of golangci-lint to use in form of v1.2.3 or `latest` to use the latest version
-        version: latest
+        # Pin to a specific v2-compatible version to match the config file
+        version: v1.59.1
         working-directory: snitch
 
   type-check:
