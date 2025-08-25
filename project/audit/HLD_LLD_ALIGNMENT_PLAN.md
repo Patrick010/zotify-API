@@ -84,6 +84,7 @@ This document outlines the plan to align the High-Level Design (HLD) and Low-Lev
 **Status:** 📝 To Do
 
 **Tasks:**
+- [x] Refactor developer documentation to create a clear distinction between the `API_DEVELOPER_GUIDE.md` (for contributors) and the `SYSTEM_INTEGRATION_GUIDE.md` (for consumers).
 - [ ] Develop a custom linting script to verify documentation changes alongside code changes.
 
 ### Phase 4d: Deep Code Review Process & Local Enforcement

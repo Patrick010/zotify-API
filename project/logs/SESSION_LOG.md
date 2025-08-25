@@ -1,3 +1,20 @@
+## DOC-LINT-001: Refactor Documentation for Custom Linter
+
+**Date:** 2025-08-25
+**Status:** 🏃 Ongoing
+**Assignee:** Jules
+
+### Objective
+To refactor the project's documentation to support the development of a new custom linter. This involves renaming the existing developer guide, creating a new guide for API contributors, and updating all internal references.
+
+### Progress
+- Renamed `DEVELOPER_GUIDE.md` to `SYSTEM_INTEGRATION_GUIDE.md`.
+- Created new `API_DEVELOPER_GUIDE.md`.
+- Updated `PROJECT_REGISTRY.md` to reflect these changes.
+- Next step is to find and update all file references that link to the old guide.
+
+---
+
 ## Phase 4a Completion
 
 **Date:** 2025-08-24
