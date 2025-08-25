@@ -14,6 +14,7 @@ This document serves as the master file, or single source of truth, for tracking
 | Document | Location | Description |
 |---|---|---|
 | **Project Registry** | [`PROJECT_REGISTRY.md`](./PROJECT_REGISTRY.md) | This document, the master index for all project artifacts. |
+| **Template Registry** | [`../templates/REGISTRY.md`](../templates/REGISTRY.md) | A registry of all reusable documentation templates. |
 | **Onboarding Guide** | [`ONBOARDING.md`](./ONBOARDING.md) | The primary entry point and guide for new developers to get up to speed on the project. |
 | **Current State** | [`CURRENT_STATE.md`](./logs/CURRENT_STATE.md) | A live snapshot of the project's most recent status, goals, and pending work. |
 | **Session Log** | [`SESSION_LOG.md`](./logs/SESSION_LOG.md) |Log of activities and findings from sessions. |
