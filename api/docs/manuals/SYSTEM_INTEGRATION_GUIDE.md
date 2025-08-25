@@ -1,149 +1,98 @@
-# Zotify API - Developer Guide
+# Zotify API: System Integration Guide
 
-**Version:** 1.1
-**Date:** 2025-08-18
+This document provides essential information for developers who need to integrate with or consume the Zotify API. It covers project setup, testing procedures, core architectural principles, and documentation conventions.
 
-## 1. Introduction
+For developers looking to contribute to the Zotify API itself, please see the [`API_DEVELOPER_GUIDE.md`](./API_DEVELOPER_GUIDE.md).
 
-This guide provides developers with the necessary information to set up a local development environment, run the server, execute tests, and interact with the Zotify API. It is intended for those who wish to contribute to the project or build applications on top of the API.
+## Table of Contents
+1.  [Project Setup](#1-project-setup)
+2.  [Running the Test Suite](#2-running-the-test-suite)
+3.  [Core Architectural Principles](#3-core-architectural-principles)
+4.  [Code & Documentation Conventions](#4-code--documentation-conventions)
 
-## 2. Local Development Setup
+---
 
-### 2.1. Prerequisites
--   Python 3.10+
--   `pip` and `venv` for package management
--   Git for cloning the repository
+## 1. Project Setup
 
-### 2.2. Installation
+This section guides you through setting up and running the Zotify API from the source code.
 
-1.  **Clone the Repository**
+### Prerequisites
+
+-   **Python 3.10 or greater**
+-   **pip**: The Python package installer.
+-   **Git**: For cloning the repository.
+
+### Installation Steps
+
+1.  **Clone the Repository:**
     ```bash
     git clone https://github.com/Patrick010/zotify-API.git
     cd zotify-API
     ```
 
-2.  **Install Dependencies**
-    It is highly recommended to use a virtual environment to isolate dependencies. The `start.sh` script assumes this setup.
+2.  **Install Dependencies (Virtual Environment Recommended):**
     ```bash
     # Create and activate a virtual environment
-    python3 -m venv .venv
-    source .venv/bin/activate
+    python3 -m venv venv
+    source venv/bin/activate
 
-    # Install the API and its dependencies in editable mode
+    # Install dependencies from the project root
     pip install -e ./api
     ```
 
-### 2.3. Configuration
+3.  **Run the API Server:**
+    The application is run using `uvicorn`. For development and integration testing, it's recommended to run in `development` mode to use a default admin API key.
+    ```bash
+    # Run from the /api directory
+    cd api
 
-The API is configured primarily through **environment variables**. The `pydantic-settings` library automatically reads these variables on startup. For a full list of available settings, see `api/src/zotify_api/config.py`.
+    # Start the server
+    APP_ENV=development uvicorn zotify_api.main:app --host 0.0.0.0 --port 8000 --reload
+    ```
+    The `--reload` flag enables hot-reloading for development.
 
-The most important variable is `APP_ENV`, which can be `development` or `production`. The provided startup script sets this to `development` for you.
+---
 
-### 2.4. Running the API Server (Recommended Method)
+## 2. Running the Test Suite
 
-The easiest and recommended way to run the API for local development is to use the provided startup script.
+The project maintains a high standard of test coverage. Follow these steps to run the test suite.
 
-**Command (from the project root):**
-```bash
-./scripts/start.sh
-```
+1.  **Create Required Directories:**
+    The API requires `storage` and `logs` directories. From the project root, run:
+    ```bash
+    mkdir api/storage
+    mkdir api/logs
+    ```
 
-**What this script does:**
--   Sets `APP_ENV=development`, which enables debug features and uses sensible defaults.
--   Creates the necessary `api/storage` and `api/logs` directories.
--   Launches the `uvicorn` server with hot-reloading, so the server will automatically restart when you save a file.
+2.  **Run Pytest:**
+    The test suite requires the `APP_ENV` environment variable to be set to `test`.
+    ```bash
+    # Run from inside the /api directory
+    cd api
+    APP_ENV=test python3 -m pytest
+    ```
 
-The API will be available at `http://localhost:8000`. The interactive OpenAPI (Swagger) documentation will be at `http://localhost:8000/docs`.
+---
 
-## 3. Running the Test Suite
+## 3. Core Architectural Principles
 
-The test suite is a critical part of the development process.
+The Zotify API is built on a set of core principles to ensure it is maintainable, testable, and extensible.
 
-**Command (from the project root):**
-```bash
-# Ensure you are in the virtual environment
-source .venv/bin/activate
+-   **Layered Architecture:** The system is divided into distinct layers (Routes, Services, Schemas, Persistence) to enforce separation of concerns. Business logic resides in the service layer, independent of the FastAPI framework.
+-   **Provider Abstraction Layer:** Decouples the core application from specific music service providers (e.g., Spotify). This allows for future extension to other providers without major refactoring.
+-   **Centralized Error Handling:** A global error handling module intercepts all exceptions, ensuring consistent and standardized error responses to clients.
+-   **Flexible Logging Framework:** A developer-centric logging service that uses tag-based routing and an external configuration file to provide flexible and powerful observability.
+-   **Authentication Provider Interface:** Standardizes how authentication flows like OAuth2 are handled, encapsulating provider-specific logic within the provider's connector.
 
-# Run the tests
-pytest api/
-```
+---
 
-**Important:** The tests are designed to run in a test environment, which is automatically configured when `pytest` runs. They use a temporary, in-memory SQLite database to ensure they do not interfere with your local development database.
+## 4. Code & Documentation Conventions
 
-## 4. Interacting with the API
+This project operates under a "living documentation" model.
 
-While the interactive docs at `http://localhost:8000/docs` are the easiest way to test endpoints, you can also use `curl`.
+-   **Reality First:** The codebase is the single source of truth. All documentation must reflect the actual, verified behavior of the application.
+-   **Continuous Alignment:** All code changes must be accompanied by corresponding documentation updates in the same commit.
+-   **Centralized Logging:** All work must be logged in the official project logs (`ACTIVITY.md`, `AUDIT-PHASE-*.md`) to maintain a clear, traceable history.
+-   **Project Registry:** All markdown documentation must be registered in `project/PROJECT_REGISTRY.md` to be discoverable.
 
-**Note:** The `start.sh` script sets a default `ADMIN_API_KEY` of `test_key` for development. All administrative endpoints require this key to be passed in the `X-API-Key` header.
-
-### Example: Checking Health
-```bash
-curl http://localhost:8000/api/health
-```
-
-### Example: Getting Authentication Status
-```bash
-curl -X GET http://localhost:8000/api/auth/status -H "X-API-Key: test_key"
-```
-**Expected Response:**
-```json
-{
-  "data": {
-    "is_authenticated": false,
-    "expires_at": null
-  }
-}
-```
-
-### Example: Triggering a Download
-```bash
-curl -X POST http://localhost:8000/api/downloads \
-  -H "X-API-Key: test_key" \
-  -H "Content-Type: application/json" \
-  -d '{"track_ids": ["spotify:track:4cOdK2wGLETOMsV3oDPEhB"]}'
-```
-
-## 5. Code Quality & Verification
-
-Maintaining code quality is essential. All contributions must pass both static analysis checks and the full test suite.
-
-### 5.1. Static Analysis with `mypy`
-
-This project uses `mypy` to enforce strict static type checking. All code is fully type-hinted. Before submitting any code, you must run `mypy` and ensure there are no errors.
-
-**Command (from the project root):**
-```bash
-# Ensure you are in the virtual environment
-source .venv/bin/activate
-
-# Run mypy with the project's config file
-mypy --config-file api/mypy.ini api/src api/tests
-```
-Any `mypy` errors must be resolved before a pull request will be accepted.
-
-### 5.2. Running the Test Suite
-
-The test suite is built on `pytest`. It is critical to run the full suite to ensure your changes have not introduced any regressions.
-
-**Prerequisites:**
-- Ensure you are in the activated virtual environment.
-- Make sure the required directories exist, as the application will fail to start without them:
-  ```bash
-  mkdir -p api/storage api/logs
-  ```
-
-**Command (from the project root):**
-```bash
-# Run the tests with the correct environment setting
-APP_ENV=test pytest api/
-```
-
-**Important:** The tests are designed to run in a `test` environment, which is automatically configured when `pytest` runs. They use a temporary, in-memory SQLite database for most tests to ensure they do not interfere with your local development database, but some components may interact with the file system, hence the need for the directories above.
-
-## 6. Key Documentation
-
-For more detailed information, please consult the following documents:
--   **[Project Registry](./../../project/PROJECT_REGISTRY.md):** The master list of all project documents.
--   **[Logging Guide](./LOGGING_GUIDE.md):** A deep dive into the Flexible Logging Framework.
--   **[High-Level Design](./../../project/HIGH_LEVEL_DESIGN.md):** An overview of the platform's architecture.
--   **[Low-Level Design](./../../project/LOW_LEVEL_DESIGN.md):** Detailed implementation notes for various subsystems.
+For a detailed checklist of tasks required for every change, please refer to `project/TASK_CHECKLIST.md`.

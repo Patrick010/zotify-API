@@ -1,5 +1,30 @@
-- **2025-08-25 01:59:51**: Jules - Initiated final audit alignment task: refactoring documentation to support the new custom linter. Renamed `DEVELOPER_GUIDE.md` to `SYSTEM_INTEGRATION_GUIDE.md`, created a new `API_DEVELOPER_GUIDE.md`, and updated `PROJECT_REGISTRY.md`. Next, I will update all internal project references to the old guide.
+## ACT-053: Fix CI Pipeline and Refactor Documentation
 
+**Date:** 2025-08-25
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To resolve the failing `security-scan` CI job and perform a major documentation refactoring as a prerequisite for a future documentation linter.
+
+### Outcome
+- **CI Pipeline Fixed:**
+    - The `bandit` scan was fixed by correcting a `#nosec` comment and adding a `bandit.yml` to ignore false positives.
+    - The `safety` scan was reverted to `safety check` to work without an API key.
+- **Documentation Refactored:**
+    - `DEVELOPER_GUIDE.md` was renamed to `SYSTEM_INTEGRATION_GUIDE.md` for API consumers.
+    - A new `API_DEVELOPER_GUIDE.md` was created for project contributors.
+    - All internal documentation links were updated to reflect the new guide structure.
+- **Project Logs Updated:** All relevant logs (`SESSION_LOG.md`, `ACTIVITY.md`) were updated to reflect the work.
+
+### Related Documents
+- `.github/workflows/ci.yml`
+- `bandit.yml`
+- `api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md`
+- `api/docs/manuals/API_DEVELOPER_GUIDE.md`
+- `project/PROJECT_REGISTRY.md`
+
+---
 # Activity Log
 
 ---

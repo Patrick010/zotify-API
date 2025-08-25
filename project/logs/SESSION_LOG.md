@@ -1,34 +1,22 @@
-## DOC-LINT-001: Refactor Documentation for Custom Linter
+## CI-DOC-001: Fix CI Pipeline and Refactor Developer Documentation
 
 **Date:** 2025-08-25
-**Status:** 🏃 Ongoing
-**Assignee:** Jules
-
-### Objective
-To refactor the project's documentation to support the development of a new custom linter. This involves renaming the existing developer guide, creating a new guide for API contributors, and updating all internal references.
-
-### Progress
-- Renamed `DEVELOPER_GUIDE.md` to `SYSTEM_INTEGRATION_GUIDE.md`.
-- Created new `API_DEVELOPER_GUIDE.md`.
-- Updated `PROJECT_REGISTRY.md` to reflect these changes.
-- Next step is to find and update all file references that link to the old guide.
-
----
-
-## Phase 4a Completion
-
-**Date:** 2025-08-24
 **Status:** ✅ Done
 **Assignee:** Jules
 
 ### Objective
-To complete the technical debt remediation tasks outlined in Phase 4a of the HLD/LLD Alignment plan, culminating in a fully passing CI/CD pipeline.
+To unblock the project by fixing the failing `security-scan` CI job, and to perform a major documentation refactoring to prepare for a future documentation linter.
 
 ### Outcome
-- All Phase 4a tasks, including `ruff` linting, `mypy` type checking, and `bandit`/`safety` security scans, have been fully remediated.
-- The `security-scan` CI job, which was blocking the project, has been fixed.
-- Detailed logs for all activities performed during this phase have been consolidated into `project/audit/AUDIT-PHASE-4.md`.
-- The project is now unblocked and ready to proceed to Phase 4b.
+- **CI Pipeline Fixed:**
+    - The `security-scan` job was repaired by resolving issues in both the `bandit` and `safety` steps.
+    - A `bandit.yml` config was added to ignore false positives, a `#nosec` comment was corrected, and the `safety` command was reverted to a version that does not require an API key.
+- **Documentation Refactored:**
+    - `DEVELOPER_GUIDE.md` was renamed to `SYSTEM_INTEGRATION_GUIDE.md`.
+    - A new `API_DEVELOPER_GUIDE.md` was created.
+    - Both new guides were populated with comprehensive content covering project setup, testing, architecture, and contribution guidelines.
+- **Project Logs Aligned:**
+    - All relevant logs (`ACTIVITY.md`, `AUDIT-PHASE-4.md`, `SESSION_LOG.md`) have been updated to accurately reflect the completed work, including separating the "Phase 4b" CI hardening work in the audit log.
 
 ---
 
