@@ -31,10 +31,10 @@ This document serves as the master file, or single source of truth, for tracking
 | **Logging System Design** | [`LOGGING_SYSTEM_DESIGN.md`](./LOGGING_SYSTEM_DESIGN.md) | The detailed architectural design for the centralized logging system. |
 | **Logging Phased Implementation** | [`LOGGING_PHASES.md`](./LOGGING_PHASES.md) | The authoritative document tracking the phased design and implementation of the Extendable Logging System. |
 | **Logging Traceability Matrix** | [`LOGGING_TRACEABILITY_MATRIX.md`](./LOGGING_TRACEABILITY_MATRIX.md) | Maps logging system requirements to design documents and backlog tasks. |
-| **Dynamic Plugin Proposal** | [`DYNAMIC_PLUGIN_PROPOSAL.md`](./proposals/DYNAMIC_PLUGIN_PROPOSAL.md) | A formal proposal for adding a dynamic plugin system for custom logging sinks. |
-| **Low-Code Integration Proposal** | [`LOW_CODE_PROPOSAL.md`](./proposals/LOW_CODE_PROPOSAL.md) | A formal proposal for integrating with low-code platforms like Node-RED. |
-| **Home Automation Proposal** | [`HOME_AUTOMATION_PROPOSAL.md`](./proposals/HOME_AUTOMATION_PROPOSAL.md) | A formal proposal for integrating with home automation platforms like Home Assistant. |
-| **Multi-Source Metadata Proposal** | [`MULTI_SOURCE_METADATA_PROPOSAL.md`](./proposals/MULTI_SOURCE_METADATA_PROPOSAL.md) | A formal proposal for a plugin-driven, multi-source metadata ingestion and querying system. |
+| **Dynamic Plugin Proposal** | [`proposals/DYNAMIC_PLUGIN_PROPOSAL.md`](./proposals/DYNAMIC_PLUGIN_PROPOSAL.md) | A formal proposal for adding a dynamic plugin system for custom logging sinks. |
+| **Low-Code Integration Proposal** | [`proposals/LOW_CODE_PROPOSAL.md`](./proposals/LOW_CODE_PROPOSAL.md) | A formal proposal for integrating with low-code platforms like Node-RED. |
+| **Home Automation Proposal** | [`proposals/HOME_AUTOMATION_PROPOSAL.md`](./proposals/HOME_AUTOMATION_PROPOSAL.md) | A formal proposal for integrating with home automation platforms like Home Assistant. |
+| **Multi-Source Metadata Proposal** | [`proposals/MULTI_SOURCE_METADATA_PROPOSAL.md`](./proposals/MULTI_SOURCE_METADATA_PROPOSAL.md) | A formal proposal for a plugin-driven, multi-source metadata ingestion and querying system. |
 | **Project Backlog** | [`BACKLOG.md`](./BACKLOG.md) | A tactical backlog of tasks managed by the formal qualification process defined in the PID. |
 | **Traceability Matrix** | [`TRACEABILITY_MATRIX.md`](./TRACEABILITY_MATRIX.md) | A live matrix mapping requirements from use cases and design docs to implementation and test status. |
 | **Use Cases** | [`USECASES.md`](./USECASES.md) | A collection of user-driven scenarios and requirements for the API. |
@@ -42,8 +42,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **Task Checklist** | [`TASK_CHECKLIST.md`](./TASK_CHECKLIST.md) | A checklist to be used for every task to ensure compliance with project standards. |
 | **Dependency Policy** | [`DEPENDENCIES.md`](./DEPENDENCIES.md) | The policy and registry for managing third-party dependencies. |
 | **Security Document** | [`SECURITY.md`](./SECURITY.md) | The definitive security reference for the project. |
-| **CI/CD Guide** | [`CICD.md`](./CICD.md) | A guide explaining the CI/CD pipeline, linters, and pre-commit hooks. |
-| **CI/CD Template** | [`../templates/CICD.md`](../templates/CICD.md) | A reusable template version of the CI/CD guide for porting to other projects. |
+| **Project CI/CD Guide** | [`CICD.md`](./CICD.md) | A high-level guide to CI/CD philosophy for project management. |
 
 ---
 
@@ -55,8 +54,9 @@ This document serves as the master file, or single source of truth, for tracking
 | **Changelog** | [`api/docs/CHANGELOG.md`](../api/docs/CHANGELOG.md) | A log of all user-facing changes for each version. |
 | **Feature Specifications** | [`api/docs/reference/FEATURE_SPECS.md`](../api/docs/reference/FEATURE_SPECS.md) | The master index for detailed, standardized specifications for all system features. |
 | **Operator Manual** | [`api/docs/manuals/OPERATOR_MANUAL.md`](../api/docs/manuals/OPERATOR_MANUAL.md) | Provides guidance for deploying, configuring, and maintaining the Zotify API in a production environment. |
-| **System Integration Guide** | [`api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md`](../api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md) | A guide for external developers on how to integrate with and consume the Zotify API. |
-| **API Developer Guide** | [`api/docs/manuals/API_DEVELOPER_GUIDE.md`](../api/docs/manuals/API_DEVELOPER_GUIDE.md) | A guide for internal developers on setting up a local environment, running tests, and contributing to the API codebase. |
+| **System Integration Guide** | [`api/docs/manuals/SYSTEM-INTEGRATION-GUIDE.md`](../api/docs/manuals/SYSTEM-INTEGRATION-GUIDE.md) | A guide for external developers on how to integrate with and consume the Zotify API. |
+| **API Developer Guide** | [`api/docs/manuals/API-DEVELOPER-GUIDE.md`](../api/docs/manuals/API-DEVELOPER-GUIDE.md) | A guide for internal developers on setting up a local environment, running tests, and contributing to the API codebase. |
+| **Developer CI/CD Guide**| [`api/docs/manuals/CICD.md`](../api/docs/manuals/CICD.md) | A detailed technical guide to the CI/CD pipeline and local setup. |
 | **User Manual** | [`api/docs/manuals/USER_MANUAL.md`](../api/docs/manuals/USER_MANUAL.md) | A manual for end-users of the API, explaining the core workflow for downloading tracks and the standard error response format. |
 | **Error Handling Guide** | [`api/docs/manuals/ERROR_HANDLING_GUIDE.md`](../api/docs/manuals/ERROR_HANDLING_GUIDE.md) | A developer guide for the Generic Error Handling Module. |
 | **Logging Guide** | [`api/docs/manuals/LOGGING_GUIDE.md`](../api/docs/manuals/LOGGING_GUIDE.md) | A comprehensive developer guide for the new Flexible Logging Framework. |

@@ -10,6 +10,7 @@ This document serves as a registry for all reusable project documentation templa
 |---|---|---|
 | **Project Registry** | [`PROJECT_REGISTRY.md`](./PROJECT_REGISTRY.md) | A template for a master index of all project artifacts. |
 | **Onboarding Guide** | [`ONBOARDING.md`](./ONBOARDING.md) | A template for a guide for new developers. |
+| **Initiation Guide** | [`INITIATION.md`](./INITIATION.md) | A guide for setting up a new project's documentation from these templates. |
 | **Project Initiation Document (PID)** | [`PID.md`](./PID.md) | A template for a formal 'living document' defining project scope and controls. |
 | **High-Level Design (HLD)** | [`HIGH_LEVEL_DESIGN.md`](./HIGH_LEVEL_DESIGN.md) | A template for outlining high-level architecture and principles. |
 | **Low-Level Design (LLD)** | [`LOW_LEVEL_DESIGN.md`](./LOW_LEVEL_DESIGN.md) | A template for describing specific work items and detailed designs. |
@@ -17,7 +18,10 @@ This document serves as a registry for all reusable project documentation templa
 | **Backlog** | [`BACKLOG.md`](./BACKLOG.md) | A template for a tactical task backlog. |
 | **Task Checklist** | [`TASK_CHECKLIST.md`](./TASK_CHECKLIST.md) | A template for a checklist to ensure compliance with project standards. |
 | **Security Document** | [`SECURITY.md`](./SECURITY.md) | A template for a definitive security reference document. |
-| **CI/CD Guide** | [`CICD.md`](./CICD.md) | A template for a guide explaining the CI/CD pipeline and local linting. |
+| **Developer CI/CD Guide** | [`CICD-DEV.md`](./CICD-DEV.md) | A template for a technical guide to the CI/CD pipeline and local setup. |
+| **Project CI/CD Guide** | [`CICD-PROJ.md`](./CICD-PROJ.md) | A template for a high-level overview of CI/CD philosophy for stakeholders. |
+| **API Developer Guide** | [`API-DEVELOPER-GUIDE.md`](./API-DEVELOPER-GUIDE.md) | A template for a guide for developers contributing to the project codebase. |
+| **System Integration Guide**| [`SYSTEM-INTEGRATION-GUIDE.md`](./SYSTEM-INTEGRATION-GUIDE.md) | A template for a guide for external developers consuming the project's API. |
 
 ## 3. Log Templates
 | Template | Location | Description |

@@ -36,6 +36,20 @@ The `project/PROJECT_REGISTRY.md` is the master index for your documentation.
 2.  Ensure that all the documents you have created in the `project/` directory are correctly listed.
 3.  If you have chosen not to include certain documents (e.g., the audit files), you may remove their entries from the registry to reflect the actual state of your project's documentation.
 
-## 5. Next Steps
-Once your documentation is initiated, the `project/ONBOARDING.md` file becomes the primary entry point for any new developer joining the project. It will guide them through the structure you have just created.
+## 5. Understand Core Processes
+
+Before beginning development, it is crucial to understand the core processes that govern this project.
+
+### File Naming Conventions
+To maintain consistency, this project follows a strict naming convention:
+-   **Markdown Files:** All markdown documentation files (`.md`) **must** be in full uppercase (e.g., `README.md`, `HIGH_LEVEL_DESIGN.md`).
+-   **Other Files:** All other files (source code, configuration, scripts, etc.) **must** be in lowercase (e.g., `main.py`, `pyproject.toml`).
+
+### CI/CD and Quality Gates
+This project is equipped with a robust CI/CD pipeline and local pre-commit hooks to ensure code quality and documentation alignment.
+-   For a high-level overview of the quality gates and their purpose, please review the **`CICD-PROJ.md`** template.
+-   For a detailed technical guide on the pipeline and local setup, please review the **`CICD-DEV.md`** template.
+
+## 6. Next Steps
+Once your documentation is initiated and you understand the core processes, the `project/ONBOARDING.md` file becomes the primary entry point for any new developer joining the project. It will guide them through the structure you have just created.
 ---
