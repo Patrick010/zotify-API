@@ -53,6 +53,5 @@ In parallel with the CI fixes, I implemented the full suite of developer tooling
 
 ## 4. Current State & Next Steps
 
-The project is stable, the CI is green, and the documentation is up-to-date. All work for Phase 4 is complete.
+To get up to speed, please follow the instructions in **`project/ONBOARDING.md`**. It provides a recommended reading order for all the key project documents and will give you a complete picture of the project's architecture, status, and processes.
 
-The next developer can confidently begin a new phase of work. I recommend starting by consulting the `project/BACKLOG.md` file for the next prioritized feature or task. The new developer tooling will help ensure that as new features are built, the project's high standards for documentation and quality are maintained automatically.
