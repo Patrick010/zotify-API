@@ -81,19 +81,19 @@ This document outlines the plan to align the High-Level Design (HLD) and Low-Lev
 
 ### Phase 4c: Custom Architectural & Documentation Linting
 **Objective:** To automatically enforce the project's "living documentation" philosophy.
-**Status:** 📝 To Do
+**Status:** ✅ Done
 
 **Tasks:**
 - [x] Refactor developer documentation to create a clear distinction between the `API_DEVELOPER_GUIDE.md` (for contributors) and the `SYSTEM_INTEGRATION_GUIDE.md` (for consumers).
-- [ ] Develop a custom linting script to verify documentation changes alongside code changes.
+- [x] Develop a custom linting script to verify documentation changes alongside code changes.
 
 ### Phase 4d: Deep Code Review Process & Local Enforcement
 **Objective:** To formalize the human review process and provide immediate local feedback.
-**Status:** 📝 To Do
+**Status:** 🏃 Ongoing
 
 **Tasks:**
 - [ ] Update `TASK_CHECKLIST.md` with a formal code review checklist.
-- [ ] Implement `pre-commit` hooks for local, instant feedback.
+- [x] Implement `pre-commit` hooks for local, instant feedback.
 
 ---
 
