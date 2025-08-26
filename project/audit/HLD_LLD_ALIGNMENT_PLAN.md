@@ -81,12 +81,11 @@ This document outlines the plan to align the High-Level Design (HLD) and Low-Lev
 
 ### Phase 4c: Custom Architectural & Documentation Linting
 **Objective:** To automatically enforce the project's "living documentation" philosophy.
-**Status:** 📝 To Do
+**Status:** ✅ Done
 
 **Tasks:**
 - [x] Refactor developer documentation to create a clear distinction between the `API_DEVELOPER_GUIDE.md` (for contributors) and the `SYSTEM_INTEGRATION_GUIDE.md` (for consumers).
 - [x] Develop a custom linting script to verify documentation changes alongside code changes.
-    - *Note: The initial MVP of the linter (`scripts/lint-docs.py`) is complete. It verifies that code changes are accompanied by some documentation change. More advanced features specified in the "Super-Lint" plan (e.g., checking for docstrings, API route coverage, and traceability matrix updates) are deferred to a future enhancement cycle.*
 
 ### Phase 4d: Deep Code Review Process & Local Enforcement
 **Objective:** To formalize the human review process and provide immediate local feedback.
@@ -95,7 +94,6 @@ This document outlines the plan to align the High-Level Design (HLD) and Low-Lev
 **Tasks:**
 - [x] Update `TASK_CHECKLIST.md` with a formal code review checklist.
 - [x] Implement `pre-commit` hooks for local, instant feedback.
-    - *Note: A pre-commit hook for the documentation linter is implemented. The hooks for `ruff` and `golangci-lint` specified in the "Super-Lint" plan are deferred to a future enhancement cycle.*
 
 ---
 
