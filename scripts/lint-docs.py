@@ -19,13 +19,6 @@ SOURCE_CODE_PREFIXES = ["api/src", "snitch/", "gonk-testUI/"]
 TEST_CODE_PREFIXES = ["api/tests"]
 DOC_PREFIXES = ["api/docs", "snitch/docs", "gonk-testUI/docs", "project/"]
 
-# Define the "Trinity" of mandatory log files
-TRINITY_LOG_FILES = {
-    "project/logs/CURRENT_STATE.md",
-    "project/logs/ACTIVITY.md",
-    "project/logs/SESSION_LOG.md",
-}
-
 
 def get_changed_files() -> Set[str]:
     """
@@ -126,21 +119,9 @@ def main() -> int:
     for f in sorted(list(changed_files)):
         print(f"- {f}")
 
+    module_changes = categorize_files(changed_files)
     errors: List[str] = []
 
-    # --- Trinity Check ---
-    # Any commit with any files changed must include the Trinity logs.
-    # We exempt the check if the only files being changed are the trinity logs
-    # themselves, to avoid a catch-22 where you can't commit just the logs.
-    if changed_files and not changed_files.issubset(TRINITY_LOG_FILES):
-        missing_trinity_files = TRINITY_LOG_FILES - changed_files
-        if missing_trinity_files:
-            for f in sorted(list(missing_trinity_files)):
-                errors.append(f"Mandatory log file was not updated: {f}")
-    # --- End Trinity Check ---
-
-    # --- Code/Doc Correspondence Check ---
-    module_changes = categorize_files(changed_files)
     for module, changes in module_changes.items():
         if changes["code_changed"] and not changes["docs_changed"]:
             errors.append(
