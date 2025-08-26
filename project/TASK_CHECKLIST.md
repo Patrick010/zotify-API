@@ -56,6 +56,55 @@
 
 ---
 
+### C. Formal Code Review Checklist
+This checklist is for the reviewer to ensure all changes meet project standards before approval.
+
+#### 1. Design & Architecture
+- [ ] **Alignment:** Does the change align with the project's HLD and LLD? If there's a deviation, is it justified and documented?
+- [ ] **Modularity:** Is the code well-structured with a clear separation of concerns? Does it avoid leaking logic between layers?
+- [ ] **Scalability:** Has the potential performance impact of the change been considered?
+
+#### 2. Code Quality & Readability
+- [ ] **Clarity:** Is the code clear, concise, and easy to understand? Are variable and function names descriptive?
+- [ ] **Style:** Does the code adhere to the project's coding style (PEP 8, `black`, `ruff`)?
+- [ ] **Type Hints:** Are all functions, variables, and classes properly type-hinted?
+- [ ] **Docstrings:** Are all public modules, classes, and functions documented with clear docstrings?
+
+#### 3. Security & Privacy
+- [ ] **Security Risks:** Have common security risks (e.g., injection, XSS, unsafe deserialization) been considered and mitigated?
+- [ ] **Data Handling:** Is sensitive data handled correctly? Is it minimized, redacted from logs, and encrypted where necessary?
+- [ ] **Dependencies:** Do new dependencies come from trusted sources and are they free of known critical vulnerabilities?
+
+#### 4. Testing
+- [ ] **Test Coverage:** Are the changes covered by new or existing tests? Is the coverage sufficient?
+- [ ] **Test Quality:** Do tests correctly verify the new functionality, including edge cases and negative paths?
+- [ ] **CI Pass:** Has the full CI pipeline (test, lint, type-check, security-scan) passed for the changes?
+
+#### 5. Documentation (Living Documentation Principle)
+- [ ] **Completeness:** Have all relevant documents (`API_REFERENCE.md`, guides, manuals, etc.) been updated to reflect the change?
+- [ ] **Clarity:** Is the documentation clear, accurate, and easy for the target audience to understand?
+- [ ] **Traceability:** Is the change correctly reflected in the `TRACEABILITY_MATRIX.md` or other relevant tracking documents?
+
+---
+
+### D. Code Review Scoring Rubric
+After completing the review checklist, provide a summary score to gauge overall quality and required actions.
+
+- **A (Excellent):**
+  - The code not only meets all checklist criteria but also demonstrates exceptional clarity, efficiency, and forward-thinking design.
+  - No further changes are required. **Action: Approve.**
+
+- **B (Good):**
+  - The code meets all critical requirements from the checklist.
+  - Minor, non-blocking suggestions for improvement (e.g., style nits, comment clarifications) may be offered but are not required for approval.
+  - **Action: Approve.** (Optionally, the author can address minor suggestions in a follow-up.)
+
+- **C (Needs Improvement):**
+  - The code fails to meet one or more critical requirements from the checklist (e.g., has a potential security risk, lacks necessary tests, is unclear, or deviates from the design without justification).
+  - **Action: Request Changes.** The reviewer must provide clear, actionable feedback on which checklist items must be addressed.
+
+---
+
 **Enforcement:**
 No task is considered complete unless all applicable checklist items have been addressed. This file is authoritative and version-controlled.
 

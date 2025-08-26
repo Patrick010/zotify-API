@@ -1,17 +1,19 @@
 # Phase 4 Traceability Matrix
 
-**Status:** Final
-**Date:** 2025-08-16
+**Status:** Live Document
+**Date:** 2025-08-26
 
 ## 1. Purpose
 
-This document maps the high-level goals for Phase 4, as defined in the `HLD_LLD_ALIGNMENT_PLAN.md`, to the concrete action plan and the specific backlog tasks created to implement them. This ensures end-to-end traceability for the "Enforce & Automate" initiative.
+This document maps the high-level goals for Phase 4, as defined in the `HLD_LLD_ALIGNMENT_PLAN.md`, to the detailed action plan in `CODE_OPTIMIZATIONPLAN_PHASE_4.md` ("Super-Lint" plan). It ensures end-to-end traceability for the "Enforce & Automate" initiative.
 
 ## 2. Traceability Matrix
 
-| Goal ID (from Alignment Plan) | Goal Description | Action Plan Document | Related Backlog Task(s) | Status |
+| HLD/LLD Phase | Goal (from Super-Lint Plan) | Detailed Task ID (Super-Lint) | Implementation Status | Notes |
 | :--- | :--- | :--- | :--- | :--- |
-| **Task 4.1** | Add doc update steps to the Task Execution Checklist. | [`CODE_OPTIMIZATIONPLAN_PHASE_4.md`](./CODE_OPTIMIZATIONPLAN_PHASE_4.md) | `SL-TASK-04` | 📝 To Do |
-| **Task 4.2** | Implement a CI check to verify that related docs are updated. | [`CODE_OPTIMIZATIONPLAN_PHASE_4.md`](./CODE_OPTIMIZATIONPLAN_PHASE_4.md) | `SL-TASK-01`, `SL-TASK-02`, `SL-TASK-03`, `SL-TASK-05` | 📝 To Do |
-| **Task 4.3** | Schedule quarterly or sprint-end reviews for design docs. | [`CODE_OPTIMIZATIONPLAN_PHASE_4.md`](./CODE_OPTIMIZATIONPLAN_PHASE_4.md) | `SL-TASK-04` | 📝 To Do |
-| **Task 4.4** | Execute the detailed action plan for code optimization and quality assurance. | [`CODE_OPTIMIZATIONPLAN_PHASE_4.md`](./CODE_OPTIMIZATIONPLAN_PHASE_4.md) | `TD-TASK-01`, `TD-TASK-02`, `TD-TASK-03`, `SL-TASK-01`, `SL-TASK-02`, `SL-TASK-03`, `SL-TASK-04`, `SL-TASK-05` | 🏃 Ongoing <br> (*`ruff` and `mypy` remediation complete*) |
+| **Phase 4a** | Prerequisite: Technical Debt Remediation | `TD-TASK-01`, `TD-TASK-02`, `TD-TASK-03` | ✅ Done | All baseline configs created and critical issues remediated. |
+| **Phase 4b** | Foundational Static Analysis (CI Integration) | `SL-TASK-01`, `SL-TASK-02` | ✅ Done | All linters integrated and running in enforcement mode in CI. |
+| **Phase 4b** | Foundational Static Analysis (Go Security) | `gosec` (Implied in `SL-TASK-01`) | ✅ Done | `gosec` linter enabled in `.golangci.yml` and one issue (G107) was remediated. |
+| **Phase 4c** | Custom Architectural & Documentation Linting | `SL-TASK-03` | 🏃 Partially Done | An MVP of the linter is implemented. Advanced features are deferred. See note in `HLD_LLD_ALIGNMENT_PLAN.md`. |
+| **Phase 4d** | Deep Code Review Process (Checklist & Rubric) | `SL-TASK-04` | ✅ Done | `TASK_CHECKLIST.md` updated with a formal checklist and scoring rubric. |
+| **Phase 4d** | Local Enforcement (Pre-commit Hooks) | `SL-TASK-05` | 🏃 Partially Done | Pre-commit hook for the doc linter is implemented. Hooks for `ruff` and `golangci-lint` are deferred. See note in `HLD_LLD_ALIGNMENT_PLAN.md`. |

@@ -7,4 +7,5 @@ linters:
     - staticcheck
     - unused
     - revive
+    - gosec
 issues: {}
