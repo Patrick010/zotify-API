@@ -61,6 +61,12 @@ This section lists specific technical features and improvements that are candida
         2.  Isolating `librespot` in its own process to decouple its dependencies from the main application.
         3.  Researching alternative libraries to replace `librespot`'s functionality.
     *   **Outcome:** A recommendation document outlining the best path forward to resolve the dependency-pinning issue.
+*   **Advanced Conditional Documentation Linter:**
+    *   **Goal:** To further evolve the "living documentation" principle, the custom documentation linter (`scripts/lint-docs.py`) could be enhanced to enforce conditional rules based on the location of changed files.
+    *   **Proposed Implementation:**
+        1.  **Decision Matrix:** A new configuration file (e.g., `lint-decision-matrix.yml`) would define the rules. This matrix would map source code paths to required documentation paths.
+        2.  **Use of Project Registry:** As suggested, the linter could use `project/PROJECT_REGISTRY.md` as an authoritative source for file paths and categories, reducing the need for hardcoded paths within the linter script itself.
+        3.  **Linter Refactoring:** The script at `scripts/lint-docs.py` would be refactored to parse the decision matrix and apply its rules to the set of changed files in a commit.
 
 ---
 
