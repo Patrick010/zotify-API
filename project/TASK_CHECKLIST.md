@@ -88,6 +88,8 @@ This checklist is for the reviewer to ensure all changes meet project standards 
 ---
 
 ### D. Code Review Scoring Rubric
+**Process:** The reviewer should complete the checklist in section C and leave a final score (A, B, or C) as a top-level comment on the Pull Request. The follow-up actions for each score are defined below.
+
 After completing the review checklist, provide a summary score to gauge overall quality and required actions.
 
 - **A (Excellent):**

@@ -26,6 +26,13 @@ roposals to create a single, authoritative guide.
     - Ensure a consistent and high level of code quality to improve long-term ma
 intainability.
 
+### 1.2. Traceability
+- This plan is the primary deliverable for the "Define the Detailed Action Plan
+for Phase 4 'Super-Lint'" task.
+- Implementation will be tracked via `TD-TASK-*` and `SL-TASK-*` entries in `BAC
+KLOG.md`.
+- Overall progress will be reflected in `ROADMAP.md`.
+
 ## 2. Tools & Standards
 
 ### 2.1. Chosen Tools
@@ -111,10 +118,3 @@ In rare cases where a rule must be violated, the following process is required:
 Pull Request description.
 3.  The exemption must be explicitly approved by a senior developer during code
 review.
-
-## 5. Traceability
-- This plan is the primary deliverable for the "Define the Detailed Action Plan
-for Phase 4 'Super-Lint'" task.
-- Implementation will be tracked via `TD-TASK-*` and `SL-TASK-*` entries in `BAC
-KLOG.md`.
-- Overall progress will be reflected in `ROADMAP.md`.
