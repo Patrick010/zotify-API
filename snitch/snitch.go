@@ -84,7 +84,6 @@ func loginHandler(apiCallbackURL string) http.HandlerFunc {
 		url := fmt.Sprintf("%s?code=%s&state=%s", apiCallbackURL, code, state)
 
 		// Use the correct HTTP GET method
-		// #nosec G107
 		resp, err := http.Get(url)
 		if err != nil {
 			writeGenericError(w, "callback.handoff.failure", map[string]interface{}{"reason": "get_request_error", "error": err.Error()})

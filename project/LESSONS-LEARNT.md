@@ -58,16 +58,6 @@ Covers insights from initial planning (Phase 0) through current active developme
 
 ---
 
-## Phase 4 – Automation & Quality Gates
-
-| Lesson | Impact | Reference |
-|--------|--------|-----------|
-| **A "single source of truth" for planning is non-negotiable.** | **Critical** – The existence of two parallel planning documents (`HLD_LLD_ALIGNMENT_PLAN.md` and `CODE_OPTIMIZATIONPLAN_PHASE_4.md`) caused significant confusion, rework, and required direct user intervention to resolve. Future phases must ensure a single, canonical plan is maintained. | (doc: project/audit/AUDIT_END_REPORT_PHASE_4.md) |
-| **Automated enforcement is vastly superior to procedural enforcement.** | **High** – The most effective improvements in this phase were converting procedural hopes into automated realities. The "Trinity Rule" added to the doc linter, which programmatically enforces the update of log files, is a prime example of a successful conversion that prevents process decay. | (doc: scripts/lint-docs.py) |
-| **The agent's execution environment can be unreliable.** | **Critical** – The agent's local `git` environment was consistently out of sync with the remote repository's true state. This led to incorrect assumptions about commit failures and significant wasted effort. Future work must not blindly trust the local `git` state and should rely on direct evidence (e.g., user feedback, file content verification) as the source of truth. | (doc: project/audit/AUDIT_END_REPORT_PHASE_4.md) |
-
----
-
 ## Cross-Phase Lessons
 
 | Lesson | Impact | Reference |
