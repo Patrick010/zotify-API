@@ -117,6 +117,22 @@ This document serves as the master file, or single source of truth, for tracking
 
 ---
 
+## 5. Helper Scripts
+This section lists standalone scripts that provide developer utility, testing, or code generation capabilities.
+
+| Script | Location | Description |
+|---|---|---|
+| **Audit API Endpoints** | [`../scripts/audit_endpoints.py`](../scripts/audit_endpoints.py) | Inspects the FastAPI app to determine if API routes are functional or stubs. |
+| **Basic Functional Tests** | [`../scripts/functional_test.py`](../scripts/functional_test.py) | A `pytest` script that runs basic functional tests against a running API server. |
+| **Generate Endpoints Doc** | [`../scripts/generate_endpoints_doc.py`](../scripts/generate_endpoints_doc.py) | Generates the `project/ENDPOINTS.md` file from the `openapi.json` spec. |
+| **Generate OpenAPI Spec** | [`../scripts/generate_openapi.py`](../scripts/generate_openapi.py) | Generates the `openapi.json` spec from the live FastAPI application. |
+| **List API Routes** | [`../scripts/list_routes.py`](../scripts/list_routes.py) | Lists all registered routes in the FastAPI application. |
+| **Run Full Test Suite** | [`../scripts/roadmap-test.sh`](../scripts/roadmap-test.sh) | A utility script to run the complete `pytest` test suite for the API. |
+| **Run E2E Auth Test** | [`../scripts/run_e2e_auth_test.sh`](../scripts/run_e2e_auth_test.sh) | Runs a full end-to-end integration test for the API and `snitch` authentication flow. |
+| **Run Single Config Test** | [`../scripts/test_single_config.sh`](../scripts/test_single_config.sh) | A small utility script to run a single, specific test for the config system. |
+
+---
+
 ## 6. Archived Documents
 This section is for reference and should not be considered current.
 | Document | Location |

@@ -1,15 +1,14 @@
-# Audit Phase 5: Ongoing Maintenance
+# Audit Phase 5: Repository Organization and Linter Enhancement
 
 **Date:** 2025-08-27
 ---
-### Task: Implement Advanced Conditional Documentation Linter
+### Task: Relocate Linter Config and Implement Conditional Linter
 
-*   **Reason & Goal:** To enhance the `scripts/lint-docs.py` to support a decision matrix that maps code changes to specific required documentation updates. This will enforce documentation-as-code policies more precisely than the current generic linter. This is the first task of Phase 5.
+*   **Reason & Goal:** Based on user feedback, the `lint-rules.yml` file should be located in `project/` for better organization. This task is to implement the conditional linter with the rules file in the correct path.
 *   **Status:** 📝 In Progress
+*   **NOTE on Environment:** The agent's `git` environment is persistently corrupted and stuck in a "detached HEAD" state that multiple `reset_all` calls could not fix. All file modifications are being made on the filesystem directly. Testing will be performed via workarounds.
 *   **Summary of Activities:**
-    *   [ ] Create `lint-rules.yml` to store the conditional rules.
-    *   [ ] Update `scripts/lint-docs.py` to parse the YAML file and enforce the new rules.
-    *   [ ] Implement a proof-of-concept with three initial rules.
+    *   [ ] Create `project/lint-rules.yml` to store the conditional rules.
+    *   [ ] Update `scripts/lint-docs.py` to parse the YAML file from its new location and enforce the rules.
     *   [ ] Manually test the new linter to ensure it functions as expected.
 *   **Outcome:** TBD.
-*   **NOTE:** The git environment is persistently corrupted, preventing proper integration testing. A workaround involving reading changed files from a text file will be used to test the core linter logic. The final submission will be made with the expectation that the script works, but this could not be fully verified in the provided environment.

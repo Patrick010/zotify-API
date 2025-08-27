@@ -14,7 +14,8 @@ from typing import Any, Dict, List, Set
 import yaml
 
 PROJECT_ROOT = Path(__file__).parent.parent
-RULES_FILE = PROJECT_ROOT / "lint-rules.yml"
+# Corrected path to the rules file inside the project/ directory
+RULES_FILE = PROJECT_ROOT / "project" / "lint-rules.yml"
 
 # Define the "Trinity" of mandatory log files
 TRINITY_LOG_FILES = {
