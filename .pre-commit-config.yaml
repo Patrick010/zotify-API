@@ -17,3 +17,4 @@ repos:
         language: python
         types: [file] # Run on all staged files
         pass_filenames: false # The script gets filenames from git, not as arguments
+        additional_dependencies: [pyyaml]

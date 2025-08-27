@@ -9,15 +9,12 @@ import os
 import subprocess
 import sys
 from pathlib import Path
-from typing import Dict, List, Set
+from typing import Any, Dict, List, Set
+
+import yaml
 
 PROJECT_ROOT = Path(__file__).parent.parent
-REGISTRY_PATH = PROJECT_ROOT / "project" / "PROJECT_REGISTRY.md"
-
-# Define path prefixes for different categories
-SOURCE_CODE_PREFIXES = ["api/src", "snitch/", "gonk-testUI/"]
-TEST_CODE_PREFIXES = ["api/tests"]
-DOC_PREFIXES = ["api/docs", "snitch/docs", "gonk-testUI/docs", "project/"]
+RULES_FILE = PROJECT_ROOT / "lint-rules.yml"
 
 # Define the "Trinity" of mandatory log files
 TRINITY_LOG_FILES = {
@@ -59,56 +56,50 @@ def get_changed_files() -> Set[str]:
         return set()
 
 
-def get_module_from_path(path: str) -> str:
-    """
-    Determines the module ('api', 'snitch', 'gonk-testUI', 'project') from a file path.
-    """
-    if path.startswith("api/"):
-        return "api"
-    if path.startswith("snitch/"):
-        return "snitch"
-    if path.startswith("gonk-testUI/"):
-        return "gonk-testUI"
-    if path.startswith("project/"):
-        return "project"
-    return "other"
+def load_rules() -> List[Dict[str, Any]]:
+    """Loads and validates the rules from lint-rules.yml."""
+    if not RULES_FILE.exists():
+        print(f"Warning: Rules file not found at {RULES_FILE}. Skipping.", file=sys.stderr)
+        return []
+    with open(RULES_FILE, "r", encoding="utf-8") as f:
+        data = yaml.safe_load(f)
+
+    if not isinstance(data, dict) or "rules" not in data or not isinstance(data["rules"], list):
+        print(f"Error: Invalid format in {RULES_FILE}. Expected a 'rules' key with a list.", file=sys.stderr)
+        return []
+
+    return data["rules"]
 
 
-def categorize_files(files: Set[str]) -> Dict[str, Dict[str, bool]]:
+def check_conditional_rules(rules: List[Dict[str, Any]], changed_files: Set[str]) -> List[str]:
     """
-    Categorizes files into modules and checks for code vs. doc changes.
+    Checks if changes in source paths are accompanied by required doc changes.
     """
-    module_changes: Dict[str, Dict[str, bool]] = {
-        "api": {"code_changed": False, "docs_changed": False},
-        "snitch": {"code_changed": False, "docs_changed": False},
-        "gonk-testUI": {"code_changed": False, "docs_changed": False},
-    }
-    project_docs_changed = False
+    errors: List[str] = []
+    for rule in rules:
+        source_paths = rule.get("source_paths", [])
+        required_docs = rule.get("required_docs", [])
+        message = rule.get("message", f"Rule '{rule.get('name', 'Unnamed')}' failed.")
 
-    for file_path in files:
-        module = get_module_from_path(file_path)
-
-        is_code = any(
-            file_path.startswith(prefix)
-            for prefix in SOURCE_CODE_PREFIXES + TEST_CODE_PREFIXES
+        # Check if any changed file matches a source path for this rule
+        source_change_found = any(
+            any(changed_file.startswith(src_path) for src_path in source_paths)
+            for changed_file in changed_files
         )
-        is_docs = any(file_path.startswith(prefix) for prefix in DOC_PREFIXES)
 
-        if is_code and module in module_changes:
-            module_changes[module]["code_changed"] = True
+        if not source_change_found:
+            continue
 
-        if is_docs:
-            if module in module_changes:
-                module_changes[module]["docs_changed"] = True
-            elif module == "project":
-                project_docs_changed = True
+        # If a source change was found, check if a required doc was also changed
+        doc_change_found = any(
+            any(changed_file == doc_path for doc_path in required_docs)
+            for changed_file in changed_files
+        )
 
-    # If project-level docs were changed, it satisfies the linter for all modules
-    if project_docs_changed:
-        for module in module_changes:
-            module_changes[module]["docs_changed"] = True
+        if not doc_change_found:
+            errors.append(message)
 
-    return module_changes
+    return errors
 
 
 def main() -> int:
@@ -129,9 +120,7 @@ def main() -> int:
     errors: List[str] = []
 
     # --- Trinity Check ---
-    # Any commit with any files changed must include the Trinity logs.
-    # We exempt the check if the only files being changed are the trinity logs
-    # themselves, to avoid a catch-22 where you can't commit just the logs.
+    # Any commit must include the Trinity logs, unless only those logs are changed.
     if changed_files and not changed_files.issubset(TRINITY_LOG_FILES):
         missing_trinity_files = TRINITY_LOG_FILES - changed_files
         if missing_trinity_files:
@@ -139,19 +128,15 @@ def main() -> int:
                 errors.append(f"Mandatory log file was not updated: {f}")
     # --- End Trinity Check ---
 
-    # --- Code/Doc Correspondence Check ---
-    module_changes = categorize_files(changed_files)
-    for module, changes in module_changes.items():
-        if changes["code_changed"] and not changes["docs_changed"]:
-            errors.append(
-                f"Module '{module}' has source code changes but no corresponding "
-                f"documentation changes. Please update documentation in '{module}/docs/' "
-                f"or in the main 'project/' directory."
-            )
+    # --- Conditional Documentation Check ---
+    rules = load_rules()
+    conditional_errors = check_conditional_rules(rules, changed_files)
+    errors.extend(conditional_errors)
+    # --- End Conditional Documentation Check ---
 
     if errors:
         print("\n--- Documentation Linter Failed ---", file=sys.stderr)
-        for error in errors:
+        for error in sorted(list(set(errors))): # Use set to remove duplicate messages
             print(f"ERROR: {error}", file=sys.stderr)
         print("-----------------------------------", file=sys.stderr)
         return 1
