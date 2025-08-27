@@ -38,7 +38,7 @@ Once you have established the baseline, your first official task is the start of
 
     Task: Implement Advanced Conditional Documentation Linter
     Location: This is the first "To Do" item in Phase 5 of the project/audit/HLD_LLD_ALIGNMENT_PLAN.md.
-    Objective: The goal is to enhance the scripts/lint-docs.py script to be more intelligent. Instead of simply checking if the Trinity logs were touched, it should support a more advanced decision matrix. For example, a change in api/src/zotify_api/routes/ might require a corresponding change in project/ENDPOINTS.md. The goal is to make the documentation linter smarter and more context-aware. Consult project/PROJECT_REGISTRY.md for a full overview of all project documents.
+    Objective: The goal is to enhance the scripts/lint-docs.py script to be more intelligent. Instead of simply checking if the Trinity logs were touched, it should support a more advanced decision matrix. For example, a change in api/src/zotify_api/routes/ might require a corresponding change in project/ENDPOINTS.md. The goal is to make the documentation linter smarter and more context-aware. Consult project/PROJECT_REGISTRY.md for a full overview of all project documents. Since phase 4 is completed and you are now starting phase 5, you will no longer use AUDIT-PHASE-4.md for audit related reporting, use a new files  AUDIT-PHASE-5.md. Use the same reporting format as in AUDIT-PHASE-4.md
 
 This task will require you to analyze the project structure and define a set of rules that map code changes to required documentation updates.
 
