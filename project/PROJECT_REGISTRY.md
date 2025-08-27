@@ -69,6 +69,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **System Requirements** | [`api/docs/system/REQUIREMENTS.md`](../api/docs/system/REQUIREMENTS.md) | Lists the system and software requirements for running the Zotify API. |
 | **Generated API Reference** | [`api/docs/reference/API_REFERENCE.md`](../api/docs/reference/API_REFERENCE.md) | A comprehensive, auto-generated reference for all API endpoints based on the OpenAPI spec. |
 | **Flexible Logging Framework Design** | [`api/docs/reference/features/developer_flexible_logging_framework.md`](../api/docs/reference/features/developer_flexible_logging_framework.md) | A design document for a developer-facing, programmable logging framework. |
+| **Code Documentation Index** | [`api/docs/reference/CODE_DOCUMENTATION_INDEX.md`](../api/docs/reference/CODE_DOCUMENTATION_INDEX.md) | A registry for tracking the documentation quality and status of all source code files. |
 | **Privacy Compliance** | [`api/docs/system/PRIVACY_COMPLIANCE.md`](../api/docs/system/PRIVACY_COMPLIANCE.md) | An overview of how the Zotify API project complies with data protection laws like GDPR. |
 
 ### 3.2. Snitch Module Documentation

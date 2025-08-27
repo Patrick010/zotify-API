@@ -126,23 +126,20 @@ For significant architectural changes (e.g., adding a new major component, chang
 
 ---
 
-## 6. Documentation Linter
+## 6. Code Documentation Quality
 
-To automatically enforce the "living documentation" principle, the project includes a custom linter that runs in the CI pipeline. This linter ensures that code changes are accompanied by corresponding documentation updates.
+This project uses a quality scoring system to track the documentation status of all source code files. The goal is to ensure all code is understandable, maintainable, and easy for new developers to contribute to.
 
-### How It Works
+### 6.1. Scoring Rubric
 
-The linter's logic is based on a "module" system, which is inferred from the top-level directory structure. The primary modules are `api`, `snitch`, and `gonk-testUI`.
+Each file is assigned a documentation score based on the following criteria:
 
-The rule is as follows:
+-   **A (Excellent):** The file has a comprehensive module-level docstring explaining its purpose. All classes and functions have detailed docstrings covering their goals, parameters, and return values. Complex logic is clarified with inline comments. Includes usage examples where applicable.
+-   **B (Good):** The file has basic docstrings for the module and most functions/classes, but they may lack detail. Some complex areas might be missing comments.
+-   **C (Needs Improvement):** The file has missing or minimal docstrings, no inline comments for complex logic, and is difficult to understand without reading the code itself.
 
-> If a pull request contains changes to source code or tests within a module (e.g., `api/src` or `api/tests`), it **must** also contain changes to a documentation file.
+### 6.2. Code Documentation Index
 
-### What Counts as a Documentation Change?
+A complete inventory of all source code files and their current documentation scores is maintained in the **Code Documentation Index**. Developers should consult this index to identify areas where documentation needs improvement and to update the score after improving a file's documentation.
 
-A documentation change can be one of two things:
-
-1.  **A change to a document within the same module.** For example, a change to `api/src/main.py` can be accompanied by a change to `api/docs/USER_MANUAL.md`.
-2.  **A change to any document in the top-level `project/` directory.** This allows high-level design documents (like `project/HIGH_LEVEL_DESIGN.md`) or logs to serve as valid documentation for a code change in any module.
-
-If this rule is violated, the `doc-linter` job in the CI pipeline will fail, blocking the pull request until a valid documentation change is added.
+-   **[View the Code Documentation Index](../reference/CODE_DOCUMENTATION_INDEX.md)**
