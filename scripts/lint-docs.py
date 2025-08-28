@@ -110,6 +110,19 @@ def main() -> int:
     print("Running Documentation Linter...")
     changed_files = get_changed_files()
 
+    # If running in pre-commit, we expect to find staged files. If not, the
+    # underlying git command likely failed. We should fail loudly.
+    if not changed_files and os.environ.get("PRE_COMMIT") == "1":
+        print(
+            "\nERROR: Linter was run in pre-commit mode but found no staged files.",
+            file=sys.stderr,
+        )
+        print(
+            "This usually indicates a problem with the git environment.",
+            file=sys.stderr,
+        )
+        return 1
+
     if not changed_files:
         print("No changed files detected. Exiting.")
         return 0
