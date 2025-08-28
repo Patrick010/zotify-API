@@ -1,3 +1,21 @@
+## AUDIT-006: Code Quality and Repository Cleanup Initiative
+
+**Date:** 2025-08-28
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To address user feedback regarding repository organization and to proactively establish a system for tracking code quality. This session evolved from a single feature implementation into a broader initiative covering repository cleanup, process formalization, and tooling improvements.
+
+### Outcome
+- **Repository Organized:** Addressed repository clutter by moving 8 utility scripts into the `scripts/` directory, relocating `DEPENDENCIES.md` to `project/`, and deleting 5 obsolete files. The `PROJECT_REGISTRY.md` was updated to reflect all changes.
+- **Code Quality Index Established:** Created a new `CODE_QUALITY_INDEX.md` to serve as a registry for the quality status of all API source files. Performed a baseline assessment on key files and updated the `API_DEVELOPER_GUIDE.md` to incorporate this new process.
+- **Doc Linter Hardened:** The `scripts/lint-docs.py` script was refactored to use an external `project/lint-rules.yml` configuration and was made more robust to prevent silent failures in faulty `git` environments.
+- **Execution Plan Formalized:** The `project/EXECUTION_PLAN.md` was updated to include a "Code QA" step at the end of every project phase, ensuring a consistent quality gate.
+- **Conclusion:** The project is now significantly more organized, and new processes are in place to track and encourage high code quality.
+
+---
+
 ## AUDIT-005: Final Documentation Cleanup
 
 **Date:** 2025-08-27

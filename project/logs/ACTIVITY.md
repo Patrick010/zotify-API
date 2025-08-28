@@ -1,3 +1,29 @@
+## ACT-057: Implement Quality Index, Linter, and Repository Cleanup
+
+**Date:** 2025-08-28
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To enhance project quality assurance by implementing a new code quality tracking system, improving the documentation linter, performing a full repository cleanup, and formalizing the QA process in the execution plan.
+
+### Outcome
+- **Code Quality Index Created:** A new document, `api/docs/reference/CODE_QUALITY_INDEX.md`, was created to track the quality score of every source file. The `API_DEVELOPER_GUIDE.md` was updated to explain this new system.
+- **Conditional Linter Enhanced:** The `scripts/lint-docs.py` was refactored to use a YAML configuration (`project/lint-rules.yml`) and made more robust to prevent silent failures.
+- **Repository Cleanup:** The root directory was cleaned by moving 8 helper scripts to the `scripts/` folder, moving `DEPENDENCIES.md` to `project/`, and deleting 5 obsolete/temporary files.
+- **Project Registry Updated:** The `PROJECT_REGISTRY.md` was updated to document the moved scripts and the new code quality index.
+- **Execution Plan Updated:** A "Code QA" step was added to all phases in `project/EXECUTION_PLAN.md` with the correct status.
+
+### Related Documents
+- `api/docs/reference/CODE_QUALITY_INDEX.md`
+- `api/docs/manuals/API_DEVELOPER_GUIDE.md`
+- `project/PROJECT_REGISTRY.md`
+- `project/EXECUTION_PLAN.md`
+- `scripts/lint-docs.py`
+- `project/lint-rules.yml`
+
+---
+
 ## ACT-056: Final Documentation Cleanup
 
 **Date:** 2025-08-27
