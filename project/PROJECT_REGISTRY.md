@@ -69,7 +69,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **System Requirements** | [`api/docs/system/REQUIREMENTS.md`](../api/docs/system/REQUIREMENTS.md) | Lists the system and software requirements for running the Zotify API. |
 | **Generated API Reference** | [`api/docs/reference/API_REFERENCE.md`](../api/docs/reference/API_REFERENCE.md) | A comprehensive, auto-generated reference for all API endpoints based on the OpenAPI spec. |
 | **Flexible Logging Framework Design** | [`api/docs/reference/features/developer_flexible_logging_framework.md`](../api/docs/reference/features/developer_flexible_logging_framework.md) | A design document for a developer-facing, programmable logging framework. |
-| **Code Quality Index** | [`api/docs/reference/CODE_QUALITY_INDEX.md`](../api/docs/reference/CODE_QUALITY_INDEX.md) | A registry for tracking the overall quality and status of all source code files. |
+| **Code Quality Index** | [`../api/docs/reference/CODE_QUALITY_INDEX.md`](../api/docs/reference/CODE_QUALITY_INDEX.md) | A registry for tracking the overall quality and status of all API source code files. |
 | **Privacy Compliance** | [`api/docs/system/PRIVACY_COMPLIANCE.md`](../api/docs/system/PRIVACY_COMPLIANCE.md) | An overview of how the Zotify API project complies with data protection laws like GDPR. |
 
 ### 3.2. Snitch Module Documentation
@@ -90,6 +90,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **User Manual** | [`snitch/docs/USER_MANUAL.md`](../snitch/docs/USER_MANUAL.md) | A manual for end-users explaining the purpose of the Snitch helper application. |
 | **Zero Trust Design** | [`snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md`](../snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md) | The design specification for a Zero Trust secure callback flow for Snitch. |
 | **IPC Communication** | [`snitch/docs/phase5-ipc.md`](../snitch/docs/phase5-ipc.md) | Outlines the secure IPC mechanism between the Zotify API and Snitch. |
+| **Code Quality Index** | [`../snitch/docs/CODE_QUALITY_INDEX.md`](../snitch/docs/CODE_QUALITY_INDEX.md) | A registry for tracking the quality and status of all Snitch source code files. |
 
 ### 3.3. Gonk-TestUI Module Documentation
 | Document | Location | Description |
@@ -99,6 +100,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **Changelog** | [`gonk-testUI/docs/CHANGELOG.md`](../gonk-testUI/docs/CHANGELOG.md) | A changelog for the `gonk-testUI` module. |
 | **Contributing Guide** | [`gonk-testUI/docs/CONTRIBUTING.md`](../gonk-testUI/docs/CONTRIBUTING.md) | A guide for contributing to the `gonk-testUI` module. |
 | **User Manual** | [`gonk-testUI/docs/USER_MANUAL.md`](../gonk-testUI/docs/USER_MANUAL.md) | A detailed user manual for the `gonk-testUI`. |
+| **Code Quality Index** | [`../gonk-testUI/docs/CODE_QUALITY_INDEX.md`](../gonk-testUI/docs/CODE_QUALITY_INDEX.md) | A registry for tracking the quality and status of all Gonk-TestUI source code files. |
 
 ---
 

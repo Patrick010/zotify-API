@@ -35,3 +35,11 @@ To ensure the security of the authentication flow, the Snitch listener will be h
 - **Secure Secret Handling:** The received authentication `code` is handled only in memory and never logged or persisted to disk.
 
 For full details, see the [`PHASE_2_SECURE_CALLBACK.md`](./docs/PHASE_2_SECURE_CALLBACK.md) design document.
+
+---
+
+## Code Quality
+
+The quality and documentation status of the source code in this module is tracked in a dedicated index. Developers should consult this index to understand the current state of the code and identify areas for improvement.
+
+-   **[View the Snitch Code Quality Index](./docs/CODE_QUALITY_INDEX.md)**

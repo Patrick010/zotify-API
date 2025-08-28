@@ -6,6 +6,10 @@
 # Exit immediately if a command exits with a non-zero status.
 set -e
 
+# --- Project Root Calculation ---
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+
 # --- Configuration ---
 API_HOST="127.0.0.1"
 API_PORT="8000"
@@ -26,7 +30,7 @@ SNITCH_BINARY="/tmp/snitch"
 function start_api() {
     echo "--- Starting Zotify API server ---"
     (
-        cd api && \
+        cd "$PROJECT_ROOT/api" && \
         uvicorn src.zotify_api.main:app --host ${API_HOST} --port ${API_PORT} &> ${API_LOG_FILE} & \
         echo $! > ${API_PID_FILE}
     )
@@ -48,7 +52,7 @@ function build_and_start_snitch() {
     echo "--- Building and Starting Snitch Service ---"
 
     echo "Building Snitch binary..."
-    (cd ${SNITCH_DIR} && go build -o ${SNITCH_BINARY} .)
+    (cd "$PROJECT_ROOT/${SNITCH_DIR}" && go build -o ${SNITCH_BINARY} .)
 
     echo "Starting Snitch service with callback URL: ${API_CALLBACK_URL}"
     (
@@ -75,7 +79,7 @@ function run_e2e_test() {
     echo "         RUNNING E2E AUTH TEST"
     echo "========================================="
     # It's better to run pytest from the root of the api project
-    (cd api && python -m pytest tests/test_e2e_auth.py)
+    (cd "$PROJECT_ROOT/api" && python -m pytest tests/test_e2e_auth.py)
 }
 
 function check_logs_for_success() {

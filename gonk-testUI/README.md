@@ -78,6 +78,12 @@ python app.py --api-url http://192.168.1.100:8000
 
 You can then access the Gonk Test UI in your web browser at the address the server is running on (e.g., `http://localhost:8082`).
 
-### 4. How to Use the UI
+### 4. Code Quality
+
+The quality and documentation status of the source code in this module is tracked in a dedicated index. Developers should consult this index to understand the current state of the code and identify areas for improvement.
+
+-   **[View the Gonk-TestUI Code Quality Index](./docs/CODE_QUALITY_INDEX.md)**
+
+### 5. How to Use the UI
 
 For detailed instructions on how to use the features of the UI, please refer to the [User Manual](./docs/USER_MANUAL.md).

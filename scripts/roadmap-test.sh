@@ -3,7 +3,7 @@ set -euo pipefail
 
 # repo root -> script location
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$SCRIPT_DIR"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 # Activate venv if present (adjust path if your venv lives elsewhere)
 if [[ -f "$PROJECT_ROOT/api/.venv/bin/activate" ]]; then

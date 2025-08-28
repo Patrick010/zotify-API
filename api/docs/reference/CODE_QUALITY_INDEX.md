@@ -37,9 +37,9 @@ Each file is assigned a quality score based on a holistic assessment. While the 
 | `api/src/zotify_api/core/logging_handlers/database_job_handler.py` | C | No quality assessment yet. |
 | `api/src/zotify_api/core/logging_handlers/json_audit_handler.py` | C | No quality assessment yet. |
 | `api/src/zotify_api/database/__init__.py` | C | No quality assessment yet. |
-| `api/src/zotify_api/database/crud.py` | C | No quality assessment yet. |
+| `api/src/zotify_api/database/crud.py` | B | Excellent function-level docstrings. A module-level docstring explaining the file's overall role as the primary database interface would make it an 'A'. |
 | `api/src/zotify_api/database/models.py` | C | No module or class-level docstrings to explain the data model. A new developer would have to infer all table purposes and relationships from the code. |
-| `api/src/zotify_api/database/session.py` | C | No quality assessment yet. |
+| `api/src/zotify_api/database/session.py` | B | Clear and concise. The `get_db` dependency is well-documented. A module-level docstring would elevate it to an 'A'. |
 | `api/src/zotify_api/globals.py` | C | No quality assessment yet. |
 | `api/src/zotify_api/logging_config.py` | C | No quality assessment yet. |
 | `api/src/zotify_api/main.py` | B | Good structure and function-level documentation via FastAPI decorators. Missing a module-level docstring explaining the file's overall purpose and initialization sequence. |
