@@ -6,19 +6,27 @@ This document serves as a central registry for the quality status of all source 
 
 ## 2. Scoring Rubric
 
-Each file is assigned a quality score based on a holistic assessment.
+Each file is assigned two quality scores: one for Documentation and one for Code.
 
--   **A (Excellent):** The code is clear, efficient, and easy to maintain. It has comprehensive documentation or is self-explanatory due to its structure (e.g., semantic HTML, well-structured CSS).
--   **B (Good):** The code is functional but could be improved. It may have basic documentation but lacks detail.
--   **C (Needs Improvement):** The code is difficult to understand and has little to no documentation.
+### Documentation Score (`Doc Score`)
+This score assesses the quality and completeness of the comments and docstrings.
+-   **A (Excellent):** The file has comprehensive documentation or is self-explanatory due to its structure (e.g., semantic HTML, well-structured CSS).
+-   **B (Good):** The file has basic documentation but lacks detail.
+-   **C (Needs Improvement):** The file has missing or minimal documentation.
+
+### Code Quality Score (`Code Score`)
+This score assesses the quality of the implementation itself.
+-   **A (Excellent):** The code is clear, efficient, well-structured, and adheres to design patterns.
+-   **B (Good):** The code is functional but could be improved.
+-   **C (Needs Improvement):** The code is difficult to understand, inefficient, or contains significant technical debt.
 
 ---
 
 ## 3. Source Code Index
 
-| File Path | Code Quality Score | Notes |
-|---|---|---|
-| `gonk-testUI/app.py` | C | The functions for managing the `sqlite-web` subprocess are complex and lack docstrings to explain their logic and state management. Core Flask routes are clear but would benefit from docstrings. |
-| `gonk-testUI/static/app.js` | B | Excellent inline comments and logical grouping. The lack of file-level and function-level docstrings makes it difficult to get a high-level understanding of the UI's complex state management. |
-| `gonk-testUI/static/styles.css` | A | Excellent use of CSS variables for theming and a clear, logical structure. The code is easy to read and maintain. |
-| `gonk-testUI/templates/index.html` | A | Clean, semantic HTML5 structure. The separation of concerns is good, though the theme-toggle style could be moved to the main CSS file for perfect separation. |
+| File Path | Doc Score | Code Score | Notes |
+|---|---|---|---|
+| `gonk-testUI/app.py` | C | B | The core Flask routes are clear, but the functions for managing the `sqlite-web` subprocess are complex and lack docstrings. |
+| `gonk-testUI/static/app.js` | B | B | Excellent inline comments, but lacks function-level docstrings for complex UI state management. |
+| `gonk-testUI/static/styles.css` | A | A | Excellent use of CSS variables and a clear, logical structure. |
+| `gonk-testUI/templates/index.html` | A | A | Clean, semantic HTML5 structure. |

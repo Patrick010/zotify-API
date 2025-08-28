@@ -1,3 +1,40 @@
+## AUDIT-008: Comprehensive Repository Refactoring and QA Enhancement
+
+**Date:** 2025-08-28
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To perform a wide-ranging series of tasks to improve the project's organization, documentation, and quality assurance framework. This session addressed significant repository clutter and established new, sustainable processes for tracking and improving code quality.
+
+### Outcome
+- **Repository Organized:** Addressed significant repository clutter by moving 8 utility scripts into `scripts/`, relocating `DEPENDENCIES.md`, and deleting 5 obsolete files. All internal script paths and project documentation were updated to reflect these changes.
+- **Code Quality Framework Established:** A new Code Quality Index system was implemented across all three modules (`api`, `snitch`, `gonk-testUI`), each with its own tracking file. A two-column scoring rubric was defined and documented in the developer guides.
+- **Baseline Quality Assessment:** A baseline quality assessment was performed on the majority of source files across the project.
+- **"Gold Standard" Documentation:** A comprehensive documentation file for `tracks_service.py` was created to serve as a high-quality example, and its score was updated in the index.
+- **Process Hardening:** The project's `EXECUTION_PLAN.md` was updated to include a formal "Code QA" step in every phase, and the documentation linter was made more robust.
+- **Conclusion:** The project is now in a significantly more organized and maintainable state, with a clear framework for ongoing quality improvement.
+
+---
+
+## AUDIT-007: Refine Quality Metrics and Document `tracks_service`
+
+**Date:** 2025-08-28
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To refine the newly implemented Code Quality Index based on user feedback, separating the scoring into "Documentation" and "Code" metrics. This task also includes creating the first piece of detailed source code documentation to demonstrate the process and achieve an 'A' score for a critical file.
+
+### Outcome
+- **Quality Rubric Refined:** The scoring rubric was updated in all `CODE_QUALITY_INDEX.md` files and the `API_DEVELOPER_GUIDE.md` to have separate, clearly defined criteria for Documentation Score and Code Score.
+- **`tracks_service.py` Documentation Created:** A comprehensive, standalone documentation file was created for the `tracks_service.py` module, detailing its purpose, functions, and usage.
+- **Code Quality Assessed:** A code quality assessment was performed on `tracks_service.py`, resulting in a 'B' score.
+- **Index Updated:** The API's `CODE_QUALITY_INDEX.md` was updated with the new 'A' (Doc) and 'B' (Code) scores for `tracks_service.py`, including detailed notes and a link to the new documentation.
+- **Conclusion:** The quality tracking system is now more nuanced, and the process for improving a file's quality score has been successfully demonstrated.
+
+---
+
 ## AUDIT-006: Code Quality and Repository Cleanup Initiative
 
 **Date:** 2025-08-28

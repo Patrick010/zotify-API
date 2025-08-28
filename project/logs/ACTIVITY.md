@@ -1,3 +1,64 @@
+## ACT-059: Comprehensive Repository Cleanup and Quality Framework Implementation
+
+**Date:** 2025-08-28
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To address repository clutter, improve quality assurance processes, and establish a baseline for code quality across all project modules. This was a major initiative to improve project maintainability and formalize QA procedures.
+
+### Outcome
+- **Repository Cleanup:**
+    - Moved 8 utility scripts from the root directory into the `scripts/` folder and corrected their internal pathing.
+    - Moved `DEPENDENCIES.md` from the root into the `project/` directory.
+    - Deleted 5 obsolete/temporary files from the root directory.
+- **Code Quality Index System:**
+    - Established a new system to track the quality of every source file in the project.
+    - Created a separate `CODE_QUALITY_INDEX.md` for each of the three modules (`api`, `snitch`, `gonk-testUI`).
+    - Defined a two-column scoring rubric for "Documentation Quality" and "Code Quality" and updated all relevant developer guides to explain it.
+    - Performed a baseline quality assessment of all source files in the `snitch` and `gonk-testUI` modules, and a partial assessment of the `api` module.
+- **`tracks_service.py` Gold Standard:**
+    - Created a comprehensive, standalone documentation file for `tracks_service.py` to serve as a "gold standard" example.
+    - Updated its documentation score to 'A' in the API quality index.
+- **Process and Tooling Improvements:**
+    - Updated the `project/EXECUTION_PLAN.md` to include a "Code QA" step in every phase.
+    - Made the conditional documentation linter more robust by ensuring it fails loudly if it cannot find changed files.
+    - Updated the `PROJECT_REGISTRY.md` to reflect all the new files and organizational changes.
+
+### Related Documents
+- `scripts/`
+- `project/DEPENDENCIES.md`
+- `api/docs/reference/CODE_QUALITY_INDEX.md`
+- `snitch/docs/reference/CODE_QUALITY_INDEX.md`
+- `gonk-testUI/docs/reference/CODE_QUALITY_INDEX.md`
+- `api/docs/reference/source/tracks_service.py.md`
+- `project/EXECUTION_PLAN.md`
+- `project/PROJECT_REGISTRY.md`
+
+---
+
+## ACT-058: Correct Quality Index and Finalize Documentation
+
+**Date:** 2025-08-28
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To address user feedback on the initial implementation of the Code Quality Index, and to correctly document a key service file as a demonstration of the new quality process.
+
+### Outcome
+- **Quality Index Refined:** The `CODE_QUALITY_INDEX.md` files and the `API_DEVELOPER_GUIDE.md` were updated to use a two-column scoring system for "Documentation Quality" and "Code Quality", with a more detailed rubric for each.
+- **`tracks_service.py` Documented:** A new, comprehensive documentation file was created at `api/docs/reference/source/tracks_service.py.md`.
+- **Quality Score Updated:** The `CODE_QUALITY_INDEX.md` for the API module was updated to reflect the new 'A' documentation score and 'B' code score for `tracks_service.py`.
+- **File Naming Corrected:** The new documentation file was given a more explicit name (`.py.md`) as per user feedback.
+
+### Related Documents
+- `api/docs/reference/CODE_QUALITY_INDEX.md`
+- `api/docs/manuals/API_DEVELOPER_GUIDE.md`
+- `api/docs/reference/source/tracks_service.py.md`
+
+---
+
 ## ACT-057: Implement Quality Index, Linter, and Repository Cleanup
 
 **Date:** 2025-08-28

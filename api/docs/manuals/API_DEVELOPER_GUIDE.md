@@ -132,14 +132,20 @@ This project uses a quality scoring system to track the overall quality of all s
 
 ### 6.1. Scoring Rubric
 
-Each file is assigned a quality score based on a holistic assessment. While the initial focus is on documentation, the score should reflect overall code quality.
+Each file is assigned two quality scores: one for **Documentation (`Doc Score`)** and one for **Code (`Code Score`)**.
 
--   **A (Excellent):** The code is clear, efficient, and easy to maintain. It has comprehensive documentation, including a module-level docstring, detailed function/class docstrings, and inline comments for complex logic. It is well-tested.
--   **B (Good):** The code is functional but could be improved. It may have basic documentation but lacks detail. Some complex areas might be uncommented or hard to follow. Test coverage may be incomplete.
--   **C (Needs Improvement):** The code is difficult to understand, has little to no documentation, and may lack sufficient test coverage. It is a candidate for refactoring.
+-   **Documentation Score:** Assesses the quality and completeness of comments and docstrings.
+    -   **A (Excellent):** Comprehensive module and function/class docstrings. Complex logic is commented.
+    -   **B (Good):** Basic docstrings are present but may lack detail.
+    -   **C (Needs Improvement):** Missing or minimal docstrings and comments.
+
+-   **Code Quality Score:** Assesses the quality of the implementation itself.
+    -   **A (Excellent):** Clear, efficient, well-structured, and has high test coverage.
+    -   **B (Good):** Functional, but could be clearer, more efficient, or better tested.
+    -   **C (Needs Improvement):** Difficult to understand, inefficient, or contains significant technical debt.
 
 ### 6.2. Code Quality Index File
 
-A complete inventory of all source code files and their current quality scores is maintained in the **Code Quality Index**. Developers should consult this index to identify areas that need improvement and to update the score after improving a file's quality.
+A complete inventory of all source code files and their current quality scores is maintained in the **Code Quality Index**. Developers should consult this index to identify areas that need improvement and to update the scores after improving a file's quality.
 
--   **[View the Code Quality Index](../reference/CODE_QUALITY_INDEX.md)**
+-   **[View the API Code Quality Index](../reference/CODE_QUALITY_INDEX.md)**
