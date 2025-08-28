@@ -126,20 +126,20 @@ For significant architectural changes (e.g., adding a new major component, chang
 
 ---
 
-## 6. Code Documentation Quality
+## 6. Code Quality Index
 
-This project uses a quality scoring system to track the documentation status of all source code files. The goal is to ensure all code is understandable, maintainable, and easy for new developers to contribute to.
+This project uses a quality scoring system to track the overall quality of all source code files. The goal is to ensure all code is understandable, maintainable, and well-tested.
 
 ### 6.1. Scoring Rubric
 
-Each file is assigned a documentation score based on the following criteria:
+Each file is assigned a quality score based on a holistic assessment. While the initial focus is on documentation, the score should reflect overall code quality.
 
--   **A (Excellent):** The file has a comprehensive module-level docstring explaining its purpose. All classes and functions have detailed docstrings covering their goals, parameters, and return values. Complex logic is clarified with inline comments. Includes usage examples where applicable.
--   **B (Good):** The file has basic docstrings for the module and most functions/classes, but they may lack detail. Some complex areas might be missing comments.
--   **C (Needs Improvement):** The file has missing or minimal docstrings, no inline comments for complex logic, and is difficult to understand without reading the code itself.
+-   **A (Excellent):** The code is clear, efficient, and easy to maintain. It has comprehensive documentation, including a module-level docstring, detailed function/class docstrings, and inline comments for complex logic. It is well-tested.
+-   **B (Good):** The code is functional but could be improved. It may have basic documentation but lacks detail. Some complex areas might be uncommented or hard to follow. Test coverage may be incomplete.
+-   **C (Needs Improvement):** The code is difficult to understand, has little to no documentation, and may lack sufficient test coverage. It is a candidate for refactoring.
 
-### 6.2. Code Documentation Index
+### 6.2. Code Quality Index File
 
-A complete inventory of all source code files and their current documentation scores is maintained in the **Code Documentation Index**. Developers should consult this index to identify areas where documentation needs improvement and to update the score after improving a file's documentation.
+A complete inventory of all source code files and their current quality scores is maintained in the **Code Quality Index**. Developers should consult this index to identify areas that need improvement and to update the score after improving a file's quality.
 
--   **[View the Code Documentation Index](../reference/CODE_DOCUMENTATION_INDEX.md)**
+-   **[View the Code Quality Index](../reference/CODE_QUALITY_INDEX.md)**
