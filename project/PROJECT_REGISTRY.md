@@ -16,9 +16,9 @@ This document serves as the master file, or single source of truth, for tracking
 | **Project Registry** | [`PROJECT_REGISTRY.md`](./PROJECT_REGISTRY.md) | This document, the master index for all project artifacts. |
 | **Template Registry** | [`../templates/REGISTRY.md`](../templates/REGISTRY.md) | A registry of all reusable documentation templates. |
 | **Onboarding Guide** | [`ONBOARDING.md`](./ONBOARDING.md) | The primary entry point and guide for new developers to get up to speed on the project. |
-| **Current State** | [`CURRENT_STATE.md`](./logs/CURRENT_STATE.md) | A live snapshot of the project's most recent status, goals, and pending work. |
-| **Session Log** | [`SESSION_LOG.md`](./logs/SESSION_LOG.md) |Log of activities and findings from sessions. |
-| **Live Activity Log** | [`ACTIVITY.md`](./logs/ACTIVITY.md) | A live, chronological log of all major tasks and audit activities. |
+| **Current State** | [`CURRENT_STATE.md`](./logs/CURRENT_STATE.md) | **High-Level Snapshot.** A brief, narrative summary of the entire project's state at the end of a work session. It should answer: What was just accomplished? What is the next immediate goal? Are there any blockers? |
+| **Session Log** | [`SESSION_LOG.md`](./logs/SESSION_LOG.md) | **Session-Level Reporting.** A detailed log of the activities, findings, and outcomes within a single work session. This is for project-related reporting and can be compared to the audit-specific logs (e.g., `AUDIT-PHASE-5.md`). |
+| **Live Activity Log** | [`ACTIVITY.md`](./logs/ACTIVITY.md) | **Granular Task Log.** A reverse-chronological list of every specific, discrete task or action performed (e.g., "Implemented `log-work.py` script", "Fixed CI test failure"). Each entry should be a self-contained unit of work. |
 | **Project Brief** | [`PROJECT_BRIEF.md`](./PROJECT_BRIEF.md) | A high-level summary of the project's purpose, scope, and justification (PRINCE2). |
 | **Project Initiation Document (PID)** | [`PID.md`](./PID.md) | The formal 'living document' that defines the project's scope, plans, and controls (PRINCE2). |
 | **High-Level Design (HLD)** | [`HIGH_LEVEL_DESIGN.md`](./HIGH_LEVEL_DESIGN.md) | Outlines the high-level architecture, scope, and principles. |
