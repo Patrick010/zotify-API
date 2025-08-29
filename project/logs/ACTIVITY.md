@@ -1,3 +1,19 @@
+---
+## ACT-??? (TBD): Implement Phase 5: Automated Documentation Workflow tooling.
+
+**Date:** 2025-08-29
+**Status:** 🚧 In Progress
+**Assignee:** Jules
+
+### Objective
+(To be filled in)
+
+### Outcome
+- (To be filled in)
+
+### Related Documents
+- (To be filled in)
+
 ## ACT-059: Comprehensive Repository Cleanup and Quality Framework Implementation
 
 **Date:** 2025-08-28

@@ -44,7 +44,10 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-    "pre-commit"
+    "pre-commit",
+    "mkdocs",
+    "mkdocs-material",
+    "pydoc-markdown"
 ]
 
 [tool.pytest.ini_options]
