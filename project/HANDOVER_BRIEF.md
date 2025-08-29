@@ -38,30 +38,13 @@ The project is in a very stable and well-documented state.
     The repository is logically organized.
     The project's "living documentation" is accurate and can be trusted as the single source of truth for all ongoing work.
 
-3. Recommended Next Steps
-
-    Step 1: Quality Improvement (Recommended)
-        Familiarize yourself: Start by reading the updated API_DEVELOPER_GUIDE.md to understand the new quality scoring rubric.
-        Pick a target: Go to one of the new CODE_QUALITY_INDEX.md files (e.g., for the api module) and find a file with a low score (a 'C' or 'D' in either documentation or code quality).
-        Improve it: Your task is to improve the quality of that file. This could mean writing comprehensive documentation (like the tracks_service.py example) or refactoring the code for clarity and adding tests.
-        Update the index: Once you've improved the file, update its score in the CODE_QUALITY_INDEX.md and add a brief note in the Notes column explaining what you did (e.g., "Refactored to improve clarity and added full unit test coverage.").
-
-    Step 2: Audit Phase 5 continuation.
-		Consult HLD_LLD_ALIGNMENT_PLAN.md and verify the progress of the tasks of phase 5. Some are partially implemented but not properly updated.
-		In project/reports you will find a concept of the audit end report. At the end of this audit this report has to be updated.
-		The main goal of this session is to finalize the audit. 
-
-    Step 3: Main project continuation.
-        Consult the user to identify the next priority task in project/EXECUTION_PLAN.md.
-        As you work, remember that the plan now requires you to complete the "Code QA" step before you finish. This means you will be expected to assess the quality of any new code you write and update the relevant Code Quality Index.
-
 Please continue to adhere to the project's core process of keeping the "Trinity" log files and project documentation updated with your work. 
 
 ## Current State & Next Steps
 
 To get up to speed, please follow the instructions in **`project/ONBOARDING.md`**. It provides a recommended reading order for all the key project documents and will give you a complete picture of the project's architecture, status, and processes.
 
-4. Tasks:
+3. Tasks:
 
 Task 1: Implementing an Automated Documentation Workflow
 
@@ -215,3 +198,22 @@ Task 2:
 			Use results to guide refactoring, documentation updates, and technical debt remediation.
 
 	This can be handed directly to developers — it explains exactly what is expected, how to score files, and why each criterion matters.
+	
+4. Recommended Next Steps
+
+Step 1: Quality Improvement (Recommended)
+	Familiarize yourself: Start by reading the updated API_DEVELOPER_GUIDE.md to understand the new quality scoring rubric.
+	Pick a target: Go to one of the new CODE_QUALITY_INDEX.md files (e.g., for the api module) and find a file with a low score (a 'C' or 'D' in either documentation or code quality).
+	Improve it: Your task is to improve the quality of that file. This could mean writing comprehensive documentation (like the tracks_service.py example) or refactoring the code for clarity and adding tests.
+	Update the index: Once you've improved the file, update its score in the CODE_QUALITY_INDEX.md and add a brief note in the Notes column explaining what you did (e.g., "Refactored to improve clarity and added full unit test coverage.").
+
+Step 2: Audit Phase 5 continuation.
+	Consult HLD_LLD_ALIGNMENT_PLAN.md and verify the progress of the tasks of phase 5. Some are partially implemented but not properly updated.
+	In project/reports you will find a concept of the audit end report. At the end of this audit this report has to be updated.
+	The main goal of this session is to finalize the audit. 
+
+Step 3: Main project continuation.
+	Consult the user to identify the next priority task in project/EXECUTION_PLAN.md.
+	As you work, remember that the plan now requires you to complete the "Code QA" step before you finish. This means you will be expected to assess the quality of any new code you write and update the relevant Code Quality Index.
+
+Please continue to adhere to the project's core process of keeping the "Trinity" log files updated with your work.
