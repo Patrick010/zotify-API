@@ -5,8 +5,8 @@ set -e
 # The application now uses a sensible default for local development if the
 # environment variable is not set. See api/src/zotify_api/config.py.
 
-echo "Installing/updating dependencies..."
-pip install ./api
+echo "Installing/updating dependencies (including dev dependencies)..."
+pip install -e './api[dev]'
 
 echo "Starting Zotify API server..."
 
