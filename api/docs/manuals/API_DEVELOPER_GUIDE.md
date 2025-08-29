@@ -132,17 +132,29 @@ This project uses a quality scoring system to track the overall quality of all s
 
 ### 6.1. Scoring Rubric
 
-Each file is assigned two quality scores: one for **Documentation (`Doc Score`)** and one for **Code (`Code Score`)**.
+Each file is assigned two independent quality scores: one for **Documentation (`Doc Score`)** and one for **Code (`Code Score`)**.
 
--   **Documentation Score:** Assesses the quality and completeness of comments and docstrings.
-    -   **A (Excellent):** Comprehensive module and function/class docstrings. Complex logic is commented.
-    -   **B (Good):** Basic docstrings are present but may lack detail.
-    -   **C (Needs Improvement):** Missing or minimal docstrings and comments.
+#### Documentation Score
+This score assesses the quality, completeness, and clarity of comments and docstrings.
 
--   **Code Quality Score:** Assesses the quality of the implementation itself.
-    -   **A (Excellent):** Clear, efficient, well-structured, and has high test coverage.
-    -   **B (Good):** Functional, but could be clearer, more efficient, or better tested.
-    -   **C (Needs Improvement):** Difficult to understand, inefficient, or contains significant technical debt.
+| Grade | Criteria |
+| :---: | --- |
+| **A** | **Excellent:** Comprehensive module, class, and function docstrings are all present and follow a consistent style. All public methods are documented. Complex logic, algorithms, and business rules are explained with inline comments. |
+| **B** | **Good:** Most public methods have docstrings, but they may lack detail or consistency. Some complex logic is commented, but not all. |
+| **C** | **Needs Improvement:** Docstrings are sparse or missing for many methods. Little to no inline comments to explain complex sections. A new developer would struggle to understand the file's purpose without reading the code. |
+| **D** | **Poor:** Only a few, minimal docstrings or comments exist. The file is effectively undocumented. |
+| **F** | **Unacceptable:** No docstrings or comments whatsoever. |
+
+#### Code Quality Score
+This score assesses the implementation's clarity, efficiency, structure, and testability.
+
+| Grade | Criteria |
+| :---: | --- |
+| **A** | **Excellent:** Code is clear, efficient, and well-structured, following established design patterns. It has high, meaningful unit test coverage (>90%). Logic is simple and easy to follow. |
+| **B** | **Good:** Code is functional but could be improved. It might be slightly inefficient, have some overly complex functions, or have only moderate test coverage (50-90%). |
+| **C** | **Needs Improvement:** Code is difficult to understand, contains significant technical debt (e.g., large functions, deep nesting, magic numbers), or has low test coverage (<50%). |
+| **D** | **Poor:** Code is highly inefficient, convoluted, or buggy. It may have little to no test coverage and poses a maintenance risk. |
+| **F** | **Unacceptable:** Code is non-functional, contains critical bugs, or is a direct copy-paste from another source without adaptation. |
 
 ### 6.2. Code Quality Index File
 

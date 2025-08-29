@@ -4,6 +4,8 @@
 
 This document provides a detailed breakdown of the tasks required to fulfill the [Canonical Roadmap](./ROADMAP.md).
 
+**Note on "Code QA":** This is a mandatory step for every phase. It involves assessing all new or modified source code against the rubric in the `API_DEVELOPER_GUIDE.md` and updating the `CODE_QUALITY_INDEX.md` accordingly.
+
 ## Phase 0–2: Foundational Setup
 **Goal:** Establish project skeleton, tooling, basic API layout.
 **Status:** ✅ Done
@@ -26,7 +28,7 @@ This document provides a detailed breakdown of the tasks required to fulfill the
 - ✅ Add reverse proxy support for `/docs`.
 - 🟡 Stub initial user system wiring (authentication placeholder). # JULES-NOTE: This is largely complete. Functional endpoints for profile, preferences, etc. exist.
 - ✅ Achieve stable CI passes across environments.
-- ❌ Code QA
+- [ ] Code QA
 
 ## Phase 6: Fork-Specific Enhancements
 **Goal:** Implement enhancements specific to client forks and improve docs.
@@ -37,7 +39,7 @@ This document provides a detailed breakdown of the tasks required to fulfill the
 - ❌ Split developer guide and operations guide documentation.
 - ✅ Clarify existing documentation with realignment tasks. # JULES-NOTE: A comprehensive documentation overhaul was completed.
 - ❌ Address GDPR and `/privacy/data` endpoints (pending). # JULES-NOTE: Confirmed, this feature is not implemented.
-- ❌ Code QA
+- [ ] Code QA
 
 ## Phase 7: Full Spotify Feature Integration
 **Goal:** Complete Spotify integration with full CRUD and sync features.
@@ -48,7 +50,7 @@ This document provides a detailed breakdown of the tasks required to fulfill the
 - ❌ Build webhook support base class for event-driven updates (future).
 - ❌ Expand CI to include code coverage tracking.
 - ❌ Prepare DevOps templates (.github workflows, issue templates).
-- ❌ Code QA
+- [ ] Code QA
 
 ## Phase 8: Automation Layer
 **Goal:** Introduce event-based automation and rules engine.
@@ -57,7 +59,7 @@ This document provides a detailed breakdown of the tasks required to fulfill the
 - ❌ Design and implement automation trigger models.
 - ❌ Build CLI hooks for rules engine integration.
 - ❌ Create global config endpoint for defaults via admin API.
-- ❌ Code QA
+- [ ] Code QA
 
 ## Phase 9: Admin + Settings API
 **Goal:** Provide administrative APIs and system monitoring tools.
@@ -67,7 +69,7 @@ This document provides a detailed breakdown of the tasks required to fulfill the
 - ❌ Add endpoints for log access with filtering support.
 - 🟡 Implement system info and reporting endpoints (uptime, env, disk/memory). # JULES-NOTE: Partially implemented. /uptime and /env are functional.
 - 🟡 Introduce background job management for sync tasks. # JULES-NOTE: The foundational in-memory queue processing logic has been implemented for the Downloads Subsystem.
-- ❌ Code QA
+- [ ] Code QA
 
 ## Phase 10: Finalization & Release Readiness
 **Goal:** Lock API schema, prepare release packaging and finalize docs.
@@ -77,7 +79,7 @@ This document provides a detailed breakdown of the tasks required to fulfill the
 - ❌ Implement release packaging workflows and Makefile targets.
 - ❌ Polish documentation, archive previous reports and blueprints.
 - ❌ Achieve 95% test coverage, covering both stubbed and real endpoints.
-- ❌ Code QA
+- [ ] Code QA
 
 ## Phase 11: Developer Tooling
 **Goal:** Provide tools to improve the developer experience and testing workflow.

@@ -1,108 +1,71 @@
-# API Module: Code Quality Index
+# API Code Quality Index
 
-## 1. Purpose
+This document tracks the quality of every source code file in the `api` module. Each file is assessed against the rubric defined in the [`API_DEVELOPER_GUIDE.md`](../manuals/API_DEVELOPER_GUIDE.md).
 
-As per the project's commitment to quality and maintainability, this document serves as a central registry for the quality status of all source code files within the Zotify API. It provides a live snapshot of our code quality, helping to identify areas that need improvement or refactoring.
-
-This index is for code files what the `project/PROJECT_REGISTRY.md` is for project documentation.
-
-## 2. Scoring Rubric
-
-Each file is assigned two quality scores: one for Documentation and one for Code.
-
-### Documentation Score (`Doc Score`)
-This score assesses the quality and completeness of the comments and docstrings.
--   **A (Excellent):** The file has a comprehensive module-level docstring. All classes and functions have detailed docstrings covering their goals, parameters, and return values. Complex logic is clarified with inline comments.
--   **B (Good):** The file has basic docstrings for the module and most functions/classes, but they may lack detail.
--   **C (Needs Improvement):** The file has missing or minimal docstrings and inline comments.
-
-### Code Quality Score (`Code Score`)
-This score assesses the quality of the implementation itself.
--   **A (Excellent):** The code is clear, efficient, well-structured, and adheres to design patterns. It has high test coverage.
--   **B (Good):** The code is functional but could be improved. It may contain some complex or hard-to-follow logic, or could be more efficient. Test coverage may be incomplete.
--   **C (Needs Improvement):** The code is difficult to understand, inefficient, or contains significant technical debt. It is a primary candidate for refactoring.
-
----
-
-## 3. API Source Code Index (`api/src/zotify_api/`)
-
-| File Path | Doc Score | Code Score | Notes |
-|---|---|---|---|
-| `api/src/zotify_api/auth_state.py` | C | B | Simple state management, but lacks comments explaining the purpose of `pending_states`. |
-| `api/src/zotify_api/config.py` | C | B | Pydantic settings are clear, but the file lacks a module-level docstring explaining the configuration loading strategy. |
-| `api/src/zotify_api/core/error_handler/__init__.py` | C | A | Standard empty init file. |
-| `api/src/zotify_api/core/error_handler/actions/__init__.py` | C | A | Standard empty init file. |
-| `api/src/zotify_api/core/error_handler/actions/log_critical.py` | A | A | Clear, single-purpose action with good documentation. |
-| `api/src/zotify_api/core/error_handler/actions/webhook.py` | B | C | Docstring is minimal. Code is a stub with the real implementation commented out. |
-| `api/src/zotify_api/core/error_handler/config.py` | A | A | Excellent use of Pydantic models for clear, self-documenting configuration. |
-| `api/src/zotify_api/core/error_handler/formatter.py` | A | A | Well-structured formatter classes with clear base class and good docstrings. |
-| `api/src/zotify_api/core/error_handler/hooks.py` | B | B | Good public function docstrings, but internal hook functions are undocumented. Code is solid but complex in parts. |
-| `api/src/zotify_api/core/error_handler/triggers.py` | A | A | Excellent design using dynamic module loading. Clear docstrings for all methods. |
-| `api/src/zotify_api/core/logging_framework/__init__.py` | C | A | Standard empty init file. |
-| `api/src/zotify_api/core/logging_framework/filters.py` | A | A | Clear implementation of a logging filter with good docstrings. |
-| `api/src/zotify_api/core/logging_framework/schemas.py` | A | A | Excellent use of Pydantic for a complex and robust configuration schema. |
-| `api/src/zotify_api/core/logging_framework/service.py` | B | B | Good class and public method docstrings, but internal trigger logic is complex and undocumented. Incomplete functionality in WebhookSink. |
-| `api/src/zotify_api/core/logging_handlers/__init__.py` | C | A | Standard empty init file. |
-| `api/src/zotify_api/core/logging_handlers/base.py` | A | A | Perfect example of a clear, well-documented abstract base class. |
-| `api/src/zotify_api/core/logging_handlers/console_handler.py` | A | A | Clear and well-documented implementation of the base handler. |
-| `api/src/zotify_api/core/logging_handlers/database_job_handler.py` | B | B | Good class docstring, but the complex `emit` method lacks documentation. Logic could be clearer. |
-| `api/src/zotify_api/core/logging_handlers/json_audit_handler.py` | A | A | Clear and well-documented implementation of a structured JSON logger. |
-| `api/src/zotify_api/database/__init__.py` | C | A | Standard empty init file. |
-| `api/src/zotify_api/database/crud.py` | B | B | Excellent function-level docstrings. Code is clear but uses raw SQL which could be improved with ORM methods. |
-| `api/src/zotify_api/database/models.py` | C | B | Code is clear SQLAlchemy models, but lacks docstrings to explain the data model and relationships. |
-| `api/src/zotify_api/database/session.py` | B | A | Clear and concise. The `get_db` dependency is well-documented. |
-| `api/src/zotify_api/globals.py` | C | B | Simple global variable definitions, but no comments explaining their purpose. |
-| `api/src/zotify_api/logging_config.py` | C | B | Functional, but lacks docstrings to explain the logging setup. |
-| `api/src/zotify_api/main.py` | B | B | Good function-level documentation via FastAPI decorators, but missing a module-level docstring. |
-| `api/src/zotify_api/middleware/request_id.py` | C | B | Functional middleware, but lacks docstrings to explain its purpose. |
-| `api/src/zotify_api/models/config_models.py` | C | A | Clear Pydantic models, but they lack docstrings. |
-| `api/src/zotify_api/models/sync.py` | C | A | A clear and simple Pydantic model, but it lacks a docstring. |
-| `api/src/zotify_api/providers/__init__.py` | C | A | Standard empty init file. |
-| `api/src/zotify_api/providers/base.py` | A | A | Excellent, well-documented abstract base class. |
-| `api/src/zotify_api/providers/spotify_connector.py` | A | B | Excellent docstrings. The `handle_oauth_callback` function is overly long and complex and could be refactored for clarity. |
-| `api/src/zotify_api/routes/__init__.py` | C | A | Standard empty init file. |
-| `api/src/zotify_api/routes/auth.py` | A | B | Excellent docstrings, but the `logout` function contains a provider-specific TODO. |
-| `api/src/zotify_api/routes/cache.py` | A | A | Clean, clear, and well-documented with FastAPI decorators. |
-| `api/src/zotify_api/routes/config.py` | C | A | Clean code, but lacks all docstrings and descriptions. |
-| `api/src/zotify_api/routes/downloads.py` | A | A | Clean, clear, and well-documented. |
-| `api/src/zotify_api/routes/network.py` | C | A | Clean code, but lacks all docstrings and descriptions. |
-| `api/src/zotify_api/routes/notifications.py` | C | A | Clean code, but lacks all docstrings and descriptions. |
-| `api/src/zotify_api/routes/playlists.py` | C | A | Clean code, but lacks all docstrings and descriptions. |
-| `api/src/zotify_api/routes/search.py` | C | B | Functional, but has a complex function signature that could be simplified. Lacks docstrings. |
-| `api/src/zotify_api/routes/sync.py` | B | B | Has a basic docstring, but the dependency logic is unusual. |
-| `api/src/zotify_api/routes/system.py` | B | B | Implemented routes are documented, but the file is cluttered with undocumented stubs. |
-| `api/src/zotify_api/routes/tracks.py` | B | A | Good docstrings on some routes, but the main CRUD endpoints are undocumented. |
-| `api/src/zotify_api/routes/user.py` | C | A | Clean code, but lacks all docstrings and descriptions. |
-| `api/src/zotify_api/routes/webhooks.py` | C | A | Clean code, but lacks all docstrings and descriptions. |
-| `api/src/zotify_api/schemas/auth.py` | C | A | Clear and simple Pydantic models, but they lack docstrings. |
-| `api/src/zotify_api/schemas/cache.py` | A | A | Excellent use of Pydantic's `description` field for self-documentation. |
-| `api/src/zotify_api/schemas/download.py` | B | A | Good structure with comments, but the models themselves lack docstrings. |
-| `api/src/zotify_api/schemas/generic.py` | C | A | Excellent use of Generics, but lacks a docstring. |
-| `api/src/zotify_api/schemas/logging_schemas.py` | C | A | Clear and simple Pydantic models, but they lack docstrings. |
-| `api/src/zotify_api/schemas/metadata.py` | C | A | Clear and simple Pydantic models, but they lack docstrings. |
-| `api/src/zotify_api/schemas/network.py` | C | A | Clear and simple Pydantic models, but they lack docstrings. |
-| `api/src/zotify_api/schemas/notifications.py` | C | A | Clear and simple Pydantic models, but they lack docstrings. |
-| `api/src/zotify_api/schemas/playlists.py` | C | A | Clear Pydantic models with good validation, but they lack docstrings. |
-| `api/src/zotify_api/schemas/spotify.py` | A | A | The comment clearly explains why the file is empty. |
-| `api/src/zotify_api/schemas/system.py` | C | A | Clear and simple Pydantic models, but they lack docstrings. |
-| `api/src/zotify_api/schemas/tracks.py` | C | A | Clear Pydantic models with good validation, but they lack docstrings. |
-| `api/src/zotify_api/schemas/user.py` | C | A | Clear and simple Pydantic models, but they lack docstrings. |
-| `api/src/zotify_api/schemas/webhooks.py` | C | A | Clear and simple Pydantic models, but they lack docstrings. |
-| `api/src/zotify_api/services/__init__.py` | C | A | Standard empty init file. |
-| `api/src/zotify_api/services/auth.py` | C | B | Functional, but lacks docstrings. |
-| `api/src/zotify_api/services/cache_service.py` | C | B | Functional, but lacks docstrings. |
-| `api/src/zotify_api/services/config_service.py` | C | B | Functional, but lacks docstrings. |
-| `api/src/zotify_api/services/db.py` | C | B | Functional, but lacks docstrings. |
-| `api/src/zotify_api/services/deps.py` | C | B | Functional, but lacks docstrings. |
-| `api/src/zotify_api/services/download_service.py` | C | B | Functional, but lacks docstrings. |
-| `api/src/zotify_api/services/logging_service.py` | C | B | Functional, but lacks docstrings. |
-| `api/src/zotify_api/services/metadata_service.py` | C | B | Functional, but lacks docstrings. |
-| `api/src/zotify_api/services/network_service.py` | C | B | Functional, but lacks docstrings. |
-| `api/src/zotify_api/services/notifications_service.py` | C | B | Functional, but lacks docstrings. |
-| `api/src/zotify_api/services/playlists_service.py` | C | B | Functional, but lacks docstrings. |
-| `api/src/zotify_api/services/search.py` | C | B | Functional, but lacks docstrings. |
-| `api/src/zotify_api/services/spoti_client.py` | C | B | Functional, but lacks docstrings. |
-| `api/src/zotify_api/services/sync_service.py` | C | B | Functional, but lacks docstrings. |
-| `api/src/zotify_api/services/tracks_service.py` | A | B | Doc Score 'A' is for the new, comprehensive external documentation. See [Source Code Documentation: `tracks_service.py.md`](./source/tracks_service.py.md). Code Score 'B' is due to a known design gap (provider abstraction violation) and complex dynamic SQL. |
-| `api/src/zotify_api/services/user_service.py` | C | B | Functional, but lacks docstrings. |
-| `api/src/zotify_api/services/webhooks.py` | C | B | Functional, but lacks docstrings. |
+| File Path | Documentation Score | Code Score | Overall Score | Notes |
+| --- | :---: | :---: | :---: | --- |
+| `api/src/zotify_api/auth_state.py` | B | A | A | Good comments explaining the module's purpose and the in-memory nature of the PKCE state. Code is clean and uses type hints. |
+| `api/src/zotify_api/config.py` | C | B | B | Uses Pydantic for settings, which is good. However, the file lacks module and class docstrings. The module-level logic for handling production key checks and development defaults has side-effects and could be encapsulated in a factory function for better structure. |
+| `api/src/zotify_api/globals.py` | D | C | D | File defines a global variable based on module import time, which is a problematic pattern for testing and predictability. It also lacks any documentation explaining its purpose. |
+| `api/src/zotify_api/logging_config.py` | D | C | D | A simple file that appears to be a remnant of an old logging system. It lacks all documentation and its approach contradicts the project's new Flexible Logging Framework defined in the design documents. |
+| `api/src/zotify_api/main.py` | B | B | B | Well-structured main application file. Most functions are well-documented, but it lacks a module-level docstring. The initialization logic is good, but could be improved by avoiding hardcoded filenames and making the error handler's configuration loading consistent with the logging framework's. |
+| `api/src/zotify_api/core/error_handler/__init__.py` | A | A | A | Excellent implementation of a singleton error handler with clear documentation and a well-defined public API. |
+| `api/src/zotify_api/core/error_handler/config.py` | A | A | A | A textbook example of how to use Pydantic for clear, self-documenting configuration models. |
+| `api/src/zotify_api/core/error_handler/formatter.py` | B | A | A | Clean implementation of the strategy pattern for error formatting. Docstrings could be slightly more detailed. |
+| `api/src/zotify_api/core/error_handler/hooks.py` | B | B | B | Robust implementation of system-wide exception hooks. Code is solid but could be improved by mapping exception types to status codes instead of hardcoding 500. Documentation is good but could be more complete for internal functions. |
+| `api/src/zotify_api/core/error_handler/triggers.py` | A | A | A | Excellent, extensible design for a trigger/action system using dynamic module loading. The code is robust and well-documented. |
+| `api/src/zotify_api/core/error_handler/actions/__init__.py` | B | A | A | Standard package marker with a helpful comment. |
+| `api/src/zotify_api/core/error_handler/actions/log_critical.py` | A | A | A | Excellent, well-documented example of a trigger action that integrates cleanly with the logging framework. |
+| `api/src/zotify_api/core/error_handler/actions/webhook.py` | B | D | D | The core logic of this action is commented out, making it a non-functional stub. It correctly validates its configuration but does not perform its primary function. |
+| `api/src/zotify_api/core/logging_framework/__init__.py` | A | A | A | A perfect example of a clean public API that decouples the interface from the implementation. |
+| `api/src/zotify_api/core/logging_framework/filters.py` | A | B | A | A clear and effective implementation of a sensitive data filter. The regex-based approach is good, though a more robust solution could handle complex edge cases. |
+| `api/src/zotify_api/core/logging_framework/schemas.py` | B | A | A | An excellent and robust configuration schema using advanced Pydantic features. A few more high-level docstrings would make it perfect. |
+| `api/src/zotify_api/core/logging_framework/service.py` | C | B | B | A sophisticated logging service with an advanced feature set. However, it is significantly under-documented, and some sink implementations (like console and webhook) are incomplete or not robust. |
+| `api/src/zotify_api/core/logging_handlers/__init__.py` | B | A | A | Standard package marker with a helpful comment. |
+| `api/src/zotify_api/core/logging_handlers/base.py` | A | A | A | Perfect implementation of an abstract base class for a strategy pattern. |
+| `api/src/zotify_api/core/logging_handlers/console_handler.py` | B | B | B | Clean and simple implementation of a console log handler. |
+| `api/src/zotify_api/core/logging_handlers/database_job_handler.py`| B | B | B | Robust and safe implementation of a database log handler. Code is clear and handles transactions correctly. |
+| `api/src/zotify_api/core/logging_handlers/json_audit_handler.py` | B | A | A | Excellent implementation of a structured JSON audit logger with robust formatting and error handling. |
+| `api/src/zotify_api/database/__init__.py` | F | A | C | File is completely empty. A comment explaining its purpose as a package marker would be beneficial. |
+| `api/src/zotify_api/database/crud.py` | A | B | A | A very well-documented and clear set of CRUD functions. The code is clean and correct, with only minor opportunities for performance optimization. |
+| `api/src/zotify_api/database/models.py` | C | A | B | An excellent, modern implementation of the database schema using SQLAlchemy 2.0. However, the file is significantly under-documented, lacking docstrings for the module, classes, and key columns. |
+| `api/src/zotify_api/database/session.py` | B | A | A | A textbook implementation of a SQLAlchemy session for FastAPI. Clean, correct, and well-documented where it matters most. |
+| `api/src/zotify_api/middleware/request_id.py` | D | C | D | The middleware is functionally incorrect as it generates the request ID after the request has been processed, making it unavailable to any downstream logic. The file also lacks any documentation. |
+| `api/src/zotify_api/models/config_models.py` | C | A | B | Excellent use of Pydantic for request models, but lacks docstrings to explain the purpose of the models. |
+| `api/src/zotify_api/models/sync.py` | C | A | B | A simple and correct Pydantic model that lacks documentation. |
+| `api/src/zotify_api/providers/__init__.py` | F | A | C | File is completely empty. A comment explaining its purpose as a package marker would be beneficial. |
+| `api/src/zotify_api/providers/base.py` | A | A | A | A perfect example of an abstract base class that clearly defines the provider interface. |
+| `api/src/zotify_api/providers/spotify_connector.py` | B | C | C | The connector is well-documented but has significant architectural issues, including improper global state management, hardcoded HTML in the business logic, and fragile dependency handling. It needs refactoring to improve separation of concerns. |
+| `api/src/zotify_api/routes/__init__.py` | B | A | A | Standard package marker with a helpful comment. |
+| `api/src/zotify_api/routes/auth.py` | A | B | A | Clean, well-documented auth routes. The `logout` endpoint contains a known design issue that needs to be addressed. |
+| `api/src/zotify_api/routes/cache.py` | A | A | A | A textbook example of a clean, well-documented route file that properly separates concerns. |
+| `api/src/zotify_api/routes/config.py` | D | A | B | An excellent, clean implementation of config routes, but it is completely undocumented. |
+| `api/src/zotify_api/routes/downloads.py` | B | B | B | Clean, well-documented routes. The service layer is tightly coupled via a direct import instead of using FastAPI's dependency injection system. |
+| `api/src/zotify_api/routes/network.py` | D | A | B | Excellent, clean implementation of network routes, but it is completely undocumented. |
+| `api/src/zotify_api/routes/notifications.py`| D | B | C | Clean implementation of notification routes, but it is undocumented and uses a generic dictionary for a response model instead of a specific Pydantic schema. |
+| `api/src/zotify_api/routes/playlists.py`| D | A | B | A textbook example of a robust and well-structured route file with excellent error handling and specific schemas, but it is completely undocumented. |
+| `api/src/zotify_api/routes/search.py` | F | C | D | The route is undocumented and uses direct service imports instead of dependency injection, making it hard to test. The feature flag implementation is also unconventional. |
+| `api/src/zotify_api/routes/sync.py` | B | C | C | The route has a docstring, but the implementation is overly complex and tightly coupled due to direct service imports and a broad exception handler. |
+| `api/src/zotify_api/routes/system.py` | B | B | B | The implemented system routes are clean and well-documented. The unimplemented routes correctly return a 501 status. |
+| `api/src/zotify_api/routes/tracks.py` | C | B | B | A mix of good and bad practices. Some routes are clean, while others use direct imports and poor exception handling. Documentation is also inconsistent. |
+| `api/src/zotify_api/routes/user.py` | F | B | C | Clean implementation of user-related routes that correctly uses dependency injection, but is completely undocumented and uses generic dictionaries for some response models. |
+| `api/src/zotify_api/routes/webhooks.py` | F | B | C | Clean implementation that correctly uses background tasks, but is completely undocumented and uses direct service imports. |
+| `api/src/zotify_api/schemas/auth.py` | C | A | B | Clear and correct Pydantic models for authentication flows, but they lack documentation. |
+| `api/src/zotify_api/services/__init__.py` | F | A | C | Empty file. |
+| `api/src/zotify_api/services/auth.py` | B | C | C | Service has good documentation for its main functions but is tightly coupled to global state (`pending_states`), making it difficult to test and maintain. Error handling could be more specific. |
+| `api/src/zotify_api/services/cache_service.py` | A | B | A | Excellent documentation. Code is clean but uses a mock in-memory cache instead of a real one, which is a significant simplification. |
+| `api/src/zotify_api/services/config_service.py`| A | A | A | Excellent code that correctly handles loading, updating, and resetting a JSON-backed config file. |
+| `api/src/zotify_api/services/db.py` | F | B | C | Undocumented. The code is a simple factory function, but it's not robust (e.g., doesn't handle connection errors). |
+| `api/src/zotify_api/services/deps.py` | B | B | B | The docstrings are good. The `get_spoti_client` dependency is well-written and handles token refreshing correctly. The `get_provider_no_auth` has a hardcoded string `"spotify"`, which is not ideal. |
+| `api/src/zotify_api/services/download_service.py`| C | B | B | Undocumented functions. The logic is clean and correctly uses the CRUD layer. The `process_download_queue` function simulates I/O with `time.sleep`, which is fine for a service like this. |
+| `api/src/zotify_api/services/logging_service.py`| B | C | C | Good class docstring. The code is overly complex and seems to be a remnant of a different design than the one in `core/logging_framework`. |
+| `api/src/zotify_api/services/metadata_service.py`| F | C | D | Undocumented. Uses a global in-memory dictionary for storage, which is not a scalable or persistent solution. |
+| `api/src/zotify_api/services/network_service.py`| B | B | B | Good documentation. The code is a simple in-memory service, similar to `cache_service`. |
+| `api/src/zotify_api/services/notifications_service.py`| F | B | C | Undocumented. The service correctly depends on `user_service` to manage its data, which is a good example of separation of concerns. |
+| `api/src/zotify_api/services/playlists_service.py`| F | B | C | Undocumented. The code is well-structured, defines a custom exception, and uses the database engine correctly. The limit/offset normalization is robust. |
+| `api/src/zotify_api/services/search.py` | F | C | D | Undocumented. The logic for falling back from a failed DB query to a provider search is good, but the use of raw SQL with string formatting is a significant issue. |
+| `api/src/zotify_api/services/spoti_client.py`| B | A | A | Good class docstring, but many methods are undocumented. The code itself is an excellent, robust `httpx`-based client for the Spotify API. |
+| `api/src/zotify_api/services/sync_service.py` | B | C | C | Good function docstring. The service is just a stub that prints a message. |
+| `api/src/zotify_api/services/tracks_service.py`| C | C | C | Some functions are documented. The code uses raw SQL, which is inconsistent with the ORM (`crud.py`) used elsewhere. The `get_tracks_metadata_from_spotify` function contains a "hack" to get around a gap in the provider abstraction. |
+| `api/src/zotify_api/services/user_service.py` | B | B | B | Good documentation. The service correctly encapsulates all user-related data and logic, reading from and writing to a JSON file for persistence. |
+| `api/src/zotify_api/services/webhooks.py` | F | B | C | Undocumented. The code correctly uses a background task for firing webhooks to avoid blocking the request. |
