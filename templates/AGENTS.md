@@ -56,7 +56,7 @@ To ensure a high standard of quality, all code and documentation changes must be
 Before submitting your work for review, you **must** run the following tools to verify compliance.
 
 1.  **Run Tests:**
-    *   **Command:** `bash scripts/run_tests.sh`
+    *   **Command:** `bash scripts/run_lint.sh.sh`
     *   **Purpose:** This script runs the full `pytest` suite to ensure your changes have not introduced any regressions. You must resolve any test failures.
 
 2.  **Run Documentation Linter:**
