@@ -18,6 +18,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **Agent Instructions** | [`../AGENTS.md`](../AGENTS.md) | The master instruction file that governs the development workflow for AI agents. |
 | **README** | [`../README.md`](../README.md) | The main README file for the project. |
 | **Handover Brief** | [`HANDOVER_BRIEF.md`](./HANDOVER_BRIEF.md) | A point-in-time snapshot of the project state at the time of handover. Should not be modified. |
+| **Jules' Handover Brief (2025-08-30)** | [`HANDOVER_BRIEF_JULES.md`](./HANDOVER_BRIEF_JULES.md) | A detailed handover brief created at the conclusion of the documentation workflow hardening session. |
 | **Onboarding Guide** | [`ONBOARDING.md`](./ONBOARDING.md) | The primary entry point and guide for new developers to get up to speed on the project. |
 | **Current State** | [`CURRENT_STATE.md`](./logs/CURRENT_STATE.md) | **High-Level Snapshot.** A brief, narrative summary of the entire project's state at the end of a work session. It should answer: What was just accomplished? What is the next immediate goal? Are there any blockers? |
 | **Session Log** | [`SESSION_LOG.md`](./logs/SESSION_LOG.md) | **Session-Level Reporting.** A detailed log of the activities, findings, and outcomes within a single work session. This is for project-related reporting and can be compared to the audit-specific logs (e.g., `AUDIT-PHASE-5.md`). |
