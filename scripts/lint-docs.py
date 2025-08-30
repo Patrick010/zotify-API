@@ -17,7 +17,8 @@ import yaml
 # --- Configuration ---
 PROJECT_ROOT = Path(__file__).parent.parent
 RULES_FILE = PROJECT_ROOT / "scripts" / "doc-lint-rules.yml"
-REGISTRY_FILE = PROJECT_ROOT / "project" / "PROJECT_REGISTRY.md"
+PROJECT_REGISTRY_FILE = PROJECT_ROOT / "project" / "PROJECT_REGISTRY.md"
+API_REGISTRY_FILE = PROJECT_ROOT / "api" / "docs" / "REGISTRY.md"
 
 # The "Trinity" of mandatory log files that must be updated in most commits.
 TRINITY_LOG_FILES = {
@@ -225,21 +226,28 @@ def get_all_relevant_files() -> Set[str]:
 
 def check_registry_completeness() -> List[str]:
     """
-    Ensures that all .md and script files on disk are registered in the
-    PROJECT_REGISTRY.md file.
+    Ensures that all .md and script files on disk are registered in one of the
+    two project registries.
     """
     errors: List[str] = []
-    registered_files = get_registered_files(REGISTRY_FILE)
 
-    # Add the registry file itself to the set of registered files to avoid self-reporting
+    # Get registered files from both registries and combine them
+    project_registered = get_registered_files(PROJECT_REGISTRY_FILE)
+    api_registered = get_registered_files(API_REGISTRY_FILE)
+    registered_files = project_registered.union(api_registered)
+
+    # Add the registry files themselves to the set to avoid self-reporting
     registered_files.add("project/PROJECT_REGISTRY.md")
+    registered_files.add("api/docs/REGISTRY.md")
 
     all_files = get_all_relevant_files()
 
     unregistered_files = all_files - registered_files
     if unregistered_files:
         for file in sorted(list(unregistered_files)):
-            errors.append(f"File '{file}' exists but is not listed in the project registry ({REGISTRY_FILE.name}).")
+            errors.append(
+                f"File '{file}' exists but is not listed in either project registry."
+            )
 
     return errors
 
