@@ -17,10 +17,11 @@ This review is mandatory to ensure you are aligned with the project's immediate 
 
 **Required Reading Order:**
 
-1.  **`project/logs/CURRENT_STATE.md`**: Start here. This document provides a narrative summary of the most recent activities, known issues, and the immediate next steps.
-2.  **`project/logs/ACTIVITY.md`**: Read this second. It provides a reverse-chronological log of all significant tasks performed. This will give you a detailed history of how the project arrived at its current state.
-3.	**`project/logs/SESSION_LOG.md`: Session reporting progress and findings document.
-4.  **`project/audit/` Directory**: Finally, review the documents in this directory. They contain the detailed findings, plans, and traceability matrices for the ongoing architectural audit.
+1.  **`AGENTS.md`**: **Start here.** This is the master instruction file that governs the development workflow, including the use of new automation scripts. You must read this first.
+2.  **`project/logs/CURRENT_STATE.md`**: This document provides a narrative summary of the most recent activities, known issues, and the immediate next steps.
+3.  **`project/logs/ACTIVITY.md`**: Read this third. It provides a reverse-chronological log of all significant tasks performed. This will give you a detailed history of how the project arrived at its current state.
+4.	**`project/logs/SESSION_LOG.md`: Session reporting progress and findings document.
+5.  **`project/audit/` Directory**: Finally, review the documents in this directory. They contain the detailed findings, plans, and traceability matrices for the ongoing architectural audit.
 
 Once you have reviewed these documents, you will have a complete picture of the project's status.
 

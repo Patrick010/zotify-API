@@ -1,3 +1,48 @@
+---
+## ACT-062: Restore session log history
+
+**Date:** 2025-08-29
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To restore the `project/logs/SESSION_LOG.md` file after it was accidentally deleted.
+
+### Outcome
+- The file was restored to its correct historical state using the `restore_file` tool.
+
+---
+## ACT-061: Correct logging implementation and documentation
+
+**Date:** 2025-08-29
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To refactor the logging system to align with the project's philosophy, based on user feedback.
+
+### Outcome
+- Clarified the purpose of `ACTIVITY.md`, `SESSION_LOG.md`, and `CURRENT_STATE.md` in the `PROJECT_REGISTRY.md`.
+- Redesigned `log-work.py` to take separate arguments (`--activity`, `--session`, `--state`) to generate distinct, appropriate content for each log file.
+
+---
+## ACT-060: Implement Phase 5 automated documentation workflow tooling
+
+**Date:** 2025-08-29
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To implement the core tooling for the Phase 5 Automated Documentation Workflow.
+
+### Outcome
+- Implemented the `log-work.py` script.
+- Enhanced `lint-docs.py` to support `forbidden_docs` rules.
+- Created `doc-lint-rules.yml` with a set of initial rules.
+- Added `mkdocs` for documentation site generation and created the initial `mkdocs.yml` configuration.
+- Updated `start.sh` to serve the documentation site and install dev dependencies.
+- Stabilized the test environment to allow verification checks to run.
+
 ## ACT-059: Comprehensive Repository Cleanup and Quality Framework Implementation
 
 **Date:** 2025-08-28

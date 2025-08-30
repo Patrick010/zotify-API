@@ -30,7 +30,10 @@ Follow these steps for every contribution:
 2.  **Create a Branch:** Create a new feature branch from `main`.
 3.  **Implement Changes:** Write your code and the corresponding documentation updates.
 4.  **Run Quality Checks:** Ensure all quality checks (see section below) pass before committing.
-5.  **Update Logs:** Add entries to `project/logs/ACTIVITY.md` and `project/logs/SESSION_LOG.md` detailing the work.
+5.  **Update Logs:** Use the `log-work.py` script to record your changes. This script automates the process of updating the "Trinity" logs (`ACTIVITY.md`, `SESSION_LOG.md`, and `CURRENT_STATE.md`). See `AGENTS.md` for full instructions.
+    ```bash
+    python scripts/log-work.py --activity "..." --session "..." --state "..."
+    ```
 6.  **Follow the `TASK_CHECKLIST.md`:** Manually go through the checklist to ensure all project standards have been met.
 7.  **Submit a Pull Request:** Create a pull request linking to the original issue.
 
@@ -59,8 +62,12 @@ Before committing, you must run the following checks from the project root.
     # Run from the project root
     bandit -c api/bandit.yml -r api
     ```
--   **Documentation Linter (CI Only):**
-    The documentation linter runs automatically in the CI/CD pipeline. It checks that code changes are accompanied by corresponding documentation changes. See the dedicated section below for more details.
+-   **Documentation Linter:**
+    The documentation linter should be run locally before committing to ensure documentation is up-to-date. It uses the rules defined in `scripts/doc-lint-rules.yml`.
+    ```bash
+    # Run in pre-commit mode to check staged files
+    PRE_COMMIT=1 python scripts/lint-docs.py
+    ```
 
 ---
 
