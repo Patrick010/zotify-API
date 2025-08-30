@@ -100,10 +100,10 @@ This document outlines the plan to align the High-Level Design (HLD) and Low-Lev
 ## Phase 5: Ongoing Maintenance
 
 **Objective:** To ensure the established quality gates and processes are maintained over the long term.
-**Status:** 📝 To Do
+**Status:** 🟡 In Progress
 
 **Tasks:**
-- [ ] **Implement Advanced Conditional Documentation Linter:** Enhance the `scripts/lint-docs.py` to support a decision matrix that maps code changes to specific required documentation updates.
+- [ ] Implement Advanced Conditional Documentation Linter: Enhance the `scripts/lint-docs.py` to support a decision matrix that maps code changes to specific required documentation updates.
 - [ ] Use audit findings as triggers for spot updates in design docs.
 - [ ] Keep the alignment matrix updated as a living artifact.
 - [ ] Continue incremental updates as new features or refactors happen.

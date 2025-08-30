@@ -193,6 +193,32 @@ To perform a final gap analysis of the Phase 4 ("Super-Lint") plan, implement al
 - All files modified in the final commit for this task.
 
 ---
+
+## DEVOPS-001: Stabilize CI and Implement Developer Tooling
+
+**Date:** 2025-08-25
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To resolve all outstanding CI/CD pipeline failures and to implement a new suite of developer tooling to enforce documentation-as-code principles, including a custom linter and pre-commit hooks.
+
+### Outcome
+- **CI Pipeline Stabilized:**
+    - Fixed the `security-scan` job by adding a `bandit.yml` config and reverting `safety` to a non-API key version.
+    - Fixed the `golangci-lint` job after a lengthy debugging process. The final fix involved downgrading the Go version in `snitch/go.mod` to `1.22` to match the CI runner's toolchain.
+- **Developer Tooling Implemented:**
+    - Created a custom documentation linter (`scripts/lint-docs.py`) that is run in CI and locally via pre-commit hooks.
+    - Established the `pre-commit` framework with a `.pre-commit-config.yaml` file.
+- **Documentation Overhauled:**
+    - Established a new file naming convention for all markdown files (UPPERCASE).
+    - Imported and created a full suite of reusable documentation templates in the `templates/` directory.
+    - Created two distinct `CICD.md` guides for developer and project management audiences.
+    - Updated all project registries and guides to reflect the new structure and conventions.
+- **Conclusion:** The project is now in a highly stable state with a green CI pipeline and robust, automated quality gates.
+
+---
+
 ## ACT-054: Implement Developer Tooling and Finalize CI
 
 **Date:** 2025-08-25
@@ -436,6 +462,215 @@ To correctly align the "Security Enhancements" feature in the `AUDIT_TRACEABILIT
 - `project/audit/AUDIT_TRACEABILITY_MATRIX.md`
 - `project/FUTURE_ENHANCEMENTS.md`
 - `project/SECURITY.md`
+
+---
+
+## DOC-FIX-004: Complete Phase 3 (Implementation & Alignment)
+
+**Date:** 2025-08-20
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To formally close out Phase 3 of the HLD/LLD Alignment Plan by verifying that all active tasks in the traceability matrix are complete.
+
+### Outcome
+- A final review of the `AUDIT_TRACEABILITY_MATRIX.md` confirmed that all features marked as `Exists? = N` were correctly deferred and tracked in `FUTURE_ENHANCEMENTS.md`.
+- The `HLD_LLD_ALIGNMENT_PLAN.md` was updated to mark Phase 3 as "Done".
+
+---
+
+## TEST-001: Increase Test Coverage to >90% and Add CI Gate
+
+**Date:** 2025-08-20
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To increase the test coverage of the API to over 90% and to implement a CI workflow that gates future pull requests on a minimum test coverage percentage.
+
+### Outcome
+- **Test Coverage Increased:** After a significant effort that required a full reset and recovery, the test coverage was successfully increased from 83% to **90.01%**. This was achieved by systematically adding over 60 new unit tests for previously under-tested modules.
+- **CI Workflow Created:** A new GitHub Actions workflow was created at `.github/workflows/ci.yml` to enforce a test coverage minimum of 85% on all future pull requests.
+
+---
+
+## DOC-FIX-003: Align Security Enhancements in Traceability Matrix
+
+**Date:** 2025-08-20
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To correctly align the "Security Enhancements" feature in the `AUDIT_TRACEABILITY_MATRIX.md`.
+
+### Outcome
+- A verification of the code and design documents confirmed the feature is not implemented and is tracked as a future enhancement.
+- The traceability matrix was updated to reflect this deferred status.
+
+---
+
+## PROC-FIX-004: Finalize Phase 3 Alignment Plan Documentation
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To perform a final update to the `HLD_LLD_ALIGNMENT_PLAN.md` to merge the high-level workflow rules with a concrete, repeatable task list for Phase 3.
+
+### Outcome
+- **`HLD_LLD_ALIGNMENT_PLAN.md` Finalized:** The Phase 3 section was updated to include both the "Alignment Workflow" and a "Repeatable Task Cycle", providing a comprehensive and unambiguous guide for all Phase 3 activities.
+
+---
+
+## PROC-FIX-003: Correct and Clarify Phase 3 Alignment Plan
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To correct an error in the `HLD_LLD_ALIGNMENT_PLAN.md` and clarify the workflow for Phase 3.
+
+### Outcome
+- **Phase 3 Status Corrected:** The status of Phase 3 was changed to `Ongoing`.
+- **Phase 3 Workflow Clarified:** The task list for Phase 3 was replaced with a detailed, unambiguous rule set.
+
+---
+
+## PROC-FIX-002: Clarify Phase 3 Process and Guidance
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To improve the project's process documentation to clarify the goal of "Phase 3".
+
+### Outcome
+- **`HLD_LLD_ALIGNMENT_PLAN.md` Updated:** The title and goal of Phase 3 were updated to make it explicit that the work involves implementing missing features and aligning code with the design.
+- **Handover Brief Template Improved:** A revised handover brief template was generated with a much clearer workflow description for Phase 3 tasks.
+
+---
+
+## PROC-FIX-001: Improve Process Documentation
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To improve the project's process documentation to ensure the mandatory nature of the `TASK_CHECKLIST.md` is clearer to all developers.
+
+### Outcome
+- **`TASK_CHECKLIST.md` Enhanced:** The checklist was restructured for clarity and efficiency.
+- **`ONBOARDING.md` Clarified:** The onboarding flow was updated to explicitly reference the `TASK_CHECKLIST.md`.
+
+---
+
+## DOC-FIX-002: Align JWT Documentation with Reality
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To correct the `AUDIT_TRACEABILITY_MATRIX.md`, which incorrectly listed "JWT for API Authentication" as having a design gap.
+
+### Outcome
+- An investigation confirmed that the HLD and LLD already correctly describe JWT as a future enhancement.
+- The `AUDIT_TRACEABILITY_MATRIX.md` was updated to reflect this reality, closing the documentation gap.
+
+---
+
+## AUDIT-FIX-001: Correct Phase 3 Audit Log
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To investigate and correct the `AUDIT-PHASE-3.md` log file, which was found to contain inaccurate descriptions of work performed. The goal is to align the audit log with the reality of the codebase.
+
+### Outcome
+- **Investigation Complete:** A detailed code review was performed to verify the claims made in the Phase 3 audit log.
+- **Log Corrected (Task 6):** The entry for the "Unified Database Architecture" was updated. The original log falsely claimed that old JSON persistence files were removed. The entry now correctly states that these files were made obsolete but were not deleted.
+- **Log Corrected (Task 5):** The entry for the "Persistent Download Queue" was updated. The original log falsely claimed a new `downloads_db.py` file was created. The entry now correctly states that the `download_service.py` was refactored to use the main database `crud` module.
+- **Plan Corrected:** The `HLD_LLD_ALIGNMENT_PLAN.md` was updated to mark Phase 3 as "Done", resolving a status contradiction.
+- **Conclusion:** The audit documentation for Phase 3 is now accurate and reliable.
+
+### Related Documents
+- `project/audit/AUDIT-PHASE-3.md`
+- `project/audit/HLD_LLD_ALIGNMENT_PLAN.md`
+
+---
+
+## DOC-FIX-001: Correct and Modernize Task Checklist
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To fix the `project/TASK_CHECKLIST.md` file, which contained outdated paths and confusing instructions, making it unusable. The goal is to align it with the current project structure and documentation policies.
+
+### Outcome
+- **Paths Corrected:** All file paths referencing the obsolete `docs/projectplan/` directory have been updated to their correct locations as defined in the `PROJECT_REGISTRY.md`.
+- **Obsolete Items Removed:** References to archived documents and an outdated reporting process were removed.
+- **Process Clarified:** The section on documentation review was rewritten to remove ambiguity and to explicitly and
+- **Header Cleaned:** The confusing, self-referential header was removed.
+- **Conclusion:** The `TASK_CHECKLIST.md` is now an accurate, usable tool that correctly reflects and enforces the project's documentation policies.
+
+### Related Documents
+- `project/TASK_CHECKLIST.md`
+
+---
+
+## REG-AUDIT-001: Audit and Correct Project Registry
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To audit the `project/PROJECT_REGISTRY.md` file for completeness and accuracy, ensuring all markdown documents in the `project/`, `api/docs/`, `snitch/`, and `gonk-testUI/` directories are correctly registered.
+
+### Outcome
+- **Audit Complete:** The registry was compared against the filesystem.
+- **Unregistered Files Added:** 2 files (`snitch/docs/TASKS.md` and `snitch/docs/ROADMAP.md`) that were present on disk but not in the registry have been added.
+- **Ghost Entries Removed:** 4 entries for files that no longer exist (`project/PID_previous.md`, `project/HIGH_LEVEL_DESIGN_previous.md`, `project/LOW_LEVEL_DESIGN_previous.md`, and `project/audit/HLD_LLD_ALIGNMENT_PLAN_previous.md`) have been removed from the registry.
+- **Conclusion:** The `PROJECT_REGISTRY.md` is now synchronized with the current state of the project's documentation files.
+
+### Related Documents
+- `project/PROJECT_REGISTRY.md`
+
+---
+
+## AUDIT-4G-001: Independent Verification of Project State
+
+**Date:** 2025-08-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To perform a fresh, independent verification of the project's state, as documented in the "Trinity" of `CURRENT_STATE.md`, `ACTIVITY.md`, and `SESSION_LOG.md`. This audit covers the entire platform, including the API, `snitch`, and `gonk-testUI`, to ensure the "living documentation" accurately reflects the codebase reality.
+
+### Outcome
+- **Verification Complete:** The independent verification of the project state is complete. While the core application logic was found to be stable and aligned with the documentation, several issues were discovered and remediated in the project's documentation and setup procedures.
+- **Discrepancy Fixed: API Test Suite:** The documented test count was outdated (137). The test suite was run, and 139 tests passed. `ACTIVITY.md` and `SESSION_LOG.md` were updated to reflect the correct count.
+- **Discrepancy Fixed: Installation Guide:** The API server failed to start using the existing `INSTALLATION.md` guide. The guide was missing two critical setup steps: creating the `api/logs` directory for the logging framework and setting `APP_ENV=development` to avoid a crash in production mode. The `INSTALLATION.md` file has been updated with these instructions.
+- **`snitch` Verification:** The helper application was successfully built and tested. It functions as documented.
+- **`gonk-testUI` Verification:** A source code review of the UI's JavaScript confirmed that all recently documented features are implemented correctly.
+- **Logging Framework Verification:** The security hardening features (sensitive data redaction, tag-based routing, and security tagging of auth events) were all verified to be implemented as documented.
+- **Architectural Proposals:** Verified that all claimed proposal documents exist in the `project/proposals` directory.
+- **Conclusion:** The audit is complete. The project's documentation and setup procedures have been improved, and the "Trinity" of documents is now a more accurate reflection of the codebase reality.
+
+### Related Documents
+- `project/logs/CURRENT_STATE.md`
+- `project/logs/ACTIVITY.md`
+- `project/logs/SESSION_LOG.md`
+- `api/docs/system/INSTALLATION.md`
 
 ---
 
