@@ -1,6 +1,11 @@
 # This file defines the "documentation matrix" for the custom linter.
 # It maps changes in source code paths to required changes in documentation files.
 
+quality_index_map:
+  "api/src/zotify_api/": "api/docs/reference/CODE_QUALITY_INDEX.md"
+  "snitch/": "snitch/docs/CODE_QUALITY_INDEX.md"
+  "gonk-testUI/": "gonk-testUI/docs/CODE_QUALITY_INDEX.md"
+
 rules:
   - name: "API Route Change"
     source_paths:

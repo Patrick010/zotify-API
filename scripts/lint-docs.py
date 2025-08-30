@@ -10,7 +10,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Set
+from typing import Any, Dict, List, Set, Tuple
 
 import yaml
 
@@ -49,20 +49,12 @@ IGNORED_DIRS = {
 def get_changed_files() -> Set[str]:
     """
     Gets the set of changed files from git.
-
-    In a pre-commit hook, it checks staged files.
-    In a CI environment, it checks files changed against the main branch.
+    This is a modified version to work in environments where 'git diff'
+    against a branch might fail. It uses 'git status' as a more robust
+    fallback.
     """
-    is_precommit = "PRE_COMMIT" in os.environ
-
-    if is_precommit:
-        print("Linter running in pre-commit mode (checking staged files)...")
-        command = ["git", "diff", "--name-only", "--cached"]
-    else:
-        print("Linter running in CI mode (checking against main branch)...")
-        # In CI, ensure the main branch is available for comparison.
-        subprocess.run(["git", "fetch", "origin", "main"], check=False, capture_output=True)
-        command = ["git", "diff", "--name-only", "origin/main...HEAD"]
+    print("Linter running (checking for all modified files)...")
+    command = ["git", "status", "--porcelain=v1"]
 
     try:
         result = subprocess.run(
@@ -72,37 +64,61 @@ def get_changed_files() -> Set[str]:
             text=True,
             encoding="utf-8",
         )
-        files = set(line for line in result.stdout.strip().split("\n") if line)
+
+        files = set()
+        # The output of git status --porcelain is a list of lines.
+        # Each line has a status code (e.g., ' M', ' A ', '??') followed by the path.
+        # We only care about the path and ignore untracked files.
+        for line in result.stdout.strip().split("\n"):
+            if line and not line.startswith("??"):
+                # The line can be like ' M path/to/file.py' or 'R old -> new'
+                # We split and take the last element, which is the file path.
+                # In case of rename, it correctly gets the new path.
+                files.add(line.strip().split()[-1])
+
+        if not files:
+            print("No changed files detected.")
+            return set()
+
         print(f"Found {len(files)} changed file(s):")
         for f in sorted(list(files)):
             print(f"- {f}")
         return files
     except (subprocess.CalledProcessError, FileNotFoundError) as e:
         print(f"FATAL: Could not get changed files from git: {e}", file=sys.stderr)
-        # In pre-commit, a failure to get files is a critical error.
-        if is_precommit:
-             print("This can happen if you haven't staged any files for commit yet.", file=sys.stderr)
         return set()
 
 
-def load_rules(rules_file: Path) -> List[Dict[str, Any]]:
-    """Loads and validates the rules from the YAML configuration file."""
+def load_rules(rules_file: Path) -> Tuple[List[Dict[str, Any]], Dict[str, str]]:
+    """
+    Loads and validates the rules and quality index map from the YAML file.
+    Returns a tuple of (rules, quality_index_map).
+    """
     if not rules_file.exists():
         print(f"Warning: Rules file not found at {rules_file}. Skipping rule checks.", file=sys.stderr)
-        return []
+        return [], {}
     try:
         with open(rules_file, "r", encoding="utf-8") as f:
             data = yaml.safe_load(f)
     except yaml.YAMLError as e:
         print(f"Error: Invalid YAML in {rules_file}: {e}", file=sys.stderr)
-        return []
+        return [], {}
 
+    if not isinstance(data, dict):
+        print(f"Error: Invalid format in {rules_file}. Expected a dictionary.", file=sys.stderr)
+        return [], {}
 
-    if not isinstance(data, dict) or "rules" not in data or not isinstance(data["rules"], list):
-        print(f"Error: Invalid format in {rules_file}. Expected a 'rules' key with a list of rule objects.", file=sys.stderr)
-        return []
+    rules = data.get("rules", [])
+    quality_map = data.get("quality_index_map", {})
 
-    return data["rules"]
+    if not isinstance(rules, list):
+        print(f"Error: Invalid format for 'rules' in {rules_file}. Expected a list.", file=sys.stderr)
+        rules = []
+    if not isinstance(quality_map, dict):
+        print(f"Error: Invalid format for 'quality_index_map' in {rules_file}. Expected a dictionary.", file=sys.stderr)
+        quality_map = {}
+
+    return rules, quality_map
 
 
 def check_documentation_rules(rules: List[Dict[str, Any]], changed_files: Set[str]) -> List[str]:
@@ -144,6 +160,38 @@ def check_documentation_rules(rules: List[Dict[str, Any]], changed_files: Set[st
                 if forbidden_doc in changed_files:
                     errors.append(f"Rule '{name}' violation: The document '{forbidden_doc}' should not be modified as part of this change.")
 
+    return errors
+
+
+def check_quality_index(
+    quality_map: Dict[str, str], changed_files: Set[str]
+) -> List[str]:
+    """
+    Checks that if a source file is changed, its corresponding Code Quality
+    Index has also been updated.
+    """
+    errors: List[str] = []
+
+    # Identify all python source files that were changed
+    source_files_changed = {
+        f for f in changed_files if f.endswith(".py") and "/src/" in f
+    }
+
+    # If no relevant source files were changed, there's nothing to do
+    if not source_files_changed:
+        return []
+
+    for src_file in source_files_changed:
+        for src_prefix, quality_doc in quality_map.items():
+            if src_file.startswith(src_prefix):
+                if quality_doc not in changed_files:
+                    msg = (
+                        f"Source file '{src_file}' was changed, but its corresponding "
+                        f"Code Quality Index '{quality_doc}' was not updated."
+                    )
+                    errors.append(msg)
+                # Once we find the rule for this source file, we can stop checking.
+                break
     return errors
 
 
@@ -269,9 +317,10 @@ def main() -> int:
     if not changed_files and "PRE_COMMIT" in os.environ:
         print("No changed files detected in pre-commit mode. Skipping change-specific checks.")
     else:
+        rules, quality_map = load_rules(RULES_FILE)
         all_errors.extend(check_trinity_logs(changed_files))
-        rules = load_rules(RULES_FILE)
         all_errors.extend(check_documentation_rules(rules, changed_files))
+        all_errors.extend(check_quality_index(quality_map, changed_files))
 
 
     # Report results
