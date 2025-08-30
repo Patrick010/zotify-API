@@ -6,9 +6,18 @@ def get_formatted_date():
     """Returns the current date in YYYY-MM-DD format."""
     return datetime.datetime.now().strftime("%Y-%m-%d")
 
-def format_activity_log(description):
+def format_activity_log(description, files=None):
     """Formats the log entry for ACTIVITY.md."""
     # ACT-??? is a placeholder for a proper ticket number if one exists.
+
+    related_docs_section = ""
+    if files:
+        file_list = "\n".join([f"- `{f}`" for f in files])
+        related_docs_section = textwrap.dedent(f"""
+        ### Related Documents
+        {file_list}
+        """)
+
     return textwrap.dedent(f"""
     ---
     ## ACT-???: {description}
@@ -17,11 +26,9 @@ def format_activity_log(description):
     **Status:** ✅ Done
     **Assignee:** Jules
 
-    ### Objective
-    (To be filled in manually)
-
     ### Outcome
     - (To be filled in manually)
+    {related_docs_section}
     """)
 
 def format_session_log(summary):
@@ -93,10 +100,15 @@ def main():
         required=True,
         help="A brief, one-sentence summary of the project's current state (for CURRENT_STATE.md)."
     )
+    parser.add_argument(
+        "--files",
+        nargs='*',
+        help="An optional list of file paths related to the activity."
+    )
     args = parser.parse_args()
 
     # --- Update ACTIVITY.md ---
-    activity_entry = format_activity_log(args.activity)
+    activity_entry = format_activity_log(args.activity, args.files)
     prepend_to_file("project/logs/ACTIVITY.md", activity_entry)
 
     # --- Update SESSION_LOG.md ---

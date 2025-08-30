@@ -44,12 +44,62 @@ Please continue to adhere to the project's core process of keeping the "Trinity"
 
 To get up to speed, please follow the instructions in **`project/ONBOARDING.md`**. It provides a recommended reading order for all the key project documents and will give you a complete picture of the project's architecture, status, and processes.
 
-3. Completed Tasks:
+3. Tasks:
 
-**Task 1: Automated Documentation Workflow**
-- **Status:** ✅ Done
-- **Summary:** The automated documentation workflow has been fully implemented. This system is designed to enforce the project's "Living Documentation" policy by providing tools to automate logging and verify that documentation is updated alongside code.
-- **Next Steps:** All developers must now follow the workflow outlined in the `AGENTS.md` file. This is the new master instruction file for all development work.
+Task 1: Implementing an Automated Documentation Workflow
+
+	1. Objective
+
+	The primary goal of this task is to solve the problem of documentation becoming outdated by implementing a new, semi-automated workflow. This system is designed to lower the friction for developers and enforce the project's "Living Documentation" policy in a consistent, verifiable way.
+
+	2. The Proposed Solution
+
+	The core of the solution is the creation of a new AGENTS.md file. This file will act as the single source of truth for the development workflow, especially for AI agents. It defines a new, mandatory process that relies on a set of automation scripts and configuration files.
+
+	The key components of the new system are:
+
+		AGENTS.md: The master instruction file.
+		scripts/log-work.py: A CLI tool to automate the updating of project log files.
+		scripts/lint-docs.py: A linter to automatically check if code changes are accompanied by the required documentation updates.
+		scripts/doc-lint-rules.yml: The configuration "matrix" for the doc linter.
+		mkdocs.yml & site/ directory: For building and hosting a static documentation website.
+
+	3. Implementation Plan
+
+	The next developer must follow this phased plan to build and verify the new system.
+
+	Phase A: Create AGENTS.md for Review
+
+		Copy the templates/AGENTS.md file in the repository root with the complete, final content that was designed.
+		This is the first deliverable.
+
+	Phase B: Environment & Script Implementation Once AGENTS.md is approved, proceed with the following:
+
+		File Operations:
+			Rename scripts/roadmap-test.sh to scripts/run_lint.sh.sh.
+			Move and rename project/lint-rules.yml to scripts/doc-lint-rules.yml.
+			Create placeholder files: scripts/log-work.py, scripts/lint-docs.py, and mkdocs.yml.
+		Dependencies:
+			Add mkdocs, mkdocs-material, and pydoc-markdown to the [project.optional-dependencies.dev] section of api/pyproject.toml.
+			Run pip install -e api/[dev] to install the new dependencies.
+		Startup Script:
+			Modify scripts/start.sh to run mkdocs serve --dev-addr 0.0.0.0:8008 in the background before the uvicorn server starts.
+
+	Phase C: Implement Script Logic
+
+		Implement the full Python logic for scripts/log-work.py. It should accept a --task argument and append formatted entries to project/logs/ACTIVITY.md and project/logs/SESSION_LOG.md.
+		Implement the full logic for scripts/lint-docs.py. It should read the rules from scripts/doc-lint-rules.yml, check the code changes, and report any violations.
+		Populate scripts/doc-lint-rules.yml with an initial set of rules. For example, a change in api/src/zotify_api/routes/ should require a change in project/ENDPOINTS.md.
+
+	Phase D: Verification and Final Submission
+
+		Follow the newly created workflow in AGENTS.md for the changes made in Phase C.
+		Run all verification steps: bash scripts/run_lint.sh.sh, python scripts/lint-docs.py, and mkdocs build.
+		I will then review all the work (implemented scripts, config changes, etc.) for a final code review.
+
+	4. Final Outcome
+
+	Upon completion, the project will have a robust, enforceable, and low-friction process for maintaining its living documentation, significantly improving developer compliance and overall project quality.
 
 Task 2:
 

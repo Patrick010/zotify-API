@@ -1,4 +1,19 @@
 ---
+## ACT-063: Correct and align developer documentation
+
+**Date:** 2025-08-30
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Outcome
+- Updated `project/ONBOARDING.md` and `api/docs/manuals/API_DEVELOPER_GUIDE.md` to reflect the new automated documentation workflow and tooling (`log-work.py`, `lint-docs.py`).
+- This ensures that developer documentation is consistent and provides the correct instructions for the current development process.
+
+### Related Documents
+- `project/ONBOARDING.md`
+- `api/docs/manuals/API_DEVELOPER_GUIDE.md`
+
+---
 ## ACT-062: Restore session log history
 
 **Date:** 2025-08-29
@@ -283,7 +298,7 @@ To perform a full static analysis remediation for the Zotify `api` module, with 
 - **Verification:** The `api` module now passes a strict `mypy` check with zero errors.
 
 ### Related Documents
-- `api/src/`
+- `api/src`
 - `api/tests/`
 - `api/mypy.ini`
 - `api/docs/manuals/DEVELOPER_GUIDE.md`

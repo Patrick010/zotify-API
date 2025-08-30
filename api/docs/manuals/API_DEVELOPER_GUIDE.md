@@ -32,7 +32,7 @@ Follow these steps for every contribution:
 4.  **Run Quality Checks:** Ensure all quality checks (see section below) pass before committing.
 5.  **Update Logs:** Use the `log-work.py` script to record your changes. This script automates the process of updating the "Trinity" logs (`ACTIVITY.md`, `SESSION_LOG.md`, and `CURRENT_STATE.md`). See `AGENTS.md` for full instructions.
     ```bash
-    python scripts/log-work.py --activity "..." --session "..." --state "..."
+    python scripts/log-work.py --activity "..." --session "..." --state "..." --files ...
     ```
 6.  **Follow the `TASK_CHECKLIST.md`:** Manually go through the checklist to ensure all project standards have been met.
 7.  **Submit a Pull Request:** Create a pull request linking to the original issue.
