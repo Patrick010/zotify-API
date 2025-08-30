@@ -15,6 +15,9 @@ This document serves as the master file, or single source of truth, for tracking
 |---|---|---|
 | **Project Registry** | [`PROJECT_REGISTRY.md`](./PROJECT_REGISTRY.md) | This document, the master index for all project artifacts. |
 | **Template Registry** | [`../templates/REGISTRY.md`](../templates/REGISTRY.md) | A registry of all reusable documentation templates. |
+| **Agent Instructions** | [`../AGENTS.md`](../AGENTS.md) | The master instruction file that governs the development workflow for AI agents. |
+| **README** | [`../README.md`](../README.md) | The main README file for the project. |
+| **Handover Brief** | [`HANDOVER_BRIEF.md`](./HANDOVER_BRIEF.md) | A point-in-time snapshot of the project state at the time of handover. Should not be modified. |
 | **Onboarding Guide** | [`ONBOARDING.md`](./ONBOARDING.md) | The primary entry point and guide for new developers to get up to speed on the project. |
 | **Current State** | [`CURRENT_STATE.md`](./logs/CURRENT_STATE.md) | **High-Level Snapshot.** A brief, narrative summary of the entire project's state at the end of a work session. It should answer: What was just accomplished? What is the next immediate goal? Are there any blockers? |
 | **Session Log** | [`SESSION_LOG.md`](./logs/SESSION_LOG.md) | **Session-Level Reporting.** A detailed log of the activities, findings, and outcomes within a single work session. This is for project-related reporting and can be compared to the audit-specific logs (e.g., `AUDIT-PHASE-5.md`). |
@@ -54,14 +57,15 @@ This document serves as the master file, or single source of truth, for tracking
 | **Changelog** | [`api/docs/CHANGELOG.md`](../api/docs/CHANGELOG.md) | A log of all user-facing changes for each version. |
 | **Feature Specifications** | [`api/docs/reference/FEATURE_SPECS.md`](../api/docs/reference/FEATURE_SPECS.md) | The master index for detailed, standardized specifications for all system features. |
 | **Operator Manual** | [`api/docs/manuals/OPERATOR_MANUAL.md`](../api/docs/manuals/OPERATOR_MANUAL.md) | Provides guidance for deploying, configuring, and maintaining the Zotify API in a production environment. |
-| **System Integration Guide** | [`api/docs/manuals/SYSTEM-INTEGRATION-GUIDE.md`](../api/docs/manuals/SYSTEM-INTEGRATION-GUIDE.md) | A guide for external developers on how to integrate with and consume the Zotify API. |
-| **API Developer Guide** | [`api/docs/manuals/API-DEVELOPER-GUIDE.md`](../api/docs/manuals/API-DEVELOPER-GUIDE.md) | A guide for internal developers on setting up a local environment, running tests, and contributing to the API codebase. |
+| **System Integration Guide** | [`api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md`](../api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md) | A guide for external developers on how to integrate with and consume the Zotify API. |
+| **API Developer Guide** | [`api/docs/manuals/API_DEVELOPER_GUIDE.md`](../api/docs/manuals/API_DEVELOPER_GUIDE.md) | A guide for internal developers on setting up a local environment, running tests, and contributing to the API codebase. |
 | **Developer CI/CD Guide**| [`api/docs/manuals/CICD.md`](../api/docs/manuals/CICD.md) | A detailed technical guide to the CI/CD pipeline and local setup. |
 | **User Manual** | [`api/docs/manuals/USER_MANUAL.md`](../api/docs/manuals/USER_MANUAL.md) | A manual for end-users of the API, explaining the core workflow for downloading tracks and the standard error response format. |
 | **Error Handling Guide** | [`api/docs/manuals/ERROR_HANDLING_GUIDE.md`](../api/docs/manuals/ERROR_HANDLING_GUIDE.md) | A developer guide for the Generic Error Handling Module. |
 | **Logging Guide** | [`api/docs/manuals/LOGGING_GUIDE.md`](../api/docs/manuals/LOGGING_GUIDE.md) | A comprehensive developer guide for the new Flexible Logging Framework. |
 | **Spotify Provider** | [`api/docs/providers/spotify.md`](../api/docs/providers/spotify.md) | Describes the implementation of the Spotify provider connector. |
 | **Authentication Spec** | [`api/docs/reference/features/authentication.md`](../api/docs/reference/features/authentication.md) | A feature specification for the static Admin API Key authentication mechanism. |
+| **Automated Documentation Workflow Spec** | [`api/docs/reference/features/automated_documentation_workflow.md`](../api/docs/reference/features/automated_documentation_workflow.md) | A feature specification for the automated documentation linting and logging workflow. |
 | **Provider OAuth2 Flow Spec** | [`api/docs/reference/features/provider_oauth.md`](../api/docs/reference/features/provider_oauth.md) | A feature specification for the provider-agnostic OAuth2 authentication flow. |
 | **Provider Extensions Spec** | [`api/docs/reference/features/provider_agnostic_extensions.md`](../api/docs/reference/features/provider_agnostic_extensions.md) | A proposal for a standardized structure for feature specification documents. |
 | **Error Handling Design** | [`api/docs/system/ERROR_HANDLING_DESIGN.md`](../api/docs/system/ERROR_HANDLING_DESIGN.md) | The technical design specification for the Generic Error Handling Module. |
@@ -113,7 +117,9 @@ This document serves as the master file, or single source of truth, for tracking
 | **Audit Log: Phase 2** | [`audit/AUDIT-phase-2.md`](./audit/AUDIT-phase-2.md) | Log of activities and findings from Phase 2 of the alignment plan. |
 | **Audit Log: Phase 3** | [`audit/AUDIT-PHASE-3.md`](./audit/AUDIT-PHASE-3.md) | Log of activities and findings from Phase 3 of the alignment plan. |
 | **Audit Log: Phase 4** | [`audit/AUDIT-PHASE-4.md`](./audit/AUDIT-PHASE-4.md) | Log of activities and findings from Phase 4 of the alignment plan. |
+| **Audit Log: Phase 5** | [`audit/AUDIT-PHASE-5.md`](./audit/AUDIT-PHASE-5.md) | Log of activities and findings from Phase 5 of the alignment plan. |
 | **Audit Traceability Matrix** | [`audit/AUDIT_TRACEABILITY_MATRIX.md`](./audit/AUDIT_TRACEABILITY_MATRIX.md) | A matrix for tracking audit-related requirements and their implementation status. |
+| **Code Optimization Plan** | [`audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md`](./audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md) | A plan for code optimizations identified during Phase 4 of the audit. |
 | **Phase 4 Traceability Matrix** | [`audit/PHASE_4_TRACEABILITY_MATRIX.md`](./audit/PHASE_4_TRACEABILITY_MATRIX.md) | A traceability matrix specific to the Phase 4 audit. |
 | **Project Audit Final Report** | [`../reports/PROJECT_AUDIT_FINAL_REPORT.md`](../reports/PROJECT_AUDIT_FINAL_REPORT.md) | A comprehensive report summarizing the process, outcomes, and lessons of the full project audit. |
 | **Audit Prompt** | [`audit/audit-prompt.md`](./audit/audit-prompt.md) | The prompt used for the audit process. |
@@ -132,6 +138,12 @@ This section lists standalone scripts that provide developer utility, testing, o
 | **List API Routes** | [`../scripts/list_routes.py`](../scripts/list_routes.py) | Lists all registered routes in the FastAPI application. |
 | **Run Full Test Suite** | [`../scripts/roadmap-test.sh`](../scripts/roadmap-test.sh) | A utility script to run the complete `pytest` test suite for the API. |
 | **Run E2E Auth Test** | [`../scripts/run_e2e_auth_test.sh`](../scripts/run_e2e_auth_test.sh) | Runs a full end-to-end integration test for the API and `snitch` authentication flow. |
+| **Documentation Linter** | [`../scripts/lint-docs.py`](../scripts/lint-docs.py) | A pre-commit script that enforces documentation-as-code policies by checking for corresponding doc changes when code is modified. |
+| **Doc Lint Rules** | [`../scripts/doc-lint-rules.yml`](../scripts/doc-lint-rules.yml) | The YAML configuration file for the documentation linter. |
+| **Log Work Utility** | [`../scripts/log-work.py`](../scripts/log-work.py) | A command-line utility to standardize and simplify the process of updating the three core project logs. |
+| **Run Linter** | [`../scripts/run_lint.sh`](../scripts/run_lint.sh) | A utility script to run all linters. |
+| **Start Server** | [`../scripts/start.sh`](../scripts/start.sh) | The main script for starting the API server. |
+| **Test Auth Flow** | [`../scripts/test_auth_flow.py`](../scripts/test_auth_flow.py) | A script for testing the authentication flow. |
 | **Run Single Config Test** | [`../scripts/test_single_config.sh`](../scripts/test_single_config.sh) | A small utility script to run a single, specific test for the config system. |
 
 ---

@@ -37,6 +37,20 @@ Follow these steps for every contribution:
 6.  **Follow the `TASK_CHECKLIST.md`:** Manually go through the checklist to ensure all project standards have been met.
 7.  **Submit a Pull Request:** Create a pull request linking to the original issue.
 
+### The Automated Workflow: Logging and Linting
+
+To enforce the "living documentation" model, this project uses an automated workflow.
+
+1.  **Documentation Linter (`lint-docs.py`):**
+    -   A `pre-commit` hook is installed that runs this script automatically before every commit.
+    -   **This script will cause the commit to fail** if you have staged changes to source code (`api/src/` or `api/tests/`) without also staging changes to a documentation file.
+    -   This is the primary mechanism that enforces the policy of updating documentation in the same commit as the code it describes.
+
+2.  **Work Logging (`log-work.py`):**
+    -   After you have committed your changes, you must log your work using this script.
+    -   It standardizes the process of updating the project's three main log files.
+    -   See the `AGENTS.md` file in the root directory for detailed instructions on the correct syntax and semantic meaning for each log entry.
+
 ---
 
 ## 3. Running Quality Checks

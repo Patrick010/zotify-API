@@ -6,7 +6,13 @@ set -e
 # environment variable is not set. See api/src/zotify_api/config.py.
 
 echo "Installing/updating dependencies (including dev dependencies)..."
-pip install -e './api[dev]'
+# Correctly install from the project root to include the 'api' package and its 'dev' extras.
+pip install -e ".[dev]"
+
+# Create required directories if they don't exist
+echo "Ensuring required directories exist..."
+mkdir -p api/storage
+mkdir -p api/logs
 
 echo "Starting Zotify API server..."
 
@@ -19,4 +25,4 @@ mkdocs serve --dev-addr 0.0.0.0:8008 &
 
 # Run the uvicorn server
 # We assume this script is run from the root of the project.
-cd api/ && mkdir -p storage && mkdir -p logs && PYTHONPATH=./src uvicorn zotify_api.main:app --host 0.0.0.0 --port 8000 --reload --log-level debug
+cd api/ && PYTHONPATH=./src uvicorn zotify_api.main:app --host 0.0.0.0 --port 8000 --reload --log-level debug

@@ -6,6 +6,7 @@ corresponding documentation, as defined in a rules file, has also been modified.
 """
 
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -16,12 +17,30 @@ import yaml
 # --- Configuration ---
 PROJECT_ROOT = Path(__file__).parent.parent
 RULES_FILE = PROJECT_ROOT / "scripts" / "doc-lint-rules.yml"
+REGISTRY_FILE = PROJECT_ROOT / "project" / "PROJECT_REGISTRY.md"
 
 # The "Trinity" of mandatory log files that must be updated in most commits.
 TRINITY_LOG_FILES = {
     "project/logs/CURRENT_STATE.md",
     "project/logs/ACTIVITY.md",
     "project/logs/SESSION_LOG.md",
+}
+
+# Directories to ignore when scanning for unregistered files.
+# This should contain directory NAMES, not paths.
+IGNORED_DIRS = {
+    ".git",
+    ".github",
+    ".idea",
+    ".pytest_cache",
+    ".venv",
+    "__pycache__",
+    "archive",
+    "site",
+    "source",
+    "storage",
+    "templates",
+    "venv",
 }
 # --- End Configuration ---
 
@@ -142,24 +161,110 @@ def check_trinity_logs(changed_files: Set[str]) -> List[str]:
     return []
 
 
+def get_registered_files(registry_file: Path) -> Set[str]:
+    """
+    Parses the project registry to find all registered file paths by looking
+    for markdown links.
+    """
+    if not registry_file.exists():
+        print(f"Warning: Registry file not found at {registry_file}", file=sys.stderr)
+        return set()
+    content = registry_file.read_text(encoding="utf-8")
+
+    # Regex to find all markdown links, e.g., [text](path)
+    links = re.findall(r"\[[^\]]*\]\(([^)]+)\)", content)
+
+    normalized_paths = set()
+    for link in links:
+        # Ignore external URLs
+        if link.startswith("http"):
+            continue
+
+        try:
+            # All links in markdown are relative to the file they are in.
+            # So we resolve from the registry file's parent directory.
+            abs_path = (registry_file.parent / link).resolve()
+            relative_path = abs_path.relative_to(PROJECT_ROOT.resolve())
+            normalized_paths.add(str(relative_path).replace("\\", "/"))
+        except (ValueError, FileNotFoundError):
+            # ValueError: path is outside project root
+            # FileNotFoundError: link is broken
+            # In either case, we can't check it, so we warn and ignore.
+            print(
+                f"Warning: Could not resolve or find path '{link}' in registry.",
+                file=sys.stderr,
+            )
+            pass
+
+    return normalized_paths
+
+
+def get_all_relevant_files() -> Set[str]:
+    """Scans the filesystem for all .md and script files."""
+    all_files: Set[str] = set()
+    for root, dirs, files in os.walk(PROJECT_ROOT, topdown=True):
+        # Modify dirs in-place to skip ignored directories
+        dirs[:] = [d for d in dirs if d not in IGNORED_DIRS]
+
+        # Convert root to a Path object for easier manipulation
+        root_path = Path(root)
+
+        for file in files:
+            file_path = root_path / file
+            relative_path_str = str(file_path.relative_to(PROJECT_ROOT)).replace("\\", "/")
+
+            # Check if the file is a markdown file or a script in the scripts/ dir
+            if file.endswith(".md") or str(file_path.parent).endswith("scripts"):
+                # Exclude this script itself from the check
+                if "lint-docs.py" in relative_path_str:
+                    continue
+                all_files.add(relative_path_str)
+
+    return all_files
+
+
+def check_registry_completeness() -> List[str]:
+    """
+    Ensures that all .md and script files on disk are registered in the
+    PROJECT_REGISTRY.md file.
+    """
+    errors: List[str] = []
+    registered_files = get_registered_files(REGISTRY_FILE)
+
+    # Add the registry file itself to the set of registered files to avoid self-reporting
+    registered_files.add("project/PROJECT_REGISTRY.md")
+
+    all_files = get_all_relevant_files()
+
+    unregistered_files = all_files - registered_files
+    if unregistered_files:
+        for file in sorted(list(unregistered_files)):
+            errors.append(f"File '{file}' exists but is not listed in the project registry ({REGISTRY_FILE.name}).")
+
+    return errors
+
+
 def main() -> int:
     """Main function for the linter."""
     print("="*20)
     print("Running Documentation Linter")
     print("="*20)
 
-    changed_files = get_changed_files()
-    if not changed_files:
-        print("No changed files detected. Exiting.")
-        return 0
-
     all_errors: List[str] = []
 
-    # Run all checks and collect errors
-    all_errors.extend(check_trinity_logs(changed_files))
+    # --- Global Checks (Always Run) ---
+    # The registry check is critical and should run regardless of what has changed.
+    all_errors.extend(check_registry_completeness())
 
-    rules = load_rules(RULES_FILE)
-    all_errors.extend(check_documentation_rules(rules, changed_files))
+    # --- Change-Specific Checks ---
+    changed_files = get_changed_files()
+    if not changed_files and "PRE_COMMIT" in os.environ:
+        print("No changed files detected in pre-commit mode. Skipping change-specific checks.")
+    else:
+        all_errors.extend(check_trinity_logs(changed_files))
+        rules = load_rules(RULES_FILE)
+        all_errors.extend(check_documentation_rules(rules, changed_files))
+
 
     # Report results
     if all_errors:
