@@ -1,5 +1,29 @@
 ---
 
+## ACT-063: Configure MkDocs for Modular Documentation
+
+**Date:** 2025-08-31
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To correctly configure the `mkdocs` build system to generate a unified documentation site from multiple sources, as per the project's "Living Documentation" philosophy.
+
+### Outcome
+- Implemented and configured the `mkdocs-monorepo-plugin`.
+- Created subordinate `mkdocs.yml` files for the `snitch` and `gonk-testUI` modules to define their navigation structures.
+- Updated the root `mkdocs.yml` to use the `monorepo` plugin and include the documentation from the `api`, `snitch`, and `gonk-testUI` modules.
+- The `project` module is now correctly excluded from the documentation build, as per the final user requirements.
+- All documentation build warnings have been resolved.
+
+### Related Documents
+- `mkdocs.yml`
+- `snitch/mkdocs.yml`
+- `gonk-testUI/mkdocs.yml`
+- `api/pyproject.toml`
+
+---
+
 ## ACT-062: Restore session log history
 
 **Date:** 2025-08-29

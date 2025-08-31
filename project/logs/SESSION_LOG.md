@@ -1,6 +1,20 @@
 ---
 ## Session Report: 2025-08-31
 
+**Summary:** This session focused on correctly configuring the `mkdocs` build system. After a series of confusing and contradictory instructions, the final, correct requirement was established: to build a unified documentation site from the `api`, `snitch`, and `gonk-testUI` modules, while explicitly excluding the `project` module.
+
+**Findings:**
+- The initial goal, derived from the `HANDOVER_BRIEF.md`, was to include all project documentation. This was later contradicted by user feedback, leading to several course corrections.
+- The final, correct implementation uses the `mkdocs-monorepo-plugin` to combine the documentation sets.
+- All documentation build warnings were resolved.
+
+**Outcome:**
+- The documentation build is now clean and correctly configured to match the project's requirements.
+- The "Trinity" log files have been manually updated to reflect this work, as per the Living Documentation policy.
+
+---
+## Session Report: 2025-08-31
+
 **Summary:** Finally resolved all mkdocs build warnings. The solution was to add a comprehensive nav section to mkdocs.yml, which explicitly defines the set of documents to be included in the site. This prevents mkdocs from discovering and parsing other files with broken or cross-directory links.
 **Findings:**
 - (To be filled in manually)
