@@ -38,7 +38,14 @@ This workflow is designed to be followed for every task that involves code or do
 ### Step 1: Code and Document
 This is the primary development task. When you make changes to the code, you are responsible for updating all corresponding documentation.
 
-To identify which documents are relevant for a given change, you **must** consult the `project/project_registry.md`. This file is the single source of truth for all project documents.
+#### Project-Level Documentation
+To identify which documents are relevant for a given change, you **must** consult the `project/PROJECT_REGISTRY.md`. This file is the single source of truth for all high-level project documents.
+
+#### API Documentation
+The API documentation has its own master index. When creating new documentation for the API, you **must** register it in the following locations:
+1.  **`api/docs/reference/MASTER_INDEX.md`**: The new documentation file must be added to this master list.
+2.  **`scripts/doc-lint-rules.yml`**: The new file must be added to the appropriate rule or mapping.
+3.  **`api/docs/reference/CODE_QUALITY_INDEX.md`**: A new row must be added for the documentation file with an initial quality score of 'X'.
 
 ### Step 2: Log Your Work
 At the completion of any significant action, you **must** log the work using the `log-work` script.
@@ -46,11 +53,11 @@ At the completion of any significant action, you **must** log the work using the
 *   **Command:** `python scripts/log_work.py --task "A clear, concise summary of the action taken."`
 *   **Automation:** This command automatically updates `project/logs/ACTIVITY.md`, project/logs/CURRENT_STATE.md and `project/logs/SESSION_LOG.md`.
 
-### Step 3: Assess Quality and Update Index
-To ensure a high standard of quality, all code and documentation changes must be assessed.
+### Step 3: Maintain the Quality Index
+To ensure a high standard of quality, all new source code and documentation files must be registered in the quality index. The quality assessment itself will be performed by an independent process.
 
-1.  **Assess Your Changes:** Review your modified files against the scoring rubric defined in the `API_DEVELOPER_GUIDE.md`.
-2.  **Update the Index:** Add or update the corresponding entries in the `CODE_QUALITY_INDEX.md` file. This is a mandatory step.
+1.  **Add New Files to Index:** When you create a new source file (`.py`) or a new documentation file (`.md`), you **must** add a corresponding entry to the appropriate `CODE_QUALITY_INDEX.md` file.
+2.  **Set Initial Score:** The initial "Documentation Score" and "Code Score" for any new file must be set to **'X'**, signifying that the quality is "Unknown" and pending review.
 
 ### Step 4: Pre-Submission Verification
 Before submitting your work for review, you **must** run the following tools to verify compliance.
