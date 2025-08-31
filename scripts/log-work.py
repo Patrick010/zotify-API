@@ -1,6 +1,8 @@
 import argparse
 import datetime
 import textwrap
+import sys
+import os
 
 def get_formatted_date():
     """Returns the current date in YYYY-MM-DD format."""
@@ -72,19 +74,25 @@ def write_to_file(file_path, content):
 
 def main():
     """
-    Main function to parse commit message and update log files.
-    This script is intended to be used as a pre-commit hook.
+    Main function to parse a commit message and update log files.
+    The message can be passed as a direct string or as a filepath.
     """
-    parser = argparse.ArgumentParser()
-    parser.add_argument("commit_msg_filepath", help="Path to the commit message file.")
+    parser = argparse.ArgumentParser(description="Update project logs from a commit message.")
+    parser.add_argument("commit_input", help="The commit message string or a filepath containing the message.")
     args = parser.parse_args()
 
-    try:
-        with open(args.commit_msg_filepath, "r") as f:
-            commit_message = f.read().strip()
-    except IOError as e:
-        print(f"Error reading commit message file: {e}", file=sys.stderr)
-        sys.exit(1)
+    commit_message = ""
+    # Check if the input is a file path that exists
+    if os.path.isfile(args.commit_input):
+        try:
+            with open(args.commit_input, "r") as f:
+                commit_message = f.read().strip()
+        except IOError as e:
+            print(f"Error reading commit message file: {e}", file=sys.stderr)
+            sys.exit(1)
+    else:
+        # If it's not a file, treat the input as the commit message directly
+        commit_message = args.commit_input.strip()
 
     # Ignore merge commits and other automated messages
     if not commit_message or commit_message.startswith("Merge"):

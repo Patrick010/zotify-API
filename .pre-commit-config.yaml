@@ -46,9 +46,3 @@ repos:
         language: python
         types: [python]
         pass_filenames: false
-      - id: auto-logger
-        name: Automatic Work Logger
-        entry: python scripts/log-work.py
-        language: python
-        stages: [commit-msg]
-        pass_filenames: false

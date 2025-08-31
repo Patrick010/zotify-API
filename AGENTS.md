@@ -55,11 +55,14 @@ The API documentation has its own master index. When creating new documentation 
 2.  **`scripts/doc-lint-rules.yml`**: The new file must be added to the appropriate rule or mapping.
 3.  **`api/docs/reference/CODE_QUALITY_INDEX.md`**: A new row must be added for the documentation file with an initial quality score of 'X'.
 
-### Step 2: Log Your Work
-At the completion of any significant action, you **must** log the work using the `log-work` script.
+### Step 2: Log Your Work (Manual Pre-Commit Step)
+This is a **mandatory, non-optional** step that you **must** perform before every single commit.
 
-*   **Command:** `python scripts/log-work.py --activity "A one-line summary for the activity log." --session "A more detailed summary for the session log." --state "A brief statement of the project's current state."`
-*   **Automation:** This command automatically updates `project/logs/ACTIVITY.md`, `project/logs/CURRENT_STATE.md` and `project/logs/SESSION_LOG.md`.
+**Before you commit your changes**, you must manually run the `log-work` script to record what you have done. The commit message from your upcoming commit should be used as the input for the script.
+
+*   **Command:** `python scripts/log-work.py "Your detailed commit message goes here."`
+*   **Action:** This command will append your work description to the project's activity and session logs (`project/logs/ACTIVITY.md` and `project/logs/SESSION_LOG.md`).
+*   **Failure to perform this step before committing is a violation of project procedure.**
 
 ### Step 3: Maintain the Quality Index
 To ensure a high standard of quality, all new source code and documentation files must be registered in the quality index. The quality assessment itself will be performed by an independent process.

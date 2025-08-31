@@ -1,4 +1,44 @@
 ---
+## ACT-???: Fix: Correct startup script failure. The start.sh script was failing because it tried to install the Python package from the wrong directory. The script has been reorganized to ensure all commands are run from the correct location, which resolves the API startup failure.
+
+**Date:** 2025-08-31
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Outcome
+- (To be filled in manually)
+
+---
+## ACT-???: Fix: Correct startup script failure. The start.sh script was failing because it tried to install the Python package from the wrong directory. The script has been reorganized to ensure all commands are run from the correct location, which resolves the API startup failure.
+
+**Date:** 2025-08-31
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Outcome
+- (To be filled in manually)
+
+---
+## ACT-???: Fix: Revert automated logging to a manual process.
+
+**Date:** 2025-08-31
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Outcome
+- (To be filled in manually)
+
+---
+## ACT-???: Fix: Revert automated logging to a manual process.
+
+**Date:** 2025-08-31
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Outcome
+- (To be filled in manually)
+
+---
 ## ACT-???: Added mandatory agent rule and reverted index file rename.
 
 **Date:** 2025-08-31
