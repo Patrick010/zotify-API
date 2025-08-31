@@ -47,7 +47,8 @@ dev = [
     "pre-commit",
     "mkdocs",
     "mkdocs-material",
-    "pydoc-markdown"
+    "pydoc-markdown",
+    "mkdocs-monorepo-plugin"
 ]
 
 [tool.pytest.ini_options]
