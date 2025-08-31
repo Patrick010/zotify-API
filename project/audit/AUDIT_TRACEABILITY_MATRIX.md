@@ -5,7 +5,7 @@
 | Feature / Component | Exists? | Matches Design? | Priority | Notes on Deviations & Context |
 | :--- | :--- | :--- | :--- | :--- |
 | **Authentication & Authorization** | | | | |
-| Admin Endpoint Security | Y | Y | High | **Context:** The design documents (specifically `security.md`) have been updated to reflect the current reality, which is that security is handled by a static admin API key. **Gap:** None. The aspirational features are now documented as future enhancements. |
+| Admin Endpoint Security | Y | Y | High | **Context:** The design documents (specifically `SECURITY.MD`) have been updated to reflect the current reality, which is that security is handled by a static admin API key. **Gap:** None. The aspirational features are now documented as future enhancements. |
 | JWT for API Authentication | N | Y (Deferred) | Low | **Status:** Planned — Deferred. This feature is tracked in project/FUTURE_ENHANCEMENTS.md. It will not appear in HLD/LLD until promoted to an active roadmap phase. |
 | Role-Based Access Control (RBAC) | N | N | Low | **Context:** Planned for multi-user environments, but current model is single-user. Deferred until multi-user support is prioritized. |
 | **Spotify Integration** | | | | |
