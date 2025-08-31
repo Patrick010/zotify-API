@@ -5,6 +5,14 @@
 
 ---
 
+## 0. Fundamental Rules
+
+This is a mandatory, non-optional rule that all agents must follow at all times.
+
+- **Do not approve your own tasks or plans. Do not make un-asked for changes. Do not start tasks or plans without approval.**
+
+---
+
 ## 1. About This System
 
 ### 1.1. Purpose
