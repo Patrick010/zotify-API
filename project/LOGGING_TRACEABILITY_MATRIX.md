@@ -16,6 +16,6 @@ This document maps the high-level requirements for the new Extendable Logging Sy
 | **REQ-LOG-03** | An initial handler for system/debug logs (console output) must be provided. | [`LOGGING_SYSTEM_DESIGN.md`](./LOGGING_SYSTEM_DESIGN.md) | `LOG-TASK-03` | **Proposed** |
 | **REQ-LOG-04** | An initial handler for structured JSON audit logs must be provided. | [`LOGGING_SYSTEM_DESIGN.md`](./LOGGING_SYSTEM_DESIGN.md) | `LOG-TASK-04` | **Proposed** |
 | **REQ-LOG-05** | An initial handler for database-backed job logs must be provided. | [`LOGGING_SYSTEM_DESIGN.md`](./LOGGING_SYSTEM_DESIGN.md) | `LOG-TASK-05` | **Proposed** |
-| **REQ-LOG-06** | A comprehensive developer guide for using the system must be created. | [`LOGGING_GUIDE.md`](../api/docs/manuals/LOGGING_GUIDE.md) | `LOG-TASK-06` | **Proposed** |
+| **REQ-LOG-06** | A comprehensive developer guide for using the system must be created. | `LOGGING_GUIDE.md` | `LOG-TASK-06` | **Proposed** |
 | **REQ-LOG-07** | The requirement for structured logging must be mandated in the project's core process documents. | [`PID.md`](./PID.md) | `LOG-TASK-07` | **Proposed** |
 | **REQ-LOG-08** | The implementation of the logging system must be tracked on the official project roadmap. | [`ROADMAP.md`](./ROADMAP.md) | `LOG-TASK-07` | **Proposed** |

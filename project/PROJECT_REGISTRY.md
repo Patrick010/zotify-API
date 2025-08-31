@@ -14,9 +14,7 @@ This document serves as the master file, or single source of truth, for tracking
 | Document | Location | Description |
 |---|---|---|
 | **Project Registry** | [`PROJECT_REGISTRY.md`](./PROJECT_REGISTRY.md) | This document, the master index for all project artifacts. |
-| **Template Registry** | [`../templates/REGISTRY.md`](../templates/REGISTRY.md) | A registry of all reusable documentation templates. |
-| **Agent Instructions** | [`../AGENTS.md`](../AGENTS.md) | The master instruction file that governs the development workflow for AI agents. |
-| **README** | [`../README.md`](../README.md) | The main README file for the introduction of the project to end users. |
+| **Template Registry** | [`../templates/PROJECT_REGISTRY.md`](../templates/PROJECT_REGISTRY.md) | A registry of all reusable documentation templates. |
 | **Handover Brief** | [`HANDOVER_BRIEF.md`](./HANDOVER_BRIEF.md) | A detailed handover brief created at the request of the user. Not to be modified during the session. |
 | **Onboarding Guide** | [`ONBOARDING.md`](./ONBOARDING.md) | The primary entry point and guide for new developers to get up to speed on the project. |
 | **Current State** | [`CURRENT_STATE.md`](./logs/CURRENT_STATE.md) | **High-Level Snapshot.** A brief, narrative summary of the entire project's state at the end of a work session. It should answer: What was just accomplished? What is the next immediate goal? Are there any blockers? |
@@ -62,7 +60,6 @@ This document serves as the master file, or single source of truth, for tracking
 | **Audit Traceability Matrix** | [`audit/AUDIT_TRACEABILITY_MATRIX.md`](./audit/AUDIT_TRACEABILITY_MATRIX.md) | A matrix for tracking audit-related requirements and their implementation status. |
 | **Code Optimization Plan** | [`audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md`](./audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md) | A plan for code optimizations identified during Phase 4 of the audit. |
 | **Phase 4 Traceability Matrix** | [`audit/PHASE_4_TRACEABILITY_MATRIX.md`](./audit/PHASE_4_TRACEABILITY_MATRIX.md) | A traceability matrix specific to the Phase 4 audit. |
-| **Project Audit Final Report** | [`../reports/PROJECT_AUDIT_FINAL_REPORT.md`](../reports/PROJECT_AUDIT_FINAL_REPORT.md) | A comprehensive report summarizing the process, outcomes, and lessons of the full project audit. |
 | **Audit Prompt** | [`audit/audit-prompt.md`](./audit/audit-prompt.md) | The prompt used for the audit process. |
 
 ---

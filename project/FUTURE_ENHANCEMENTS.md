@@ -99,7 +99,7 @@ Beyond technical features, the long-term success of the API depends on making it
 
 *   **Goal:** To make the API's power accessible to non-programmers and citizen developers through visual, flow-based programming environments.
 *   **Vision:** While the Python plugin system extends the API's backend, integration with platforms like Node-RED or Zapier would extend its reach. This would involve creating a dedicated package of nodes or modules for that platform (e.g., `node-red-contrib-zotify`).
-*   **Synergy:** These nodes would act as well-designed clients for the Zotify API. The more powerful the backend API becomes (through Python plugins), the more powerful these visual building blocks become. This creates a synergistic ecosystem for both developers and power users. See the full proposal at [`LOW_CODE_PROPOSAL.md`](./LOW_CODE_PROPOSAL.md).
+*   **Synergy:** These nodes would act as well-designed clients for the Zotify API. The more powerful the backend API becomes (through Python plugins), the more powerful these visual building blocks become. This creates a synergistic ecosystem for both developers and power users. See the full proposal at [`LOW_CODE_PROPOSAL.md`](./proposals/LOW_CODE_PROPOSAL.md).
 
 ---
 
@@ -180,7 +180,9 @@ This is a medium- to long-term goal and must be factored into future architectur
 
 **Objective:** Extend the Unified Provider Abstraction Layer by establishing a structured, detailed, and discoverable feature specification process. This ensures all provider-agnostic and provider-specific features are fully documented and tracked.
 
-**Reference:** [Provider-Agnostic Extensions Feature Specification](docs/reference/features/provider_agnostic_extensions.md)
+**Reference:**
+
+--8<-- "api/docs/reference/features/PROVIDER_AGNOSTIC_EXTENSIONS.md"
 
 **Key Actions:**
 - Maintain a **metadata integration matrix** for all supported providers, tracking feature coverage, compatibility, and limitations.

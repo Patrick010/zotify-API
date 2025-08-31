@@ -1,4 +1,14 @@
 ---
+## ACT-???: Fix all mkdocs build warnings and startup script.
+
+**Date:** 2025-08-31
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Outcome
+- (To be filled in manually)
+
+---
 ## ACT-???: Final verification of documentation build.
 
 **Date:** 2025-08-31
