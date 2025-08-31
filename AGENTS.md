@@ -5,6 +5,14 @@
 
 ---
 
+## 0. Fundamental Rules
+
+This is a mandatory, non-optional rule that all agents must follow at all times.
+
+    Do not approve your own tasks or plans. Do not make un-asked for changes. Do not start tasks or plans without approval.
+
+---
+
 ## 1. About This System
 
 ### 1.1. Purpose
@@ -48,19 +56,10 @@ The API documentation has its own master index. When creating new documentation 
 3.  **`api/docs/reference/CODE_QUALITY_INDEX.md`**: A new row must be added for the documentation file with an initial quality score of 'X'.
 
 ### Step 2: Log Your Work
-At the completion of any significant action, you **must** log the work using the `log-work.py` script. This script automatically generates a new entry in `project/logs/ACTIVITY.md` with a correctly formatted, sequential `ACT-XXX` number.
+At the completion of any significant action, you **must** log the work using the `log-work` script.
 
-*   **Command:**
-    ```bash
-    python scripts/log-work.py \
-        --summary "A one-line summary of the task." \
-        --outcome "A multi-line description of the outcome. Use '\\n' for new lines." \
-        --files file1.md file2.py
-    ```
-*   **Arguments:**
-    *   `--summary`: (Required) A short, one-line summary of the action taken. This becomes the title of the log entry.
-    *   `--outcome`: (Required) A detailed, multi-line description of the work performed and its result.
-    *   `--files`: (Optional) A space-separated list of files that were modified.
+*   **Command:** `python scripts/log-work.py --activity "..." --session "..." --state "..." --files ...`
+*   **Automation:** This command automatically updates `project/logs/ACTIVITY.md`, `project/logs/CURRENT_STATE.md` and `project/logs/SESSION_LOG.md`.
 
 ### Step 3: Maintain the Quality Index
 To ensure a high standard of quality, all new source code and documentation files must be registered in the quality index. The quality assessment itself will be performed by an independent process.

@@ -26,30 +26,30 @@ This project operates under a strict **"living documentation"** model.
 
 Follow these steps for every contribution:
 
-1.  **Create an Issue:** Before starting work, ensure there is a GitHub issue describing the bug or feature.
-2.  **Create a Branch:** Create a new feature branch from `main`.
-3.  **Implement Changes:** Write your code and the corresponding documentation updates.
-4.  **Run Quality Checks:** Ensure all quality checks (see section below) pass before committing.
-5.  **Update Logs:** Use the `log-work.py` script to record your changes. This script automates the process of updating the "Trinity" logs (`ACTIVITY.md`, `SESSION_LOG.md`, and `CURRENT_STATE.md`). See `AGENTS.md` for full instructions.
-    ```bash
-    python scripts/log-work.py --activity "..." --session "..." --state "..." --files ...
-    ```
-6.  **Follow the `TASK_CHECKLIST.md`:** Manually go through the checklist to ensure all project standards have been met.
-7.  **Submit a Pull Request:** Create a pull request linking to the original issue.
+    Create an Issue: Before starting work, ensure there is a GitHub issue describing the bug or feature.
+    Create a Branch: Create a new feature branch from main.
+    Implement Changes: Write your code and the corresponding documentation updates.
+    Run Quality Checks: Ensure all quality checks (see section below) pass before committing.
+    Update Logs: Use the log-work.py script to record your changes. This script automates the process of updating the "Trinity" logs (ACTIVITY.md, SESSION_LOG.md, and CURRENT_STATE.md). See AGENTS.md for full instructions.
 
-### The Automated Workflow: Logging and Linting
+    python scripts/log-work.py --activity "..." --session "..." --state "..." --files ...
+
+    Follow the TASK_CHECKLIST.md: Manually go through the checklist to ensure all project standards have been met.
+    Submit a Pull Request: Create a pull request linking to the original issue.
+
+The Automated Workflow: Logging and Linting
 
 To enforce the "living documentation" model, this project uses an automated workflow.
 
-1.  **Documentation Linter (`lint-docs.py`):**
-    -   A `pre-commit` hook is installed that runs this script automatically before every commit.
-    -   **This script will cause the commit to fail** if you have staged changes to source code (`api/src/` or `api/tests/`) without also staging changes to a documentation file.
-    -   This is the primary mechanism that enforces the policy of updating documentation in the same commit as the code it describes.
+    Documentation Linter (lint-docs.py):
+        A pre-commit hook is installed that runs this script automatically before every commit.
+        This script will cause the commit to fail if you have staged changes to source code (api/src/ or api/tests/) without also staging changes to a documentation file.
+        This is the primary mechanism that enforces the policy of updating documentation in the same commit as the code it describes.
 
-2.  **Work Logging (`log-work.py`):**
-    -   After you have committed your changes, you must log your work using this script.
-    -   It standardizes the process of updating the project's three main log files.
-    -   See the `AGENTS.md` file in the root directory for detailed instructions on the correct syntax and semantic meaning for each log entry.
+    Work Logging (log-work.py):
+        After you have committed your changes, you must log your work using this script.
+        It standardizes the process of updating the project's three main log files.
+        See the AGENTS.md file in the root directory for detailed instructions on the correct syntax and semantic meaning for each log entry.
 
 ---
 
