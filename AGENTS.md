@@ -58,8 +58,8 @@ The API documentation has its own master index. When creating new documentation 
 ### Step 2: Log Your Work
 At the completion of any significant action, you **must** log the work using the `log-work` script.
 
-*   **Command:** `python scripts/log_work.py --task "A clear, concise summary of the action taken."`
-*   **Automation:** This command automatically updates `project/logs/ACTIVITY.md`, project/logs/CURRENT_STATE.md and `project/logs/SESSION_LOG.md`.
+*   **Command:** `python scripts/log-work.py --activity "A one-line summary for the activity log." --session "A more detailed summary for the session log." --state "A brief statement of the project's current state."`
+*   **Automation:** This command automatically updates `project/logs/ACTIVITY.md`, `project/logs/CURRENT_STATE.md` and `project/logs/SESSION_LOG.md`.
 
 ### Step 3: Maintain the Quality Index
 To ensure a high standard of quality, all new source code and documentation files must be registered in the quality index. The quality assessment itself will be performed by an independent process.

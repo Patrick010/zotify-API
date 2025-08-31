@@ -1,4 +1,34 @@
 ---
+## ACT-???: Added mandatory agent rule and reverted index file rename.
+
+**Date:** 2025-08-31
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Outcome
+- (To be filled in manually)
+
+---
+## ACT-???: Reorganized documentation hierarchy and fixed broken links.
+
+**Date:** 2025-08-31
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Outcome
+- (To be filled in manually)
+
+---
+## ACT-???: Reorganized documentation hierarchy and fixed broken links.
+
+**Date:** 2025-08-31
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Outcome
+- (To be filled in manually)
+
+---
     ## ACT-???: Implement convention-based linter and overhaul documentation standards.
 
     **Date:** 2025-08-31

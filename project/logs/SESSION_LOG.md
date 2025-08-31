@@ -1,6 +1,27 @@
 ---
 ## Session Report: 2025-08-31
 
+**Summary:** Added mandatory rule to AGENTS.md regarding task approval. Reverted the rename of MASTER_INDEX.md back from index.md as per user instruction.
+**Findings:**
+- (To be filled in manually)
+
+---
+## Session Report: 2025-08-31
+
+**Summary:** Completed documentation reorganization by moving MASTER_INDEX.md, deleting incorrect registries, and updating all related links. This resolves the docs build issues and the 404 error on the docs homepage.
+**Findings:**
+- (To be filled in manually)
+
+---
+## Session Report: 2025-08-31
+
+**Summary:** Completed documentation reorganization by moving MASTER_INDEX.md, deleting incorrect registries, and updating all related links. This resolves the docs build issues and the 404 error on the docs homepage.
+**Findings:**
+- (To be filled in manually)
+
+---
+## Session Report: 2025-08-31
+
 **Summary:** Completed a major overhaul of the documentation process and linter enforcement. Renamed documentation files, created a new master index, updated project policies, and implemented new linter logic for convention-based checking of existing and new files.
 **Findings:**
 - (To be filled in manually)
