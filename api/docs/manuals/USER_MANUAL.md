@@ -5,7 +5,7 @@
 
 ## 1. Introduction
 
-This manual explains how to consume the Zotify REST API to manage your music library. It is intended for end-users or client application developers. For a full, interactive list of all endpoints, please see the [Swagger UI documentation](./../../docs) available on your local server instance.
+This manual explains how to consume the Zotify REST API to manage your music library. It is intended for end-users or client application developers. For a full, interactive list of all endpoints, please see the [Swagger UI documentation](http://localhost:8000/docs) available on your local server instance.
 
 ## 2. Authentication
 
