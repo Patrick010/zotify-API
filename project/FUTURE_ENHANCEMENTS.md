@@ -45,14 +45,14 @@ This section lists specific technical features and improvements that are candida
     *   Investigate the further development of the conceptual `Snitch` module.
     *   Potential enhancements include running it as a persistent background service, developing it into a browser plugin for seamless integration, or expanding it to handle multi-service authentication flows.
 *   **Dynamic Logging Sink Plugin System:**
-    *   Implement a dynamic plugin system for the Flexible Logging Framework, based on Python's `entry_points`. This will allow third-party developers to create and install their own custom sink types without modifying the core API code. See the full proposal at [`DYNAMIC_PLUGIN_PROPOSAL.md`](./DYNAMIC_PLUGIN_PROPOSAL.md).
+    -   Implement a dynamic plugin system for the Flexible Logging Framework, based on Python's `entry_points`. This will allow third-party developers to create and install their own custom sink types without modifying the core API code. See the full proposal at [`DYNAMIC_PLUGIN_PROPOSAL.md`](./proposals/DYNAMIC_PLUGIN_PROPOSAL.md).
 *   **Plugin-Driven Multi-Source Metadata System:**
     *   Implement a new core service that leverages the Dynamic Plugin System to ingest, normalize, and query metadata from multiple, arbitrary sources (e.g., Spotify, local files, other services).
     *   Each source will be a self-contained, installable plugin.
     *   The system will use a document-oriented database for flexible metadata storage and a vector store to enable powerful semantic search capabilities across all sources.
-    *   This feature is a major step towards making the platform truly provider-agnostic and will serve as the foundation for advanced cross-source library management and content discovery. See the full proposal at [`MULTI_SOURCE_METADATA_PROPOSAL.md`](./MULTI_SOURCE_METADATA_PROPOSAL.md).
+    -   This feature is a major step towards making the platform truly provider-agnostic and will serve as the foundation for advanced cross-source library management and content discovery. See the full proposal at [`MULTI_SOURCE_METADATA_PROPOSAL.md`](./proposals/MULTI_SOURCE_METADATA_PROPOSAL.md).
 *   **Home Automation Integration:**
-    *   Develop a dedicated integration for home automation platforms like Home Assistant. This would expose Zotify as a `media_player` entity and provide services for triggering downloads and other actions from within home automations. See the full proposal at [`HOME_AUTOMATION_PROPOSAL.md`](./HOME_AUTOMATION_PROPOSAL.md).
+    -   Develop a dedicated integration for home automation platforms like Home Assistant. This would expose Zotify as a `media_player` entity and provide services for triggering downloads and other actions from within home automations. See the full proposal at [`HOME_AUTOMATION_PROPOSAL.md`](./proposals/HOME_AUTOMATION_PROPOSAL.md).
 *   **Decouple from `librespot` to Mitigate Dependency Risk:**
     *   **Problem:** The project is currently locked to an old version of `protobuf` (`3.20.1`) due to a strict dependency pin in `librespot`. This version has known security vulnerabilities.
     *   **Goal:** Mitigate this security and maintenance risk by investigating alternatives to the direct `librespot` dependency.

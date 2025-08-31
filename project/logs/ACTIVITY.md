@@ -1,4 +1,14 @@
 ---
+## ACT-???: Final verification of documentation build.
+
+**Date:** 2025-08-31
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Outcome
+- (To be filled in manually)
+
+---
 ## ACT-???: Delete MODULE_REGISTRY.md as per user instruction.
 
 **Date:** 2025-08-31
