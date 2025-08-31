@@ -1,3 +1,21 @@
+## AUDIT-010: Linter Overhaul and Documentation Process Refinement
+
+**Date:** 2025-08-31
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To overhaul the documentation process and enhance the linter to enforce new, more rigorous documentation standards based on user feedback.
+
+### Outcome
+- **File Naming Convention Enforced:** All documentation files were renamed to follow the `UPPERCASE.extension` or `UPPERCASE.py.md` convention.
+- **Master Index Created:** A new `api/docs/reference/MASTER_INDEX.md` was created to serve as a central registry for all API documentation.
+- **Policy Updated:** The `AGENTS.md` file was updated to reflect the new, detailed workflow for developers, including the requirement to register new files in multiple locations.
+- **Linter Overhauled:** The `scripts/lint-docs.py` script was rewritten to be fully convention-based. It now enforces that changes to source code are accompanied by changes to their corresponding documentation files, and that new files are correctly registered in the quality index.
+- **Project Logs Updated:** All relevant project log files were updated to reflect the completion of this work.
+
+---
+
 ## AUDIT-009: Automated Documentation Workflow
 
 **Date:** 2025-08-29
