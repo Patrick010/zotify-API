@@ -1,4 +1,5 @@
 import logging as py_logging
+import os
 import time
 from typing import Any, Dict, Optional, cast
 
@@ -75,7 +76,9 @@ app.add_middleware(RequestIDMiddleware)
 def initialize_logging_framework() -> None:
     """Loads config and initializes the new flexible logging framework."""
     try:
-        with open("logging_framework.yml", "r") as f:
+        # Construct a path to 'api/logging_framework.yml' relative to this file's location
+        config_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'logging_framework.yml'))
+        with open(config_path, "r") as f:
             config_data = yaml.safe_load(f)
 
         validated_config = LoggingFrameworkConfig(**config_data)

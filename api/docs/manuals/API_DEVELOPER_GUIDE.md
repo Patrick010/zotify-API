@@ -8,10 +8,8 @@ For information on how to consume or integrate with the API, please see the [`SY
 1.  [Core Principles](#1-core-principles)
 2.  [Development Workflow](#2-development-workflow)
 3.  [Running Quality Checks](#3-running-quality-checks)
-4.  [Building the Documentation](#4-building-the-documentation)
-5.  [How to Add a New Provider](#5-how-to-add-a-new-provider)
-6.  [Proposing Architectural Changes](#6-proposing-architectural-changes)
-7.  [Code Quality Index](#7-code-quality-index)
+4.  [How to Add a New Provider](#4-how-to-add-a-new-provider)
+5.  [Proposing Architectural Changes](#5-proposing-architectural-changes)
 
 ---
 
@@ -57,7 +55,7 @@ To enforce the "living documentation" model, this project uses an automated work
 
 ## 3. Running Quality Checks
 
-For a comprehensive overview of the project's CI/CD pipeline and local quality checks, please refer to the main [`CICD.md`](../project/CICD.md) guide.
+For a comprehensive overview of the project's CI/CD pipeline and local quality checks, please refer to the main [`CICD.md`](../../../project/CICD.md) guide.
 
 Before committing, you must run the following checks from the project root.
 
@@ -87,25 +85,7 @@ Before committing, you must run the following checks from the project root.
 
 ---
 
-## 4. Building the Documentation
-
-The documentation site is built using `mkdocs` from the `api/docs` directory. However, it includes documentation from multiple modules across the repository. To enable the build, you must first create symbolic links to make the other documentation directories visible from within `api/docs`.
-
-From the repository root, run the following commands:
-```bash
-ln -s ../../snitch/docs/ api/docs/snitch
-ln -s ../../gonk-testUI/docs/ api/docs/gonk-testUI
-ln -s ../../project/ api/docs/project
-```
-
-Once the links are created, you can build the site from the repository root:
-```bash
-mkdocs build
-```
-
----
-
-## 5. How to Add a New Provider
+## 4. How to Add a New Provider
 
 The API is designed to be extensible with new music providers. To add a new one, you must implement the `BaseProvider` interface.
 
@@ -150,7 +130,7 @@ The API is designed to be extensible with new music providers. To add a new one,
 
 ---
 
-## 6. Proposing Architectural Changes
+## 5. Proposing Architectural Changes
 
 For significant architectural changes (e.g., adding a new major component, changing a core data flow), a formal proposal is required.
 
@@ -167,7 +147,7 @@ For significant architectural changes (e.g., adding a new major component, chang
 
 ---
 
-## 7. Code Quality Index
+## 6. Code Quality Index
 
 This project uses a quality scoring system to track the overall quality of all source code files. The goal is to ensure all code is understandable, maintainable, and well-tested.
 

@@ -1,3 +1,4 @@
+import os
 import platform
 import sys
 import time
@@ -29,7 +30,9 @@ def reload_logging_config() -> Dict[str, str]:
     `logging_framework.yml` file at runtime.
     """
     try:
-        with open("logging_framework.yml", "r") as f:
+        # Construct a path to 'api/logging_framework.yml' relative to this file's location
+        config_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'logging_framework.yml'))
+        with open(config_path, "r") as f:
             config_data = yaml.safe_load(f)
     except FileNotFoundError:
         raise HTTPException(

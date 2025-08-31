@@ -20,7 +20,7 @@ This system is the single source of truth for understanding the purpose, design,
 
 ### Core API Features
 
--   [Authentication: Admin API Key](./features/AUTHENTICATION.md)
+-   [Authentication: Admin API Key](./features/authentication.md)
 
 ### Supporting Modules
 

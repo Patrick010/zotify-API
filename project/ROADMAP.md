@@ -7,7 +7,7 @@
 
 This document provides a high-level, strategic roadmap for the Zotify API Platform. It is organized by major themes and outlines the development trajectory from the current stable state to future enhancements.
 
-This document is not a detailed task tracker. For a log of completed work, see [`ACTIVITY.md`](./logs/ACTIVITY.md). For the immediate next steps, see [`CURRENT_STATE.md`](./logs/CURRENT_STATE.md). For a list of all potential long-term ideas, see [`FUTURE_ENHANCEMENTS.md`](./FUTURE_ENHANCEMENTS.md).
+This document is not a detailed task tracker. For a log of completed work, see [`ACTIVITY.md`](./ACTIVITY.md). For the immediate next steps, see [`CURRENT_STATE.md`](./CURRENT_STATE.md). For a list of all potential long-term ideas, see [`FUTURE_ENHANCEMENTS.md`](./FUTURE_ENHANCEMENTS.md).
 
 ---
 
@@ -32,12 +32,12 @@ This next major phase of work will focus on making the Zotify API a truly extens
 
 -   **Archive Cleanup & Documentation Consolidation:** Clean up the `project/archive/` directory by reviewing old `.md` files, extracting anything still relevant, and discarding what is obsolete. The goal is to reduce noise while preserving useful material without corrupting the authoritative documentation.
 -   **Dynamic Plugin System:** Implement a dynamic plugin system based on the `entry_points` mechanism, allowing developers to create custom logging sinks.
-    -   **Source:** [`DYNAMIC_PLUGIN_PROPOSAL.md`](./proposals/DYNAMIC_PLUGIN_PROPOSAL.md)
+    -   **Source:** [`DYNAMIC_PLUGIN_PROPOSAL.md`](./DYNAMIC_PLUGIN_PROPOSAL.md)
 -   **Refactor Providers as Plugins:** As a proof-of-concept, refactor the existing Spotify provider to be a standalone plugin, solidifying the new architectural pattern.
 -   **Low-Code/No-Code Integration:** Create a reference implementation for Node-RED integration, making the API accessible to non-programmers.
-    -   **Source:** [`LOW_CODE_PROPOSAL.md`](./proposals/LOW_CODE_PROPOSAL.md)
+    -   **Source:** [`LOW_CODE_PROPOSAL.md`](./LOW_CODE_PROPOSAL.md)
 -   **Home Automation Integration:** Create a reference implementation for Home Assistant integration, bringing Zotify into the smart home ecosystem.
-    -   **Source:** [`HOME_AUTOMATION_PROPOSAL.md`](./proposals/HOME_AUTOMATION_PROPOSAL.md)
+    -   **Source:** [`HOME_AUTOMATION_PROPOSAL.md`](./HOME_AUTOMATION_PROPOSAL.md)
 
 ---
 

@@ -22,7 +22,7 @@ The FastAPI application uses several middleware to provide cross-cutting concern
 
 ## Provider Abstraction Layer
 
-**Goal:** To decouple the core application logic from specific music service providers, allowing for future expansion to other services. This layer serves as a first-generation implementation of this principle. The long-term architectural vision is to supersede this with a dynamic plugin system, as detailed in [`DYNAMIC_PLUGIN_PROPOSAL.md`](./proposals/DYNAMIC_PLUGIN_PROPOSAL.md).
+**Goal:** To decouple the core application logic from specific music service providers, allowing for future expansion to other services. This layer serves as a first-generation implementation of this principle. The long-term architectural vision is to supersede this with a dynamic plugin system, as detailed in the `DYNAMIC_PLUGIN_PROPOSAL.md`.
 
 **Module:** `api/src/zotify_api/providers/`
 
@@ -198,4 +198,4 @@ This section describes the low-level design of the official supporting modules f
 ---
 
 ## Ongoing Maintenance
-All development tasks must follow the [Task Execution Checklist](./TASK_CHECKLIST.md) to ensure consistency, quality, and security.
+All development tasks must follow the [Task Execution Checklist](./task_checklist.md) to ensure consistency, quality, and security.

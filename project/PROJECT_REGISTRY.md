@@ -5,11 +5,7 @@
 
 ## 1. Purpose
 
-This document serves as the master file, or single source of truth, for tracking all key **project-level planning and design documents**. It provides a centralized index for all stakeholders to ensure traceability and transparency.
-
-**Note:** This registry is for high-level project management and architectural documents. For detailed technical documentation related to the API and its sub-modules, please see the [API Documentation Master Index](../api/MASTER_INDEX.md).
-
-To maintain this document's value, it is mandatory that any new markdown documentation file created anywhere in the project is added to this registry.
+This document serves as the master file, or single source of truth, for tracking all key documents, records, and artifacts for the Zotify API project. It provides a centralized index for all stakeholders to ensure traceability and transparency. To maintain this document's value, it is mandatory that any new markdown documentation file created anywhere in the project is added to this registry.
 
 ---
 
@@ -18,9 +14,9 @@ To maintain this document's value, it is mandatory that any new markdown documen
 | Document | Location | Description |
 |---|---|---|
 | **Project Registry** | [`PROJECT_REGISTRY.md`](./PROJECT_REGISTRY.md) | This document, the master index for all project artifacts. |
-| **Template Registry** | [`../templates/PROJECT_REGISTRY.md`](../templates/PROJECT_REGISTRY.md) | A registry of all reusable documentation templates. |
-| **Agent Instructions** | [`../../AGENTS.md`](../../AGENTS.md) | The master instruction file that governs the development workflow for AI agents. |
-| **README** | [`../../README.md`](../../README.md) | The main README file for the introduction of the project to end users. |
+| **Template Registry** | [`../templates/REGISTRY.md`](../templates/REGISTRY.md) | A registry of all reusable documentation templates. |
+| **Agent Instructions** | [`../AGENTS.md`](../AGENTS.md) | The master instruction file that governs the development workflow for AI agents. |
+| **README** | [`../README.md`](../README.md) | The main README file for the introduction of the project to end users. |
 | **Handover Brief** | [`HANDOVER_BRIEF.md`](./HANDOVER_BRIEF.md) | A detailed handover brief created at the request of the user. Not to be modified during the session. |
 | **Onboarding Guide** | [`ONBOARDING.md`](./ONBOARDING.md) | The primary entry point and guide for new developers to get up to speed on the project. |
 | **Current State** | [`CURRENT_STATE.md`](./logs/CURRENT_STATE.md) | **High-Level Snapshot.** A brief, narrative summary of the entire project's state at the end of a work session. It should answer: What was just accomplished? What is the next immediate goal? Are there any blockers? |

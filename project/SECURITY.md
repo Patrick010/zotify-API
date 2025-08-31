@@ -41,7 +41,7 @@ The `snitch` application, used for CLI-based authentication, has been refactored
 
 This section outlines security features that are planned but not yet implemented. For full details, see the [`FUTURE_ENHANCEMENTS.md`](./FUTURE_ENHANCEMENTS.md) document.
 
--   **Dynamic Plugin System Security:** The proposal for the plugin system includes a detailed section on security considerations, including administrator warnings and safe-loading practices. See [`DYNAMIC_PLUGIN_PROPOSAL.md`](./proposals/DYNAMIC_PLUGIN_PROPOSAL.md).
+-   **Dynamic Plugin System Security:** The proposal for the plugin system includes a detailed section on security considerations, including administrator warnings and safe-loading practices. See [`DYNAMIC_PLUGIN_PROPOSAL.md`](./DYNAMIC_PLUGIN_PROPOSAL.md).
 -   **Full JWT-Based User Authentication:** The long-term vision is to replace the static admin API key with a full JWT-based authentication system, allowing for multiple users with different roles and permissions.
 -   **Encrypted Secrets:** A future enhancement will be to encrypt sensitive data (like the Spotify tokens) within the database itself, providing an additional layer of protection.
 -   **API Governance:** Implementing rate limiting and other governance features to prevent abuse.
