@@ -24,7 +24,7 @@ rules:
       - "scripts/lint-docs.py"
       - "scripts/log-work.py"
     # The Handover Brief is a point-in-time document and must not be changed
-    # after the initial session.
+    # after the initial session, except when the user asks for it.
     forbidden_docs:
       - "project/HANDOVER_BRIEF.md"
     message: "The Handover Brief cannot be modified."

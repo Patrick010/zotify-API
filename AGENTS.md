@@ -56,7 +56,7 @@ At the completion of any significant action, you **must** log the work using the
 ### Step 3: Maintain the Quality Index
 To ensure a high standard of quality, all new source code and documentation files must be registered in the quality index. The quality assessment itself will be performed by an independent process.
 
-1.  **Add New Files to Index:** When you create a new source file (`.py`) or a new documentation file (`.md`), you **must** add a corresponding entry to the appropriate `CODE_QUALITY_INDEX.md` file.
+1.  **Add New Files to Index:** When you create a new source file (`.py`, `.go' or `.js`) or a new documentation file (`.md`), you **must** add a corresponding entry to the appropriate `CODE_QUALITY_INDEX.md` file.
 2.  **Set Initial Score:** The initial "Documentation Score" and "Code Score" for any new file must be set to **'X'**, signifying that the quality is "Unknown" and pending review.
 
 ### Step 4: Pre-Submission Verification
@@ -72,7 +72,7 @@ Before submitting your work for review, you **must** run the following tools to 
 
 3.  **Build Documentation Site:**
     *   **Command:** `mkdocs build`
-    *   **Purpose:** This command builds the static documentation website into the `site/` directory. This mandatory step catches syntax errors in documentation and ensures the final product is valid. The site can be previewed locally by running `mkdocs serve`.
+    *   **Purpose:** This command builds the static documentation website into the `site/` directory. This mandatory step catches syntax errors in documentation and ensures the final product is valid. The site can be previewed at http://<server_ip>:8008 by running `mkdocs serve`. 
 
 ---
 
