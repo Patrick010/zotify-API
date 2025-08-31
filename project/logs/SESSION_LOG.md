@@ -1,6 +1,13 @@
 ---
 ## Session Report: 2025-08-31
 
+**Summary:** Finally resolved all mkdocs build warnings. The solution was to add a comprehensive nav section to mkdocs.yml, which explicitly defines the set of documents to be included in the site. This prevents mkdocs from discovering and parsing other files with broken or cross-directory links.
+**Findings:**
+- (To be filled in manually)
+
+---
+## Session Report: 2025-08-31
+
 **Summary:** Methodically fixed all mkdocs build warnings by correcting relative paths and removing invalid links. Also fixed the start.sh script to ensure dependencies are installed correctly. The documentation now builds cleanly and the application starts as expected.
 **Findings:**
 - (To be filled in manually)
