@@ -26,7 +26,7 @@ theme:
     - content.tabs.link
 
 # The main documentation source directory
-docs_dir: 'api/docs'
+docs_dir: 'docs'
 
 # Extensions
 markdown_extensions:
