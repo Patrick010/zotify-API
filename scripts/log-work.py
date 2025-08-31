@@ -6,18 +6,9 @@ def get_formatted_date():
     """Returns the current date in YYYY-MM-DD format."""
     return datetime.datetime.now().strftime("%Y-%m-%d")
 
-def format_activity_log(description, files=None):
+def format_activity_log(description):
     """Formats the log entry for ACTIVITY.md."""
     # ACT-??? is a placeholder for a proper ticket number if one exists.
-
-    related_docs_section = ""
-    if files:
-        file_list = "\n".join([f"- `{f}`" for f in files])
-        related_docs_section = textwrap.dedent(f"""
-        ### Related Documents
-        {file_list}
-        """)
-
     return textwrap.dedent(f"""
     ---
     ## ACT-???: {description}
@@ -28,7 +19,6 @@ def format_activity_log(description, files=None):
 
     ### Outcome
     - (To be filled in manually)
-    {related_docs_section}
     """)
 
 def format_session_log(summary):
@@ -81,42 +71,41 @@ def write_to_file(file_path, content):
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Automate logging of work tasks to the project's 'Trinity' logs.",
-        formatter_class=argparse.RawTextHelpFormatter
-    )
-    parser.add_argument(
-        "--activity",
-        required=True,
-        help="A short, granular description of the specific task completed (for ACTIVITY.md)."
-    )
-    parser.add_argument(
-        "--session",
-        required=True,
-        help="A higher-level summary of the session's outcome (for SESSION_LOG.md)."
-    )
-    parser.add_argument(
-        "--state",
-        required=True,
-        help="A brief, one-sentence summary of the project's current state (for CURRENT_STATE.md)."
-    )
-    parser.add_argument(
-        "--files",
-        nargs='*',
-        help="An optional list of file paths related to the activity."
-    )
+    """
+    Main function to parse commit message and update log files.
+    This script is intended to be used as a pre-commit hook.
+    """
+    parser = argparse.ArgumentParser()
+    parser.add_argument("commit_msg_filepath", help="Path to the commit message file.")
     args = parser.parse_args()
 
+    try:
+        with open(args.commit_msg_filepath, "r") as f:
+            commit_message = f.read().strip()
+    except IOError as e:
+        print(f"Error reading commit message file: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    # Ignore merge commits and other automated messages
+    if not commit_message or commit_message.startswith("Merge"):
+        print("Ignoring merge commit or empty message.")
+        sys.exit(0)
+
+    lines = commit_message.split('\n')
+    activity_summary = lines[0]
+    session_summary = commit_message
+    state_summary = activity_summary # Use the first line for state as well
+
     # --- Update ACTIVITY.md ---
-    activity_entry = format_activity_log(args.activity, args.files)
+    activity_entry = format_activity_log(activity_summary)
     prepend_to_file("project/logs/ACTIVITY.md", activity_entry)
 
     # --- Update SESSION_LOG.md ---
-    session_entry = format_session_log(args.session)
+    session_entry = format_session_log(session_summary)
     prepend_to_file("project/logs/SESSION_LOG.md", session_entry)
 
     # --- Overwrite CURRENT_STATE.md ---
-    state_content = format_current_state(args.state)
+    state_content = format_current_state(state_summary)
     write_to_file("project/logs/CURRENT_STATE.md", state_content)
 
 
