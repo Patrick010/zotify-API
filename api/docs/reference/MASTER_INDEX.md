@@ -1,6 +1,8 @@
 # API Documentation Master Index
 
-This document serves as the central index for all documentation related to the Zotify API and its sub-modules. All new documentation files must be registered here.
+This document serves as the central index for all **technical documentation** related to the Zotify API and its sub-modules. All new technical documentation files must be registered here.
+
+**Note:** This index is for API-specific technical documentation. For high-level project management and architectural documents, please see the [Project Registry](../../project/PROJECT_REGISTRY.md).
 
 ## Core API
 
@@ -41,3 +43,17 @@ This document serves as the central index for all documentation related to the Z
 ## Providers
 
 *   [Spotify Provider](../providers/SPOTIFY.md)
+
+---
+
+## Documentation Build Setup
+
+The documentation site is built from multiple directories. To build the site locally, you must create symbolic links from the `api/docs` directory to the other documentation locations.
+
+From the repository root, run the following commands:
+
+```bash
+ln -s ../../snitch/docs/ api/docs/snitch
+ln -s ../../gonk-testUI/docs/ api/docs/gonk-testUI
+ln -s ../../project/ api/docs/project
+```

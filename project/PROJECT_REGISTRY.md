@@ -5,7 +5,11 @@
 
 ## 1. Purpose
 
-This document serves as the master file, or single source of truth, for tracking all key documents, records, and artifacts for the Zotify API project. It provides a centralized index for all stakeholders to ensure traceability and transparency. To maintain this document's value, it is mandatory that any new markdown documentation file created anywhere in the project is added to this registry.
+This document serves as the master file, or single source of truth, for tracking all key **project-level planning and design documents**. It provides a centralized index for all stakeholders to ensure traceability and transparency.
+
+**Note:** This registry is for high-level project management and architectural documents. For detailed technical documentation related to the API and its sub-modules, please see the [API Documentation Master Index](../api/docs/reference/MASTER_INDEX.md).
+
+To maintain this document's value, it is mandatory that any new markdown documentation file created anywhere in the project is added to this registry.
 
 ---
 
