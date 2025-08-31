@@ -55,7 +55,9 @@ To enforce the "living documentation" model, this project uses an automated work
 
 ## 3. Running Quality Checks
 
-For a comprehensive overview of the project's CI/CD pipeline and local quality checks, please refer to the main [`CICD.md`](../../../project/CICD.md) guide.
+For a comprehensive overview of the project's CI/CD pipeline and local quality checks, please see the embedded guide below.
+
+--8<-- "project/CICD.md"
 
 Before committing, you must run the following checks from the project root.
 

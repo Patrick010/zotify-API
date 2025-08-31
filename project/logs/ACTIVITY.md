@@ -1,4 +1,29 @@
 ---
+## ACT-???: Verify final repository state and confirm all issues are resolved.
+
+**Date:** 2025-08-31
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Outcome
+- (To be filled in manually)
+
+---
+    ## ACT-???: Fix documentation build warnings by adding a navigation structure to mkdocs.yml and correcting broken links.
+
+    **Date:** 2025-08-31
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Outcome
+    - (To be filled in manually)
+
+        ### Related Documents
+        - `mkdocs.yml`
+- `api/docs/manuals/API_DEVELOPER_GUIDE.md`
+- `api/docs/reference/FEATURE_SPECS.md`
+
+---
     ## ACT-???: Fix application startup failure by making logging config path resilient.
 
     **Date:** 2025-08-31

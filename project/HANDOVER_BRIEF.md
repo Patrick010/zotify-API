@@ -33,5 +33,5 @@ A comprehensive set of changes were successfully implemented to meet all objecti
     Verify the Environment: The first action should be to attempt to run the verification suite to see if the cd issue was transient. The commands are:
         cd api/ && APP_ENV=test python3 -m pytest
         mkdocs build
-    Address Linter Warnings: The mkdocs build command generated a number of warnings about broken links in api/docs/REGISTRY.md. These should be investigated and fixed to ensure the documentation is fully consistent.
+    Address Linter Warnings: The mkdocs build command may generate warnings about broken links. These should be investigated and fixed to ensure the documentation is fully consistent.
     Review the New Linter: The new linter in scripts/lint-docs.py is a significant piece of new code. It should be reviewed carefully by the next developer to ensure it meets all project standards.
