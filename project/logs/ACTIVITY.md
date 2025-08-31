@@ -1,22 +1,5 @@
 ---
-    ## ACT-063: Revert logging system to original state and add Objective field.
 
-    **Date:** 2025-08-31
-    **Status:** ✅ Done
-    **Assignee:** Jules
-
-    ### Objective
-    The user was unhappy with the automated logging system. The goal is to revert the log-work.py script, the AGENTS.md instructions, and the API_DEVELOPER_GUIDE.md instructions to their original state, and to add the Objective field to the log entries as requested.
-
-    ### Outcome
-    The log-work.py script has been reverted to its original state, with the addition of an --objective argument. The ACTIVITY.md log has been cleaned of all malformed entries. The AGENTS.md and API_DEVELOPER_GUIDE.md files have been updated with the correct instructions.
-    ### Related Documents
-- `scripts/log-work.py`
-- `project/logs/ACTIVITY.md`
-- `AGENTS.md`
-- `api/docs/manuals/API_DEVELOPER_GUIDE.md`
-
----
 ## ACT-062: Restore session log history
 
 **Date:** 2025-08-29
