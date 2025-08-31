@@ -1,4 +1,14 @@
 ---
+## ACT-???: Delete MODULE_REGISTRY.md as per user instruction.
+
+**Date:** 2025-08-31
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Outcome
+- (To be filled in manually)
+
+---
 ## ACT-???: Verify final repository state and confirm all issues are resolved.
 
 **Date:** 2025-08-31
