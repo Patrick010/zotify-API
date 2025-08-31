@@ -1,97 +1,25 @@
 ---
-## ACT-???: Fix all documentation build warnings by adding an explicit navigation structure to mkdocs.yml.
-
-**Date:** 2025-08-31
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Outcome
-- (To be filled in manually)
-
----
-## ACT-???: Fix all mkdocs build warnings and startup script.
-
-**Date:** 2025-08-31
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Outcome
-- (To be filled in manually)
-
----
-## ACT-???: Final verification of documentation build.
-
-**Date:** 2025-08-31
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Outcome
-- (To be filled in manually)
-
----
-## ACT-???: Delete MODULE_REGISTRY.md as per user instruction.
-
-**Date:** 2025-08-31
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Outcome
-- (To be filled in manually)
-
----
-## ACT-???: Verify final repository state and confirm all issues are resolved.
-
-**Date:** 2025-08-31
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Outcome
-- (To be filled in manually)
-
----
-    ## ACT-???: Fix documentation build warnings by adding a navigation structure to mkdocs.yml and correcting broken links.
+    ## ACT-064: Fix all startup, documentation, and logging issues.
 
     **Date:** 2025-08-31
     **Status:** ✅ Done
     **Assignee:** Jules
 
     ### Outcome
-    - (To be filled in manually)
-
-        ### Related Documents
-        - `mkdocs.yml`
-- `api/docs/manuals/API_DEVELOPER_GUIDE.md`
-- `api/docs/reference/FEATURE_SPECS.md`
-
----
-    ## ACT-???: Fix application startup failure by making logging config path resilient.
-
-    **Date:** 2025-08-31
-    **Status:** ✅ Done
-    **Assignee:** Jules
-
-    ### Outcome
-    - (To be filled in manually)
-
-        ### Related Documents
-        - `api/src/zotify_api/main.py`
+- A comprehensive set of fixes were applied to the repository.\n- The application startup error was resolved by making the logging configuration path resilient.\n- The start.sh script was fixed to ensure dependencies are installed correctly.\n- All mkdocs build warnings were resolved by adding a nav section to mkdocs.yml and fixing all broken links.\n- The log-work.py script was refactored to generate complete and correct log entries.
+    ### Related Documents
+- `scripts/log-work.py`
+- `mkdocs.yml`
+- `api/src/zotify_api/main.py`
 - `api/src/zotify_api/routes/system.py`
-
----
-    ## ACT-???: Implement convention-based linter and overhaul documentation standards.
-
-    **Date:** 2025-08-31
-    **Status:** ✅ Done
-    **Assignee:** Jules
-
-    ### Outcome
-    - (To be filled in manually)
-
-        ### Related Documents
-        - `scripts/lint-docs.py`
-- `AGENTS.md`
-- `api/docs/reference/MASTER_INDEX.md`
-- `scripts/doc-lint-rules.yml`
+- `scripts/start.sh`
+- `project/FUTURE_ENHANCEMENTS.md`
+- `project/HIGH_LEVEL_DESIGN.md`
+- `project/LOGGING_TRACEABILITY_MATRIX.md`
+- `project/LOW_LEVEL_DESIGN.md`
+- `project/PROJECT_REGISTRY.md`
+- `project/ROADMAP.md`
+- `project/SECURITY.md`
 
 ---
 ## ACT-063: Correct and align developer documentation
