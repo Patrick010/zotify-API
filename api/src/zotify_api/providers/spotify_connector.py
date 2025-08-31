@@ -141,7 +141,7 @@ class SpotifyConnector(BaseProvider):
                 resp = await client.post(SPOTIFY_TOKEN_URL, data=data, headers=headers)
                 resp.raise_for_status()
 
-                tokens = await resp.json()
+                tokens = resp.json()
 
                 expires_at = datetime.now(timezone.utc) + timedelta(
                     seconds=tokens["expires_in"] - 60

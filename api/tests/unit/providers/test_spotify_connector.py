@@ -22,11 +22,14 @@ async def test_handle_oauth_callback_success(
 
     # Configure the response from the 'post' call
     mock_post_response = AsyncMock()
-    mock_post_response.json.return_value = {
-        "access_token": "test_access_token",
-        "refresh_token": "test_refresh_token",
-        "expires_in": 3600,
-    }
+    # .json() is a sync method on an httpx.Response, even from an async client
+    mock_post_response.json = MagicMock(
+        return_value={
+            "access_token": "test_access_token",
+            "refresh_token": "test_refresh_token",
+            "expires_in": 3600,
+        }
+    )
     mock_post_response.raise_for_status = MagicMock(return_value=None)
     mock_client_instance.post.return_value = mock_post_response
 
