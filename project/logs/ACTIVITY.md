@@ -1,4 +1,20 @@
 ---
+    ## ACT-???: Implement convention-based linter and overhaul documentation standards.
+
+    **Date:** 2025-08-31
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Outcome
+    - (To be filled in manually)
+
+        ### Related Documents
+        - `scripts/lint-docs.py`
+- `AGENTS.md`
+- `api/docs/reference/MASTER_INDEX.md`
+- `scripts/doc-lint-rules.yml`
+
+---
 ## ACT-063: Correct and align developer documentation
 
 **Date:** 2025-08-30
