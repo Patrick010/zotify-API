@@ -1,16 +1,19 @@
 ---
-## ACT-063: Correct and align developer documentation
+    ## ACT-063: Revert logging system to original state and add Objective field.
 
-**Date:** 2025-08-30
-**Status:** ✅ Done
-**Assignee:** Jules
+    **Date:** 2025-08-31
+    **Status:** ✅ Done
+    **Assignee:** Jules
 
-### Outcome
-- Updated `project/ONBOARDING.md` and `api/docs/manuals/API_DEVELOPER_GUIDE.md` to reflect the new automated documentation workflow and tooling (`log-work.py`, `lint-docs.py`).
-- This ensures that developer documentation is consistent and provides the correct instructions for the current development process.
+    ### Objective
+    The user was unhappy with the automated logging system. The goal is to revert the log-work.py script, the AGENTS.md instructions, and the API_DEVELOPER_GUIDE.md instructions to their original state, and to add the Objective field to the log entries as requested.
 
-### Related Documents
-- `project/ONBOARDING.md`
+    ### Outcome
+    The log-work.py script has been reverted to its original state, with the addition of an --objective argument. The ACTIVITY.md log has been cleaned of all malformed entries. The AGENTS.md and API_DEVELOPER_GUIDE.md files have been updated with the correct instructions.
+    ### Related Documents
+- `scripts/log-work.py`
+- `project/logs/ACTIVITY.md`
+- `AGENTS.md`
 - `api/docs/manuals/API_DEVELOPER_GUIDE.md`
 
 ---

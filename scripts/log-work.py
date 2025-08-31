@@ -1,35 +1,49 @@
 import argparse
 import datetime
+import re
 import textwrap
 
 def get_formatted_date():
     """Returns the current date in YYYY-MM-DD format."""
     return datetime.datetime.now().strftime("%Y-%m-%d")
 
-def format_activity_log(description, files=None):
-    """Formats the log entry for ACTIVITY.md."""
-    # ACT-??? is a placeholder for a proper ticket number if one exists.
+def get_next_act_number(file_path="project/logs/ACTIVITY.md"):
+    """Finds the latest ACT-XXX number in the activity log and returns the next number."""
+    try:
+        with open(file_path, "r") as f:
+            content = f.read()
+        act_numbers = re.findall(r"## ACT-(\d+):", content)
+        if not act_numbers:
+            return 1
+        return max([int(n) for n in act_numbers]) + 1
+    except FileNotFoundError:
+        return 1
 
+def format_activity_log(act_number, summary, objective, outcome, files=None):
+    """Formats the log entry for ACTIVITY.md."""
     related_docs_section = ""
     if files:
-        file_list = "\n".join([f"- `{f}`" for f in files])
+        file_list = "\n".join([f"    - `{f}`" for f in files])
         related_docs_section = textwrap.dedent(f"""
         ### Related Documents
-        {file_list}
-        """)
+{file_list}
+        """).strip()
 
     return textwrap.dedent(f"""
     ---
-    ## ACT-???: {description}
+    ## ACT-{act_number:03d}: {summary}
 
     **Date:** {get_formatted_date()}
     **Status:** ✅ Done
     **Assignee:** Jules
 
+    ### Objective
+    {objective}
+
     ### Outcome
-    - (To be filled in manually)
+    {outcome}
     {related_docs_section}
-    """)
+    """).strip()
 
 def format_session_log(summary):
     """Formats the log entry for SESSION_LOG.md."""
@@ -82,23 +96,23 @@ def write_to_file(file_path, content):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Automate logging of work tasks to the project's 'Trinity' logs.",
+        description="Automate logging of work tasks to project/logs/ACTIVITY.md.",
         formatter_class=argparse.RawTextHelpFormatter
     )
     parser.add_argument(
-        "--activity",
+        "--summary",
         required=True,
-        help="A short, granular description of the specific task completed (for ACTIVITY.md)."
+        help="A one-line summary of the task, used as the entry title."
     )
     parser.add_argument(
-        "--session",
+        "--objective",
         required=True,
-        help="A higher-level summary of the session's outcome (for SESSION_LOG.md)."
+        help="A description of the task's objective."
     )
     parser.add_argument(
-        "--state",
+        "--outcome",
         required=True,
-        help="A brief, one-sentence summary of the project's current state (for CURRENT_STATE.md)."
+        help="A multi-line description of the outcome. Use '\\n' for new lines."
     )
     parser.add_argument(
         "--files",
@@ -107,17 +121,14 @@ def main():
     )
     args = parser.parse_args()
 
-    # --- Update ACTIVITY.md ---
-    activity_entry = format_activity_log(args.activity, args.files)
+    # Determine the next ACT number
+    act_number = get_next_act_number()
+
+    # Format the new entry
+    activity_entry = format_activity_log(act_number, args.summary, args.objective, args.outcome, args.files)
+
+    # Prepend the new entry to the activity log
     prepend_to_file("project/logs/ACTIVITY.md", activity_entry)
-
-    # --- Update SESSION_LOG.md ---
-    session_entry = format_session_log(args.session)
-    prepend_to_file("project/logs/SESSION_LOG.md", session_entry)
-
-    # --- Overwrite CURRENT_STATE.md ---
-    state_content = format_current_state(args.state)
-    write_to_file("project/logs/CURRENT_STATE.md", state_content)
 
 
 if __name__ == "__main__":
