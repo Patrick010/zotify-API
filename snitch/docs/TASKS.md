@@ -1,0 +1,1 @@
+- [x] Write Installation Manual (Phase 1)

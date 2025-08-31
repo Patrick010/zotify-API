@@ -1,0 +1,91 @@
+openapi: 3.0.3
+info:
+  title: Zotify External API
+  version: 1.0.0
+  description: OpenAPI specification for Zotify's external API endpoints used by download
+    clients, external tools, or third-party integrations.
+paths:
+  /search:
+    get:
+      summary: Search the Spotify catalog
+      parameters:
+      - in: query
+        name: q
+        required: true
+        schema:
+          type: string
+        description: Search query string
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+  /download:
+    post:
+      summary: Download a track by ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DownloadRequest'
+      responses:
+        '200':
+          description: Download started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DownloadResponse'
+  /download/status:
+    get:
+      summary: Check download status
+      parameters:
+      - in: query
+        name: task_id
+        required: true
+        schema:
+          type: string
+        description: Download task ID
+      responses:
+        '200':
+          description: Status of the download
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DownloadStatus'
+components:
+  schemas:
+    SearchResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+        total:
+          type: integer
+    DownloadRequest:
+      type: object
+      properties:
+        track_id:
+          type: string
+      required:
+      - track_id
+    DownloadResponse:
+      type: object
+      properties:
+        task_id:
+          type: string
+        message:
+          type: string
+    DownloadStatus:
+      type: object
+      properties:
+        task_id:
+          type: string
+        status:
+          type: string
+        progress:
+          type: integer

@@ -1,0 +1,86 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zotify-api"
+version = "0.1.0"
+description = "A REST API for the Zotify music and podcast downloader."
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "librespot @ git+https://github.com/kokarare1212/librespot-python.git",
+    "ffmpy",
+    "music_tag",
+    "Pillow",
+    "pkce",
+    "protobuf==3.20.1",
+    "pwinput",
+    "tabulate[widechars]",
+    "tqdm",
+    "pytest",
+    "pytest-asyncio",
+    "httpx",
+    "respx",
+    "pydantic-settings",
+    "sqlalchemy",
+    "python-multipart",
+	"pytest-cov",
+	"xenon",
+	"radon",
+	"semgrep",
+	"coverage",
+    "pyyaml",
+    "pytest-mock",
+    "mypy",
+    "ruff",
+    "bandit",
+    "safety",
+    "types-pyyaml",
+    "sqlalchemy[mypy]",
+	"black"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit",
+    "mkdocs",
+    "mkdocs-material",
+    "pydoc-markdown"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"
+filterwarnings = [
+    "ignore:Support for class-based `config` is deprecated:pydantic.PydanticDeprecatedSince20"
+]
+
+[tool.pytest-asyncio]
+mode = "auto"
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "W", "I"]   # basic errors, flake8, imports
+ignore = ["E501"]               # if you let Black handle line length
+fix = true
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+disallow_untyped_defs = true
+warn_unused_ignores = true
+warn_return_any = true
+
+[tool.coverage.run]
+branch = true
+source = ["your_package"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true

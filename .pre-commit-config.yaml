@@ -1,0 +1,48 @@
+repos:
+  # 1. Code formatting & linting
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.0.280
+    hooks:
+      - id: ruff
+        args: ["--fix"]  # fixes formatting and common style issues
+
+  # 2. Type checking
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.5.1
+    hooks:
+      - id: mypy
+        additional_dependencies: []
+
+  # 3. Security checks
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.5
+    hooks:
+      - id: bandit
+        args: ["-r", "."]
+
+  - repo: https://github.com/returntocorp/semgrep
+    rev: v1.37.0
+    hooks:
+      - id: semgrep
+        args: ["--config=p/ci"]
+
+  # 4. Documentation linter (local)
+  - repo: local
+    hooks:
+      - id: doc-linter
+        name: Documentation Linter
+        entry: python scripts/lint-docs.py
+        language: python
+        types: [file, python]
+        pass_filenames: false
+        additional_dependencies: [pyyaml]
+
+  # 5. Optional: complexity checks (Radon/Xenon) as a local hook
+  - repo: local
+    hooks:
+      - id: complexity
+        name: Cyclomatic Complexity
+        entry: python scripts/check_complexity.py
+        language: python
+        types: [python]
+        pass_filenames: false
