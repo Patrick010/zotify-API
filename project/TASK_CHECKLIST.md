@@ -115,7 +115,7 @@ No task is considered complete unless all applicable checklist items have been a
 **Notes on Privacy Compliance (Integrated)**
 Privacy compliance is an integral part of every task, not a separate addendum. Ensure:
 - User consent is captured and stored where relevant.
-- API endpoints exposing personal data enforce RBAC and access controls.
+- API endpoints exposing personal data must be designed to accommodate future RBAC and access controls.
 - Data minimization, encryption, and audit logging are applied consistently.
 - User rights such as data export, deletion, and correction are implemented and tested.
 - All privacy-related documentation is updated as part of normal doc maintenance.

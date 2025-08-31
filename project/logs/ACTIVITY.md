@@ -1,4 +1,28 @@
 ---
+    ## ACT-066: Align RBAC documentation with audit findings.
+
+    **Date:** 2025-08-31
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Outcome
+- The AUDIT_TRACEABILITY_MATRIX.md identified that Role-Based Access Control (RBAC) is a future enhancement, not a current feature. The TASK_CHECKLIST.md was updated to reflect this reality, changing a statement that implied RBAC is currently enforced to a forward-looking requirement.
+    ### Related Documents
+- `project/TASK_CHECKLIST.md`
+
+---
+    ## ACT-065: Align RBAC documentation with audit findings.
+
+    **Date:** 2025-08-31
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Outcome
+- The AUDIT_TRACEABILITY_MATRIX.md identified that Role-Based Access Control (RBAC) is a future enhancement, not a current feature. The TASK_CHECKLIST.md was updated to reflect this reality, changing a statement that implied RBAC is currently enforced to a forward-looking requirement.
+    ### Related Documents
+- `project/TASK_CHECKLIST.md`
+
+---
     ## ACT-064: Fix all startup, documentation, and logging issues.
 
     **Date:** 2025-08-31
