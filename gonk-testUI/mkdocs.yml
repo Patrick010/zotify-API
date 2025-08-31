@@ -1,6 +1,6 @@
 # This mkdocs.yml file is intended to be included by the root mkdocs.yml.
 # The site_name will be used as the directory name in the final merged documentation.
-site_name: gonk-testUI-docs
+site_name: gonk-testUI
 
 # The docs_dir is relative to this file's location.
 docs_dir: docs/
