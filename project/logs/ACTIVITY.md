@@ -7,13 +7,14 @@
 **Assignee:** Jules
 
 ### Objective
-To correctly configure the `mkdocs` build system to generate a unified documentation site from multiple sources, as per the project's "Living Documentation" philosophy.
+To correctly configure the `mkdocs` build system to generate a unified documentation site from multiple sources, as per the project's "Living Documentation" philosophy and final user requirements.
 
 ### Outcome
 - Implemented and configured the `mkdocs-monorepo-plugin`.
 - Created subordinate `mkdocs.yml` files for the `snitch` and `gonk-testUI` modules to define their navigation structures.
 - Updated the root `mkdocs.yml` to use the `monorepo` plugin and include the documentation from the `api`, `snitch`, and `gonk-testUI` modules.
-- The `project` module is now correctly excluded from the documentation build, as per the final user requirements.
+- The `project` module is now correctly excluded from the documentation build.
+- Debugged and resolved a `FileExistsError` during the build process by renaming the `site_name` in `snitch/mkdocs.yml` to `snitch-docs` to avoid a naming conflict.
 - All documentation build warnings have been resolved.
 
 ### Related Documents
