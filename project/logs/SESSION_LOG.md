@@ -1,6 +1,21 @@
 ---
 ## Session Report: 2025-08-31
 
+**Summary:** This session focused on correctly configuring the `mkdocs` build system to create a unified documentation site and resolving all associated build errors.
+
+**Findings:**
+- The task was initially confusing due to a series of conflicting user instructions regarding which documentation sets to include.
+- The final, correct requirement was to include `api/`, `snitch/`, and `gonk-testUI/` documentation while explicitly excluding `project/`.
+- The `mkdocs-monorepo-plugin` was implemented to achieve this.
+- A recurring `FileExistsError` bug was discovered during the build process. This was traced to a name collision within the plugin's temporary directory and resolved by renaming the `site_name` for both the `snitch` and `gonk-testUI` modules to `snitch-docs` and `gonk-testUI-docs` respectively.
+
+**Outcome:**
+- The documentation build is now clean, warning-free, and correctly configured to match the project's requirements.
+- All three "Trinity" log files have been manually updated to reflect this work, adhering to the project's Living Documentation policy.
+
+---
+## Session Report: 2025-08-31
+
 **Summary:** This session focused on correctly configuring the `mkdocs` build system to create a unified documentation site.
 
 **Findings:**

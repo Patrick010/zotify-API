@@ -14,7 +14,7 @@ To correctly configure the `mkdocs` build system to generate a unified documenta
 - Created subordinate `mkdocs.yml` files for the `snitch` and `gonk-testUI` modules to define their navigation structures.
 - Updated the root `mkdocs.yml` to use the `monorepo` plugin and include the documentation from the `api`, `snitch`, and `gonk-testUI` modules.
 - The `project` module is now correctly excluded from the documentation build.
-- Debugged and resolved a `FileExistsError` during the build process by renaming the `site_name` in `snitch/mkdocs.yml` to `snitch-docs` to avoid a naming conflict.
+- Debugged and resolved a recurring `FileExistsError` during the build process by renaming the `site_name` in `snitch/mkdocs.yml` and `gonk-testUI/mkdocs.yml` to avoid naming conflicts.
 - All documentation build warnings have been resolved.
 
 ### Related Documents

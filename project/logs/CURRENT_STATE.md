@@ -4,7 +4,7 @@
 
 ## 1. Session Summary & Accomplishments
 - The `mkdocs` build system has been reconfigured to use the `mkdocs-monorepo-plugin`.
-- A build issue with the plugin (`FileExistsError`) was debugged and resolved by renaming the `site_name` in `snitch/mkdocs.yml` to `snitch-docs`.
+- A recurring build issue with the plugin (`FileExistsError`) was debugged and resolved by renaming the `site_name` in both `snitch/mkdocs.yml` and `gonk-testUI/mkdocs.yml` to avoid naming conflicts.
 - The documentation site now correctly builds a unified site from the `api/`, `snitch/`, and `gonk-testUI/` modules.
 - The `project/` module is correctly excluded from the documentation build.
 - The documentation build is now clean and warning-free.
