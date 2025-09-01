@@ -5,6 +5,49 @@ This LLD describes the specific implementation details of the Zotify API's subsy
 
 ---
 
+## API Endpoint Baseline
+
+This table provides a canonical overview of all planned and implemented endpoints for the Zotify API. It serves as the human-readable counterpart to the authoritative baseline defined in `api/docs/endpoints.yaml`.
+
+| Module      | Path                         | Methods               | Status        |
+|-------------|------------------------------|-----------------------|---------------|
+| **auth**    | `/api/auth/login`            | `POST`                | `planned`     |
+|             | `/api/auth/logout`           | `POST`                | `planned`     |
+|             | `/api/auth/status`           | `GET`                 | `implemented` |
+| **user**    | `/api/user/profile`          | `GET`                 | `implemented` |
+|             | `/api/user/preferences`      | `GET`, `PUT`          | `implemented` |
+|             | `/api/user/liked`            | `GET`                 | `implemented` |
+|             | `/api/user/history`          | `GET`                 | `implemented` |
+|             | `/api/user/library`          | `GET`                 | `planned`     |
+| **playlists** | `/api/playlists`             | `GET`, `POST`         | `implemented` |
+|             | `/api/playlists/{id}`        | `GET`, `PUT`, `DELETE`| `planned`     |
+|             | `/api/playlists/{id}/tracks` | `GET`, `POST`, `DELETE`| `planned`     |
+| **tracks**  | `/api/tracks`                | `GET`                 | `implemented` |
+|             | `/api/tracks/{id}`           | `GET`                 | `planned`     |
+|             | `/api/tracks/{id}/download`  | `POST`                | `planned`     |
+| **downloads** | `/api/downloads/status`      | `GET`                 | `implemented` |
+|             | `/api/downloads/{id}/cancel` | `POST`                | `planned`     |
+| **system**  | `/api/system/status`         | `GET`                 | `implemented` |
+|             | `/api/system/storage`        | `GET`                 | `implemented` |
+|             | `/api/system/logs`           | `GET`                 | `implemented` |
+|             | `/api/system/uptime`         | `GET`                 | `implemented` |
+|             | `/api/system/env`            | `GET`                 | `implemented` |
+| **cache**   | `/api/cache`                 | `GET`, `DELETE`       | `implemented` |
+| **config**  | `/api/config`                | `GET`, `PUT`          | `implemented` |
+| **network** | `/api/network`               | `GET`                 | `implemented` |
+| **search**  | `/api/search`                | `GET`                 | `implemented` |
+| **webhooks**| `/api/webhooks`              | `POST`, `DELETE`      | `implemented` |
+| **meta**    | `/ping`                      | `GET`                 | `implemented` |
+|             | `/health`                    | `GET`                 | `implemented` |
+|             | `/version`                   | `GET`                 | `implemented` |
+|             | `/api/schema`                | `GET`                 | `implemented` |
+|             | `/openapi.json`              | `GET`                 | `implemented` |
+|             | `/docs`                      | `GET`                 | `implemented` |
+|             | `/docs/oauth2-redirect`      | `GET`                 | `implemented` |
+|             | `/redoc`                     | `GET`                 | `implemented` |
+
+---
+
 ## API Middleware
 
 The FastAPI application uses several middleware to provide cross-cutting concerns.

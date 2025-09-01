@@ -87,3 +87,12 @@ This document provides a detailed breakdown of the tasks required to fulfill the
 **Steps:**
 - ✅ Implement `gonk-testUI`: A standalone web-based UI for API testing and database browsing with `sqlite-web`.
 - ✅ Code QA
+
+---
+
+## Documentation
+
+**Goal:** Ensure documentation is clear, accurate, and serves as a reliable source of truth for both developers and users.
+**Status:** 🟡 In Progress
+**Steps:**
+- [ ] Maintain `/docs/api/endpoints.yaml` as the authoritative baseline for planned vs. implemented endpoints.

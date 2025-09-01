@@ -45,6 +45,7 @@ This next major phase of work will focus on making the Zotify API a truly extens
 
 Beyond the next major phase, development will focus on expanding the core feature set and improving the user experience.
 
+-   **API Baseline Implementation:** Diff the implemented OpenAPI spec vs. the `endpoints.yaml` baseline and implement all missing, planned endpoints.
 -   **Full Two-Way Sync:** Implement write-sync capabilities for Spotify and other providers.
 -   **Advanced API Governance:** Introduce rate limiting, usage quotas, and more sophisticated security controls.
 -   **Enhanced User Interface:** Develop a more feature-rich web UI for managing all aspects of the platform.

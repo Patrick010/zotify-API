@@ -1,3 +1,5 @@
+> This file is auto-generated from the OpenAPI specification. For planned endpoints (not yet implemented), see `docs/api/endpoints.yaml`.
+
 # API Reference
 
 This document provides a detailed reference for the Zotify API. It is generated from the OpenAPI 3.0 specification.
