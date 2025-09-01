@@ -1,4 +1,19 @@
 ---
+    ## ACT-070: Close backlog item #2
+
+    **Date:** 2025-09-01
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    Mark the 'Gap Analysis Framework' item as Done in project/LOOSE_ENDS_BACKLOG.md.
+
+    ### Outcome
+    The backlog item was successfully marked as Done.
+    ### Related Documents
+- `project/LOOSE_ENDS_BACKLOG.md`
+
+---
     ## ACT-069: Create loose ends backlog and gap analysis template
 
     **Date:** 2025-09-01
