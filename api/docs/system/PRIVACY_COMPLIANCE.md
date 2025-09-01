@@ -19,7 +19,7 @@ Zotify respects user privacy and commits to protecting personal data by:
 - All API endpoints handling personal data enforce access controls and audit logging.
 - Privacy by design and default are implemented in API logic and storage.
 - Data minimization and retention policies are applied rigorously.
-- Data export and deletion endpoints are provided under `/privacy/data`.
+- Data export and deletion endpoints are planned under `/privacy/data` to ensure GDPR compliance.
 
 ## Future Enhancements
 

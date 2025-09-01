@@ -45,6 +45,7 @@ This table provides a canonical overview of all planned and implemented endpoint
 |             | `/docs`                      | `GET`                 | `implemented` |
 |             | `/docs/oauth2-redirect`      | `GET`                 | `implemented` |
 |             | `/redoc`                     | `GET`                 | `implemented` |
+| **privacy** | `/privacy/data`              | `GET`, `DELETE`       | `planned`     |
 
 ---
 
@@ -242,3 +243,28 @@ This section describes the low-level design of the official supporting modules f
 
 ## Ongoing Maintenance
 All development tasks must follow the [Task Execution Checklist](./TASK_CHECKLIST.md) to ensure consistency, quality, and security.
+
+---
+
+## Privacy Subsystem (GDPR Compliance)
+
+**Goal:** To provide endpoints that allow users to export and delete their personal data, in compliance with GDPR.
+
+*   **`GET /privacy/data`**:
+    *   **Description:** Exports all personal data related to the authenticated user. The data should be returned in a machine-readable JSON format.
+    *   **Authentication:** Requires user authentication (e.g., via a future JWT implementation). For now, it will be protected by the admin API key.
+    *   **Response Body (Success 200 OK):**
+        ```json
+        {
+          "user_id": "string",
+          "profile": { },
+          "playlists": [ ],
+          "liked_songs": [ ],
+          "download_history": [ ]
+        }
+        ```
+
+*   **`DELETE /privacy/data`**:
+    *   **Description:** Deletes all personal data related to the authenticated user. This is a destructive action and should be handled with care.
+    *   **Authentication:** Requires user authentication. For now, it will be protected by the admin API key.
+    *   **Response Body (Success 204 No Content):** Empty response.

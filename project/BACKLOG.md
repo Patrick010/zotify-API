@@ -15,6 +15,18 @@ All new tasks added to this backlog **must** use the template defined in the `PI
 
 ### High Priority
 
+-   **Task ID:** `FEAT-PRIVACY-01`
+-   **Source:** `project/LOW_LEVEL_DESIGN.md`
+-   **Priority:** HIGH
+-   **Dependencies:** None
+-   **Description:** Implement the GDPR-compliant endpoints for data export and erasure, as designed in the Low-Level Design document. This includes `GET /privacy/data` and `DELETE /privacy/data`.
+-   **Acceptance Criteria:**
+    -   `[ ]` The `GET /privacy/data` endpoint is implemented and returns all personal data for the authenticated user.
+    -   `[ ]` The `DELETE /privacy/data` endpoint is implemented and securely deletes all personal data for the authenticated user.
+    -   `[ ]` The endpoints are protected by authentication.
+    -   `[ ]` The changes are documented in the `API_REFERENCE.md`.
+-   **Estimated Effort:** Medium
+
 -   **Task ID:** `FEAT-SDK-01`
 -   **Source:** `project/DYNAMIC_PLUGIN_PROPOSAL.md`
 -   **Priority:** HIGH

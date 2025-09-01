@@ -9,6 +9,7 @@ This document outlines the high-level architecture, scope, and guiding principle
 The refactor aims to:
 - Transition all subsystems to a **dedicated service layer** architecture.
 - Improve **testability**, **maintainability**, and **separation of concerns**.
+- Incorporate privacy-by-design principles, including GDPR-compliant endpoints for data export and erasure.
 - Establish a **living documentation** workflow where all documentation is kept in constant alignment with the codebase.
 
 ## 3. Architecture Overview

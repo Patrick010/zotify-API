@@ -4,15 +4,32 @@ This document provides essential information for developers who need to integrat
 
 For developers looking to contribute to the Zotify API itself, please see the [`API_DEVELOPER_GUIDE.md`](./API_DEVELOPER_GUIDE.md).
 
-## Table of Contents
-1.  [Project Setup](#1-project-setup)
-2.  [Running the Test Suite](#2-running-the-test-suite)
-3.  [Core Architectural Principles](#3-core-architectural-principles)
-4.  [Code & Documentation Conventions](#4-code--documentation-conventions)
+## 1. Architectural Overview
+
+It is critical to understand that the Zotify API is **not** a reimplementation of the Spotify Web API. Instead, it is a developer-centric framework built around the original Zotify CLI client, which itself uses Librespot for authentication and media retrieval.
+
+The primary purpose of this API is to expose powerful, automation-oriented functionality that Spotify’s own Web API either does not offer or makes difficult to script. This includes:
+
+*   **Direct Media Downloads**: Programmatically download tracks, albums, or playlists.
+*   **Offline Caching**: Manage a local cache of media content.
+*   **Advanced Automation**: Hook into a robust queueing and download management system.
+*   **Raw Librespot Access**: Provide a safe, scriptable, and scalable interface to Librespot's underlying capabilities.
+
+Think of the Zotify API as a developer platform for building systems on top of Spotify's content ecosystem, with a strong focus on media acquisition and local library management.
 
 ---
 
-## 1. Project Setup
+## Table of Contents
+1.  [Architectural Overview](#1-architectural-overview)
+2.  [Project Setup](#2-project-setup)
+3.  [Authentication](#3-authentication)
+4.  [Running the Test Suite](#4-running-the-test-suite)
+5.  [Core Architectural Principles](#5-core-architectural-principles)
+6.  [Code & Documentation Conventions](#6-code--documentation-conventions)
+
+---
+
+## 2. Project Setup
 
 This section guides you through setting up and running the Zotify API from the source code.
 
@@ -53,7 +70,22 @@ This section guides you through setting up and running the Zotify API from the s
 
 ---
 
-## 2. Running the Test Suite
+## 3. Authentication
+
+The Zotify API uses the **OAuth 2.0 Authorization Code Flow with PKCE** to securely connect to a user's Spotify account. This process is designed for both interactive and headless environments and is orchestrated by the API and the `snitch` helper application.
+
+The flow is as follows:
+1.  **Initiate Login**: A client sends a `GET` request to `/api/spotify/login`.
+2.  **User Authorization**: The API returns a Spotify authorization URL. The user must open this URL in a browser and grant permission to the application.
+3.  **Callback to Snitch**: After the user grants permission, Spotify redirects the browser to `http://127.0.0.1:4381/login`, where the `snitch` application is listening. Snitch captures the authorization `code` and `state` token from the request.
+4.  **Secure Handoff**: Snitch makes a `POST` request to the Zotify API's `/api/auth/spotify/callback` endpoint, sending the `code` and `state` in a secure JSON body.
+5.  **Token Exchange**: The main API validates the `state` token, then securely exchanges the `code` for a permanent refresh token and a short-lived access token from Spotify using the PKCE verifier. The tokens are then persisted.
+
+This process ensures that credentials and secrets are never exposed in the browser.
+
+---
+
+## 4. Running the Test Suite
 
 The project maintains a high standard of test coverage. Follow these steps to run the test suite.
 
@@ -74,7 +106,7 @@ The project maintains a high standard of test coverage. Follow these steps to ru
 
 ---
 
-## 3. Core Architectural Principles
+## 5. Core Architectural Principles
 
 The Zotify API is built on a set of core principles to ensure it is maintainable, testable, and extensible.
 
@@ -86,7 +118,7 @@ The Zotify API is built on a set of core principles to ensure it is maintainable
 
 ---
 
-## 4. Code & Documentation Conventions
+## 6. Code & Documentation Conventions
 
 This project operates under a "living documentation" model.
 

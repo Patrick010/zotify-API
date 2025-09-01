@@ -37,6 +37,16 @@ The Flexible Logging Framework includes several features to enhance security.
 
 The `snitch` application, used for CLI-based authentication, has been refactored for simplicity and security. While its design documents outline a Zero Trust model with end-to-end encryption as a future goal, the current implementation securely forwards the OAuth code over HTTP on the local machine only.
 
+### 2.5. Known Subsystem Vulnerabilities
+
+The following are known security weaknesses in specific subsystems that have been identified and are tracked for future remediation.
+
+*   **Notifications Subsystem:**
+    *   **Authentication and Authorization:** The notification endpoints are not authenticated. This is a major security flaw, as it allows any user to create, view, and manage notifications for any other user. This will be addressed in a future iteration when a proper user authentication and authorization system is implemented.
+
+*   **Playlists Subsystem:**
+    *   **Data Privacy:** The current implementation does not have a concept of private playlists. All playlists are considered public. This is a potential privacy issue that should be addressed in a future iteration by adding a `private` flag to the playlist model and enforcing access control based on user ownership.
+
 ## 3. Security Roadmap (Future Enhancements)
 
 This section outlines security features that are planned but not yet implemented. For full details, see the [`FUTURE_ENHANCEMENTS.md`](./FUTURE_ENHANCEMENTS.md) document.

@@ -1,4 +1,19 @@
 ---
+    ## ACT-065: Align AUDIT_TRACEABILITY_MATRIX.md for RBAC feature
+
+    **Date:** 2025-09-01
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    To align the AUDIT_TRACEABILITY_MATRIX.md with the project's process for handling deferred features. The 'Role-Based Access Control (RBAC)' feature was incorrectly marked as N/N (Exists/Matches Design) and needed to be updated to reflect its status as a planned future enhancement.
+
+    ### Outcome
+    The AUDIT_TRACEABILITY_MATRIX.md was updated. The RBAC feature is now correctly marked as Exists? = N, Matches Design? = Y (Deferred). This resolves the documentation gap and formally tracks RBAC as a future enhancement.
+    ### Related Documents
+- `project/audit/AUDIT_TRACEABILITY_MATRIX.md`
+
+---
 
 ## ACT-064: Move Master Index and Fix Links
 
