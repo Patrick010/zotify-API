@@ -59,6 +59,37 @@ def parse_quality_index(file_path: Path) -> Set[str]:
     paths = re.findall(r"\|\s*`([^`]+)`\s*\|", content)
     return set(paths)
 
+def parse_project_registry(file_path: Path) -> Set[str]:
+    """Parses the PROJECT_REGISTRY.md file and returns a set of file paths."""
+    if not file_path.exists():
+        return set()
+    content = file_path.read_text(encoding="utf-8")
+    # Regex to find markdown links, e.g., [`...`](./path/to/file.md)
+    # It specifically looks for links starting with ./ to avoid capturing external links.
+    paths = re.findall(r"\[`.*?`\]\(\.\/([^)]+\.md)\)", content)
+    # The paths in the registry are relative to the project/ directory, so we need to prepend that.
+    return {f"project/{path}" for path in paths}
+
+def check_new_project_docs(new_files: Set[str]) -> List[str]:
+    """
+    Checks that new markdown files in the 'project/' directory are registered
+    in the PROJECT_REGISTRY.md file.
+    """
+    errors: List[str] = []
+    registry_path = PROJECT_ROOT / "project" / "PROJECT_REGISTRY.md"
+    registered_docs = parse_project_registry(registry_path)
+
+    new_project_docs = {
+        f for f in new_files if f.endswith(".md") and f.startswith("project/")
+    }
+
+    for doc_file in new_project_docs:
+        if doc_file not in registered_docs:
+            errors.append(
+                f"New project document '{doc_file}' was added but is not registered in '{registry_path}'."
+            )
+    return errors
+
 def check_code_doc_link_by_convention(changed_files: Set[str], new_files: Set[str]) -> List[str]:
     """
     Checks that if a source file is changed, its corresponding documentation file is also changed.
@@ -122,6 +153,7 @@ def main() -> int:
     all_errors: List[str] = []
     all_errors.extend(check_code_doc_link_by_convention(changed_files, new_files))
     all_errors.extend(check_new_file_rules(new_files))
+    all_errors.extend(check_new_project_docs(new_files))
 
     if all_errors:
         print("\n--- Documentation Linter Failed ---", file=sys.stderr)

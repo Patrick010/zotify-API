@@ -1,4 +1,21 @@
 ---
+    ## ACT-069: Create loose ends backlog and gap analysis template
+
+    **Date:** 2025-09-01
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    Fulfill the first step of the post-audit cleanup outlined in project/HANDOVER_BRIEF.md. This involves creating the project/LOOSE_ENDS_BACKLOG.md to track outstanding tasks, and creating the project/process/GAP_ANALYSIS_TEMPLATE.md to address the first item in that backlog.
+
+    ### Outcome
+    Successfully created both project/LOOSE_ENDS_BACKLOG.md and project/process/GAP_ANALYSIS_TEMPLATE.md. Also updated the api/docs/reference/CODE_QUALITY_INDEX.md to register these new documentation files as per project process.
+    ### Related Documents
+- `project/LOOSE_ENDS_BACKLOG.md`
+- `project/process/GAP_ANALYSIS_TEMPLATE.md`
+- `api/docs/reference/CODE_QUALITY_INDEX.md`
+
+---
     ## ACT-068: Create Project Plan for Snitch Module
 
     **Date:** 2025-09-01

@@ -43,19 +43,29 @@ Before starting any new task, you **must** first read the following document to 
 
 This workflow is designed to be followed for every task that involves code or documentation changes.
 
-### Step 1: Code and Document
-This is the primary development task. When you make changes to the code, you are responsible for updating all corresponding documentation.
+### Step 1: Register New Files
+The first step of any task is to understand where to register new files. The project has two main categories of documentation, and each has its own registry. Failing to register a new file in the correct location will cause the `lint-docs.py` verification script to fail.
 
-#### Project-Level Documentation
-To identify which documents are relevant for a given change, you **must** consult the `project/PROJECT_REGISTRY.md`. This file is the single source of truth for all high-level project documents.
+*   **Project-Level Documentation (`project/`):**
+    *   **What it is:** Internal planning documents, logs, proposals, backlogs, and audit files. Anything that lives in the `project/` directory.
+    *   **Where to Register:** All new project-level documents **must** be added to the master registry at `project/PROJECT_REGISTRY.md`.
 
-#### API Documentation
-The API documentation has its own master index. When creating new documentation for the API, you **must** register it in the following locations:
-1.  **`api/docs/MASTER_INDEX.md`**: The new documentation file must be added to this master list.
-2.  **`scripts/doc-lint-rules.yml`**: The new file must be added to the appropriate rule or mapping.
-3.  **`api/docs/reference/CODE_QUALITY_INDEX.md`**: A new row must be added for the documentation file with an initial quality score of 'X'.
+*   **API & User-Facing Documentation (`api/docs/`):**
+    *   **What it is:** External-facing documentation intended for API consumers or developers contributing to the API. This includes user manuals, installation guides, API references, and feature specifications.
+    *   **Where to Register:** New API documents **must** be registered in two places:
+        1.  `api/docs/MASTER_INDEX.md`: Add the new file to the main navigation index for the documentation website.
+        2.  `api/docs/reference/CODE_QUALITY_INDEX.md`: Add a new row for the file with an initial "Documentation Score" of 'X'.
 
-### Step 2: Log Your Work
+### Step 2: Code and Document
+This is the primary development task. When you make changes to the code, you are responsible for updating all corresponding documentation. Use the registries mentioned in Step 1 to identify relevant documents.
+
+### Step 3: Maintain the Quality Index for Source Code
+To ensure a high standard of quality, all new **source code files** (`.py`, `.go`, `.js`) must be registered in the appropriate quality index. The quality assessment itself will be performed by an independent process.
+
+1.  **Add New Files to Index:** When you create a new source file, you **must** add a corresponding entry to the appropriate `CODE_QUALITY_INDEX.md` file (e.g., `api/docs/reference/CODE_QUALITY_INDEX.md` for API source files).
+2.  **Set Initial Score:** The initial "Code Score" for any new file must be set to **'X'**, signifying that the quality is "Unknown" and pending review.
+
+### Step 4: Log Your Work
 At the completion of any significant action, you **must** log the work using the `log-work` script.
 
 *   **Command:** `python scripts/log-work.py --summary "..." --objective "..." --outcome "..." --files ...`
@@ -63,13 +73,7 @@ At the completion of any significant action, you **must** log the work using the
 
 > **Important:** Due to a global git policy, it is not possible to run this script as an automated pre-commit hook. Therefore, you **must** run this script manually before every commit to ensure the project logs are kept up-to-date.
 
-### Step 3: Maintain the Quality Index
-To ensure a high standard of quality, all new source code and documentation files must be registered in the quality index. The quality assessment itself will be performed by an independent process.
-
-1.  **Add New Files to Index:** When you create a new source file (`.py`, `.go' or `.js`) or a new documentation file (`.md`), you **must** add a corresponding entry to the appropriate `CODE_QUALITY_INDEX.md` file.
-2.  **Set Initial Score:** The initial "Documentation Score" and "Code Score" for any new file must be set to **'X'**, signifying that the quality is "Unknown" and pending review.
-
-### Step 4: Pre-Submission Verification
+### Step 5: Pre-Submission Verification
 Before submitting your work for review, you **must** run the following tools to verify compliance.
 
 1.  **Run Tests:**

@@ -39,6 +39,8 @@ This document serves as the master file, or single source of truth, for tracking
 | **Home Automation Proposal** | [`proposals/HOME_AUTOMATION_PROPOSAL.md`](./proposals/HOME_AUTOMATION_PROPOSAL.md) | A formal proposal for integrating with home automation platforms like Home Assistant. |
 | **Multi-Source Metadata Proposal** | [`proposals/MULTI_SOURCE_METADATA_PROPOSAL.md`](./proposals/MULTI_SOURCE_METADATA_PROPOSAL.md) | A formal proposal for a plugin-driven, multi-source metadata ingestion and querying system. |
 | **Project Backlog** | [`BACKLOG.md`](./BACKLOG.md) | A tactical backlog of tasks managed by the formal qualification process defined in the PID. |
+| **Loose Ends Backlog** | [`LOOSE_ENDS_BACKLOG.md`](./LOOSE_ENDS_BACKLOG.md) | A temporary backlog for tracking design and documentation tasks that were discussed but not fully integrated. |
+| **Gap Analysis Template** | [`process/GAP_ANALYSIS_TEMPLATE.md`](./process/GAP_ANALYSIS_TEMPLATE.md) | A standardized template for developers to use when performing a gap analysis. |
 | **Traceability Matrix** | [`TRACEABILITY_MATRIX.md`](./TRACEABILITY_MATRIX.md) | A live matrix mapping requirements from use cases and design docs to implementation and test status. |
 | **Use Cases** | [`USECASES.md`](./USECASES.md) | A collection of user-driven scenarios and requirements for the API. |
 | **Use Case Gap Analysis** | [`USECASES_GAP_ANALYSIS.md`](./USECASES_GAP_ANALYSIS.md) | An analysis of the gaps between the desired use cases and the current implementation. |
