@@ -1,4 +1,20 @@
 ---
+    ## ACT-067: Create new execution-oriented project plan
+
+    **Date:** 2025-09-01
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    To create a structured, actionable project plan for the Zotify API, serving as the central execution reference for developers.
+
+    ### Outcome
+    Created project/PROJECT_PLAN.md and populated it with a comprehensive plan synthesized from the roadmap, PID, and backlog. Also updated the PROJECT_REGISTRY.md to include the new document.
+    ### Related Documents
+- `project/PROJECT_PLAN.md`
+- `project/PROJECT_REGISTRY.md`
+
+---
     ## ACT-066: Update AGENTS.md with logging policy
 
     **Date:** 2025-09-01
