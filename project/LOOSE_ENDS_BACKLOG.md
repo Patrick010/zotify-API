@@ -20,8 +20,8 @@ Each item should be reviewed, documented, and closed out systematically.
 
 ### 2. Gap Analysis Framework (Template + Skeleton)
 - **Problem**: We drafted a combined skeleton+template form for gap analysis, so devs can be tasked with "Run a gap analysis and solve it. Use this form."
-- **Status**: Not in repo. Lives only in chat notes.
-- **Action**: Move into `project/process/GAP_ANALYSIS_TEMPLATE.md` so devs know exactly how to execute.
+- **Status**: **Done**.
+- **Action**: The template has been created at `project/process/GAP_ANALYSIS_TEMPLATE.md`. No further action needed.
 
 ---
 
