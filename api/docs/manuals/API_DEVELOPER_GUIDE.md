@@ -76,7 +76,7 @@ Before committing, you must run the following checks from the project root.
 -   **Security Scan (`bandit`):**
     ```bash
     # Run from the project root
-    bandit -c api/bandit.yml -r api
+    bandit -c bandit.yml -r api
     ```
 -   **Documentation Linter:**
     The documentation linter should be run locally before committing to ensure documentation is up-to-date. It uses the rules defined in `scripts/doc-lint-rules.yml`.
