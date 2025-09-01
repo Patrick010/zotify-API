@@ -1,4 +1,17 @@
 ---
+## Session Report: 2025-09-01 (Addendum 3)
+
+**Summary:** Created a new, comprehensive project plan for the Snitch module.
+
+**Findings:**
+- The existing `snitch/docs/PROJECT_PLAN.md` was found to be a historical design document, not an actionable plan.
+- A new project plan was drafted and created at `snitch/docs/PROJECT_PLAN.md`, following the user's specified structure.
+- The main `project/PID.md` was updated to include a detailed entry for the Snitch module, linking to the new plan.
+- The `project/PROJECT_REGISTRY.md` was updated to register the new document.
+
+**Outcome:**
+- The Snitch module now has a formal, execution-oriented project plan that aligns with the overall project's governance structure.
+---
 ## Session Report: 2025-09-01 (Addendum 2)
 
 **Summary:** This session was to correct a second process error from a previous commit. The creation of the `PROJECT_PLAN.md` was committed without first updating the Trinity logs.

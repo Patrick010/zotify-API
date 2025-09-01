@@ -58,8 +58,14 @@ Example of a deferred feature:
 
 ### 2.5 Supporting Modules
 The Zotify Platform consists of the Core API and official supporting modules, currently:
-- Snitch — Integrated monitoring and intelligence toolset.
-- Gonk-TestUI — Frontend testing and interaction suite for validation and QA.
+- **Snitch — Secure OAuth Callback Helper:**
+    - **Objective:** To provide a secure, reliable, and user-friendly mechanism for handling the browser-based OAuth 2.0 callback during CLI-driven authentication flows.
+    - **Major Phases:** 1. Initial Implementation (Done), 2. Hardening & Integration (Planned).
+    - **Delivery Checkpoints:** The module is considered complete when all tasks in the project plan are done, including full test coverage and an end-to-end integration test in the main CI pipeline.
+    - **Project Plan:** `../snitch/docs/PROJECT_PLAN.md`
+- **Gonk-TestUI — Frontend testing and interaction suite for validation and QA:**
+    - **Objective:** To provide a standalone developer UI for easily testing all API endpoints.
+    - **Project Plan:** The `gonk-testUI` module is currently simple enough not to require a separate project plan. Its development is tracked directly in the main project backlog and roadmap.
 
 Supporting modules are developed, tracked, and governed under the same policies, workflows, and quality standards as the Core API.
 **Note:** Retroactive work on these modules must be documented and incorporated into all relevant project files.

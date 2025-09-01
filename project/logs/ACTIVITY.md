@@ -1,4 +1,21 @@
 ---
+    ## ACT-068: Create Project Plan for Snitch Module
+
+    **Date:** 2025-09-01
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    To create a full, developer-ready project plan for the Snitch module, replacing the outdated historical document. This also involved updating the main PID to formally link to the new plan.
+
+    ### Outcome
+    Overwrote snitch/docs/PROJECT_PLAN.md with a new, structured plan. Updated project/PID.md with a detailed entry for the Snitch module. Registered the new plan in project/PROJECT_REGISTRY.md.
+    ### Related Documents
+- `snitch/docs/PROJECT_PLAN.md`
+- `project/PID.md`
+- `project/PROJECT_REGISTRY.md`
+
+---
     ## ACT-067: Create new execution-oriented project plan
 
     **Date:** 2025-09-01

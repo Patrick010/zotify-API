@@ -1,61 +1,114 @@
-# Project Plan: Snitch
+# Snitch Module Project Plan
 
-## 1. Purpose of Snitch
+**Date:** 2025-09-01
+**Author:** Jules
 
-Snitch is a lightweight, single-purpose command-line tool designed to act as a temporary local OAuth 2.0 callback listener. Its sole function is to capture the authorization `code` sent by Spotify's authentication server during the authorization code flow.
+**Reference Links:**
+- **Main Project Plan:** `../../api/PROJECT_PLAN.md`
+- **PID:** `../../project/PID.md`
+- **Roadmap:** `../../project/ROADMAP.md`
+- **Snitch Architecture:** `./ARCHITECTURE.md`
 
-## 2. Problem Being Solved
+---
 
-When command-line applications like Zotify-API need to perform user-level authentication with Spotify, they must use an OAuth 2.0 flow. This typically involves redirecting the user to a Spotify URL in their browser. After the user grants permission, Spotify redirects the browser back to a `redirect_uri`.
+## 1. Purpose & Scope
 
-For a headless or CLI application, there is no persistent web server to receive this callback. Snitch solves this by spinning up a short-lived HTTP server on a known port (21371 in Phase 1) to listen for this one-time redirect, capture the necessary `code`, and then immediately terminate.
+### Purpose
+The Snitch module is a critical security and integration component of the Zotify API platform. Its primary purpose is to provide a secure, reliable, and user-friendly mechanism for handling the browser-based OAuth 2.0 callback during CLI-driven authentication flows. It acts as a short-lived, local web server that captures the authorization token from Spotify and securely forwards it to the main Zotify API backend.
 
-## 3. How it Integrates with Zotify-API
+### Scope
+- **In Scope:**
+    - Listening on a local port for the OAuth redirect.
+    - Validating the `state` parameter to prevent CSRF attacks.
+    - Securely transmitting the captured authorization `code` to the Zotify API.
+    - Providing clear, user-facing status messages in the browser.
+    - Graceful startup, shutdown, and timeout handling.
+- **Out of Scope:**
+    - Storing any long-term credentials or tokens.
+    - Handling any part of the OAuth flow beyond the `redirect_uri` callback.
+    - Any direct interaction with the Spotify API.
 
-Snitch will be invoked by the Zotify-API backend or a related CLI tool when user authentication is required. The flow is as follows:
+---
 
-1.  Zotify-API determines that a new Spotify OAuth token is needed.
-2.  It launches the Snitch binary as a subprocess.
-3.  It opens a browser window pointing to the Spotify authorization URL, with `redirect_uri` set to `http://localhost:21371/callback`.
-4.  The user authorizes the application in their browser.
-5.  Spotify redirects the browser to the Snitch listener.
-6.  Snitch captures the `code` from the query parameters, prints it to `stdout`, and exits.
-7.  Zotify-API reads the `code` from Snitch's `stdout`.
-8.  Zotify-API exchanges the `code` for an access token and refresh token with Spotify's backend.
+## 2. Milestones & Phases
 
-## 4. Security Constraints and Assumptions
+The development of the Snitch module follows the high-level phases of the main Zotify API project.
 
-- **Localhost Only**: Snitch must only bind to the localhost interface (`127.0.0.1`) to prevent external network exposure.
-- **Short-Lived**: The listener is designed to be ephemeral. It will automatically shut down after a short timeout (2 minutes) to minimize its attack surface.
-- **No State**: Snitch does not store any tokens or sensitive information. Its only job is to pass the received `code` to its parent process via `stdout`.
-- **Secure IPC (Future Phases)**: While Phase 1 uses `stdout`, later phases will implement a more secure Inter-Process Communication (IPC) handshake to ensure that Snitch is communicating with the legitimate Zotify-API process. This will involve a secret passed at startup.
-- **Randomized Port (Future Phases)**: To prevent other applications from squatting on the known port, future phases will use a randomized port for the listener, with the port number communicated back to the parent process.
+### Phase 1: Initial Implementation & Refactoring (✅ Done)
+- **Milestone:** Basic functionality achieved.
+- **Tasks:**
+    - Initial `stdout`-based proof of concept.
+    - Addition of `state` validation for CSRF protection.
+    - Refactoring into a standard Go project structure.
+    - Transition to a secure `POST`-based handoff to the main API.
+- **Link to PID:** This work was part of the "Core Platform Stability & Security" phase of the main project.
 
-## Phase 2: Secure Callback Handling
+### Phase 2: Hardening & Integration (Next Up)
+- **Milestone:** Achieve production-ready security and reliability.
+- **Security Milestones:**
+    - **End-to-End Encryption:** Implement the Zero Trust model described in `PHASE_2_ZERO_TRUST_DESIGN.md`, where the payload from Snitch to the API is encrypted.
+    - **Dynamic Port Allocation:** Use a randomized, ephemeral port for the listener to prevent port squatting, communicating the port number back to the parent Zotify API process.
+- **Testing Milestones:**
+    - **Unit Test Coverage:** Achieve >90% unit test coverage for the Go codebase.
+    - **Integration Test:** Add a CI step that performs a full, end-to-end authentication flow test involving the Zotify API and the compiled Snitch binary.
+    - **Security Verification:** Perform a manual security audit of the IPC mechanism.
 
-Phase 2 introduces a critical security enhancement: **state validation**.
+---
 
-- **State Token**: The Zotify-API process now starts Snitch with a `--state` flag, providing a unique, unguessable token.
-- **Validation Logic**: The HTTP handler in Snitch validates that the `state` parameter in the callback URL from Spotify exactly matches the expected token.
-- **Conditional Shutdown**:
-    - If the `state` is valid, Snitch captures the `code`, prints it to stdout, and triggers a graceful shutdown.
-    - If the `state` is missing or invalid, Snitch rejects the request with a `400 Bad Request` error and, crucially, **does not shut down**. It continues to listen for a valid request until the timeout is reached. This prevents a malicious or malformed request from terminating the authentication process prematurely.
+## 3. Roadmap Integration
 
-## Phase 3: Code and Structure Refactor
+The Snitch module is a "Supporting Module" as defined in the `project/PID.md`. Its development is intrinsically linked to the Core API's authentication and security features.
 
-Phase 3 focuses on improving the internal code structure for maintainability and testability, without changing existing functionality.
+| Snitch Milestone | Zotify API PID/Roadmap Phase | Dependencies |
+|---|---|---|
+| Hardening & Integration | Platform Extensibility | A stable Core API authentication endpoint. |
+| Maintenance & Updates | Future Vision | Dependent on future changes to the API's authentication model (e.g., transition to JWT). |
 
-- **Goal**: Refactor the codebase into a standard Go project layout.
-- **Outcome**: The code is now organized into two main packages:
-    - `cmd/snitch`: The main application entry point.
-    - `internal/listener`: The core package containing all HTTP listener and request handling logic.
-- **Benefit**: This separation of concerns makes the code easier to understand, maintain, and test in the future. The application's entry point is decoupled from its core business logic.
+---
 
-## Phase 4: Secure POST Endpoint
+## 4. Tasks & Deliverables
 
-Phase 4 transitions Snitch from a `GET` callback listener to a more robust and secure `POST` endpoint. This improves cross-platform compatibility and removes the need for a user-facing browser redirect.
+### Development Tasks
+| Task ID | Description | Owner | Status |
+|---|---|---|---|
+| `SNITCH-FEAT-01` | Implement end-to-end payload encryption between Snitch and API. | TBD | `Planned` |
+| `SNITCH-FEAT-02` | Implement dynamic port allocation for the listener. | TBD | `Planned` |
+| `SNITCH-BUG-01` | Investigate and resolve any remaining build consistency issues. | TBD | `Planned` |
 
-- **Endpoint**: The listener now runs on `http://127.0.0.1:56789` and only accepts `POST` requests to `/snitch/oauth-code`.
-- **Payload**: The `code` and `state` are now passed in a JSON body, which is more secure and flexible than query parameters.
-- **Strict Validation**: The handler strictly validates the request method, path, and JSON payload before processing the authentication code.
-- **Testing**: Unit tests have been introduced to verify the handler's logic for various success and failure scenarios.
+### QA & Testing Tasks
+| Task ID | Description | Owner | Status |
+|---|---|---|---|
+| `SNITCH-TEST-01` | Create comprehensive unit tests for all Go packages. | TBD | `Planned` |
+| `SNITCH-TEST-02` | Develop and integrate an end-to-end auth flow test into the CI pipeline. | TBD | `Planned` |
+| `SNITCH-QA-01` | Perform manual security verification of the IPC channel. | TBD | `Planned` |
+
+### Documentation Tasks
+| Task ID | Description | Owner | Status |
+|---|---|---|---|
+| `SNITCH-DOC-01` | Update all `snitch/docs` to reflect the hardened architecture. | TBD | `Planned` |
+| `SNITCH-DOC-02` | Ensure the `USER_MANUAL.md` provides clear instructions for any new user-facing changes. | TBD | `Planned` |
+
+---
+
+## 5. Security & Compliance
+
+- **Replay Attack Prevention:** The secure IPC mechanism must include a nonce or timestamp to ensure that a captured payload cannot be replayed. This is a core requirement of the Zero Trust design.
+- **Sniffing Attack Prevention:** While the communication is on localhost, payload encryption will mitigate the risk of local process sniffing attacks.
+- **Compliance:** The Snitch module itself does not handle or persist PII, but its role in the authentication flow is critical for the platform's overall GDPR compliance. Its security and reliability are paramount.
+
+---
+
+## 6. Tracking & Updates
+
+This document is a living plan and will be updated as work progresses.
+
+| Milestone | Status |
+|---|---|
+| Basic Functionality | ✅ `Completed` |
+| State Validation | ✅ `Completed` |
+| Code Refactor | ✅ `Completed` |
+| Secure POST Handoff | ✅ `Completed` |
+| End-to-End Encryption | ❌ `Not Started` |
+| Dynamic Port Allocation | ❌ `Not Started` |
+| Full Test Coverage | ❌ `Not Started` |
+| CI Integration Test | ❌ `Not Started` |
