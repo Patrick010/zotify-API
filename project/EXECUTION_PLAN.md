@@ -52,13 +52,14 @@ This document provides a detailed breakdown of the tasks required to fulfill the
 - ❌ Prepare DevOps templates (.github workflows, issue templates).
 - [ ] Code QA
 
-## Phase 8: Automation Layer
-**Goal:** Introduce event-based automation and rules engine.
+## Phase 8: Extensibility & Automation
+**Goal:** Make the Zotify API a truly extensible platform and introduce event-based automation.
 **Status:** ❌ Not Started
 **Steps:**
-- ❌ Design and implement automation trigger models.
-- ❌ Build CLI hooks for rules engine integration.
-- ❌ Create global config endpoint for defaults via admin API.
+- ❌ **Dynamic Plugin System:** Design and implement a dynamic plugin system (e.g., using entry points) for custom components. (Source: `DYNAMIC_PLUGIN_PROPOSAL.md`)
+- ❌ **Providers as Plugins:** Refactor the existing provider model to use the new plugin system.
+- ❌ **External Integrations:** Develop reference implementations for Node-RED and Home Assistant. (Source: `LOW_CODE_PROPOSAL.md`, `HOME_AUTOMATION_PROPOSAL.md`)
+- ❌ **Automation Triggers:** Design and implement automation trigger models for an event-based rules engine.
 - [ ] Code QA
 
 ## Phase 9: Admin + Settings API

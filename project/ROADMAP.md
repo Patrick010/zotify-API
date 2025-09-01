@@ -37,8 +37,18 @@ This phase will focus on implementing the security and reliability improvements 
 
 - **Source:** `snitch/docs/PROJECT_PLAN.md`
 
+### Phase 8: Administrative & Fork-Specific Enhancements (Planned)
+This phase will focus on implementing administrative APIs, settings, and other enhancements that improve the operational control and management of the platform.
+
+- **Source:** `EXECUTION_PLAN.md` (Phases 6 & 9)
+
+### Phase 9: Release Readiness (Planned)
+This phase will focus on the final steps required to prepare for a stable, versioned release, including API versioning and packaging.
+
+- **Source:** `EXECUTION_PLAN.md` (Phase 10)
+
 ---
 
-## 3. Future Vision
+## 4. Future Vision
 
 Beyond the planned phases, development will focus on expanding the core feature set. See `FUTURE_ENHANCEMENTS.md` for a full list of long-term ideas.
