@@ -67,3 +67,15 @@ All new tasks added to this backlog **must** use the template defined in the `PI
 -   **Acceptance Criteria:**
     -   `[ ]` `mypy` runs successfully without configuration errors.
 -   **Estimated Effort:** Small
+
+### Technical Debt
+
+-   **Task ID:** `TD-REFACTOR-01`
+    -   **Source:** `project/LOW_LEVEL_DESIGN.md` (originally), User finding
+    -   **Priority:** LOW
+    -   **Dependencies:** None
+    -   **Description:** The `tracks_service.py` module currently uses raw, hardcoded SQL queries instead of using the SQLAlchemy ORM and the `Track` model. This led to a schema divergence and a runtime error.
+    -   **Acceptance Criteria:**
+        -   `[ ]` Refactor all database operations in `tracks_service.py` to use the SQLAlchemy ORM and the `Track` model.
+        -   `[ ]` Remove the temporary `artist` and `album` columns from the `Track` model if they are not needed after the refactor, or confirm they are correctly used by the ORM.
+    -   **Estimated Effort:** Medium
