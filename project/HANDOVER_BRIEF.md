@@ -3,45 +3,44 @@
 **Project:** Zotify API Refactoring 
 **Author:** Jules 
 **Date:** 2025-08-31 
-**Commit Reference:** b9f412288f43993400319d3a6e8dc940f9928c9f 
-**Commit Message:** "Fix: Add agent rules and correct doc hierarchy"
 
+1. Executive Summary
 
-1. Context & Objectives
+This handover marks the completion of a significant documentation and process initiative: the establishment of a canonical baseline for the API's endpoints. A new system is now in place (endpoints.yaml) to track the status of all endpoints (planned vs. implemented), which will bring much-needed clarity to the development roadmap.
 
-This handover brief describes the state of the repository at the time of the commit referenced above. The primary objective of the work leading up to this commit was to resolve a large number of mkdocs build warnings related to broken links in the project's documentation.
+However, it is critical to note that this work was performed on a codebase that contains several significant, unresolved bugs and inconsistencies. The immediate priority for the next developer will be to stabilize the system by addressing a critical database error and fixing the broken test suite before proceeding with new feature development.
+2. Key Accomplishments
 
-The secondary objectives were to fix a fatal application startup error and a broken start.sh script.
-2. State of the Project at time of Commit
-2.1. Application and Startup
+The primary deliverable of this work phase was the API Endpoint Baseline System:
 
-    Application Startup Error: The fatal error caused by the application's inability to find logging_framework.yml was fixed. The api/src/zotify_api/main.py and api/src/zotify_api/routes/system.py files were patched to use absolute paths.
-    start.sh Script: The scripts/start.sh script was fixed. It was modified to correctly change into the api/ directory before running pip install.
+    Authoritative Baseline (api/docs/endpoints.yaml): A new YAML file has been created to serve as the single source of truth for all API endpoints. It tracks each endpoint's path, methods, and implementation status (planned, implemented, etc.).
+    LLD Integration: A human-readable markdown table summarizing this baseline has been embedded in the project/LOW_LEVEL_DESIGN.md for easy reference during design discussions.
+    Planning Integration: The EXECUTION_PLAN.md and ROADMAP.md have been updated to incorporate this new baseline into the project's planning and development process. The next phase of work is now explicitly defined as implementing the remaining planned endpoints.
+    API Reference Update: The auto-generated API_REFERENCE.md has been updated with a note clarifying that it only shows implemented endpoints and points to the new YAML file for the complete picture.
 
-2.2. Documentation System
+3. Current System Status & Known Issues
 
-The documentation system was in a partially fixed, but ultimately incorrect, state. The following changes were made:
+    Critical Database Bug: The API is partially non-functional due to a database schema mismatch. The tracks_service.py attempts to query for artist and album columns that do not exist in the tracks table, causing a sqlalchemy.exc.OperationalError whenever the /api/tracks endpoint is hit.
+    /version Endpoint Failure: The /version endpoint is consistently failing with a TypeError due to an incorrect uptime calculation involving timezone-naive and timezone-aware datetime objects.
+    Broken Functional Tests: The primary functional test suite (scripts/functional_test.py) is completely broken and fails with multiple 404 Not Found errors. The tests are out of sync with the actual API routes.
+    Repository Clutter: The api/ directory contains at least 9 leftover, redundant, or temporary scripts (e.g., test_api.sh, route_audit.py) that need to be audited and removed.
+    Latent CI Bug: The bandit.yml security configuration file is located in api/, but the CI workflow in .github/workflows/ci.yml expects it to be in the repository root. This may cause the CI security scan to fail or run with a default configuration.
 
-    mkdocs.yml:
-        An explicit nav section was added to the mkdocs.yml file. The goal of this was to strictly control which files were included in the documentation build, thereby hiding the numerous warnings from files in the project/ directory.
-    Broken Link Fixes:
-        A number of broken links in the documentation files within api/docs/ were fixed.
-        A cross-directory link in api/docs/manuals/API_DEVELOPER_GUIDE.md was addressed by using a pymdownx.snippets inclusion.
-    api/docs/REGISTRY.md: This file, which was a major source of broken links, was deleted.
+4. Recommended Next Steps
 
-2.3. Logging System
+The following tasks should be addressed in order of priority to stabilize the project:
 
-    The logging system was in a state of flux. The log-work.py script had been refactored multiple times, and the ACTIVITY.md log contained a number of malformed entries.
+    Fix Critical Bugs (High Priority):
+        Resolve the database schema mismatch. The recommended approach is to add the artist and album columns to the Track model in models.py and document the technical debt of the service using raw SQL.
+        Fix the TypeError in the /version endpoint by correcting the app_start_time definition in globals.py.
 
-3. Known Issues and Next Steps for Next Developer
+    Stabilize Testing (High Priority):
+        Rewrite scripts/functional_test.py to use the correct API endpoint paths and assertions. All tests must pass before any new work is started.
 
-The primary issue with the repository at the time of this commit was that the "fix" for the documentation was a workaround, not a true solution. While the mkdocs build command was clean, it was only because the nav section in mkdocs.yml was hiding the underlying problems by excluding most of the project's documentation from the build.
+    Perform Code & Repo Cleanup (Medium Priority):
+        Delete the numerous leftover scripts from the api/ directory.
+        Move bandit.yml to the repository root to fix the CI pipeline and update the API_DEVELOPER_GUIDE.md accordingly.
 
-The next developer should:
+    Proceed with Roadmap (Normal Priority):
+        Once the system is stable, begin work on implementing the planned endpoints from endpoints.yaml as outlined in the newly updated ROADMAP.md
 
-    Review the mkdocs.yml file. The nav section should be carefully audited.
-    Address the root cause of the documentation warnings. The fundamental problem is that mkdocs is configured with docs_dir: 'api/docs', but many documents in other directories (project/, snitch/, etc.) are intended to be part of the site. A proper solution needs to be found for this, such as using the mkdocs-monorepo-plugin or restructuring the repository.
-    Revert the log-work.py script to its original, simpler state as requested in subsequent user feedback.
-    Clean the ACTIVITY.md log.
-
-This handover brief should provide the necessary context to understand the state of the repository at the specified commit and to formulate a plan to move forward.
