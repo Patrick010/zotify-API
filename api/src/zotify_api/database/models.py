@@ -63,9 +63,9 @@ class SpotifyToken(Base):
 class Track(Base):
     __tablename__ = "tracks"
     id: Mapped[str] = mapped_column(String, primary_key=True)  # Spotify track ID
-    name: Mapped[str | None] = mapped_column(
-        String, nullable=True
-    )  # Optional: store track name for convenience
+    name: Mapped[str | None] = mapped_column(String, nullable=True)
+    artist: Mapped[str | None] = mapped_column(String, nullable=True)
+    album: Mapped[str | None] = mapped_column(String, nullable=True)
     playlists: Mapped[List["Playlist"]] = relationship(
         "Playlist", secondary=playlist_track_association, back_populates="tracks"
     )

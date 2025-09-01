@@ -56,6 +56,14 @@ The FastAPI application uses several middleware to provide cross-cutting concern
 *   **`crud.py`**:
     *   Provides a layer of abstraction for database operations.
 
+#### Technical Debt
+
+*   **`tracks_service.py`**:
+    *   **Issue:** The `tracks_service.py` module currently uses raw, hardcoded SQL queries (via `sqlalchemy.text`) instead of using the SQLAlchemy ORM and the `Track` model.
+    *   **Problem:** This has led to a schema divergence, where the service expected `artist` and `album` columns that did not exist in the `Track` model, causing a runtime `OperationalError`.
+    *   **Hack/Fix (2025-09-01):** As an immediate fix, the `Track` model in `models.py` has been patched to include the `artist` and `album` columns to match the service's expectations.
+    *   **Required Refactoring:** This service should be refactored to use the ORM and the `Track` model for all database operations. This will eliminate the risk of schema mismatches and align the service with the project's unified database architecture.
+
 ---
 
 ## Spotify Integration Design
