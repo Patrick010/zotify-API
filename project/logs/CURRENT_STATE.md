@@ -12,4 +12,4 @@
 - The `notifications` endpoints are known to be unauthenticated, as documented in `project/SECURITY.md`. This should be addressed when a full user authentication system is implemented.
 
 ## 3. Pending Work: Next Immediate Steps
-- The next task is to create a new project plan for the `gonk-testUI` module, as per the user's latest request.
+- Read project/HANDOVER_BRIEF.md 
