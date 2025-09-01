@@ -20,14 +20,14 @@ The final commit (feat(docs): Clean archive, create Snitch plan, and update logs
 3. Current System Status
 
     The Codebase is Stable: The underlying application code is stable and all tests pass.
-    The Git State is Clean: The docs-cleanup-and-snitch-plan branch contains all the work described above in a single, comprehensive commit.
+    The Git State is Clean: The audit-phase-5g branch contains all the work described above in a single, comprehensive commit.
     Known Issues: The notifications endpoints are known to be unauthenticated, as documented in project/SECURITY.md. This should be addressed in a future development cycle.
 
 4. Recommended Next Steps
 
 The next developer should start a new task on a new branch audit-phase-5h.
 
-The immediate next task is to begin working through the "Loose Ends Backlog".
+The immediate next task after reading AGENTS.md is to begin working through the "Loose Ends Backlog".
 
     Create the Backlog File: Create a new file at project/LOOSE_ENDS_BACKLOG.md using the content provided below.
     Execute the Backlog: Systematically work through the "Open Items" listed within that file, creating separate, atomic commits for each resolved item as instructed in the file's "Meta" section. The first item to address will be the "Gap Analysis Framework".
@@ -99,5 +99,3 @@ Each item should be reviewed, documented, and closed out systematically.
 ## Meta
 - This file (`LOOSE_ENDS_BACKLOG.md`) is temporary.  
 - Once each item is resolved, it should be removed and archived in `project/archive/` and marked fully **Done**.  
-
-
