@@ -1,4 +1,19 @@
 ---
+    ## ACT-066: Update AGENTS.md with logging policy
+
+    **Date:** 2025-09-01
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    To clarify the manual process for logging work. The AGENTS.md file needed a note explaining that log-work.py must be run manually before each commit.
+
+    ### Outcome
+    Added a note to AGENTS.md clarifying the manual logging process. Also corrected the example command in the document to use the correct arguments, preventing future errors.
+    ### Related Documents
+- `AGENTS.md`
+
+---
     ## ACT-065: Align AUDIT_TRACEABILITY_MATRIX.md for RBAC feature
 
     **Date:** 2025-09-01

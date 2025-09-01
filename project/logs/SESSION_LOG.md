@@ -1,4 +1,16 @@
 ---
+## Session Report: 2025-09-01 (Addendum)
+
+**Summary:** This brief session was to correct a process error from a previous commit. An update to `AGENTS.md` was committed without first updating the Trinity logs.
+
+**Findings:**
+- The `AGENTS.md` file was updated to clarify the manual execution policy for the `log-work.py` script.
+- The example command for the script was also corrected to reflect its actual arguments.
+
+**Outcome:**
+- A new entry for this change was added to `ACTIVITY.md`.
+- This `SESSION_LOG.md` and the `CURRENT_STATE.md` have been updated to reflect this work, bringing all logs into compliance with project standards.
+---
 ## Session Report: 2025-09-01
 
 **Summary:** This session focused on executing the "Archive Cleanup & Documentation Consolidation" task from the project roadmap. This involved a deep review of all archived documentation, deleting obsolete files, migrating valuable content, and addressing a newly discovered documentation gap.

@@ -3,9 +3,9 @@
 **Status:** Live Document
 
 ## 1. Session Summary & Accomplishments
-- **Archive Cleanup & Documentation Consolidation:** A major documentation task was completed. Over 20 obsolete files were deleted from `project/archive/`.
-- **Documentation Enriched:** Valuable historical context from the archive was migrated into the live `CHANGELOG.md`, `SYSTEM_INTEGRATION_GUIDE.md`, and `SECURITY.md`.
-- **New Feature Designed & Tracked:** A documentation gap regarding GDPR compliance was resolved by designing the required `/privacy/data` endpoints in the LLD and adding a new implementation task (`FEAT-PRIVACY-01`) to the project backlog.
+- **Archive Cleanup & Documentation Consolidation:** A major documentation task was completed, including deleting obsolete files, migrating valuable content, and designing a new GDPR feature.
+- **Process Documentation Update:** The `AGENTS.md` file was updated to clarify the manual execution policy for the `log-work.py` script, correcting a process knowledge gap.
+- **Trinity Logs Synchronized:** All three Trinity log files have been updated to reflect the work of the current session.
 
 ## 2. Known Issues & Blockers
 - The `notifications` endpoints are known to be unauthenticated, as documented in `project/SECURITY.md`. This should be addressed when a full user authentication system is implemented.
