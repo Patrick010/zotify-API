@@ -49,7 +49,7 @@ nav:
       - 'API Reference': 'reference/API_REFERENCE.md'
       - 'Code Quality Index': 'reference/CODE_QUALITY_INDEX.md'
       - 'Feature Specs': 'reference/FEATURE_SPECS.md'
-      - 'Master Index': 'reference/MASTER_INDEX.md'
+      - 'Master Index': 'MASTER_INDEX.md'
       - 'Features':
         - 'Authentication': 'reference/features/AUTHENTICATION.md'
         - 'Automated Doc Workflow': 'reference/features/AUTOMATED_DOCUMENTATION_WORKFLOW.md'

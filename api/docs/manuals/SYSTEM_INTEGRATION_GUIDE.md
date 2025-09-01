@@ -8,7 +8,7 @@ For developers looking to contribute to the Zotify API itself, please see the [`
 1.  [Project Setup](#1-project-setup)
 2.  [Running the Test Suite](#2-running-the-test-suite)
 3.  [Core Architectural Principles](#3-core-architectural-principles)
-4.  [Code & Documentation Conventions](#4-code-documentation-conventions)
+4.  [Code & Documentation Conventions](#4-code--documentation-conventions)
 
 ---
 

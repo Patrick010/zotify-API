@@ -1,5 +1,26 @@
 ---
 
+## ACT-064: Move Master Index and Fix Links
+
+**Date:** 2025-08-31
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To move the `MASTER_INDEX.md` to its correct location and resolve all broken links caused by the move.
+
+### Outcome
+- Moved `api/docs/reference/MASTER_INDEX.md` to `api/docs/MASTER_INDEX.md`.
+- Updated links in `mkdocs.yml` and `AGENTS.md` to point to the new location.
+- Corrected all relative links within `MASTER_INDEX.md` to be valid from its new location.
+- Verified that the `mkdocs build` is clean after all changes.
+
+### Related Documents
+- `api/docs/MASTER_INDEX.md`
+- `mkdocs.yml`
+- `AGENTS.md`
+
+---
 ## ACT-063: Configure MkDocs for Modular Documentation
 
 **Date:** 2025-08-31

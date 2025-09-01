@@ -51,7 +51,7 @@ To identify which documents are relevant for a given change, you **must** consul
 
 #### API Documentation
 The API documentation has its own master index. When creating new documentation for the API, you **must** register it in the following locations:
-1.  **`api/docs/reference/MASTER_INDEX.md`**: The new documentation file must be added to this master list.
+1.  **`api/docs/MASTER_INDEX.md`**: The new documentation file must be added to this master list.
 2.  **`scripts/doc-lint-rules.yml`**: The new file must be added to the appropriate rule or mapping.
 3.  **`api/docs/reference/CODE_QUALITY_INDEX.md`**: A new row must be added for the documentation file with an initial quality score of 'X'.
 
