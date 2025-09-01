@@ -6,41 +6,98 @@
 
 1. Executive Summary
 
-This handover marks the completion of a significant documentation and process initiative: the establishment of a canonical baseline for the API's endpoints. A new system is now in place (endpoints.yaml) to track the status of all endpoints (planned vs. implemented), which will bring much-needed clarity to the development roadmap.
+This session successfully completed a major documentation overhaul. The primary goals were to address a large backlog of documentation debt by cleaning up the project archive, consolidating valuable information, and establishing clear, actionable project plans for key modules. The project is now in a clean, stable, and well-documented state, ready for the next phase of work.
+2. Work Completed in Final Commit
 
-However, it is critical to note that this work was performed on a codebase that contains several significant, unresolved bugs and inconsistencies. The immediate priority for the next developer will be to stabilize the system by addressing a critical database error and fixing the broken test suite before proceeding with new feature development.
-2. Key Accomplishments
+The final commit (feat(docs): Clean archive, create Snitch plan, and update logs) includes the following key achievements:
 
-The primary deliverable of this work phase was the API Endpoint Baseline System:
+    Archive Cleanup: Over 20 obsolete, inaccurate, or superseded documents were deleted from the project/archive/ directory, significantly reducing project clutter.
+    Documentation Consolidation: Valuable historical context and security warnings were migrated from archived files into the current, live documentation (CHANGELOG.md, SYSTEM_INTEGRATION_GUIDE.md, SECURITY.md).
+    GDPR Feature Design: A feature gap for GDPR compliance was addressed by formally designing the /privacy/data endpoints in the HLD/LLD and adding the implementation task to the backlog.
+    Snitch Module Plan: A new, comprehensive project plan was created for the Snitch module at snitch/docs/PROJECT_PLAN.md and was integrated into the main PID and Project Registry.
+    Process Improvements: The AGENTS.md file was updated to clarify the manual logging process, and all project logs were updated to reflect the completed work.
 
-    Authoritative Baseline (api/docs/endpoints.yaml): A new YAML file has been created to serve as the single source of truth for all API endpoints. It tracks each endpoint's path, methods, and implementation status (planned, implemented, etc.).
-    LLD Integration: A human-readable markdown table summarizing this baseline has been embedded in the project/LOW_LEVEL_DESIGN.md for easy reference during design discussions.
-    Planning Integration: The EXECUTION_PLAN.md and ROADMAP.md have been updated to incorporate this new baseline into the project's planning and development process. The next phase of work is now explicitly defined as implementing the remaining planned endpoints.
-    API Reference Update: The auto-generated API_REFERENCE.md has been updated with a note clarifying that it only shows implemented endpoints and points to the new YAML file for the complete picture.
+3. Current System Status
 
-3. Current System Status & Known Issues
-
-    Critical Database Bug: The API is partially non-functional due to a database schema mismatch. The tracks_service.py attempts to query for artist and album columns that do not exist in the tracks table, causing a sqlalchemy.exc.OperationalError whenever the /api/tracks endpoint is hit.
-    /version Endpoint Failure: The /version endpoint is consistently failing with a TypeError due to an incorrect uptime calculation involving timezone-naive and timezone-aware datetime objects.
-    Broken Functional Tests: The primary functional test suite (scripts/functional_test.py) is completely broken and fails with multiple 404 Not Found errors. The tests are out of sync with the actual API routes.
-    Repository Clutter: The api/ directory contains at least 9 leftover, redundant, or temporary scripts (e.g., test_api.sh, route_audit.py) that need to be audited and removed.
-    Latent CI Bug: The bandit.yml security configuration file is located in api/, but the CI workflow in .github/workflows/ci.yml expects it to be in the repository root. This may cause the CI security scan to fail or run with a default configuration.
+    The Codebase is Stable: The underlying application code is stable and all tests pass.
+    The Git State is Clean: The docs-cleanup-and-snitch-plan branch contains all the work described above in a single, comprehensive commit.
+    Known Issues: The notifications endpoints are known to be unauthenticated, as documented in project/SECURITY.md. This should be addressed in a future development cycle.
 
 4. Recommended Next Steps
 
-The following tasks should be addressed in order of priority to stabilize the project:
+The next developer should start a new task on a new branch audit-phase-5h.
 
-    Fix Critical Bugs (High Priority):
-        Resolve the database schema mismatch. The recommended approach is to add the artist and album columns to the Track model in models.py and document the technical debt of the service using raw SQL.
-        Fix the TypeError in the /version endpoint by correcting the app_start_time definition in globals.py.
+The immediate next task is to begin working through the "Loose Ends Backlog".
 
-    Stabilize Testing (High Priority):
-        Rewrite scripts/functional_test.py to use the correct API endpoint paths and assertions. All tests must pass before any new work is started.
+    Create the Backlog File: Create a new file at project/LOOSE_ENDS_BACKLOG.md using the content provided below.
+    Execute the Backlog: Systematically work through the "Open Items" listed within that file, creating separate, atomic commits for each resolved item as instructed in the file's "Meta" section. The first item to address will be the "Gap Analysis Framework".
 
-    Perform Code & Repo Cleanup (Medium Priority):
-        Delete the numerous leftover scripts from the api/ directory.
-        Move bandit.yml to the repository root to fix the CI pipeline and update the API_DEVELOPER_GUIDE.md accordingly.
+This will continue the process of improving the project's documentation and process maturity.
 
-    Proceed with Roadmap (Normal Priority):
-        Once the system is stable, begin work on implementing the planned endpoints from endpoints.yaml as outlined in the newly updated ROADMAP.md
+Task: 
+
+1. Add this file under project/LOOSE_ENDS_BACKLOG.md:
+
+# Loose Ends Backlog
+
+This document tracks design and documentation tasks that were discussed but never fully integrated into the repository.  
+Each item should be reviewed, documented, and closed out systematically.
+
+---
+
+## Done
+1. **Code & Documentation Quality Ratings**
+   - Status: **Done**
+   - Integrated into repo docs (A/B/C rubric with objective + human criteria).
+   - No further action needed.
+
+2. **Snitch Integration (Base)**
+   - Status: **Done (basic version exists)**
+
+---
+
+## Open Items
+
+### 2. Gap Analysis Framework (Template + Skeleton)
+- **Problem**: We drafted a combined skeleton+template form for gap analysis, so devs can be tasked with "Run a gap analysis and solve it. Use this form."  
+- **Status**: Not in repo. Lives only in chat notes.  
+- **Action**: Move into `project/process/GAP_ANALYSIS_TEMPLATE.md` so devs know exactly how to execute.  
+
+---
+
+### 3. Snitch OAuth Helper (Security Improvements)
+- **Problem**: Current Snitch is basic. Browser ↔ helper comms are vulnerable to replay/sniffing attacks.  
+- **Action**: Update `snitch/PROJECT_PLAN.md` including:  
+  - **Goals**: Secure OAuth callback transport (ephemeral, authenticated, replay-resistant).  
+  - **Milestones**:  
+    1. Define secure comms mechanism (e.g. HMAC token exchange or mutual auth).  
+    2. Implement replay protection + TLS support.  
+    3. Add automated integration test with Zotify-API.  
+    4. Document usage in `snitch/README.md`.  
+  - **Roadmap**: Link into `roadmap.md` Phase 7 or next open milestone.  
+
+---
+
+### 4. Roadmap File (Outdated)
+- **Problem**: `roadmap.md` exists but content is outdated vs. actual phase progress.  
+- **Action**:  
+  - Compare `roadmap.md` with Next Steps/Phase Sequencing doc.  
+  - Rewrite `roadmap.md` to reflect current state (Phase 3 wrap-up, Phase 4 approval, Phase 6–7 work planned).  
+  - Add pointers to loose ends tracked here.  
+
+---
+
+### 5. Privacy Compliance Documentation
+- **Problem**: `PRIVACY_COMPLIANCE.md` exists but is sparse. Endpoints like `/privacy/data` were added, but not fully documented.  
+- **Action**:  
+  - Flesh out compliance doc: list implemented endpoints, describe data handling flow, add operator instructions.  
+  - Ensure `API Reference.md` reflects compliance endpoints.  
+  - Cross-link from `SECURITY_GUIDE.md` and `OPERATOR_GUIDE.md`.  
+
+---
+
+## Meta
+- This file (`LOOSE_ENDS_BACKLOG.md`) is temporary.  
+- Once each item is resolved, it should be removed and archived in `project/archive/` and marked fully **Done**.  
+
 
