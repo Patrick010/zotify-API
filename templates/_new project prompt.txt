@@ -1,0 +1,10 @@
+Set up a complete project documentation directory based on the template set from the templates/ directory following PRINCE2 principles.
+Include all the core documents (PID, HLD, LLD, etc.) and any other relevant templates from the library.
+Populate them with project-specific data where available, leave placeholders where information is missing, and skip only those templates that are clearly not applicable to this project.
+Make sure each file is named consistently and reflects the standard structure.
+Also, import ONBOARDING.md from the templates, read it and follow it. Add the missing files named in onboarding to the project, but not all files are always applicable (e.g. audit files). If during the course of execution the project documentation files appear to be absent, import them from the templates directory.
+Always update the registry and other relevant project files.
+
+
+
+Review the current project documentation directory against the full template set to make it follow PRINCE2 principles. Add any missing core documents (e.g. PID, LLD, etc.) and populate them with project-specific data where possible. Where data is not available, create the file with placeholders so the structure is complete. Keep the naming and format consistent with the template standard

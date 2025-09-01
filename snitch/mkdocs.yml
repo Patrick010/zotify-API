@@ -1,0 +1,24 @@
+# This mkdocs.yml file is intended to be included by the root mkdocs.yml.
+# The site_name will be used as the directory name in the final merged documentation.
+site_name: snitch
+
+# The docs_dir is relative to this file's location.
+docs_dir: docs/
+
+nav:
+  - 'Architecture': 'ARCHITECTURE.md'
+  - 'Installation': 'INSTALLATION.md'
+  - 'User Manual': 'USER_MANUAL.md'
+  - 'Project Plan': 'PROJECT_PLAN.md'
+  - 'Roadmap': 'ROADMAP.md'
+  - 'Milestones': 'MILESTONES.md'
+  - 'Status': 'STATUS.md'
+  - 'Tasks': 'TASKS.md'
+  - 'Modules': 'MODULES.md'
+  - 'Phases': 'PHASES.md'
+  - 'Test Runbook': 'TEST_RUNBOOK.md'
+  - 'Code Quality': 'CODE_QUALITY_INDEX.md'
+  - 'Design':
+    - 'Phase 2 - Secure Callback': 'PHASE_2_SECURE_CALLBACK.md'
+    - 'Phase 2 - Zero Trust': 'PHASE_2_ZERO_TRUST_DESIGN.md'
+    - 'Phase 5 - IPC': 'phase5-ipc.md'
