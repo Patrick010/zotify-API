@@ -1,6 +1,7 @@
 import logging as py_logging
 import os
 import time
+from datetime import datetime, timezone
 from typing import Any, Dict, Optional, cast
 
 import yaml
@@ -157,11 +158,12 @@ async def get_open_api_endpoint() -> Dict[str, Any]:
 
 @app.get("/version")
 async def version() -> Dict[str, Any]:
+    uptime_delta = datetime.now(timezone.utc) - app_start_time
     return {
         "api": "v0.1.28",
         "cli_version": "v0.1.54",
         "build": "local",
-        "uptime": time.time() - app_start_time,
+        "uptime": uptime_delta.total_seconds(),
     }
 
 
