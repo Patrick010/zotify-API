@@ -1,4 +1,29 @@
 ---
+    ## ACT-071: Complete and close out the LOOSE_ENDS_BACKLOG.md
+
+    **Date:** 2025-09-01
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    Systematically process all items in the temporary LOOSE_ENDS_BACKLOG.md file, either by executing the tasks or migrating them to permanent documentation, and then delete the file as per the project workflow.
+
+    ### Outcome
+    Successfully processed all four open items in the backlog. The Snitch project plan was updated, the main Roadmap was rewritten, and the Privacy Compliance documentation was fleshed out and cross-linked. The temporary backlog file has now been deleted.
+    ### Related Documents
+- `project/process/GAP_ANALYSIS_TEMPLATE.md`
+- `snitch/docs/PROJECT_PLAN.md`
+- `project/ROADMAP.md`
+- `api/docs/system/PRIVACY_COMPLIANCE.md`
+- `api/docs/reference/API_REFERENCE.md`
+- `project/SECURITY.md`
+- `api/docs/manuals/OPERATOR_MANUAL.md`
+- `project/LOOSE_ENDS_BACKLOG.md`
+- `AGENTS.md`
+- `scripts/lint-docs.py`
+- `project/PROJECT_REGISTRY.md`
+
+---
     ## ACT-070: Close backlog item #2
 
     **Date:** 2025-09-01

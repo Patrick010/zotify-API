@@ -14,17 +14,29 @@ Zotify respects user privacy and commits to protecting personal data by:
 - Supporting users’ rights to data correction, portability, and consent withdrawal.
 - Conducting regular privacy impact assessments.
 
-## API Compliance
+## API Compliance & Data Handling
 
-- All API endpoints handling personal data enforce access controls and audit logging.
-- Privacy by design and default are implemented in API logic and storage.
-- Data minimization and retention policies are applied rigorously.
-- Data export and deletion endpoints are planned under `/privacy/data` to ensure GDPR compliance.
+### Data Storage and Security
+The primary piece of Personally Identifiable Information (PII) handled by the Zotify API is the user's **Spotify OAuth Token** (access and refresh tokens).
+
+- **Storage Location:** These tokens are stored in the main application database, a SQLite file located at `api/storage/zotify.db`.
+- **Security:** The security of this sensitive data is dependent on the security of the database file itself. Access to all API endpoints is protected by a static administrative API key.
+
+### Operator Responsibilities
+The operator of the Zotify API instance is responsible for the security of the data at rest.
+- **File Permissions:** Ensure the `api/storage/` directory and the `zotify.db` file within it have appropriate, restrictive file system permissions.
+- **Backups:** Perform regular, secure backups of the database file.
+- For detailed instructions on performing backups and other maintenance tasks, see the [`OPERATOR_MANUAL.md`](../manuals/OPERATOR_MANUAL.md).
+
+### Implemented Endpoints for Data Rights
+While dedicated `/privacy/data` endpoints for data export and deletion are planned for a future release, the following existing endpoints can be used to exercise some GDPR-related data rights:
+
+- **Right of Access:** User data can be accessed via the various `/api/user/*` endpoints.
+- **Right to Erasure ('Right to be Forgotten'):** A user's Spotify token can be deleted from the database by calling `POST /api/auth/logout`. This effectively disconnects the user's account from the Zotify instance.
 
 ## Future Enhancements
 
-- Implementation of role-based access control (RBAC) for fine-grained permissions.
-- Rate limiting to prevent abuse of personal data endpoints.
-- Continuous monitoring and improvements based on security reviews and audits.
-
-For full details, see the security.md file and developer/operator guides.
+- **Dedicated GDPR Endpoints:** Implementation of `/privacy/data/export` and `/privacy/data/delete` endpoints.
+- **Role-Based Access Control (RBAC):** Implementation of RBAC for more fine-grained data access permissions.
+- **Rate Limiting:** Adding rate limiting to prevent abuse of personal data endpoints.
+- **Continuous Monitoring:** Ongoing improvements based on security reviews and audits.

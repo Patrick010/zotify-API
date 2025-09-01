@@ -14,6 +14,10 @@ This document provides a detailed reference for the Zotify API. It is generated 
 
 This summary is grouped by tags and provides a quick overview of all available endpoints.
 
+### `privacy`
+
+> Note: Endpoints for direct data export and deletion (`/privacy/data`) are planned for a future release to enhance GDPR compliance.
+
 ### `auth`
 
 - `GET /api/auth/spotify/login`: Spotify Login

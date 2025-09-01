@@ -1,51 +1,44 @@
 # Zotify API Platform Roadmap
 
-**Date:** 2025-08-18
+**Date:** 2025-09-01
 **Status:** Live Document
 
 ## 1. Introduction
 
-This document provides a high-level, strategic roadmap for the Zotify API Platform. It is organized by major themes and outlines the development trajectory from the current stable state to future enhancements.
-
-This document is not a detailed task tracker. For a log of completed work, see [`ACTIVITY.md`](./logs/ACTIVITY.md). For the immediate next steps, see [`CURRENT_STATE.md`](./logs/CURRENT_STATE.md). For a list of all potential long-term ideas, see [`FUTURE_ENHANCEMENTS.md`](./FUTURE_ENHANCEMENTS.md).
+This document provides a high-level, strategic roadmap for the Zotify API Platform. It is organized by project phase and outlines the development trajectory from the current stable state to future enhancements.
 
 ---
 
-## 2. Core Platform Stability & Security (✅ Done)
+## 2. Project Phases
 
-This phase focused on refactoring the core architecture, resolving critical regressions, and hardening the platform's security and observability features.
+### Phase 1-2: Core Architecture & Refactoring (✅ Done)
+This phase focused on establishing the foundational architecture of the project, including the initial API, database models, and provider abstractions.
 
--   **Unified Database Layer:** Migrated all data persistence to a unified SQLAlchemy backend.
--   **Provider Abstraction Layer (v1):** Decoupled the application from a hardcoded Spotify implementation.
--   **`snitch` Application Repair:** Resolved a critical build issue and refactored the application for stability.
--   **Flexible Logging Framework:** Implemented and hardened a feature-rich logging system with capabilities for:
-    -   Tag-based routing to multiple sinks.
-    -   Dedicated security and audit logging.
-    -   Automatic redaction of sensitive data in production environments.
--   **Comprehensive Documentation Overhaul:** Brought all key project documents up to a high standard of quality and accuracy.
+### Phase 3: HLD/LLD Alignment (✅ Done)
+This phase involved a comprehensive audit to align the High-Level Design (HLD) and Low-Level Design (LLD) with the implemented code, ensuring all documentation accurately reflects the state of the project.
 
----
+### Phase 4: Enforcement & Automation (✅ Done)
+This phase focused on hardening the development process by introducing and configuring a suite of static analysis tools (`ruff`, `mypy`), security scanners (`bandit`, `gosec`), and CI/CD pipeline improvements to enforce quality gates.
 
-## 3. Platform Extensibility (Next Up)
+### Phase 5: Documentation & Process Hardening (In Progress)
+This is the current phase. The primary goal is to resolve outstanding documentation and process gaps identified during the audit. This includes closing out the `LOOSE_ENDS_BACKLOG.md`.
 
+- **Source:** `project/LOOSE_ENDS_BACKLOG.md`
+
+### Phase 6: Platform Extensibility (Planned)
 This next major phase of work will focus on making the Zotify API a truly extensible platform, allowing the community to build and share new functionality.
 
--   **Archive Cleanup & Documentation Consolidation:** Clean up the `project/archive/` directory by reviewing old `.md` files, extracting anything still relevant, and discarding what is obsolete. The goal is to reduce noise while preserving useful material without corrupting the authoritative documentation.
--   **Dynamic Plugin System:** Implement a dynamic plugin system based on the `entry_points` mechanism, allowing developers to create custom logging sinks.
-    -   **Source:** [`DYNAMIC_PLUGIN_PROPOSAL.md`](./proposals/DYNAMIC_PLUGIN_PROPOSAL.md)
--   **Refactor Providers as Plugins:** As a proof-of-concept, refactor the existing Spotify provider to be a standalone plugin, solidifying the new architectural pattern.
--   **Low-Code/No-Code Integration:** Create a reference implementation for Node-RED integration, making the API accessible to non-programmers.
-    -   **Source:** [`LOW_CODE_PROPOSAL.md`](./proposals/LOW_CODE_PROPOSAL.md)
--   **Home Automation Integration:** Create a reference implementation for Home Assistant integration, bringing Zotify into the smart home ecosystem.
-    -   **Source:** [`HOME_AUTOMATION_PROPOSAL.md`](./proposals/HOME_AUTOMATION_PROPOSAL.md)
+- **Dynamic Plugin System:** Implement a dynamic plugin system for custom logging sinks and other components.
+- **Providers as Plugins:** Refactor the existing providers to be standalone plugins.
+- **External Integrations:** Develop reference implementations for Low-Code and Home Automation platforms.
+
+### Phase 7: Snitch Module Hardening (Planned)
+This phase will focus on implementing the security and reliability improvements for the Snitch module as defined in its project plan.
+
+- **Source:** `snitch/docs/PROJECT_PLAN.md`
 
 ---
 
-## 4. Future Vision
+## 3. Future Vision
 
-Beyond the next major phase, development will focus on expanding the core feature set and improving the user experience.
-
--   **API Baseline Implementation:** Diff the implemented OpenAPI spec vs. the `endpoints.yaml` baseline and implement all missing, planned endpoints.
--   **Full Two-Way Sync:** Implement write-sync capabilities for Spotify and other providers.
--   **Advanced API Governance:** Introduce rate limiting, usage quotas, and more sophisticated security controls.
--   **Enhanced User Interface:** Develop a more feature-rich web UI for managing all aspects of the platform.
+Beyond the planned phases, development will focus on expanding the core feature set. See `FUTURE_ENHANCEMENTS.md` for a full list of long-term ideas.

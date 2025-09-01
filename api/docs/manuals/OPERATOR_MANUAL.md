@@ -116,7 +116,7 @@ Regular backups of the application database are critical.
 ```bash
 sqlite3 /path/to/zotify-API/api/storage/zotify.db ".backup /path/to/backups/zotify_$(date +%F).db"
 ```
-This command should be run regularly via a `cron` job, and backups should be stored securely.
+This command should be run regularly via a `cron` job, and backups should be stored securely. Note that this database contains sensitive user authentication tokens and should be handled according to your organization's data protection policies. For more information, see the [`PRIVACY_COMPLIANCE.md`](../system/PRIVACY_COMPLIANCE.md) document.
 
 ## 5. Monitoring
 

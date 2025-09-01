@@ -24,7 +24,7 @@ Access to all administrative and system-level API endpoints is protected by a st
 The platform uses a standard OAuth2 PKCE flow to authenticate with the Spotify API.
 
 -   **Credential Storage:** Spotify OAuth tokens (access and refresh) are stored in the central `zotify.db` SQLite database, within the `spotify_tokens` table. This is a significant improvement over the previous plain text file storage.
--   **Database Security:** The security of these tokens is dependent on the security of the database file itself. Administrators should ensure that the `storage/` directory has appropriate file permissions.
+-   **Database Security:** The security of these tokens is dependent on the security of the database file itself. Administrators should ensure that the `storage/` directory has appropriate file permissions. For more details on data handling and GDPR compliance, see the [`PRIVACY_COMPLIANCE.md`](../api/docs/system/PRIVACY_COMPLIANCE.md) document.
 
 ### 2.3. Secure Logging
 
