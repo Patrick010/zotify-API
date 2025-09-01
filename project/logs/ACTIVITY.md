@@ -1,4 +1,19 @@
 ---
+    ## ACT-072: Create Roadmap-to-Execution traceability matrix
+
+    **Date:** 2025-09-01
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    Create a new traceability matrix in TRACEABILITY_MATRIX.md to map the strategic roadmap to the operational execution plan, making any drift between the two documents clear.
+
+    ### Outcome
+    A new 'Roadmap to Execution Plan Traceability' table has been added to TRACEABILITY_MATRIX.md, explicitly mapping themes to phases and flagging any gaps or unmapped items.
+    ### Related Documents
+- `project/TRACEABILITY_MATRIX.md`
+
+---
     ## ACT-071: Complete and close out the LOOSE_ENDS_BACKLOG.md
 
     **Date:** 2025-09-01

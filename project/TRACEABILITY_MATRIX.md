@@ -1,6 +1,25 @@
 # Traceability Matrix – Zotify API
 
+## 1. Roadmap to Execution Plan Traceability
+
+This matrix provides a high-level bridge between the strategic themes outlined in the `ROADMAP.md` and the operational phases in the `EXECUTION_PLAN.md`. Its purpose is to make any drift between the two documents immediately obvious.
+
+| Roadmap Theme | Execution Phases | Deliverables / Notes |
+|---|---|---|
+| **Phase 1-5: Core Stability & Hardening** | Phases 0-5, 7, 11 | **Well-Aligned.** These roadmap phases correspond to the foundational setup, core API implementation, and developer tooling in the execution plan. |
+| | Phase 6: Fork-Specific Enhancements | **Unmapped in Roadmap.** This execution phase contains work (e.g., API key rotation) that is not explicitly themed in the current roadmap. |
+| | Phase 9: Admin + Settings API | **Unmapped in Roadmap.** This execution phase contains work (e.g., log access endpoints, background job management) that is not explicitly themed in the current roadmap. |
+| | Phase 10: Finalization & Release Readiness | **Unmapped in Roadmap.** This execution phase contains release-readiness tasks that are not explicitly themed in the current roadmap. |
+| **Phase 6: Platform Extensibility** | Phase 8: Automation Layer | **Partial Alignment.** The "Automation Layer" in the execution plan loosely maps to the extensibility theme, but the specific deliverables differ. |
+| | | **Unmapped in Execution Plan:** Roadmap items like Dynamic Plugins, Node-RED, and Home Assistant integration are not yet reflected as specific tasks in the execution plan. |
+| **Phase 7: Snitch Module Hardening** | Phase 2 (Snitch Plan) | **Aligned.** The work is detailed in the `snitch/docs/PROJECT_PLAN.md`, which is considered a sub-plan of the main execution plan. |
+| **Future Vision** | N/A | **Intentional Omission.** The "Future Vision" items are by definition not yet planned for execution and are tracked in `FUTURE_ENHANCEMENTS.md`. |
+
+---
+
 > **Note:** For a high-level summary of feature coverage and gaps, see the [`USECASES_GAP_ANALYSIS.md`](./USECASES_GAP_ANALYSIS.md) document.
+
+## 2. Detailed Requirements Traceability
 
 ## Legend
 - ✅ Implemented
@@ -50,7 +69,7 @@
 
 ---
 
-## Logging System Traceability
+## 3. Logging System Traceability
 
 | Requirement | Source Doc | Phase(s) | Status |
 |-------------|------------|----------|--------|
