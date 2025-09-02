@@ -1,4 +1,20 @@
 ---
+    ## ACT-076: Populate alignment matrix and add linter rule
+
+    **Date:** 2025-09-02
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    Flesh out the new ALIGNMENT_MATRIX.md with accurate, up-to-date data. Enforce its maintenance by adding a new rule to the documentation linter.
+
+    ### Outcome
+    The project/ALIGNMENT_MATRIX.md is now fully populated with links to the relevant HLD, LLD, code, and documentation for all major components. A new rule in scripts/doc-lint-rules.yml will ensure this matrix is kept up-to-date as the project evolves.
+    ### Related Documents
+- `project/ALIGNMENT_MATRIX.md`
+- `scripts/doc-lint-rules.yml`
+
+---
     ## ACT-075: Create living alignment matrix and enforce in linter
 
     **Date:** 2025-09-02

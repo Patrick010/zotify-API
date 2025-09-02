@@ -3,7 +3,7 @@
 **Status:** Live Document
 
 ## 1. Session Summary & Accomplishments
-Create living alignment matrix and enforce in linter
+Populate alignment matrix and add linter rule
 
 ## 2. Known Issues & Blockers
 - None

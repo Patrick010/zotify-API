@@ -10,10 +10,10 @@ It must be updated with every feature, refactor, or documentation change.
 
 | Module / Feature     | HLD Reference | LLD Reference | Code Path(s) | Documentation |
 |----------------------|---------------|---------------|--------------|---------------|
-| Track Service        | HIGH_LEVEL_DESIGN.md#track-service | LOW_LEVEL_DESIGN.md#track-service | api/src/zotify_api/services/tracks_service.py | api/docs/reference/API_REFERENCE.md#track-endpoints |
-| Playlist Service     | …             | …             | api/src/zotify_api/services/playlists_service.py | … |
-| Auth & OAuth Flow    | …             | …             | api/src/zotify_api/auth/ | project/SECURITY.md, HIGH_LEVEL_DESIGN.md#auth |
-| Database Models      | …             | LOW_LEVEL_DESIGN.md#database | api/src/zotify_api/database/models.py | … |
+| Track Service        | [HLD §3](HIGH_LEVEL_DESIGN.md#3-architecture-overview) | [LLD §Tracks](LOW_LEVEL_DESIGN.md#tracks) | `api/src/zotify_api/services/tracks_service.py` | `api/docs/reference/API_REFERENCE.md#tracks` |
+| Playlist Service     | [HLD §3](HIGH_LEVEL_DESIGN.md#3-architecture-overview) | [LLD §Playlists](LOW_LEVEL_DESIGN.md#playlists) | `api/src/zotify_api/services/playlists_service.py` | `api/docs/reference/API_REFERENCE.md#playlists` |
+| Auth & OAuth Flow    | [HLD §3](HIGH_LEVEL_DESIGN.md#3-architecture-overview) | [LLD §Auth](LOW_LEVEL_DESIGN.md#auth) | `api/src/zotify_api/routes/auth.py`, `api/src/zotify_api/services/auth.py` | `project/SECURITY.md`, `HIGH_LEVEL_DESIGN.md#7-security-model` |
+| Database Models      | [HLD §3](HIGH_LEVEL_DESIGN.md#3-architecture-overview) | [LLD §Database](LOW_LEVEL_DESIGN.md#unified-database-architecture) | `api/src/zotify_api/database/models.py` | `project/LOW_LEVEL_DESIGN.md#unified-database-architecture` |
 
 ---
 
@@ -21,9 +21,9 @@ It must be updated with every feature, refactor, or documentation change.
 
 | Component            | HLD Reference | LLD Reference | Code Path(s) | Documentation |
 |----------------------|---------------|---------------|--------------|---------------|
-| Snitch Module        | HIGH_LEVEL_DESIGN.md#snitch | LOW_LEVEL_DESIGN.md#snitch | snitch/ | api/docs/modules/snitch.md |
-| Gonk Test UI         | HIGH_LEVEL_DESIGN.md#gonk-testui | LOW_LEVEL_DESIGN.md#gonk-testui | gonk-testUI/ | api/docs/modules/gonk-testUI.md |
-| Logging & Agents     | …             | …             | scripts/log-work.py | AGENTS.md |
+| Snitch Module        | [HLD §3.1](HIGH_LEVEL_DESIGN.md#31-supporting-modules) | [LLD §Snitch](LOW_LEVEL_DESIGN.md#snitch) | `snitch/` | `snitch/docs/` |
+| Gonk Test UI         | [HLD §3.1](HIGH_LEVEL_DESIGN.md#31-supporting-modules) | [LLD §Gonk-TestUI](LOW_LEVEL_DESIGN.md#gonk-testui) | `gonk-testUI/` | `gonk-testUI/docs/` |
+| Logging & Agents     | [HLD §3.3](HIGH_LEVEL_DESIGN.md#33-flexible-logging-framework) | [LLD §Agents](LOW_LEVEL_DESIGN.md#agents) | `scripts/log-work.py` | `AGENTS.md` |
 
 ---
 
@@ -31,8 +31,8 @@ It must be updated with every feature, refactor, or documentation change.
 
 | Area                 | HLD Reference | LLD Reference | Code Path(s) | Documentation |
 |----------------------|---------------|---------------|--------------|---------------|
-| CI/CD Pipeline       | HIGH_LEVEL_DESIGN.md#cicd | LOW_LEVEL_DESIGN.md#cicd | .github/workflows/ | project/CICD.md, api/docs/manuals/CICD.md |
-| Linter & QA          | HIGH_LEVEL_DESIGN.md#qa | LOW_LEVEL_DESIGN.md#qa | scripts/lint-docs.py, doc-lint-rules.yml | project/DEVELOPER_GUIDE.md |
+| CI/CD Pipeline       | [HLD §6](HIGH_LEVEL_DESIGN.md#6-deployment-model) | [LLD §CI/CD](LOW_LEVEL_DESIGN.md#cicd) | `.github/workflows/` | `project/CICD.md`, `api/docs/manuals/CICD.md` |
+| Linter & QA          | [HLD §5](HIGH_LEVEL_DESIGN.md#5-documentation-governance) | [LLD §QA](LOW_LEVEL_DESIGN.md#qa) | `scripts/lint-docs.py`, `scripts/doc-lint-rules.yml` | `api/docs/manuals/API_DEVELOPER_GUIDE.md` |
 
 ---
 
