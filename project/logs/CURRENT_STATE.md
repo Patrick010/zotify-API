@@ -3,7 +3,7 @@
 **Status:** Live Document
 
 ## 1. Session Summary & Accomplishments
-Create exhaustive, gap-free Project Alignment Matrix
+Create unified and conditional pre-submission linter
 
 ## 2. Known Issues & Blockers
 - None

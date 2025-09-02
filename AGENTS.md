@@ -74,19 +74,14 @@ At the completion of any significant action, you **must** log the work using the
 > **Important:** Due to a global git policy, it is not possible to run this script as an automated pre-commit hook. Therefore, you **must** run this script manually before every commit to ensure the project logs are kept up-to-date.
 
 ### Step 5: Pre-Submission Verification
-Before submitting your work for review, you **must** run the following tools to verify compliance.
+Before submitting your work for review, you **must** run the unified linter script to verify compliance. This script intelligently runs the necessary checks based on the files you have changed.
 
-1.  **Run Tests:**
-    *   **Command:** `bash scripts/run_lint.sh.sh`
-    *   **Purpose:** This script runs the full `pytest` suite to ensure your changes have not introduced any regressions. You must resolve any test failures.
-
-2.  **Run Documentation Linter:**
-    *   **Command:** `python scripts/lint-docs.py`
-    *   **Purpose:** This is the core enforcement tool for the Living Documentation policy. It uses the "documentation matrix" defined in `scripts/doc-lint-rules.yml` to check that all required documentation has been updated. You must resolve any errors it reports.
-
-3.  **Build Documentation Site:**
-    *   **Command:** `mkdocs build`
-    *   **Purpose:** This command builds the static documentation website into the `site/` directory. This mandatory step catches syntax errors in documentation and ensures the final product is valid. The site can be previewed at http://<server_ip>:8008 by running `mkdocs serve`. 
+*   **Command:** `bash scripts/linter.sh`
+*   **Purpose:** This script acts as a single entrypoint for all verification steps. It will:
+    1.  Run the documentation cross-reference linter (`lint-docs.py`) on every run.
+    2.  Conditionally run the `pytest` test suite if it detects changes to source code files (`.py`, `.go`).
+    3.  Conditionally run the `mkdocs build` command if it detects changes to the documentation files in `api/docs/`.
+*   You must resolve any errors reported by the script before submitting.
 
 ---
 

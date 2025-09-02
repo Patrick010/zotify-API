@@ -1,4 +1,20 @@
 ---
+    ## ACT-078: Create unified and conditional pre-submission linter
+
+    **Date:** 2025-09-02
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    To refine the pre-submission verification process by unifying the various check scripts into a single, intelligent script that runs conditionally based on the type of files changed.
+
+    ### Outcome
+    Created a new `scripts/linter.sh` script that acts as a single entrypoint for verification. This script inspects staged files and conditionally runs `pytest` for code changes and `mkdocs build` for documentation changes, optimizing the verification process. The `AGENTS.md` file was updated to point to this new unified script.
+    ### Related Documents
+- `scripts/linter.sh`
+- `AGENTS.md`
+
+---
     ## ACT-077: Create exhaustive, gap-free Project Alignment Matrix
 
     **Date:** 2025-09-02
@@ -460,7 +476,7 @@ To resolve all outstanding CI/CD pipeline failures and to implement a new suite 
 - **Developer Tooling Implemented:**
     - Created a custom documentation linter (`scripts/lint-docs.py`) that is run in CI and locally via pre-commit hooks.
     - Established the `pre-commit` framework with a `.pre-commit-config.yaml` file.
-- **Documentation Overhaul:**
+- **Documentation Overhauled:**
     - Established a new file naming convention for all markdown files (UPPERCASE).
     - Imported and created a full suite of reusable documentation templates in the `templates/` directory.
     - Created two distinct `CICD.md` guides for developer and project management audiences.
