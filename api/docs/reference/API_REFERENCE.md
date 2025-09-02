@@ -1,4 +1,4 @@
-> This file is auto-generated from the OpenAPI specification. For planned endpoints (not yet implemented), see `docs/api/endpoints.yaml`.
+> This file is auto-generated from the OpenAPI specification. For planned endpoints (not yet implemented), see `../../project/api/endpoints.yaml`.
 
 # API Reference
 

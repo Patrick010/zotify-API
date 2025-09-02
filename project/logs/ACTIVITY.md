@@ -1,4 +1,22 @@
 ---
+    ## ACT-074: Move endpoints.yaml and update references
+
+    **Date:** 2025-09-02
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    Move the endpoints.yaml file from api/docs/ to project/api/ and update all references to it in the documentation.
+
+    ### Outcome
+    Successfully moved the file and updated all references in API_REFERENCE.md, EXECUTION_PLAN.md, and LOW_LEVEL_DESIGN.md. The rename_file tool failed, so a workaround of reading, creating, and deleting the file was used.
+    ### Related Documents
+- `project/api/endpoints.yaml`
+- `api/docs/reference/API_REFERENCE.md`
+- `project/EXECUTION_PLAN.md`
+- `project/LOW_LEVEL_DESIGN.md`
+
+---
     ## ACT-073: Align strategic and operational documentation
 
     **Date:** 2025-09-01

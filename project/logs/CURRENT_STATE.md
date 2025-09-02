@@ -1,9 +1,9 @@
-# Project State as of 2025-09-01
+# Project State as of 2025-09-02
 
 **Status:** Live Document
 
 ## 1. Session Summary & Accomplishments
-Align strategic and operational documentation
+Move endpoints.yaml and update references
 
 ## 2. Known Issues & Blockers
 - None

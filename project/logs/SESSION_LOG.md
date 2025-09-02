@@ -1,4 +1,11 @@
 ---
+## Session Report: 2025-09-02
+
+**Summary:** Move endpoints.yaml and update references
+**Findings:**
+- (To be filled in manually)
+
+---
 ## Session Report: 2025-09-01
 
 **Summary:** Align strategic and operational documentation

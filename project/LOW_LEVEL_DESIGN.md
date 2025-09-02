@@ -7,7 +7,7 @@ This LLD describes the specific implementation details of the Zotify API's subsy
 
 ## API Endpoint Baseline
 
-This table provides a canonical overview of all planned and implemented endpoints for the Zotify API. It serves as the human-readable counterpart to the authoritative baseline defined in `api/docs/endpoints.yaml`.
+This table provides a canonical overview of all planned and implemented endpoints for the Zotify API. It serves as the human-readable counterpart to the authoritative baseline defined in `api/endpoints.yaml`.
 
 | Module      | Path                         | Methods               | Status        |
 |-------------|------------------------------|-----------------------|---------------|

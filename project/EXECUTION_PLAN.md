@@ -96,4 +96,4 @@ This document provides a detailed breakdown of the tasks required to fulfill the
 **Goal:** Ensure documentation is clear, accurate, and serves as a reliable source of truth for both developers and users.
 **Status:** 🟡 In Progress
 **Steps:**
-- [ ] Maintain `/docs/api/endpoints.yaml` as the authoritative baseline for planned vs. implemented endpoints.
+- [ ] Maintain `project/api/endpoints.yaml` as the authoritative baseline for planned vs. implemented endpoints.
