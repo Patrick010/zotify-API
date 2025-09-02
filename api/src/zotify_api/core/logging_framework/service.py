@@ -1,6 +1,8 @@
 import asyncio
 import logging
+import os
 from logging.handlers import RotatingFileHandler
+from pathlib import Path
 from typing import Any, Dict, List, Optional, cast
 
 import httpx
@@ -45,6 +47,11 @@ class FileSink(BaseSink):
 
     def __init__(self, config: FileSinkConfig):
         super().__init__(config)
+
+        # Ensure the directory for the log file exists.
+        log_dir = Path(config.path).parent
+        os.makedirs(log_dir, exist_ok=True)
+
         self.handler = RotatingFileHandler(
             config.path, maxBytes=config.max_bytes, backupCount=config.backup_count
         )

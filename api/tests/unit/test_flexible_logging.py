@@ -7,8 +7,12 @@ import yaml
 from pydantic import ValidationError
 from pytest_mock import MockerFixture
 
-from zotify_api.core.logging_framework.schemas import LoggingFrameworkConfig
+from zotify_api.core.logging_framework.schemas import (
+    FileSinkConfig,
+    LoggingFrameworkConfig,
+)
 from zotify_api.core.logging_framework.service import (
+    FileSink,
     LoggingService,
     get_logging_service,
 )
@@ -170,6 +174,37 @@ async def test_trigger_handling(
     assert logging_service.sinks["test_console"].emit.call_count == 1
     assert logging_service.sinks["test_file"].emit.call_count == 0
     assert logging_service.sinks["test_webhook"].emit.call_count == 0
+
+
+def test_file_sink_creates_directory(tmp_path):
+    """
+    Tests that the FileSink constructor correctly creates the log directory
+    if it does not exist. This verifies the fix for the startup crash.
+    """
+    # 1. Define a log file path in a non-existent subdirectory of the temp path
+    log_dir = tmp_path / "non_existent_dir"
+    log_file = log_dir / "test.log"
+
+    # At this point, the directory should not exist
+    assert not log_dir.exists()
+
+    # 2. Create a config model for the sink
+    file_sink_config = {
+        "name": "test_creation",
+        "type": "file",
+        "level": "INFO",
+        "path": str(log_file),
+    }
+    config_model = FileSinkConfig(**file_sink_config)
+
+    # 3. Instantiate the FileSink, which should trigger the directory creation
+    FileSink(config_model)
+
+    # 4. Assert that the directory and the log file now exist
+    assert log_dir.exists()
+    assert log_dir.is_dir()
+    assert log_file.exists()
+    assert log_file.is_file()
 
 
 # Note: Testing the reload API endpoint would typically be done in an integration
