@@ -1,18 +1,20 @@
 ---
-    ## ACT-078: Create unified and conditional pre-submission linter
+    ## ACT-078: Unify and optimize pre-submission verification script
 
     **Date:** 2025-09-02
     **Status:** ✅ Done
     **Assignee:** Jules
 
     ### Objective
-    To refine the pre-submission verification process by unifying the various check scripts into a single, intelligent script that runs conditionally based on the type of files changed.
+    To refactor the pre-submission verification process into a single, unified, and intelligent Python script, as per user request. This involves merging the logic of multiple scripts and making the execution of checks conditional.
 
     ### Outcome
-    Created a new `scripts/linter.sh` script that acts as a single entrypoint for verification. This script inspects staged files and conditionally runs `pytest` for code changes and `mkdocs build` for documentation changes, optimizing the verification process. The `AGENTS.md` file was updated to point to this new unified script.
+    Created a new  that now contains all verification logic. This script conditionally runs pytest for code changes and mkdocs for documentation changes, while always running the doc matrix check. The old  and  scripts have been deleted, and  has been updated to point to the new, single command. The new script has been tested and verified.
     ### Related Documents
-- `scripts/linter.sh`
+- `scripts/linter.py`
 - `AGENTS.md`
+- `scripts/lint-docs.py`
+- `scripts/run_lint.sh`
 
 ---
     ## ACT-077: Create exhaustive, gap-free Project Alignment Matrix

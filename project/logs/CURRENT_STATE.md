@@ -3,7 +3,7 @@
 **Status:** Live Document
 
 ## 1. Session Summary & Accomplishments
-Create unified and conditional pre-submission linter
+Unify and optimize pre-submission verification script
 
 ## 2. Known Issues & Blockers
 - None

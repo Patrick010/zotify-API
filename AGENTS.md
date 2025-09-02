@@ -76,9 +76,9 @@ At the completion of any significant action, you **must** log the work using the
 ### Step 5: Pre-Submission Verification
 Before submitting your work for review, you **must** run the unified linter script to verify compliance. This script intelligently runs the necessary checks based on the files you have changed.
 
-*   **Command:** `bash scripts/linter.sh`
+*   **Command:** `python3 scripts/linter.py`
 *   **Purpose:** This script acts as a single entrypoint for all verification steps. It will:
-    1.  Run the documentation cross-reference linter (`lint-docs.py`) on every run.
+    1.  Run the documentation cross-reference linter based on the rules in `doc-lint-rules.yml`.
     2.  Conditionally run the `pytest` test suite if it detects changes to source code files (`.py`, `.go`).
     3.  Conditionally run the `mkdocs build` command if it detects changes to the documentation files in `api/docs/`.
 *   You must resolve any errors reported by the script before submitting.
