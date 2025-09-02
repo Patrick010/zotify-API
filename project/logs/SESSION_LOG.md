@@ -1,7 +1,7 @@
 ---
 ## Session Report: 2025-09-02
 
-**Summary:** Fix CI pipeline by updating doc-linter job
+**Summary:** Fix CI pipeline by installing PyYAML for doc-linter
 **Findings:**
 - (To be filled in manually)
 

@@ -3,7 +3,7 @@
 **Status:** Live Document
 
 ## 1. Session Summary & Accomplishments
-Fix CI pipeline by updating doc-linter job
+Fix CI pipeline by installing PyYAML for doc-linter
 
 ## 2. Known Issues & Blockers
 - None

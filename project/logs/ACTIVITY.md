@@ -1,15 +1,15 @@
 ---
-    ## ACT-079: Fix CI pipeline by updating doc-linter job
+    ## ACT-080: Fix CI pipeline by installing PyYAML for doc-linter
 
     **Date:** 2025-09-02
     **Status:** ✅ Done
     **Assignee:** Jules
 
     ### Objective
-    To fix the CI pipeline failure caused by the `doc-linter` job calling a script that was deleted in a previous refactoring.
+    To fix the CI pipeline failure caused by a `ModuleNotFoundError` for the `yaml` package in the `doc-linter` job.
 
     ### Outcome
-    Updated the `.github/workflows/ci.yml` file to replace the call to the old `lint-docs.py` script with the new, unified `linter.py` script. This aligns the CI pipeline with the current state of the codebase.
+    Added a new step to the `doc-linter` job in `.github/workflows/ci.yml` to explicitly install the `PyYAML` dependency before the linter script is run. This ensures the script has access to all its required libraries.
     ### Related Documents
 - `.github/workflows/ci.yml`
 
@@ -520,7 +520,7 @@ To complete Phase 4c of the audit alignment plan by implementing a custom docume
 - **Pre-commit Hooks:**
     - The `pre-commit` framework was introduced to run the documentation linter locally, preventing developers from committing code that violates documentation policies.
     - A `.pre-commit-config.yaml` file was created to configure the hook.
-- **Documentation Overhaul:**
+- **Documentation Overhauled:**
     - A new file naming convention was established (`FILENAME.md` for markdown, `lowercase` for all other files).
     - A comprehensive set of reusable documentation templates was imported into the `templates/` directory.
     - New `CICD.md` guides were created for both project management (`project/CICD.md`) and developer (`api/docs/manuals/CICD.md`) audiences.
