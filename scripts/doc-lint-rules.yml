@@ -15,7 +15,7 @@ rules:
       - "project/HIGH_LEVEL_DESIGN.md"
       - "project/LOW_LEVEL_DESIGN.md"
     required_docs:
-      - "project/audit/AUDIT_TRACEABILITY_MATRIX.md"
+      - "project/ALIGNMENT_MATRIX.md"
     message: "Changes to core design documents must be reflected in the traceability matrix."
 
   - name: "Agent Workflow Change"

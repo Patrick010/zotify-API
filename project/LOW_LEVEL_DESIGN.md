@@ -5,7 +5,7 @@ This LLD describes the specific implementation details of the Zotify API's subsy
 
 ---
 
-## API Endpoint Baseline
+## API Endpoint Baseline {#lld-api-endpoint-baseline}
 
 This table provides a canonical overview of all planned and implemented endpoints for the Zotify API. It serves as the human-readable counterpart to the authoritative baseline defined in `api/endpoints.yaml`.
 
@@ -49,7 +49,7 @@ This table provides a canonical overview of all planned and implemented endpoint
 
 ---
 
-## API Middleware
+## API Middleware {#lld-api-middleware}
 
 The FastAPI application uses several middleware to provide cross-cutting concerns.
 
@@ -64,7 +64,7 @@ The FastAPI application uses several middleware to provide cross-cutting concern
 
 ---
 
-## Provider Abstraction Layer
+## Provider Abstraction Layer {#lld-provider-abstraction-layer}
 
 **Goal:** To decouple the core application logic from specific music service providers, allowing for future expansion to other services. This layer serves as a first-generation implementation of this principle. The long-term architectural vision is to supersede this with a dynamic plugin system, as detailed in [`DYNAMIC_PLUGIN_PROPOSAL.md`](./proposals/DYNAMIC_PLUGIN_PROPOSAL.md).
 
@@ -83,7 +83,7 @@ The FastAPI application uses several middleware to provide cross-cutting concern
 
 ---
 
-## Unified Database Architecture
+## Unified Database Architecture {#lld-unified-database-architecture}
 
 **Goal:** To establish a single, unified, and backend-agnostic persistence layer for the entire application, managed by SQLAlchemy.
 
@@ -102,7 +102,7 @@ The FastAPI application uses several middleware to provide cross-cutting concern
 
 ---
 
-## Spotify Integration Design
+## Spotify Integration Design {#lld-spotify-integration-design}
 
 **Goal:** To provide a robust integration with the Spotify Web API, implemented as the first connector for the provider abstraction layer.
 
@@ -115,7 +115,7 @@ The FastAPI application uses several middleware to provide cross-cutting concern
 
 ---
 
-## Configuration Management
+## Configuration Management {#lld-configuration-management}
 
 The application uses a dual system for managing configuration, separating immutable startup settings from mutable runtime settings.
 
@@ -131,7 +131,7 @@ The application uses a dual system for managing configuration, separating immuta
 
 ---
 
-## Downloads Subsystem Design
+## Downloads Subsystem Design {#lld-downloads-subsystem-design}
 
 **Goal:** To provide a persistent and robust download management system using the unified database.
 
@@ -145,7 +145,7 @@ The application uses a dual system for managing configuration, separating immuta
 
 ---
 
-## Generic Error Handling Module
+## Generic Error Handling Module {#lld-generic-error-handling-module}
 
 **Goal:** To centralize all exception handling in a single, configurable, and extensible module.
 
@@ -177,7 +177,7 @@ The application uses a dual system for managing configuration, separating immuta
 
 ---
 
-## Flexible Logging Framework
+## Flexible Logging Framework {#lld-flexible-logging-framework}
 
 **Goal:** To provide a developer-centric, configurable, and asynchronous logging framework.
 
@@ -213,11 +213,11 @@ The application uses a dual system for managing configuration, separating immuta
 
 ---
 
-## Supporting Modules
+## Supporting Modules {#lld-supporting-modules}
 
 This section describes the low-level design of the official supporting modules for the Zotify Platform.
 
-### Gonk-TestUI
+### Gonk-TestUI {#lld-gonk-testui}
 
 **Purpose:** A standalone developer tool for testing the Zotify API.
 
@@ -231,7 +231,7 @@ This section describes the low-level design of the official supporting modules f
     *   Includes a theme toggle with preferences saved to `localStorage`.
 *   **Templating:** The `index.html` is rendered as a Flask template to allow the backend to inject the configurable `--api-url` into the frontend at runtime.
 
-### Snitch
+### Snitch {#lld-snitch}
 
 **Purpose:** A helper application to securely manage the OAuth callback flow for CLI clients.
 
@@ -241,12 +241,12 @@ This section describes the low-level design of the official supporting modules f
 
 ---
 
-## Ongoing Maintenance
+## Ongoing Maintenance {#lld-ongoing-maintenance}
 All development tasks must follow the [Task Execution Checklist](./TASK_CHECKLIST.md) to ensure consistency, quality, and security.
 
 ---
 
-## Privacy Subsystem (GDPR Compliance)
+## Privacy Subsystem (GDPR Compliance) {#lld-privacy-subsystem}
 
 **Goal:** To provide endpoints that allow users to export and delete their personal data, in compliance with GDPR.
 

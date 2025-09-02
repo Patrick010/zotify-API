@@ -3,7 +3,7 @@
 **Status:** Live Document
 
 ## 1. Session Summary & Accomplishments
-Populate alignment matrix and add linter rule
+Populate and Enhance the Project Alignment Matrix
 
 ## 2. Known Issues & Blockers
 - None

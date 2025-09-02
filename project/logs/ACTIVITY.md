@@ -1,4 +1,22 @@
 ---
+    ## ACT-077: Populate and Enhance the Project Alignment Matrix
+
+    **Date:** 2025-09-02
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    To flesh out the ALIGNMENT_MATRIX.md with granular detail, add a new 'Audit Ref' column, and create the necessary anchors in the HLD/LLD documents to ensure full traceability between audit requirements and design documents.
+
+    ### Outcome
+    Successfully added anchors to HLD and LLD documents. Re-wrote the ALIGNMENT_MATRIX.md with a new structure, the 'Audit Ref' column, and detailed links from audit requirements to the specific design sections. Also corrected an outdated path in the doc linter configuration to ensure consistency.
+    ### Related Documents
+- `project/HIGH_LEVEL_DESIGN.md`
+- `project/LOW_LEVEL_DESIGN.md`
+- `project/ALIGNMENT_MATRIX.md`
+- `scripts/doc-lint-rules.yml`
+
+---
     ## ACT-076: Populate alignment matrix and add linter rule
 
     **Date:** 2025-09-02

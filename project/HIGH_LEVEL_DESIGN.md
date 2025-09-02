@@ -14,15 +14,15 @@ The refactor aims to:
 
 ## 3. Architecture Overview
 **Key Layers:**
-1. **Routes Layer** — FastAPI route handlers; minimal logic.
-2. **Service Layer** — Pure business logic; no framework dependencies.
-3. **Schema Layer** — Pydantic models for validation and serialization.
-4. **Persistence Layer** — A unified, backend-agnostic database system built on SQLAlchemy.
-5. **Provider Abstraction Layer** — An interface that decouples the core application from specific music service providers (e.g., Spotify). This layer is a first-generation implementation of the extensibility principle. The long-term vision is to supersede this with a dynamic plugin system, as detailed in the `DYNAMIC_PLUGIN_PROPOSAL.md`.
-6. **Config Layer** — Centralized settings with environment-based overrides.
-7. **Generic Error Handling Layer** — A centralized, platform-wide module for catching, processing, and responding to all exceptions.
-8. **Logging Layer** — A centralized, extendable service for handling all application logging, including system, audit, and job status logs.
-9. **Authentication Provider Interface** — An extension of the Provider Abstraction Layer that standardizes how authentication flows (e.g., OAuth2) are initiated and handled. This ensures that provider-specific authentication logic is encapsulated within the provider connector, not in the main API routes.
+1.  **Routes Layer** — FastAPI route handlers; minimal logic.
+2.  **Service Layer** — Pure business logic; no framework dependencies.
+3.  **Schema Layer** — Pydantic models for validation and serialization.
+4.  **Persistence Layer** — A unified, backend-agnostic database system built on SQLAlchemy.
+5.  **Provider Abstraction Layer** — An interface that decouples the core application from specific music service providers (e.g., Spotify). This layer is a first-generation implementation of the extensibility principle. The long-term vision is to supersede this with a dynamic plugin system, as detailed in the `DYNAMIC_PLUGIN_PROPOSAL.md`.
+6.  **Config Layer** — Centralized settings with environment-based overrides.
+7.  **Generic Error Handling Layer** — A centralized, platform-wide module for catching, processing, and responding to all exceptions.
+8.  **Logging Layer** — A centralized, extendable service for handling all application logging, including system, audit, and job status logs.
+9.  **Authentication Provider Interface** — An extension of the Provider Abstraction Layer that standardizes how authentication flows (e.g., OAuth2) are initiated and handled. This ensures that provider-specific authentication logic is encapsulated within the provider connector, not in the main API routes.
 
 **Data Flow Example (Search Request):**
 1. Request hits FastAPI route.
