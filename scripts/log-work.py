@@ -130,6 +130,13 @@ def main():
     # Prepend the new entry to the activity log
     prepend_to_file("project/logs/ACTIVITY.md", activity_entry)
 
+    # Format and update the other log files
+    session_entry = format_session_log(args.summary)
+    prepend_to_file("project/logs/SESSION_LOG.md", session_entry)
+
+    current_state_content = format_current_state(args.summary)
+    write_to_file("project/logs/CURRENT_STATE.md", current_state_content)
+
 
 if __name__ == "__main__":
     main()
