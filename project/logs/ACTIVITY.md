@@ -1,4 +1,19 @@
 ---
+    ## ACT-079: Fix CI pipeline by updating doc-linter job
+
+    **Date:** 2025-09-02
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    To fix the CI pipeline failure caused by the `doc-linter` job calling a script that was deleted in a previous refactoring.
+
+    ### Outcome
+    Updated the `.github/workflows/ci.yml` file to replace the call to the old `lint-docs.py` script with the new, unified `linter.py` script. This aligns the CI pipeline with the current state of the codebase.
+    ### Related Documents
+- `.github/workflows/ci.yml`
+
+---
     ## ACT-078: Unify and optimize pre-submission verification script
 
     **Date:** 2025-09-02
@@ -9,7 +24,7 @@
     To refactor the pre-submission verification process into a single, unified, and intelligent Python script, as per user request. This involves merging the logic of multiple scripts and making the execution of checks conditional.
 
     ### Outcome
-    Created a new  that now contains all verification logic. This script conditionally runs pytest for code changes and mkdocs for documentation changes, while always running the doc matrix check. The old  and  scripts have been deleted, and  has been updated to point to the new, single command. The new script has been tested and verified.
+    Created a new `scripts/linter.py` that now contains all verification logic. This script conditionally runs pytest for code changes and mkdocs for documentation changes, while always running the doc matrix check. The old `lint-docs.py` and `run_lint.sh` scripts have been deleted, and `AGENTS.md` has been updated to point to the new, single command. The new script has been tested and verified.
     ### Related Documents
 - `scripts/linter.py`
 - `AGENTS.md`

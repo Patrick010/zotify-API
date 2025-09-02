@@ -1,6 +1,13 @@
 ---
 ## Session Report: 2025-09-02
 
+**Summary:** Fix CI pipeline by updating doc-linter job
+**Findings:**
+- (To be filled in manually)
+
+---
+## Session Report: 2025-09-02
+
 **Summary:** Unify and optimize pre-submission verification script
 **Findings:**
 - (To be filled in manually)

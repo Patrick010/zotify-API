@@ -3,7 +3,7 @@
 **Status:** Live Document
 
 ## 1. Session Summary & Accomplishments
-Unify and optimize pre-submission verification script
+Fix CI pipeline by updating doc-linter job
 
 ## 2. Known Issues & Blockers
 - None

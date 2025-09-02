@@ -145,4 +145,4 @@ jobs:
         python-version: '3.12'
 
     - name: Run documentation linter
-      run: python ${{ github.workspace }}/scripts/lint-docs.py
+      run: python3 ${{ github.workspace }}/scripts/linter.py
