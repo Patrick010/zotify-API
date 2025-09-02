@@ -43,3 +43,13 @@ rules:
       - "project/CICD.md"
       - "api/docs/manuals/CICD.md"
     message: "Changes to the CI/CD pipeline must be documented in the CICD guides."
+
+  - name: "Alignment Matrix Maintenance"
+    source_paths:
+      - "api/src/zotify_api/"
+      - "snitch/"
+      - "gonk-testUI/"
+      - "scripts/"
+    required_docs:
+      - "project/ALIGNMENT_MATRIX.md"
+    message: "Code or component changes must be reflected in project/ALIGNMENT_MATRIX.md."

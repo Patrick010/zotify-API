@@ -3,7 +3,7 @@
 **Status:** Live Document
 
 ## 1. Session Summary & Accomplishments
-Move endpoints.yaml and update references
+Create living alignment matrix and enforce in linter
 
 ## 2. Known Issues & Blockers
 - None

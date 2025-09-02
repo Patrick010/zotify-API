@@ -1,4 +1,20 @@
 ---
+    ## ACT-075: Create living alignment matrix and enforce in linter
+
+    **Date:** 2025-09-02
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    Create a new living ALIGNMENT_MATRIX.md file to track the relationship between design, code, and docs. Add a new rule to the documentation linter to enforce its maintenance.
+
+    ### Outcome
+    Successfully created project/ALIGNMENT_MATRIX.md and added a new rule to scripts/doc-lint-rules.yml. This will ensure the new matrix is kept up-to-date as the project evolves.
+    ### Related Documents
+- `project/ALIGNMENT_MATRIX.md`
+- `scripts/doc-lint-rules.yml`
+
+---
     ## ACT-074: Move endpoints.yaml and update references
 
     **Date:** 2025-09-02

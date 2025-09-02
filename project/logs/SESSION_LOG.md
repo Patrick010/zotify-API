@@ -1,6 +1,13 @@
 ---
 ## Session Report: 2025-09-02
 
+**Summary:** Create living alignment matrix and enforce in linter
+**Findings:**
+- (To be filled in manually)
+
+---
+## Session Report: 2025-09-02
+
 **Summary:** Move endpoints.yaml and update references
 **Findings:**
 - (To be filled in manually)
