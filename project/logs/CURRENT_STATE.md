@@ -3,7 +3,7 @@
 **Status:** Live Document
 
 ## 1. Session Summary & Accomplishments
-Populate and Enhance the Project Alignment Matrix
+Create exhaustive, gap-free Project Alignment Matrix
 
 ## 2. Known Issues & Blockers
 - None

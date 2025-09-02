@@ -15,20 +15,37 @@ It must be updated with every feature, refactor, or documentation change.
 | Unified Persistence (SQLAlchemy) | AR-004 | [Persistence Layer](HIGH_LEVEL_DESIGN.md#hld-persistence-layer) | [Unified Database Architecture](LOW_LEVEL_DESIGN.md#lld-unified-database-architecture) | `api/src/zotify_api/database/` | `project/LOW_LEVEL_DESIGN.md#lld-unified-database-architecture` |
 | Provider Abstraction | AR-005 | [Provider Abstraction](HIGH_LEVEL_DESIGN.md#hld-provider-abstraction-layer) | [Provider Abstraction Layer](LOW_LEVEL_DESIGN.md#lld-provider-abstraction-layer) | `api/src/zotify_api/providers/` | `project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md` |
 | Centralized Configuration | AR-006 | [Config Layer](HIGH_LEVEL_DESIGN.md#hld-config-layer) | [Configuration Management](LOW_LEVEL_DESIGN.md#lld-configuration-management) | `api/src/zotify_api/config.py`, `api/src/zotify_api/services/config_service.py` | `project/LOW_LEVEL_DESIGN.md#lld-configuration-management` |
+| **API Routes & Services** | | | | | |
+| Auth Routes | AR-007 | [Auth Provider Interface](HIGH_LEVEL_DESIGN.md#hld-authentication-provider-interface) | [Spotify Integration Design](LOW_LEVEL_DESIGN.md#lld-spotify-integration-design) | `api/src/zotify_api/routes/auth.py` | `project/api/endpoints.yaml` |
+| Cache Routes | AR-008 | `N/A` | `N/A` | `api/src/zotify_api/routes/cache.py` | `project/api/endpoints.yaml` |
+| Config Routes | AR-009 | [Config Layer](HIGH_LEVEL_DESIGN.md#hld-config-layer) | [Configuration Management](LOW_LEVEL_DESIGN.md#lld-configuration-management) | `api/src/zotify_api/routes/config.py` | `project/api/endpoints.yaml` |
+| Downloads Routes | AR-010 | `N/A` | [Downloads Subsystem Design](LOW_LEVEL_DESIGN.md#lld-downloads-subsystem-design) | `api/src/zotify_api/routes/downloads.py` | `project/api/endpoints.yaml` |
+| Network Routes | AR-011 | `N/A` | `N/A` | `api/src/zotify_api/routes/network.py` | `project/api/endpoints.yaml` |
+| Notifications Routes | AR-012 | `N/A` | `N/A` | `api/src/zotify_api/routes/notifications.py` | `project/api/endpoints.yaml` |
+| Playlists Routes | AR-013 | `N/A` | `N/A` | `api/src/zotify_api/routes/playlists.py` | `project/api/endpoints.yaml` |
+| Search Routes | AR-014 | `N/A` | `N/A` | `api/src/zotify_api/routes/search.py` | `project/api/endpoints.yaml` |
+| Sync Routes | AR-015 | `N/A` | `N/A` | `api/src/zotify_api/routes/sync.py` | `project/api/endpoints.yaml` |
+| System Routes | AR-016 | `N/A` | `N/A` | `api/src/zotify_api/routes/system.py` | `project/api/endpoints.yaml` |
+| Tracks Routes | AR-017 | `N/A` | `N/A` | `api/src/zotify_api/routes/tracks.py` | `project/api/endpoints.yaml` |
+| User Routes | AR-018 | `N/A` | `N/A` | `api/src/zotify_api/routes/user.py` | `project/api/endpoints.yaml` |
+| Webhooks Routes | AR-019 | `N/A` | `N/A` | `api/src/zotify_api/routes/webhooks.py` | `project/api/endpoints.yaml` |
+| **Database Models** | | | | | |
+| All DB Models | AR-020 | [Persistence Layer](HIGH_LEVEL_DESIGN.md#hld-persistence-layer) | [Unified Database Architecture](LOW_LEVEL_DESIGN.md#lld-unified-database-architecture) | `api/src/zotify_api/database/models.py` | `project/LOW_LEVEL_DESIGN.md#lld-unified-database-architecture` |
 | **Cross-Cutting Concerns** | | | | | |
-| Generic Error Handling | AR-007 | [Error Handling Layer](HIGH_LEVEL_DESIGN.md#hld-generic-error-handling-layer) | [Generic Error Handling Module](LOW_LEVEL_DESIGN.md#lld-generic-error-handling-module) | `api/src/zotify_api/core/error_handler/` | `api/docs/system/ERROR_HANDLING_STRATEGY.md` |
-| Flexible Logging Framework | AR-008 | [Logging Layer](HIGH_LEVEL_DESIGN.md#hld-logging-layer) | [Flexible Logging Framework](LOW_LEVEL_DESIGN.md#lld-flexible-logging-framework) | `api/src/zotify_api/core/logging_framework/` | `api/docs/system/LOGGING_FRAMEWORK.md` |
-| API Middleware | AR-009 | `N/A` | [API Middleware](LOW_LEVEL_DESIGN.md#lld-api-middleware) | `api/src/zotify_api/middleware/` | `project/LOW_LEVEL_DESIGN.md#lld-api-middleware` |
-| **Security & Privacy** | | | | | |
-| Auth Provider Interface | AR-010 | [Auth Provider Interface](HIGH_LEVEL_DESIGN.md#hld-authentication-provider-interface) | `N/A` | `api/src/zotify_api/providers/` | `project/SECURITY.md` |
-| Spotify Integration (OAuth) | AR-011 | `N/A` | [Spotify Integration Design](LOW_LEVEL_DESIGN.md#lld-spotify-integration-design) | `api/src/zotify_api/providers/spotify_connector.py` | `project/SECURITY.md` |
-| GDPR Compliance Subsystem | AR-012 | [Security Model](HIGH_LEVEL_DESIGN.md#hld-security-model) | [Privacy Subsystem](LOW_LEVEL_DESIGN.md#lld-privacy-subsystem) | `api/src/zotify_api/routes/privacy.py` | `api/docs/system/PRIVACY_COMPLIANCE.md` |
-| **Subsystems & Modules** | | | | | |
-| Downloads Subsystem | AR-013 | `N/A` | [Downloads Subsystem Design](LOW_LEVEL_DESIGN.md#lld-downloads-subsystem-design) | `api/src/zotify_api/routes/downloads.py`, `api/src/zotify_api/services/download_service.py` | `api/docs/reference/API_REFERENCE.md#downloads` |
-| Gonk-TestUI | AR-014 | [Supporting Modules](HIGH_LEVEL_DESIGN.md#hld-supporting-modules) | [Gonk-TestUI](LOW_LEVEL_DESIGN.md#lld-gonk-testui) | `gonk-testUI/` | `gonk-testUI/README.md` |
-| Snitch | AR-015 | [Supporting Modules](HIGH_LEVEL_DESIGN.md#hld-supporting-modules) | [Snitch](LOW_LEVEL_DESIGN.md#lld-snitch) | `snitch/` | `snitch/docs/` |
+| Generic Error Handling | AR-021 | [Error Handling Layer](HIGH_LEVEL_DESIGN.md#hld-generic-error-handling-layer) | [Generic Error Handling Module](LOW_LEVEL_DESIGN.md#lld-generic-error-handling-module) | `api/src/zotify_api/core/error_handler/` | `api/docs/system/ERROR_HANDLING_STRATEGY.md` |
+| Flexible Logging Framework | AR-022 | [Logging Layer](HIGH_LEVEL_DESIGN.md#hld-logging-layer) | [Flexible Logging Framework](LOW_LEVEL_DESIGN.md#lld-flexible-logging-framework) | `api/src/zotify_api/core/logging_framework/` | `api/docs/system/LOGGING_FRAMEWORK.md` |
+| API Middleware | AR-023 | `N/A` | [API Middleware](LOW_LEVEL_DESIGN.md#lld-api-middleware) | `api/src/zotify_api/middleware/` | `project/LOW_LEVEL_DESIGN.md#lld-api-middleware` |
+| **Supporting Modules** | | | | | |
+| Gonk-TestUI | AR-024 | [Supporting Modules](HIGH_LEVEL_DESIGN.md#hld-supporting-modules) | [Gonk-TestUI](LOW_LEVEL_DESIGN.md#lld-gonk-testui) | `gonk-testUI/` | `gonk-testUI/README.md` |
+| Snitch | AR-025 | [Supporting Modules](HIGH_LEVEL_DESIGN.md#hld-supporting-modules) | [Snitch](LOW_LEVEL_DESIGN.md#lld-snitch) | `snitch/` | `snitch/docs/PROJECT_PLAN.md` |
+| **Infrastructure & Tooling** | | | | | |
+| CI/CD Pipeline | AR-026 | [Deployment Model](HIGH_LEVEL_DESIGN.md#hld-deployment-model) | `N/A` | `.github/workflows/ci.yml` | `project/CICD.md` |
+| Documentation Linter | AR-027 | [Doc Governance](HIGH_LEVEL_DESIGN.md#hld-documentation-governance) | [Ongoing Maintenance](LOW_LEVEL_DESIGN.md#lld-ongoing-maintenance) | `scripts/lint-docs.py` | `AGENTS.md` |
+| Work Logging Script | AR-028 | [Doc Governance](HIGH_LEVEL_DESIGN.md#hld-documentation-governance) | [Ongoing Maintenance](LOW_LEVEL_DESIGN.md#lld-ongoing-maintenance) | `scripts/log-work.py` | `AGENTS.md` |
+| **Privacy & Security** | | | | | |
+| GDPR Compliance Subsystem | AR-029 | [Security Model](HIGH_LEVEL_DESIGN.md#hld-security-model) | [Privacy Subsystem](LOW_LEVEL_DESIGN.md#lld-privacy-subsystem) | `api/src/zotify_api/routes/privacy.py` | `api/docs/system/PRIVACY_COMPLIANCE.md` |
 | **Project Governance** | | | | | |
-| Task & Doc Hygiene | AR-016 | [Doc Governance](HIGH_LEVEL_DESIGN.md#hld-documentation-governance) | [Ongoing Maintenance](LOW_LEVEL_DESIGN.md#lld-ongoing-maintenance) | `scripts/lint-docs.py` | `project/TASK_CHECKLIST.md` |
+| Task & Doc Hygiene | AR-030 | [Doc Governance](HIGH_LEVEL_DESIGN.md#hld-documentation-governance) | [Ongoing Maintenance](LOW_LEVEL_DESIGN.md#lld-ongoing-maintenance) | `scripts/lint-docs.py` | `project/TASK_CHECKLIST.md` |
 
 ---
 
