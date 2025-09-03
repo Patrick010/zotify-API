@@ -64,6 +64,8 @@ This matrix provides a high-level bridge between the strategic themes outlined i
 | SYS-05 | CORS Policy for Web UI | HIGH_LEVEL_DESIGN.md | ✅ Implemented | `zotify_api/main.py` | N/A | | Permissive CORS policy to allow browser-based clients. |
 | SYS-06 | Snitch Secure Callback | `snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md` | 🟡 Partial | `snitch/snitch.go` | ✅ Implemented | | Zero Trust model with end-to-end payload encryption and nonce-based replay protection. |
 | SYS-07 | Provider-Agnostic OAuth2 Flow | LLD.md | ✅ Implemented | api/src/zotify_api/providers/ | ✅ Implemented | FE-03 | New requirement to handle OAuth2 callbacks generically in the provider layer. |
+| SYS-08 | HLD Adherence (ORM Usage) | HIGH_LEVEL_DESIGN.md | ✅ Implemented | `services/tracks_service.py` | ✅ Implemented | | The `tracks_service.py` was refactored to remove raw SQL and use the ORM, resolving a major HLD violation. |
+| SYS-09 | Unified Developer Tooling | `project/handover_brief.md` | ✅ Implemented | `scripts/linter.py` | N/A | | The `log-work.py` script was consolidated into `linter.py` under a `--log` flag. |
 
 ---
 

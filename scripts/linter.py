@@ -10,9 +10,118 @@ from pathlib import Path
 from typing import List, Set, Tuple
 
 import yaml
+import datetime
+import textwrap
 
 # --- Configuration ---
 PROJECT_ROOT = Path(__file__).parent.parent
+
+
+# --- Logging Functions (from log-work.py) ---
+def get_formatted_date():
+    """Returns the current date in YYYY-MM-DD format."""
+    return datetime.datetime.now().strftime("%Y-%m-%d")
+
+def get_next_act_number(file_path="project/logs/ACTIVITY.md"):
+    """Finds the latest ACT-XXX number in the activity log and returns the next number."""
+    try:
+        with open(PROJECT_ROOT / file_path, "r") as f:
+            content = f.read()
+        act_numbers = re.findall(r"## ACT-(\d+):", content)
+        if not act_numbers:
+            return 1
+        return max([int(n) for n in act_numbers]) + 1
+    except FileNotFoundError:
+        return 1
+
+def format_activity_log(act_number, summary, objective, outcome, files=None):
+    """Formats the log entry for ACTIVITY.md."""
+    related_docs_section = ""
+    if files:
+        file_list = "\n".join([f"    - `{f}`" for f in files])
+        related_docs_section = textwrap.dedent(f"""
+        ### Related Documents
+{file_list}
+        """).strip()
+
+    return textwrap.dedent(f"""
+    ---
+    ## ACT-{act_number:03d}: {summary}
+
+    **Date:** {get_formatted_date()}
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    {objective}
+
+    ### Outcome
+    {outcome}
+    {related_docs_section}
+    """).strip()
+
+def format_session_log(summary):
+    """Formats the log entry for SESSION_LOG.md."""
+    return textwrap.dedent(f"""
+    ---
+    ## Session Report: {get_formatted_date()}
+
+    **Summary:** {summary}
+    **Findings:**
+    - (To be filled in manually)
+    """)
+
+def format_current_state(summary):
+    """Formats the content for CURRENT_STATE.md."""
+    return textwrap.dedent(f"""
+    # Project State as of {get_formatted_date()}
+
+    **Status:** Live Document
+
+    ## 1. Session Summary & Accomplishments
+    {summary}
+
+    ## 2. Known Issues & Blockers
+    - None
+
+    ## 3. Pending Work: Next Immediate Steps
+    - (To be filled in manually)
+    """)
+
+def prepend_to_file(file_path, content):
+    """Prepends new content to the beginning of a file."""
+    try:
+        with open(PROJECT_ROOT / file_path, "r+") as f:
+            original_content = f.read()
+            f.seek(0)
+            f.write(content.strip() + "\n\n" + original_content)
+        print(f"Successfully updated {file_path}")
+    except IOError as e:
+        print(f"Error updating {file_path}: {e}")
+
+def write_to_file(file_path, content):
+    """Writes content to a file, overwriting existing content."""
+    try:
+        with open(PROJECT_ROOT / file_path, "w") as f:
+            f.write(content.strip() + "\n")
+        print(f"Successfully updated {file_path}")
+    except IOError as e:
+        print(f"Error updating {file_path}: {e}")
+
+def do_logging(summary: str, objective: str, outcome: str, files: List[str]) -> int:
+    """The main logic for the logging functionality."""
+    print("--- Running Logging ---")
+    act_number = get_next_act_number()
+    activity_entry = format_activity_log(act_number, summary, objective, outcome, files)
+    prepend_to_file("project/logs/ACTIVITY.md", activity_entry)
+
+    session_entry = format_session_log(summary)
+    prepend_to_file("project/logs/SESSION_LOG.md", session_entry)
+
+    current_state_content = format_current_state(summary)
+    write_to_file("project/logs/CURRENT_STATE.md", current_state_content)
+    print("--- Logging Complete ---")
+    return 0
 
 
 def run_command(
@@ -147,17 +256,55 @@ def check_doc_matrix_rules(changed_files: Set[str]) -> List[str]:
 
 
 def main() -> int:
-    """Main function for the unified linter."""
-    parser = argparse.ArgumentParser(description="Unified Linter for Zotify API.")
+    """Main function for the unified linter and logger."""
+    parser = argparse.ArgumentParser(
+        description="Unified Linter and Logger for Zotify.",
+        formatter_class=argparse.RawTextHelpFormatter,
+    )
+    # --- Linter Arguments ---
     parser.add_argument(
         "--run-all",
         action="store_true",
-        help="Run checks on all relevant files, not just changed ones.",
+        help="[Linter] Run checks on all relevant files, not just changed ones.",
     )
-    args = parser.parse_args()
 
+    # --- Logger Arguments ---
+    parser.add_argument(
+        "--log",
+        action="store_true",
+        help="Run in logging mode. Requires --summary, --objective, and --outcome.",
+    )
+    parser.add_argument(
+        "--summary",
+        help="[Logger] A one-line summary of the task, used as the entry title."
+    )
+    parser.add_argument(
+        "--objective",
+        help="[Logger] A description of the task's objective."
+    )
+    parser.add_argument(
+        "--outcome",
+        help="[Logger] A multi-line description of the outcome. Use '\\n' for new lines."
+    )
+    parser.add_argument(
+        "--files",
+        nargs='*',
+        help="[Logger] An optional list of file paths related to the activity."
+    )
+
+    args = parser.parse_args()
     os.chdir(PROJECT_ROOT)
 
+    # --- Mode Selection ---
+    if args.log:
+        if not all([args.summary, args.objective, args.outcome]):
+            print("ERROR: In --log mode, you must provide --summary, --objective, and --outcome.", file=sys.stderr)
+            return 1
+        # Run logging and exit
+        return do_logging(args.summary, args.objective, args.outcome, args.files or [])
+
+
+    # --- Linter Mode ---
     print("=" * 30)
     print("Running Unified Linter")
     print("=" * 30)

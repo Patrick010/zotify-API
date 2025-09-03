@@ -1,16 +1,16 @@
 ---
-    ## ACT-084: Refactored tracks service to use ORM and updated traceability matrix.
+## ACT-084: Refactored tracks service to use ORM and updated traceability matrix.
 
-    **Date:** 2025-09-03
-    **Status:** ✅ Done
-    **Assignee:** Jules
+**Date:** 2025-09-03
+**Status:** ✅ Done
+**Assignee:** Jules
 
-    ### Objective
-    To remediate the TD-REFACTOR-01 technical debt item and align the tracks service with the unified database architecture.
+### Objective
+To remediate the TD-REFACTOR-01 technical debt item and align the tracks service with the unified database architecture.
 
-    ### Outcome
-    The tracks_service.py now uses the SQLAlchemy ORM instead of raw SQL. All 201 tests pass. The AUDIT_TRACEABILITY_MATRIX.md has been updated to reflect this.
-    ### Related Documents
+### Outcome
+The tracks_service.py now uses the SQLAlchemy ORM instead of raw SQL. All 201 tests pass. The AUDIT_TRACEABILITY_MATRIX.md has been updated to reflect this.
+### Related Documents
 - `api/src/zotify_api/services/tracks_service.py`
 - `api/src/zotify_api/database/crud.py`
 - `api/src/zotify_api/database/models.py`
@@ -19,50 +19,50 @@
 - `project/audit/AUDIT_TRACEABILITY_MATRIX.md`
 
 ---
-    ## ACT-083: Conducted documentation audit and aligned execution plan with reality.
+## ACT-083: Conducted documentation audit and aligned execution plan with reality.
 
-    **Date:** 2025-09-03
-    **Status:** ✅ Done
-    **Assignee:** Jules
+**Date:** 2025-09-03
+**Status:** ✅ Done
+**Assignee:** Jules
 
-    ### Objective
-    To resolve inconsistencies between high-level plans and the detailed execution plan, creating a single source of truth for project status.
+### Objective
+To resolve inconsistencies between high-level plans and the detailed execution plan, creating a single source of truth for project status.
 
-    ### Outcome
-    Updated EXECUTION_PLAN.md with correct task statuses and added audit notes. Marked an obsolete task in BACKLOG.md and added a new task for the environment fixes.
-    ### Related Documents
+### Outcome
+Updated EXECUTION_PLAN.md with correct task statuses and added audit notes. Marked an obsolete task in BACKLOG.md and added a new task for the environment fixes.
+### Related Documents
 - `project/EXECUTION_PLAN.md`
 - `project/BACKLOG.md`
 
 ---
-    ## ACT-082: Fixed broken links in documentation causing mkdocs warnings.
+## ACT-082: Fixed broken links in documentation causing mkdocs warnings.
 
-    **Date:** 2025-09-03
-    **Status:** ✅ Done
-    **Assignee:** Jules
+**Date:** 2025-09-03
+**Status:** ✅ Done
+**Assignee:** Jules
 
-    ### Objective
-    To ensure the mkdocs build is 100% clean with no warnings, as required for a green CI.
+### Objective
+To ensure the mkdocs build is 100% clean with no warnings, as required for a green CI.
 
-    ### Outcome
-    The links in USER_MANUAL.md and SYSTEM_INTEGRATION_GUIDE.md were fixed, and the mkdocs build now completes without any warnings.
-    ### Related Documents
+### Outcome
+The links in USER_MANUAL.md and SYSTEM_INTEGRATION_GUIDE.md were fixed, and the mkdocs build now completes without any warnings.
+### Related Documents
 - `api/docs/manuals/USER_MANUAL.md`
 - `api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md`
 
 ---
-    ## ACT-081: Improved the linter script by adding a --run-all flag to enable full-repo scanning.
+## ACT-081: Improved the linter script by adding a --run-all flag to enable full-repo scanning.
 
-    **Date:** 2025-09-03
-    **Status:** ✅ Done
-    **Assignee:** Jules
+**Date:** 2025-09-03
+**Status:** ✅ Done
+**Assignee:** Jules
 
-    ### Objective
-    To make the CI script runnable in local environments without a git history, enabling a full audit.
+### Objective
+To make the CI script runnable in local environments without a git history, enabling a full audit.
 
-    ### Outcome
-    The linter now supports a --run-all flag, which was used to verify the entire codebase.
-    ### Related Documents
+### Outcome
+The linter now supports a --run-all flag, which was used to verify the entire codebase.
+### Related Documents
 - `scripts/linter.py`
 
 ---
@@ -494,7 +494,7 @@ To enhance project quality assurance by implementing a new code quality tracking
 
 ### Outcome
 - **Code Quality Index Created:** A new document, `api/docs/reference/CODE_QUALITY_INDEX.md`, was created to track the quality score of every source file. The `API_DEVELOPER_GUIDE.md` was updated to explain this new system.
-- **Conditional Linter Enhanced:** The `scripts/lint-docs.py` was refactored to use a YAML configuration (`project/lint-rules.yml`) and made more robust to prevent silent failures.
+- **Conditional Linter Enhanced:** The `scripts/lint-docs.py` was refactored to use a YAML configuration (`project/lint-rules.yml`) and made more robust to prevent silent failures in faulty `git` environments.
 - **Repository Cleanup:** The root directory was cleaned by moving 8 helper scripts to the `scripts/` folder, moving `DEPENDENCIES.md` to `project/`, and deleting 5 obsolete/temporary files.
 - **Project Registry Updated:** The `PROJECT_REGISTRY.md` was updated to document the moved scripts and the new code quality index.
 - **Execution Plan Updated:** A "Code QA" step was added to all phases in `project/EXECUTION_PLAN.md` with the correct status.
@@ -1231,7 +1231,7 @@ To harden the project's stability by performing a full test run, fixing any disc
     -   The root cause was a comparison between a timezone-naive `datetime` from the database and a timezone-aware `datetime` from `datetime.now(timezone.utc)`.
     -   The `get_auth_status` service was updated to safely handle naive datetimes by making them timezone-aware before comparison.
 
-- **Final Status:** The entire test suite of 139 tests is now passing.
+- **Final Status:** The entire test suite of 139 tests is now confirmed to be passing.
 
 ### Related Documents
 - `api/tests/unit/test_auth.py`
