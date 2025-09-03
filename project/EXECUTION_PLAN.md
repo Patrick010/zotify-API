@@ -19,7 +19,7 @@ This document provides a detailed breakdown of the tasks required to fulfill the
 
 ## Phase 3–5: Core API + Testing
 **Goal:** Deliver core API functionality and test coverage.
-**Status:** 🟡 In Progress
+**Status:** ✅ Done
 **Steps:**
 - ✅ Implement core endpoints: albums, tracks, metadata.
 - ✅ Add notification endpoints, ensure proper response models.
@@ -28,7 +28,7 @@ This document provides a detailed breakdown of the tasks required to fulfill the
 - ✅ Add reverse proxy support for `/docs`.
 - 🟡 Stub initial user system wiring (authentication placeholder). # JULES-NOTE: This is largely complete. Functional endpoints for profile, preferences, etc. exist.
 - ✅ Achieve stable CI passes across environments.
-- [ ] Code QA
+- [x] Code QA
 
 ## Phase 6: Fork-Specific Enhancements
 **Goal:** Implement enhancements specific to client forks and improve docs.

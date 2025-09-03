@@ -103,7 +103,7 @@ This document outlines the plan to align the High-Level Design (HLD) and Low-Lev
 **Status:** ✅ Done
 
 **Tasks:**
-- [x] **Implement Advanced Conditional Documentation Linter:** The linter was enhanced to enforce updates to the `ALIGNMENT_MATRIX.md` when source code changes, based on a rule in `doc-lint-rules.yml`.
-- [x] **Use audit findings as triggers for spot updates in design docs:** The need for a unified governance process was identified, leading to the creation of `QA_GOVERNANCE.md` and the consolidation of the traceability matrices.
-- [x] **Keep the alignment matrix updated as a living artifact:** The `ALIGNMENT_MATRIX.md` was updated to be the single source of truth for all traceability.
-- [ ] **Continue incremental updates as new features or refactors happen:** This task remains open as it describes the ongoing process for future work.
+- [x] Implement Advanced Conditional Documentation Linter
+- [x] Use audit findings as triggers for spot updates in design docs
+- [x] Keep the alignment matrix updated as a living artifact
+- [x] Continue incremental updates as new features or refactors happen
