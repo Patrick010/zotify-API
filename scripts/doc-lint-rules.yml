@@ -1,0 +1,55 @@
+# This file defines the "documentation matrix" for the custom linter.
+# It maps changes in source code paths to required changes in documentation files.
+
+rules:
+  - name: "API Route Change"
+    source_paths:
+      - "api/src/zotify_api/routes/"
+    required_docs:
+      - "project/ENDPOINTS.md"
+      - "api/docs/reference/API_REFERENCE.md"
+    message: "Changes to API routes require an update to the endpoint documentation."
+
+  - name: "High-Level Design Change"
+    source_paths:
+      - "project/HIGH_LEVEL_DESIGN.md"
+      - "project/LOW_LEVEL_DESIGN.md"
+    required_docs:
+      - "project/ALIGNMENT_MATRIX.md"
+    message: "Changes to core design documents must be reflected in the traceability matrix."
+
+  - name: "Agent Workflow Change"
+    source_paths:
+      - "AGENTS.md"
+      - "scripts/lint-docs.py"
+      - "scripts/log-work.py"
+    # The Handover Brief is a point-in-time document and must not be changed
+    # after the initial session, except when the user asks for it.
+    forbidden_docs:
+      - "project/HANDOVER_BRIEF.md"
+    message: "The Handover Brief cannot be modified."
+
+  - name: "Database Model Change"
+    source_paths:
+      - "api/src/zotify_api/database/models.py"
+    required_docs:
+      - "project/LOW_LEVEL_DESIGN.md"
+    message: "Changes to database models should be reflected in the Low-Level Design document."
+
+  - name: "CI/CD Pipeline Change"
+    source_paths:
+      - ".github/workflows/ci.yml"
+    required_docs:
+      - "project/CICD.md"
+      - "api/docs/manuals/CICD.md"
+    message: "Changes to the CI/CD pipeline must be documented in the CICD guides."
+
+  - name: "Alignment Matrix Maintenance"
+    source_paths:
+      - "api/src/zotify_api/"
+      - "snitch/"
+      - "gonk-testUI/"
+      - "scripts/"
+    required_docs:
+      - "project/ALIGNMENT_MATRIX.md"
+    message: "Code or component changes must be reflected in project/ALIGNMENT_MATRIX.md."
