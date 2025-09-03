@@ -66,9 +66,9 @@ To ensure a high standard of quality, all new **source code files** (`.py`, `.go
 2.  **Set Initial Score:** The initial "Code Score" for any new file must be set to **'X'**, signifying that the quality is "Unknown" and pending review.
 
 ### Step 4: Log Your Work
-At the completion of any significant action, you **must** log the work using the `log-work` script.
+At the completion of any significant action, you **must** log the work using the unified linter script.
 
-*   **Command:** `python scripts/log-work.py --summary "..." --objective "..." --outcome "..." --files ...`
+*   **Command:** `python scripts/linter.py --log --summary "..." --objective "..." --outcome "..." --files ...`
 *   **Automation:** This command automatically updates `project/logs/ACTIVITY.md`, `project/logs/CURRENT_STATE.md` and `project/logs/SESSION_LOG.md`.
 
 > **Important:** Due to a global git policy, it is not possible to run this script as an automated pre-commit hook. Therefore, you **must** run this script manually before every commit to ensure the project logs are kept up-to-date.

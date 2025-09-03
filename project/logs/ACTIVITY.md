@@ -1,4 +1,39 @@
 ---
+    ## ACT-082: fix: Update HLD_LLD_ALIGNMENT_PLAN.md to reflect Phase 5 completion
+
+    **Date:** 2025-09-03
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    To correctly update the Phase 5 section of the HLD/LLD alignment plan, as per user feedback.
+
+    ### Outcome
+    Updated the Phase 5 checklist in project/audit/HLD_LLD_ALIGNMENT_PLAN.md to mark the active tasks as complete and add notes about the governance refactoring. This addresses the final piece of feedback on the documentation.
+    ### Related Documents
+- `project/audit/HLD_LLD_ALIGNMENT_PLAN.md`
+
+---
+    ## ACT-081: feat: Consolidate traceability and establish QA governance
+
+    **Date:** 2025-09-03
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    To consolidate all traceability documents into a single, unified ALIGNMENT_MATRIX.md, create a new QA_GOVERNANCE.md policy file, and enhance the linter to enforce the new governance rules.
+
+    ### Outcome
+    Successfully merged TRACEABILITY_MATRIX.md into ALIGNMENT_MATRIX.md, creating a new single source of truth for traceability. Created the new project/QA_GOVERNANCE.md file with all required policies. Archived the old traceability matrix. Updated AGENTS.md to reference the new governance doc. Enhanced scripts/linter.py to be a unified logger and linter, and updated its rules to enforce the new alignment policy. The new linter logic was fully validated.
+    ### Related Documents
+- `project/ALIGNMENT_MATRIX.md`
+- `project/QA_GOVERNANCE.md`
+- `AGENTS.md`
+- `scripts/linter.py`
+- `scripts/doc-lint-rules.yml`
+- `project/archive/TRACEABILITY_MATRIX.md`
+
+---
 ## ACT-080: Fix CI pipeline by installing PyYAML for doc-linter
 
 **Date:** 2025-09-02

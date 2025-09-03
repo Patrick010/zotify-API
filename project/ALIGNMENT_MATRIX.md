@@ -9,7 +9,7 @@ This document maintains a live mapping between strategic goals, design documents
 
 | Roadmap Theme | Execution Phases | Deliverables / Notes |
 |---|---|---|
-| **Phase 1-5: Core Stability & Hardening** | Phases 0-5, 7, 11 | **Aligned.** These roadmap phases correspond to the foundational setup, core API implementation, developer tooling, and initial Spotify integration work in the execution plan. |
+| **Phase 1-5: Core Stability & Hardening** | Phases 0-5, 7, 11 | **Aligned.** These roadmap phases correspond to the foundational setup, core API implementation, developer tooling, and initial Spotify integration work. Phase 5 concluded with a major governance refactoring, which consolidated traceability documents and enhanced linter enforcement. |
 | **Phase 6: Platform Extensibility** | Phase 8: Extensibility & Automation | **Aligned.** The roadmap theme maps directly to the corresponding execution phase. |
 | **Phase 7: Snitch Module Hardening** | Phase 2 (Snitch Plan) | **Aligned.** The work is detailed in the `snitch/docs/PROJECT_PLAN.md`. |
 | **Phase 8: Administrative & Fork-Specific Enhancements** | Phases 6 & 9 | **Aligned.** This roadmap theme groups the operational tasks for admin APIs and fork-specific features. |
