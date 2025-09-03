@@ -21,8 +21,7 @@ rules:
   - name: "Agent Workflow Change"
     source_paths:
       - "AGENTS.md"
-      - "scripts/lint-docs.py"
-      - "scripts/log-work.py"
+      - "scripts/linter.py"
     # The Handover Brief is a point-in-time document and must not be changed
     # after the initial session, except when the user asks for it.
     forbidden_docs:

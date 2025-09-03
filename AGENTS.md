@@ -92,3 +92,4 @@ This automated workflow is designed to fulfill the rules defined in the followin
 *   `project/PID.md`
 *   `project/HIGH_LEVEL_DESIGN.md`
 *   `project/TASK_CHECKLIST.md`
+*   `project/QA_GOVERNANCE.md`

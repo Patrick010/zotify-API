@@ -66,12 +66,6 @@ class Track(Base):
     name: Mapped[str | None] = mapped_column(String, nullable=True)
     artist: Mapped[str | None] = mapped_column(String, nullable=True)
     album: Mapped[str | None] = mapped_column(String, nullable=True)
-    created_at: Mapped[datetime.datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now()
-    )
-    updated_at: Mapped[datetime.datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
-    )
     playlists: Mapped[List["Playlist"]] = relationship(
         "Playlist", secondary=playlist_track_association, back_populates="tracks"
     )

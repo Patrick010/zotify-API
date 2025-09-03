@@ -1,9 +1,7 @@
 from typing import Any, Dict
 
 from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile
-from sqlalchemy.orm import Session
 
-from zotify_api.database.session import get_db
 from zotify_api.providers.base import BaseProvider
 from zotify_api.schemas.metadata import (
     MetadataPatchResponse,
@@ -19,6 +17,7 @@ from zotify_api.schemas.tracks import (
 )
 from zotify_api.services import tracks_service
 from zotify_api.services.auth import require_admin_api_key
+from zotify_api.services.db import get_db_engine
 from zotify_api.services.deps import get_provider
 from zotify_api.services.metadata_service import MetadataService, get_metadata_service
 
@@ -30,15 +29,19 @@ def list_tracks(
     limit: int = Query(25, ge=1, le=100),
     offset: int = 0,
     q: str | None = None,
-    db: Session = Depends(get_db),
+    engine: Any = Depends(get_db_engine),
 ) -> Dict[str, Any]:
-    items, total = tracks_service.get_tracks(db=db, limit=limit, offset=offset, q=q)
+    items, total = tracks_service.get_tracks(
+        limit=limit, offset=offset, q=q, engine=engine
+    )
     return {"data": items, "meta": {"total": total, "limit": limit, "offset": offset}}
 
 
 @router.get("/{track_id}", response_model=TrackResponseModel)
-def get_track(track_id: str, db: Session = Depends(get_db)) -> TrackResponseModel:
-    track = tracks_service.get_track(db, track_id)
+def get_track(
+    track_id: str, engine: Any = Depends(get_db_engine)
+) -> TrackResponseModel:
+    track = tracks_service.get_track(track_id, engine)
     if not track:
         raise HTTPException(status_code=404, detail="Track not found")
     return track
@@ -51,10 +54,10 @@ def get_track(track_id: str, db: Session = Depends(get_db)) -> TrackResponseMode
     dependencies=[Depends(require_admin_api_key)],
 )
 def create_track(
-    payload: CreateTrackModel, db: Session = Depends(get_db)
+    payload: CreateTrackModel, engine: Any = Depends(get_db_engine)
 ) -> TrackResponseModel:
     try:
-        return tracks_service.create_track(db, payload.model_dump())
+        return tracks_service.create_track(payload.model_dump(), engine)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -65,15 +68,12 @@ def create_track(
     dependencies=[Depends(require_admin_api_key)],
 )
 def update_track(
-    track_id: str, payload: UpdateTrackModel, db: Session = Depends(get_db)
+    track_id: str, payload: UpdateTrackModel, engine: Any = Depends(get_db_engine)
 ) -> TrackResponseModel:
     try:
-        track = tracks_service.update_track(
-            db, track_id, payload.model_dump(exclude_unset=True)
+        return tracks_service.update_track(
+            track_id, payload.model_dump(exclude_unset=True), engine
         )
-        if not track:
-            raise HTTPException(status_code=404, detail="Track not found")
-        return track
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -81,9 +81,9 @@ def update_track(
 @router.delete(
     "/{track_id}", status_code=204, dependencies=[Depends(require_admin_api_key)]
 )
-def delete_track(track_id: str, db: Session = Depends(get_db)) -> None:
+def delete_track(track_id: str, engine: Any = Depends(get_db_engine)) -> None:
     try:
-        tracks_service.delete_track(db, track_id)
+        tracks_service.delete_track(track_id, engine)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -92,10 +92,13 @@ def delete_track(track_id: str, db: Session = Depends(get_db)) -> None:
 async def upload_track_cover(
     track_id: str,
     cover_image: UploadFile = File(...),
+    engine: Any = Depends(get_db_engine),
 ) -> Dict[str, Any]:
     try:
         file_bytes = await cover_image.read()
-        result: Dict[str, Any] = tracks_service.upload_cover(track_id, file_bytes)
+        result: Dict[str, Any] = tracks_service.upload_cover(
+            track_id, file_bytes, engine
+        )
         return result
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
