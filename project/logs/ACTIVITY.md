@@ -1,147 +1,155 @@
 ---
-    ## ACT-080: Fix CI pipeline by installing PyYAML for doc-linter
+## ACT-080: Fix CI pipeline by installing PyYAML for doc-linter
 
-    **Date:** 2025-09-02
-    **Status:** ✅ Done
-    **Assignee:** Jules
+**Date:** 2025-09-02
+**Status:** ✅ Done
+**Assignee:** Jules
 
-    ### Objective
-    To fix the CI pipeline failure caused by a `ModuleNotFoundError` for the `yaml` package in the `doc-linter` job.
+### Objective
+To fix the CI pipeline failure caused by a `ModuleNotFoundError` for the `yaml` package in the `doc-linter` job.
 
-    ### Outcome
-    Added a new step to the `doc-linter` job in `.github/workflows/ci.yml` to explicitly install the `PyYAML` dependency before the linter script is run. This ensures the script has access to all its required libraries.
-    ### Related Documents
+### Outcome
+Added a new step to the `doc-linter` job in `.github/workflows/ci.yml` to explicitly install the `PyYAML` dependency before the linter script is run. This ensures the script has access to all its required libraries.
+### Related Documents
 - `.github/workflows/ci.yml`
 
 ---
-    ## ACT-078: Unify and optimize pre-submission verification script
+## ACT-078: Unify and optimize pre-submission verification script
 
-    **Date:** 2025-09-02
-    **Status:** ✅ Done
-    **Assignee:** Jules
+**Date:** 2025-09-02
+**Status:** ✅ Done
+**Assignee:** Jules
 
-    ### Objective
-    To refactor the pre-submission verification process into a single, unified, and intelligent Python script, as per user request. This involves merging the logic of multiple scripts and making the execution of checks conditional.
+### Objective
+To refactor the pre-submission verification process into a single, unified, and intelligent Python script, as per user request. This involves merging the logic of multiple scripts and making the execution of checks conditional.
 
-    ### Outcome
-    Created a new `scripts/linter.py` that now contains all verification logic. This script conditionally runs pytest for code changes and mkdocs for documentation changes, while always running the doc matrix check. The old `lint-docs.py` and `run_lint.sh` scripts have been deleted, and `AGENTS.md` has been updated to point to the new, single command. The new script has been tested and verified.
-    ### Related Documents
+### Outcome
+Created a new `scripts/linter.py` that now contains all verification logic. This script conditionally runs pytest for code changes and mkdocs for documentation changes, while always running the doc matrix check. The old `lint-docs.py` and `run_lint.sh` scripts have been deleted, and `AGENTS.md` has been updated to point to the new, single command. The new script has been tested and verified.
+
+### Related Documents
 - `scripts/linter.py`
 - `AGENTS.md`
 - `scripts/lint-docs.py`
 - `scripts/run_lint.sh`
 
 ---
-    ## ACT-077: Create exhaustive, gap-free Project Alignment Matrix
+## ACT-077: Create exhaustive, gap-free Project Alignment Matrix
 
-    **Date:** 2025-09-02
-    **Status:** ✅ Done
-    **Assignee:** Jules
+**Date:** 2025-09-02
+**Status:** ✅ Done
+**Assignee:** Jules
 
-    ### Objective
-    To expand and validate the ALIGNMENT_MATRIX.md until it fully covers every component of the project, as per the user's detailed instructions. This involved a systematic review of the entire codebase, design documents, and audit files.
+### Objective
+To expand and validate the ALIGNMENT_MATRIX.md until it fully covers every component of the project, as per the user's detailed instructions. This involved a systematic review of the entire codebase, design documents, and audit files.
 
-    ### Outcome
-    Successfully created a new, exhaustive alignment matrix that maps every code module, API route, service, supporting application, and infrastructure component to its corresponding HLD, LLD, and documentation artifacts. The new matrix provides a complete, gap-free view of the project's architecture and implementation.
-    ### Related Documents
+### Outcome
+Successfully created a new, exhaustive alignment matrix that maps every code module, API route, service, supporting application, and infrastructure component to its corresponding HLD, LLD, and documentation artifacts. The new matrix provides a complete, gap-free view of the project's architecture and implementation.
+
+### Related Documents
 - `project/ALIGNMENT_MATRIX.md`
 
 ---
-    ## ACT-076: Populate alignment matrix and add linter rule
+## ACT-076: Populate alignment matrix and add linter rule
 
-    **Date:** 2025-09-02
-    **Status:** ✅ Done
-    **Assignee:** Jules
+**Date:** 2025-09-02
+**Status:** ✅ Done
+**Assignee:** Jules
 
-    ### Objective
-    Flesh out the new ALIGNMENT_MATRIX.md with accurate, up-to-date data. Enforce its maintenance by adding a new rule to the documentation linter.
+### Objective
+Flesh out the new ALIGNMENT_MATRIX.md with accurate, up-to-date data. Enforce its maintenance by adding a new rule to the documentation linter.
 
-    ### Outcome
-    The project/ALIGNMENT_MATRIX.md is now fully populated with links to the relevant HLD, LLD, code, and documentation for all major components. A new rule in scripts/doc-lint-rules.yml will ensure this matrix is kept up-to-date as the project evolves.
-    ### Related Documents
-- `project/ALIGNMENT_MATRIX.md`
-- `scripts/doc-lint-rules.yml`
+### Outcome
+The project/ALIGNMENT_MATRIX.md is now fully populated with links to the relevant HLD, LLD, code, and documentation for all major components. A new rule in scripts/doc-lint-rules.yml will ensure this matrix is kept up-to-date as the project evolves.
 
----
-    ## ACT-075: Create living alignment matrix and enforce in linter
-
-    **Date:** 2025-09-02
-    **Status:** ✅ Done
-    **Assignee:** Jules
-
-    ### Objective
-    Create a new living ALIGNMENT_MATRIX.md file to track the relationship between design, code, and docs. Add a new rule to the documentation linter to enforce its maintenance.
-
-    ### Outcome
-    Successfully created project/ALIGNMENT_MATRIX.md and added a new rule to scripts/doc-lint-rules.yml. This will ensure the new matrix is kept up-to-date as the project evolves.
-    ### Related Documents
+### Related Documents
 - `project/ALIGNMENT_MATRIX.md`
 - `scripts/doc-lint-rules.yml`
 
 ---
-    ## ACT-074: Move endpoints.yaml and update references
+## ACT-075: Create living alignment matrix and enforce in linter
 
-    **Date:** 2025-09-02
-    **Status:** ✅ Done
-    **Assignee:** Jules
+**Date:** 2025-09-02
+**Status:** ✅ Done
+**Assignee:** Jules
 
-    ### Objective
-    Move the endpoints.yaml file from api/docs/ to project/api/ and update all references to it in the documentation.
+### Objective
+Create a new living ALIGNMENT_MATRIX.md file to track the relationship between design, code, and docs. Add a new rule to the documentation linter to enforce its maintenance.
 
-    ### Outcome
-    Successfully moved the file and updated all references in API_REFERENCE.md, EXECUTION_PLAN.md, and LOW_LEVEL_DESIGN.md. The rename_file tool failed, so a workaround of reading, creating, and deleting the file was used.
-    ### Related Documents
+### Outcome
+Successfully created project/ALIGNMENT_MATRIX.md and added a new rule to scripts/doc-lint-rules.yml. This will ensure the new matrix is kept up-to-date as the project evolves.
+
+### Related Documents
+- `project/ALIGNMENT_MATRIX.md`
+- `scripts/doc-lint-rules.yml`
+
+---
+## ACT-074: Move endpoints.yaml and update references
+
+**Date:** 2025-09-02
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Move the endpoints.yaml file from api/docs/ to project/api/ and update all references to it in the documentation.
+
+### Outcome
+Successfully moved the file and updated all references in API_REFERENCE.md, EXECUTION_PLAN.md, and LOW_LEVEL_DESIGN.md. The rename_file tool failed, so a workaround of reading, creating, and deleting the file was used.
+
+### Related Documents
 - `project/api/endpoints.yaml`
 - `api/docs/reference/API_REFERENCE.md`
 - `project/EXECUTION_PLAN.md`
 - `project/LOW_LEVEL_DESIGN.md`
 
 ---
-    ## ACT-073: Align strategic and operational documentation
+## ACT-073: Align strategic and operational documentation
 
-    **Date:** 2025-09-01
-    **Status:** ✅ Done
-    **Assignee:** Jules
+**Date:** 2025-09-01
+**Status:** ✅ Done
+**Assignee:** Jules
 
-    ### Objective
-    Align the ROADMAP.md and EXECUTION_PLAN.md documents, using the TRACEABILITY_MATRIX.md as the authoritative bridge to ensure no gaps or unmapped items exist.
+### Objective
+Align the ROADMAP.md and EXECUTION_PLAN.md documents, using the TRACEABILITY_MATRIX.md as the authoritative bridge to ensure no gaps or unmapped items exist.
 
-    ### Outcome
-    Successfully aligned both documents by adding missing themes to the roadmap and missing tasks to the execution plan. The traceability matrix has been updated to reflect the 1:1 alignment. The audit log was also updated to mark the review as complete.
-    ### Related Documents
+### Outcome
+Successfully aligned both documents by adding missing themes to the roadmap and missing tasks to the execution plan. The traceability matrix has been updated to reflect the 1:1 alignment. The audit log was also updated to mark the review as complete.
+
+### Related Documents
 - `project/ROADMAP.md`
 - `project/EXECUTION_PLAN.md`
 - `project/TRACEABILITY_MATRIX.md`
 - `project/audit/AUDIT_TRACEABILITY_MATRIX.md`
 
 ---
-    ## ACT-072: Create Roadmap-to-Execution traceability matrix
+## ACT-072: Create Roadmap-to-Execution traceability matrix
 
-    **Date:** 2025-09-01
-    **Status:** ✅ Done
-    **Assignee:** Jules
+**Date:** 2025-09-01
+**Status:** ✅ Done
+**Assignee:** Jules
 
-    ### Objective
+### Objective
     Create a new traceability matrix in TRACEABILITY_MATRIX.md to map the strategic roadmap to the operational execution plan, making any drift between the two documents clear.
 
-    ### Outcome
+### Outcome
     A new 'Roadmap to Execution Plan Traceability' table has been added to TRACEABILITY_MATRIX.md, explicitly mapping themes to phases and flagging any gaps or unmapped items.
-    ### Related Documents
+
+### Related Documents
 - `project/TRACEABILITY_MATRIX.md`
 
 ---
-    ## ACT-071: Complete and close out the LOOSE_ENDS_BACKLOG.md
+## ACT-071: Complete and close out the LOOSE_ENDS_BACKLOG.md
 
-    **Date:** 2025-09-01
-    **Status:** ✅ Done
-    **Assignee:** Jules
+**Date:** 2025-09-01
+**Status:** ✅ Done
+**Assignee:** Jules
 
-    ### Objective
+### Objective
     Systematically process all items in the temporary LOOSE_ENDS_BACKLOG.md file, either by executing the tasks or migrating them to permanent documentation, and then delete the file as per the project workflow.
 
-    ### Outcome
-    Successfully processed all four open items in the backlog. The Snitch project plan was updated, the main Roadmap was rewritten, and the Privacy Compliance documentation was fleshed out and cross-linked. The temporary backlog file has now been deleted.
-    ### Related Documents
+### Outcome
+Successfully processed all four open items in the backlog. The Snitch project plan was updated, the main Roadmap was rewritten, and the Privacy Compliance documentation was fleshed out and cross-linked. The temporary backlog file has now been deleted.
+
+### Related Documents
 - `project/process/GAP_ANALYSIS_TEMPLATE.md`
 - `snitch/docs/PROJECT_PLAN.md`
 - `project/ROADMAP.md`
@@ -155,98 +163,104 @@
 - `project/PROJECT_REGISTRY.md`
 
 ---
-    ## ACT-070: Close backlog item #2
+## ACT-070: Close backlog item #2
 
-    **Date:** 2025-09-01
-    **Status:** ✅ Done
-    **Assignee:** Jules
+**Date:** 2025-09-01
+**Status:** ✅ Done
+**Assignee:** Jules
 
-    ### Objective
-    Mark the 'Gap Analysis Framework' item as Done in project/LOOSE_ENDS_BACKLOG.md.
+### Objective
+Mark the 'Gap Analysis Framework' item as Done in project/LOOSE_ENDS_BACKLOG.md.
 
-    ### Outcome
+### Outcome
     The backlog item was successfully marked as Done.
-    ### Related Documents
+
+### Related Documents
 - `project/LOOSE_ENDS_BACKLOG.md`
 
 ---
-    ## ACT-069: Create loose ends backlog and gap analysis template
+## ACT-069: Create loose ends backlog and gap analysis template
 
-    **Date:** 2025-09-01
-    **Status:** ✅ Done
-    **Assignee:** Jules
+**Date:** 2025-09-01
+**Status:** ✅ Done
+**Assignee:** Jules
 
-    ### Objective
+### Objective
     Fulfill the first step of the post-audit cleanup outlined in project/HANDOVER_BRIEF.md. This involves creating the project/LOOSE_ENDS_BACKLOG.md to track outstanding tasks, and creating the project/process/GAP_ANALYSIS_TEMPLATE.md to address the first item in that backlog.
 
-    ### Outcome
+### Outcome
     Successfully created both project/LOOSE_ENDS_BACKLOG.md and project/process/GAP_ANALYSIS_TEMPLATE.md. Also updated the api/docs/reference/CODE_QUALITY_INDEX.md to register these new documentation files as per project process.
-    ### Related Documents
+
+### Related Documents
 - `project/LOOSE_ENDS_BACKLOG.md`
 - `project/process/GAP_ANALYSIS_TEMPLATE.md`
 - `api/docs/reference/CODE_QUALITY_INDEX.md`
 
 ---
-    ## ACT-068: Create Project Plan for Snitch Module
+## ACT-068: Create Project Plan for Snitch Module
 
-    **Date:** 2025-09-01
-    **Status:** ✅ Done
-    **Assignee:** Jules
+**Date:** 2025-09-01
+**Status:** ✅ Done
+**Assignee:** Jules
 
-    ### Objective
-    To create a full, developer-ready project plan for the Snitch module, replacing the outdated historical document. This also involved updating the main PID to formally link to the new plan.
+### Objective
+To create a full, developer-ready project plan for the Snitch module, replacing the outdated historical document. This also involved updating the main PID to formally link to the new plan.
 
-    ### Outcome
+### Outcome
     Overwrote snitch/docs/PROJECT_PLAN.md with a new, structured plan. Updated project/PID.md with a detailed entry for the Snitch module. Registered the new plan in project/PROJECT_REGISTRY.md.
-    ### Related Documents
+
+### Related Documents
 - `snitch/docs/PROJECT_PLAN.md`
 - `project/PID.md`
 - `project/PROJECT_REGISTRY.md`
 
 ---
-    ## ACT-067: Create new execution-oriented project plan
+## ACT-067: Create new execution-oriented project plan
 
-    **Date:** 2025-09-01
-    **Status:** ✅ Done
-    **Assignee:** Jules
+**Date:** 2025-09-01
+**Status:** ✅ Done
+**Assignee:** Jules
 
-    ### Objective
+### Objective
     To create a structured, actionable project plan for the Zotify API, serving as the central execution reference for developers.
 
-    ### Outcome
+### Outcome
     Created project/PROJECT_PLAN.md and populated it with a comprehensive plan synthesized from the roadmap, PID, and backlog. Also updated the PROJECT_REGISTRY.md to include the new document.
-    ### Related Documents
+
+### Related Documents
 - `project/PROJECT_PLAN.md`
 - `project/PROJECT_REGISTRY.md`
 
 ---
-    ## ACT-066: Update AGENTS.md with logging policy
+## ACT-066: Update AGENTS.md with logging policy
 
-    **Date:** 2025-09-01
-    **Status:** ✅ Done
-    **Assignee:** Jules
+**Date:** 2025-09-01
+**Status:** ✅ Done
+**Assignee:** Jules
 
-    ### Objective
+### Objective
     To clarify the manual process for logging work. The AGENTS.md file needed a note explaining that log-work.py must be run manually before each commit.
 
-    ### Outcome
+### Outcome
     Added a note to AGENTS.md clarifying the manual logging process. Also corrected the example command in the document to use the correct arguments, preventing future errors.
-    ### Related Documents
+
+### Related Documents
 - `AGENTS.md`
 
 ---
-    ## ACT-065: Align AUDIT_TRACEABILITY_MATRIX.md for RBAC feature
+## ACT-065: Align AUDIT_TRACEABILITY_MATRIX.md for RBAC feature
 
-    **Date:** 2025-09-01
-    **Status:** ✅ Done
-    **Assignee:** Jules
+**Date:** 2025-09-01
+**Status:** ✅ Done
+**Assignee:** Jules
 
-    ### Objective
-    To align the AUDIT_TRACEABILITY_MATRIX.md with the project's process for handling deferred features. The 'Role-Based Access Control (RBAC)' feature was incorrectly marked as N/N (Exists/Matches Design) and needed to be updated to reflect its status as a planned future enhancement.
+### Objective
+To align the AUDIT_TRACEABILITY_MATRIX.md with the project's process for handling deferred features. The 'Role-Based Access Control (RBAC)' feature was incorrectly marked as N/N (Exists/Matches Design) and needed to be updated to reflect its status as a planned future enhancement.
 
-    ### Outcome
-    The AUDIT_TRACEABILITY_MATRIX.md was updated. The RBAC feature is now correctly marked as Exists? = N, Matches Design? = Y (Deferred). This resolves the documentation gap and formally tracks RBAC as a future enhancement.
-    ### Related Documents
+### Outcome
+The AUDIT_TRACEABILITY_MATRIX.md was updated. The RBAC feature is now correctly marked as Exists? = N, Matches Design? = Y (Deferred). This resolves the documentation gap and formally tracks RBAC as a future enhancement.
+
+### Related Documents
 - `project/audit/AUDIT_TRACEABILITY_MATRIX.md`
 
 ---
