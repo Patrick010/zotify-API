@@ -1,147 +1,124 @@
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
-from pytest import MonkeyPatch
+from sqlalchemy.orm import Session
 
+from zotify_api.database import models
 from zotify_api.services import tracks_service
 
 
 def test_get_tracks_no_db() -> None:
-    items, total = tracks_service.get_tracks(engine=None)
+    items, total = tracks_service.get_tracks(db=None)
     assert items == []
     assert total == 0
 
 
-def test_get_tracks_with_db() -> None:
-    mock_engine = MagicMock()
-    mock_conn = MagicMock()
-    mock_engine.connect.return_value.__enter__.return_value = mock_conn
-    mock_conn.execute.return_value.mappings.return_value.all.return_value = [
-        {
-            "id": "1",
-            "name": "Test Track",
-            "artist": "Test Artist",
-            "album": "Test Album",
-        },
+@patch("zotify_api.database.crud.get_tracks")
+def test_get_tracks_with_db(mock_get_tracks: MagicMock) -> None:
+    mock_db = MagicMock(spec=Session)
+    mock_get_tracks.return_value = [
+        models.Track(
+            id="1", name="Test Track", artist="Test Artist", album="Test Album"
+        )
     ]
-    items, total = tracks_service.get_tracks(engine=mock_engine)
+    items, total = tracks_service.get_tracks(db=mock_db)
     assert len(items) == 1
     assert total == 1
     assert items[0]["name"] == "Test Track"
 
 
-def test_get_tracks_db_fails() -> None:
-    mock_engine = MagicMock()
-    mock_engine.connect.side_effect = Exception("DB error")
-    items, total = tracks_service.get_tracks(engine=mock_engine)
-    assert items == []
-    assert total == 0
+@patch("zotify_api.database.crud.get_tracks")
+def test_get_tracks_db_fails(mock_get_tracks: MagicMock) -> None:
+    mock_db = MagicMock(spec=Session)
+    mock_get_tracks.side_effect = Exception("DB error")
+    with pytest.raises(Exception, match="DB error"):
+        tracks_service.get_tracks(db=mock_db)
 
 
-def test_search_tracks_spotify_fallback() -> None:
+@patch("zotify_api.database.crud.get_tracks")
+def test_search_tracks(mock_get_tracks: MagicMock) -> None:
+    mock_db = MagicMock(spec=Session)
+    mock_get_tracks.return_value = []
     items, total = tracks_service.search_tracks(
-        q="test", limit=10, offset=0, engine=None
+        db=mock_db, q="test", limit=10, offset=0
     )
     assert total == 0
     assert items == []
-
-
-def test_create_track_no_db(monkeypatch: MonkeyPatch) -> None:
-    monkeypatch.setattr(
-        "zotify_api.services.tracks_service.get_db_engine", lambda: None
-    )
-    with pytest.raises(Exception, match="No DB engine available"):
-        payload = {
-            "name": "test",
-            "artist": "test",
-            "album": "test",
-            "duration_seconds": 1,
-            "path": "test",
-        }
-        tracks_service.create_track(payload=payload)
 
 
 def test_get_track_no_db() -> None:
-    track = tracks_service.get_track(track_id="1", engine=None)
+    track = tracks_service.get_track(db=None, track_id="1")
     assert track is None
 
 
-def test_get_track_success() -> None:
-    mock_engine = MagicMock()
-    mock_conn = MagicMock()
-    mock_engine.connect.return_value.__enter__.return_value = mock_conn
-    mock_conn.execute.return_value.mappings.return_value.first.return_value = {
-        "id": "1",
-        "name": "Test",
-    }
-    track = tracks_service.get_track("1", engine=mock_engine)
+@patch("zotify_api.database.crud.get_track")
+def test_get_track_success(mock_get_track: MagicMock) -> None:
+    mock_db = MagicMock(spec=Session)
+    mock_get_track.return_value = models.Track(id="1", name="Test")
+    track = tracks_service.get_track(mock_db, "1")
     assert track is not None
     assert track["name"] == "Test"
 
 
-def test_get_track_db_fails() -> None:
-    mock_engine = MagicMock()
-    mock_engine.connect.side_effect = Exception("DB error")
-    track = tracks_service.get_track("1", engine=mock_engine)
-    assert track is None
+@patch("zotify_api.database.crud.get_track")
+def test_get_track_db_fails(mock_get_track: MagicMock) -> None:
+    mock_db = MagicMock(spec=Session)
+    mock_get_track.side_effect = Exception("DB error")
+    with pytest.raises(Exception, match="DB error"):
+        tracks_service.get_track(mock_db, "1")
 
 
-def test_create_track_success() -> None:
-    mock_engine = MagicMock()
-    mock_conn = MagicMock()
-    mock_engine.connect.return_value.__enter__.return_value = mock_conn
+@patch("zotify_api.database.crud.create_track")
+def test_create_track_success(mock_create_track: MagicMock) -> None:
+    mock_db = MagicMock(spec=Session)
     payload = {
         "name": "test",
         "artist": "test",
         "album": "test",
-        "duration_seconds": 1,
-        "path": "test",
     }
-    track = tracks_service.create_track(payload, engine=mock_engine)
+    mock_create_track.return_value = models.Track(id="1", **payload)
+    track = tracks_service.create_track(mock_db, payload)
     assert track["name"] == "test"
-    mock_conn.execute.assert_called_once()
+    mock_create_track.assert_called_once_with(mock_db, payload)
 
 
-def test_create_track_db_fails() -> None:
-    mock_engine = MagicMock()
-    mock_engine.connect.side_effect = Exception("DB error")
+@patch("zotify_api.database.crud.create_track")
+def test_create_track_db_fails(mock_create_track: MagicMock) -> None:
+    mock_db = MagicMock(spec=Session)
+    mock_create_track.side_effect = Exception("DB error")
     with pytest.raises(Exception, match="DB error"):
         payload = {
             "name": "test",
             "artist": "test",
             "album": "test",
-            "duration_seconds": 1,
-            "path": "test",
         }
-        tracks_service.create_track(payload, engine=mock_engine)
+        tracks_service.create_track(mock_db, payload)
 
 
-def test_update_track_success() -> None:
-    mock_engine = MagicMock()
-    mock_conn = MagicMock()
-    mock_engine.connect.return_value.__enter__.return_value = mock_conn
-    with patch("zotify_api.services.tracks_service.get_track") as mock_get:
-        mock_get.return_value = {"id": "1", "name": "Old Name"}
-        payload = {"name": "New Name"}
-        track = tracks_service.update_track("1", payload, engine=mock_engine)
-        assert track is not None
-        assert track["name"] == "New Name"
-        mock_conn.execute.assert_called_once()
+@patch("zotify_api.database.crud.update_track")
+def test_update_track_success(mock_update_track: MagicMock) -> None:
+    mock_db = MagicMock(spec=Session)
+    payload = {"name": "New Name"}
+    mock_update_track.return_value = models.Track(id="1", **payload)
+    track = tracks_service.update_track(mock_db, "1", payload)
+    assert track is not None
+    assert track["name"] == "New Name"
+    mock_update_track.assert_called_once_with(mock_db, "1", payload)
 
 
-def test_delete_track_success() -> None:
-    mock_engine = MagicMock()
-    mock_conn = MagicMock()
-    mock_engine.connect.return_value.__enter__.return_value = mock_conn
-    tracks_service.delete_track("1", engine=mock_engine)
-    mock_conn.execute.assert_called_once()
+@patch("zotify_api.database.crud.delete_track")
+def test_delete_track_success(mock_delete_track: MagicMock) -> None:
+    mock_db = MagicMock(spec=Session)
+    tracks_service.delete_track(mock_db, "1")
+    mock_delete_track.assert_called_once_with(mock_db, "1")
 
 
-def test_delete_track_db_fails() -> None:
-    mock_engine = MagicMock()
-    mock_engine.connect.side_effect = Exception("DB error")
+@patch("zotify_api.database.crud.delete_track")
+def test_delete_track_db_fails(mock_delete_track: MagicMock) -> None:
+    mock_db = MagicMock(spec=Session)
+    mock_delete_track.side_effect = Exception("DB error")
     with pytest.raises(Exception, match="DB error"):
-        tracks_service.delete_track("1", engine=mock_engine)
+        tracks_service.delete_track(mock_db, "1")
 
 
 def test_upload_cover() -> None:

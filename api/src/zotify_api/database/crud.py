@@ -138,6 +138,65 @@ def clear_all_playlists_and_tracks(db: Session) -> None:
     db.commit()
 
 
+# --- Track CRUD ---
+
+
+def get_tracks(
+    db: Session, skip: int = 0, limit: int = 100, q: str | None = None
+) -> List[models.Track]:
+    """
+    Get all tracks from the database with optional search query.
+    """
+    query = db.query(models.Track)
+    if q:
+        query = query.filter(models.Track.name.contains(q))
+    return query.offset(skip).limit(limit).all()
+
+
+def get_track(db: Session, track_id: str) -> models.Track | None:
+    """
+    Get a single track by its ID.
+    """
+    return db.query(models.Track).filter(models.Track.id == track_id).first()
+
+
+def create_track(db: Session, track: Dict[str, Any]) -> models.Track:
+    """
+    Create a new track in the database.
+    """
+    db_track = models.Track(**track)
+    db.add(db_track)
+    db.commit()
+    db.refresh(db_track)
+    return db_track
+
+
+def update_track(
+    db: Session, track_id: str, track_data: Dict[str, Any]
+) -> models.Track | None:
+    """
+    Update a track's information.
+    """
+    db_track = get_track(db, track_id)
+    if db_track:
+        for key, value in track_data.items():
+            setattr(db_track, key, value)
+        db.commit()
+        db.refresh(db_track)
+    return db_track
+
+
+def delete_track(db: Session, track_id: str) -> models.Track | None:
+    """
+    Delete a track from the database.
+    """
+    db_track = get_track(db, track_id)
+    if db_track:
+        db.delete(db_track)
+        db.commit()
+    return db_track
+
+
 # --- SpotifyToken CRUD ---
 
 

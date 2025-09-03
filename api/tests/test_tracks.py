@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from io import BytesIO
 from typing import Any, Generator
 from unittest.mock import AsyncMock, MagicMock, patch
@@ -5,48 +6,50 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from fastapi import HTTPException
 from fastapi.testclient import TestClient
+from sqlalchemy.orm import Session
 
+from zotify_api.database import models
+from zotify_api.database.session import get_db
 from zotify_api.main import app
-from zotify_api.services.db import get_db_engine
 
 
 @pytest.fixture
-def mock_db(client: TestClient) -> Generator[Any, None, None]:
-    """Fixture to mock the database engine."""
-    mock_engine = MagicMock()
-    mock_conn = MagicMock()
-    mock_engine.connect.return_value.__enter__.return_value = mock_conn
-
-    app.dependency_overrides[get_db_engine] = lambda: mock_engine
-    yield mock_engine, mock_conn
-    del app.dependency_overrides[get_db_engine]
+def mock_db() -> Generator[MagicMock, None, None]:
+    """Fixture to mock the database session."""
+    mock_session = MagicMock(spec=Session)
+    app.dependency_overrides[get_db] = lambda: mock_session
+    yield mock_session
+    del app.dependency_overrides[get_db]
 
 
-def test_list_tracks_no_db(client: TestClient) -> None:
-    app.dependency_overrides[get_db_engine] = lambda: None
-    response = client.get("/api/tracks")
-    assert response.status_code == 200
-    body = response.json()
-    assert body["data"] == []
-    assert body["meta"]["total"] == 0
-    del app.dependency_overrides[get_db_engine]
+def test_list_tracks_no_db(client: TestClient, mock_db: MagicMock) -> None:
+    with patch("zotify_api.database.crud.get_tracks", return_value=[]) as mock_crud:
+        response = client.get("/api/tracks")
+        assert response.status_code == 200
+        body = response.json()
+        assert body["data"] == []
+        assert body["meta"]["total"] == 0
+        mock_crud.assert_called_once()
 
 
-def test_list_tracks_with_db(client: TestClient, mock_db: Any) -> None:
-    mock_engine, mock_conn = mock_db
-    mock_conn.execute.return_value.mappings.return_value.all.return_value = [
-        {
-            "id": "1",
-            "name": "Test Track",
-            "artist": "Test Artist",
-            "album": "Test Album",
-        },
-    ]
-    response = client.get("/api/tracks")
-    assert response.status_code == 200
-    body = response.json()
-    assert len(body["data"]) == 1
-    assert body["data"][0]["name"] == "Test Track"
+def test_list_tracks_with_db(client: TestClient, mock_db: MagicMock) -> None:
+    with patch(
+        "zotify_api.database.crud.get_tracks",
+        return_value=[
+            models.Track(
+                id="1",
+                name="Test Track",
+                artist="Test Artist",
+                album="Test Album",
+            )
+        ],
+    ) as mock_crud:
+        response = client.get("/api/tracks")
+        assert response.status_code == 200
+        body = response.json()
+        assert len(body["data"]) == 1
+        assert body["data"][0]["name"] == "Test Track"
+        mock_crud.assert_called_once()
 
 
 def test_crud_flow_unauthorized(client: TestClient) -> None:
@@ -56,42 +59,67 @@ def test_crud_flow_unauthorized(client: TestClient) -> None:
     assert response.status_code == 401
 
 
-def test_crud_flow(client: TestClient, mock_db: Any) -> None:
-    mock_engine, mock_conn = mock_db
-
+def test_crud_flow(client: TestClient, mock_db: MagicMock) -> None:
     # Create
-    mock_conn.execute.return_value.lastrowid = 1
     create_payload = {"name": "New Track", "artist": "New Artist"}
-    response = client.post(
-        "/api/tracks", headers={"X-API-Key": "test_key"}, json=create_payload
-    )
-    assert response.status_code == 201
-    track_id = response.json()["id"]
+    with patch(
+        "zotify_api.database.crud.create_track",
+        return_value=models.Track(
+            id="1",
+            created_at=datetime.now(timezone.utc),
+            updated_at=datetime.now(timezone.utc),
+            **create_payload,
+        ),
+    ) as mock_create:
+        response = client.post(
+            "/api/tracks", headers={"X-API-Key": "test_key"}, json=create_payload
+        )
+        assert response.status_code == 201
+        track_id = response.json()["id"]
+        mock_create.assert_called_once()
 
     # Get
-    mock_conn.execute.return_value.mappings.return_value.first.return_value = {
-        "id": track_id,
-        **create_payload,
-    }
-    response = client.get(f"/api/tracks/{track_id}")
-    assert response.status_code == 200
-    assert response.json()["name"] == "New Track"
+    with patch(
+        "zotify_api.database.crud.get_track",
+        return_value=models.Track(
+            id=track_id,
+            created_at=datetime.now(timezone.utc),
+            updated_at=datetime.now(timezone.utc),
+            **create_payload,
+        ),
+    ) as mock_get:
+        response = client.get(f"/api/tracks/{track_id}")
+        assert response.status_code == 200
+        assert response.json()["name"] == "New Track"
+        mock_get.assert_called_once_with(mock_db, track_id)
 
     # Patch
     update_payload = {"name": "Updated Track"}
-    response = client.patch(
-        f"/api/tracks/{track_id}",
-        headers={"X-API-Key": "test_key"},
-        json=update_payload,
-    )
-    assert response.status_code == 200
-    assert response.json()["name"] == "Updated Track"
+    with patch(
+        "zotify_api.database.crud.update_track",
+        return_value=models.Track(
+            id=track_id,
+            created_at=datetime.now(timezone.utc),
+            updated_at=datetime.now(timezone.utc),
+            **update_payload,
+        ),
+    ) as mock_update:
+        response = client.patch(
+            f"/api/tracks/{track_id}",
+            headers={"X-API-Key": "test_key"},
+            json=update_payload,
+        )
+        assert response.status_code == 200
+        assert response.json()["name"] == "Updated Track"
+        mock_update.assert_called_once()
 
     # Delete
-    response = client.delete(
-        f"/api/tracks/{track_id}", headers={"X-API-Key": "test_key"}
-    )
-    assert response.status_code == 204
+    with patch("zotify_api.database.crud.delete_track") as mock_delete:
+        response = client.delete(
+            f"/api/tracks/{track_id}", headers={"X-API-Key": "test_key"}
+        )
+        assert response.status_code == 204
+        mock_delete.assert_called_once_with(mock_db, track_id)
 
 
 def test_upload_cover_unauthorized(client: TestClient) -> None:
@@ -103,7 +131,7 @@ def test_upload_cover_unauthorized(client: TestClient) -> None:
     assert response.status_code == 401
 
 
-def test_upload_cover(client: TestClient, mock_db: Any) -> None:
+def test_upload_cover(client: TestClient, mock_db: MagicMock) -> None:
     file_content = b"fake image data"
     response = client.post(
         "/api/tracks/1/cover",

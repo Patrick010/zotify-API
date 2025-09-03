@@ -1,4 +1,71 @@
 ---
+    ## ACT-084: Refactored tracks service to use ORM and updated traceability matrix.
+
+    **Date:** 2025-09-03
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    To remediate the TD-REFACTOR-01 technical debt item and align the tracks service with the unified database architecture.
+
+    ### Outcome
+    The tracks_service.py now uses the SQLAlchemy ORM instead of raw SQL. All 201 tests pass. The AUDIT_TRACEABILITY_MATRIX.md has been updated to reflect this.
+    ### Related Documents
+- `api/src/zotify_api/services/tracks_service.py`
+- `api/src/zotify_api/database/crud.py`
+- `api/src/zotify_api/database/models.py`
+- `api/tests/unit/test_tracks_service.py`
+- `api/tests/test_tracks.py`
+- `project/audit/AUDIT_TRACEABILITY_MATRIX.md`
+
+---
+    ## ACT-083: Conducted documentation audit and aligned execution plan with reality.
+
+    **Date:** 2025-09-03
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    To resolve inconsistencies between high-level plans and the detailed execution plan, creating a single source of truth for project status.
+
+    ### Outcome
+    Updated EXECUTION_PLAN.md with correct task statuses and added audit notes. Marked an obsolete task in BACKLOG.md and added a new task for the environment fixes.
+    ### Related Documents
+- `project/EXECUTION_PLAN.md`
+- `project/BACKLOG.md`
+
+---
+    ## ACT-082: Fixed broken links in documentation causing mkdocs warnings.
+
+    **Date:** 2025-09-03
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    To ensure the mkdocs build is 100% clean with no warnings, as required for a green CI.
+
+    ### Outcome
+    The links in USER_MANUAL.md and SYSTEM_INTEGRATION_GUIDE.md were fixed, and the mkdocs build now completes without any warnings.
+    ### Related Documents
+- `api/docs/manuals/USER_MANUAL.md`
+- `api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md`
+
+---
+    ## ACT-081: Improved the linter script by adding a --run-all flag to enable full-repo scanning.
+
+    **Date:** 2025-09-03
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    To make the CI script runnable in local environments without a git history, enabling a full audit.
+
+    ### Outcome
+    The linter now supports a --run-all flag, which was used to verify the entire codebase.
+    ### Related Documents
+- `scripts/linter.py`
+
+---
 ## ACT-080: Fix CI pipeline by installing PyYAML for doc-linter
 
 **Date:** 2025-09-02

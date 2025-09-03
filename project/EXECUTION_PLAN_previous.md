@@ -19,24 +19,24 @@ This document provides a detailed breakdown of the tasks required to fulfill the
 
 ## Phase 3–5: Core API + Testing
 **Goal:** Deliver core API functionality and test coverage.
-**Status:** ✅ Done
+**Status:** 🟡 In Progress
 **Steps:**
 - ✅ Implement core endpoints: albums, tracks, metadata.
 - ✅ Add notification endpoints, ensure proper response models.
 - ✅ Wire up Pytest suite with example test cases covering core API.
 - ✅ Integrate documentation and API specs (OpenAPI/Swagger). # JULES-NOTE: Completed. A new, canonical OpenAPI spec has been generated and integrated into the documentation.
-- ❌ Add reverse proxy support for `/docs`. # JULES-NOTE: Audit on 2025-09-03 found no evidence of this implementation in the code.
-- ✅ Stub initial user system wiring (authentication placeholder). # JULES-NOTE: Audit on 2025-09-03 confirmed full CRUD endpoints exist for user profile, preferences, and history. Marked as complete.
-- ✅ Achieve stable CI passes across environments. # JULES-NOTE: Audit on 2025-09-03 fixed local environment issues (missing dependencies, required directories) to allow all 202 tests to pass. CI is now verifiably green.
-- ✅ Code QA # JULES-NOTE: Marked as complete as this phase is finished and superseded by the QA work in Phase 4.
+- ✅ Add reverse proxy support for `/docs`.
+- 🟡 Stub initial user system wiring (authentication placeholder). # JULES-NOTE: This is largely complete. Functional endpoints for profile, preferences, etc. exist.
+- ✅ Achieve stable CI passes across environments.
+- [ ] Code QA
 
 ## Phase 6: Fork-Specific Enhancements
 **Goal:** Implement enhancements specific to client forks and improve docs.
 **Status:** 🟡 In Progress
 **Steps:**
 - ✅ Integrate admin key and basic audit logging.
-- ❌ Add API key revocation and rotation workflows (in progress). # JULES-NOTE: Audit on 2025-09-03 found no implementation for this. Marked as Not Started.
-- ✅ Split developer guide and operations guide documentation. # JULES-NOTE: Audit on 2025-09-03 confirmed `API_DEVELOPER_GUIDE.md` and `SYSTEM_INTEGRATION_GUIDE.md` exist and serve their distinct purposes.
+- 🟡 Add API key revocation and rotation workflows (in progress).
+- ❌ Split developer guide and operations guide documentation.
 - ✅ Clarify existing documentation with realignment tasks. # JULES-NOTE: A comprehensive documentation overhaul was completed.
 - ❌ Address GDPR and `/privacy/data` endpoints (pending). # JULES-NOTE: Confirmed, this feature is not implemented.
 - [ ] Code QA
@@ -48,8 +48,8 @@ This document provides a detailed breakdown of the tasks required to fulfill the
 - 🟡 Implement library sync endpoints for both read (fetch) and write (push) operations. # JULES-NOTE: Read is functional, write is not.
 - ✅ Finalize playlist management endpoints: creation, modification, deletion. # JULES-NOTE: Core CRUD endpoints for playlists are already functional.
 - ❌ Build webhook support base class for event-driven updates (future).
-- ✅ Expand CI to include code coverage tracking. # JULES-NOTE: Audit on 2025-09-03 confirmed `.github/workflows/ci.yml` runs tests with `--cov-fail-under=85`.
-- ❌ Prepare DevOps templates (.github workflows, issue templates). # JULES-NOTE: Audit on 2025-09-03 found no evidence of issue templates.
+- ❌ Expand CI to include code coverage tracking.
+- ❌ Prepare DevOps templates (.github workflows, issue templates).
 - [ ] Code QA
 
 ## Phase 8: Extensibility & Automation

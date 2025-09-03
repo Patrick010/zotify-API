@@ -15,7 +15,7 @@
 | Webhook/Event System | N | Y (Deferred) | Low | **Status:** Planned — Deferred. This feature is tracked in `project/FUTURE_ENHANCEMENTS.md`. It will not appear in HLD/LLD until promoted to an active roadmap phase. |
 | **Core Subsystems** | | | | |
 | Provider Abstraction Layer | Y | Y | Critical | **Context:** A new provider-agnostic abstraction layer has been implemented. Spotify has been refactored into a connector for this layer. **Gap:** None. |
-| Unified Database System | Y | Y | Critical | **Context:** A new backend-agnostic database layer using SQLAlchemy has been implemented. It handles all data persistence for the application. The `tracks_service` has been refactored to use the ORM, removing the last pocket of raw SQL usage and fully aligning this component with the design. **Gap:** None. |
+| Unified Database System | Y | Y | Critical | **Context:** A new backend-agnostic database layer using SQLAlchemy has been implemented. It handles all data persistence for the application. **Gap:** None. |
 | Downloads Subsystem | Y | Y | High | **Context:** The download queue is now managed by the unified database system, making it fully persistent and production-ready. **Gap:** None. |
 | Spotify Integration | Y | Y | Medium | **Context:** The storage for OAuth tokens and synced playlists has been migrated to the unified database system. **Gap:** None. |
 | System Info & Health Endpoints | Y | Y | Medium | **Context:** The design documents (`LOW_LEVEL_DESIGN.md`) have been updated to reflect the current reality, which is that only basic `/uptime` and `/env` endpoints are implemented. **Gap:** None. The more advanced checks are now documented as future enhancements. |

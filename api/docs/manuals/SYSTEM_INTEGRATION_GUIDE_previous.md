@@ -25,7 +25,7 @@ Think of the Zotify API as a developer platform for building systems on top of S
 3.  [Authentication](#3-authentication)
 4.  [Running the Test Suite](#4-running-the-test-suite)
 5.  [Core Architectural Principles](#5-core-architectural-principles)
-6.  [Code & Documentation Conventions](#6-code-documentation-conventions)
+6.  [Code & Documentation Conventions](#6-code--documentation-conventions)
 
 ---
 
