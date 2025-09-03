@@ -190,8 +190,9 @@ def get_changed_files() -> Tuple[Set[str], Set[str]]:
 
 def check_doc_matrix_rules(changed_files: Set[str]) -> List[str]:
     """
-    Checks that if a source file is changed, its corresponding documentation file is also changed,
-    based on rules in a YAML file.
+    Checks for documentation rule violations based on the set of changed files.
+    - Enforces that source changes have corresponding doc changes.
+    - Enforces that forbidden documents are not modified.
     """
     errors: List[str] = []
     rules_file = PROJECT_ROOT / "scripts" / "doc-lint-rules.yml"
@@ -203,22 +204,34 @@ def check_doc_matrix_rules(changed_files: Set[str]) -> List[str]:
         rules = yaml.safe_load(f).get("rules", [])
 
     for rule in rules:
-        source_paths = rule.get("source_paths", [])
-        required_docs = rule.get("required_docs", [])
-
-        # Check if any changed file matches any of the source paths in the rule
-        source_changed = any(
-            any(f.startswith(p) for p in source_paths) for f in changed_files
-        )
-
-        if source_changed:
-            # If a source file changed, check if at least one required doc also changed
-            doc_changed = any(d in changed_files for d in required_docs)
-            if not doc_changed:
-                message = rule.get("message", f"Changes in {source_paths} require updates to one of {required_docs}")
+        # Check for forbidden file modifications first for this rule.
+        forbidden_docs = rule.get("forbidden_docs", [])
+        was_forbidden_doc_changed = False
+        for doc in forbidden_docs:
+            if doc in changed_files:
+                message = rule.get("message", f"Modification of the forbidden file {doc} is not allowed.")
                 errors.append(message)
+                was_forbidden_doc_changed = True
 
-    return errors
+        # If a forbidden doc in this rule was changed, skip the 'required' check for the same rule.
+        if was_forbidden_doc_changed:
+            continue
+
+        # Check for required documentation changes.
+        # This logic should only run if the rule actually has required_docs.
+        required_docs = rule.get("required_docs")
+        if required_docs: # This handles both missing key and empty list `[]`
+            source_paths = rule.get("source_paths", [])
+            source_changed = any(
+                any(f.startswith(p) for p in source_paths) for f in changed_files
+            )
+            if source_changed:
+                doc_changed = any(d in changed_files for d in required_docs)
+                if not doc_changed:
+                    message = rule.get("message", f"Changes in {source_paths} require updates to one of {required_docs}")
+                    errors.append(message)
+
+    return list(set(errors))
 
 
 def main() -> int:
@@ -285,11 +298,15 @@ def main() -> int:
         return 0
 
     # --- Flagging Phase ---
-    run_pytest = any(f.endswith((".py", ".go")) for f in changed_files)
+    run_python_checks = any(f.endswith(".py") for f in changed_files)
+    run_go_checks = any(f.endswith(".go") for f in changed_files)
+    run_pytest = run_python_checks or run_go_checks # Keep original logic for now
     run_mkdocs = any(f.startswith("api/docs/") for f in changed_files)
 
     print("\n--- Checks to run ---")
     print(f"Doc Matrix Linter: Always")
+    print(f"Ruff Linter: {run_python_checks}")
+    print(f"Black Formatter Check: {run_python_checks}")
     print(f"Pytest: {run_pytest}")
     print(f"MkDocs Build: {run_mkdocs}")
     print("-----------------------\n")
@@ -311,8 +328,33 @@ def main() -> int:
     if final_return_code != 0:
         return final_return_code
 
+    # 2. Ruff Linter (Conditional)
+    if run_python_checks:
+        print("\n--- Running Ruff Linter ---")
+        ruff_return_code = run_command(["ruff", "check", "."])
+        if ruff_return_code != 0:
+            print("Ruff Linter Failed!", file=sys.stderr)
+            final_return_code = 1
+        else:
+            print("Ruff Linter Passed!")
+        print("-" * 27)
+    else:
+        print("\nSkipping Ruff Linter: No Python changes detected.")
 
-    # 2. Pytest (Conditional)
+    # 3. Black Formatter Check (Conditional)
+    if run_python_checks:
+        print("\n--- Running Black Formatter Check ---")
+        black_return_code = run_command(["black", "--check", "."])
+        if black_return_code != 0:
+            print("Black Formatter Check Failed!", file=sys.stderr)
+            final_return_code = 1
+        else:
+            print("Black Formatter Check Passed!")
+        print("-" * 35)
+    else:
+        print("\nSkipping Black Formatter Check: No Python changes detected.")
+
+    # 4. Pytest (Conditional)
     if run_pytest:
         print("\n--- Running Pytest ---")
         # run_lint.sh sets APP_ENV=development, we will do the same.
@@ -327,7 +369,7 @@ def main() -> int:
         print("\nSkipping Pytest: No code changes detected.")
 
 
-    # 3. MkDocs Build (Conditional)
+    # 5. MkDocs Build (Conditional)
     if run_mkdocs:
         print("\n--- Running MkDocs Build ---")
         mkdocs_return_code = run_command(["mkdocs", "build", "--clean"])

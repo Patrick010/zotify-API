@@ -28,6 +28,19 @@ The primary mechanism for enforcing these policies is the unified linter script,
 - **Rule:** The relationships between source code and their required documentation are defined in `scripts/doc-lint-rules.yml`. If a source file with a defined rule is changed, its corresponding documentation must also be changed.
 - **Enforcement:** The linter will fail if the documentation is not updated alongside the code.
 
+### 3.3. Code Quality & Formatting Enforcement
+- **Trigger:** Any change to a Python source code file (`.py`).
+- **Rule:** All Python code must pass two separate checks:
+    1.  **Ruff (`ruff check .`):** For general linting, style enforcement, and import checks.
+    2.  **Black (`black --check .`):** For strict, uncompromising code formatting.
+- **Enforcement:** The unified linter (`scripts/linter.py`) runs both `ruff` and `black` on all Python code changes. A failure in either check will cause the linter to fail.
+
+### 3.4. Forbidden Document Enforcement
+- **Trigger:** Any change to a file listed in the `forbidden_docs` section of a rule in `scripts/doc-lint-rules.yml`.
+- **Rule:** These files are considered locked and must not be modified.
+- **Enforcement:** The linter will fail if a change is detected in a forbidden document.
+- **Note on Unreliable Environments:** In some CI/test environments, the `git diff` command used by the linter may be unreliable. In such cases, the `forbidden_docs` check may require manual verification during code review.
+
 ## 4. CI/CD & Pull Request (PR) Enforcement
 - All policies are enforced at the PR level by the `ci.yml` GitHub Actions workflow.
 - The workflow runs the unified linter (`python scripts/linter.py`) on all changes.
