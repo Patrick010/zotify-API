@@ -1,6 +1,20 @@
 ---
 ## Session Report: 2025-09-04
 
+**Summary:** fix(linter): Refactor logging script
+**Findings:**
+The linter script was refactored to fix three issues: 1. An indentation bug in ACTIVITY.md was resolved by removing textwrap.dedent. 2. The script was updated to populate the 'Findings' section of SESSION_LOG.md. 3. The script was updated to populate the 'Next Immediate Steps' section of CURRENT_STATE.md. This was achieved by adding new --findings and --next-steps arguments.
+
+---
+## Session Report: 2025-09-04
+
+**Summary:** test(linter): Verify logging script refactor
+**Findings:**
+This is a test of the findings section.
+
+---
+## Session Report: 2025-09-04
+
 **Summary:** fix(linter): Make mandatory logging conditional
 **Findings:**
 - (To be filled in manually)

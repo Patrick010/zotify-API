@@ -34,33 +34,30 @@ def get_next_act_number(file_path="project/logs/ACTIVITY.md"):
     except FileNotFoundError:
         return 1
 
-def format_activity_log(act_number, summary, objective, outcome, files=None):
+def format_activity_log(act_number, summary, findings, files=None):
     """Formats the log entry for ACTIVITY.md."""
     related_docs_section = ""
     if files:
-        file_list = "\n".join([f"    - `{f}`" for f in files])
-        related_docs_section = textwrap.dedent(f"""
-        ### Related Documents
-{file_list}
-        """).strip()
+        file_list = "\n".join([f"- `{f}`" for f in files])
+        related_docs_section = f"### Related Documents\n{file_list}"
 
-    return textwrap.dedent(f"""
-    ---
-    ## ACT-{act_number:03d}: {summary}
+    # Manually format the string to avoid indentation issues
+    return f"""---
+## ACT-{act_number:03d}: {summary}
 
-    **Date:** {get_formatted_date()}
-    **Status:** ✅ Done
-    **Assignee:** Jules
+**Date:** {get_formatted_date()}
+**Status:** ✅ Done
+**Assignee:** Jules
 
-    ### Objective
-    {objective}
+### Objective
+{summary}
 
-    ### Outcome
-    {outcome}
-    {related_docs_section}
-    """).strip()
+### Outcome
+{findings}
 
-def format_session_log(summary):
+{related_docs_section}""".strip()
+
+def format_session_log(summary, findings):
     """Formats the log entry for SESSION_LOG.md."""
     return textwrap.dedent(f"""
     ---
@@ -68,10 +65,10 @@ def format_session_log(summary):
 
     **Summary:** {summary}
     **Findings:**
-    - (To be filled in manually)
+    {findings}
     """)
 
-def format_current_state(summary):
+def format_current_state(summary, next_steps):
     """Formats the content for CURRENT_STATE.md."""
     return textwrap.dedent(f"""
     # Project State as of {get_formatted_date()}
@@ -85,7 +82,7 @@ def format_current_state(summary):
     - None
 
     ## 3. Pending Work: Next Immediate Steps
-    - (To be filled in manually)
+    {next_steps}
     """)
 
 def prepend_to_file(file_path, content):
@@ -108,17 +105,17 @@ def write_to_file(file_path, content):
     except IOError as e:
         print(f"Error updating {file_path}: {e}")
 
-def do_logging(summary: str, objective: str, outcome: str, files: List[str]) -> int:
+def do_logging(summary: str, findings: str, next_steps: str, files: List[str]) -> int:
     """The main logic for the logging functionality."""
     print("--- Running Logging ---")
     act_number = get_next_act_number()
-    activity_entry = format_activity_log(act_number, summary, objective, outcome, files)
+    activity_entry = format_activity_log(act_number, summary, findings, files)
     prepend_to_file("project/logs/ACTIVITY.md", activity_entry)
 
-    session_entry = format_session_log(summary)
+    session_entry = format_session_log(summary, findings)
     prepend_to_file("project/logs/SESSION_LOG.md", session_entry)
 
-    current_state_content = format_current_state(summary)
+    current_state_content = format_current_state(summary, next_steps)
     write_to_file("project/logs/CURRENT_STATE.md", current_state_content)
     print("--- Logging Complete ---")
     return 0
@@ -308,12 +305,12 @@ def main() -> int:
         help="[Logger] A one-line summary of the task, used as the entry title."
     )
     parser.add_argument(
-        "--objective",
-        help="[Logger] A description of the task's objective."
+        "--findings",
+        help="[Logger] A multi-line description of the findings. Use '\\n' for new lines."
     )
     parser.add_argument(
-        "--outcome",
-        help="[Logger] A multi-line description of the outcome. Use '\\n' for new lines."
+        "--next-steps",
+        help="[Logger] A multi-line description of the next immediate steps."
     )
     parser.add_argument(
         "--files",
@@ -332,11 +329,11 @@ def main() -> int:
 
     # --- Mode Selection ---
     if args.log:
-        if not all([args.summary, args.objective, args.outcome]):
-            print("ERROR: In --log mode, you must provide --summary, --objective, and --outcome.", file=sys.stderr)
+        if not all([args.summary, args.findings, args.next_steps]):
+            print("ERROR: In --log mode, you must provide --summary, --findings, and --next-steps.", file=sys.stderr)
             return 1
         # Run logging and exit
-        return do_logging(args.summary, args.objective, args.outcome, args.files or [])
+        return do_logging(args.summary, args.findings, args.next_steps, args.files or [])
 
 
     # --- Linter Mode ---

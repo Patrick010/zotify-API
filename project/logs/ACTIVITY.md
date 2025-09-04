@@ -1,4 +1,36 @@
 ---
+## ACT-089: fix(linter): Refactor logging script
+
+**Date:** 2025-09-04
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+fix(linter): Refactor logging script
+
+### Outcome
+The linter script was refactored to fix three issues: 1. An indentation bug in ACTIVITY.md was resolved by removing textwrap.dedent. 2. The script was updated to populate the 'Findings' section of SESSION_LOG.md. 3. The script was updated to populate the 'Next Immediate Steps' section of CURRENT_STATE.md. This was achieved by adding new --findings and --next-steps arguments.
+
+### Related Documents
+- `scripts/linter.py`
+
+---
+## ACT-088: test(linter): Verify logging script refactor
+
+**Date:** 2025-09-04
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+test(linter): Verify logging script refactor
+
+### Outcome
+This is a test of the findings section.
+
+### Related Documents
+- `scripts/linter.py`
+
+---
     ## ACT-087: fix(linter): Make mandatory logging conditional
 
     **Date:** 2025-09-04
