@@ -60,7 +60,7 @@ This is the primary development task. When you make changes to the code, you are
 ### Step 3: Maintain the Quality Index for Source Code
 To ensure a high standard of quality, all new **source code files** (`.py`, `.go`, `.js`) must be registered in the appropriate quality index. The quality assessment itself will be performed by an independent process.
 
-1.  **Add New Files to Index:** When you create a new source file, you **must** add a corresponding entry to the consolidated `project/CODE_QUALITY_INDEX.md` file.
+1.  **Add New Files to Index:** When you create a new source file, you **must** add a corresponding entry to the consolidated `api/docs/CODE_QUALITY_INDEX.md` file.
 2.  **Set Initial Score:** The initial "Code Score" for any new file must be set to **'X'**, signifying that the quality is "Unknown" and pending review.
 
 ### Step 4: Log Your Work
@@ -78,7 +78,7 @@ Before submitting your work for review, you **must** run the unified linter scri
 *   **Purpose:** This script acts as a single entrypoint for all verification steps, enforcing the policies defined in `project/QA_GOVERNANCE.md`. It will:
     1.  **Run Documentation Linters:** It runs a suite of checks based on the rules in `doc-lint-rules.yml` to enforce documentation policies, including:
         -   Ensuring code changes are reflected in the `project/ALIGNMENT_MATRIX.md`.
-        -   Ensuring new source files are added to the `project/CODE_QUALITY_INDEX.md`.
+        -   Ensuring new source files are added to the `api/docs/CODE_QUALITY_INDEX.md`.
         -   Ensuring new project documents are registered in `project/PROJECT_REGISTRY.md`.
         -   Ensuring new API documents are registered in `api/docs/MASTER_INDEX.md`.
     2.  **Run Tests:** Conditionally runs the `pytest` test suite if it detects changes to source code files (`.py`, `.go`).

@@ -82,9 +82,9 @@ rules:
       - "gonk-testUI/"
       - "scripts/"
     required_docs:
-      - "project/CODE_QUALITY_INDEX.md"
+      - "api/docs/CODE_QUALITY_INDEX.md"
     message: |
-      Any source file changes must be reflected in project/CODE_QUALITY_INDEX.md.
+      Any source file changes must be reflected in api/docs/CODE_QUALITY_INDEX.md.
       Add/update the relevant entry to maintain code quality coverage.
       Refer to QA_GOVERNANCE.md for policy details.
 
@@ -108,7 +108,7 @@ rules:
       - "api/docs/"
     required_docs:
       - "project/ALIGNMENT_MATRIX.md"
-      - "project/CODE_QUALITY_INDEX.md"
+      - "api/docs/CODE_QUALITY_INDEX.md"
       - "project/PROJECT_REGISTRY.md"
       - "api/docs/MASTER_INDEX.md"
     message: |
