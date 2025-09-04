@@ -1,4 +1,34 @@
 ---
+    ## ACT-087: fix(linter): Make mandatory logging conditional
+
+    **Date:** 2025-09-04
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    To fix the linter so that the mandatory logging rule is only triggered when code or documentation files are changed, not on every commit.
+
+    ### Outcome
+    Modified scripts/doc-lint-rules.yml to add a comprehensive list of source_paths to the 'Enforce Mandatory Logging' rule. This makes the rule conditional. The new logic was verified with two test cases: one that correctly skipped the check for a non-code file, and one that correctly failed the check for a code file.
+    ### Related Documents
+- `scripts/doc-lint-rules.yml`
+
+---
+    ## ACT-086: verify(linter): Confirm mandatory logging enforcement
+
+    **Date:** 2025-09-04
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    To verify that the 'Enforce Mandatory Logging' feature in the linter is working correctly.
+
+    ### Outcome
+    The feature was verified by running two test cases using the --test-files argument. The failure case (missing log files) correctly failed, and the success case (including all required files) correctly passed. The linter is working as expected. Note: The test environment required the installation of several missing dependencies (PyYAML, mkdocs, mkdocs-material, mkdocs-monorepo-plugin).
+    ### Related Documents
+- `verification/mandatory_logging.md`
+
+---
     ## ACT-085: fix(linter): correct mandatory logging check to use all()
 
     **Date:** 2025-09-04

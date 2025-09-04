@@ -3,13 +3,23 @@
 
 rules:
   - name: "Enforce Mandatory Logging"
+    source_paths:
+      - "api/src/zotify_api/"
+      - "project/"
+      - "api/docs/"
+      - "snitch/"
+      - "gonk-testUI/"
+      - "scripts/"
+      - "AGENTS.md"
+      - ".github/workflows/ci.yml"
+      - "README.md"
     required_docs:
       - "project/logs/ACTIVITY.md"
       - "project/logs/SESSION_LOG.md"
       - "project/logs/CURRENT_STATE.md"
     message: |
-      Every commit must include updates to the project log files.
-      This rule is unconditional and enforced by the linter.
+      Changes to code or documentation must be logged. Please run the linter's
+      --log command to update the project logs.
 
   - name: "API Route Change"
     source_paths:

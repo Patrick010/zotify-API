@@ -3,7 +3,7 @@
 **Status:** Live Document
 
 ## 1. Session Summary & Accomplishments
-fix(linter): correct mandatory logging check to use all()
+fix(linter): Make mandatory logging conditional
 
 ## 2. Known Issues & Blockers
 - None
