@@ -1,6 +1,13 @@
 ---
 ## Session Report: 2025-09-04
 
+**Summary:** fix(docs): Correct layout of CODE_QUALITY_INDEX.md
+**Findings:**
+The tables for the Snitch and gonk-testUI modules were missing the 'Overall Score' column. The tables were edited to add the missing column and bring them into alignment with the API module's table, ensuring a consistent layout throughout the document.
+
+---
+## Session Report: 2025-09-04
+
 **Summary:** fix(linter): Refactor logging script
 **Findings:**
 The linter script was refactored to fix three issues: 1. An indentation bug in ACTIVITY.md was resolved by removing textwrap.dedent. 2. The script was updated to populate the 'Findings' section of SESSION_LOG.md. 3. The script was updated to populate the 'Next Immediate Steps' section of CURRENT_STATE.md. This was achieved by adding new --findings and --next-steps arguments.

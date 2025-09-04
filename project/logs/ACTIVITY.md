@@ -1,4 +1,20 @@
 ---
+## ACT-090: fix(docs): Correct layout of CODE_QUALITY_INDEX.md
+
+**Date:** 2025-09-04
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+fix(docs): Correct layout of CODE_QUALITY_INDEX.md
+
+### Outcome
+The tables for the Snitch and gonk-testUI modules were missing the 'Overall Score' column. The tables were edited to add the missing column and bring them into alignment with the API module's table, ensuring a consistent layout throughout the document.
+
+### Related Documents
+- `api/docs/CODE_QUALITY_INDEX.md`
+
+---
 ## ACT-089: fix(linter): Refactor logging script
 
 **Date:** 2025-09-04
