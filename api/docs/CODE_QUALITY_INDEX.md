@@ -34,7 +34,7 @@ This score assesses the implementation's clarity, efficiency, structure, and tes
 
 | File Path | Documentation Score | Code Score | Overall Score | Notes |
 | --- | :---: | :---: | :---: | --- |
-| `api/src/zotify_api/auth_state.py` | X | A | A | Good comments explaining the module's purpose and the in-memory nature of the PKCE state. Code is clean and uses type hints. |
+| `api/src/zotify_api/auth_state.py` | B | A | A | Good comments explaining the module's purpose and the in-memory nature of the PKCE state. Code is clean and uses type hints. |
 | `api/src/zotify_api/config.py` | C | B | B | Uses Pydantic for settings, which is good. However, the file lacks module and class docstrings. The module-level logic for handling production key checks and development defaults has side-effects and could be encapsulated in a factory function for better structure. |
 | `api/src/zotify_api/globals.py` | D | C | D | File defines a global variable based on module import time, which is a problematic pattern for testing and predictability. It also lacks any documentation explaining its purpose. |
 | `api/src/zotify_api/logging_config.py` | D | F | F | A simple file that appears to be a remnant of an old logging system. It lacks all documentation and its approach contradicts the project's new Flexible Logging Framework. Code is non-functional in the context of the current design. |
@@ -104,13 +104,13 @@ This score assesses the implementation's clarity, efficiency, structure, and tes
 
 | File Path | Doc Score | Code Score | Notes |
 |---|---|---|---|
-| `snitch/snitch.go` | B | B | Excellent inline comments and a clear module-level comment. Lacks function-level docstrings. The code is clear and functional but could be slightly better structured. |
+| `snitch/snitch.go` | C | B | Excellent inline comments and a clear module-level comment. Lacks function-level docstrings, which is a significant gap. |
 
 ## Gonk-TestUI Module
 
 | File Path | Doc Score | Code Score | Notes |
 |---|---|---|---|
 | `gonk-testUI/app.py` | C | B | The core Flask routes are clear, but the functions for managing the `sqlite-web` subprocess are complex and lack docstrings. |
-| `gonk-testUI/static/app.js` | B | B | Excellent inline comments, but lacks function-level docstrings for complex UI state management. |
+| `gonk-testUI/static/app.js` | C | B | Excellent inline comments, but lacks function-level docstrings for complex UI state management. |
 | `gonk-testUI/static/styles.css` | A | A | Excellent use of CSS variables and a clear, logical structure. |
 | `gonk-testUI/templates/index.html` | A | A | Clean, semantic HTML5 structure. |
