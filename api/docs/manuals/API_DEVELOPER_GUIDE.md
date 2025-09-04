@@ -37,19 +37,21 @@ Follow these steps for every contribution:
     Follow the TASK_CHECKLIST.md: Manually go through the checklist to ensure all project standards have been met.
     Submit a Pull Request: Create a pull request linking to the original issue.
 
-The Automated Workflow: Logging and Linting
+The Automated Workflow: The Unified Linter
 
-To enforce the "living documentation" model, this project uses an automated workflow.
+To enforce the "living documentation" model, this project uses a unified linter script (`scripts/linter.py`) that handles both pre-submission verification and work logging.
 
-    Documentation Linter (lint-docs.py):
+    Verification (Linting):
         A pre-commit hook is installed that runs this script automatically before every commit.
-        This script will cause the commit to fail if you have staged changes to source code (api/src/ or api/tests/) without also staging changes to a documentation file.
-        This is the primary mechanism that enforces the policy of updating documentation in the same commit as the code it describes.
+        This script will cause the commit to fail if you have staged changes that violate the project's documentation policies (e.g., changing code without updating the `ALIGNMENT_MATRIX.md`).
+        This is the primary mechanism that enforces the project's governance rules.
+        Command: `python3 scripts/linter.py`
 
-    Work Logging (log-work.py):
-        After you have committed your changes, you must log your work using this script.
-        It standardizes the process of updating the project's three main log files.
-        See the AGENTS.md file in the root directory for detailed instructions on the correct syntax and semantic meaning for each log entry.
+    Work Logging:
+        After you have committed your changes, you must log your work using the same script with the `--log` flag.
+        It standardizes the process of updating the project's three main log files (`ACTIVITY.md`, `SESSION_LOG.md`, and `CURRENT_STATE.md`).
+        See `AGENTS.md` for full instructions.
+        Command: `python scripts/linter.py --log --summary "..." --objective "..." --outcome "..." --files ...`
 
 ---
 
@@ -78,11 +80,11 @@ Before committing, you must run the following checks from the project root.
     # Run from the project root
     bandit -c bandit.yml -r api
     ```
--   **Documentation Linter:**
-    The documentation linter should be run locally before committing to ensure documentation is up-to-date. It uses the rules defined in `scripts/doc-lint-rules.yml`.
+-   **Unified Linter (Verification Mode):**
+    The unified linter should be run locally before committing to ensure documentation is up-to-date. It uses the rules defined in `scripts/doc-lint-rules.yml`.
     ```bash
     # Run in pre-commit mode to check staged files
-    PRE_COMMIT=1 python scripts/lint-docs.py
+    PRE_COMMIT=1 python scripts/linter.py
     ```
 
 ---

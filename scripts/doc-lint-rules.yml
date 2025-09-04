@@ -52,3 +52,17 @@ rules:
     required_docs:
       - "project/ALIGNMENT_MATRIX.md"
     message: "Code or component changes must be reflected in project/ALIGNMENT_MATRIX.md."
+
+  - name: "API Documentation Index Maintenance"
+    source_paths:
+      - "api/docs/"
+    required_docs:
+      - "api/docs/MASTER_INDEX.md"
+    message: "New or changed documents in api/docs/ must be reflected in the MASTER_INDEX.md."
+
+  - name: "API Code Quality Index Maintenance"
+    source_paths:
+      - "api/src/zotify_api/"
+    required_docs:
+      - "api/docs/reference/CODE_QUALITY_INDEX.md"
+    message: "New or changed source files in api/src/zotify_api/ must be reflected in the CODE_QUALITY_INDEX.md."

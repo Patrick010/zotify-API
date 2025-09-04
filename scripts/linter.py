@@ -150,11 +150,14 @@ def run_command(command: List[str], cwd: str = str(PROJECT_ROOT), env: dict = No
         print(e.stderr, file=sys.stderr)
         return e.returncode
 
-def get_changed_files() -> Tuple[Set[str], Set[str]]:
+def get_changed_files() -> List[Tuple[str, str]]:
     """
-    Gets the set of all changed files and new files from git.
-    Returns a tuple of (all_changed_files, new_files).
+    Gets the list of changed files from git, correctly handling renames.
+    Returns a list of tuples (status, file_path).
     """
+    # Note: This logic was updated to correctly handle renamed files, which caused
+    # the previous implementation to crash. The main function is adapted to handle
+    # the list of tuples return type.
     is_precommit = "PRE_COMMIT" in os.environ
     command = ["git", "diff", "--name-status"]
 
@@ -166,26 +169,34 @@ def get_changed_files() -> Tuple[Set[str], Set[str]]:
         command.append("origin/main...HEAD")
 
     try:
-        result = subprocess.run(command, check=True, capture_output=True, text=True, encoding="utf-8")
+        result = subprocess.run(
+            command, check=True, capture_output=True, text=True, encoding="utf-8"
+        )
+        output = result.stdout.strip().splitlines()
 
-        all_changed = set()
-        new_files = set()
-
-        for line in result.stdout.strip().split("\n"):
+        changed_files_list = []
+        for line in output:
             if not line:
                 continue
-            status, file_path = line.split("\t")
-            all_changed.add(file_path)
-            if status.startswith("A"):
-                new_files.add(file_path)
+            parts = line.split("\t")
+            status = parts[0]
+            if status.startswith("R"):  # Renamed file (e.g., R100\told_path\tnew_path)
+                old_path, new_path = parts[1], parts[2]
+                # Treat a rename as a change to both the old and new paths
+                # so that rules for both locations are triggered.
+                changed_files_list.append((status, old_path))
+                changed_files_list.append((status, new_path))
+            else: # Modified (M), Added (A), Deleted (D), etc.
+                file_path = parts[1]
+                changed_files_list.append((status, file_path))
 
-        print(f"Found {len(all_changed)} changed file(s), {len(new_files)} of which are new.")
-        print("\n".join(f"- {f}" for f in all_changed))
-        return all_changed, new_files
+        print(f"Found {len(changed_files_list)} changed file(s) based on status.")
+        print("\n".join(f"- {status}\t{f}" for status, f in changed_files_list))
+        return changed_files_list
 
     except (subprocess.CalledProcessError, FileNotFoundError) as e:
         print(f"FATAL: Could not get changed files from git: {e}", file=sys.stderr)
-        return set(), set()
+        return []
 
 
 def check_doc_matrix_rules(changed_files: Set[str]) -> List[str]:
@@ -227,13 +238,6 @@ def main() -> int:
         description="Unified Linter and Logger for Zotify.",
         formatter_class=argparse.RawTextHelpFormatter,
     )
-    # --- Linter Arguments ---
-    parser.add_argument(
-        "--run-all",
-        action="store_true",
-        help="[Linter] Run checks on all relevant files, not just changed ones.",
-    )
-
     # --- Logger Arguments ---
     parser.add_argument(
         "--log",
@@ -257,6 +261,12 @@ def main() -> int:
         nargs='*',
         help="[Logger] An optional list of file paths related to the activity."
     )
+    # --- Linter Test Arguments ---
+    parser.add_argument(
+        "--test-files",
+        nargs='*',
+        help="[Linter-Test] A list of file paths to test, bypassing git."
+    )
 
     args = parser.parse_args()
     os.chdir(PROJECT_ROOT)
@@ -275,14 +285,27 @@ def main() -> int:
     print("Running Unified Linter")
     print("=" * 30)
 
-    if args.run_all:
-        changed_files, new_files = get_all_files()
+    changed_files_with_status = []
+    if args.test_files:
+        print("--- Running in Test Mode ---")
+        # In test mode, we simulate the status as 'M' (Modified) for all provided files.
+        # The linter logic primarily depends on the file paths, not the status.
+        changed_files_with_status = [('M', f) for f in args.test_files]
+        print(f"Injecting {len(changed_files_with_status)} file(s) for testing.")
+        print("\n".join(f"- M\t{f}" for f in args.test_files))
     else:
-        changed_files, new_files = get_changed_files()
+        # The --run-all flag was removed as it was incompatible with the incremental,
+        # git-based nature of the linter and caused several bugs. The linter now
+        # only runs on changed files detected by git.
+        changed_files_with_status = get_changed_files()
 
-    if not changed_files:
+    if not changed_files_with_status:
         print("No changed files detected. Exiting.")
         return 0
+
+    # The rest of the script expects a set of file paths, not a list of tuples.
+    # We extract the file paths here.
+    changed_files = {file_path for _, file_path in changed_files_with_status}
 
     # --- Flagging Phase ---
     run_pytest = any(f.endswith((".py", ".go")) for f in changed_files)
