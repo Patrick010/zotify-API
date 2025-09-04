@@ -102,15 +102,15 @@ This score assesses the implementation's clarity, efficiency, structure, and tes
 
 ## Snitch Module
 
-| File Path | Doc Score | Code Score | Notes |
-|---|---|---|---|
-| `snitch/snitch.go` | C | B | Excellent inline comments and a clear module-level comment. Lacks function-level docstrings, which is a significant gap. |
+| File Path | Documentation Score | Code Score | Overall Score | Notes |
+|---|---|---|---|---|
+| `snitch/snitch.go` | C | B | C | Excellent inline comments and a clear module-level comment. Lacks function-level docstrings, which is a significant gap. |
 
 ## Gonk-TestUI Module
 
-| File Path | Doc Score | Code Score | Notes |
-|---|---|---|---|
-| `gonk-testUI/app.py` | C | B | The core Flask routes are clear, but the functions for managing the `sqlite-web` subprocess are complex and lack docstrings. |
-| `gonk-testUI/static/app.js` | C | B | Excellent inline comments, but lacks function-level docstrings for complex UI state management. |
-| `gonk-testUI/static/styles.css` | A | A | Excellent use of CSS variables and a clear, logical structure. |
-| `gonk-testUI/templates/index.html` | A | A | Clean, semantic HTML5 structure. |
+| File Path | Documentation Score | Code Score | Overall Score | Notes |
+|---|---|---|---|---|
+| `gonk-testUI/app.py` | C | B | C | The core Flask routes are clear, but the functions for managing the `sqlite-web` subprocess are complex and lack docstrings. |
+| `gonk-testUI/static/app.js` | C | B | C | Excellent inline comments, but lacks function-level docstrings for complex UI state management. |
+| `gonk-testUI/static/styles.css` | A | A | A | Excellent use of CSS variables and a clear, logical structure. |
+| `gonk-testUI/templates/index.html` | A | A | A | Clean, semantic HTML5 structure. |
