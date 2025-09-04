@@ -44,6 +44,11 @@ The primary mechanism for enforcing these policies is the unified linter script,
 - **Rule:** The scores in the index **must** align with the A-F scale defined in the `API_DEVELOPER_GUIDE.md`.
 - **Enforcement:** The linter will parse the `CODE_QUALITY_INDEX.md` file on every change and validate that all `Doc Score` and `Code Score` values are one of `A, B, C, D, F`. Commits containing invalid scores will be rejected.
 
+### 3.6. Mandatory Logging Enforcement
+- **Trigger:** Unconditional. This rule is checked on every commit, regardless of the files changed.
+- **Rule:** The three project log files (`project/logs/ACTIVITY.md`, `project/logs/SESSION_LOG.md`, `project/logs/CURRENT_STATE.md`) must be modified.
+- **Enforcement:** The linter will fail if these three log files are not included in the set of changed files for a commit. This serves as a reminder to the developer to manually log their work using the `linter.py --log` command.
+
 ## 4. CI/CD & Pull Request (PR) Enforcement
 - All policies are enforced at the PR level by the `ci.yml` GitHub Actions workflow.
 - The workflow runs the unified linter (`python scripts/linter.py`) on all changes.
