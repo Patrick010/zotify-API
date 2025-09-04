@@ -1,4 +1,19 @@
 ---
+    ## ACT-085: fix(linter): correct mandatory logging check to use all()
+
+    **Date:** 2025-09-04
+    **Status:** ✅ Done
+    **Assignee:** Jules
+
+    ### Objective
+    The mandatory logging rule was incorrectly using 'any()' to check for log files, when it should have been using 'all()'. This would have allowed commits with only one of the three required log files. The objective is to fix this bug.
+
+    ### Outcome
+    The linter script 'scripts/linter.py' has been modified. The logic now specifically checks if the rule name is 'Enforce Mandatory Logging' and, if so, uses 'all()' to validate that all three log files are present in the commit. Other rules continue to use 'any()' as before.
+    ### Related Documents
+- `scripts/linter.py`
+
+---
     ## ACT-084: chore: Conclude multi-phase project audit
 
     **Date:** 2025-09-03

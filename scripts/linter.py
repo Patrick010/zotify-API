@@ -225,8 +225,15 @@ def check_doc_matrix_rules(changed_files: Set[str]) -> List[str]:
 
         # A rule is triggered if it's unconditional OR if a source file matches.
         if is_unconditional or source_changed:
-            # If the rule is triggered, check if at least one required doc also changed
-            doc_changed = any(d in changed_files for d in required_docs)
+            # If the rule is triggered, check if the required docs also changed.
+            # The "Enforce Mandatory Logging" rule is special and requires ALL docs to be present.
+            # Other rules only require ANY doc to be present.
+            doc_changed = False
+            if rule.get("name") == "Enforce Mandatory Logging":
+                doc_changed = all(d in changed_files for d in required_docs)
+            else:
+                doc_changed = any(d in changed_files for d in required_docs)
+
             if not doc_changed:
                 message = rule.get("message", f"Changes in {source_paths} require updates to one of {required_docs}")
                 errors.append(message)
