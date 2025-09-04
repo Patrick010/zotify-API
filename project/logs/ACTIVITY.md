@@ -1,4 +1,22 @@
 ---
+## ACT-094: fix(ci): Resolve final ruff and git diff errors
+
+**Date:** 2025-09-04
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+fix(ci): Resolve final ruff and git diff errors
+
+### Outcome
+Fixed two remaining E501 (line too long) errors in comments reported by ruff. Fixed the 'Unable to find merge base' error in the doc-linter CI job by adding 'fetch-depth: 0' to the checkout action, which gives the tj-actions/changed-files action the full git history it needs.
+
+### Related Documents
+- `api/src/zotify_api/main.py`
+- `api/src/zotify_api/routes/system.py`
+- `.github/workflows/ci.yml`
+
+---
 ## ACT-093: fix(ci): Fix ruff errors and linter git diff logic
 
 **Date:** 2025-09-04

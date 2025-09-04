@@ -76,7 +76,7 @@ app.add_middleware(RequestIDMiddleware)
 def initialize_logging_framework() -> None:
     """Loads config and initializes the new flexible logging framework."""
     try:
-        # Construct a path to 'api/logging_framework.yml' relative to this file's location
+        # Construct path to 'api/logging_framework.yml' relative to this file's location
         current_dir = os.path.dirname(__file__)
         config_path = os.path.abspath(
             os.path.join(current_dir, '..', '..', 'logging_framework.yml')
