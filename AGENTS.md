@@ -44,7 +44,7 @@ Before starting any new task, you **must** first read the following document to 
 This workflow is designed to be followed for every task that involves code or documentation changes.
 
 ### Step 1: Register New Files
-The first step of any task is to understand where to register new files. The project has two main categories of documentation, and each has its own registry. Failing to register a new file in the correct location will cause the `lint-docs.py` verification script to fail.
+The first step of any task is to understand where to register new files. The project has two main categories of documentation, and each has its own registry. Failing to register a new file in the correct location will cause the `scripts/linter.py` verification script to fail.
 
 *   **Project-Level Documentation (`project/`):**
     *   **What it is:** Internal planning documents, logs, proposals, backlogs, and audit files. Anything that lives in the `project/` directory.
@@ -52,9 +52,7 @@ The first step of any task is to understand where to register new files. The pro
 
 *   **API & User-Facing Documentation (`api/docs/`):**
     *   **What it is:** External-facing documentation intended for API consumers or developers contributing to the API. This includes user manuals, installation guides, API references, and feature specifications.
-    *   **Where to Register:** New API documents **must** be registered in two places:
-        1.  `api/docs/MASTER_INDEX.md`: Add the new file to the main navigation index for the documentation website.
-        2.  `api/docs/reference/CODE_QUALITY_INDEX.md`: Add a new row for the file with an initial "Documentation Score" of 'X'.
+    *   **Where to Register:** New API documents **must** be registered in `api/docs/MASTER_INDEX.md`.
 
 ### Step 2: Code and Document
 This is the primary development task. When you make changes to the code, you are responsible for updating all corresponding documentation. Use the registries mentioned in Step 1 to identify relevant documents.
@@ -62,7 +60,7 @@ This is the primary development task. When you make changes to the code, you are
 ### Step 3: Maintain the Quality Index for Source Code
 To ensure a high standard of quality, all new **source code files** (`.py`, `.go`, `.js`) must be registered in the appropriate quality index. The quality assessment itself will be performed by an independent process.
 
-1.  **Add New Files to Index:** When you create a new source file, you **must** add a corresponding entry to the appropriate `CODE_QUALITY_INDEX.md` file (e.g., `api/docs/reference/CODE_QUALITY_INDEX.md` for API source files).
+1.  **Add New Files to Index:** When you create a new source file, you **must** add a corresponding entry to the consolidated `project/CODE_QUALITY_INDEX.md` file.
 2.  **Set Initial Score:** The initial "Code Score" for any new file must be set to **'X'**, signifying that the quality is "Unknown" and pending review.
 
 ### Step 4: Log Your Work
@@ -78,9 +76,13 @@ Before submitting your work for review, you **must** run the unified linter scri
 
 *   **Command:** `python3 scripts/linter.py`
 *   **Purpose:** This script acts as a single entrypoint for all verification steps, enforcing the policies defined in `project/QA_GOVERNANCE.md`. It will:
-    1.  Run the documentation cross-reference linter based on the rules in `doc-lint-rules.yml`.
-    2.  Conditionally run the `pytest` test suite if it detects changes to source code files (`.py`, `.go`).
-    3.  Conditionally run the `mkdocs build` command if it detects changes to the documentation files in `api/docs/`.
+    1.  **Run Documentation Linters:** It runs a suite of checks based on the rules in `doc-lint-rules.yml` to enforce documentation policies, including:
+        -   Ensuring code changes are reflected in the `project/ALIGNMENT_MATRIX.md`.
+        -   Ensuring new source files are added to the `project/CODE_QUALITY_INDEX.md`.
+        -   Ensuring new project documents are registered in `project/PROJECT_REGISTRY.md`.
+        -   Ensuring new API documents are registered in `api/docs/MASTER_INDEX.md`.
+    2.  **Run Tests:** Conditionally runs the `pytest` test suite if it detects changes to source code files (`.py`, `.go`).
+    3.  **Build Docs:** Conditionally runs the `mkdocs build` command if it detects changes to the documentation files in `api/docs/`.
 *   You must resolve any errors reported by the script before submitting.
 
 ---

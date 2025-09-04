@@ -1,6 +1,8 @@
-# API Code Quality Index
+# Project Code Quality Index
 
-This document tracks the quality of every source code file in the `api` module. Each file is assessed against the rubric defined in the [`API_DEVELOPER_GUIDE.md`](../manuals/API_DEVELOPER_GUIDE.md).
+This document tracks the quality of every source code file in the project. Each file is assessed against the rubric defined in the `api/docs/manuals/API_DEVELOPER_GUIDE.md`.
+
+## API Module
 
 | File Path | Documentation Score | Code Score | Overall Score | Notes |
 | --- | :---: | :---: | :---: | --- |
@@ -69,3 +71,18 @@ This document tracks the quality of every source code file in the `api` module. 
 | `api/src/zotify_api/services/tracks_service.py`| C | C | C | Some functions are documented. The code uses raw SQL, which is inconsistent with the ORM (`crud.py`) used elsewhere. The `get_tracks_metadata_from_spotify` function contains a "hack" to get around a gap in the provider abstraction. |
 | `api/src/zotify_api/services/user_service.py` | B | B | B | Good documentation. The service correctly encapsulates all user-related data and logic, reading from and writing to a JSON file for persistence. |
 | `api/src/zotify_api/services/webhooks.py` | F | B | C | Undocumented. The code correctly uses a background task for firing webhooks to avoid blocking the request. |
+
+## Snitch Module
+
+| File Path | Doc Score | Code Score | Notes |
+|---|---|---|---|
+| `snitch/snitch.go` | B | B | Excellent inline comments and a clear module-level comment. Lacks function-level docstrings. The code is clear and functional but could be slightly better structured. |
+
+## Gonk-TestUI Module
+
+| File Path | Doc Score | Code Score | Notes |
+|---|---|---|---|
+| `gonk-testUI/app.py` | C | B | The core Flask routes are clear, but the functions for managing the `sqlite-web` subprocess are complex and lack docstrings. |
+| `gonk-testUI/static/app.js` | B | B | Excellent inline comments, but lacks function-level docstrings for complex UI state management. |
+| `gonk-testUI/static/styles.css` | A | A | Excellent use of CSS variables and a clear, logical structure. |
+| `gonk-testUI/templates/index.html` | A | A | Clean, semantic HTML5 structure. |
