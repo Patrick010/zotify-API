@@ -1,6 +1,5 @@
 import logging as py_logging
 import os
-import time
 from datetime import datetime, timezone
 from typing import Any, Dict, Optional, cast
 
@@ -78,7 +77,10 @@ def initialize_logging_framework() -> None:
     """Loads config and initializes the new flexible logging framework."""
     try:
         # Construct a path to 'api/logging_framework.yml' relative to this file's location
-        config_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'logging_framework.yml'))
+        current_dir = os.path.dirname(__file__)
+        config_path = os.path.abspath(
+            os.path.join(current_dir, '..', '..', 'logging_framework.yml')
+        )
         with open(config_path, "r") as f:
             config_data = yaml.safe_load(f)
 

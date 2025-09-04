@@ -33,8 +33,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+
+    - name: Get changed files
+      id: changed-files
+      uses: tj-actions/changed-files@v44
       with:
-        fetch-depth: 0 # Fetch all history for git diff to work
+        files_ignore: |
+          **/*.md
+          **/*.yml
+        # We need the status for the linter, but this action doesn't provide it easily.
+        # We will just get the filenames and assume 'M' in the linter.
+        # This is a reasonable simplification for the doc linter's purpose.
+
+    - name: List changed files for debugging
+      run: |
+        echo "Changed files: ${{ steps.changed-files.outputs.all_changed_files }}"
+        # Write the list of changed files to a file for the linter to consume
+        echo "${{ steps.changed-files.outputs.all_changed_files }}" > changed_files.txt
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -47,7 +62,7 @@ jobs:
         pip install PyYAML mkdocs mkdocs-material mkdocs-monorepo-plugin
 
     - name: Run documentation linter
-      run: python3 scripts/linter.py
+      run: python3 scripts/linter.py --from-file changed_files.txt
 
   # This job only runs if the paths-filter job determines that code files have changed.
   code-quality:

@@ -346,6 +346,10 @@ def main() -> int:
         nargs='*',
         help="[Linter-Test] A list of file paths to test, bypassing git."
     )
+    parser.add_argument(
+        "--from-file",
+        help="[Linter-CI] Read list of changed files from a text file (one file per line)."
+    )
 
     args = parser.parse_args()
     os.chdir(PROJECT_ROOT)
@@ -365,17 +369,25 @@ def main() -> int:
     print("=" * 30)
 
     changed_files_with_status = []
-    if args.test_files:
+    if args.from_file:
+        print(f"--- Reading changed files from {args.from_file} ---")
+        try:
+            with open(args.from_file, "r") as f:
+                # Assume all files from the file are 'Modified' for status
+                files = [line.strip() for line in f if line.strip()]
+                changed_files_with_status = [('M', f) for f in files]
+            print(f"Found {len(changed_files_with_status)} changed file(s).")
+        except FileNotFoundError:
+            print(f"ERROR: File specified by --from-file not found: {args.from_file}", file=sys.stderr)
+            return 1
+    elif args.test_files:
         print("--- Running in Test Mode ---")
         # In test mode, we simulate the status as 'M' (Modified) for all provided files.
-        # The linter logic primarily depends on the file paths, not the status.
         changed_files_with_status = [('M', f) for f in args.test_files]
         print(f"Injecting {len(changed_files_with_status)} file(s) for testing.")
         print("\n".join(f"- M\t{f}" for f in args.test_files))
     else:
-        # The --run-all flag was removed as it was incompatible with the incremental,
-        # git-based nature of the linter and caused several bugs. The linter now
-        # only runs on changed files detected by git.
+        # Default to getting files from git
         changed_files_with_status = get_changed_files()
 
     if not changed_files_with_status:
@@ -391,7 +403,7 @@ def main() -> int:
     run_quality_check = "api/docs/CODE_QUALITY_INDEX.md" in changed_files
 
     print("\n--- Checks to run ---")
-    print(f"Doc Matrix Linter: Always")
+    print("Doc Matrix Linter: Always")
     print(f"Quality Index Linter: {run_quality_check}")
     print(f"MkDocs Build: {run_mkdocs}")
     print("-----------------------\n")

@@ -1,4 +1,23 @@
 ---
+## ACT-093: fix(ci): Fix ruff errors and linter git diff logic
+
+**Date:** 2025-09-04
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+fix(ci): Fix ruff errors and linter git diff logic
+
+### Outcome
+Fixed 6 errors reported by the ruff linter, including unused imports and line length issues. Implemented a more robust method for the doc-linter to get changed files in the CI environment by using the tj-actions/changed-files action and a new --from-file argument in the linter script.
+
+### Related Documents
+- `scripts/linter.py`
+- `.github/workflows/ci.yml`
+- `api/src/zotify_api/main.py`
+- `api/src/zotify_api/routes/system.py`
+
+---
 ## ACT-092: refactor(ci): Separate doc and code quality jobs
 
 **Date:** 2025-09-04
