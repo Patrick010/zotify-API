@@ -1,4 +1,22 @@
 ---
+## ACT-092: refactor(ci): Separate doc and code quality jobs
+
+**Date:** 2025-09-04
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+refactor(ci): Separate doc and code quality jobs
+
+### Outcome
+Refactored the CI pipeline to separate documentation and code quality checks into distinct jobs for efficiency. The linter.py script was simplified to only handle documentation governance checks. The .github/workflows/ci.yml was updated to have a conditional 'code-quality' job that only runs on code changes. QA_GOVERNANCE.md was updated to reflect this new workflow.
+
+### Related Documents
+- `scripts/linter.py`
+- `.github/workflows/ci.yml`
+- `project/QA_GOVERNANCE.md`
+
+---
 ## ACT-091: feat(linter): Create linter enforcement verification report
 
 **Date:** 2025-09-04

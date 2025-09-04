@@ -1,6 +1,13 @@
 ---
 ## Session Report: 2025-09-04
 
+**Summary:** refactor(ci): Separate doc and code quality jobs
+**Findings:**
+Refactored the CI pipeline to separate documentation and code quality checks into distinct jobs for efficiency. The linter.py script was simplified to only handle documentation governance checks. The .github/workflows/ci.yml was updated to have a conditional 'code-quality' job that only runs on code changes. QA_GOVERNANCE.md was updated to reflect this new workflow.
+
+---
+## Session Report: 2025-09-04
+
 **Summary:** feat(linter): Create linter enforcement verification report
 **Findings:**
 A comprehensive audit of the linter.py script was performed against a detailed checklist. The linter was found to be fully enforcing all major documentation rules as configured in doc-lint-rules.yml. The findings, including analysis of the code and results from validation test scenarios, are documented in the new verification report.

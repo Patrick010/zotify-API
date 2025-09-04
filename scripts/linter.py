@@ -238,6 +238,29 @@ def check_doc_matrix_rules(changed_files: Set[str]) -> List[str]:
     return errors
 
 
+def run_mkdocs_check():
+    docs_dir = "api/docs"
+    if not os.path.isdir(docs_dir):
+        print(f"Docs directory not found: {docs_dir}")
+        return True  # no docs, nothing to check
+
+    print("Running mkdocs validation...")
+    try:
+        # Note: The user-provided snippet is adapted here to use the existing
+        # run_command function for consistency in output and error handling.
+        # The return code of run_command is 0 on success.
+        return_code = run_command(
+            ["mkdocs", "build", "--strict", "-f", f"{docs_dir}/mkdocs.yml"],
+        )
+        if return_code == 0:
+            return True
+        else:
+            print("mkdocs validation failed.")
+            return False
+    except subprocess.CalledProcessError:
+        print("mkdocs validation failed.")
+        return False
+
 def check_quality_index_ratings() -> List[str]:
     """
     Parses the CODE_QUALITY_INDEX.md file and checks for invalid ratings.
@@ -364,14 +387,12 @@ def main() -> int:
     changed_files = {file_path for _, file_path in changed_files_with_status}
 
     # --- Flagging Phase ---
-    run_pytest = any(f.endswith((".py", ".go")) for f in changed_files)
     run_mkdocs = any(f.startswith("api/docs/") for f in changed_files)
     run_quality_check = "api/docs/CODE_QUALITY_INDEX.md" in changed_files
 
     print("\n--- Checks to run ---")
     print(f"Doc Matrix Linter: Always")
     print(f"Quality Index Linter: {run_quality_check}")
-    print(f"Pytest: {run_pytest}")
     print(f"MkDocs Build: {run_mkdocs}")
     print("-----------------------\n")
 
@@ -405,27 +426,10 @@ def main() -> int:
             print("Code Quality Index Linter Passed!")
         print("-" * 37)
 
-
-    # 3. Pytest (Conditional)
-    if run_pytest:
-        print("\n--- Running Pytest ---")
-        # run_lint.sh sets APP_ENV=development, we will do the same.
-        pytest_return_code = run_command(["pytest"], cwd=str(PROJECT_ROOT / "api"), env={"APP_ENV": "development"})
-        if pytest_return_code != 0:
-            print("Pytest Failed!", file=sys.stderr)
-            final_return_code = 1
-        else:
-            print("Pytest Passed!")
-        print("-" * 22)
-    else:
-        print("\nSkipping Pytest: No code changes detected.")
-
-
-    # 4. MkDocs Build (Conditional)
+    # 3. MkDocs Build (Conditional)
     if run_mkdocs:
         print("\n--- Running MkDocs Build ---")
-        mkdocs_return_code = run_command(["mkdocs", "build", "--clean"])
-        if mkdocs_return_code != 0:
+        if not run_mkdocs_check():
             print("MkDocs Build Failed!", file=sys.stderr)
             final_return_code = 1
         else:

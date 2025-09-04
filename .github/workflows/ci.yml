@@ -7,131 +7,28 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  # This job runs on all PRs and serves as a gatekeeper. It determines if
+  # code-related jobs need to run.
+  paths-filter:
     runs-on: ubuntu-latest
+    outputs:
+      code_changed: ${{ steps.filter.outputs.code_changed }}
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            code_changed:
+              - 'api/src/**'
+              - 'api/tests/**'
+              - 'scripts/**'
+              - 'snitch/**'
+              - 'gonk-testUI/**'
+              - 'pyproject.toml'
+              - 'go.mod'
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.12'
-
-    - name: Cache pip dependencies
-      uses: actions/cache@v3
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/pyproject.toml') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -e ./api
-        pip install pytest-cov
-
-    - name: Create required directories
-      run: mkdir -p api/storage api/logs
-
-    - name: Create admin API key file for tests
-      run: echo "test-ci-key" > api/src/.admin_api_key
-
-    - name: Run tests with coverage
-      run: |
-        cd api
-        python -m pytest --cov=src/zotify_api --cov-report=xml --cov-fail-under=85
-
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.12'
-
-    - name: Install ruff
-      run: python -m pip install ruff
-
-    - name: Run ruff
-      run: python -m ruff check .
-
-    - name: Set up Go
-      uses: actions/setup-go@v4
-      with:
-        go-version: '1.22' # Updated to resolve linter incompatibility
-        cache: false # Disable caching as there are no dependencies
-
-    - name: Run golangci-lint
-      uses: golangci/golangci-lint-action@v4
-      with:
-        # Downgrade to a known stable version to avoid linter/toolchain bugs
-        version: v1.55.2
-        working-directory: snitch
-
-  type-check:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.12'
-
-    - name: Cache pip dependencies
-      uses: actions/cache@v3
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/pyproject.toml') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -e ./api
-
-    - name: Run mypy
-      run: |
-        cd api
-        python -m mypy --config-file mypy.ini src tests
-
-  security-scan:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.12'
-
-    - name: Cache pip dependencies
-      uses: actions/cache@v3
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/pyproject.toml') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -e ./api
-
-    - name: Run bandit
-      run: |
-        cd api
-        python -m bandit -r . -c bandit.yml
-
-    - name: Run safety
-      run: |
-        pip install "safety<3.0.0"
-        python -m safety check --ignore=51167 --ignore=77740
-
+  # This job runs on all PRs to check for documentation governance.
   doc-linter:
     runs-on: ubuntu-latest
     steps:
@@ -144,8 +41,79 @@ jobs:
       with:
         python-version: '3.12'
 
-    - name: Install linter dependencies
-      run: python -m pip install PyYAML
+    - name: Install documentation dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install PyYAML mkdocs mkdocs-material mkdocs-monorepo-plugin
 
     - name: Run documentation linter
-      run: python3 ${{ github.workspace }}/scripts/linter.py
+      run: python3 scripts/linter.py
+
+  # This job only runs if the paths-filter job determines that code files have changed.
+  code-quality:
+    runs-on: ubuntu-latest
+    needs: paths-filter
+    if: needs.paths-filter.outputs.code_changed == 'true'
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/pyproject.toml') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e ./api
+        pip install ruff black pytest pytest-cov "safety<3.0.0"
+
+    - name: Create required directories for tests
+      run: mkdir -p api/storage api/logs
+
+    - name: Create admin API key file for tests
+      run: echo "test-ci-key" > api/src/.admin_api_key
+
+    - name: Run Ruff linter
+      run: python -m ruff check .
+
+    - name: Run Black formatter check
+      run: python -m black --check .
+
+    - name: Run mypy type checker
+      run: |
+        cd api
+        python -m mypy --config-file mypy.ini src tests
+
+    - name: Run Bandit security scanner
+      run: |
+        cd api
+        python -m bandit -r . -c bandit.yml
+
+    - name: Run Safety dependency scanner
+      run: python -m safety check --ignore=51167 --ignore=77740
+
+    - name: Run tests with coverage
+      run: |
+        cd api
+        python -m pytest --cov=src/zotify_api --cov-report=xml --cov-fail-under=85
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.22'
+        cache: false
+
+    - name: Run golangci-lint
+      uses: golangci/golangci-lint-action@v4
+      with:
+        version: v1.55.2
+        working-directory: snitch

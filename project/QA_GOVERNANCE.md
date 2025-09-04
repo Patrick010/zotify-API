@@ -44,14 +44,27 @@ The primary mechanism for enforcing these policies is the unified linter script,
 - **Enforcement:** The linter will parse the `CODE_QUALITY_INDEX.md` file on every change and validate that all `Doc Score` and `Code Score` values are one of `A, B, C, D, F`. Commits containing invalid scores will be rejected.
 
 ### 3.6. Mandatory Logging Enforcement
-- **Trigger:** Unconditional. This rule is checked on every commit, regardless of the files changed.
-- **Rule:** The three project log files (`project/logs/ACTIVITY.md`, `project/logs/SESSION_LOG.md`, `project/logs/CURRENT_STATE.md`) must be modified.
-- **Enforcement:** The linter will fail if these three log files are not included in the set of changed files for a commit. This serves as a reminder to the developer to manually log their work using the `linter.py --log` command.
+- **Trigger:** Any change to a file within the project's defined `source_paths` (e.g., any file in `api/src/`, `project/`, `scripts/`, etc.).
+- **Rule:** If any code or documentation file is changed, the three project log files (`project/logs/ACTIVITY.md`, `project/logs/SESSION_LOG.md`, `project/logs/CURRENT_STATE.md`) must also be modified.
+- **Enforcement:** The linter will fail if the log files are not included in a commit that contains other code/doc changes. This serves as a reminder to the developer to manually log their work using the `linter.py --log` command.
 
 ## 4. CI/CD & Pull Request (PR) Enforcement
-- All policies are enforced at the PR level by the `ci.yml` GitHub Actions workflow.
-- The workflow runs the unified linter (`python scripts/linter.py`) on all changes.
-- A PR cannot be merged if the linter script fails. This ensures that no code that violates project governance can be merged into the `main` branch.
+The project uses a multi-stage CI/CD pipeline defined in `.github/workflows/ci.yml` to enforce quality gates. The pipeline is structured to be efficient by separating documentation and code checks.
+
+- **`doc-linter` Job:** This job runs on **every commit** in a pull request. Its sole responsibility is to enforce documentation governance. It runs `scripts/linter.py`, which:
+    - Validates documentation rules from `scripts/doc-lint-rules.yml`.
+    - Validates the `CODE_QUALITY_INDEX.md` content.
+    - Runs an `mkdocs build` to check for broken links in the `api/docs/` documentation.
+    - This job **does not** run any code linters or tests.
+
+- **`code-quality` Job:** This job is **conditional**. It only runs if changes are detected in source code directories (e.g., `api/src/`, `scripts/`, `snitch/`). It performs a comprehensive set of checks:
+    - Lints code with `ruff`.
+    - Checks formatting with `black`.
+    - Runs type checking with `mypy`.
+    - Scans for vulnerabilities with `bandit` and `safety`.
+    - Runs the full `pytest` test suite.
+
+A PR cannot be merged if any of these jobs fail. This ensures that no code or documentation that violates project governance can be merged into the `main` branch.
 
 ## 5. Key Governance Documents
 - **This Document:** `project/QA_GOVERNANCE.md`
