@@ -68,6 +68,7 @@ At the completion of any significant action, you **must** log the work using the
 
 *   **Command:** `python scripts/linter.py --log --summary "..." --objective "..." --outcome "..." --files ...`
 *   **Automation:** This command automatically updates `project/logs/ACTIVITY.md`, `project/logs/CURRENT_STATE.md` and `project/logs/SESSION_LOG.md`.
+*   **Enforcement:** The pre-submission linter (`python3 scripts/linter.py`) now includes an unconditional check to ensure these log files have been modified. If you do not run the `--log` command, the linter will fail.
 
 > **Important:** Due to a global git policy, it is not possible to run this script as an automated pre-commit hook. Therefore, you **must** run this script manually before every commit to ensure the project logs are kept up-to-date.
 

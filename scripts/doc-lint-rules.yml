@@ -2,6 +2,15 @@
 # It maps changes in source code paths to required changes in documentation files.
 
 rules:
+  - name: "Enforce Mandatory Logging"
+    required_docs:
+      - "project/logs/ACTIVITY.md"
+      - "project/logs/SESSION_LOG.md"
+      - "project/logs/CURRENT_STATE.md"
+    message: |
+      Every commit must include updates to the project log files.
+      This rule is unconditional and enforced by the linter.
+
   - name: "API Route Change"
     source_paths:
       - "api/src/zotify_api/routes/"

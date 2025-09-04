@@ -216,14 +216,16 @@ def check_doc_matrix_rules(changed_files: Set[str]) -> List[str]:
     for rule in rules:
         source_paths = rule.get("source_paths", [])
         required_docs = rule.get("required_docs", [])
+        is_unconditional = not source_paths
 
         # Check if any changed file matches any of the source paths in the rule
         source_changed = any(
             any(f.startswith(p) for p in source_paths) for f in changed_files
         )
 
-        if source_changed:
-            # If a source file changed, check if at least one required doc also changed
+        # A rule is triggered if it's unconditional OR if a source file matches.
+        if is_unconditional or source_changed:
+            # If the rule is triggered, check if at least one required doc also changed
             doc_changed = any(d in changed_files for d in required_docs)
             if not doc_changed:
                 message = rule.get("message", f"Changes in {source_paths} require updates to one of {required_docs}")
