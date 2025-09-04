@@ -39,6 +39,11 @@ The primary mechanism for enforcing these policies is the unified linter script,
 - **Enforcement:** The linter will fail if a change is detected in a forbidden document.
 - **Note on Unreliable Environments:** In some CI/test environments, the `git diff` command used by the linter may be unreliable. In such cases, the `forbidden_docs` check may require manual verification during code review.
 
+### 3.5. Code Quality Scorecard Enforcement
+- **Trigger:** Any change to the `api/docs/CODE_QUALITY_INDEX.md` file.
+- **Rule:** The scores in the index **must** align with the A-F scale defined in the `API_DEVELOPER_GUIDE.md`.
+- **Enforcement:** The linter will parse the `CODE_QUALITY_INDEX.md` file on every change and validate that all `Doc Score` and `Code Score` values are one of `A, B, C, D, F`. Commits containing invalid scores will be rejected.
+
 ## 4. CI/CD & Pull Request (PR) Enforcement
 - All policies are enforced at the PR level by the `ci.yml` GitHub Actions workflow.
 - The workflow runs the unified linter (`python scripts/linter.py`) on all changes.

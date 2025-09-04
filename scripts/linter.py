@@ -232,6 +232,56 @@ def check_doc_matrix_rules(changed_files: Set[str]) -> List[str]:
     return errors
 
 
+def check_quality_index_ratings() -> List[str]:
+    """
+    Parses the CODE_QUALITY_INDEX.md file and checks for invalid ratings.
+    """
+    errors: List[str] = []
+    quality_index_file = PROJECT_ROOT / "api" / "docs" / "CODE_QUALITY_INDEX.md"
+    if not quality_index_file.exists():
+        return []
+
+    valid_scores = {"A", "B", "C", "D", "F"}
+    with open(quality_index_file, "r", encoding="utf-8") as f:
+        lines = f.readlines()
+
+    in_data_table = False
+    for i, line in enumerate(lines):
+        # The real data tables start with a header like this.
+        # This prevents the linter from parsing the rubric tables in the legend.
+        if "| File Path |" in line and "| Documentation Score |" in line:
+            in_data_table = True
+            continue
+
+        if not in_data_table:
+            continue
+
+        if not line.strip().startswith("|"):
+            continue
+        if "---" in line:
+            continue
+
+        parts = [p.strip() for p in line.split("|")]
+        if len(parts) < 4:
+            continue
+
+        doc_score = parts[2]
+        code_score = parts[3]
+
+        if doc_score and doc_score not in valid_scores:
+            errors.append(
+                f"Invalid 'Doc Score' in CODE_QUALITY_INDEX.md on line {i+1}: '{doc_score}'. "
+                f"Score must be one of {sorted(list(valid_scores))}"
+            )
+        if code_score and code_score not in valid_scores:
+            errors.append(
+                f"Invalid 'Code Score' in CODE_QUALITY_INDEX.md on line {i+1}: '{code_score}'. "
+                f"Score must be one of {sorted(list(valid_scores))}"
+            )
+
+    return errors
+
+
 def main() -> int:
     """Main function for the unified linter and logger."""
     parser = argparse.ArgumentParser(
@@ -310,9 +360,11 @@ def main() -> int:
     # --- Flagging Phase ---
     run_pytest = any(f.endswith((".py", ".go")) for f in changed_files)
     run_mkdocs = any(f.startswith("api/docs/") for f in changed_files)
+    run_quality_check = "api/docs/CODE_QUALITY_INDEX.md" in changed_files
 
     print("\n--- Checks to run ---")
     print(f"Doc Matrix Linter: Always")
+    print(f"Quality Index Linter: {run_quality_check}")
     print(f"Pytest: {run_pytest}")
     print(f"MkDocs Build: {run_mkdocs}")
     print("-----------------------\n")
@@ -332,10 +384,23 @@ def main() -> int:
         print("Documentation Matrix Linter Passed!")
     print("-" * 37)
     if final_return_code != 0:
-        return final_return_code
+        return final_return_code # Early exit if core rules fail
+
+    # 2. Code Quality Index Linter (Conditional)
+    if run_quality_check:
+        print("\n--- Running Code Quality Index Linter ---")
+        quality_errors = check_quality_index_ratings()
+        if quality_errors:
+            print("Code Quality Index Linter Failed:", file=sys.stderr)
+            for error in quality_errors:
+                print(f"- {error}", file=sys.stderr)
+            final_return_code = 1
+        else:
+            print("Code Quality Index Linter Passed!")
+        print("-" * 37)
 
 
-    # 2. Pytest (Conditional)
+    # 3. Pytest (Conditional)
     if run_pytest:
         print("\n--- Running Pytest ---")
         # run_lint.sh sets APP_ENV=development, we will do the same.
@@ -350,7 +415,7 @@ def main() -> int:
         print("\nSkipping Pytest: No code changes detected.")
 
 
-    # 3. MkDocs Build (Conditional)
+    # 4. MkDocs Build (Conditional)
     if run_mkdocs:
         print("\n--- Running MkDocs Build ---")
         mkdocs_return_code = run_command(["mkdocs", "build", "--clean"])
