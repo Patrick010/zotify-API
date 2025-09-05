@@ -22,9 +22,7 @@ class SpotiClient:
         self._refresh_token = refresh_token
         self._client = httpx.AsyncClient(base_url=SPOTIFY_API_BASE)
 
-    async def _request(
-        self, method: str, url: str, **kwargs: Any
-    ) -> httpx.Response:
+    async def _request(self, method: str, url: str, **kwargs: Any) -> httpx.Response:
         """
         Makes an authenticated request to the Spotify API.
         """

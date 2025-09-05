@@ -26,9 +26,9 @@ class NotificationsService:
         return notification
 
     def get_notifications(self, user_id: str) -> List[Dict[str, Any]]:
-        notifications: List[
-            Dict[str, Any]
-        ] = self.user_service.get_notifications(user_id)
+        notifications: List[Dict[str, Any]] = self.user_service.get_notifications(
+            user_id
+        )
         return notifications
 
     def mark_notification_as_read(

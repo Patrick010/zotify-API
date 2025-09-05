@@ -41,9 +41,7 @@ def test_correct_key(monkeypatch: MonkeyPatch) -> None:
     assert require_admin_api_key(x_api_key="test_key", settings=settings) is True
 
 
-def test_provider_callback_route(
-    monkeypatch: MonkeyPatch, client: TestClient
-) -> None:
+def test_provider_callback_route(monkeypatch: MonkeyPatch, client: TestClient) -> None:
     """
     Tests that the generic provider callback route correctly invokes the
     provider's handle_oauth_callback method.

@@ -79,7 +79,7 @@ def initialize_logging_framework() -> None:
         # Construct path to 'api/logging_framework.yml' relative to this file's location
         current_dir = os.path.dirname(__file__)
         config_path = os.path.abspath(
-            os.path.join(current_dir, '..', '..', 'logging_framework.yml')
+            os.path.join(current_dir, "..", "..", "logging_framework.yml")
         )
         with open(config_path, "r") as f:
             config_data = yaml.safe_load(f)
@@ -179,9 +179,7 @@ def get_schema(request: Request, q: Optional[str] = None) -> Dict[str, Any]:
             and "schemas" in openapi_schema["components"]
             and q in openapi_schema["components"]["schemas"]
         ):
-            return cast(
-                Dict[str, Any], openapi_schema["components"]["schemas"][q]
-            )
+            return cast(Dict[str, Any], openapi_schema["components"]["schemas"][q])
         else:
             raise HTTPException(status_code=404, detail=f"Schema '{q}' not found.")
     return openapi_schema

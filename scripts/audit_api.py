@@ -25,7 +25,9 @@ def main():
         module = importlib.import_module(app_module)
         app: FastAPI = getattr(module, app_attr)
     except Exception as e:
-        print(f"Error: Could not import FastAPI app '{app_attr}' from module '{app_module}'.")
+        print(
+            f"Error: Could not import FastAPI app '{app_attr}' from module '{app_module}'."
+        )
         print(f"Details: {e}")
         return
 

@@ -31,6 +31,7 @@ STUB_TEMPLATE = """
 - (To be filled in)
 """
 
+
 def get_all_source_files():
     """Scans the source directories and returns a list of all source files."""
     source_files = []
@@ -40,6 +41,7 @@ def get_all_source_files():
                 if any(file.endswith(ext) for ext in SOURCE_EXTENSIONS):
                     source_files.append(Path(root) / file)
     return source_files
+
 
 def get_documented_files():
     """Parses the MASTER_INDEX.md to find which source files are already documented."""
@@ -56,6 +58,7 @@ def get_documented_files():
         documented.add(match)
     return documented
 
+
 def create_stub_file(module_name, doc_path):
     """Creates a new markdown stub file for a source module."""
     content = STUB_TEMPLATE.format(module_name=module_name)
@@ -63,10 +66,18 @@ def create_stub_file(module_name, doc_path):
         f.write(content.strip())
     print(f"  - Created stub file: {doc_path.relative_to(PROJECT_ROOT)}")
 
+
 def add_to_master_index(module_name, doc_filename):
     """Inserts a new entry into the correct section of MASTER_INDEX.md."""
     # Format the module name for the link text, e.g., "CRUD.py" -> "CRUD Module"
-    link_text = module_name.replace('.py', '').replace('.go', '').replace('.js', '').replace('_', ' ').title() + " Module"
+    link_text = (
+        module_name.replace(".py", "")
+        .replace(".go", "")
+        .replace(".js", "")
+        .replace("_", " ")
+        .title()
+        + " Module"
+    )
     new_entry = f"* [{link_text}](reference/source/{doc_filename})\n"
 
     with open(MASTER_INDEX, "r+", encoding="utf-8") as f:
@@ -84,17 +95,23 @@ def add_to_master_index(module_name, doc_filename):
         else:
             # Fallback to appending if the header isn't found
             f.write(new_entry)
-            print(f"  - WARNING: Could not find '{target_header}'. Appending to end of file.")
+            print(
+                f"  - WARNING: Could not find '{target_header}'. Appending to end of file."
+            )
+
 
 def add_to_docs_quality_index(module_name, doc_filename):
     """Appends a new entry to the DOCS_QUALITY_INDEX.md file."""
     # Format the module name, e.g., "CRUD.py" -> "CRUD"
-    module_text = module_name.replace('.py', '').replace('.go', '').replace('.js', '').title()
+    module_text = (
+        module_name.replace(".py", "").replace(".go", "").replace(".js", "").title()
+    )
     entry = f"| {module_text} | {doc_filename} | X |\n"
 
     with open(DOCS_QUALITY_INDEX, "a", encoding="utf-8") as f:
         f.write(entry)
     print(f"  - Added '{module_text}' to {DOCS_QUALITY_INDEX.name}")
+
 
 def main():
     """Main function to generate documentation stubs."""
@@ -130,6 +147,7 @@ def main():
         print(f"\nSuccessfully created {new_stubs_created} new documentation stub(s).")
 
     print("--- Stub Generator Finished ---")
+
 
 if __name__ == "__main__":
     main()

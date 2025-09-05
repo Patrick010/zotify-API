@@ -1,6 +1,7 @@
 """
 A unified, intelligent linter to enforce documentation and code quality standards.
 """
+
 import os
 import re
 import subprocess
@@ -22,6 +23,7 @@ def get_formatted_date():
     """Returns the current date in YYYY-MM-DD format."""
     return datetime.datetime.now().strftime("%Y-%m-%d")
 
+
 def get_next_act_number(file_path="project/logs/ACTIVITY.md"):
     """Finds the latest ACT-XXX number in the activity log and returns the next number."""
     try:
@@ -33,6 +35,7 @@ def get_next_act_number(file_path="project/logs/ACTIVITY.md"):
         return max([int(n) for n in act_numbers]) + 1
     except FileNotFoundError:
         return 1
+
 
 def format_activity_log(act_number, summary, findings, files=None):
     """Formats the log entry for ACTIVITY.md."""
@@ -57,20 +60,25 @@ def format_activity_log(act_number, summary, findings, files=None):
 
 {related_docs_section}""".strip()
 
+
 def format_session_log(summary, findings):
     """Formats the log entry for SESSION_LOG.md."""
-    return textwrap.dedent(f"""
+    return textwrap.dedent(
+        f"""
     ---
     ## Session Report: {get_formatted_date()}
 
     **Summary:** {summary}
     **Findings:**
     {findings}
-    """)
+    """
+    )
+
 
 def format_current_state(summary, next_steps):
     """Formats the content for CURRENT_STATE.md."""
-    return textwrap.dedent(f"""
+    return textwrap.dedent(
+        f"""
     # Project State as of {get_formatted_date()}
 
     **Status:** Live Document
@@ -83,7 +91,9 @@ def format_current_state(summary, next_steps):
 
     ## 3. Pending Work: Next Immediate Steps
     {next_steps}
-    """)
+    """
+    )
+
 
 def prepend_to_file(file_path, content):
     """Prepends new content to the beginning of a file."""
@@ -96,6 +106,7 @@ def prepend_to_file(file_path, content):
     except IOError as e:
         print(f"Error updating {file_path}: {e}")
 
+
 def write_to_file(file_path, content):
     """Writes content to a file, overwriting existing content."""
     try:
@@ -104,6 +115,7 @@ def write_to_file(file_path, content):
         print(f"Successfully updated {file_path}")
     except IOError as e:
         print(f"Error updating {file_path}: {e}")
+
 
 def do_logging(summary: str, findings: str, next_steps: str, files: List[str]) -> int:
     """The main logic for the logging functionality."""
@@ -121,7 +133,9 @@ def do_logging(summary: str, findings: str, next_steps: str, files: List[str]) -
     return 0
 
 
-def run_command(command: List[str], cwd: str = str(PROJECT_ROOT), env: dict = None) -> int:
+def run_command(
+    command: List[str], cwd: str = str(PROJECT_ROOT), env: dict = None
+) -> int:
     """Runs a command and returns its exit code."""
     try:
         process_env = os.environ.copy()
@@ -147,6 +161,7 @@ def run_command(command: List[str], cwd: str = str(PROJECT_ROOT), env: dict = No
         print(e.stderr, file=sys.stderr)
         return e.returncode
 
+
 def get_changed_files() -> List[Tuple[str, str]]:
     """
     Gets the list of changed files from git, correctly handling renames.
@@ -162,7 +177,9 @@ def get_changed_files() -> List[Tuple[str, str]]:
         command.append("--cached")
     else:
         # In CI, ensure the main branch is available for comparison.
-        subprocess.run(["git", "fetch", "origin", "main"], check=False, capture_output=True)
+        subprocess.run(
+            ["git", "fetch", "origin", "main"], check=False, capture_output=True
+        )
         command.append("origin/main...HEAD")
 
     try:
@@ -183,7 +200,7 @@ def get_changed_files() -> List[Tuple[str, str]]:
                 # so that rules for both locations are triggered.
                 changed_files_list.append((status, old_path))
                 changed_files_list.append((status, new_path))
-            else: # Modified (M), Added (A), Deleted (D), etc.
+            else:  # Modified (M), Added (A), Deleted (D), etc.
                 file_path = parts[1]
                 changed_files_list.append((status, file_path))
 
@@ -204,7 +221,10 @@ def check_doc_matrix_rules(changed_files: Set[str]) -> List[str]:
     errors: List[str] = []
     rules_file = PROJECT_ROOT / "scripts" / "doc-lint-rules.yml"
     if not rules_file.exists():
-        print("WARNING: doc-lint-rules.yml not found, skipping matrix checks.", file=sys.stderr)
+        print(
+            "WARNING: doc-lint-rules.yml not found, skipping matrix checks.",
+            file=sys.stderr,
+        )
         return errors
 
     with open(rules_file, "r", encoding="utf-8") as f:
@@ -232,7 +252,10 @@ def check_doc_matrix_rules(changed_files: Set[str]) -> List[str]:
                 doc_changed = any(d in changed_files for d in required_docs)
 
             if not doc_changed:
-                message = rule.get("message", f"Changes in {source_paths} require updates to one of {required_docs}")
+                message = rule.get(
+                    "message",
+                    f"Changes in {source_paths} require updates to one of {required_docs}",
+                )
                 errors.append(message)
 
     return errors
@@ -260,6 +283,7 @@ def run_mkdocs_check():
     except subprocess.CalledProcessError:
         print("mkdocs validation failed.")
         return False
+
 
 def check_quality_index_ratings() -> List[str]:
     """
@@ -325,30 +349,30 @@ def main() -> int:
     )
     parser.add_argument(
         "--summary",
-        help="[Logger] A one-line summary of the task, used as the entry title."
+        help="[Logger] A one-line summary of the task, used as the entry title.",
     )
     parser.add_argument(
         "--findings",
-        help="[Logger] A multi-line description of the findings. Use '\\n' for new lines."
+        help="[Logger] A multi-line description of the findings. Use '\\n' for new lines.",
     )
     parser.add_argument(
         "--next-steps",
-        help="[Logger] A multi-line description of the next immediate steps."
+        help="[Logger] A multi-line description of the next immediate steps.",
     )
     parser.add_argument(
         "--files",
-        nargs='*',
-        help="[Logger] An optional list of file paths related to the activity."
+        nargs="*",
+        help="[Logger] An optional list of file paths related to the activity.",
     )
     # --- Linter Test Arguments ---
     parser.add_argument(
         "--test-files",
-        nargs='*',
-        help="[Linter-Test] A list of file paths to test, bypassing git."
+        nargs="*",
+        help="[Linter-Test] A list of file paths to test, bypassing git.",
     )
     parser.add_argument(
         "--from-file",
-        help="[Linter-CI] Read list of changed files from a text file (one file per line)."
+        help="[Linter-CI] Read list of changed files from a text file (one file per line).",
     )
 
     args = parser.parse_args()
@@ -357,11 +381,15 @@ def main() -> int:
     # --- Mode Selection ---
     if args.log:
         if not all([args.summary, args.findings, args.next_steps]):
-            print("ERROR: In --log mode, you must provide --summary, --findings, and --next-steps.", file=sys.stderr)
+            print(
+                "ERROR: In --log mode, you must provide --summary, --findings, and --next-steps.",
+                file=sys.stderr,
+            )
             return 1
         # Run logging and exit
-        return do_logging(args.summary, args.findings, args.next_steps, args.files or [])
-
+        return do_logging(
+            args.summary, args.findings, args.next_steps, args.files or []
+        )
 
     # --- Linter Mode ---
     print("=" * 30)
@@ -375,15 +403,18 @@ def main() -> int:
             with open(args.from_file, "r") as f:
                 # Assume all files from the file are 'Modified' for status
                 files = [line.strip() for line in f if line.strip()]
-                changed_files_with_status = [('M', f) for f in files]
+                changed_files_with_status = [("M", f) for f in files]
             print(f"Found {len(changed_files_with_status)} changed file(s).")
         except FileNotFoundError:
-            print(f"ERROR: File specified by --from-file not found: {args.from_file}", file=sys.stderr)
+            print(
+                f"ERROR: File specified by --from-file not found: {args.from_file}",
+                file=sys.stderr,
+            )
             return 1
     elif args.test_files:
         print("--- Running in Test Mode ---")
         # In test mode, we simulate the status as 'M' (Modified) for all provided files.
-        changed_files_with_status = [('M', f) for f in args.test_files]
+        changed_files_with_status = [("M", f) for f in args.test_files]
         print(f"Injecting {len(changed_files_with_status)} file(s) for testing.")
         print("\n".join(f"- M\t{f}" for f in args.test_files))
     else:
@@ -423,7 +454,7 @@ def main() -> int:
         print("Documentation Matrix Linter Passed!")
     print("-" * 37)
     if final_return_code != 0:
-        return final_return_code # Early exit if core rules fail
+        return final_return_code  # Early exit if core rules fail
 
     # 2. Code Quality Index Linter (Conditional)
     if run_quality_check:
@@ -450,13 +481,12 @@ def main() -> int:
     else:
         print("\nSkipping MkDocs Build: No relevant documentation changes detected.")
 
-
-    print("\n" + "="*30)
+    print("\n" + "=" * 30)
     if final_return_code == 0:
         print("✅ Unified Linter Passed!")
     else:
         print("❌ Unified Linter Failed.")
-    print("="*30)
+    print("=" * 30)
 
     return final_return_code
 

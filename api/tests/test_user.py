@@ -49,7 +49,7 @@ def user_service_override(
 
 
 def test_get_user_profile(
-    user_service_override: Callable[[], user_service.UserService]
+    user_service_override: Callable[[], user_service.UserService],
 ) -> None:
     app.dependency_overrides[user_service.get_user_service] = user_service_override
     response = client.get("/api/user/profile")
@@ -59,7 +59,7 @@ def test_get_user_profile(
 
 
 def test_get_user_liked(
-    user_service_override: Callable[[], user_service.UserService]
+    user_service_override: Callable[[], user_service.UserService],
 ) -> None:
     app.dependency_overrides[user_service.get_user_service] = user_service_override
     response = client.get("/api/user/liked")
@@ -69,7 +69,7 @@ def test_get_user_liked(
 
 
 def test_sync_user_liked(
-    user_service_override: Callable[[], user_service.UserService]
+    user_service_override: Callable[[], user_service.UserService],
 ) -> None:
     app.dependency_overrides[user_service.get_user_service] = user_service_override
     response = client.post("/api/user/sync_liked")
@@ -79,7 +79,7 @@ def test_sync_user_liked(
 
 
 def test_get_user_history(
-    user_service_override: Callable[[], user_service.UserService]
+    user_service_override: Callable[[], user_service.UserService],
 ) -> None:
     app.dependency_overrides[user_service.get_user_service] = user_service_override
     response = client.get("/api/user/history")
@@ -89,7 +89,7 @@ def test_get_user_history(
 
 
 def test_delete_user_history(
-    user_service_override: Callable[[], user_service.UserService]
+    user_service_override: Callable[[], user_service.UserService],
 ) -> None:
     app.dependency_overrides[user_service.get_user_service] = user_service_override
     response = client.delete("/api/user/history")
@@ -98,7 +98,7 @@ def test_delete_user_history(
 
 
 def test_update_user_profile(
-    user_service_override: Callable[[], user_service.UserService]
+    user_service_override: Callable[[], user_service.UserService],
 ) -> None:
     app.dependency_overrides[user_service.get_user_service] = user_service_override
     update_data = {"name": "New Name"}
@@ -109,7 +109,7 @@ def test_update_user_profile(
 
 
 def test_get_user_preferences(
-    user_service_override: Callable[[], user_service.UserService]
+    user_service_override: Callable[[], user_service.UserService],
 ) -> None:
     app.dependency_overrides[user_service.get_user_service] = user_service_override
     response = client.get("/api/user/preferences")
@@ -119,7 +119,7 @@ def test_get_user_preferences(
 
 
 def test_update_user_preferences(
-    user_service_override: Callable[[], user_service.UserService]
+    user_service_override: Callable[[], user_service.UserService],
 ) -> None:
     app.dependency_overrides[user_service.get_user_service] = user_service_override
     update_data = {"theme": "light"}

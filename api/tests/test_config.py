@@ -34,9 +34,7 @@ def config_service_override(
     app.dependency_overrides[config_service.get_config_service] = original_override
 
 
-def test_get_config(
-    client: TestClient, config_service_override: Any
-) -> None:
+def test_get_config(client: TestClient, config_service_override: Any) -> None:
     response = client.get("/api/config")
     assert response.status_code == 200
     assert "library_path" in response.json()["data"]
@@ -50,9 +48,7 @@ def test_update_config_unauthorized(
     assert response.status_code == 401
 
 
-def test_update_config(
-    client: TestClient, config_service_override: Any
-) -> None:
+def test_update_config(client: TestClient, config_service_override: Any) -> None:
     update_data = {"scan_on_startup": False}
     response = client.patch(
         "/api/config", headers={"X-API-Key": "test_key"}, json=update_data
@@ -68,9 +64,7 @@ def test_reset_config_unauthorized(
     assert response.status_code == 401
 
 
-def test_reset_config(
-    client: TestClient, config_service_override: Any
-) -> None:
+def test_reset_config(client: TestClient, config_service_override: Any) -> None:
     # First, change the config
     update_data = {"scan_on_startup": False}
     client.patch("/api/config", headers={"X-API-Key": "test_key"}, json=update_data)

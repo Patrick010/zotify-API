@@ -38,9 +38,7 @@ def test_clear_cache_all_unauthorized(
     assert response.status_code == 401
 
 
-def test_clear_cache_all(
-    client: TestClient, cache_service_override: Any
-) -> None:
+def test_clear_cache_all(client: TestClient, cache_service_override: Any) -> None:
     # Get initial state
     initial_response = client.get("/api/cache")
     initial_total = initial_response.json()["data"]["total_items"]
@@ -67,9 +65,7 @@ def test_clear_cache_by_type_unauthorized(
     assert response.status_code == 401
 
 
-def test_clear__by_type(
-    client: TestClient, cache_service_override: Any
-) -> None:
+def test_clear__by_type(client: TestClient, cache_service_override: Any) -> None:
     # Clear by type with correct API key
     response = client.request(
         "DELETE",

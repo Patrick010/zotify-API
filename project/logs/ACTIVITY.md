@@ -1,4 +1,22 @@
 ---
+## ACT-097: style: Format codebase with black
+
+**Date:** 2025-09-05
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+style: Format codebase with black
+
+### Outcome
+The  command failed in the CI pipeline. Ran  to reformat 11 Python files and bring them into compliance with the project's code style.
+
+### Related Documents
+- `api/src/zotify_api/main.py`
+- `api/src/zotify_api/routes/system.py`
+- `scripts/linter.py`
+
+---
 ## ACT-096: fix(script): Fix bugs in stub generator
 
 **Date:** 2025-09-05
