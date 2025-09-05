@@ -1,6 +1,13 @@
 ---
 ## Session Report: 2025-09-05
 
+**Summary:** feat(docs): Expand docs quality index to all markdown files
+**Findings:**
+Refactored the script at  to scan all documentation directories (, , ) and add any missing markdown files to the . The script was then run to populate the index with all 114 documentation files.
+
+---
+## Session Report: 2025-09-05
+
 **Summary:** fix(script): Fix bugs in source doc generator
 **Findings:**
 Fixed two critical bugs in the  script. The first bug was a naming collision for  files, which was resolved by creating unique names based on the parent directory. The second bug was a missing path in the , which was fixed by adding the full path to the output.

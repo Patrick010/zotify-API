@@ -1,4 +1,21 @@
 ---
+## ACT-104: feat(docs): Expand docs quality index to all markdown files
+
+**Date:** 2025-09-05
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+feat(docs): Expand docs quality index to all markdown files
+
+### Outcome
+Refactored the script at  to scan all documentation directories (, , ) and add any missing markdown files to the . The script was then run to populate the index with all 114 documentation files.
+
+### Related Documents
+- `scripts/manage_docs_index.py`
+- `api/docs/DOCS_QUALITY_INDEX.md`
+
+---
 ## ACT-103: fix(script): Fix bugs in source doc generator
 
 **Date:** 2025-09-05
