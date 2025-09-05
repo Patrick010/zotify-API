@@ -34,6 +34,8 @@ This document serves as the central index for all documentation related to the Z
 *   [Provider OAuth](reference/features/PROVIDER_OAUTH.md)
 
 ## Source Code Documentation
+* [Crud Module](reference/source/CRUD.py.md)
+
 * [Test Auth Flow Module](reference/source/TEST_AUTH_FLOW.py.md)
 
 * [Audit Endpoints Module](reference/source/AUDIT_ENDPOINTS.py.md)
@@ -209,7 +211,6 @@ This document serves as the central index for all documentation related to the Z
 * [Auth State Module](reference/source/AUTH_STATE.py.md)
 
 
-*   [CRUD Module](reference/source/CRUD.py.md)
 *   [Tracks Service](reference/source/TRACKS_SERVICE.py.md)
 
 ## Providers

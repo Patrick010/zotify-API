@@ -9,4 +9,4 @@ style: Format codebase with black
 - None
 
 ## 3. Pending Work: Next Immediate Steps
-The code formatting is now fixed. Will proceed with fixing the deleted file issue.
+The code formatting is now fixed.

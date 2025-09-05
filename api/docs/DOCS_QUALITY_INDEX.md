@@ -91,3 +91,4 @@ This document tracks the quality of the standalone documentation file for each s
 | Generate_Source_Docs | GENERATE_SOURCE_DOCS.py.md | X |
 | Audit_Endpoints | AUDIT_ENDPOINTS.py.md | X |
 | Test_Auth_Flow | TEST_AUTH_FLOW.py.md | X |
+| Crud | CRUD.py.md | X |
