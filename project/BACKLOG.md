@@ -15,6 +15,17 @@ All new tasks added to this backlog **must** use the template defined in the `PI
 
 ### High Priority
 
+-   **Task ID:** `FEAT-QA-GATE-01`
+-   **Source:** `project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md`
+-   **Priority:** CRITICAL
+-   **Dependencies:** None
+-   **Description:** Implement Phase 1 of the new QA Gate system. This involves creating the main `qa_gate.py` script, installing new Python dependencies (`Radon`, `mutmut`), and implementing all Python-specific code quality checks (ruff, pytest, mutmut, radon).
+-   **Acceptance Criteria:**
+    -   `[ ]` The `scripts/qa_gate.py` script is created and functional for Python code.
+    -   `[ ]` The script successfully runs all specified tools and checks their output against the defined thresholds.
+    -   `[ ]` A new `api/docs/manuals/QA_GATE.md` document is created and explains the new system.
+-   **Estimated Effort:** Large
+
 -   **Task ID:** `FEAT-PRIVACY-01`
 -   **Source:** `project/LOW_LEVEL_DESIGN.md`
 -   **Priority:** HIGH
