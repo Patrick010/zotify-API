@@ -1,4 +1,22 @@
 ---
+## ACT-095: feat(docs): Implement automated source doc stub generation
+
+**Date:** 2025-09-05
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+feat(docs): Implement automated source doc stub generation
+
+### Outcome
+Implemented a new system for documenting all source code files. This included: 1. Creating a new DOCS_QUALITY_INDEX.md file. 2. Adding new linter rules to enforce registration of source docs. 3. Creating a new script, scripts/generate_source_docs.py, to automate the creation of stub .md files and update the MASTER_INDEX.md and DOCS_QUALITY_INDEX.md. 4. Running the script to backfill documentation for 89 source files.
+
+### Related Documents
+- `scripts/generate_source_docs.py`
+- `api/docs/DOCS_QUALITY_INDEX.md`
+- `scripts/doc-lint-rules.yml`
+
+---
 ## ACT-094: fix(ci): Resolve final ruff and git diff errors
 
 **Date:** 2025-09-04

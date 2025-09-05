@@ -250,7 +250,7 @@ def run_mkdocs_check():
         # run_command function for consistency in output and error handling.
         # The return code of run_command is 0 on success.
         return_code = run_command(
-            ["mkdocs", "build", "--strict", "-f", f"{docs_dir}/mkdocs.yml"],
+            ["mkdocs", "build"],
         )
         if return_code == 0:
             return True

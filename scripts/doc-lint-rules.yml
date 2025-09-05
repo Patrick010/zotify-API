@@ -2,6 +2,24 @@
 # It maps changes in source code paths to required changes in documentation files.
 
 rules:
+  - name: "Source Documentation Registration"
+    source_paths:
+      - "api/docs/reference/source/"
+    required_docs:
+      - "api/docs/MASTER_INDEX.md"
+    message: |
+      New source documentation must be registered in MASTER_INDEX.md.
+      Refer to QA_GOVERNANCE.md for policy details.
+
+  - name: "Source Documentation Quality Tracking"
+    source_paths:
+      - "api/docs/reference/source/"
+    required_docs:
+      - "api/docs/DOCS_QUALITY_INDEX.md"
+    message: |
+      New source documentation must be added to the DOCS_QUALITY_INDEX.md for quality tracking.
+      Refer to QA_GOVERNANCE.md for policy details.
+
   - name: "Enforce Mandatory Logging"
     source_paths:
       - "api/src/zotify_api/"
