@@ -1,4 +1,20 @@
 ---
+## ACT-103: fix(script): Fix bugs in source doc generator
+
+**Date:** 2025-09-05
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+fix(script): Fix bugs in source doc generator
+
+### Outcome
+Fixed two critical bugs in the  script. The first bug was a naming collision for  files, which was resolved by creating unique names based on the parent directory. The second bug was a missing path in the , which was fixed by adding the full path to the output.
+
+### Related Documents
+- `scripts/generate_source_docs.py`
+
+---
 ## ACT-102: feat(docs): Generate all missing source code doc stubs
 
 **Date:** 2025-09-05

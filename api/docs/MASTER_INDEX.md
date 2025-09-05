@@ -102,7 +102,7 @@ This document serves as the central index for all documentation related to the Z
 
 * [Notifications Service Module](reference/source/NOTIFICATIONS_SERVICE.py.md)
 
-* [  Init   Module](reference/source/__INIT__.py.md)
+* [Services   Init   Module Module](reference/source/SERVICES____INIT__.py.md)
 
 * [Logging Service Module](reference/source/LOGGING_SERVICE.py.md)
 
@@ -134,7 +134,7 @@ This document serves as the central index for all documentation related to the Z
 
 * [Config Module](reference/source/CONFIG.py.md)
 
-* [  Init   Module](reference/source/__INIT__.py.md)
+* [Routes   Init   Module Module](reference/source/ROUTES____INIT__.py.md)
 
 * [Notifications Module](reference/source/NOTIFICATIONS.py.md)
 
@@ -154,13 +154,13 @@ This document serves as the central index for all documentation related to the Z
 
 * [Base Module](reference/source/BASE.py.md)
 
-* [  Init   Module](reference/source/__INIT__.py.md)
+* [Providers   Init   Module Module](reference/source/PROVIDERS____INIT__.py.md)
 
 * [Spotify Connector Module](reference/source/SPOTIFY_CONNECTOR.py.md)
 
 * [Request Id Module](reference/source/REQUEST_ID.py.md)
 
-* [  Init   Module](reference/source/__INIT__.py.md)
+* [Database   Init   Module Module](reference/source/DATABASE____INIT__.py.md)
 
 * [Session Module](reference/source/SESSION.py.md)
 
@@ -170,7 +170,7 @@ This document serves as the central index for all documentation related to the Z
 
 * [Log Critical Module](reference/source/LOG_CRITICAL.py.md)
 
-* [  Init   Module](reference/source/__INIT__.py.md)
+* [Actions   Init   Module Module](reference/source/ACTIONS____INIT__.py.md)
 
 * [Webhook Module](reference/source/WEBHOOK.py.md)
 
@@ -180,13 +180,13 @@ This document serves as the central index for all documentation related to the Z
 
 * [Config Module](reference/source/CONFIG.py.md)
 
-* [  Init   Module](reference/source/__INIT__.py.md)
+* [Error Handler   Init   Module Module](reference/source/ERROR_HANDLER____INIT__.py.md)
 
 * [Triggers Module](reference/source/TRIGGERS.py.md)
 
 * [Base Module](reference/source/BASE.py.md)
 
-* [  Init   Module](reference/source/__INIT__.py.md)
+* [Logging Handlers   Init   Module Module](reference/source/LOGGING_HANDLERS____INIT__.py.md)
 
 * [Database Job Handler Module](reference/source/DATABASE_JOB_HANDLER.py.md)
 
@@ -196,7 +196,7 @@ This document serves as the central index for all documentation related to the Z
 
 * [Schemas Module](reference/source/SCHEMAS.py.md)
 
-* [  Init   Module](reference/source/__INIT__.py.md)
+* [Logging Framework   Init   Module Module](reference/source/LOGGING_FRAMEWORK____INIT__.py.md)
 
 * [Service Module](reference/source/SERVICE.py.md)
 
@@ -211,6 +211,95 @@ This document serves as the central index for all documentation related to the Z
 * [Globals Module](reference/source/GLOBALS.py.md)
 
 * [Auth State Module](reference/source/AUTH_STATE.py.md)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

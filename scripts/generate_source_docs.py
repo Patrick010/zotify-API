@@ -107,7 +107,8 @@ def add_to_docs_quality_index(module_name, doc_filename):
     module_text = (
         module_name.replace(".py", "").replace(".go", "").replace(".js", "").title()
     )
-    entry = f"| {module_text} | {doc_filename} | X |\n"
+    full_doc_path = f"reference/source/{doc_filename}"
+    entry = f"| {module_text} | {full_doc_path} | X |\n"
 
     with open(DOCS_QUALITY_INDEX, "a", encoding="utf-8") as f:
         f.write(entry)
@@ -183,22 +184,32 @@ def main():
 
     for src_path in source_files:
         name, ext = os.path.splitext(src_path.name)
-        doc_filename = name.upper() + ext + ".md"
+
+        # Handle __init__.py files to avoid collisions
+        if name == "__init__":
+            parent_dir_name = src_path.parent.name.upper()
+            doc_filename = f"{parent_dir_name}__{name.upper()}{ext}.md"
+            module_name = f"{parent_dir_name.title()} {name.title()} Module"
+        else:
+            doc_filename = name.upper() + ext + ".md"
+            module_name = src_path.name
 
         if doc_filename not in documented_files:
             new_stubs_created += 1
-            print(f"\nFound undocumented source file: {src_path.name}")
-            module_name = src_path.name
+            print(f"\nFound undocumented source file: {src_path.relative_to(PROJECT_ROOT)}")
 
             if args.dry_run:
                 print(f"  - [DRY RUN] Would create stub file: {DOC_DIR / doc_filename}")
                 print("  - [DRY RUN] Would add to MASTER_INDEX.md")
                 print("  - [DRY RUN] Would add to DOCS_QUALITY_INDEX.md")
             else:
+                # Use the original filename for the stub title, but unique filename for the file
+                stub_title = src_path.name
                 doc_path = DOC_DIR / doc_filename
-                create_stub_file(module_name, doc_path)
+                create_stub_file(stub_title, doc_path)
+                # Use the unique module name for the index, but original for quality index
                 add_to_master_index(module_name, doc_filename)
-                add_to_docs_quality_index(module_name, doc_filename)
+                add_to_docs_quality_index(stub_title, doc_filename)
 
     if new_stubs_created == 0:
         print("\nNo new source files to document. Everything is up to date.")

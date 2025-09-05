@@ -1,6 +1,13 @@
 ---
 ## Session Report: 2025-09-05
 
+**Summary:** fix(script): Fix bugs in source doc generator
+**Findings:**
+Fixed two critical bugs in the  script. The first bug was a naming collision for  files, which was resolved by creating unique names based on the parent directory. The second bug was a missing path in the , which was fixed by adding the full path to the output.
+
+---
+## Session Report: 2025-09-05
+
 **Summary:** feat(docs): Generate all missing source code doc stubs
 **Findings:**
 Created a new system for documenting source code, including a generator script, new linter rules, and a new quality index. Executed the script to backfill documentation for all 89 undocumented source files. Also fixed a minor ruff formatting issue in the new script.
