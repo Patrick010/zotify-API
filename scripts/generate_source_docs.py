@@ -192,8 +192,8 @@ def main():
 
             if args.dry_run:
                 print(f"  - [DRY RUN] Would create stub file: {DOC_DIR / doc_filename}")
-                print(f"  - [DRY RUN] Would add to MASTER_INDEX.md")
-                print(f"  - [DRY RUN] Would add to DOCS_QUALITY_INDEX.md")
+                print("  - [DRY RUN] Would add to MASTER_INDEX.md")
+                print("  - [DRY RUN] Would add to DOCS_QUALITY_INDEX.md")
             else:
                 doc_path = DOC_DIR / doc_filename
                 create_stub_file(module_name, doc_path)

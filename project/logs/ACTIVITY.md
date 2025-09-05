@@ -1,4 +1,40 @@
 ---
+## ACT-102: feat(docs): Generate all missing source code doc stubs
+
+**Date:** 2025-09-05
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+feat(docs): Generate all missing source code doc stubs
+
+### Outcome
+Created a new system for documenting source code, including a generator script, new linter rules, and a new quality index. Executed the script to backfill documentation for all 89 undocumented source files. Also fixed a minor ruff formatting issue in the new script.
+
+### Related Documents
+- `scripts/generate_source_docs.py`
+- `api/docs/MASTER_INDEX.md`
+- `api/docs/DOCS_QUALITY_INDEX.md`
+
+---
+## ACT-101: feat(docs): Generate all missing source code doc stubs
+
+**Date:** 2025-09-05
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+feat(docs): Generate all missing source code doc stubs
+
+### Outcome
+Executed the  script to backfill documentation for all undocumented source files. This created 89 new stub markdown files and updated  and  to include them.
+
+### Related Documents
+- `scripts/generate_source_docs.py`
+- `api/docs/MASTER_INDEX.md`
+- `api/docs/DOCS_QUALITY_INDEX.md`
+
+---
 ## ACT-100: feat(docs): Create system for source code documentation
 
 **Date:** 2025-09-05
