@@ -64,14 +64,27 @@ def create_stub_file(module_name, doc_path):
     print(f"  - Created stub file: {doc_path.relative_to(PROJECT_ROOT)}")
 
 def add_to_master_index(module_name, doc_filename):
-    """Appends a new entry to the MASTER_INDEX.md file."""
+    """Inserts a new entry into the correct section of MASTER_INDEX.md."""
     # Format the module name for the link text, e.g., "CRUD.py" -> "CRUD Module"
     link_text = module_name.replace('.py', '').replace('.go', '').replace('.js', '').replace('_', ' ').title() + " Module"
-    entry = f"* [{link_text}](reference/source/{doc_filename})\n"
+    new_entry = f"* [{link_text}](reference/source/{doc_filename})\n"
 
-    with open(MASTER_INDEX, "a", encoding="utf-8") as f:
-        f.write(entry)
-    print(f"  - Added '{link_text}' to {MASTER_INDEX.name}")
+    with open(MASTER_INDEX, "r+", encoding="utf-8") as f:
+        content = f.read()
+        # Find the header and add the new entry right after it
+        target_header = "## Source Code Documentation"
+        if target_header in content:
+            # Split content and insert the new entry
+            parts = content.split(target_header, 1)
+            new_content = parts[0] + target_header + "\n" + new_entry + parts[1]
+            f.seek(0)
+            f.write(new_content)
+            f.truncate()
+            print(f"  - Added '{link_text}' to {MASTER_INDEX.name}")
+        else:
+            # Fallback to appending if the header isn't found
+            f.write(new_entry)
+            print(f"  - WARNING: Could not find '{target_header}'. Appending to end of file.")
 
 def add_to_docs_quality_index(module_name, doc_filename):
     """Appends a new entry to the DOCS_QUALITY_INDEX.md file."""
@@ -98,7 +111,8 @@ def main():
 
     for src_path in source_files:
         # Generate the expected doc filename, e.g., "crud.py" -> "CRUD.py.md"
-        doc_filename = src_path.name.upper() + ".md"
+        name, ext = os.path.splitext(src_path.name)
+        doc_filename = name.upper() + ext + ".md"
 
         if doc_filename not in documented_files:
             new_stubs_created += 1

@@ -1,4 +1,20 @@
 ---
+## ACT-096: fix(script): Fix bugs in stub generator
+
+**Date:** 2025-09-05
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+fix(script): Fix bugs in stub generator
+
+### Outcome
+Fixed two bugs in the scripts/generate_source_docs.py script. 1. Corrected the filename generation to properly handle extensions (e.g., creating 'FOO.py.md' instead of 'FOO.PY.MD'). 2. Changed the logic for updating MASTER_INDEX.md to intelligently insert new entries under the correct heading instead of just appending to the file. The script was then re-run to correctly generate stubs for all source files.
+
+### Related Documents
+- `scripts/generate_source_docs.py`
+
+---
 ## ACT-095: feat(docs): Implement automated source doc stub generation
 
 **Date:** 2025-09-05

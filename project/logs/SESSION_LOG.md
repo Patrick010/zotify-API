@@ -1,6 +1,13 @@
 ---
 ## Session Report: 2025-09-05
 
+**Summary:** fix(script): Fix bugs in stub generator
+**Findings:**
+Fixed two bugs in the scripts/generate_source_docs.py script. 1. Corrected the filename generation to properly handle extensions (e.g., creating 'FOO.py.md' instead of 'FOO.PY.MD'). 2. Changed the logic for updating MASTER_INDEX.md to intelligently insert new entries under the correct heading instead of just appending to the file. The script was then re-run to correctly generate stubs for all source files.
+
+---
+## Session Report: 2025-09-05
+
 **Summary:** feat(docs): Implement automated source doc stub generation
 **Findings:**
 Implemented a new system for documenting all source code files. This included: 1. Creating a new DOCS_QUALITY_INDEX.md file. 2. Adding new linter rules to enforce registration of source docs. 3. Creating a new script, scripts/generate_source_docs.py, to automate the creation of stub .md files and update the MASTER_INDEX.md and DOCS_QUALITY_INDEX.md. 4. Running the script to backfill documentation for 89 source files.
