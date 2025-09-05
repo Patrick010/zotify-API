@@ -1,6 +1,20 @@
 ---
 ## Session Report: 2025-09-05
 
+**Summary:** feat(docs): Create system for source code documentation
+**Findings:**
+Created a new system to enforce and automate the creation of documentation for source code files. This includes: 1. A new script, scripts/generate_source_docs.py, which can generate stub files and update indexes. It includes --dry-run and --clean flags. 2. A new index file, api/docs/DOCS_QUALITY_INDEX.md, to track documentation quality. 3. New rules in scripts/doc-lint-rules.yml to enforce the registration of new source docs.
+
+---
+## Session Report: 2025-09-05
+
+**Summary:** fix: Restore CRUD.py.md and fix generator script
+**Findings:**
+The CRUD.py.md documentation was accidentally deleted during a cleanup operation. The file was restored by first fixing two bugs in the generate_source_docs.py script (incorrect naming convention and incorrect index insertion logic) and then re-running the script.
+
+---
+## Session Report: 2025-09-05
+
 **Summary:** style: Format codebase with black
 **Findings:**
 The  command failed in the CI pipeline. Ran  to reformat files and bring them into compliance with the project's code style.

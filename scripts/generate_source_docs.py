@@ -1,5 +1,6 @@
 import os
 import re
+import argparse
 from pathlib import Path
 
 # --- Configuration ---
@@ -113,11 +114,65 @@ def add_to_docs_quality_index(module_name, doc_filename):
     print(f"  - Added '{module_text}' to {DOCS_QUALITY_INDEX.name}")
 
 
+def clean_master_index():
+    """Removes all source doc entries from MASTER_INDEX.md."""
+    if not MASTER_INDEX.is_file():
+        return
+    with open(MASTER_INDEX, "r", encoding="utf-8") as f:
+        lines = f.readlines()
+
+    with open(MASTER_INDEX, "w", encoding="utf-8") as f:
+        for line in lines:
+            if "](reference/source/" not in line:
+                f.write(line)
+    print(f"Cleaned source doc entries from {MASTER_INDEX.name}")
+
+def clean_docs_quality_index():
+    """Removes all data rows from DOCS_QUALITY_INDEX.md."""
+    if not DOCS_QUALITY_INDEX.is_file():
+        return
+    with open(DOCS_QUALITY_INDEX, "r", encoding="utf-8") as f:
+        header = f.readline()
+        separator = f.readline()
+
+    with open(DOCS_QUALITY_INDEX, "w", encoding="utf-8") as f:
+        f.write(header)
+        f.write(separator)
+    print(f"Cleaned all data from {DOCS_QUALITY_INDEX.name}")
+
+
 def main():
     """Main function to generate documentation stubs."""
-    print("--- Starting Source Documentation Stub Generator ---")
+    parser = argparse.ArgumentParser(description="Generate documentation stubs for source files.")
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Print what actions would be taken without creating or modifying any files."
+    )
+    parser.add_argument(
+        "--clean",
+        action="store_true",
+        help="Clean up previously generated stubs and index entries."
+    )
+    args = parser.parse_args()
 
-    if not DOC_DIR.exists():
+    if args.clean:
+        print("--- Cleaning up previous generation ---")
+        clean_master_index()
+        clean_docs_quality_index()
+        if DOC_DIR.exists():
+            import shutil
+            shutil.rmtree(DOC_DIR)
+            print(f"Deleted directory: {DOC_DIR}")
+        print("--- Cleanup Finished ---")
+        return
+
+    if args.dry_run:
+        print("--- Running in Dry Run Mode ---")
+    else:
+        print("--- Starting Source Documentation Stub Generator ---")
+
+    if not DOC_DIR.exists() and not args.dry_run:
         print(f"Creating documentation directory: {DOC_DIR}")
         DOC_DIR.mkdir(parents=True)
 
@@ -127,7 +182,6 @@ def main():
     new_stubs_created = 0
 
     for src_path in source_files:
-        # Generate the expected doc filename, e.g., "crud.py" -> "CRUD.py.md"
         name, ext = os.path.splitext(src_path.name)
         doc_filename = name.upper() + ext + ".md"
 
@@ -135,16 +189,24 @@ def main():
             new_stubs_created += 1
             print(f"\nFound undocumented source file: {src_path.name}")
             module_name = src_path.name
-            doc_path = DOC_DIR / doc_filename
 
-            create_stub_file(module_name, doc_path)
-            add_to_master_index(module_name, doc_filename)
-            add_to_docs_quality_index(module_name, doc_filename)
+            if args.dry_run:
+                print(f"  - [DRY RUN] Would create stub file: {DOC_DIR / doc_filename}")
+                print(f"  - [DRY RUN] Would add to MASTER_INDEX.md")
+                print(f"  - [DRY RUN] Would add to DOCS_QUALITY_INDEX.md")
+            else:
+                doc_path = DOC_DIR / doc_filename
+                create_stub_file(module_name, doc_path)
+                add_to_master_index(module_name, doc_filename)
+                add_to_docs_quality_index(module_name, doc_filename)
 
     if new_stubs_created == 0:
         print("\nNo new source files to document. Everything is up to date.")
     else:
-        print(f"\nSuccessfully created {new_stubs_created} new documentation stub(s).")
+        if args.dry_run:
+            print(f"\n[DRY RUN] Would create {new_stubs_created} new documentation stub(s).")
+        else:
+            print(f"\nSuccessfully created {new_stubs_created} new documentation stub(s).")
 
     print("--- Stub Generator Finished ---")
 

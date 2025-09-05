@@ -1,4 +1,39 @@
 ---
+## ACT-100: feat(docs): Create system for source code documentation
+
+**Date:** 2025-09-05
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+feat(docs): Create system for source code documentation
+
+### Outcome
+Created a new system to enforce and automate the creation of documentation for source code files. This includes: 1. A new script, scripts/generate_source_docs.py, which can generate stub files and update indexes. It includes --dry-run and --clean flags. 2. A new index file, api/docs/DOCS_QUALITY_INDEX.md, to track documentation quality. 3. New rules in scripts/doc-lint-rules.yml to enforce the registration of new source docs.
+
+### Related Documents
+- `scripts/generate_source_docs.py`
+- `scripts/doc-lint-rules.yml`
+- `api/docs/DOCS_QUALITY_INDEX.md`
+
+---
+## ACT-099: fix: Restore CRUD.py.md and fix generator script
+
+**Date:** 2025-09-05
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+fix: Restore CRUD.py.md and fix generator script
+
+### Outcome
+The CRUD.py.md documentation was accidentally deleted during a cleanup operation. The file was restored by first fixing two bugs in the generate_source_docs.py script (incorrect naming convention and incorrect index insertion logic) and then re-running the script.
+
+### Related Documents
+- `scripts/generate_source_docs.py`
+- `api/docs/MASTER_INDEX.md`
+
+---
 ## ACT-098: style: Format codebase with black
 
 **Date:** 2025-09-05
