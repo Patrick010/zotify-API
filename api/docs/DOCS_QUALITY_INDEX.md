@@ -222,3 +222,4 @@ This score assesses the quality, completeness, and clarity of the standalone mar
 | Contributing | gonk-testUI/docs/CONTRIBUTING.md | X |
 | User Manual | gonk-testUI/docs/USER_MANUAL.md | X |
 | Changelog | gonk-testUI/docs/CHANGELOG.md | X |
+| QA Gate Manual | api/docs/manuals/QA_GATE.md | X |

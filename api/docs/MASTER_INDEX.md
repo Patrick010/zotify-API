@@ -15,6 +15,7 @@ This document serves as the central index for all documentation related to the Z
 *   [Error Handling Guide](manuals/ERROR_HANDLING_GUIDE.md)
 *   [Logging Guide](manuals/LOGGING_GUIDE.md)
 *   [Operator Manual](manuals/OPERATOR_MANUAL.md)
+*   [QA Gate Manual](manuals/QA_GATE.md)
 *   [System Integration Guide](manuals/SYSTEM_INTEGRATION_GUIDE.md)
 *   [User Manual](manuals/USER_MANUAL.md)
 
