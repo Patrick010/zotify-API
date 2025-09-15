@@ -3,7 +3,7 @@
 **Status:** Proposed
 
 ## 1. Overview
-This document outlines the phased implementation plan for creating a professional-level, multi-language QA Gate for the project. This system will replace the current, simpler linter with a robust set of checks for code quality, documentation quality, and index consistency.
+This document outlines the phased implementation plan for creating a professional-level, multi-language QA Gate for the project. This system will complement the current, simpler linter with a robust set of checks for code quality, documentation quality, and index consistency.The QA Gate linter will need to be run at the end of project phases.
 
 The implementation is broken down into the following phases to ensure a structured rollout and allow for feedback at each stage.
 
@@ -21,9 +21,9 @@ The implementation is broken down into the following phases to ensure a structur
     -   Add `Radon` and `mutmut` to the project's dependencies.
 3.  **Implement Python Code Checks in `run_code_quality()`:**
     -   Integrate `ruff` for baseline linting.
-    -   Integrate `pytest` with a coverage check of `>= 80%`.
-    -   Integrate `radon` to check for cyclomatic complexity (`<= 10`) and maintainability index (`>= 70`).
-    -   Integrate `mutmut` for mutation testing with a score threshold of `>= 70%`.
+    -   Integrate `pytest` with a coverage check of `>= 85%`.
+    -   Integrate `radon` to check for cyclomatic complexity (`<= 5`) and maintainability index (`>= 80`).
+    -   Integrate `mutmut` for mutation testing with a score threshold of `>= 90%`.
 4.  **Create Placeholder Helper Scripts:**
     -   Create `scripts/check_docs_alignment.py` with a placeholder "Not Implemented" message.
     -   Create `scripts/check_quality_indexes.py` with a placeholder "Not Implemented" message.
@@ -41,14 +41,14 @@ The implementation is broken down into the following phases to ensure a structur
 
 **Tasks:**
 1.  **Implement `check_docs_alignment.py`:**
-    -   The script must scan all source files (`.py`, `.go`, `.js`).
+    -   The script must scan all source files (`.py`, `.go`, `.js`, .html, .sh).
     -   It must verify that a corresponding `.md` file exists in `api/docs/reference/source/`.
     -   It must parse the markdown file to ensure it contains the required sections (Role, Usage, API, etc.).
     -   It must parse the source file (e.g., using `ast` for Python) to get a list of public functions/classes and ensure they are referenced in the markdown file.
 2.  **Implement `check_quality_indexes.py`:**
     -   The script must parse both `CODE_QUALITY_INDEX.md` and `DOCS_QUALITY_INDEX.md`.
     -   It must validate that every source file and every documentation file has an entry.
-    -   It must perform consistency checks (e.g., if a file has an 'A' rating for test coverage, the script must verify that the coverage is indeed >= 80%).
+    -   It must perform consistency checks (e.g., if a file has an 'A' rating for test coverage, the script must verify that the coverage is indeed >= 85%).
 3.  **Update `qa_gate.py`:**
     -   Integrate the calls to these two new helper scripts into the `run_docs_quality()` function.
 
