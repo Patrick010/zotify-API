@@ -32,6 +32,6 @@ Your first and most important task is to begin the implementation of **Phase 1: 
     -   Implementing the Python-specific code quality checks.
     -   Creating placeholder helper scripts.
     -   Writing the new `QA_GATE.md` manual.
-    -   Commit changes to a new branch post-audit-1d
+    -   Commit changes to a new branch qa-gate-1a
 
 This work will form the foundation of the new QA system.
