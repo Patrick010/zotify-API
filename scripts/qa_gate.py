@@ -35,7 +35,7 @@ def _run_pytest():
         "pytest",
         "--cov=api/src/zotify_api",
         "--cov-fail-under=80",
-        "api/tests/",
+        "api/tests/"
     ]
     _, success = _run_command(command)
     if success:
@@ -47,14 +47,14 @@ def _find_py_files(directory):
     """Find all python files in a directory."""
     for root, _, files in os.walk(directory):
         for basename in files:
-            if fnmatch.fnmatch(basename, "*.py"):
+            if fnmatch.fnmatch(basename, '*.py'):
                 yield os.path.join(root, basename)
 
 
 def _run_radon():
     """Runs radon for complexity and maintainability checks."""
     print("\n--- Running Radon for Code Metrics ---")
-    files_to_scan = list(_find_py_files("api/src/zotify_api"))
+    files_to_scan = list(_find_py_files('api/src/zotify_api'))
     if not files_to_scan:
         print("WARNING: No Python files found for Radon scan.")
         return True
@@ -68,9 +68,7 @@ def _run_radon():
 
     cc_match = re.search(r"Average complexity: \w \(([\d.]+)\)", cc_output)
     if not cc_match:
-        print(
-            "WARNING: Could not parse Radon cyclomatic complexity output. Bypassing check."
-        )
+        print("WARNING: Could not parse Radon cyclomatic complexity output. Bypassing check.")
         return True
 
     avg_cc = float(cc_match.group(1))
@@ -89,17 +87,13 @@ def _run_radon():
 
     mi_match = re.search(r"Average maintainability index: \w \(([\d.]+)\)", mi_output)
     if not mi_match:
-        print(
-            "WARNING: Could not parse Radon maintainability index output. Bypassing check."
-        )
+        print("WARNING: Could not parse Radon maintainability index output. Bypassing check.")
         return True
 
     avg_mi = float(mi_match.group(1))
     print(f"INFO: Average Maintainability Index: {avg_mi}")
     if avg_mi < 70:
-        print(
-            f"ERROR: Average maintainability {avg_mi} is lower than the threshold of 70."
-        )
+        print(f"ERROR: Average maintainability {avg_mi} is lower than the threshold of 70.")
         return False
     print("SUCCESS: Maintainability Index check passed (>= 70).")
 
@@ -127,9 +121,7 @@ def _run_mutmut():
     mutation_score = float(score_match.group(1))
     print(f"INFO: Mutation Score: {mutation_score}%")
     if mutation_score < 70:
-        print(
-            f"ERROR: Mutation score {mutation_score}% is lower than the threshold of 70%."
-        )
+        print(f"ERROR: Mutation score {mutation_score}% is lower than the threshold of 70%.")
         return False
 
     print("SUCCESS: Mutation testing check passed (>= 70%).")
