@@ -114,3 +114,12 @@ This score assesses the implementation's clarity, efficiency, structure, and tes
 | `gonk-testUI/static/app.js` | C | B | C | Excellent inline comments, but lacks function-level docstrings for complex UI state management. |
 | `gonk-testUI/static/styles.css` | A | A | A | Excellent use of CSS variables and a clear, logical structure. |
 | `gonk-testUI/templates/index.html` | A | A | A | Clean, semantic HTML5 structure. |
+
+## Scripts
+
+| File Path | Documentation Score | Code Score | Overall Score | Notes |
+| --- | :---: | :---: | :---: | --- |
+| `scripts/qa_gate.py` | X | X | X | New file, pending review. |
+| `scripts/check_docs_alignment.py` | X | X | X | New file, pending review. |
+| `scripts/check_quality_indexes.py` | X | X | X | New file, pending review. |
+| `scripts/manage_docs_index.py` | X | X | X | Existing file modified, pending review. |

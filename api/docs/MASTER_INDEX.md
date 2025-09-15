@@ -14,6 +14,7 @@ This document serves as the central index for all documentation related to the Z
 *   [CI/CD Guide](manuals/CICD.md)
 *   [Error Handling Guide](manuals/ERROR_HANDLING_GUIDE.md)
 *   [Logging Guide](manuals/LOGGING_GUIDE.md)
+*   [QA Gate Manual](manuals/QA_GATE.md)
 *   [Operator Manual](manuals/OPERATOR_MANUAL.md)
 *   [System Integration Guide](manuals/SYSTEM_INTEGRATION_GUIDE.md)
 *   [User Manual](manuals/USER_MANUAL.md)

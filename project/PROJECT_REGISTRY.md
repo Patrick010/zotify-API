@@ -48,10 +48,23 @@ This document serves as the master file, or single source of truth, for tracking
 | **Dependency Policy** | [`DEPENDENCIES.md`](./DEPENDENCIES.md) | The policy and registry for managing third-party dependencies. |
 | **Security Document** | [`SECURITY.md`](./SECURITY.md) | The definitive security reference for the project. |
 | **Project CI/CD Guide** | [`CICD.md`](./CICD.md) | A high-level guide to CI/CD philosophy for project management. |
+| **QA Gate Manual** | [`../api/docs/manuals/QA_GATE.md`](../api/docs/manuals/QA_GATE.md) | The manual for the new QA Gate system. |
 
 ---
 
-## 3. Audit & Alignment Documents
+## 3. Tooling & Scripts
+
+| Document | Location | Description |
+|---|---|---|
+| **QA Gate** | [`../scripts/qa_gate.py`](../scripts/qa_gate.py) | The main entrypoint for the new QA Gate. |
+| **Doc Alignment Script** | [`../scripts/check_docs_alignment.py`](../scripts/check_docs_alignment.py) | Placeholder for documentation alignment checks. |
+| **Quality Index Script** | [`../scripts/check_quality_indexes.py`](../scripts/check_quality_indexes.py) | Placeholder for quality index checks. |
+| **Mutmut Config** | [`../.mutmut.ini`](../.mutmut.ini) | Configuration for the Mutmut mutation testing tool. |
+| **Doc Index Script** | [`../scripts/manage_docs_index.py`](../scripts/manage_docs_index.py) | Script to manage the documentation quality index. |
+
+---
+
+## 4. Audit & Alignment Documents
 | Document | Location | Description |
 |---|---|---|
 | **First Audit** | [`audit/FIRST_AUDIT.md`](./audit/FIRST_AUDIT.md) | The initial audit report for the project. |

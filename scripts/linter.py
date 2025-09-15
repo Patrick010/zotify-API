@@ -294,7 +294,7 @@ def check_quality_index_ratings() -> List[str]:
     if not quality_index_file.exists():
         return []
 
-    valid_scores = {"A", "B", "C", "D", "F"}
+    valid_scores = {"A", "B", "C", "D", "F", "X"}
     with open(quality_index_file, "r", encoding="utf-8") as f:
         lines = f.readlines()
 

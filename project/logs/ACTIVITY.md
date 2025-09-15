@@ -1,4 +1,28 @@
 ---
+## ACT-106: Implement Phase 1 of the new QA Gate
+
+**Date:** 2025-09-15
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Implement Phase 1 of the new QA Gate
+
+### Outcome
+Created the qa_gate.py script with checks for ruff, pytest, radon, and mutmut. Added new dependencies and created the QA_GATE.md manual. The script successfully runs the core checks (ruff, pytest) and bypasses the others with warnings due to environment issues.
+
+### Related Documents
+- `api/pyproject.toml`
+- `scripts/qa_gate.py`
+- `scripts/check_docs_alignment.py`
+- `scripts/check_quality_indexes.py`
+- `api/docs/manuals/QA_GATE.md`
+- `api/docs/MASTER_INDEX.md`
+- `api/docs/DOCS_QUALITY_INDEX.md`
+- `.mutmut.ini`
+- `scripts/manage_docs_index.py`
+
+---
 ## ACT-105: docs: Create plan and handover for QA Gate implementation
 
 **Date:** 2025-09-05

@@ -170,3 +170,7 @@ api/src/storage/spotify_tokens.json
 # Ignore API storage directory and database files
 api/storage/
 api/*.db
+
+# Ignore mutmut cache
+/mutants/
+.mutmut_cache

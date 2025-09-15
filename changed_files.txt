@@ -1,0 +1,15 @@
+api/pyproject.toml
+scripts/qa_gate.py
+scripts/check_docs_alignment.py
+scripts/check_quality_indexes.py
+api/docs/manuals/QA_GATE.md
+api/docs/MASTER_INDEX.md
+api/docs/DOCS_QUALITY_INDEX.md
+.mutmut.ini
+scripts/manage_docs_index.py
+project/logs/ACTIVITY.md
+project/logs/CURRENT_STATE.md
+project/logs/SESSION_LOG.md
+project/ALIGNMENT_MATRIX.md
+api/docs/CODE_QUALITY_INDEX.md
+project/PROJECT_REGISTRY.md

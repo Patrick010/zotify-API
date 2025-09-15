@@ -119,6 +119,7 @@ This score assesses the quality, completeness, and clarity of the standalone mar
 | Api Developer Guide | api/docs/manuals/API_DEVELOPER_GUIDE.md | X |
 | User Manual | api/docs/manuals/USER_MANUAL.md | X |
 | Logging Guide | api/docs/manuals/LOGGING_GUIDE.md | X |
+| QA Gate Manual | api/docs/manuals/QA_GATE.md | X |
 | Spotify | api/docs/providers/SPOTIFY.md | X |
 | Feature Specs | api/docs/reference/FEATURE_SPECS.md | X |
 | Api Reference | api/docs/reference/API_REFERENCE.md | X |
