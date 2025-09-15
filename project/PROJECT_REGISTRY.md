@@ -59,7 +59,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **QA Gate** | [`../scripts/qa_gate.py`](../scripts/qa_gate.py) | The main entrypoint for the new QA Gate. |
 | **Doc Alignment Script** | [`../scripts/check_docs_alignment.py`](../scripts/check_docs_alignment.py) | Placeholder for documentation alignment checks. |
 | **Quality Index Script** | [`../scripts/check_quality_indexes.py`](../scripts/check_quality_indexes.py) | Placeholder for quality index checks. |
-| **Mutmut Config** | [`../.mutmut.ini`](../.mutmut.ini) | Configuration for the Mutmut mutation testing tool. |
+| **Mutmut Config** | [`../setup.cfg`](../setup.cfg) | Configuration for the Mutmut mutation testing tool. |
 | **Doc Index Script** | [`../scripts/manage_docs_index.py`](../scripts/manage_docs_index.py) | Script to manage the documentation quality index. |
 
 ---

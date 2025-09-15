@@ -13,14 +13,19 @@ Created the qa_gate.py script with checks for ruff, pytest, radon, and mutmut. A
 
 ### Related Documents
 - `api/pyproject.toml`
-- `scripts/qa_gate.py`
+- `.gitignore`
+- `setup.cfg`
 - `scripts/check_docs_alignment.py`
 - `scripts/check_quality_indexes.py`
+- `scripts/qa_gate.py`
+- `scripts/manage_docs_index.py`
+- `scripts/linter.py`
 - `api/docs/manuals/QA_GATE.md`
 - `api/docs/MASTER_INDEX.md`
 - `api/docs/DOCS_QUALITY_INDEX.md`
-- `.mutmut.ini`
-- `scripts/manage_docs_index.py`
+- `project/ALIGNMENT_MATRIX.md`
+- `api/docs/CODE_QUALITY_INDEX.md`
+- `project/PROJECT_REGISTRY.md`
 
 ---
 ## ACT-105: docs: Create plan and handover for QA Gate implementation

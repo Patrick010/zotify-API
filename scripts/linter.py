@@ -186,9 +186,20 @@ def get_changed_files() -> List[Tuple[str, str]]:
         result = subprocess.run(
             command, check=True, capture_output=True, text=True, encoding="utf-8"
         )
-        output = result.stdout.strip().splitlines()
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        # Fallback for environments where origin/main is not available (like some CI runners)
+        print("WARNING: 'git diff origin/main' failed. Falling back to 'git diff HEAD~1'.")
+        command = ["git", "diff", "--name-status", "HEAD~1...HEAD"]
+        try:
+            result = subprocess.run(
+                command, check=True, capture_output=True, text=True, encoding="utf-8"
+            )
+        except (subprocess.CalledProcessError, FileNotFoundError) as e:
+            print(f"FATAL: Could not get changed files from git on fallback: {e}", file=sys.stderr)
+            return []
 
-        changed_files_list = []
+    output = result.stdout.strip().splitlines()
+    changed_files_list = []
         for line in output:
             if not line:
                 continue

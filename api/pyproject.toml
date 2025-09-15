@@ -86,8 +86,3 @@ source = ["your_package"]
 [tool.coverage.report]
 show_missing = true
 skip_covered = true
-
-[tool.mutmut]
-paths_to_mutate = "api/src/zotify_api"
-runner = "pytest"
-tests_dir = "api/tests/"

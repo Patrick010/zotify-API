@@ -9,6 +9,7 @@ DOCS_QUALITY_INDEX = PROJECT_ROOT / "api/docs/DOCS_QUALITY_INDEX.md"
 
 # --- Main Functions ---
 
+
 def get_all_markdown_files():
     """Scans the doc directories and returns a list of all .md files."""
     md_files = []
@@ -19,6 +20,7 @@ def get_all_markdown_files():
                     # Store the path relative to the project root
                     md_files.append(Path(root) / file)
     return md_files
+
 
 def get_indexed_docs():
     """Parses the DOCS_QUALITY_INDEX.md to find which files are already indexed."""
@@ -41,6 +43,7 @@ def get_indexed_docs():
                 continue
     return indexed
 
+
 def add_to_docs_quality_index(doc_path):
     """Appends a new entry for a markdown file to the quality index."""
     # Use the filename as the module name for simplicity
@@ -53,13 +56,16 @@ def add_to_docs_quality_index(doc_path):
         f.write(entry)
     print(f"  - Added '{relative_path}' to {DOCS_QUALITY_INDEX.name}")
 
+
 def main():
     """Main function to manage the documentation quality index."""
-    parser = argparse.ArgumentParser(description="Manage the documentation quality index.")
+    parser = argparse.ArgumentParser(
+        description="Manage the documentation quality index."
+    )
     parser.add_argument(
         "--run",
         action="store_true",
-        help="Run the script to find and add missing markdown files to the index."
+        help="Run the script to find and add missing markdown files to the index.",
     )
     args = parser.parse_args()
 
@@ -88,6 +94,7 @@ def main():
         print(f"\nSuccessfully added {new_entries_added} new file(s) to the index.")
 
     print("--- Indexer Finished ---")
+
 
 if __name__ == "__main__":
     main()
