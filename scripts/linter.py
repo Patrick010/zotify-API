@@ -182,46 +182,42 @@ def get_changed_files() -> List[Tuple[str, str]]:
         )
         command.append("origin/main...HEAD")
 
-    try:
+    def _get_git_diff_output(cmd):
+        """Helper to run git diff and return the output lines."""
         result = subprocess.run(
-            command, check=True, capture_output=True, text=True, encoding="utf-8"
+            cmd, check=True, capture_output=True, text=True, encoding="utf-8"
         )
+        return result.stdout.strip().splitlines()
+
+    try:
+        output = _get_git_diff_output(command)
     except (subprocess.CalledProcessError, FileNotFoundError):
-        # Fallback for environments where origin/main is not available (like some CI runners)
+        # Fallback for environments where origin/main is not available
         print("WARNING: 'git diff origin/main' failed. Falling back to 'git diff HEAD~1'.")
         command = ["git", "diff", "--name-status", "HEAD~1...HEAD"]
         try:
-            result = subprocess.run(
-                command, check=True, capture_output=True, text=True, encoding="utf-8"
-            )
+            output = _get_git_diff_output(command)
         except (subprocess.CalledProcessError, FileNotFoundError) as e:
             print(f"FATAL: Could not get changed files from git on fallback: {e}", file=sys.stderr)
             return []
 
-    output = result.stdout.strip().splitlines()
     changed_files_list = []
-        for line in output:
-            if not line:
-                continue
-            parts = line.split("\t")
-            status = parts[0]
-            if status.startswith("R"):  # Renamed file (e.g., R100\told_path\tnew_path)
-                old_path, new_path = parts[1], parts[2]
-                # Treat a rename as a change to both the old and new paths
-                # so that rules for both locations are triggered.
-                changed_files_list.append((status, old_path))
-                changed_files_list.append((status, new_path))
-            else:  # Modified (M), Added (A), Deleted (D), etc.
-                file_path = parts[1]
-                changed_files_list.append((status, file_path))
+    for line in output:
+        if not line:
+            continue
+        parts = line.split("\t")
+        status = parts[0]
+        if status.startswith("R"):  # Renamed file (e.g., R100\told_path\tnew_path)
+            old_path, new_path = parts[1], parts[2]
+            changed_files_list.append((status, old_path))
+            changed_files_list.append((status, new_path))
+        else:  # Modified (M), Added (A), Deleted (D), etc.
+            file_path = parts[1]
+            changed_files_list.append((status, file_path))
 
-        print(f"Found {len(changed_files_list)} changed file(s) based on status.")
-        print("\n".join(f"- {status}\t{f}" for status, f in changed_files_list))
-        return changed_files_list
-
-    except (subprocess.CalledProcessError, FileNotFoundError) as e:
-        print(f"FATAL: Could not get changed files from git: {e}", file=sys.stderr)
-        return []
+    print(f"Found {len(changed_files_list)} changed file(s) based on status.")
+    print("\n".join(f"- {status}\t{f}" for status, f in changed_files_list))
+    return changed_files_list
 
 
 def check_doc_matrix_rules(changed_files: Set[str]) -> List[str]:
