@@ -19,19 +19,6 @@ Given the large scope of the new QA Gate, the decision was made to implement it 
 
 This plan is located at: **`project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md`**.
 
-I have also created a high-priority task in the `project/BACKLOG.md` to kick off this work.
+The work on this proposal has been postponed to a later moment and must therefor be placed on the Future Enhancement list
 
-## 4. Your Task: Begin Phase 1
-Your first and most important task is to begin the implementation of **Phase 1: Python Code Quality Foundation** as detailed in the implementation plan.
-
-**Key Steps for You:**
-1.  **Read the Plan:** Thoroughly read and understand the new `project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md`.
-2.  **Execute Phase 1:** Follow the tasks outlined in the "Phase 1" section of the plan. This includes:
-    -   Creating the new `scripts/qa_gate.py` file.
-    -   Installing new Python dependencies (`Radon`, `mutmut`).
-    -   Implementing the Python-specific code quality checks.
-    -   Creating placeholder helper scripts.
-    -   Writing the new `QA_GATE.md` manual.
-    -   Commit changes to a new branch qa-gate-1a
-
-This work will form the foundation of the new QA system.
+## 4. Your Task: Place the Quality Gate on the Future Enhancement list with a meaningful description.
