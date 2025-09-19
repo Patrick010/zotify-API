@@ -1,0 +1,153 @@
+# This file defines the "documentation matrix" for the custom linter.
+# It maps changes in source code paths to required changes in documentation files.
+
+rules:
+  - name: "Source Documentation Registration"
+    source_paths:
+      - "api/docs/reference/source/"
+    required_docs:
+      - "api/docs/MASTER_INDEX.md"
+    message: |
+      New source documentation must be registered in MASTER_INDEX.md.
+      Refer to QA_GOVERNANCE.md for policy details.
+
+  - name: "Source Documentation Quality Tracking"
+    source_paths:
+      - "api/docs/reference/source/"
+    required_docs:
+      - "api/docs/DOCS_QUALITY_INDEX.md"
+    message: |
+      New source documentation must be added to the DOCS_QUALITY_INDEX.md for quality tracking.
+      Refer to QA_GOVERNANCE.md for policy details.
+
+  - name: "Enforce Mandatory Logging"
+    source_paths:
+      - "api/src/zotify_api/"
+      - "project/"
+      - "api/docs/"
+      - "snitch/"
+      - "gonk-testUI/"
+      - "scripts/"
+      - "AGENTS.md"
+      - ".github/workflows/ci.yml"
+      - "README.md"
+    required_docs:
+      - "project/logs/ACTIVITY.md"
+      - "project/logs/SESSION_LOG.md"
+      - "project/logs/CURRENT_STATE.md"
+    message: |
+      Changes to code or documentation must be logged. Please run the linter's
+      --log command to update the project logs.
+
+  - name: "API Route Change"
+    source_paths:
+      - "api/src/zotify_api/routes/"
+    required_docs:
+      - "project/ENDPOINTS.md"
+      - "api/docs/reference/API_REFERENCE.md"
+    message: |
+      Changes to API routes require an update to the endpoint documentation.
+      Refer to QA_GOVERNANCE.md for policy details.
+
+  - name: "High-Level Design Change"
+    source_paths:
+      - "project/HIGH_LEVEL_DESIGN.md"
+      - "project/LOW_LEVEL_DESIGN.md"
+    required_docs:
+      - "project/ALIGNMENT_MATRIX.md"
+    message: |
+      Changes to core design documents must be reflected in the traceability matrix.
+      Refer to QA_GOVERNANCE.md for policy details.
+
+  - name: "Agent Workflow Change"
+    source_paths:
+      - "AGENTS.md"
+      - "scripts/linter.py"
+    # The Handover Brief is a point-in-time document and must not be changed
+    # after the initial session, except when the user asks for it.
+    forbidden_docs:
+      - "project/HANDOVER_BRIEF.md"
+    message: |
+      The Handover Brief cannot be modified.
+      Refer to QA_GOVERNANCE.md for policy details.
+
+  - name: "Database Model Change"
+    source_paths:
+      - "api/src/zotify_api/database/models.py"
+    required_docs:
+      - "project/LOW_LEVEL_DESIGN.md"
+    message: |
+      Changes to database models should be reflected in the Low-Level Design document.
+      Refer to QA_GOVERNANCE.md for policy details.
+
+  - name: "CI/CD Pipeline Change"
+    source_paths:
+      - ".github/workflows/ci.yml"
+    required_docs:
+      - "project/CICD.md"
+      - "api/docs/manuals/CICD.md"
+    message: |
+      Changes to the CI/CD pipeline must be documented in the CICD guides.
+      Refer to QA_GOVERNANCE.md for policy details.
+
+  - name: "Alignment Matrix Maintenance"
+    source_paths:
+      - "api/src/zotify_api/"
+      - "snitch/"
+      - "gonk-testUI/"
+      - "scripts/"
+    required_docs:
+      - "project/ALIGNMENT_MATRIX.md"
+    message: |
+      All code changes must be reflected in `project/ALIGNMENT_MATRIX.md`.
+      Refer to QA_GOVERNANCE.md (Section: Alignment & Traceability) for policy details.
+
+  - name: "MASTER Index Maintenance"
+    source_paths:
+      - "api/docs/"
+    required_docs:
+      - "api/docs/MASTER_INDEX.md"
+    message: |
+      All documents under api/docs/ must be registered in api/docs/MASTER_INDEX.md.
+      Update MASTER_INDEX.md to reflect additions, removals, or renames.
+      Refer to QA_GOVERNANCE.md for policy details.
+
+  - name: "Code Quality Index Maintenance"
+    source_paths:
+      - "api/src/"
+      - "snitch/"
+      - "gonk-testUI/"
+      - "scripts/"
+    required_docs:
+      - "api/docs/CODE_QUALITY_INDEX.md"
+    message: |
+      Any source file changes must be reflected in api/docs/CODE_QUALITY_INDEX.md.
+      Add/update the relevant entry to maintain code quality coverage.
+      Refer to QA_GOVERNANCE.md for policy details.
+
+  - name: "Project Registry Maintenance"
+    source_paths:
+      - "project/"
+    required_docs:
+      - "project/PROJECT_REGISTRY.md"
+    message: |
+      All project-level governance and process documents must be registered in
+      `project/PROJECT_REGISTRY.md`. Update it when adding, renaming, or removing docs.
+      Refer to QA_GOVERNANCE.md for policy details.
+
+  - name: "Documentation Update Enforcement"
+    source_paths:
+      - "api/src/"
+      - "snitch/"
+      - "gonk-testUI/"
+      - "scripts/"
+      - "project/"
+      - "api/docs/"
+    required_docs:
+      - "project/ALIGNMENT_MATRIX.md"
+      - "api/docs/CODE_QUALITY_INDEX.md"
+      - "project/PROJECT_REGISTRY.md"
+      - "api/docs/MASTER_INDEX.md"
+    message: |
+      Code or documentation changes must be reflected in the relevant index/matrix docs.
+      Refer to QA_GOVERNANCE.md for update policies.
