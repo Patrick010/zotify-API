@@ -24,34 +24,21 @@ This project operates under a strict **"living documentation"** model.
 
 ## 2. Development Workflow
 
-Follow these steps for every contribution:
+To enforce the "living documentation" model, this project uses a unified linter script (`scripts/linter.py`) that handles both pre-submission verification and work logging. Follow this workflow for all contributions:
 
-    Create an Issue: Before starting work, ensure there is a GitHub issue describing the bug or feature.
-    Create a Branch: Create a new feature branch from main.
-    Implement Changes: Write your code and the corresponding documentation updates.
-    Run Quality Checks: Ensure all quality checks (see section below) pass before committing.
-    Update Logs: Use the log-work.py script to record your changes. This script automates the process of updating the "Trinity" logs (ACTIVITY.md, SESSION_LOG.md, and CURRENT_STATE.md). See AGENTS.md for full instructions.
-
-    python scripts/log-work.py --activity "..." --session "..." --state "..." --files ...
-
-    Follow the TASK_CHECKLIST.md: Manually go through the checklist to ensure all project standards have been met.
-    Submit a Pull Request: Create a pull request linking to the original issue.
-
-The Automated Workflow: The Unified Linter
-
-To enforce the "living documentation" model, this project uses a unified linter script (`scripts/linter.py`) that handles both pre-submission verification and work logging.
-
-    Verification (Linting):
-        A pre-commit hook is installed that runs this script automatically before every commit.
-        This script will cause the commit to fail if you have staged changes that violate the project's documentation policies (e.g., changing code without updating the `ALIGNMENT_MATRIX.md`).
-        This is the primary mechanism that enforces the project's governance rules.
-        Command: `python3 scripts/linter.py`
-
-    Work Logging:
-        After you have committed your changes, you must log your work using the same script with the `--log` flag.
-        It standardizes the process of updating the project's three main log files (`ACTIVITY.md`, `SESSION_LOG.md`, and `CURRENT_STATE.md`).
-        See `AGENTS.md` for full instructions.
-        Command: `python scripts/linter.py --log --summary "..." --objective "..." --outcome "..." --files ...`
+1.  **Create an Issue & Branch:** Before starting work, ensure there is a GitHub issue and create a new feature branch.
+2.  **Implement Changes:** Write your code and the corresponding documentation updates.
+3.  **Run Quality Checks:** Before committing, run all the quality checks detailed in Section 3. Most importantly, run the unified linter in verification mode to ensure your changes are compliant:
+    ```bash
+    python3 scripts/linter.py
+    ```
+4.  **Commit Your Work:** Once all checks pass, commit your changes.
+5.  **Log Your Work:** After committing, you must log your work using the linter's logging mode. This updates the project's "Trinity" logs (`ACTIVITY.md`, `SESSION_LOG.md`, and `CURRENT_STATE.md`). See `AGENTS.md` for full instructions.
+    ```bash
+    python3 scripts/linter.py --log --summary "Your one-line summary" --findings "Detailed findings..." --next-steps "Next steps..." --files file1.md file2.py
+    ```
+6.  **Follow the `TASK_CHECKLIST.md`:** Manually go through the checklist to ensure all project standards have been met.
+7.  **Submit a Pull Request:** Create a pull request linking to the original issue.
 
 ---
 

@@ -1,6 +1,13 @@
 ---
 ## Session Report: 2025-09-19
 
+**Summary:** docs: Update documentation to reflect unified linter
+**Findings:**
+Multiple documents, including feature specs, developer guides, and core project documents, contained outdated references to old, separate linter scripts (lint-docs.py, log-work.py). These have all been updated to refer to the single, unified linter.py script. The .pre-commit-config.yaml was also updated to disable the old, broken hook.
+
+---
+## Session Report: 2025-09-19
+
 **Summary:** docs: Postpone QA Gate feature and update documentation
 **Findings:**
 The decision was made to postpone the implementation of the QA Gate feature. To reflect this, the task was removed from the backlog. The feature was then formally documented as a future enhancement by adding it to project/FUTURE_ENHANCEMENTS.md and the project/ALIGNMENT_MATRIX.md to ensure it is tracked.

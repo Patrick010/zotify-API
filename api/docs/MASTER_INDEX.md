@@ -1,5 +1,7 @@
 # API Documentation Master Index
 
+**Last Updated:** 2025-09-19
+
 This document serves as the central index for all documentation related to the Zotify API and its sub-modules. All new documentation files must be registered here.
 
 ## Core API

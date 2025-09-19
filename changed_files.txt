@@ -1,7 +1,13 @@
-project/BACKLOG.md
-project/FUTURE_ENHANCEMENTS.md
-project/ALIGNMENT_MATRIX.md
+api/docs/reference/features/AUTOMATED_DOCUMENTATION_WORKFLOW.md
+.pre-commit-config.yaml
+api/docs/manuals/CICD.md
+api/docs/manuals/API_DEVELOPER_GUIDE.md
+project/PID.md
+project/PROJECT_PLAN.md
+templates/AGENTS.md
+templates/CICD-DEV.md
 project/logs/ACTIVITY.md
 project/logs/SESSION_LOG.md
 project/logs/CURRENT_STATE.md
+api/docs/MASTER_INDEX.md
 project/PROJECT_REGISTRY.md

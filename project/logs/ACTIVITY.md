@@ -1,4 +1,27 @@
 ---
+## ACT-107: docs: Update documentation to reflect unified linter
+
+**Date:** 2025-09-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+docs: Update documentation to reflect unified linter
+
+### Outcome
+Multiple documents, including feature specs, developer guides, and core project documents, contained outdated references to old, separate linter scripts (lint-docs.py, log-work.py). These have all been updated to refer to the single, unified linter.py script. The .pre-commit-config.yaml was also updated to disable the old, broken hook.
+
+### Related Documents
+- `api/docs/reference/features/AUTOMATED_DOCUMENTATION_WORKFLOW.md`
+- `.pre-commit-config.yaml`
+- `api/docs/manuals/CICD.md`
+- `api/docs/manuals/API_DEVELOPER_GUIDE.md`
+- `project/PID.md`
+- `project/PROJECT_PLAN.md`
+- `templates/AGENTS.md`
+- `templates/CICD-DEV.md`
+
+---
 ## ACT-106: docs: Postpone QA Gate feature and update documentation
 
 **Date:** 2025-09-19

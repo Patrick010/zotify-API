@@ -27,15 +27,18 @@ repos:
         args: ["--config=p/ci"]
 
   # 4. Documentation linter (local)
+  # Note: The 'doc-linter' hook is intentionally disabled.
+  # As per the note in AGENTS.md, the unified linter script must be run manually
+  # before each commit and cannot be run as an automated pre-commit hook.
   - repo: local
     hooks:
-      - id: doc-linter
-        name: Documentation Linter
-        entry: python scripts/lint-docs.py
-        language: python
-        types: [file, python]
-        pass_filenames: false
-        additional_dependencies: [pyyaml]
+      # - id: doc-linter
+      #   name: Documentation Linter
+      #   entry: python scripts/linter.py
+      #   language: python
+      #   types: [file, python]
+      #   pass_filenames: false
+      #   additional_dependencies: [pyyaml]
 
   # 5. Optional: complexity checks (Radon/Xenon) as a local hook
   - repo: local
