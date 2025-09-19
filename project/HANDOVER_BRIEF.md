@@ -21,4 +21,5 @@ This plan is located at: **`project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md`**.
 
 The work on this proposal has been postponed to a later moment and must therefor be placed on the Future Enhancement list
 
-## 4. Your Task: Place the Quality Gate on the Future Enhancement list with a meaningful description.
+## 4. Your Task: 
+Place the Quality Gate on the Future Enhancement list with a meaningful description and add it to the ALIGNMENT_MATRIX.md
