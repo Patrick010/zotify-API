@@ -1,4 +1,22 @@
 ---
+## ACT-106: docs: Postpone QA Gate feature and update documentation
+
+**Date:** 2025-09-19
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+docs: Postpone QA Gate feature and update documentation
+
+### Outcome
+The decision was made to postpone the implementation of the QA Gate feature. To reflect this, the task was removed from the backlog. The feature was then formally documented as a future enhancement by adding it to project/FUTURE_ENHANCEMENTS.md and the project/ALIGNMENT_MATRIX.md to ensure it is tracked.
+
+### Related Documents
+- `project/BACKLOG.md`
+- `project/FUTURE_ENHANCEMENTS.md`
+- `project/ALIGNMENT_MATRIX.md`
+
+---
 ## ACT-105: docs: Create plan and handover for QA Gate implementation
 
 **Date:** 2025-09-05

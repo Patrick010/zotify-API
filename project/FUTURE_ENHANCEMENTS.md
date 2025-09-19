@@ -61,6 +61,8 @@ This section lists specific technical features and improvements that are candida
         2.  Isolating `librespot` in its own process to decouple its dependencies from the main application.
         3.  Researching alternative libraries to replace `librespot`'s functionality.
     *   **Outcome:** A recommendation document outlining the best path forward to resolve the dependency-pinning issue.
+*   **Comprehensive QA Gate:**
+    *   Implement a new, professional-level, multi-language QA Gate to complement the existing linter. This system will perform deep code quality analysis (e.g., complexity checks, mutation testing) and comprehensive checks for documentation quality and content alignment. The full, phased plan is detailed in `project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md`.
 ---
 
 ## 3. API Adoption & Usability Philosophy

@@ -53,6 +53,7 @@ This document maintains a live mapping between strategic goals, design documents
 | **Infrastructure & Tooling** | | | | | | | | | |
 | AR-026 | CI/CD Pipeline | | ✅ | [Deployment Model](HIGH_LEVEL_DESIGN.md#hld-deployment-model) | `N/A` | `.github/workflows/ci.yml` | | `project/CICD.md` | |
 | AR-027 | Unified Linter & Logger | | ✅ | [Doc Governance](HIGH_LEVEL_DESIGN.md#hld-documentation-governance) | [Ongoing Maintenance](LOW_LEVEL_DESIGN.md#lld-ongoing-maintenance) | `scripts/linter.py` | N/A | `AGENTS.md` | Merged `log-work.py` into `linter.py`. |
+| AR-028 | Comprehensive QA Gate | FE-15 | ❌ | [Doc Governance](HIGH_LEVEL_DESIGN.md#hld-documentation-governance) | N/A | N/A | N/A | `project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md` | Deferred as per handover. |
 | **Privacy & Security** | | | | | | | | | |
 | AR-029 | GDPR Compliance Subsystem | FE-14 | ❌ | [Security Model](HIGH_LEVEL_DESIGN.md#hld-security-model) | [Privacy Subsystem](LOW_LEVEL_DESIGN.md#lld-privacy-subsystem) | `api/src/zotify_api/routes/privacy.py` | N/A | `api/docs/system/PRIVACY_COMPLIANCE.md` | Endpoints for data export and deletion. |
 | **Project Governance** | | | | | | | | | |

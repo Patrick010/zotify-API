@@ -1,0 +1,7 @@
+project/BACKLOG.md
+project/FUTURE_ENHANCEMENTS.md
+project/ALIGNMENT_MATRIX.md
+project/logs/ACTIVITY.md
+project/logs/SESSION_LOG.md
+project/logs/CURRENT_STATE.md
+project/PROJECT_REGISTRY.md
