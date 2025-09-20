@@ -17,6 +17,7 @@ from zotify_api.routes import (
     cache,
     config,
     downloads,
+    jwt_auth,
     network,
     notifications,
     playlists,
@@ -126,6 +127,7 @@ prefix = settings.api_prefix
 
 modules = [
     auth,
+    jwt_auth,
     cache,
     system,
     user,

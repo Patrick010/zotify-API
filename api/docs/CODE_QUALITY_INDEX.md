@@ -68,6 +68,7 @@ This score assesses the implementation's clarity, efficiency, structure, and tes
 | `api/src/zotify_api/providers/spotify_connector.py` | B | D | D | The connector is well-documented but has significant architectural issues (improper global state, hardcoded HTML, fragile dependencies) that make it difficult to maintain. |
 | `api/src/zotify_api/routes/__init__.py` | B | A | A | Standard package marker with a helpful comment. |
 | `api/src/zotify_api/routes/auth.py` | A | B | A | Clean, well-documented auth routes. The `logout` endpoint contains a known design issue that needs to be addressed. |
+| `api/src/zotify_api/routes/jwt_auth.py` | B | A | A | New JWT authentication routes. Well-tested. |
 | `api/src/zotify_api/routes/cache.py` | A | A | A | A textbook example of a clean, well-documented route file that properly separates concerns. |
 | `api/src/zotify_api/routes/config.py` | F | A | C | An excellent, clean implementation of config routes, but it is completely undocumented. |
 | `api/src/zotify_api/routes/downloads.py` | B | C | C | Clean, well-documented routes. The service layer is tightly coupled via a direct import instead of using FastAPI's dependency injection system, making it difficult to test. |
@@ -97,7 +98,9 @@ This score assesses the implementation's clarity, efficiency, structure, and tes
 | `api/src/zotify_api/services/spoti_client.py`| B | A | A | Good class docstring, but many methods are undocumented. The code itself is an excellent, robust `httpx`-based client for the Spotify API. |
 | `api/src/zotify_api/services/sync_service.py` | B | C | C | Good function docstring. The service is just a stub that prints a message. |
 | `api/src/zotify_api/services/tracks_service.py`| C | D | D | Some functions are documented. The code uses raw SQL, which is inconsistent with the ORM (`crud.py`) used elsewhere. The `get_tracks_metadata_from_spotify` function contains a "hack" to get around a gap in the provider abstraction. |
-| `api/src/zotify_api/services/user_service.py` | B | B | B | Good documentation. The service correctly encapsulates all user-related data and logic, reading from and writing to a JSON file for persistence. |
+| `api/src/zotify_api/services/user_service.py` | B | B | B | Refactored to be user-aware. Good documentation. The service correctly encapsulates all user-related data and logic, reading from and writing to a JSON file for persistence. |
+| `api/src/zotify_api/services/deps.py` | B | B | B | Added a new dependency for the user service. |
+| `api/src/zotify_api/database/session.py` | B | A | A | Removed a print statement. |
 | `api/src/zotify_api/services/webhooks.py` | F | B | C | Undocumented. The code correctly uses a background task for firing webhooks to avoid blocking the request. |
 
 ## Snitch Module

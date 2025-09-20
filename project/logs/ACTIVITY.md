@@ -1,4 +1,33 @@
 ---
+## ACT-108: Fix JWT authentication and related documentation
+
+**Date:** 2025-09-20
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Fix JWT authentication and related documentation
+
+### Outcome
+Fixed endpoint protection, added tests, updated documentation, and refactored the user service to be user-aware.
+
+### Related Documents
+- `api/tests/conftest.py`
+- `api/tests/unit/test_jwt_auth.py`
+- `scripts/generate_openapi.py`
+- `project/ENDPOINTS.md`
+- `api/docs/reference/source/JWT_AUTH.py.md`
+- `mkdocs.yml`
+- `api/docs/MASTER_INDEX.md`
+- `api/src/zotify_api/database/session.py`
+- `api/src/zotify_api/services/user_service.py`
+- `api/src/zotify_api/services/deps.py`
+- `api/tests/unit/test_user_service.py`
+- `api/docs/DOCS_QUALITY_INDEX.md`
+- `project/ALIGNMENT_MATRIX.md`
+- `api/docs/CODE_QUALITY_INDEX.md`
+
+---
 ## ACT-107: docs: Update documentation to reflect unified linter
 
 **Date:** 2025-09-19

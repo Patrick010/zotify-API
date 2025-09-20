@@ -6,13 +6,25 @@
     "version": "0.1.20"
   },
   "paths": {
-    "/api/auth/spotify/login": {
+    "/api/auth/{provider_name}/login": {
       "get": {
         "tags": [
           "auth"
         ],
-        "summary": "Spotify Login",
-        "operationId": "spotify_login_api_auth_spotify_login_get",
+        "summary": "Provider Login",
+        "description": "Initiates the OAuth2 login flow for a given provider.",
+        "operationId": "provider_login_api_auth__provider_name__login_get",
+        "parameters": [
+          {
+            "name": "provider_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Provider Name"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -23,33 +35,83 @@
                 }
               }
             }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
           }
         }
       }
     },
-    "/api/auth/spotify/callback": {
+    "/api/auth/{provider_name}/callback": {
       "get": {
         "tags": [
           "auth"
         ],
-        "summary": "Spotify Callback",
-        "operationId": "spotify_callback_api_auth_spotify_callback_get",
+        "summary": "Provider Callback",
+        "description": "Handles the OAuth2 callback from the provider.",
+        "operationId": "provider_callback_api_auth__provider_name__callback_get",
         "parameters": [
           {
-            "name": "code",
-            "in": "query",
+            "name": "provider_name",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string",
+              "title": "Provider Name"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
               "title": "Code"
+            }
+          },
+          {
+            "name": "error",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Error"
             }
           },
           {
             "name": "state",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
-              "type": "string",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
               "title": "State"
             }
           }
@@ -132,7 +194,7 @@
           "auth"
         ],
         "summary": "Logout",
-        "description": "Clears stored Spotify credentials from the database.\n\nThis function deletes the token from local storage, effectively logging the user out\nfrom this application's perspective.",
+        "description": "Clears stored provider credentials from the database.\nTODO: This is currently provider-specific and should be moved to the provider layer.",
         "operationId": "logout_api_auth_logout_post",
         "parameters": [
           {
@@ -169,39 +231,69 @@
         }
       }
     },
-    "/api/auth/refresh": {
-      "get": {
+    "/api/auth/register": {
+      "post": {
         "tags": [
           "auth"
         ],
-        "summary": "Refresh",
-        "description": "Refreshes the Spotify access token",
-        "operationId": "refresh_api_auth_refresh_get",
-        "parameters": [
-          {
-            "name": "X-API-Key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
+        "summary": "Register",
+        "operationId": "register_api_auth_register_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
-              ],
-              "title": "X-Api-Key"
+              }
             }
           }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": [
+          "auth"
         ],
+        "summary": "Login",
+        "operationId": "login_api_auth_login_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_login_api_auth_login_post"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RefreshResponse"
+                  "$ref": "#/components/schemas/Token"
                 }
               }
             }
@@ -330,7 +422,13 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Reload Logging Config Api System Logging Reload Post"
+                }
               }
             }
           },
@@ -700,7 +798,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       },
       "patch": {
         "tags": [
@@ -739,7 +842,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       }
     },
     "/api/user/preferences": {
@@ -760,7 +868,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       },
       "patch": {
         "tags": [
@@ -799,7 +912,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       }
     },
     "/api/user/liked": {
@@ -815,14 +933,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
                   "type": "object",
                   "title": "Response Get User Liked Api User Liked Get"
                 }
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       }
     },
     "/api/user/sync_liked": {
@@ -843,7 +965,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       }
     },
     "/api/user/history": {
@@ -859,14 +986,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
                   "type": "object",
                   "title": "Response Get User History Api User History Get"
                 }
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -878,7 +1009,12 @@
           "204": {
             "description": "Successful Response"
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       }
     },
     "/api/playlists": {
@@ -1045,7 +1181,6 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
                   "title": "Response List Tracks Api Tracks Get"
                 }
               }
@@ -1327,7 +1462,10 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "title": "Response Upload Track Cover Api Tracks  Track Id  Cover Post"
+                }
               }
             }
           },
@@ -1683,7 +1821,13 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Trigger Sync Api Sync Trigger Post"
+                }
               }
             }
           },
@@ -1965,7 +2109,10 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "title": "Response Search Api Search Get"
+                }
               }
             }
           },
@@ -2073,7 +2220,6 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
                   "title": "Response List Webhooks Api Webhooks Get"
                 }
               }
@@ -2183,7 +2329,13 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Fire Webhook Api Webhooks Fire Post"
+                }
               }
             }
           },
@@ -2208,6 +2360,15 @@
         "summary": "Create Notification",
         "operationId": "create_notification_api_notifications_post",
         "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Username"
+            }
+          },
           {
             "name": "X-API-Key",
             "in": "header",
@@ -2266,6 +2427,11 @@
         ],
         "summary": "Get Notifications",
         "operationId": "get_notifications_api_notifications__user_id__get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "user_id",
@@ -2274,6 +2440,15 @@
             "schema": {
               "type": "string",
               "title": "User Id"
+            }
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Username"
             }
           }
         ],
@@ -2284,7 +2459,6 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
                   "title": "Response Get Notifications Api Notifications  User Id  Get"
                 }
               }
@@ -2318,6 +2492,15 @@
             "schema": {
               "type": "string",
               "title": "Notification Id"
+            }
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Username"
             }
           },
           {
@@ -2373,7 +2556,13 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "additionalProperties": {
+                    "type": "boolean"
+                  },
+                  "type": "object",
+                  "title": "Response Ping Ping Get"
+                }
               }
             }
           }
@@ -2392,7 +2581,13 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Health Check Health Get"
+                }
               }
             }
           }
@@ -2408,7 +2603,10 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "title": "Response Version Version Get"
+                }
               }
             }
           }
@@ -2421,7 +2619,7 @@
           "system"
         ],
         "summary": "Get Schema",
-        "description": "Returns either full OpenAPI spec or schema fragment for requested object type (via query param).",
+        "description": "Returns OpenAPI spec or a specific schema fragment.",
         "operationId": "get_schema_api_schema_get",
         "parameters": [
           {
@@ -2462,7 +2660,10 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "title": "Response Get Schema Api Schema Get"
+                }
               }
             }
           },
@@ -2515,6 +2716,65 @@
           "expires_in"
         ],
         "title": "AuthStatus"
+      },
+      "Body_login_api_auth_login_post": {
+        "properties": {
+          "grant_type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^password$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Grant Type"
+          },
+          "username": {
+            "type": "string",
+            "title": "Username"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "title": "Password"
+          },
+          "scope": {
+            "type": "string",
+            "title": "Scope",
+            "default": ""
+          },
+          "client_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client Id"
+          },
+          "client_secret": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "format": "password",
+            "title": "Client Secret"
+          }
+        },
+        "type": "object",
+        "required": [
+          "username",
+          "password"
+        ],
+        "title": "Body_login_api_auth_login_post"
       },
       "Body_upload_track_cover_api_tracks__track_id__cover_post": {
         "properties": {
@@ -2817,7 +3077,6 @@
             "title": "Event"
           },
           "data": {
-            "additionalProperties": true,
             "type": "object",
             "title": "Data"
           }
@@ -3124,7 +3383,6 @@
             "title": "Data"
           },
           "meta": {
-            "additionalProperties": true,
             "type": "object",
             "title": "Meta"
           }
@@ -3174,19 +3432,6 @@
         },
         "type": "object",
         "title": "ProxyConfig"
-      },
-      "RefreshResponse": {
-        "properties": {
-          "expires_at": {
-            "type": "integer",
-            "title": "Expires At"
-          }
-        },
-        "type": "object",
-        "required": [
-          "expires_at"
-        ],
-        "title": "RefreshResponse"
       },
       "StandardResponse_CacheStatusResponse_": {
         "properties": {
@@ -3479,6 +3724,24 @@
         ],
         "title": "SystemUptime"
       },
+      "Token": {
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "title": "Access Token"
+          },
+          "token_type": {
+            "type": "string",
+            "title": "Token Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "access_token",
+          "token_type"
+        ],
+        "title": "Token"
+      },
       "TrackMetadataRequest": {
         "properties": {
           "track_ids": {
@@ -3499,7 +3762,6 @@
         "properties": {
           "metadata": {
             "items": {
-              "additionalProperties": true,
               "type": "object"
             },
             "type": "array",
@@ -3651,6 +3913,24 @@
         },
         "type": "object",
         "title": "UpdateTrackModel"
+      },
+      "UserCreate": {
+        "properties": {
+          "username": {
+            "type": "string",
+            "title": "Username"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password"
+          }
+        },
+        "type": "object",
+        "required": [
+          "username",
+          "password"
+        ],
+        "title": "UserCreate"
       },
       "UserPreferences": {
         "properties": {
@@ -3827,6 +4107,17 @@
           "events"
         ],
         "title": "WebhookPayload"
+      }
+    },
+    "securitySchemes": {
+      "OAuth2PasswordBearer": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "scopes": {},
+            "tokenUrl": "/auth/login"
+          }
+        }
       }
     }
   }

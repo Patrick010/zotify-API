@@ -16,11 +16,12 @@ This file lists all public API endpoints for the Zotify API project, generated f
 ### `auth`
 | Method | Path | Summary | Auth Required |
 |---|---|---|---|
-| GET | `/api/auth/refresh` | Refresh | Yes |
-| GET | `/api/auth/spotify/callback` | Spotify Callback | No |
-| GET | `/api/auth/spotify/login` | Spotify Login | No |
 | GET | `/api/auth/status` | Get Status | Yes |
+| GET | `/api/auth/{provider_name}/callback` | Provider Callback | No |
+| GET | `/api/auth/{provider_name}/login` | Provider Login | No |
+| POST | `/api/auth/login` | Login | No |
 | POST | `/api/auth/logout` | Logout | Yes |
+| POST | `/api/auth/register` | Register | No |
 
 ### `cache`
 | Method | Path | Summary | Auth Required |
@@ -57,7 +58,7 @@ This file lists all public API endpoints for the Zotify API project, generated f
 ### `notifications`
 | Method | Path | Summary | Auth Required |
 |---|---|---|---|
-| GET | `/api/notifications/{user_id}` | Get Notifications | No |
+| GET | `/api/notifications/{user_id}` | Get Notifications | Yes |
 | PATCH | `/api/notifications/{notification_id}` | Mark Notification As Read | Yes |
 | POST | `/api/notifications` | Create Notification | Yes |
 
@@ -106,14 +107,14 @@ This file lists all public API endpoints for the Zotify API project, generated f
 ### `user`
 | Method | Path | Summary | Auth Required |
 |---|---|---|---|
-| DELETE | `/api/user/history` | Delete User History | No |
-| GET | `/api/user/history` | Get User History | No |
-| GET | `/api/user/liked` | Get User Liked | No |
-| GET | `/api/user/preferences` | Get User Preferences | No |
-| GET | `/api/user/profile` | Get User Profile | No |
-| PATCH | `/api/user/preferences` | Update User Preferences | No |
-| PATCH | `/api/user/profile` | Update User Profile | No |
-| POST | `/api/user/sync_liked` | Sync User Liked | No |
+| DELETE | `/api/user/history` | Delete User History | Yes |
+| GET | `/api/user/history` | Get User History | Yes |
+| GET | `/api/user/liked` | Get User Liked | Yes |
+| GET | `/api/user/preferences` | Get User Preferences | Yes |
+| GET | `/api/user/profile` | Get User Profile | Yes |
+| PATCH | `/api/user/preferences` | Update User Preferences | Yes |
+| PATCH | `/api/user/profile` | Update User Profile | Yes |
+| POST | `/api/user/sync_liked` | Sync User Liked | Yes |
 
 ### `webhooks`
 | Method | Path | Summary | Auth Required |

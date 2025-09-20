@@ -1,7 +1,8 @@
 from typing import Any, Dict
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 
+from zotify_api.database.models import User
 from zotify_api.schemas.generic import StandardResponse
 from zotify_api.schemas.notifications import (
     Notification,
@@ -9,6 +10,7 @@ from zotify_api.schemas.notifications import (
     NotificationUpdate,
 )
 from zotify_api.services.auth import require_admin_api_key
+from zotify_api.services.jwt_service import get_current_user
 from zotify_api.services.notifications_service import (
     NotificationsService,
     get_notifications_service,
@@ -36,7 +38,10 @@ def create_notification(
 def get_notifications(
     user_id: str,
     notifications_service: NotificationsService = Depends(get_notifications_service),
+    current_user: User = Depends(get_current_user),
 ) -> Dict[str, Any]:
+    if str(current_user.id) != user_id:
+        raise HTTPException(status_code=403, detail="Not authorized to access these notifications")
     items = notifications_service.get_notifications(user_id)
     return {"data": items, "meta": {"total": len(items)}}
 

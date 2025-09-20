@@ -23,5 +23,10 @@ class CallbackResponse(BaseModel):
     status: str
 
 
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
 class OAuthLoginResponse(BaseModel):
     auth_url: str

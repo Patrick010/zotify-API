@@ -19,6 +19,7 @@ This score assesses the quality, completeness, and clarity of the standalone mar
 
 | Module | File | Docs Rating |
 |---|---|:---:|
+| Jwt_Auth | reference/source/JWT_AUTH.py.md | X |
 | Auth_State | reference/source/AUTH_STATE.py.md | X |
 | Globals | reference/source/GLOBALS.py.md | X |
 | Main | reference/source/MAIN.py.md | X |

@@ -1,14 +1,16 @@
 import json
+import os
 import sys
 from pathlib import Path
 
-from api.src.zotify_api.main import app
+# Set app environment to testing
+os.environ["APP_ENV"] = "testing"
 
 # Add project root to path
-project_root = Path(__file__).parent
-api_src_path = project_root / "api" / "src"
-sys.path.insert(0, str(api_src_path))
+project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
+
+from api.src.zotify_api.main import app
 
 
 def generate_openapi_spec():

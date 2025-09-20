@@ -17,6 +17,11 @@ class Settings(BaseSettings):
     database_uri: str = f"sqlite:///{API_ROOT / 'storage' / 'zotify.db'}"
     redis_uri: str | None = None
 
+    # JWT Settings
+    jwt_secret_key: str = "a-very-secret-key-that-should-be-changed"
+    jwt_algorithm: str = "HS256"
+    access_token_expire_minutes: int = 60
+
     # The complex __init__ method was removed.
     # Pydantic's BaseSettings now handles loading from environment variables.
     # This fixes test failures where the test-specific API key was ignored.
@@ -45,3 +50,7 @@ if is_prod and is_missing_key:
             "ADMIN_API_KEY must be set in production, "
             "and .admin_api_key file was not found."
         )
+
+# Check for default JWT secret in production
+if settings.app_env == "production" and settings.jwt_secret_key == "a-very-secret-key-that-should-be-changed":
+    raise RuntimeError("JWT_SECRET_KEY must be set in production.")

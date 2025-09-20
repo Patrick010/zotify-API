@@ -3,8 +3,33 @@ from typing import Any, Dict, List
 from sqlalchemy.orm import Session
 
 from zotify_api.schemas import download as schemas
+from zotify_api.schemas import user as user_schema
+from zotify_api.services.jwt_service import get_password_hash
 
 from . import models
+
+
+# --- User CRUD ---
+
+
+def get_user_by_username(db: Session, username: str) -> models.User | None:
+    """
+    Get a single user by their username.
+    """
+    return db.query(models.User).filter(models.User.username == username).first()
+
+
+def create_user(db: Session, user: user_schema.UserCreate) -> models.User:
+    """
+    Create a new user in the database.
+    """
+    hashed_password = get_password_hash(user.password)
+    db_user = models.User(username=user.username, hashed_password=hashed_password)
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
+
 
 # --- DownloadJob CRUD ---
 

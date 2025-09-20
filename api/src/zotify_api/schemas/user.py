@@ -32,6 +32,20 @@ class UserHistoryResponse(BaseModel):
     items: List[str]
 
 
+class UserCreate(BaseModel):
+    username: str
+    password: str
+
+
+class User(BaseModel):
+    id: str
+    username: str
+    role: str
+
+    class Config:
+        orm_mode = True
+
+
 class SyncLikedResponse(BaseModel):
     status: str
     synced: int

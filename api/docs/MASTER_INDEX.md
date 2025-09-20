@@ -36,6 +36,7 @@ This document serves as the central index for all documentation related to the Z
 *   [Provider OAuth](reference/features/PROVIDER_OAUTH.md)
 
 ## Source Code Documentation
+* [Jwt Auth Module](reference/source/JWT_AUTH.py.md)
 * [Test Auth Flow Module](reference/source/TEST_AUTH_FLOW.py.md)
 
 * [Audit Endpoints Module](reference/source/AUDIT_ENDPOINTS.py.md)
