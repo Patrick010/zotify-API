@@ -1,4 +1,28 @@
 ---
+## ACT-107: Fix ModuleNotFoundError in GonkUI and CLI
+
+**Date:** 2025-09-20
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Fix ModuleNotFoundError in GonkUI and CLI
+
+### Outcome
+Fixed a ModuleNotFoundError that occurred when running the GonkUI application. The issue was caused by an incorrect Python path. The fix involved adding the project root to sys.path in Gonk/GonkUI/app.py and correcting the import statements in app.py and Gonk/GonkUI/views/jwt_ui.py. Also fixed the same import issue in Gonk/GonkCLI/main.py and the tests for JWTClient.
+
+### Related Documents
+- `Gonk/GonkUI/app.py`
+- `Gonk/GonkUI/views/jwt_ui.py`
+- `Gonk/GonkCLI/main.py`
+- `Gonk/GonkCLI/tests/test_jwt_mock.py`
+- `Gonk/pyproject.toml`
+- `api/MIGRATIONS.md`
+- `Gonk/GonkUI/docs/USER_MANUAL.md`
+- `Gonk/GonkCLI/README.md`
+- `api/docs/reference/API_REFERENCE.md`
+
+---
 ## ACT-106: feat: Implement JWT authentication and database-backed user service
 
 **Date:** 2025-09-20

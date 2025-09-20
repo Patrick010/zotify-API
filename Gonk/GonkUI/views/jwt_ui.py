@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from Gonk.GonkCLI.modules.jwt_mock import JWTClient
+from GonkCLI.modules.jwt_mock import JWTClient
 
 jwt_ui = Blueprint("jwt_ui", __name__, url_prefix="/jwt")
 

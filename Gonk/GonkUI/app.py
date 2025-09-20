@@ -1,12 +1,18 @@
 import os
+import sys
+from pathlib import Path
 import subprocess  # nosec B404
 import argparse
 from flask import Flask, jsonify, send_from_directory, render_template
 
+# Add the project root to the python path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
+
 app = Flask(__name__, static_folder="static")
 sqlite_web_process = None
 
-from Gonk.GonkUI.views.jwt_ui import jwt_ui
+from GonkUI.views.jwt_ui import jwt_ui
 app.register_blueprint(jwt_ui)
 
 
