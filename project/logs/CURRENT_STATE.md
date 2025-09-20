@@ -3,7 +3,7 @@
 **Status:** Live Document
 
 ## 1. Session Summary & Accomplishments
-Fix JWT authentication and related documentation
+Implement Gonk JWT Mock CLI
 
 ## 2. Known Issues & Blockers
 - None

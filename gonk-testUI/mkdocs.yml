@@ -7,6 +7,7 @@ docs_dir: docs/
 
 nav:
   - 'User Manual': 'USER_MANUAL.md'
+  - 'JWT Mock CLI User Manual': 'JWT_MOCK_CLI_USER_MANUAL.md'
   - 'Architecture': 'ARCHITECTURE.md'
   - 'Changelog': 'CHANGELOG.md'
   - 'Contributing': 'CONTRIBUTING.md'

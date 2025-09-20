@@ -1,4 +1,25 @@
 ---
+## ACT-109: Implement Gonk JWT Mock CLI
+
+**Date:** 2025-09-20
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Implement Gonk JWT Mock CLI
+
+### Outcome
+Added the Gonk JWT Mock CLI tool and its user manual. Refactored the user service to support the new CLI.
+
+### Related Documents
+- `api/src/zotify_api/services/user_service.py`
+- `gonk-testUI/modules/user_service_cli.py`
+- `gonk-testUI/docs/JWT_MOCK_CLI_USER_MANUAL.md`
+- `gonk-testUI/mkdocs.yml`
+- `project/ALIGNMENT_MATRIX.md`
+- `api/docs/CODE_QUALITY_INDEX.md`
+
+---
 ## ACT-108: Fix JWT authentication and related documentation
 
 **Date:** 2025-09-20

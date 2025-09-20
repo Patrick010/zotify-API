@@ -117,3 +117,4 @@ This score assesses the implementation's clarity, efficiency, structure, and tes
 | `gonk-testUI/static/app.js` | C | B | C | Excellent inline comments, but lacks function-level docstrings for complex UI state management. |
 | `gonk-testUI/static/styles.css` | A | A | A | Excellent use of CSS variables and a clear, logical structure. |
 | `gonk-testUI/templates/index.html` | A | A | A | Clean, semantic HTML5 structure. |
+| `gonk-testUI/modules/user_service_cli.py` | B | B | B | A simple CLI tool for testing the user service. |

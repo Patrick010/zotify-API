@@ -1,6 +1,13 @@
 ---
 ## Session Report: 2025-09-20
 
+**Summary:** Implement Gonk JWT Mock CLI
+**Findings:**
+Added the Gonk JWT Mock CLI tool and its user manual. Refactored the user service to support the new CLI.
+
+---
+## Session Report: 2025-09-20
+
 **Summary:** Fix JWT authentication and related documentation
 **Findings:**
 Fixed endpoint protection, added tests, updated documentation, and refactored the user service to be user-aware.

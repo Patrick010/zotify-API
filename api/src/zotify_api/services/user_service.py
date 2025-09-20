@@ -58,3 +58,8 @@ def update_user(username: str, user_data: Dict[str, Any]) -> bool:
         _write_data(data)
         return True
     return False
+
+
+def list_users() -> list[str]:
+    data = _read_data()
+    return list(data["users"].keys())
