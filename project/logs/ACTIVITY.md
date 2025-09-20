@@ -1,94 +1,31 @@
 ---
-## ACT-109: Implement Gonk JWT Mock CLI
+## ACT-106: feat: Implement JWT authentication and database-backed user service
 
 **Date:** 2025-09-20
 **Status:** ✅ Done
 **Assignee:** Jules
 
 ### Objective
-Implement Gonk JWT Mock CLI
+To implement a full JWT-based authentication system and refactor the user service to be backed by a database, as per Phase 3a of the project roadmap.
 
 ### Outcome
-Added the Gonk JWT Mock CLI tool and its user manual. Refactored the user service to support the new CLI.
+- Refactored the `user_service` to be fully database-backed, using SQLAlchemy ORM models for `UserProfile`, `UserPreferences`, `LikedSong`, and `History`.
+- Created new JWT authentication routes (`/register`, `/login`) and a `jwt_service` for handling token creation and validation.
+- Protected all user-specific endpoints (`/user/*`, `/notifications/*`) with the new `get_current_user` dependency, requiring a valid JWT token.
+- Refactored all related tests (`test_user.py`, `test_notifications.py`) to use the new authentication and database systems.
+- Created new unit tests for the JWT authentication and database-backed user service (`test_jwt_auth_db.py`, `test_user_service_db.py`, `test_user_service.py`).
+- Restored and updated the `API_REFERENCE.md` with detailed prose descriptions for all changed endpoints.
+- Fixed a bug in the `create_notification` endpoint that incorrectly required an admin role.
+- Verified the Spotify login flow is working correctly.
 
 ### Related Documents
 - `api/src/zotify_api/services/user_service.py`
-- `gonk-testUI/modules/user_service_cli.py`
-- `gonk-testUI/docs/JWT_MOCK_CLI_USER_MANUAL.md`
-- `gonk-testUI/mkdocs.yml`
-- `project/ALIGNMENT_MATRIX.md`
-- `api/docs/CODE_QUALITY_INDEX.md`
-
----
-## ACT-108: Fix JWT authentication and related documentation
-
-**Date:** 2025-09-20
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Objective
-Fix JWT authentication and related documentation
-
-### Outcome
-Fixed endpoint protection, added tests, updated documentation, and refactored the user service to be user-aware.
-
-### Related Documents
-- `api/tests/conftest.py`
-- `api/tests/unit/test_jwt_auth.py`
-- `scripts/generate_openapi.py`
-- `project/ENDPOINTS.md`
-- `api/docs/reference/source/JWT_AUTH.py.md`
-- `mkdocs.yml`
-- `api/docs/MASTER_INDEX.md`
-- `api/src/zotify_api/database/session.py`
-- `api/src/zotify_api/services/user_service.py`
-- `api/src/zotify_api/services/deps.py`
-- `api/tests/unit/test_user_service.py`
-- `api/docs/DOCS_QUALITY_INDEX.md`
-- `project/ALIGNMENT_MATRIX.md`
-- `api/docs/CODE_QUALITY_INDEX.md`
-
----
-## ACT-107: docs: Update documentation to reflect unified linter
-
-**Date:** 2025-09-19
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Objective
-docs: Update documentation to reflect unified linter
-
-### Outcome
-Multiple documents, including feature specs, developer guides, and core project documents, contained outdated references to old, separate linter scripts (lint-docs.py, log-work.py). These have all been updated to refer to the single, unified linter.py script. The .pre-commit-config.yaml was also updated to disable the old, broken hook.
-
-### Related Documents
-- `api/docs/reference/features/AUTOMATED_DOCUMENTATION_WORKFLOW.md`
-- `.pre-commit-config.yaml`
-- `api/docs/manuals/CICD.md`
-- `api/docs/manuals/API_DEVELOPER_GUIDE.md`
-- `project/PID.md`
-- `project/PROJECT_PLAN.md`
-- `templates/AGENTS.md`
-- `templates/CICD-DEV.md`
-
----
-## ACT-106: docs: Postpone QA Gate feature and update documentation
-
-**Date:** 2025-09-19
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Objective
-docs: Postpone QA Gate feature and update documentation
-
-### Outcome
-The decision was made to postpone the implementation of the QA Gate feature. To reflect this, the task was removed from the backlog. The feature was then formally documented as a future enhancement by adding it to project/FUTURE_ENHANCEMENTS.md and the project/ALIGNMENT_MATRIX.md to ensure it is tracked.
-
-### Related Documents
-- `project/BACKLOG.md`
-- `project/FUTURE_ENHANCEMENTS.md`
-- `project/ALIGNMENT_MATRIX.md`
-
+- `api/src/zotify_api/services/jwt_service.py`
+- `api/src/zotify_api/routes/jwt_auth.py`
+- `api/src/zotify_api/routes/user.py`
+- `api/src/zotify_api/routes/notifications.py`
+- `api/tests/`
+- `api/docs/reference/API_REFERENCE.md`
 ---
 ## ACT-105: docs: Create plan and handover for QA Gate implementation
 

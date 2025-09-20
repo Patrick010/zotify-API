@@ -43,6 +43,48 @@ class User(Base):
     hashed_password: Mapped[str] = mapped_column(String, nullable=False)
     # A simple role system for future use
     role: Mapped[str] = mapped_column(String, default="user", nullable=False)
+    profile: Mapped["UserProfile"] = relationship(back_populates="user", cascade="all, delete-orphan")
+    preferences: Mapped["UserPreferences"] = relationship(back_populates="user", cascade="all, delete-orphan")
+    liked_songs: Mapped[List["LikedSong"]] = relationship(back_populates="user", cascade="all, delete-orphan")
+    history: Mapped[List["History"]] = relationship(back_populates="user", cascade="all, delete-orphan")
+    notifications: Mapped[List["Notification"]] = relationship(back_populates="user", cascade="all, delete-orphan")
+
+
+class UserProfile(Base):
+    __tablename__ = "user_profiles"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[str] = mapped_column(String, ForeignKey("users.id"), unique=True)
+    name: Mapped[str] = mapped_column(String, nullable=False)
+    email: Mapped[str | None] = mapped_column(String, nullable=True)
+    user: Mapped["User"] = relationship(back_populates="profile")
+
+
+class UserPreferences(Base):
+    __tablename__ = "user_preferences"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[str] = mapped_column(String, ForeignKey("users.id"), unique=True)
+    theme: Mapped[str] = mapped_column(String, default="dark")
+    language: Mapped[str] = mapped_column(String, default="en")
+    user: Mapped["User"] = relationship(back_populates="preferences")
+
+
+class LikedSong(Base):
+    __tablename__ = "liked_songs"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[str] = mapped_column(String, ForeignKey("users.id"))
+    track_id: Mapped[str] = mapped_column(String, nullable=False)
+    user: Mapped["User"] = relationship(back_populates="liked_songs")
+
+
+class History(Base):
+    __tablename__ = "history"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[str] = mapped_column(String, ForeignKey("users.id"))
+    track_id: Mapped[str] = mapped_column(String, nullable=False)
+    played_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
+    user: Mapped["User"] = relationship(back_populates="history")
 
 
 class SpotifyToken(Base):
@@ -111,3 +153,15 @@ class JobLog(Base):
     updated_at: Mapped[datetime.datetime | None] = mapped_column(
         DateTime(timezone=True), onupdate=func.now(), nullable=True
     )
+
+
+class Notification(Base):
+    __tablename__ = "notifications"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[str] = mapped_column(String, ForeignKey("users.id"))
+    message: Mapped[str] = mapped_column(String, nullable=False)
+    read: Mapped[bool] = mapped_column(default=False)
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
+    user: Mapped["User"] = relationship(back_populates="notifications")

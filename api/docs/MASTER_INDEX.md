@@ -1,7 +1,5 @@
 # API Documentation Master Index
 
-**Last Updated:** 2025-09-19
-
 This document serves as the central index for all documentation related to the Zotify API and its sub-modules. All new documentation files must be registered here.
 
 ## Core API
@@ -36,7 +34,6 @@ This document serves as the central index for all documentation related to the Z
 *   [Provider OAuth](reference/features/PROVIDER_OAUTH.md)
 
 ## Source Code Documentation
-* [Jwt Auth Module](reference/source/JWT_AUTH.py.md)
 * [Test Auth Flow Module](reference/source/TEST_AUTH_FLOW.py.md)
 
 * [Audit Endpoints Module](reference/source/AUDIT_ENDPOINTS.py.md)

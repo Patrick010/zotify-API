@@ -87,8 +87,8 @@ All development work must align with the project's core design documents.
 ## 5. Quality & Compliance Tasks
 
 Adherence to quality and compliance is mandatory for all tasks.
-- **Testing:** All new code requires corresponding unit and/or integration tests. The full test suite must pass before submission (run `python3 scripts/linter.py`).
-- **Documentation:** All documentation must be kept in sync with code changes. This is enforced by the `scripts/linter.py` script.
+- **Testing:** All new code requires corresponding unit and/or integration tests. The full test suite must pass before submission (`scripts/run_lint.sh`).
+- **Documentation:** All documentation must be kept in sync with code changes. This is enforced by the `scripts/lint-docs.py` linter.
 - **Code Quality:** Code must be analyzed with `ruff` and `mypy`. Scores are tracked in the `CODE_QUALITY_INDEX.md` files.
 - **Security & Privacy:** All changes must be reviewed for security implications as per `project/SECURITY.md`. Any feature handling user data must consider the requirements of `api/docs/system/PRIVACY_COMPLIANCE.md`.
 

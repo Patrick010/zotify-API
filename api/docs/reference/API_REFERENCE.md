@@ -20,6 +20,8 @@ This summary is grouped by tags and provides a quick overview of all available e
 
 ### `auth`
 
+- `POST /api/auth/register`: Register User
+- `POST /api/auth/login`: Login for Access Token
 - `GET /api/auth/spotify/login`: Spotify Login
 - `GET /api/auth/spotify/callback`: Spotify Callback
 - `GET /api/auth/status`: Get Status
@@ -103,8 +105,9 @@ This summary is grouped by tags and provides a quick overview of all available e
 - `GET /api/user/preferences`: Get User Preferences
 - `PATCH /api/user/preferences`: Update User Preferences
 - `GET /api/user/liked`: Get User Liked
-- `POST /api/user/sync_liked`: Sync User Liked
+- `POST /api/user/liked/{track_id}`: Add User Liked
 - `GET /api/user/history`: Get User History
+- `POST /api/user/history/{track_id}`: Add User History
 - `DELETE /api/user/history`: Delete User History
 
 ### `webhooks`
@@ -115,6 +118,194 @@ This summary is grouped by tags and provides a quick overview of all available e
 - `POST /api/webhooks/fire`: Fire Webhook
 
 <br>
+
+## Endpoints
+
+This section provides detailed information about each endpoint.
+
+### `auth`
+
+#### `POST /api/auth/register`
+
+Register a new user.
+
+- **Request Body:**
+    - `username` (string, required): The desired username.
+    - `password` (string, required): The desired password.
+- **Responses:**
+    - `201 Created`: User registered successfully.
+    - `400 Bad Request`: If the username is already taken.
+
+#### `POST /api/auth/login`
+
+Log in to get an access token.
+
+- **Request Body:**
+    - `username` (string, required): The username.
+    - `password` (string, required): The password.
+- **Responses:**
+    - `200 OK`: Returns a JWT access token.
+    - `401 Unauthorized`: If the credentials are a invalid.
+
+#### `GET /api/auth/spotify/login`
+
+Initiates the OAuth2 login flow for Spotify. This will return a URL that the user should be redirected to in their browser to authorize the application.
+
+- **Responses:**
+    - `200 OK`: Returns the Spotify authorization URL.
+
+#### `GET /api/auth/spotify/callback`
+
+Handles the OAuth2 callback from Spotify. This endpoint is called by Spotify after the user has authorized the application. It exchanges the authorization code for an access token and stores it.
+
+- **Query Parameters:**
+    - `code` (string): The authorization code from Spotify.
+    - `state` (string): The state parameter for CSRF protection.
+- **Responses:**
+    - `200 OK`: Returns an HTML page indicating success or failure.
+
+#### `GET /api/auth/status`
+
+Returns the current authentication status for the Spotify provider. Requires an admin API key.
+
+- **Headers:**
+    - `X-API-Key` (string): The admin API key.
+- **Responses:**
+    - `200 OK`: Returns the authentication status.
+
+#### `POST /api/auth/logout`
+
+Clears stored Spotify credentials from the database. Requires an admin API key.
+
+- **Headers:**
+    - `X-API-Key` (string): The admin API key.
+- **Responses:**
+    - `204 No Content`: Logout successful.
+
+#### `GET /api/auth/refresh`
+
+Refreshes the Spotify access token. Requires an admin API key.
+
+- **Headers:**
+    - `X-API-Key` (string): The admin API key.
+- **Responses:**
+    - `200 OK`: Returns the new expiration time for the token.
+
+### `user`
+
+#### `GET /api/user/profile`
+
+Get the profile of the currently authenticated user.
+
+- **Security:** Requires a valid JWT access token.
+- **Responses:**
+    - `200 OK`: Returns the user's profile information.
+
+#### `PATCH /api/user/profile`
+
+Update the profile of the currently authenticated user.
+
+- **Security:** Requires a valid JWT access token.
+- **Request Body:**
+    - `name` (string, optional): The new name for the user.
+    - `email` (string, optional): The new email for the user.
+- **Responses:**
+    - `200 OK`: Returns the updated user profile.
+
+#### `GET /api/user/preferences`
+
+Get the preferences of the currently authenticated user.
+
+- **Security:** Requires a valid JWT access token.
+- **Responses:**
+    - `200 OK`: Returns the user's preferences.
+
+#### `PATCH /api/user/preferences`
+
+Update the preferences of the currently authenticated user.
+
+- **Security:** Requires a valid JWT access token.
+- **Request Body:**
+    - `theme` (string, optional): The new theme for the user.
+    - `language` (string, optional): The new language for the user.
+- **Responses:**
+    - `200 OK`: Returns the updated user preferences.
+
+#### `GET /api/user/liked`
+
+Get the liked songs of the currently authenticated user.
+
+- **Security:** Requires a valid JWT access token.
+- **Responses:**
+    - `200 OK`: Returns a list of liked songs.
+
+#### `POST /api/user/liked/{track_id}`
+
+Add a song to the liked songs of the currently authenticated user.
+
+- **Security:** Requires a valid JWT access token.
+- **Path Parameters:**
+    - `track_id` (string, required): The ID of the track to like.
+- **Responses:**
+    - `200 OK`: Returns the newly liked song.
+
+#### `GET /api/user/history`
+
+Get the listening history of the currently authenticated user.
+
+- **Security:** Requires a valid JWT access token.
+- **Responses:**
+    - `200 OK`: Returns a list of recently played tracks.
+
+#### `POST /api/user/history/{track_id}`
+
+Add a track to the listening history of the currently authenticated user.
+
+- **Security:** Requires a valid JWT access token.
+- **Path Parameters:**
+    - `track_id` (string, required): The ID of the track to add to the history.
+- **Responses:**
+    - `200 OK`: Returns the newly added history item.
+
+#### `DELETE /api/user/history`
+
+Clear the listening history of the currently authenticated user.
+
+- **Security:** Requires a valid JWT access token.
+- **Responses:**
+    - `204 No Content`: History cleared successfully.
+
+### `notifications`
+
+#### `POST /api/notifications`
+
+Create a notification for the currently authenticated user.
+
+- **Security:** Requires a valid JWT access token.
+- **Request Body:**
+    - `message` (string, required): The content of the notification.
+- **Responses:**
+    - `200 OK`: Returns the newly created notification.
+
+#### `GET /api/notifications`
+
+Get all notifications for the currently authenticated user.
+
+- **Security:** Requires a valid JWT access token.
+- **Responses:**
+    - `200 OK`: Returns a list of notifications.
+
+#### `PATCH /api/notifications/{notification_id}`
+
+Mark a notification as read.
+
+- **Security:** Requires a valid JWT access token.
+- **Path Parameters:**
+    - `notification_id` (integer, required): The ID of the notification to mark as read.
+- **Request Body:**
+    - `read` (boolean, required): Whether the notification should be marked as read or unread.
+- **Responses:**
+    - `204 No Content`: Notification updated successfully.
 
 ---
 
@@ -281,6 +472,86 @@ This summary is grouped by tags and provides a quick overview of all available e
         "responses": {
           "204": {
             "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Register",
+        "operationId": "register_api_auth_register_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Login",
+        "operationId": "login_api_auth_login_post",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_login_api_auth_login_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
           },
           "422": {
             "description": "Validation Error",
@@ -951,20 +1222,46 @@ This summary is grouped by tags and provides a quick overview of all available e
         }
       }
     },
-    "/api/user/sync_liked": {
+    "/api/user/liked/{track_id}": {
       "post": {
         "tags": [
           "user"
         ],
-        "summary": "Sync User Liked",
-        "operationId": "sync_user_liked_api_user_sync_liked_post",
+        "summary": "Add User Liked",
+        "operationId": "add_user_liked_api_user_liked__track_id__post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "track_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Track Id"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StandardResponse_SyncLikedResponse_"
+                  "$ref": "#/components/schemas/LikedSong"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
@@ -1006,6 +1303,53 @@ This summary is grouped by tags and provides a quick overview of all available e
           }
         }
       }
+    },
+    "/api/user/history/{track_id}": {
+        "post": {
+            "tags": [
+                "user"
+            ],
+            "summary": "Add User History",
+            "operationId": "add_user_history_api_user_history__track_id__post",
+            "security": [
+                {
+                    "OAuth2PasswordBearer": []
+                }
+            ],
+            "parameters": [
+                {
+                    "name": "track_id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "title": "Track Id"
+                    }
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Successful Response",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/History"
+                            }
+                        }
+                    }
+                },
+                "422": {
+                    "description": "Validation Error",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/HTTPValidationError"
+                            }
+                        }
+                    }
+                }
+            }
+        }
     },
     "/api/playlists": {
       "get": {

@@ -1,3 +1,19 @@
 {
-    "users": {}
+    "profile": {
+        "name": "Test User",
+        "email": "test@example.com"
+    },
+    "liked": [
+        "track1",
+        "track2"
+    ],
+    "history": [
+        "track3",
+        "track4"
+    ],
+    "preferences": {
+        "theme": "dark",
+        "language": "en"
+    },
+    "notifications": []
 }

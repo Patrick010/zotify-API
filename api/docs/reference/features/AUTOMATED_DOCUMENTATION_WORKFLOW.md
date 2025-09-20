@@ -14,45 +14,45 @@ Developer Tooling & Project Scripts
 To enforce and streamline the project's core "living documentation" policy. This system ensures that all code changes are accompanied by corresponding documentation updates and that all work is logged in a consistent, structured manner. It reduces manual overhead for developers and guarantees that the project's documentation stays synchronized with its implementation.
 
 **4. Description of Functionality:**
-This feature consists of a single, unified script (`scripts/linter.py`) that serves as the entry point for all documentation workflow and logging tasks. It operates in two primary modes:
+This feature consists of two primary, interconnected components: a documentation linter (`lint-docs.py`) and a work-logging utility (`log-work.py`).
 
-*   **Verification Mode (The Enforcer):**
-    *   When run without arguments (`python3 scripts/linter.py`), the script acts as a powerful, intelligent linter.
-    *   It runs a suite of checks based on the rules defined in `scripts/doc-lint-rules.yml` to enforce documentation policies, such as ensuring new files are registered and that code changes are reflected in the alignment matrix.
-    *   It conditionally runs the `pytest` test suite if it detects changes to source code files.
-    *   It conditionally runs the `mkdocs build` command if it detects changes to documentation files.
-    *   This command must be run manually before submitting work for review.
+*   **`lint-docs.py` (The Enforcer):**
+    *   A script that runs as a `pre-commit` hook to enforce documentation standards. It has two main rules:
+    *   **1. Registry Completeness Check:** The script first scans the entire repository for all `.md` files and helper scripts (`scripts/*`). It compares this list against all the file paths linked in the `project/PROJECT_REGISTRY.md`. If it finds any files that are not registered, the commit will fail. This ensures the project registry remains a true single source of truth.
+    *   **2. Documentation-with-Code Check:** It inspects all files staged for a commit. If any source code or test files have been modified, it requires that at least one documentation file is also staged in the same commit. This makes the "docs-as-code" policy mandatory.
+    *   **Configuration:** The script's behavior is controlled by rules defined in `scripts/doc-lint-rules.yml`. This allows for project-specific customization, such as defining which files are considered "documentation" and which files are "forbidden" from being modified (e.g., `HANDOVER_BRIEF.md`).
 
-*   **Logging Mode (The Scribe):**
-    *   When run with the `--log` flag, the script acts as a standardized work-logging utility.
-    *   It takes structured inputs (e.g., `--summary`, `--findings`) and correctly appends them to the three "Trinity" logs: `project/logs/ACTIVITY.md`, `project/logs/SESSION_LOG.md`, and `project/logs/CURRENT_STATE.md`.
+*   **`log-work.py` (The Scribe):**
+    *   A command-line utility designed to simplify and standardize the process of logging work.
+    *   It takes structured inputs and correctly appends them to the three "Trinity" logs: `project/logs/ACTIVITY.md`, `project/logs/SESSION_LOG.md`, and `project/logs/CURRENT_STATE.md`.
     *   This removes the need for developers to manually edit these files, preventing formatting errors and ensuring each log receives the semantically correct information.
 
 **5. Technical Details:**
-*   The script's behavior is controlled by rules defined in `scripts/doc-lint-rules.yml`.
-*   Due to a global git policy, it is not possible to run this script as an automated pre-commit hook. It must be run manually.
+*   `lint-docs.py` determines file categories (source, test, docs) based on path prefixes defined within the script. It is designed to fail the commit if its rules are not met, providing clear feedback to the developer.
+*   `log-work.py` uses command-line arguments (`--activity`, `--session`, `--state`, `--files`) to accept structured input for each of the logs.
 
 **6. Associated Endpoints or Functions:**
 *   This is a developer tooling feature and has no API endpoints.
-*   Key Script: `scripts/linter.py`
-*   Configuration: `scripts/doc-lint-rules.yml`
+*   Key Scripts: `scripts/lint-docs.py`, `scripts/log-work.py`
+*   Configuration: `scripts/doc-lint-rules.yml`, `.pre-commit-config.yaml`
 
 **7. Inputs:**
-*   Verification Mode: Reads changed file paths from Git (or from a file with `--from-file`).
-*   Logging Mode: Takes string inputs from the command line (e.g., `--summary`).
+*   `lint-docs.py`: Reads staged file paths from Git.
+*   `log-work.py`: Takes string inputs from the command line.
 
 **8. Outputs:**
-*   Verification Mode: Prints success or failure messages to the console.
-*   Logging Mode: Modifies the three log files in `project/logs/`.
+*   `lint-docs.py`: Prints success or failure messages to the console and returns a corresponding exit code to the pre-commit framework.
+*   `log-work.py`: Modifies the three log files in `project/logs/`.
 
 **9. Dependencies:**
-*   External Libraries: `pyyaml`
+*   External Libraries: `pyyaml` (for `lint-docs.py`)
+*   Frameworks: `pre-commit`
 
 **10. Testing & Validation Notes:**
-*   The workflow is validated by its successful execution during the development process. The linter's failure on non-compliant changes and the successful update of logs serve as validation.
+*   The workflow is validated by its successful execution during the development process. The `pre-commit` hook's failure on non-compliant commits and the successful update of logs by `log-work.py` serve as validation.
 
 **11. Related Documentation:**
-*   `AGENTS.md` (provides instructions on using the tool)
+*   `AGENTS.md` (provides instructions on using the tools)
 *   `api/docs/manuals/API_DEVELOPER_GUIDE.md` (documents the workflow for contributors)
-*   `project/PROJECT_REGISTRY.md` (registers the script and this spec)
+*   `project/PROJECT_REGISTRY.md` (registers the scripts and this spec)
 *   `project/PID.md` (incorporates the workflow into project controls)

@@ -49,10 +49,7 @@ def test_provider_callback_route(monkeypatch: MonkeyPatch, client: TestClient) -
     mock_provider = AsyncMock(spec=BaseProvider)
     mock_provider.handle_oauth_callback.return_value = "<html>Success</html>"
 
-    def mock_get_provider_no_auth(provider_name: str) -> AsyncMock:
-        return mock_provider
-
-    app.dependency_overrides[deps.get_provider_no_auth] = mock_get_provider_no_auth
+    app.dependency_overrides[deps.get_spotify_provider_no_auth] = lambda: mock_provider
 
     response = client.get(
         "/api/auth/spotify/callback?code=test_code&state=test_state&error=test_error"
@@ -61,7 +58,7 @@ def test_provider_callback_route(monkeypatch: MonkeyPatch, client: TestClient) -
     assert response.status_code == 200
     assert response.text == "<html>Success</html>"
     mock_provider.handle_oauth_callback.assert_awaited_once_with(
-        code="test_code", state="test_state", error="test_error"
+        code="test_code", error="test_error", state="test_state"
     )
 
     # Clean up the override

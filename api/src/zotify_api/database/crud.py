@@ -3,33 +3,8 @@ from typing import Any, Dict, List
 from sqlalchemy.orm import Session
 
 from zotify_api.schemas import download as schemas
-from zotify_api.schemas import user as user_schema
-from zotify_api.services.jwt_service import get_password_hash
 
 from . import models
-
-
-# --- User CRUD ---
-
-
-def get_user_by_username(db: Session, username: str) -> models.User | None:
-    """
-    Get a single user by their username.
-    """
-    return db.query(models.User).filter(models.User.username == username).first()
-
-
-def create_user(db: Session, user: user_schema.UserCreate) -> models.User:
-    """
-    Create a new user in the database.
-    """
-    hashed_password = get_password_hash(user.password)
-    db_user = models.User(username=user.username, hashed_password=hashed_password)
-    db.add(db_user)
-    db.commit()
-    db.refresh(db_user)
-    return db_user
-
 
 # --- DownloadJob CRUD ---
 
@@ -163,6 +138,28 @@ def clear_all_playlists_and_tracks(db: Session) -> None:
     db.commit()
 
 
+from zotify_api.services import jwt_service
+from zotify_api.schemas import user as user_schemas
+
+# --- User CRUD ---
+
+def get_user_by_username(db: Session, username: str) -> models.User | None:
+    return db.query(models.User).filter(models.User.username == username).first()
+
+
+def get_user(db: Session, user_id: str) -> models.User | None:
+    return db.query(models.User).filter(models.User.id == user_id).first()
+
+
+def create_user(db: Session, user: user_schemas.UserCreate) -> models.User:
+    hashed_password = jwt_service.pwd_context.hash(user.password)
+    db_user = models.User(username=user.username, hashed_password=hashed_password)
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
+
+
 # --- SpotifyToken CRUD ---
 
 
@@ -205,3 +202,96 @@ def delete_spotify_token(db: Session) -> None:
     if token:
         db.delete(token)
         db.commit()
+
+
+# --- UserProfile CRUD ---
+
+def create_user_profile(db: Session, user: models.User, name: str, email: str | None = None) -> models.UserProfile:
+    db_profile = models.UserProfile(user_id=user.id, name=name, email=email)
+    db.add(db_profile)
+    db.commit()
+    db.refresh(db_profile)
+    return db_profile
+
+def get_user_profile(db: Session, user_id: str) -> models.UserProfile | None:
+    return db.query(models.UserProfile).filter(models.UserProfile.user_id == user_id).first()
+
+def update_user_profile(db: Session, db_profile: models.UserProfile, name: str | None = None, email: str | None = None) -> models.UserProfile:
+    if name is not None:
+        db_profile.name = name
+    if email is not None:
+        db_profile.email = email
+    db.commit()
+    db.refresh(db_profile)
+    return db_profile
+
+# --- UserPreferences CRUD ---
+
+def create_user_preferences(db: Session, user: models.User, theme: str = "dark", language: str = "en") -> models.UserPreferences:
+    db_preferences = models.UserPreferences(user_id=user.id, theme=theme, language=language)
+    db.add(db_preferences)
+    db.commit()
+    db.refresh(db_preferences)
+    return db_preferences
+
+def get_user_preferences(db: Session, user_id: str) -> models.UserPreferences | None:
+    return db.query(models.UserPreferences).filter(models.UserPreferences.user_id == user_id).first()
+
+def update_user_preferences(db: Session, db_preferences: models.UserPreferences, theme: str | None = None, language: str | None = None) -> models.UserPreferences:
+    if theme is not None:
+        db_preferences.theme = theme
+    if language is not None:
+        db_preferences.language = language
+    db.commit()
+    db.refresh(db_preferences)
+    return db_preferences
+
+# --- LikedSong CRUD ---
+
+def add_liked_song(db: Session, user: models.User, track_id: str) -> models.LikedSong:
+    db_liked_song = models.LikedSong(user_id=user.id, track_id=track_id)
+    db.add(db_liked_song)
+    db.commit()
+    db.refresh(db_liked_song)
+    return db_liked_song
+
+def get_liked_songs(db: Session, user_id: str) -> List[models.LikedSong]:
+    return db.query(models.LikedSong).filter(models.LikedSong.user_id == user_id).all()
+
+# --- History CRUD ---
+
+def add_history(db: Session, user: models.User, track_id: str) -> models.History:
+    db_history = models.History(user_id=user.id, track_id=track_id)
+    db.add(db_history)
+    db.commit()
+    db.refresh(db_history)
+    return db_history
+
+def get_history(db: Session, user_id: str) -> List[models.History]:
+    return db.query(models.History).filter(models.History.user_id == user_id).order_by(models.History.played_at.desc()).all()
+
+def delete_history(db: Session, user_id: str) -> int:
+    num_deleted = db.query(models.History).filter(models.History.user_id == user_id).delete()
+    db.commit()
+    return num_deleted
+
+
+# --- Notification CRUD ---
+
+def create_notification(db: Session, user: models.User, message: str) -> models.Notification:
+    db_notification = models.Notification(user_id=user.id, message=message)
+    db.add(db_notification)
+    db.commit()
+    db.refresh(db_notification)
+    return db_notification
+
+def get_notifications(db: Session, user_id: str) -> List[models.Notification]:
+    return db.query(models.Notification).filter(models.Notification.user_id == user_id).order_by(models.Notification.created_at.desc()).all()
+
+def mark_notification_as_read(db: Session, notification_id: int, read: bool = True) -> models.Notification | None:
+    db_notification = db.query(models.Notification).filter(models.Notification.id == notification_id).first()
+    if db_notification:
+        db_notification.read = read
+        db.commit()
+        db.refresh(db_notification)
+    return db_notification

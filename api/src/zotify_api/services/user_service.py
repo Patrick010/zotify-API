@@ -1,65 +1,86 @@
-"""
-User service module.
-
-This module contains the business logic for the user subsystem.
-The functions in this module are designed to be called from the API layer.
-"""
-
-import json
-import logging
-from pathlib import Path
-from typing import Any, Dict, Optional
-
-log = logging.getLogger(__name__)
-
-STORAGE_FILE = Path(__file__).parent.parent / "storage" / "user_data.json"
+from typing import Any, Dict, List
+from sqlalchemy.orm import Session
+from zotify_api.database import crud, models
+from zotify_api.schemas import user as user_schemas
 
 
-def _read_data() -> Dict[str, Any]:
-    if not STORAGE_FILE.exists():
-        return {"users": {}}
-    try:
-        with open(STORAGE_FILE, "r") as f:
-            data = json.load(f)
-            if "users" not in data:
-                data["users"] = {}
-            return data
-    except (json.JSONDecodeError, FileNotFoundError):
-        return {"users": {}}
+def get_user_profile(
+    db: Session, user: models.User
+) -> user_schemas.UserProfileResponse:
+    profile = crud.get_user_profile(db, user_id=user.id)
+    if not profile:
+        profile = crud.create_user_profile(db, user=user, name=user.username)
+
+    preferences = crud.get_user_preferences(db, user_id=user.id)
+    if not preferences:
+        preferences = crud.create_user_preferences(db, user=user)
+
+    return user_schemas.UserProfileResponse(
+        name=profile.name,
+        email=profile.email,
+        preferences=user_schemas.UserPreferences.model_validate(preferences),
+    )
 
 
-def _write_data(data: Dict[str, Any]) -> None:
-    if not STORAGE_FILE.parent.exists():
-        STORAGE_FILE.parent.mkdir(parents=True, exist_ok=True)
-    with open(STORAGE_FILE, "w") as f:
-        json.dump(data, f, indent=4)
+def update_user_profile(
+    db: Session, user: models.User, profile_data: user_schemas.UserProfileUpdate
+) -> user_schemas.UserProfileResponse:
+    profile = crud.get_user_profile(db, user_id=user.id)
+    if not profile:
+        profile = crud.create_user_profile(db, user=user, name=user.username)
+
+    profile = crud.update_user_profile(
+        db, db_profile=profile, name=profile_data.name, email=profile_data.email
+    )
+
+    preferences = crud.get_user_preferences(db, user_id=user.id)
+    if not preferences:
+        preferences = crud.create_user_preferences(db, user=user)
+
+    return user_schemas.UserProfileResponse(
+        name=profile.name,
+        email=profile.email,
+        preferences=user_schemas.UserPreferences.model_validate(preferences),
+    )
 
 
-def clear_all_users() -> None:
-    _write_data({"users": {}})
+def get_user_preferences(
+    db: Session, user: models.User
+) -> user_schemas.UserPreferences:
+    preferences = crud.get_user_preferences(db, user_id=user.id)
+    if not preferences:
+        preferences = crud.create_user_preferences(db, user=user)
+    return user_schemas.UserPreferences.model_validate(preferences)
 
 
-def create_user(username: str, user_data: Dict[str, Any]) -> None:
-    data = _read_data()
-    if username not in data["users"]:
-        data["users"][username] = user_data
-        _write_data(data)
+def update_user_preferences(
+    db: Session, user: models.User, preferences_data: user_schemas.UserPreferencesUpdate
+) -> user_schemas.UserPreferences:
+    preferences = crud.get_user_preferences(db, user_id=user.id)
+    if not preferences:
+        preferences = crud.create_user_preferences(db, user=user)
 
+    updated_preferences = crud.update_user_preferences(
+        db,
+        db_preferences=preferences,
+        theme=preferences_data.theme,
+        language=preferences_data.language,
+    )
+    return user_schemas.UserPreferences.model_validate(updated_preferences)
 
-def get_user(username: str) -> Optional[Dict[str, Any]]:
-    data = _read_data()
-    return data["users"].get(username)
+def get_user_liked(db: Session, user: models.User) -> List[str]:
+    liked_songs = crud.get_liked_songs(db, user_id=user.id)
+    return [song.track_id for song in liked_songs]
 
+def add_user_liked(db: Session, user: models.User, track_id: str) -> models.LikedSong:
+    return crud.add_liked_song(db, user=user, track_id=track_id)
 
-def update_user(username: str, user_data: Dict[str, Any]) -> bool:
-    data = _read_data()
-    if username in data["users"]:
-        data["users"][username].update(user_data)
-        _write_data(data)
-        return True
-    return False
+def get_user_history(db: Session, user: models.User) -> List[str]:
+    history = crud.get_history(db, user_id=user.id)
+    return [item.track_id for item in history]
 
+def add_user_history(db: Session, user: models.User, track_id: str) -> models.History:
+    return crud.add_history(db, user=user, track_id=track_id)
 
-def list_users() -> list[str]:
-    data = _read_data()
-    return list(data["users"].keys())
+def clear_user_history(db: Session, user: models.User) -> int:
+    return crud.delete_history(db, user_id=user.id)

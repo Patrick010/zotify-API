@@ -1,6 +1,7 @@
+import datetime
 from typing import List, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, field_serializer
 
 
 class UserProfileUpdate(BaseModel):
@@ -12,16 +13,25 @@ class UserPreferences(BaseModel):
     theme: str
     language: str
 
+    class Config:
+        from_attributes = True
+
 
 class UserPreferencesUpdate(BaseModel):
     theme: Optional[str] = None
     language: Optional[str] = None
 
+    class Config:
+        from_attributes = True
+
 
 class UserProfileResponse(BaseModel):
     name: str
-    email: str
+    email: Optional[str]
     preferences: UserPreferences
+
+    class Config:
+        from_attributes = True
 
 
 class UserLikedResponse(BaseModel):
@@ -43,7 +53,28 @@ class User(BaseModel):
     role: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
+
+
+class LikedSong(BaseModel):
+    id: int
+    track_id: str
+
+    class Config:
+        from_attributes = True
+
+
+class History(BaseModel):
+    id: int
+    track_id: str
+    played_at: datetime.datetime
+
+    @field_serializer("played_at")
+    def serialize_dt(self, dt: datetime.datetime, _info):
+        return dt.isoformat()
+
+    class Config:
+        from_attributes = True
 
 
 class SyncLikedResponse(BaseModel):

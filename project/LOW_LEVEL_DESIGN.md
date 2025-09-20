@@ -96,6 +96,11 @@ The FastAPI application uses several middleware to provide cross-cutting concern
 
 *   **`models.py`**:
     *   Contains all SQLAlchemy ORM model definitions.
+    *   **User-related models**:
+        *   `UserProfile`: Stores user's name and email.
+        *   `UserPreferences`: Stores user's theme and language.
+        *   `LikedSong`: Stores user's liked songs.
+        *   `History`: Stores user's listening history.
 
 *   **`crud.py`**:
     *   Provides a layer of abstraction for database operations.

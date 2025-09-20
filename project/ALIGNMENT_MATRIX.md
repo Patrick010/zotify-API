@@ -31,7 +31,6 @@ This document maintains a live mapping between strategic goals, design documents
 | AR-006 | Centralized Configuration | FE-09 | 🟡 | [Config Layer](HIGH_LEVEL_DESIGN.md#hld-config-layer) | [Configuration Management](LOW_LEVEL_DESIGN.md#lld-configuration-management) | `api/src/zotify_api/config.py`, `api/src/zotify_api/services/config_service.py` | 🔍 | `project/LOW_LEVEL_DESIGN.md#lld-configuration-management` | Dual system exists, not unified. |
 | **API Routes & Services** | | | | | | | | | |
 | AR-007 | Auth Routes & Provider-Agnostic Flow | SYS-07 | ✅ | [Auth Provider Interface](HIGH_LEVEL_DESIGN.md#hld-authentication-provider-interface) | [Spotify Integration Design](LOW_LEVEL_DESIGN.md#lld-spotify-integration-design) | `api/src/zotify_api/routes/auth.py`, `api/src/zotify_api/providers/` | ✅ | `project/api/endpoints.yaml` | Handles OAuth2 callbacks generically in the provider layer. |
-| AR-007a | JWT Authentication | | ✅ | [Security Model](HIGH_LEVEL_DESIGN.md#hld-security-model) | | `api/src/zotify_api/routes/jwt_auth.py` | ✅ | `api/docs/reference/source/JWT_AUTH.py.md` | |
 | AR-008 | Cache Routes | | ✅ | `N/A` | `N/A` | `api/src/zotify_api/routes/cache.py` | ✅ | `project/api/endpoints.yaml` | |
 | AR-009 | Config Routes | FE-09 | 🟡 | [Config Layer](HIGH_LEVEL_DESIGN.md#hld-config-layer) | [Configuration Management](LOW_LEVEL_DESIGN.md#lld-configuration-management) | `api/src/zotify_api/routes/config.py` | ✅ | `project/api/endpoints.yaml` | |
 | AR-010 | Downloads Routes & Service | UC-04 | 🟡 | `N/A` | [Downloads Subsystem Design](LOW_LEVEL_DESIGN.md#lld-downloads-subsystem-design) | `api/src/zotify_api/routes/downloads.py` | 🔍 | `project/api/endpoints.yaml` | Lacks automation and file management. |
@@ -50,12 +49,10 @@ This document maintains a live mapping between strategic goals, design documents
 | AR-023 | API Middleware | SYS-05 | ✅ | `N/A` | [API Middleware](LOW_LEVEL_DESIGN.md#lld-api-middleware) | `api/src/zotify_api/middleware/` | N/A | `project/LOW_LEVEL_DESIGN.md#lld-api-middleware` | Permissive CORS policy for Web UI. |
 | **Supporting Modules** | | | | | | | | | |
 | AR-024 | Gonk-TestUI | | ✅ | [Supporting Modules](HIGH_LEVEL_DESIGN.md#hld-supporting-modules) | [Gonk-TestUI](LOW_LEVEL_DESIGN.md#lld-gonk-testui) | `gonk-testUI/` | | `gonk-testUI/README.md` | |
-| AR-024a | Gonk JWT Mock CLI | | ✅ | | | `gonk-testUI/modules/user_service_cli.py` | | `gonk-testUI/docs/JWT_MOCK_CLI_USER_MANUAL.md` | |
 | AR-025 | Snitch | SYS-06 | 🟡 | [Supporting Modules](HIGH_LEVEL_DESIGN.md#hld-supporting-modules) | [Snitch](LOW_LEVEL_DESIGN.md#lld-snitch) | `snitch/` | ✅ | `snitch/docs/PROJECT_PLAN.md` | Zero Trust model with end-to-end payload encryption. |
 | **Infrastructure & Tooling** | | | | | | | | | |
 | AR-026 | CI/CD Pipeline | | ✅ | [Deployment Model](HIGH_LEVEL_DESIGN.md#hld-deployment-model) | `N/A` | `.github/workflows/ci.yml` | | `project/CICD.md` | |
 | AR-027 | Unified Linter & Logger | | ✅ | [Doc Governance](HIGH_LEVEL_DESIGN.md#hld-documentation-governance) | [Ongoing Maintenance](LOW_LEVEL_DESIGN.md#lld-ongoing-maintenance) | `scripts/linter.py` | N/A | `AGENTS.md` | Merged `log-work.py` into `linter.py`. |
-| AR-028 | Comprehensive QA Gate | FE-15 | ❌ | [Doc Governance](HIGH_LEVEL_DESIGN.md#hld-documentation-governance) | N/A | N/A | N/A | `project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md` | Deferred as per handover. |
 | **Privacy & Security** | | | | | | | | | |
 | AR-029 | GDPR Compliance Subsystem | FE-14 | ❌ | [Security Model](HIGH_LEVEL_DESIGN.md#hld-security-model) | [Privacy Subsystem](LOW_LEVEL_DESIGN.md#lld-privacy-subsystem) | `api/src/zotify_api/routes/privacy.py` | N/A | `api/docs/system/PRIVACY_COMPLIANCE.md` | Endpoints for data export and deletion. |
 | **Project Governance** | | | | | | | | | |

@@ -9,14 +9,14 @@ from zotify_api.database.session import get_db
 from zotify_api.providers.base import BaseProvider
 from zotify_api.schemas.auth import AuthStatus, OAuthLoginResponse
 from zotify_api.services.auth import get_auth_status, require_admin_api_key
-from zotify_api.services.deps import get_provider_no_auth
+from zotify_api.services.deps import get_spotify_provider_no_auth
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 
-@router.get("/{provider_name}/login", response_model=OAuthLoginResponse)
-async def provider_login(
-    provider: BaseProvider = Depends(get_provider_no_auth),
+@router.get("/spotify/login", response_model=OAuthLoginResponse)
+async def spotify_login(
+    provider: BaseProvider = Depends(get_spotify_provider_no_auth),
 ) -> OAuthLoginResponse:
     """
     Initiates the OAuth2 login flow for a given provider.
@@ -26,9 +26,9 @@ async def provider_login(
     return OAuthLoginResponse(auth_url=auth_url)
 
 
-@router.get("/{provider_name}/callback")
-async def provider_callback(
-    provider: BaseProvider = Depends(get_provider_no_auth),
+@router.get("/spotify/callback")
+async def spotify_callback(
+    provider: BaseProvider = Depends(get_spotify_provider_no_auth),
     code: Optional[str] = None,
     error: Optional[str] = None,
     state: Optional[str] = None,

@@ -1,88 +1,61 @@
-from pathlib import Path
-from typing import Callable
-
 import pytest
 from fastapi.testclient import TestClient
-from pytest import MonkeyPatch
+from sqlalchemy.orm import Session
 
-from zotify_api.main import app
-from zotify_api.services import user_service
-
-client = TestClient(app)
+from zotify_api.database import crud
+from zotify_api.schemas import user as user_schemas, notifications as notification_schemas
 
 
 @pytest.fixture
-def notifications_service_override(
-    tmp_path: Path, monkeypatch: MonkeyPatch
-) -> Callable[[], user_service.UserService]:
-    user_data_path = tmp_path / "user_data.json"
-    monkeypatch.setattr(user_service, "STORAGE_FILE", user_data_path)
-
-    def get_user_service_override() -> user_service.UserService:
-        return user_service.get_user_service()
-
-    return get_user_service_override
+def test_user(test_db_session: Session):
+    user_in = user_schemas.UserCreate(username="testuser", password="password123")
+    user = crud.create_user(db=test_db_session, user=user_in)
+    user.role = "admin"
+    test_db_session.commit()
+    test_db_session.refresh(user)
+    return user
 
 
-def test_create_notification(
-    notifications_service_override: Callable[[], user_service.UserService],
-    monkeypatch: MonkeyPatch,
-) -> None:
-    monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
-    app.dependency_overrides[user_service.get_user_service] = (
-        notifications_service_override
-    )
+def test_create_notification(client: TestClient, test_user, get_auth_headers):
+    headers = get_auth_headers(client, "testuser", "password123")
     response = client.post(
         "/api/notifications",
-        headers={"X-API-Key": "test_key"},
-        json={"user_id": "user1", "message": "Test message"},
+        headers=headers,
+        json={"user_id": test_user.id, "message": "Test message"},
     )
     assert response.status_code == 200
-    assert response.json()["data"]["message"] == "Test message"
-    app.dependency_overrides = {}
+    data = response.json()
+    assert data["message"] == "Test message"
 
 
-def test_get_notifications(
-    notifications_service_override: Callable[[], user_service.UserService],
-    monkeypatch: MonkeyPatch,
-) -> None:
-    monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
-    app.dependency_overrides[user_service.get_user_service] = (
-        notifications_service_override
-    )
+def test_get_notifications(client: TestClient, test_user, get_auth_headers):
+    headers = get_auth_headers(client, "testuser", "password123")
     client.post(
         "/api/notifications",
-        headers={"X-API-Key": "test_key"},
-        json={"user_id": "user1", "message": "Test message"},
+        headers=headers,
+        json={"user_id": test_user.id, "message": "Test message"},
     )
-    response = client.get("/api/notifications/user1")
+    response = client.get("/api/notifications", headers=headers)
     assert response.status_code == 200
-    assert len(response.json()["data"]) == 1
-    assert response.json()["data"][0]["message"] == "Test message"
-    app.dependency_overrides = {}
+    data = response.json()
+    assert len(data) == 1
+    assert data[0]["message"] == "Test message"
 
 
-def test_mark_notification_as_read(
-    notifications_service_override: Callable[[], user_service.UserService],
-    monkeypatch: MonkeyPatch,
-) -> None:
-    monkeypatch.setattr("zotify_api.config.settings.admin_api_key", "test_key")
-    app.dependency_overrides[user_service.get_user_service] = (
-        notifications_service_override
-    )
+def test_mark_notification_as_read(client: TestClient, test_user, get_auth_headers):
+    headers = get_auth_headers(client, "testuser", "password123")
     create_response = client.post(
         "/api/notifications",
-        headers={"X-API-Key": "test_key"},
-        json={"user_id": "user1", "message": "Test message"},
+        headers=headers,
+        json={"user_id": test_user.id, "message": "Test message"},
     )
-    notification_id = create_response.json()["data"]["id"]
+    notification_id = create_response.json()["id"]
     response = client.patch(
         f"/api/notifications/{notification_id}",
-        headers={"X-API-Key": "test_key"},
+        headers=headers,
         json={"read": True},
     )
     assert response.status_code == 204
 
-    notifications = client.get("/api/notifications/user1").json()["data"]
+    notifications = client.get("/api/notifications", headers=headers).json()
     assert notifications[0]["read"] is True
-    app.dependency_overrides = {}

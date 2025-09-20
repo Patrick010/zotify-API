@@ -6,25 +6,14 @@
     "version": "0.1.20"
   },
   "paths": {
-    "/api/auth/{provider_name}/login": {
+    "/api/auth/spotify/login": {
       "get": {
         "tags": [
           "auth"
         ],
-        "summary": "Provider Login",
+        "summary": "Spotify Login",
         "description": "Initiates the OAuth2 login flow for a given provider.",
-        "operationId": "provider_login_api_auth__provider_name__login_get",
-        "parameters": [
-          {
-            "name": "provider_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Provider Name"
-            }
-          }
-        ],
+        "operationId": "spotify_login_api_auth_spotify_login_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -35,38 +24,19 @@
                 }
               }
             }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
           }
         }
       }
     },
-    "/api/auth/{provider_name}/callback": {
+    "/api/auth/spotify/callback": {
       "get": {
         "tags": [
           "auth"
         ],
-        "summary": "Provider Callback",
+        "summary": "Spotify Callback",
         "description": "Handles the OAuth2 callback from the provider.",
-        "operationId": "provider_callback_api_auth__provider_name__callback_get",
+        "operationId": "spotify_callback_api_auth_spotify_callback_get",
         "parameters": [
-          {
-            "name": "provider_name",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Provider Name"
-            }
-          },
           {
             "name": "code",
             "in": "query",
@@ -793,7 +763,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StandardResponse_UserProfileResponse_"
+                  "$ref": "#/components/schemas/UserProfileResponse"
                 }
               }
             }
@@ -827,7 +797,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StandardResponse_UserProfileResponse_"
+                  "$ref": "#/components/schemas/UserProfileResponse"
                 }
               }
             }
@@ -863,7 +833,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StandardResponse_UserPreferences_"
+                  "$ref": "#/components/schemas/UserPreferences"
                 }
               }
             }
@@ -897,7 +867,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StandardResponse_UserPreferences_"
+                  "$ref": "#/components/schemas/UserPreferences"
                 }
               }
             }
@@ -933,7 +903,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
                   "title": "Response Get User Liked Api User Liked Get"
                 }
               }
@@ -947,30 +920,51 @@
         ]
       }
     },
-    "/api/user/sync_liked": {
+    "/api/user/liked/{track_id}": {
       "post": {
         "tags": [
           "user"
         ],
-        "summary": "Sync User Liked",
-        "operationId": "sync_user_liked_api_user_sync_liked_post",
+        "summary": "Add User Liked",
+        "operationId": "add_user_liked_api_user_liked__track_id__post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "track_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Track Id"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StandardResponse_SyncLikedResponse_"
+                  "$ref": "#/components/schemas/LikedSong"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
           }
-        },
-        "security": [
-          {
-            "OAuth2PasswordBearer": []
-          }
-        ]
+        }
       }
     },
     "/api/user/history": {
@@ -986,7 +980,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
                   "title": "Response Get User History Api User History Get"
                 }
               }
@@ -1015,6 +1012,53 @@
             "OAuth2PasswordBearer": []
           }
         ]
+      }
+    },
+    "/api/user/history/{track_id}": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Add User History",
+        "operationId": "add_user_history_api_user_history__track_id__post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "track_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Track Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/History"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/playlists": {
@@ -2353,48 +2397,49 @@
       }
     },
     "/api/notifications": {
+      "get": {
+        "tags": [
+          "notifications"
+        ],
+        "summary": "Get Notifications",
+        "operationId": "get_notifications_api_notifications_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Notification"
+                  },
+                  "type": "array",
+                  "title": "Response Get Notifications Api Notifications Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      },
       "post": {
         "tags": [
           "notifications"
         ],
         "summary": "Create Notification",
         "operationId": "create_notification_api_notifications_post",
-        "parameters": [
-          {
-            "name": "username",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Username"
-            }
-          },
-          {
-            "name": "X-API-Key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
-            }
-          }
-        ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/NotificationCreate"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -2402,7 +2447,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StandardResponse_Notification_"
+                  "$ref": "#/components/schemas/Notification"
                 }
               }
             }
@@ -2417,64 +2462,12 @@
               }
             }
           }
-        }
-      }
-    },
-    "/api/notifications/{user_id}": {
-      "get": {
-        "tags": [
-          "notifications"
-        ],
-        "summary": "Get Notifications",
-        "operationId": "get_notifications_api_notifications__user_id__get",
+        },
         "security": [
           {
             "OAuth2PasswordBearer": []
           }
-        ],
-        "parameters": [
-          {
-            "name": "user_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "User Id"
-            }
-          },
-          {
-            "name": "username",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Username"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "title": "Response Get Notifications Api Notifications  User Id  Get"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/api/notifications/{notification_id}": {
@@ -2484,39 +2477,19 @@
         ],
         "summary": "Mark Notification As Read",
         "operationId": "mark_notification_as_read_api_notifications__notification_id__patch",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "notification_id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
               "title": "Notification Id"
-            }
-          },
-          {
-            "name": "username",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Username"
-            }
-          },
-          {
-            "name": "X-API-Key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
             }
           }
         ],
@@ -3101,6 +3074,48 @@
         "type": "object",
         "title": "HTTPValidationError"
       },
+      "History": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "track_id": {
+            "type": "string",
+            "title": "Track Id"
+          },
+          "played_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Played At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "track_id",
+          "played_at"
+        ],
+        "title": "History"
+      },
+      "LikedSong": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "track_id": {
+            "type": "string",
+            "title": "Track Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "track_id"
+        ],
+        "title": "LikedSong"
+      },
       "MetadataPatchResponse": {
         "properties": {
           "status": {
@@ -3242,7 +3257,7 @@
       "Notification": {
         "properties": {
           "id": {
-            "type": "string",
+            "type": "integer",
             "title": "Id"
           },
           "user_id": {
@@ -3522,40 +3537,6 @@
         ],
         "title": "StandardResponse[NetworkConfigResponse]"
       },
-      "StandardResponse_Notification_": {
-        "properties": {
-          "status": {
-            "type": "string",
-            "title": "Status",
-            "default": "success"
-          },
-          "data": {
-            "$ref": "#/components/schemas/Notification"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "title": "StandardResponse[Notification]"
-      },
-      "StandardResponse_SyncLikedResponse_": {
-        "properties": {
-          "status": {
-            "type": "string",
-            "title": "Status",
-            "default": "success"
-          },
-          "data": {
-            "$ref": "#/components/schemas/SyncLikedResponse"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "title": "StandardResponse[SyncLikedResponse]"
-      },
       "StandardResponse_SystemEnv_": {
         "properties": {
           "status": {
@@ -3614,40 +3595,6 @@
         ],
         "title": "StandardResponse[Union[DownloadJob, NoneType]]"
       },
-      "StandardResponse_UserPreferences_": {
-        "properties": {
-          "status": {
-            "type": "string",
-            "title": "Status",
-            "default": "success"
-          },
-          "data": {
-            "$ref": "#/components/schemas/UserPreferences"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "title": "StandardResponse[UserPreferences]"
-      },
-      "StandardResponse_UserProfileResponse_": {
-        "properties": {
-          "status": {
-            "type": "string",
-            "title": "Status",
-            "default": "success"
-          },
-          "data": {
-            "$ref": "#/components/schemas/UserProfileResponse"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "title": "StandardResponse[UserProfileResponse]"
-      },
       "StandardResponse_Webhook_": {
         "properties": {
           "status": {
@@ -3664,24 +3611,6 @@
           "data"
         ],
         "title": "StandardResponse[Webhook]"
-      },
-      "SyncLikedResponse": {
-        "properties": {
-          "status": {
-            "type": "string",
-            "title": "Status"
-          },
-          "synced": {
-            "type": "integer",
-            "title": "Synced"
-          }
-        },
-        "type": "object",
-        "required": [
-          "status",
-          "synced"
-        ],
-        "title": "SyncLikedResponse"
       },
       "SystemEnv": {
         "properties": {
@@ -3985,7 +3914,14 @@
             "title": "Name"
           },
           "email": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Email"
           },
           "preferences": {

@@ -14,10 +14,10 @@ from zotify_api.database.models import Base
 from zotify_api.database.session import engine
 from zotify_api.routes import (
     auth,
+    jwt_auth,
     cache,
     config,
     downloads,
-    jwt_auth,
     network,
     notifications,
     playlists,

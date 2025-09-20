@@ -1,129 +1,92 @@
-import json
-from pathlib import Path
-from typing import Any, Callable, Dict, Generator, List
-
 import pytest
 from fastapi.testclient import TestClient
+from sqlalchemy.orm import Session
 
-from zotify_api.main import app
-from zotify_api.services import user_service
-
-client = TestClient(app)
+from zotify_api.database import crud
+from zotify_api.schemas import user as user_schemas
 
 
 @pytest.fixture
-def user_service_override(
-    tmp_path: Path,
-) -> Generator[Callable[[], user_service.UserService], None, None]:
-    user_data_path = tmp_path / "user_data.json"
-    user_profile = {"name": "Test User", "email": "test@example.com"}
-    user_liked = ["track1", "track2"]
-    user_history = ["track3", "track4"]
-    user_preferences = {"theme": "dark", "language": "en"}
-    notifications: List[Dict[str, Any]] = []
-
-    def get_user_service_override() -> user_service.UserService:
-        with open(user_data_path, "w") as f:
-            json.dump(
-                {
-                    "profile": user_profile,
-                    "liked": user_liked,
-                    "history": user_history,
-                    "preferences": user_preferences,
-                    "notifications": notifications,
-                },
-                f,
-            )
-        return user_service.UserService(
-            user_profile=user_profile,
-            user_liked=user_liked,
-            user_history=user_history,
-            user_preferences=user_preferences,
-            notifications=notifications,
-        )
-
-    original_storage_file = user_service.STORAGE_FILE
-    user_service.STORAGE_FILE = user_data_path
-    yield get_user_service_override
-    user_service.STORAGE_FILE = original_storage_file
+def test_user(test_db_session: Session):
+    user_in = user_schemas.UserCreate(username="testuser", password="password123")
+    user = crud.create_user(db=test_db_session, user=user_in)
+    return user
 
 
-def test_get_user_profile(
-    user_service_override: Callable[[], user_service.UserService],
-) -> None:
-    app.dependency_overrides[user_service.get_user_service] = user_service_override
-    response = client.get("/api/user/profile")
+def test_get_user_profile(client: TestClient, test_user, get_auth_headers):
+    headers = get_auth_headers(client, "testuser", "password123")
+    response = client.get("/api/user/profile", headers=headers)
     assert response.status_code == 200
-    assert response.json()["data"]["name"] == "Test User"
-    app.dependency_overrides = {}
+    data = response.json()
+    assert data["name"] == "testuser"
+    assert data["email"] is None
 
 
-def test_get_user_liked(
-    user_service_override: Callable[[], user_service.UserService],
-) -> None:
-    app.dependency_overrides[user_service.get_user_service] = user_service_override
-    response = client.get("/api/user/liked")
+def test_update_user_profile(client: TestClient, test_user, get_auth_headers):
+    headers = get_auth_headers(client, "testuser", "password123")
+    update_data = {"name": "New Name", "email": "new@email.com"}
+    response = client.patch("/api/user/profile", headers=headers, json=update_data)
     assert response.status_code == 200
-    assert response.json()["data"] == ["track1", "track2"]
-    app.dependency_overrides = {}
+    data = response.json()
+    assert data["name"] == "New Name"
+    assert data["email"] == "new@email.com"
 
 
-def test_sync_user_liked(
-    user_service_override: Callable[[], user_service.UserService],
-) -> None:
-    app.dependency_overrides[user_service.get_user_service] = user_service_override
-    response = client.post("/api/user/sync_liked")
+def test_get_user_preferences(client: TestClient, test_user, get_auth_headers):
+    headers = get_auth_headers(client, "testuser", "password123")
+    response = client.get("/api/user/preferences", headers=headers)
     assert response.status_code == 200
-    assert response.json()["data"]["status"] == "ok"
-    app.dependency_overrides = {}
+    data = response.json()
+    assert data["theme"] == "dark"
+    assert data["language"] == "en"
 
 
-def test_get_user_history(
-    user_service_override: Callable[[], user_service.UserService],
-) -> None:
-    app.dependency_overrides[user_service.get_user_service] = user_service_override
-    response = client.get("/api/user/history")
+def test_update_user_preferences(client: TestClient, test_user, get_auth_headers):
+    headers = get_auth_headers(client, "testuser", "password123")
+    update_data = {"theme": "light", "language": "fr"}
+    response = client.patch("/api/user/preferences", headers=headers, json=update_data)
     assert response.status_code == 200
-    assert response.json()["data"] == ["track3", "track4"]
-    app.dependency_overrides = {}
+    data = response.json()
+    assert data["theme"] == "light"
+    assert data["language"] == "fr"
 
 
-def test_delete_user_history(
-    user_service_override: Callable[[], user_service.UserService],
-) -> None:
-    app.dependency_overrides[user_service.get_user_service] = user_service_override
-    response = client.delete("/api/user/history")
+def test_get_user_liked(client: TestClient, test_user, get_auth_headers):
+    headers = get_auth_headers(client, "testuser", "password123")
+    response = client.get("/api/user/liked", headers=headers)
+    assert response.status_code == 200
+    assert response.json() == []
+
+
+def test_add_user_liked(client: TestClient, test_user, get_auth_headers):
+    headers = get_auth_headers(client, "testuser", "password123")
+    response = client.post("/api/user/liked/track1", headers=headers)
+    assert response.status_code == 200
+    response = client.get("/api/user/liked", headers=headers)
+    assert response.status_code == 200
+    assert response.json() == ["track1"]
+
+
+def test_get_user_history(client: TestClient, test_user, get_auth_headers):
+    headers = get_auth_headers(client, "testuser", "password123")
+    response = client.get("/api/user/history", headers=headers)
+    assert response.status_code == 200
+    assert response.json() == []
+
+
+def test_add_user_history(client: TestClient, test_user, get_auth_headers):
+    headers = get_auth_headers(client, "testuser", "password123")
+    response = client.post("/api/user/history/track1", headers=headers)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["track_id"] == "track1"
+
+
+def test_delete_user_history(client: TestClient, test_user, get_auth_headers):
+    headers = get_auth_headers(client, "testuser", "password123")
+    client.post("/api/user/history/track1", headers=headers)
+    response = client.delete("/api/user/history", headers=headers)
     assert response.status_code == 204
-    app.dependency_overrides = {}
-
-
-def test_update_user_profile(
-    user_service_override: Callable[[], user_service.UserService],
-) -> None:
-    app.dependency_overrides[user_service.get_user_service] = user_service_override
-    update_data = {"name": "New Name"}
-    response = client.patch("/api/user/profile", json=update_data)
+    response = client.get("/api/user/history", headers=headers)
     assert response.status_code == 200
-    assert response.json()["data"]["name"] == "New Name"
-    app.dependency_overrides = {}
-
-
-def test_get_user_preferences(
-    user_service_override: Callable[[], user_service.UserService],
-) -> None:
-    app.dependency_overrides[user_service.get_user_service] = user_service_override
-    response = client.get("/api/user/preferences")
-    assert response.status_code == 200
-    assert response.json()["data"]["theme"] == "dark"
-    app.dependency_overrides = {}
-
-
-def test_update_user_preferences(
-    user_service_override: Callable[[], user_service.UserService],
-) -> None:
-    app.dependency_overrides[user_service.get_user_service] = user_service_override
-    update_data = {"theme": "light"}
-    response = client.patch("/api/user/preferences", json=update_data)
-    assert response.status_code == 200
-    assert response.json()["data"]["theme"] == "light"
-    app.dependency_overrides = {}
+    assert response.json() == []

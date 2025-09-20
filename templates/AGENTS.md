@@ -5,14 +5,6 @@
 
 ---
 
-## 0. Fundamental Rules
-
-This is a mandatory, non-optional rule that all agents must follow at all times.
-
-    Do not approve your own tasks or plans. Do not make un-asked for changes. Do not start tasks or plans without approval.
-
----
-
 ## 1. About This System
 
 ### 1.1. Purpose
@@ -43,48 +35,37 @@ Before starting any new task, you **must** first read the following document to 
 
 This workflow is designed to be followed for every task that involves code or documentation changes.
 
-### Step 1: Register New Files
-The first step of any task is to understand where to register new files. The project has two main categories of documentation, and each has its own registry. Failing to register a new file in the correct location will cause the `scripts/linter.py` verification script to fail.
+### Step 1: Code and Document
+This is the primary development task. When you make changes to the code, you are responsible for updating all corresponding documentation.
 
-*   **Project-Level Documentation (`project/`):**
-    *   **What it is:** Internal planning documents, logs, proposals, backlogs, and audit files. Anything that lives in the `project/` directory.
-    *   **Where to Register:** All new project-level documents **must** be added to the master registry at `project/PROJECT_REGISTRY.md`.
+To identify which documents are relevant for a given change, you **must** consult the `project/project_registry.md`. This file is the single source of truth for all project documents.
 
-*   **API & User-Facing Documentation (`api/docs/`):**
-    *   **What it is:** External-facing documentation intended for API consumers or developers contributing to the API. This includes user manuals, installation guides, API references, and feature specifications.
-    *   **Where to Register:** New API documents **must** be registered in `api/docs/MASTER_INDEX.md`.
+### Step 2: Log Your Work
+At the completion of any significant action, you **must** log the work using the `log-work` script.
 
-### Step 2: Code and Document
-This is the primary development task. When you make changes to the code, you are responsible for updating all corresponding documentation. Use the registries mentioned in Step 1 to identify relevant documents.
+*   **Command:** `python scripts/log_work.py --task "A clear, concise summary of the action taken."`
+*   **Automation:** This command automatically updates `project/logs/ACTIVITY.md` and `project/logs/SESSION_LOG.md`.
 
-### Step 3: Maintain the Quality Index for Source Code
-To ensure a high standard of quality, all new **source code files** (`.py`, `.go`, `.js`) must be registered in the appropriate quality index. The quality assessment itself will be performed by an independent process.
+### Step 3: Assess Quality and Update Index
+To ensure a high standard of quality, all code and documentation changes must be assessed.
 
-1.  **Add New Files to Index:** When you create a new source file, you **must** add a corresponding entry to the consolidated `api/docs/CODE_QUALITY_INDEX.md` file.
-2.  **Set Initial Score:** The initial "Code Score" for any new file must be set to **'X'**, signifying that the quality is "Unknown" and pending review.
+1.  **Assess Your Changes:** Review your modified files against the scoring rubric defined in the `API_DEVELOPER_GUIDE.md`.
+2.  **Update the Index:** Add or update the corresponding entries in the `CODE_QUALITY_INDEX.md` file. This is a mandatory step.
 
-### Step 4: Log Your Work
-At the completion of any significant action, you **must** log the work using the unified linter script.
+### Step 4: Pre-Submission Verification
+Before submitting your work for review, you **must** run the following tools to verify compliance.
 
-*   **Command:** `python scripts/linter.py --log --summary "..." --objective "..." --outcome "..." --files ...`
-*   **Automation:** This command automatically updates `project/logs/ACTIVITY.md`, `project/logs/CURRENT_STATE.md` and `project/logs/SESSION_LOG.md`.
-*   **Enforcement:** The pre-submission linter (`python3 scripts/linter.py`) now includes an unconditional check to ensure these log files have been modified. If you do not run the `--log` command, the linter will fail.
+1.  **Run Tests:**
+    *   **Command:** `bash scripts/run_lint.sh.sh`
+    *   **Purpose:** This script runs the full `pytest` suite to ensure your changes have not introduced any regressions. You must resolve any test failures.
 
-> **Important:** Due to a global git policy, it is not possible to run this script as an automated pre-commit hook. Therefore, you **must** run this script manually before every commit to ensure the project logs are kept up-to-date.
+2.  **Run Documentation Linter:**
+    *   **Command:** `python scripts/lint-docs.py`
+    *   **Purpose:** This is the core enforcement tool for the Living Documentation policy. It uses the "documentation matrix" defined in `scripts/doc-lint-rules.yml` to check that all required documentation has been updated. You must resolve any errors it reports.
 
-### Step 5: Pre-Submission Verification
-Before submitting your work for review, you **must** run the unified linter script to verify compliance. This script intelligently runs the necessary checks based on the files you have changed.
-
-*   **Command:** `python3 scripts/linter.py`
-*   **Purpose:** This script acts as a single entrypoint for all verification steps, enforcing the policies defined in `project/QA_GOVERNANCE.md`. It will:
-    1.  **Run Documentation Linters:** It runs a suite of checks based on the rules in `doc-lint-rules.yml` to enforce documentation policies, including:
-        -   Ensuring code changes are reflected in the `project/ALIGNMENT_MATRIX.md`.
-        -   Ensuring new source files are added to the `api/docs/CODE_QUALITY_INDEX.md`.
-        -   Ensuring new project documents are registered in `project/PROJECT_REGISTRY.md`.
-        -   Ensuring new API documents are registered in `api/docs/MASTER_INDEX.md`.
-    2.  **Run Tests:** Conditionally runs the `pytest` test suite if it detects changes to source code files (`.py`, `.go`).
-    3.  **Build Docs:** Conditionally runs the `mkdocs build` command if it detects changes to the documentation files in `api/docs/`.
-*   You must resolve any errors reported by the script before submitting.
+3.  **Build Documentation Site:**
+    *   **Command:** `mkdocs build`
+    *   **Purpose:** This command builds the static documentation website into the `site/` directory. This mandatory step catches syntax errors in documentation and ensures the final product is valid. The site can be previewed locally by running `mkdocs serve`.
 
 ---
 
@@ -95,4 +76,3 @@ This automated workflow is designed to fulfill the rules defined in the followin
 *   `project/PID.md`
 *   `project/HIGH_LEVEL_DESIGN.md`
 *   `project/TASK_CHECKLIST.md`
-*   `project/QA_GOVERNANCE.md`

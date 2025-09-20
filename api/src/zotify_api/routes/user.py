@@ -1,99 +1,91 @@
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
 
-from zotify_api.database.models import User
-from zotify_api.schemas.generic import StandardResponse
-from zotify_api.schemas.user import (
-    UserPreferences,
-    UserProfileResponse,
-    UserProfileUpdate,
-)
+from zotify_api.database import models
+from zotify_api.database.session import get_db
+from zotify_api.schemas import user as user_schemas
 from zotify_api.services import user_service
 from zotify_api.services.jwt_service import get_current_user
 
 router = APIRouter(prefix="/user", tags=["user"])
 
 
-@router.get("/profile", response_model=StandardResponse[UserProfileResponse])
+@router.get("/profile", response_model=user_schemas.UserProfileResponse)
 def get_user_profile(
-    current_user: User = Depends(get_current_user),
-) -> Dict[str, Any]:
-    user_data = user_service.get_user(current_user.username)
-    if not user_data:
-        # This should not happen if the user is authenticated
-        return {"data": {}}
-    profile = UserProfileResponse(**user_data["profile"], preferences=user_data["preferences"])
-    return {"data": profile}
+    current_user: models.User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> Any:
+    return user_service.get_user_profile(db, user=current_user)
 
 
-@router.patch("/profile", response_model=StandardResponse[UserProfileResponse])
+@router.patch("/profile", response_model=user_schemas.UserProfileResponse)
 def update_user_profile(
-    profile_data: UserProfileUpdate,
-    current_user: User = Depends(get_current_user),
-) -> Dict[str, Any]:
-    user_service.update_user(
-        current_user.username, {"profile": profile_data.model_dump(exclude_unset=True)}
-    )
-    user_data = user_service.get_user(current_user.username)
-    if not user_data:
-        return {"data": {}}
-    profile = UserProfileResponse(**user_data["profile"], preferences=user_data["preferences"])
-    return {"data": profile}
+    profile_data: user_schemas.UserProfileUpdate,
+    current_user: models.User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> Any:
+    return user_service.update_user_profile(db, user=current_user, profile_data=profile_data)
 
 
-@router.get("/preferences", response_model=StandardResponse[UserPreferences])
+@router.get("/preferences", response_model=user_schemas.UserPreferences)
 def get_user_preferences(
-    current_user: User = Depends(get_current_user),
-) -> Dict[str, Any]:
-    user_data = user_service.get_user(current_user.username)
-    if not user_data:
-        return {"data": {}}
-    return {"data": user_data["preferences"]}
+    current_user: models.User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> Any:
+    return user_service.get_user_preferences(db, user=current_user)
 
 
-@router.patch("/preferences", response_model=StandardResponse[UserPreferences])
+@router.patch("/preferences", response_model=user_schemas.UserPreferences)
 def update_user_preferences(
-    preferences_data: UserPreferences,
-    current_user: User = Depends(get_current_user),
-) -> Dict[str, Any]:
-    user_service.update_user(
-        current_user.username, {"preferences": preferences_data.model_dump(exclude_unset=True)}
+    preferences_data: user_schemas.UserPreferencesUpdate,
+    current_user: models.User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> Any:
+    return user_service.update_user_preferences(
+        db, user=current_user, preferences_data=preferences_data
     )
-    user_data = user_service.get_user(current_user.username)
-    if not user_data:
-        return {"data": {}}
-    return {"data": user_data["preferences"]}
 
 
-@router.get("/liked", response_model=Dict[str, Any])
+@router.get("/liked", response_model=List[str])
 def get_user_liked(
-    current_user: User = Depends(get_current_user),
-) -> Dict[str, Any]:
-    user_data = user_service.get_user(current_user.username)
-    if not user_data:
-        return {"data": [], "meta": {"total": 0}}
-    items = user_data["liked"]
-    return {"data": items, "meta": {"total": len(items)}}
+    current_user: models.User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> Any:
+    return user_service.get_user_liked(db, user=current_user)
 
 
-@router.get("/history", response_model=Dict[str, Any])
+@router.post("/liked/{track_id}", response_model=user_schemas.LikedSong)
+def add_user_liked(
+    track_id: str,
+    current_user: models.User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> Any:
+    return user_service.add_user_liked(db, user=current_user, track_id=track_id)
+
+
+@router.get("/history", response_model=List[str])
 def get_user_history(
-    current_user: User = Depends(get_current_user),
-) -> Dict[str, Any]:
-    user_data = user_service.get_user(current_user.username)
-    if not user_data:
-        return {"data": [], "meta": {"total": 0}}
-    items = user_data["history"]
-    return {"data": items, "meta": {"total": len(items)}}
+    current_user: models.User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> Any:
+    return user_service.get_user_history(db, user=current_user)
+
+
+@router.post("/history/{track_id}", response_model=user_schemas.History)
+def add_user_history(
+    track_id: str,
+    current_user: models.User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> Any:
+    return user_service.add_user_history(db, user=current_user, track_id=track_id)
 
 
 @router.delete("/history", status_code=204)
 def delete_user_history(
-    current_user: User = Depends(get_current_user),
+    current_user: models.User = Depends(get_current_user),
+    db: Session = Depends(get_db),
 ) -> None:
-    user_data = user_service.get_user(current_user.username)
-    if user_data:
-        user_data["history"].clear()
-        user_service.update_user(current_user.username, user_data)
+    user_service.clear_user_history(db, user=current_user)
     return
