@@ -94,7 +94,7 @@ Once the codebase and documentation have been fully aligned and the design has s
 - OAuth2 for Spotify integration.
 - JWT for API authentication (future step).
 - Principle of least privilege for DB access.
-- **CORS Policy:** The API implements a permissive CORS (Cross-Origin Resource Sharing) policy to allow web-based UIs (like the `gonk-testUI`) from any origin to interact with the API. This is a requirement for browser-based tools.
+- **CORS Policy:** The API implements a permissive CORS (Cross-Origin Resource Sharing) policy to allow web-based UIs (like the `Gonk/GonkUI`) from any origin to interact with the API. This is a requirement for browser-based tools.
 
 > Note: Specific, long-term security ambitions are tracked in the [`FUTURE_ENHANCEMENTS.md`](./FUTURE_ENHANCEMENTS.md) document.
 

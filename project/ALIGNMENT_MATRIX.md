@@ -48,7 +48,7 @@ This document maintains a live mapping between strategic goals, design documents
 | AR-022 | Flexible Logging Framework | FE-07a | ✅ | [Logging Layer](HIGH_LEVEL_DESIGN.md#hld-logging-layer) | [Flexible Logging Framework](LOW_LEVEL_DESIGN.md#lld-flexible-logging-framework) | `api/src/zotify_api/core/logging_framework/` | ✅ | `api/docs/system/LOGGING_FRAMEWORK.md`, `docs/manuals/LOGGING_GUIDE.md` | Core framework is complete. |
 | AR-023 | API Middleware | SYS-05 | ✅ | `N/A` | [API Middleware](LOW_LEVEL_DESIGN.md#lld-api-middleware) | `api/src/zotify_api/middleware/` | N/A | `project/LOW_LEVEL_DESIGN.md#lld-api-middleware` | Permissive CORS policy for Web UI. |
 | **Supporting Modules** | | | | | | | | | |
-| AR-024 | Gonk-TestUI | | ✅ | [Supporting Modules](HIGH_LEVEL_DESIGN.md#hld-supporting-modules) | [Gonk-TestUI](LOW_LEVEL_DESIGN.md#lld-gonk-testui) | `gonk-testUI/` | | `gonk-testUI/README.md` | |
+| AR-024 | Gonk-TestUI | | ✅ | [Supporting Modules](HIGH_LEVEL_DESIGN.md#hld-supporting-modules) | [Gonk-TestUI](LOW_LEVEL_DESIGN.md#lld-gonk-testui) | `Gonk/GonkUI/` | | `Gonk/GonkUI/README.md` | |
 | AR-025 | Snitch | SYS-06 | 🟡 | [Supporting Modules](HIGH_LEVEL_DESIGN.md#hld-supporting-modules) | [Snitch](LOW_LEVEL_DESIGN.md#lld-snitch) | `snitch/` | ✅ | `snitch/docs/PROJECT_PLAN.md` | Zero Trust model with end-to-end payload encryption. |
 | **Infrastructure & Tooling** | | | | | | | | | |
 | AR-026 | CI/CD Pipeline | | ✅ | [Deployment Model](HIGH_LEVEL_DESIGN.md#hld-deployment-model) | `N/A` | `.github/workflows/ci.yml` | | `project/CICD.md` | |
@@ -107,4 +107,4 @@ This document maintains a live mapping between strategic goals, design documents
 ---
 
 **Maintenance Rule:**
-Whenever code under `api/src/zotify_api/`, `snitch/`, `gonk-testUI/`, or `scripts/` changes, this matrix must be updated to reflect the change. The linter enforces this.
+Whenever code under `api/src/zotify_api/`, `snitch/`, `Gonk/GonkUI/`, or `scripts/` changes, this matrix must be updated to reflect the change. The linter enforces this.

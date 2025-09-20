@@ -16,7 +16,7 @@ This document lists the system and software requirements for running the Zotify 
 
 The application is developed and tested on Linux. It should be compatible with other Unix-like systems (including macOS) and Windows, but these are not officially supported environments.
 
-## Developer Testing UI (`gonk-testUI/`)
+## Developer Testing UI (`Gonk/GonkUI/`)
 
 ### Software Requirements
 

@@ -17,7 +17,7 @@
 The Zotify API project is a strategic refactor and enhancement of the original Zotify CLI tool. Its purpose is to transform the tool into a robust, scalable, and provider-agnostic API framework. This enables advanced automation, third-party integrations, and a choice of interfaces (CLI, Web) for developers and end-users.
 
 **Scope:**
-The project encompasses the core API, a developer testing UI (`gonk-testUI`), and a secure OAuth helper application (`snitch`). The current scope is focused on completing the "Platform Extensibility" phase, which involves establishing a dynamic plugin system and creating reference integrations.
+The project encompasses the core API, a developer testing UI (`Gonk/GonkUI`), and a secure OAuth helper application (`snitch`). The current scope is focused on completing the "Platform Extensibility" phase, which involves establishing a dynamic plugin system and creating reference integrations.
 
 **Dependencies:**
 - The core API's download functionality is dependent on an underlying, fork-specific version of **Librespot**.
@@ -61,7 +61,7 @@ This phase will focus on expanding the core feature set based on the established
 - **Current Status:** Stable. Core architecture is refactored with distinct layers for services, persistence, and providers.
 - **Planned Next Steps:** Implement high-priority items from the `BACKLOG.md`, starting with the "Platform Extensibility" phase.
 
-### `gonk-testUI` Module
+### `Gonk/GonkUI` Module
 - **Purpose:** A standalone developer testing UI for the API.
 - **Dependencies:** The Core API's OpenAPI schema (`openapi.json`).
 - **Current Status:** Stable and functional.

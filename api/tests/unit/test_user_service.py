@@ -27,7 +27,7 @@ def mock_crud(monkeypatch):
 def test_get_user_profile(mock_crud, test_db_session: Session):
     user = models.User(id="user1", username="test", hashed_password="pw")
     mock_crud["get_user_profile"].return_value = models.UserProfile(user_id="user1", name="test")
-    mock_crud["get_user_preferences"].return_value = models.UserPreferences(user_id="user1", theme="dark", language="en")
+    mock_crud["get_user_preferences"].return_value = models.UserPreferences(user_id="user1", theme="dark", language="en", notifications_enabled=True)
     user_service.get_user_profile(db=test_db_session, user=user)
 
     mock_crud["get_user_profile"].assert_called_once()
@@ -43,7 +43,7 @@ def test_update_user_profile(mock_crud, test_db_session: Session):
     profile_data = user_schemas.UserProfileUpdate(name="new_name", email="new_email@test.com")
     profile = models.UserProfile(user_id="user1", name="test")
     mock_crud["get_user_profile"].return_value = profile
-    mock_crud["get_user_preferences"].return_value = models.UserPreferences(user_id="user1", theme="dark", language="en")
+    mock_crud["get_user_preferences"].return_value = models.UserPreferences(user_id="user1", theme="dark", language="en", notifications_enabled=True)
     mock_crud["update_user_profile"].return_value = models.UserProfile(user_id="user1", name="new_name", email="new_email@test.com")
     user_service.update_user_profile(db=test_db_session, user=user, profile_data=profile_data)
     mock_crud["update_user_profile"].assert_called_once()
@@ -55,7 +55,7 @@ def test_update_user_profile(mock_crud, test_db_session: Session):
 
 def test_get_user_preferences(mock_crud, test_db_session: Session):
     user = models.User(id="user1", username="test", hashed_password="pw")
-    mock_crud["get_user_preferences"].return_value = models.UserPreferences(user_id="user1", theme="dark", language="en")
+    mock_crud["get_user_preferences"].return_value = models.UserPreferences(user_id="user1", theme="dark", language="en", notifications_enabled=True)
     user_service.get_user_preferences(db=test_db_session, user=user)
     mock_crud["get_user_preferences"].assert_called_once()
     _, kwargs = mock_crud["get_user_preferences"].call_args
@@ -63,16 +63,17 @@ def test_get_user_preferences(mock_crud, test_db_session: Session):
 
 def test_update_user_preferences(mock_crud, test_db_session: Session):
     user = models.User(id="user1", username="test", hashed_password="pw")
-    preferences_data = user_schemas.UserPreferencesUpdate(theme="light", language="fr")
-    preferences = models.UserPreferences(user_id="user1", theme="dark", language="en")
+    preferences_data = user_schemas.UserPreferencesUpdate(theme="light", language="fr", notifications_enabled=False)
+    preferences = models.UserPreferences(user_id="user1", theme="dark", language="en", notifications_enabled=True)
     mock_crud["get_user_preferences"].return_value = preferences
-    mock_crud["update_user_preferences"].return_value = models.UserPreferences(user_id="user1", theme="light", language="fr")
+    mock_crud["update_user_preferences"].return_value = models.UserPreferences(user_id="user1", theme="light", language="fr", notifications_enabled=False)
     user_service.update_user_preferences(db=test_db_session, user=user, preferences_data=preferences_data)
     mock_crud["update_user_preferences"].assert_called_once()
     call_args, call_kwargs = mock_crud["update_user_preferences"].call_args
     assert call_kwargs['db_preferences'] == preferences
     assert call_kwargs['theme'] == "light"
     assert call_kwargs['language'] == "fr"
+    assert call_kwargs['notifications_enabled'] is False
 
 def test_get_user_liked(mock_crud, test_db_session: Session):
     user = models.User(id="user1", username="test", hashed_password="pw")

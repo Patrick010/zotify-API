@@ -15,7 +15,7 @@ The linter's enforcement of the documented rules is comprehensive and robust, wi
 The following checks are fully implemented and enforced by the linter's logic, primarily through the `scripts/doc-lint-rules.yml` configuration.
 
 - **`MASTER_INDEX.md` Maintenance:** Changes within `api/docs/` correctly trigger a requirement to update `api/docs/MASTER_INDEX.md`.
-- **`ALIGNMENT_MATRIX.md` Maintenance:** Changes to any code in the `api`, `snitch`, `gonk-testUI`, or `scripts` modules correctly trigger a requirement to update `project/ALIGNMENT_MATRIX.md`.
+- **`ALIGNMENT_MATRIX.md` Maintenance:** Changes to any code in the `api`, `snitch`, `Gonk/GonkUI`, or `scripts` modules correctly trigger a requirement to update `project/ALIGNMENT_MATRIX.md`.
 - **`CODE_QUALITY_INDEX.md` Maintenance:** Changes to any source file correctly trigger a requirement to update `api/docs/CODE_QUALITY_INDEX.md`.
 - **`PROJECT_REGISTRY.md` Maintenance:** Changes within `project/` correctly trigger a requirement to update `project/PROJECT_REGISTRY.md`.
 - **`QA_GOVERNANCE.md` Referencing:** Failure messages for the above rules correctly reference `QA_GOVERNANCE.md`, guiding the user to the relevant policy.

@@ -13,16 +13,16 @@ This section will guide you through the setup and launch of the Gonk Test UI app
 
 The Gonk Test UI is a standalone application with its own set of dependencies. These must be installed before running the tool.
 
-First, open your terminal or command prompt and navigate to the `gonk-testUI` directory, which is located at the root of the project.
+First, open your terminal or command prompt and navigate to the `Gonk/GonkUI` directory, which is located at the root of the project.
 ```bash
-cd path/to/project/gonk-testUI
+cd path/to/project/Gonk/GonkUI
 ```
 
 Next, install the required Python packages. The dependencies are listed in the `pyproject.toml` file. You can install them using `pip`:
 ```bash
 pip install -e .
 ```
-This command installs the necessary packages (`Flask` and `sqlite-web`) and also installs the `gonk-testUI` project in "editable" mode, which is good for development.
+This command installs the necessary packages (`Flask` and `sqlite-web`) and also installs the `Gonk/GonkUI` project in "editable" mode, which is good for development.
 
 ### 2. Configuration
 
@@ -39,13 +39,13 @@ export DATABASE_URI="sqlite:///../api/storage/zotify.db"
 ```bash
 set DATABASE_URI=sqlite:///../api/storage/zotify.db
 ```
-This path points to the default location of the database file relative to the `gonk-testUI` directory. If your database is located elsewhere, you will need to adjust the path accordingly.
+This path points to the default location of the database file relative to the `Gonk/GonkUI` directory. If your database is located elsewhere, you will need to adjust the path accordingly.
 
 ### 3. Running the Application
 
 Once the installation and configuration are complete, you can start the Gonk Test UI server.
 
-From within the `gonk-testUI` directory, run the following command:
+From within the `Gonk/GonkUI` directory, run the following command:
 ```bash
 # Run with all defaults
 # Server on 0.0.0.0:8082, connects to API at http://localhost:8000
@@ -115,3 +115,41 @@ On page load, the UI automatically checks with the Zotify API to see if you are 
 1.  If the button says **"Logout"**, clicking it will send a request to the Zotify API to clear your stored Spotify credentials from the database.
 2.  This requires a valid **Admin API Key** to be present in one of the API forms.
 3.  Upon success, the button will change back to **"Login with Spotify"**.
+
+---
+
+### GonkUI – JWT Mock Panel
+
+1. Open GonkUI in browser.
+2. Navigate to the JWT CLI Panel.
+3. Enter username/password and click "Login".
+   - Verbose mode will display JWT payload and API request details.
+4. Click "Get Profile" to fetch profile info.
+5. Update preferences using the form and click "Update Preferences".
+6. Fetch liked tracks by clicking "Fetch Liked".
+7. Fetch listening history by clicking "Fetch History".
+8. Clear history by clicking "Clear History".
+9. Verbose output panel displays request/response details for all actions.
+
+---
+
+## GonkCLI
+
+The Gonk project also includes a command-line interface (CLI) for interacting with the Zotify API.
+
+### Authentication
+
+Before using most commands, you must log in:
+```bash
+python Gonk/GonkCLI/main.py login <username> <password>
+```
+
+### Commands
+
+-   **Get User Profile:** `python Gonk/GonkCLI/main.py get-profile`
+-   **Update Preferences:** `python Gonk/GonkCLI/main.py update-prefs --theme <theme> --language <lang> --notifications <true|false>`
+-   **Get Liked Tracks:** `python Gonk/GonkCLI/main.py get-liked`
+-   **Get History:** `python Gonk/GonkCLI/main.py get-history`
+-   **Clear History:** `python Gonk/GonkCLI/main.py clear-history`
+
+For more details, see the `Gonk/GonkCLI/README.md` file.

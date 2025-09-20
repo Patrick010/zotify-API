@@ -39,16 +39,18 @@ def test_get_user_preferences(client: TestClient, test_user, get_auth_headers):
     data = response.json()
     assert data["theme"] == "dark"
     assert data["language"] == "en"
+    assert data["notifications_enabled"] is True  # Check default value
 
 
 def test_update_user_preferences(client: TestClient, test_user, get_auth_headers):
     headers = get_auth_headers(client, "testuser", "password123")
-    update_data = {"theme": "light", "language": "fr"}
+    update_data = {"theme": "light", "language": "fr", "notifications_enabled": False}
     response = client.patch("/api/user/preferences", headers=headers, json=update_data)
     assert response.status_code == 200
     data = response.json()
     assert data["theme"] == "light"
     assert data["language"] == "fr"
+    assert data["notifications_enabled"] is False
 
 
 def test_get_user_liked(client: TestClient, test_user, get_auth_headers):

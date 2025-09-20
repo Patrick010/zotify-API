@@ -33,7 +33,7 @@ The Zotify API was originally built as a lightweight wrapper for a single use ca
 - Full audit of the codebase against documentation. *(In Progress)*  
 - Refactoring to a unified, SQLAlchemy-based persistence layer.  
 - Migration of all file-based and in-memory data (playlists, tokens, download jobs) to the new database.  
-- Creation of a standalone developer testing UI (`gonk-testUI`) with `sqlite-web` integration.  
+- Creation of a standalone developer testing UI (`Gonk/GonkUI`) with `sqlite-web` integration.
 - Complete overhaul of system documentation (`INSTALLATION.md`, `USER_MANUAL.md`, etc.). *(In Progress)*  
 - Creation of formal project management documents (Project Brief, PID).  
 - Initial design and implementation of a provider-agnostic abstraction layer. *(In Progress)*  
@@ -44,7 +44,7 @@ The Zotify API was originally built as a lightweight wrapper for a single use ca
 
 ### 2.3 Main Products (Deliverables)
 1. **Refactored Zotify API (v1.0):** New database architecture with modular design.  
-2. **`gonk-testUI` Module (v0.1.0):** Developer testing tool with SQLite inspection.  
+2. **`Gonk/GonkUI` Module (v0.1.0):** Developer testing tool with SQLite inspection.
 3. **System Documentation Set:** Fully updated `docs/system/` directory.  
 4. **PRINCE2 Project Documentation:** PID, Project Brief, and supporting docs.  
 5. **`scripts/start.sh`:** Unified startup script.  
@@ -63,9 +63,12 @@ The Zotify Platform consists of the Core API and official supporting modules, cu
     - **Major Phases:** 1. Initial Implementation (Done), 2. Hardening & Integration (Planned).
     - **Delivery Checkpoints:** The module is considered complete when all tasks in the project plan are done, including full test coverage and an end-to-end integration test in the main CI pipeline.
     - **Project Plan:** `../snitch/docs/PROJECT_PLAN.md`
-- **Gonk-TestUI — Frontend testing and interaction suite for validation and QA:**
+- **Gonk/GonkUI — Frontend testing and interaction suite for validation and QA:**
     - **Objective:** To provide a standalone developer UI for easily testing all API endpoints.
-    - **Project Plan:** The `gonk-testUI` module is currently simple enough not to require a separate project plan. Its development is tracked directly in the main project backlog and roadmap.
+    - **Project Plan:** The `Gonk/GonkUI` module is currently simple enough not to require a separate project plan. Its development is tracked directly in the main project backlog and roadmap.
+- **Gonk/GonkCLI — Command-line interface for the Zotify API:**
+    - **Objective:** To provide a command-line interface for interacting with the Zotify API.
+    - **Project Plan:** The `Gonk/GonkCLI` module is currently simple enough not to require a separate project plan. Its development is tracked directly in the main project backlog and roadmap.
 
 Supporting modules are developed, tracked, and governed under the same policies, workflows, and quality standards as the Core API.
 **Note:** Retroactive work on these modules must be documented and incorporated into all relevant project files.
@@ -120,7 +123,7 @@ Supporting modules are developed, tracked, and governed under the same policies,
   - *Mitigation:* External code review, safe file operations instead of rename/move.  
 
 - **Issue Register:**  
-  - *Issue #1:* Duplicate `devtools/` directory exists alongside `gonk-testUI/`.  
+  - *Issue #1:* Duplicate `devtools/` directory exists alongside `Gonk/GonkUI/`.
   - *Status:* Open.  
   - *Impact:* Minor clutter, no functional risk.  
   - *Action:* Cleanup in future refactor.  

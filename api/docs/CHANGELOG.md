@@ -368,7 +368,7 @@ This is the initial documented release, capturing the state of the Zotify API af
     -   System endpoints for monitoring application status, configuration, and logs.
     -   Webhook system for sending outbound notifications on application events.
 -   **Developer Experience:**
-    -   `gonk-testUI`: A standalone developer UI for easily testing all API endpoints.
+    -   `GonkUI`: A standalone developer UI for easily testing all API endpoints.
     -   Comprehensive Project Documentation, including live status documents, developer guides, and a project registry.
     -   Default `DATABASE_URI` configuration to allow the application to run out-of-the-box for local development.
 

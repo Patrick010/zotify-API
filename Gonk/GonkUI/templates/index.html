@@ -54,6 +54,49 @@
                 <div id="endpoints-list"></div>
             </div>
 
+            <div id="jwt-cli-panel">
+              <section id="login-panel">
+                <h3>Login</h3>
+                <input type="text" id="username" placeholder="Username"/>
+                <input type="password" id="password" placeholder="Password"/>
+                <label><input type="checkbox" id="verbose"> Verbose</label>
+                <button onclick="login()">Login</button>
+                <p id="login-status"></p>
+              </section>
+
+              <section id="profile-panel">
+                <h3>Profile</h3>
+                <button onclick="getProfile()">Get Profile</button>
+                <pre id="profile-output"></pre>
+              </section>
+
+              <section id="preferences-panel">
+                <h3>Preferences</h3>
+                <label>Theme: <select id="theme"><option>light</option><option>dark</option></select></label>
+                <label>Notifications: <input type="checkbox" id="notifications"/></label>
+                <button onclick="updatePreferences()">Update Preferences</button>
+                <pre id="preferences-output"></pre>
+              </section>
+
+              <section id="liked-panel">
+                <h3>Liked Tracks</h3>
+                <button onclick="getLiked()">Fetch Liked</button>
+                <pre id="liked-output"></pre>
+              </section>
+
+              <section id="history-panel">
+                <h3>Listening History</h3>
+                <button onclick="getHistory()">Fetch History</button>
+                <button onclick="clearHistory()">Clear History</button>
+                <pre id="history-output"></pre>
+              </section>
+
+              <section id="verbose-panel">
+                <h3>Verbose Output</h3>
+                <pre id="verbose-output"></pre>
+              </section>
+            </div>
+
             <div class="db-section">
                 <h2>Database Browser (sqlite-web)</h2>
                 <iframe id="sqlite-iframe" src="about:blank"></iframe>

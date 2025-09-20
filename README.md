@@ -17,7 +17,7 @@ The Zotify ecosystem consists of several key components:
 
 -   **The Core API:** A robust FastAPI application that provides a RESTful interface for all platform features.
 -   **`snitch`:** A secure helper application for managing OAuth2 callback flows for CLI-based clients.
--   **`gonk-testUI`:** A standalone web UI for testing and interacting with the API during development.
+-   **`Gonk/GonkUI`:** A standalone web UI for testing and interacting with the API during development.
 
 ## 3. Getting Started
 

@@ -3,6 +3,7 @@ import uuid
 from typing import List
 
 from sqlalchemy import (
+    Boolean,
     Column,
     DateTime,
     Float,
@@ -65,6 +66,7 @@ class UserPreferences(Base):
     user_id: Mapped[str] = mapped_column(String, ForeignKey("users.id"), unique=True)
     theme: Mapped[str] = mapped_column(String, default="dark")
     language: Mapped[str] = mapped_column(String, default="en")
+    notifications_enabled: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
     user: Mapped["User"] = relationship(back_populates="preferences")
 
 

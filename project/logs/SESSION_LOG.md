@@ -115,7 +115,7 @@ A comprehensive audit of the linter.py script was performed against a detailed c
 
 **Summary:** fix(docs): Correct layout of CODE_QUALITY_INDEX.md
 **Findings:**
-The tables for the Snitch and gonk-testUI modules were missing the 'Overall Score' column. The tables were edited to add the missing column and bring them into alignment with the API module's table, ensuring a consistent layout throughout the document.
+The tables for the Snitch and Gonk/GonkUI modules were missing the 'Overall Score' column. The tables were edited to add the missing column and bring them into alignment with the API module's table, ensuring a consistent layout throughout the document.
 
 ---
 ## Session Report: 2025-09-04
@@ -244,7 +244,7 @@ This is a test of the findings section.
 
 **Findings:**
 - The task was initially confusing due to a series of conflicting user instructions regarding which documentation sets to include.
-- The final, correct requirement was established: include `api/`, `snitch/`, and `gonk-testUI/` documentation while explicitly excluding `project/`.
+- The final, correct requirement was established: include `api/`, `snitch/`, and `Gonk/GonkUI/` documentation while explicitly excluding `project/`.
 - The `mkdocs-monorepo-plugin` was successfully implemented to achieve this multi-repository documentation build.
 - A recurring `FileExistsError` during the build process was diagnosed by the user as being caused by leftover symlinks. After the user removed these, the build was successful. My own debugging attempts were incorrect and were reverted.
 - A `TypeError` regression (`object dict can't be used in 'await' expression`) in the Spotify authentication callback was identified and fixed. This was caused by previous repository resets and was resolved by removing an erroneous `await` keyword in `spotify_connector.py` and correcting the associated unit test.
@@ -262,7 +262,7 @@ This is a test of the findings section.
 
 **Findings:**
 - The task was initially confusing due to a series of conflicting user instructions regarding which documentation sets to include.
-- The final, correct requirement was to include `api/`, `snitch/`, and `gonk-testUI/` documentation while excluding `project/`.
+- The final, correct requirement was to include `api/`, `snitch/`, and `Gonk/GonkUI/` documentation while excluding `project/`.
 - The `mkdocs-monorepo-plugin` was implemented to achieve this.
 - A recurring `FileExistsError` bug was discovered during the build process. This was ultimately diagnosed by the user as being caused by leftover symlinks. After the user removed these, the build was successful. My own debugging attempts (renaming site_name, modifying nav) were incorrect and have been reverted.
 
@@ -273,7 +273,7 @@ This is a test of the findings section.
 ---
 ## Session Report: 2025-08-31
 
-**Summary:** This session focused on correctly configuring the `mkdocs` build system. After a series of confusing and contradictory instructions, the final, correct requirement was established: to build a unified documentation site from the `api`, `snitch`, and `gonk-testUI` modules, while explicitly excluding the `project` module.
+**Summary:** This session focused on correctly configuring the `mkdocs` build system. After a series of confusing and contradictory instructions, the final, correct requirement was established: to build a unified documentation site from the `api`, `snitch`, and `Gonk/GonkUI` modules, while explicitly excluding the `project` module.
 
 **Findings:**
 - The initial goal, derived from the `HANDOVER_BRIEF.md`, was to include all project documentation. This was later contradicted by user feedback, leading to several course corrections.
@@ -591,7 +591,7 @@ This session focused on resolving all remaining documentation gaps and ensuring 
 
 ### 4.3 Project Registry Audit
 - A full audit of the `project/PROJECT_REGISTRY.md` file was conducted.
-- The registry was updated to include all markdown documents for the `api`, `snitch`, and `gonk-testUI` modules, as well as all critical project-level and audit-level documents. The registry is now considered complete and accurate.
+- The registry was updated to include all markdown documents for the `api`, `snitch`, and `Gonk/GonkUI` modules, as well as all critical project-level and audit-level documents. The registry is now considered complete and accurate.
 
 ---
 

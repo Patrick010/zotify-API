@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
--   Initial version of the `gonk-testUI` developer tool.
+-   Initial version of the `Gonk/GonkUI` developer tool.
 -   Flask-based web server to host the UI.
 -   Dynamic API testing page that generates forms from the Zotify API's OpenAPI schema.
 -   Integration with `sqlite-web` for browsing the development database, embedded in an `<iframe>`.

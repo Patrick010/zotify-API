@@ -28,6 +28,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **Execution Plan** | [`EXECUTION_PLAN.md`](./EXECUTION_PLAN.md) | Provides a detailed breakdown of tasks required to fulfill the roadmap. |
 | **Project Plan** | [`PROJECT_PLAN.md`](./PROJECT_PLAN.md) | A detailed, execution-oriented plan linking roadmap goals to specific modules and tasks. |
 | **Snitch Module Project Plan** | [`../snitch/docs/PROJECT_PLAN.md`](../snitch/docs/PROJECT_PLAN.md) | The detailed, execution-oriented project plan for the Snitch module. |
+| **GonkCLI README** | [`../Gonk/GonkCLI/README.md`](../Gonk/GonkCLI/README.md) | The README file for the Gonk Command Line Interface. |
 | **Endpoints Reference** | [`ENDPOINTS.md`](./ENDPOINTS.md) | A canonical reference for all public API endpoints for both the Zotify and Snitch projects. |
 | **Future Enhancements** | [`FUTURE_ENHANCEMENTS.md`](./FUTURE_ENHANCEMENTS.md) | A "parking lot" for new ideas and long-term ambitions not on the current roadmap. |
 | **Lessons Learnt Log** | [`LESSONS-LEARNT.md`](./LESSONS-LEARNT.md) | A log of key takeaways and insights from each project phase. |

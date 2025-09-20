@@ -218,7 +218,7 @@ This score assesses the quality, completeness, and clarity of the standalone mar
 | Milestones | snitch/docs/MILESTONES.md | X |
 | Phase 2 Secure Callback | snitch/docs/PHASE_2_SECURE_CALLBACK.md | X |
 | Phase 2 Zero Trust Design | snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md | X |
-| Architecture | gonk-testUI/docs/ARCHITECTURE.md | X |
-| Contributing | gonk-testUI/docs/CONTRIBUTING.md | X |
-| User Manual | gonk-testUI/docs/USER_MANUAL.md | X |
-| Changelog | gonk-testUI/docs/CHANGELOG.md | X |
+| Architecture | Gonk/GonkUI/docs/ARCHITECTURE.md | X |
+| Contributing | Gonk/GonkUI/docs/CONTRIBUTING.md | X |
+| User Manual | Gonk/GonkUI/docs/USER_MANUAL.md | X |
+| Changelog | Gonk/GonkUI/docs/CHANGELOG.md | X |

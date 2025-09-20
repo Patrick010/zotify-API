@@ -65,6 +65,7 @@ def update_user_preferences(
         db_preferences=preferences,
         theme=preferences_data.theme,
         language=preferences_data.language,
+        notifications_enabled=preferences_data.notifications_enabled,
     )
     return user_schemas.UserPreferences.model_validate(updated_preferences)
 

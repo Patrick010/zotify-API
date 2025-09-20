@@ -286,4 +286,106 @@ document.addEventListener("DOMContentLoaded", () => {
     if (globalApiKeyInput) {
         globalApiKeyInput.addEventListener('input', updateLoginButtonState);
     }
+
+    // --- JWT CLI Panel Handlers ---
+
+    function displayOutput(panelId, data, isVerbose = false) {
+        const outputEl = document.getElementById(panelId);
+        const verboseEl = document.getElementById("verbose-output");
+        if (outputEl) {
+            outputEl.textContent = JSON.stringify(data, null, 2);
+        }
+        if (isVerbose) {
+            verboseEl.textContent += `\n\n--- ${new Date().toISOString()} ---\n${JSON.stringify(data, null, 2)}`;
+        }
+    }
+
+    window.login = async function() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const verbose = document.getElementById("verbose").checked;
+        const statusEl = document.getElementById("login-status");
+
+        try {
+            const response = await fetch("/jwt/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password }),
+            });
+            const data = await response.json();
+            if (response.ok) {
+                statusEl.textContent = "Login successful!";
+                statusEl.style.color = "green";
+            } else {
+                statusEl.textContent = `Login failed: ${data.message}`;
+                statusEl.style.color = "red";
+            }
+            displayOutput("login-status", data, verbose);
+        } catch (error) {
+            statusEl.textContent = `Error: ${error.message}`;
+            statusEl.style.color = "red";
+        }
+    }
+
+    window.getProfile = async function() {
+        const verbose = document.getElementById("verbose").checked;
+        try {
+            const response = await fetch("/jwt/profile");
+            const data = await response.json();
+            displayOutput("profile-output", data, verbose);
+        } catch (error) {
+            displayOutput("profile-output", { error: error.message }, verbose);
+        }
+    }
+
+    window.updatePreferences = async function() {
+        const theme = document.getElementById("theme").value;
+        const notifications = document.getElementById("notifications").checked;
+        const verbose = document.getElementById("verbose").checked;
+
+        try {
+            const response = await fetch("/jwt/preferences", {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ theme: theme, notifications_enabled: notifications }),
+            });
+            const data = await response.json();
+            displayOutput("preferences-output", data, verbose);
+        } catch (error) {
+            displayOutput("preferences-output", { error: error.message }, verbose);
+        }
+    }
+
+    window.getLiked = async function() {
+        const verbose = document.getElementById("verbose").checked;
+        try {
+            const response = await fetch("/jwt/liked");
+            const data = await response.json();
+            displayOutput("liked-output", data, verbose);
+        } catch (error) {
+            displayOutput("liked-output", { error: error.message }, verbose);
+        }
+    }
+
+    window.getHistory = async function() {
+        const verbose = document.getElementById("verbose").checked;
+        try {
+            const response = await fetch("/jwt/history");
+            const data = await response.json();
+            displayOutput("history-output", data, verbose);
+        } catch (error) {
+            displayOutput("history-output", { error: error.message }, verbose);
+        }
+    }
+
+    window.clearHistory = async function() {
+        const verbose = document.getElementById("verbose").checked;
+        try {
+            const response = await fetch("/jwt/history", { method: "DELETE" });
+            const data = await response.json();
+            displayOutput("history-output", data, verbose);
+        } catch (error) {
+            displayOutput("history-output", { error: error.message }, verbose);
+        }
+    }
 });

@@ -26,7 +26,7 @@ rules:
       - "project/"
       - "api/docs/"
       - "snitch/"
-      - "gonk-testUI/"
+      - "Gonk/GonkUI/"
       - "scripts/"
       - "AGENTS.md"
       - ".github/workflows/ci.yml"
@@ -94,7 +94,7 @@ rules:
     source_paths:
       - "api/src/zotify_api/"
       - "snitch/"
-      - "gonk-testUI/"
+      - "Gonk/GonkUI/"
       - "scripts/"
     required_docs:
       - "project/ALIGNMENT_MATRIX.md"
@@ -116,7 +116,7 @@ rules:
     source_paths:
       - "api/src/"
       - "snitch/"
-      - "gonk-testUI/"
+      - "Gonk/GonkUI/"
       - "scripts/"
     required_docs:
       - "api/docs/CODE_QUALITY_INDEX.md"
@@ -139,7 +139,7 @@ rules:
     source_paths:
       - "api/src/"
       - "snitch/"
-      - "gonk-testUI/"
+      - "Gonk/GonkUI/"
       - "scripts/"
       - "project/"
       - "api/docs/"

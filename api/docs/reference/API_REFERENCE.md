@@ -228,6 +228,7 @@ Update the preferences of the currently authenticated user.
 - **Request Body:**
     - `theme` (string, optional): The new theme for the user.
     - `language` (string, optional): The new language for the user.
+    - `notifications_enabled` (boolean, optional): Whether to enable notifications for the user.
 - **Responses:**
     - `200 OK`: Returns the updated user preferences.
 
@@ -329,6 +330,7 @@ Mark a notification as read.
           "auth"
         ],
         "summary": "Spotify Login",
+        "description": "Initiates the OAuth2 login flow for a given provider.",
         "operationId": "spotify_login_api_auth_spotify_login_get",
         "responses": {
           "200": {
@@ -350,23 +352,54 @@ Mark a notification as read.
           "auth"
         ],
         "summary": "Spotify Callback",
+        "description": "Handles the OAuth2 callback from the provider.",
         "operationId": "spotify_callback_api_auth_spotify_callback_get",
         "parameters": [
           {
             "name": "code",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
-              "type": "string",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
               "title": "Code"
+            }
+          },
+          {
+            "name": "error",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Error"
             }
           },
           {
             "name": "state",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
-              "type": "string",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
               "title": "State"
             }
           }
@@ -449,7 +482,7 @@ Mark a notification as read.
           "auth"
         ],
         "summary": "Logout",
-        "description": "Clears stored Spotify credentials from the database.\\n\\nThis function deletes the token from local storage, effectively logging the user out\\nfrom this application's perspective.",
+        "description": "Clears stored provider credentials from the database.\nTODO: This is currently provider-specific and should be moved to the provider layer.",
         "operationId": "logout_api_auth_logout_post",
         "parameters": [
           {
@@ -566,56 +599,6 @@ Mark a notification as read.
         }
       }
     },
-    "/api/auth/refresh": {
-      "get": {
-        "tags": [
-          "auth"
-        ],
-        "summary": "Refresh",
-        "description": "Refreshes the Spotify access token",
-        "operationId": "refresh_api_auth_refresh_get",
-        "parameters": [
-          {
-            "name": "X-API-Key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RefreshResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/cache": {
       "get": {
         "tags": [
@@ -702,7 +685,7 @@ Mark a notification as read.
           "system"
         ],
         "summary": "Reload Logging Config",
-        "description": "Reloads the logging framework's configuration from the\\n`logging_framework.yml` file at runtime.",
+        "description": "Reloads the logging framework's configuration from the\n`logging_framework.yml` file at runtime.",
         "operationId": "reload_logging_config_api_system_logging_reload_post",
         "parameters": [
           {
@@ -727,7 +710,13 @@ Mark a notification as read.
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Reload Logging Config Api System Logging Reload Post"
+                }
               }
             }
           },
@@ -1092,12 +1081,17 @@ Mark a notification as read.
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StandardResponse_UserProfileResponse_"
+                  "$ref": "#/components/schemas/UserProfileResponse"
                 }
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       },
       "patch": {
         "tags": [
@@ -1121,7 +1115,7 @@ Mark a notification as read.
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StandardResponse_UserProfileResponse_"
+                  "$ref": "#/components/schemas/UserProfileResponse"
                 }
               }
             }
@@ -1136,7 +1130,12 @@ Mark a notification as read.
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       }
     },
     "/api/user/preferences": {
@@ -1152,12 +1151,17 @@ Mark a notification as read.
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StandardResponse_UserPreferences_"
+                  "$ref": "#/components/schemas/UserPreferences"
                 }
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       },
       "patch": {
         "tags": [
@@ -1181,7 +1185,7 @@ Mark a notification as read.
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StandardResponse_UserPreferences_"
+                  "$ref": "#/components/schemas/UserPreferences"
                 }
               }
             }
@@ -1196,7 +1200,12 @@ Mark a notification as read.
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       }
     },
     "/api/user/liked": {
@@ -1212,14 +1221,21 @@ Mark a notification as read.
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "type": "object",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
                   "title": "Response Get User Liked Api User Liked Get"
                 }
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       }
     },
     "/api/user/liked/{track_id}": {
@@ -1282,14 +1298,21 @@ Mark a notification as read.
             "content": {
               "application/json": {
                 "schema": {
-                  "additionalProperties": true,
-                  "type": "object",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
                   "title": "Response Get User History Api User History Get"
                 }
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -1301,55 +1324,60 @@ Mark a notification as read.
           "204": {
             "description": "Successful Response"
           }
-        }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       }
     },
     "/api/user/history/{track_id}": {
-        "post": {
-            "tags": [
-                "user"
-            ],
-            "summary": "Add User History",
-            "operationId": "add_user_history_api_user_history__track_id__post",
-            "security": [
-                {
-                    "OAuth2PasswordBearer": []
-                }
-            ],
-            "parameters": [
-                {
-                    "name": "track_id",
-                    "in": "path",
-                    "required": true,
-                    "schema": {
-                        "type": "string",
-                        "title": "Track Id"
-                    }
-                }
-            ],
-            "responses": {
-                "200": {
-                    "description": "Successful Response",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/History"
-                            }
-                        }
-                    }
-                },
-                "422": {
-                    "description": "Validation Error",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/HTTPValidationError"
-                            }
-                        }
-                    }
-                }
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Add User History",
+        "operationId": "add_user_history_api_user_history__track_id__post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "track_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Track Id"
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/History"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
         }
+      }
     },
     "/api/playlists": {
       "get": {
@@ -1515,7 +1543,6 @@ Mark a notification as read.
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
                   "title": "Response List Tracks Api Tracks Get"
                 }
               }
@@ -1797,7 +1824,10 @@ Mark a notification as read.
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "title": "Response Upload Track Cover Api Tracks  Track Id  Cover Post"
+                }
               }
             }
           },
@@ -1880,7 +1910,7 @@ Mark a notification as read.
           "tracks"
         ],
         "summary": "Get extended metadata for a track",
-        "description": "Retrieves extended metadata for a specific track.\\n\\n- **track_id**: The ID of the track to retrieve metadata for.",
+        "description": "Retrieves extended metadata for a specific track.\n\n- **track_id**: The ID of the track to retrieve metadata for.",
         "operationId": "get_track_metadata_api_tracks__track_id__metadata_get",
         "parameters": [
           {
@@ -1921,7 +1951,7 @@ Mark a notification as read.
           "tracks"
         ],
         "summary": "Update extended metadata for a track",
-        "description": "Updates extended metadata for a specific track.\\n\\n- **track_id**: The ID of the track to update.\\n- **meta**: A `MetadataUpdate` object with the fields to update.",
+        "description": "Updates extended metadata for a specific track.\n\n- **track_id**: The ID of the track to update.\n- **meta**: A `MetadataUpdate` object with the fields to update.",
         "operationId": "patch_track_metadata_api_tracks__track_id__metadata_patch",
         "parameters": [
           {
@@ -2128,7 +2158,7 @@ Mark a notification as read.
           "sync"
         ],
         "summary": "Trigger Sync",
-        "description": "Triggers a global synchronization job.\\nIn a real app, this would be a background task.",
+        "description": "Triggers a global synchronization job.\nIn a real app, this would be a background task.",
         "operationId": "trigger_sync_api_sync_trigger_post",
         "parameters": [
           {
@@ -2153,7 +2183,13 @@ Mark a notification as read.
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Trigger Sync Api Sync Trigger Post"
+                }
               }
             }
           },
@@ -2435,7 +2471,10 @@ Mark a notification as read.
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "title": "Response Search Api Search Get"
+                }
               }
             }
           },
@@ -2543,7 +2582,6 @@ Mark a notification as read.
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "additionalProperties": true,
                   "title": "Response List Webhooks Api Webhooks Get"
                 }
               }
@@ -2653,7 +2691,13 @@ Mark a notification as read.
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Fire Webhook Api Webhooks Fire Post"
+                }
               }
             }
           },
@@ -2671,39 +2715,49 @@ Mark a notification as read.
       }
     },
     "/api/notifications": {
+      "get": {
+        "tags": [
+          "notifications"
+        ],
+        "summary": "Get Notifications",
+        "operationId": "get_notifications_api_notifications_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Notification"
+                  },
+                  "type": "array",
+                  "title": "Response Get Notifications Api Notifications Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      },
       "post": {
         "tags": [
           "notifications"
         ],
         "summary": "Create Notification",
         "operationId": "create_notification_api_notifications_post",
-        "parameters": [
-          {
-            "name": "X-API-Key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
-            }
-          }
-        ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/NotificationCreate"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -2711,7 +2765,7 @@ Mark a notification as read.
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StandardResponse_Notification_"
+                  "$ref": "#/components/schemas/Notification"
                 }
               }
             }
@@ -2726,51 +2780,12 @@ Mark a notification as read.
               }
             }
           }
-        }
-      }
-    },
-    "/api/notifications/{user_id}": {
-      "get": {
-        "tags": [
-          "notifications"
-        ],
-        "summary": "Get Notifications",
-        "operationId": "get_notifications_api_notifications__user_id__get",
-        "parameters": [
+        },
+        "security": [
           {
-            "name": "user_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "User Id"
-            }
+            "OAuth2PasswordBearer": []
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "title": "Response Get Notifications Api Notifications  User Id  Get"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/api/notifications/{notification_id}": {
@@ -2780,30 +2795,19 @@ Mark a notification as read.
         ],
         "summary": "Mark Notification As Read",
         "operationId": "mark_notification_as_read_api_notifications__notification_id__patch",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "notification_id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
               "title": "Notification Id"
-            }
-          },
-          {
-            "name": "X-API-Key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
             }
           }
         ],
@@ -2843,7 +2847,13 @@ Mark a notification as read.
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "additionalProperties": {
+                    "type": "boolean"
+                  },
+                  "type": "object",
+                  "title": "Response Ping Ping Get"
+                }
               }
             }
           }
@@ -2862,7 +2872,13 @@ Mark a notification as read.
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Health Check Health Get"
+                }
               }
             }
           }
@@ -2878,7 +2894,10 @@ Mark a notification as read.
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "title": "Response Version Version Get"
+                }
               }
             }
           }
@@ -2891,7 +2910,7 @@ Mark a notification as read.
           "system"
         ],
         "summary": "Get Schema",
-        "description": "Returns either full OpenAPI spec or schema fragment for requested object type (via query param).",
+        "description": "Returns OpenAPI spec or a specific schema fragment.",
         "operationId": "get_schema_api_schema_get",
         "parameters": [
           {
@@ -2932,7 +2951,10 @@ Mark a notification as read.
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "title": "Response Get Schema Api Schema Get"
+                }
               }
             }
           },
@@ -2985,6 +3007,65 @@ Mark a notification as read.
           "expires_in"
         ],
         "title": "AuthStatus"
+      },
+      "Body_login_api_auth_login_post": {
+        "properties": {
+          "grant_type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^password$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Grant Type"
+          },
+          "username": {
+            "type": "string",
+            "title": "Username"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "title": "Password"
+          },
+          "scope": {
+            "type": "string",
+            "title": "Scope",
+            "default": ""
+          },
+          "client_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client Id"
+          },
+          "client_secret": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "format": "password",
+            "title": "Client Secret"
+          }
+        },
+        "type": "object",
+        "required": [
+          "username",
+          "password"
+        ],
+        "title": "Body_login_api_auth_login_post"
       },
       "Body_upload_track_cover_api_tracks__track_id__cover_post": {
         "properties": {
@@ -3140,7 +3221,7 @@ Mark a notification as read.
             "anyOf": [
               {
                 "type": "integer",
-                "exclusiveMinimum": 0
+                "exclusiveMinimum": 0.0
               },
               {
                 "type": "null"
@@ -3287,7 +3368,6 @@ Mark a notification as read.
             "title": "Event"
           },
           "data": {
-            "additionalProperties": true,
             "type": "object",
             "title": "Data"
           }
@@ -3311,6 +3391,48 @@ Mark a notification as read.
         },
         "type": "object",
         "title": "HTTPValidationError"
+      },
+      "History": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "track_id": {
+            "type": "string",
+            "title": "Track Id"
+          },
+          "played_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Played At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "track_id",
+          "played_at"
+        ],
+        "title": "History"
+      },
+      "LikedSong": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "track_id": {
+            "type": "string",
+            "title": "Track Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "track_id"
+        ],
+        "title": "LikedSong"
       },
       "MetadataPatchResponse": {
         "properties": {
@@ -3453,7 +3575,7 @@ Mark a notification as read.
       "Notification": {
         "properties": {
           "id": {
-            "type": "string",
+            "type": "integer",
             "title": "Id"
           },
           "user_id": {
@@ -3480,10 +3602,6 @@ Mark a notification as read.
       },
       "NotificationCreate": {
         "properties": {
-          "user_id": {
-            "type": "string",
-            "title": "User Id"
-          },
           "message": {
             "type": "string",
             "title": "Message"
@@ -3491,7 +3609,6 @@ Mark a notification as read.
         },
         "type": "object",
         "required": [
-          "user_id",
           "message"
         ],
         "title": "NotificationCreate"
@@ -3594,7 +3711,6 @@ Mark a notification as read.
             "title": "Data"
           },
           "meta": {
-            "additionalProperties": true,
             "type": "object",
             "title": "Meta"
           }
@@ -3644,19 +3760,6 @@ Mark a notification as read.
         },
         "type": "object",
         "title": "ProxyConfig"
-      },
-      "RefreshResponse": {
-        "properties": {
-          "expires_at": {
-            "type": "integer",
-            "title": "Expires At"
-          }
-        },
-        "type": "object",
-        "required": [
-          "expires_at"
-        ],
-        "title": "RefreshResponse"
       },
       "StandardResponse_CacheStatusResponse_": {
         "properties": {
@@ -3747,40 +3850,6 @@ Mark a notification as read.
         ],
         "title": "StandardResponse[NetworkConfigResponse]"
       },
-      "StandardResponse_Notification_": {
-        "properties": {
-          "status": {
-            "type": "string",
-            "title": "Status",
-            "default": "success"
-          },
-          "data": {
-            "$ref": "#/components/schemas/Notification"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "title": "StandardResponse[Notification]"
-      },
-      "StandardResponse_SyncLikedResponse_": {
-        "properties": {
-          "status": {
-            "type": "string",
-            "title": "Status",
-            "default": "success"
-          },
-          "data": {
-            "$ref": "#/components/schemas/SyncLikedResponse"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "title": "StandardResponse[SyncLikedResponse]"
-      },
       "StandardResponse_SystemEnv_": {
         "properties": {
           "status": {
@@ -3839,40 +3908,6 @@ Mark a notification as read.
         ],
         "title": "StandardResponse[Union[DownloadJob, NoneType]]"
       },
-      "StandardResponse_UserPreferences_": {
-        "properties": {
-          "status": {
-            "type": "string",
-            "title": "Status",
-            "default": "success"
-          },
-          "data": {
-            "$ref": "#/components/schemas/UserPreferences"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "title": "StandardResponse[UserPreferences]"
-      },
-      "StandardResponse_UserProfileResponse_": {
-        "properties": {
-          "status": {
-            "type": "string",
-            "title": "Status",
-            "default": "success"
-          },
-          "data": {
-            "$ref": "#/components/schemas/UserProfileResponse"
-          }
-        },
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "title": "StandardResponse[UserProfileResponse]"
-      },
       "StandardResponse_Webhook_": {
         "properties": {
           "status": {
@@ -3889,24 +3924,6 @@ Mark a notification as read.
           "data"
         ],
         "title": "StandardResponse[Webhook]"
-      },
-      "SyncLikedResponse": {
-        "properties": {
-          "status": {
-            "type": "string",
-            "title": "Status"
-          },
-          "synced": {
-            "type": "integer",
-            "title": "Synced"
-          }
-        },
-        "type": "object",
-        "required": [
-          "status",
-          "synced"
-        ],
-        "title": "SyncLikedResponse"
       },
       "SystemEnv": {
         "properties": {
@@ -3949,6 +3966,24 @@ Mark a notification as read.
         ],
         "title": "SystemUptime"
       },
+      "Token": {
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "title": "Access Token"
+          },
+          "token_type": {
+            "type": "string",
+            "title": "Token Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "access_token",
+          "token_type"
+        ],
+        "title": "Token"
+      },
       "TrackMetadataRequest": {
         "properties": {
           "track_ids": {
@@ -3969,7 +4004,6 @@ Mark a notification as read.
         "properties": {
           "metadata": {
             "items": {
-              "additionalProperties": true,
               "type": "object"
             },
             "type": "array",
@@ -4099,7 +4133,7 @@ Mark a notification as read.
             "anyOf": [
               {
                 "type": "integer",
-                "exclusiveMinimum": 0
+                "exclusiveMinimum": 0.0
               },
               {
                 "type": "null"
@@ -4122,6 +4156,24 @@ Mark a notification as read.
         "type": "object",
         "title": "UpdateTrackModel"
       },
+      "UserCreate": {
+        "properties": {
+          "username": {
+            "type": "string",
+            "title": "Username"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password"
+          }
+        },
+        "type": "object",
+        "required": [
+          "username",
+          "password"
+        ],
+        "title": "UserCreate"
+      },
       "UserPreferences": {
         "properties": {
           "theme": {
@@ -4131,12 +4183,17 @@ Mark a notification as read.
           "language": {
             "type": "string",
             "title": "Language"
+          },
+          "notifications_enabled": {
+            "type": "boolean",
+            "title": "Notifications Enabled"
           }
         },
         "type": "object",
         "required": [
           "theme",
-          "language"
+          "language",
+          "notifications_enabled"
         ],
         "title": "UserPreferences"
       },
@@ -4163,6 +4220,17 @@ Mark a notification as read.
               }
             ],
             "title": "Language"
+          },
+          "notifications_enabled": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notifications Enabled"
           }
         },
         "type": "object",
@@ -4175,7 +4243,14 @@ Mark a notification as read.
             "title": "Name"
           },
           "email": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Email"
           },
           "preferences": {
@@ -4297,6 +4372,17 @@ Mark a notification as read.
           "events"
         ],
         "title": "WebhookPayload"
+      }
+    },
+    "securitySchemes": {
+      "OAuth2PasswordBearer": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "scopes": {},
+            "tokenUrl": "/auth/login"
+          }
+        }
       }
     }
   }

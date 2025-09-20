@@ -31,7 +31,7 @@ The linter's core logic for processing rules is functional. It correctly runs as
 
 *   **`ALIGNMENT_MATRIX.md` must be updated when code changes.**
     *   **Status:** Fully Enforced
-    *   **Analysis:** The `doc-lint-rules.yml` file contains a broad rule named "Alignment Matrix Maintenance" that requires `project/ALIGNMENT_MATRIX.md` to be modified whenever a file under `api/src/zotify_api/`, `snitch/`, `gonk-testUI/`, or `scripts/` is changed. The logic in `check_doc_matrix_rules` in `linter.py` correctly processes this rule. This was confirmed during validation testing.
+    *   **Analysis:** The `doc-lint-rules.yml` file contains a broad rule named "Alignment Matrix Maintenance" that requires `project/ALIGNMENT_MATRIX.md` to be modified whenever a file under `api/src/zotify_api/`, `snitch/`, `Gonk/GonkUI/`, or `scripts/` is changed. The logic in `check_doc_matrix_rules` in `linter.py` correctly processes this rule. This was confirmed during validation testing.
 
 *   **`CODE_QUALITY_INDEX.md` must be updated when any source file changes.**
     *   **Status:** Missing

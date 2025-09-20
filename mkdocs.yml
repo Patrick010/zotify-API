@@ -65,7 +65,7 @@ nav:
       - 'Privacy Compliance': 'system/PRIVACY_COMPLIANCE.md'
       - 'Requirements': 'system/REQUIREMENTS.md'
   - 'Snitch Module': '!include ./snitch/mkdocs.yml'
-  - 'Gonk TestUI Module': '!include ./gonk-testUI/mkdocs.yml'
+  - 'Gonk TestUI Module': '!include ./Gonk/GonkUI/mkdocs.yml'
 
 
 # Extensions

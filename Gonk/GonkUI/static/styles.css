@@ -78,6 +78,24 @@ main {
     border-radius: 5px;
 }
 
+#jwt-cli-panel section {
+  border: 1px solid #aaa;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  background: #f8f8f8;
+}
+#jwt-cli-panel button {
+  margin-top: 6px;
+}
+pre {
+  background: #222;
+  color: #0f0;
+  padding: 8px;
+  overflow-x: auto;
+  max-height: 200px;
+}
+
 h2 {
     color: var(--text-color);
 }

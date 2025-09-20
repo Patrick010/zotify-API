@@ -5,7 +5,7 @@ from pathlib import Path
 
 # --- Configuration ---
 PROJECT_ROOT = Path(__file__).parent.parent
-DOC_DIRS_TO_INDEX = ["api/docs", "snitch/docs", "gonk-testUI/docs"]
+DOC_DIRS_TO_INDEX = ["api/docs", "snitch/docs", "Gonk/GonkUI/docs"]
 DOCS_QUALITY_INDEX = PROJECT_ROOT / "api/docs/DOCS_QUALITY_INDEX.md"
 
 # --- Main Functions ---

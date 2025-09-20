@@ -86,7 +86,7 @@ This document provides a detailed breakdown of the tasks required to fulfill the
 **Goal:** Provide tools to improve the developer experience and testing workflow.
 **Status:** ✅ Done
 **Steps:**
-- ✅ Implement `gonk-testUI`: A standalone web-based UI for API testing and database browsing with `sqlite-web`.
+- ✅ Implement `Gonk/GonkUI`: A standalone web-based UI for API testing and database browsing with `sqlite-web`.
 - ✅ Code QA
 
 ---

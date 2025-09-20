@@ -6,6 +6,9 @@ from flask import Flask, jsonify, send_from_directory, render_template
 app = Flask(__name__, static_folder="static")
 sqlite_web_process = None
 
+from Gonk.GonkUI.views.jwt_ui import jwt_ui
+app.register_blueprint(jwt_ui)
+
 
 @app.route("/")
 def index():

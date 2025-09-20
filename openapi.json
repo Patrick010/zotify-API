@@ -3284,10 +3284,6 @@
       },
       "NotificationCreate": {
         "properties": {
-          "user_id": {
-            "type": "string",
-            "title": "User Id"
-          },
           "message": {
             "type": "string",
             "title": "Message"
@@ -3295,7 +3291,6 @@
         },
         "type": "object",
         "required": [
-          "user_id",
           "message"
         ],
         "title": "NotificationCreate"
@@ -3870,12 +3865,17 @@
           "language": {
             "type": "string",
             "title": "Language"
+          },
+          "notifications_enabled": {
+            "type": "boolean",
+            "title": "Notifications Enabled"
           }
         },
         "type": "object",
         "required": [
           "theme",
-          "language"
+          "language",
+          "notifications_enabled"
         ],
         "title": "UserPreferences"
       },
@@ -3902,6 +3902,17 @@
               }
             ],
             "title": "Language"
+          },
+          "notifications_enabled": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notifications Enabled"
           }
         },
         "type": "object",

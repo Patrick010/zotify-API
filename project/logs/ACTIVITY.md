@@ -298,7 +298,7 @@ A comprehensive audit of the linter.py script was performed against a detailed c
 fix(docs): Correct layout of CODE_QUALITY_INDEX.md
 
 ### Outcome
-The tables for the Snitch and gonk-testUI modules were missing the 'Overall Score' column. The tables were edited to add the missing column and bring them into alignment with the API module's table, ensuring a consistent layout throughout the document.
+The tables for the Snitch and Gonk/GonkUI modules were missing the 'Overall Score' column. The tables were edited to add the missing column and bring them into alignment with the API module's table, ensuring a consistent layout throughout the document.
 
 ### Related Documents
 - `api/docs/CODE_QUALITY_INDEX.md`
@@ -747,8 +747,8 @@ To correctly configure the `mkdocs` build system to generate a unified documenta
 
 ### Outcome
 - Implemented and configured the `mkdocs-monorepo-plugin`.
-- Created subordinate `mkdocs.yml` files for the `snitch` and `gonk-testUI` modules to define their navigation structures.
-- Updated the root `mkdocs.yml` to use the `monorepo` plugin and include the documentation from the `api`, `snitch`, and `gonk-testUI` modules.
+- Created subordinate `mkdocs.yml` files for the `snitch` and `Gonk/GonkUI` modules to define their navigation structures.
+- Updated the root `mkdocs.yml` to use the `monorepo` plugin and include the documentation from the `api`, `snitch`, and `Gonk/GonkUI` modules.
 - The `project` module is now correctly excluded from the documentation build.
 - A recurring `FileExistsError` during the build process was ultimately diagnosed by the user as being caused by leftover symlinks. The user removed these symlinks to fix the build.
 - Agent's incorrect debugging attempts (renaming `site_name` and modifying `nav`) were reverted.
@@ -756,7 +756,7 @@ To correctly configure the `mkdocs` build system to generate a unified documenta
 ### Related Documents
 - `mkdocs.yml`
 - `snitch/mkdocs.yml`
-- `gonk-testUI/mkdocs.yml`
+- `Gonk/GonkUI/mkdocs.yml`
 - `api/pyproject.toml`
 
 ---
@@ -837,7 +837,7 @@ To address repository clutter, improve quality assurance processes, and establis
 - `project/DEPENDENCIES.md`
 - `api/docs/reference/CODE_QUALITY_INDEX.md`
 - `snitch/docs/reference/CODE_QUALITY_INDEX.md`
-- `gonk-testUI/docs/reference/CODE_QUALITY_INDEX.md`
+- `Gonk/GonkUI/docs/reference/CODE_QUALITY_INDEX.md`
 - `api/docs/reference/source/tracks_service.py.md`
 - `project/EXECUTION_PLAN.md`
 - `project/PROJECT_REGISTRY.md`
@@ -1381,7 +1381,7 @@ To fix the `project/TASK_CHECKLIST.md` file, which contained outdated paths and 
 **Assignee:** Jules
 
 ### Objective
-To audit the `project/PROJECT_REGISTRY.md` file for completeness and accuracy, ensuring all markdown documents in the `project/`, `api/docs/`, `snitch/`, and `gonk-testUI/` directories are correctly registered.
+To audit the `project/PROJECT_REGISTRY.md` file for completeness and accuracy, ensuring all markdown documents in the `project/`, `api/docs/`, `snitch/`, and `Gonk/GonkUI/` directories are correctly registered.
 
 ### Outcome
 - **Audit Complete:** The registry was compared against the filesystem.
@@ -1401,14 +1401,14 @@ To audit the `project/PROJECT_REGISTRY.md` file for completeness and accuracy, e
 **Assignee:** Jules
 
 ### Objective
-To perform a fresh, independent verification of the project's state, as documented in the "Trinity" of `CURRENT_STATE.md`, `ACTIVITY.md`, and `SESSION_LOG.md`. This audit covers the entire platform, including the API, `snitch`, and `gonk-testUI`, to ensure the "living documentation" accurately reflects the codebase reality.
+To perform a fresh, independent verification of the project's state, as documented in the "Trinity" of `CURRENT_STATE.md`, `ACTIVITY.md`, and `SESSION_LOG.md`. This audit covers the entire platform, including the API, `snitch`, and `Gonk/GonkUI`, to ensure the "living documentation" accurately reflects the codebase reality.
 
 ### Outcome
 - **Verification Complete:** The independent verification of the project state is complete. While the core application logic was found to be stable and aligned with the documentation, several issues were discovered and remediated in the project's documentation and setup procedures.
 - **Discrepancy Fixed: API Test Suite:** The documented test count was outdated (137). The test suite was run, and 139 tests passed. `ACTIVITY.md` and `SESSION_LOG.md` were updated to reflect the correct count.
 - **Discrepancy Fixed: Installation Guide:** The API server failed to start using the existing `INSTALLATION.md` guide. The guide was missing two critical setup steps: creating the `api/logs` directory for the logging framework and setting `APP_ENV=development` to avoid a crash in production mode. The `INSTALLATION.md` file has been updated with these instructions.
 - **`snitch` Verification:** The helper application was successfully built and tested. It functions as documented.
-- **`gonk-testUI` Verification:** A source code review of the UI's JavaScript confirmed that all recently documented features are implemented correctly.
+- **`Gonk/GonkUI` Verification:** A source code review of the UI's JavaScript confirmed that all recently documented features are implemented correctly.
 - **Logging Framework Verification:** The security hardening features (sensitive data redaction, tag-based routing, and security tagging of auth events) were all verified to be implemented as documented.
 - **Architectural Proposals:** Verified that all claimed proposal documents exist in the `project/proposals` directory.
 - **Conclusion:** The audit is complete. The project's documentation and setup procedures have been improved, and the "Trinity" of documents is now a more accurate reflection of the codebase reality.
@@ -1578,7 +1578,7 @@ To refactor the authentication system to be fully provider-agnostic, adhering to
     -   A new `get_provider_no_auth` dependency was created in `deps.py` to inject the correct provider into the routes without requiring prior authentication.
 
 4.  **Frontend UI Polished:**
-    -   The `gonk-testUI` was updated to use the new generic API routes and to correctly check the authentication status.
+    -   The `Gonk/GonkUI` was updated to use the new generic API routes and to correctly check the authentication status.
 
 ### Related Documents
 - `project/HIGH_LEVEL_DESIGN.md`
@@ -1587,7 +1587,7 @@ To refactor the authentication system to be fully provider-agnostic, adhering to
 - `api/docs/reference/features/provider_oauth.md`
 - `api/src/zotify_api/providers/`
 - `api/src/zotify_api/routes/auth.py`
-- `gonk-testUI/static/app.js`
+- `Gonk/GonkUI/static/app.js`
 
 ---
 
@@ -2133,14 +2133,14 @@ To fix a recurring `500 Internal Server Error` caused by a `TypeError` when comp
 
 ---
 
-## ACT-013: Revamp `gonk-testUI` Login Flow
+## ACT-013: Revamp `Gonk/GonkUI` Login Flow
 
 **Date:** 2025-08-13
 **Status:** ✅ Done
 **Assignee:** Jules
 
 ### Objective
-To improve the usability and robustness of the Spotify authentication flow in the `gonk-testUI`.
+To improve the usability and robustness of the Spotify authentication flow in the `Gonk/GonkUI`.
 
 ### Outcome
 - The login process was moved from a new tab to a managed popup window.
@@ -2150,90 +2150,90 @@ To improve the usability and robustness of the Spotify authentication flow in th
 - All related documentation was updated.
 
 ### Related Documents
-- `gonk-testUI/static/app.js`
+- `Gonk/GonkUI/static/app.js`
 - `api/src/zotify_api/routes/auth.py`
-- `gonk-testUI/README.md`
-- `gonk-testUI/docs/USER_MANUAL.md`
+- `Gonk/GonkUI/README.md`
+- `Gonk/GonkUI/docs/USER_MANUAL.md`
 
 ---
 
-## ACT-012: Fix `gonk-testUI` Unresponsive UI Bug
+## ACT-012: Fix `Gonk/GonkUI` Unresponsive UI Bug
 
 **Date:** 2025-08-13
 **Status:** ✅ Done
 **Assignee:** Jules
 
 ### Objective
-To fix a critical bug where the `gonk-testUI` would become completely unresponsive on load.
+To fix a critical bug where the `Gonk/GonkUI` would become completely unresponsive on load.
 
 ### Outcome
 - The root cause was identified as a JavaScript `TypeError` when trying to add an event listener to a DOM element that might not exist.
-- The `gonk-testUI/static/app.js` file was modified to include null checks for all control button elements before attempting to attach event listeners. This makes the script more resilient and prevents it from crashing.
+- The `Gonk/GonkUI/static/app.js` file was modified to include null checks for all control button elements before attempting to attach event listeners. This makes the script more resilient and prevents it from crashing.
 
 ### Related Documents
-- `gonk-testUI/static/app.js`
+- `Gonk/GonkUI/static/app.js`
 
 ---
 
-## ACT-011: Fix `gonk-testUI` Form Layout
+## ACT-011: Fix `Gonk/GonkUI` Form Layout
 
 **Date:** 2025-08-13
 **Status:** ✅ Done
 **Assignee:** Jules
 
 ### Objective
-To improve the user experience of the `gonk-testUI` by placing the API endpoint forms in a more intuitive location.
+To improve the user experience of the `Gonk/GonkUI` by placing the API endpoint forms in a more intuitive location.
 
 ### Outcome
-- The JavaScript logic in `gonk-testUI/static/app.js` was modified to insert the generated form directly below the endpoint button that was clicked, rather than in a fixed container at the bottom of the page.
-- The redundant form container was removed from `gonk-testUI/templates/index.html`.
+- The JavaScript logic in `Gonk/GonkUI/static/app.js` was modified to insert the generated form directly below the endpoint button that was clicked, rather than in a fixed container at the bottom of the page.
+- The redundant form container was removed from `Gonk/GonkUI/templates/index.html`.
 
 ### Related Documents
-- `gonk-testUI/static/app.js`
-- `gonk-testUI/templates/index.html`
+- `Gonk/GonkUI/static/app.js`
+- `Gonk/GonkUI/templates/index.html`
 
 ---
 
-## ACT-010: Add Theme Toggle to `gonk-testUI`
+## ACT-010: Add Theme Toggle to `Gonk/GonkUI`
 
 **Date:** 2025-08-13
 **Status:** ✅ Done
 **Assignee:** Jules
 
 ### Objective
-To add a dark/light mode theme toggle to the `gonk-testUI` to improve usability.
+To add a dark/light mode theme toggle to the `Gonk/GonkUI` to improve usability.
 
 ### Outcome
-- Refactored `gonk-testUI/static/styles.css` to use CSS variables for theming.
-- Added a theme toggle button with custom SVG icons to `gonk-testUI/templates/index.html`.
-- Implemented the theme switching logic in `gonk-testUI/static/app.js`, with the user's preference saved to `localStorage` for persistence.
+- Refactored `Gonk/GonkUI/static/styles.css` to use CSS variables for theming.
+- Added a theme toggle button with custom SVG icons to `Gonk/GonkUI/templates/index.html`.
+- Implemented the theme switching logic in `Gonk/GonkUI/static/app.js`, with the user's preference saved to `localStorage` for persistence.
 
 ### Related Documents
-- `gonk-testUI/static/styles.css`
-- `gonk-testUI/templates/index.html`
-- `gonk-testUI/static/app.js`
+- `Gonk/GonkUI/static/styles.css`
+- `Gonk/GonkUI/templates/index.html`
+- `Gonk/GonkUI/static/app.js`
 
 ---
 
-## ACT-009: Make `gonk-testUI` Server Configurable
+## ACT-009: Make `Gonk/GonkUI` Server Configurable
 
 **Date:** 2025-08-13
 **Status:** ✅ Done
 **Assignee:** Jules
 
 ### Objective
-To allow the `gonk-testUI` server's IP, port, and target API URL to be configured via the command line.
+To allow the `Gonk/GonkUI` server's IP, port, and target API URL to be configured via the command line.
 
 ### Outcome
-- Modified `gonk-testUI/app.py` to use `argparse` to accept `--ip`, `--port`, and `--api-url` arguments.
+- Modified `Gonk/GonkUI/app.py` to use `argparse` to accept `--ip`, `--port`, and `--api-url` arguments.
 - Updated the backend to pass the configured API URL to the frontend by rendering `index.html` as a template.
 - Updated the `README.md` and `USER_MANUAL.md` to document the new command-line flags.
 
 ### Related Documents
-- `gonk-testUI/app.py`
-- `gonk-testUI/templates/index.html`
-- `gonk-testUI/static/app.js`
-- `gonk-testUI/README.md`
+- `Gonk/GonkUI/app.py`
+- `Gonk/GonkUI/templates/index.html`
+- `Gonk/GonkUI/static/app.js`
+- `Gonk/GonkUI/README.md`
 
 ---
 
@@ -2357,7 +2357,7 @@ To create a robust startup script for the API and to overhaul the system documen
 
 ---
 
-## ACT-002: Implement `gonk-testUI` Module
+## ACT-002: Implement `Gonk/GonkUI` Module
 
 **Date:** 2025-08-11
 **Status:** ✅ Done
@@ -2367,12 +2367,12 @@ To create a robust startup script for the API and to overhaul the system documen
 To create a standalone web-based UI for API testing and database browsing.
 
 ### Outcome
-- A new `gonk-testUI` module was created with a standalone Flask application.
+- A new `Gonk/GonkUI` module was created with a standalone Flask application.
 - The UI dynamically generates forms for all API endpoints from the OpenAPI schema.
 - The UI embeds the `sqlite-web` interface for database browsing.
 
 ### Related Documents
-- `gonk-testUI/`
+- `Gonk/GonkUI/`
 - `README.md`
 
 ---

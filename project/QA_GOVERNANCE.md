@@ -19,7 +19,7 @@ This policy is enforced automatically by the project's linter.
 The primary mechanism for enforcing these policies is the unified linter script, located at `scripts/linter.py`.
 
 ### 3.1. Traceability Enforcement
-- **Trigger:** Any change to source code files within the `api/src/`, `snitch/`, `gonk-testUI/`, or `scripts/` directories.
+- **Trigger:** Any change to source code files within the `api/src/`, `snitch/`, `Gonk/GonkUI/`, or `scripts/` directories.
 - **Rule:** When a change is detected in a source code file, a corresponding update to the `project/ALIGNMENT_MATRIX.md` is **mandatory**.
 - **Enforcement:** The linter will fail if source code is modified without a corresponding change to the alignment matrix. This check is performed in every `pre-commit` hook and in the CI/CD pipeline.
 

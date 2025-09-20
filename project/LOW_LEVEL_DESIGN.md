@@ -55,7 +55,7 @@ The FastAPI application uses several middleware to provide cross-cutting concern
 
 *   **CORS (Cross-Origin Resource Sharing)**:
     *   **Module:** `api/src/zotify_api/main.py`
-    *   **Purpose:** To allow web-based clients (like `gonk-testUI`) hosted on different origins (IP/port) to communicate with the API. This is a browser security requirement.
+    *   **Purpose:** To allow web-based clients (like `Gonk/GonkUI`) hosted on different origins (IP/port) to communicate with the API. This is a browser security requirement.
     *   **Configuration:** The middleware is configured to be permissive, allowing all origins, methods, and headers (`*`). This is suitable for a local development tool but would need to be reviewed for a production deployment.
 
 *   **Request ID**:

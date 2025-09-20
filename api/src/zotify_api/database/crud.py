@@ -227,8 +227,8 @@ def update_user_profile(db: Session, db_profile: models.UserProfile, name: str |
 
 # --- UserPreferences CRUD ---
 
-def create_user_preferences(db: Session, user: models.User, theme: str = "dark", language: str = "en") -> models.UserPreferences:
-    db_preferences = models.UserPreferences(user_id=user.id, theme=theme, language=language)
+def create_user_preferences(db: Session, user: models.User, theme: str = "dark", language: str = "en", notifications_enabled: bool = True) -> models.UserPreferences:
+    db_preferences = models.UserPreferences(user_id=user.id, theme=theme, language=language, notifications_enabled=notifications_enabled)
     db.add(db_preferences)
     db.commit()
     db.refresh(db_preferences)
@@ -237,11 +237,13 @@ def create_user_preferences(db: Session, user: models.User, theme: str = "dark",
 def get_user_preferences(db: Session, user_id: str) -> models.UserPreferences | None:
     return db.query(models.UserPreferences).filter(models.UserPreferences.user_id == user_id).first()
 
-def update_user_preferences(db: Session, db_preferences: models.UserPreferences, theme: str | None = None, language: str | None = None) -> models.UserPreferences:
+def update_user_preferences(db: Session, db_preferences: models.UserPreferences, theme: str | None = None, language: str | None = None, notifications_enabled: bool | None = None) -> models.UserPreferences:
     if theme is not None:
         db_preferences.theme = theme
     if language is not None:
         db_preferences.language = language
+    if notifications_enabled is not None:
+        db_preferences.notifications_enabled = notifications_enabled
     db.commit()
     db.refresh(db_preferences)
     return db_preferences

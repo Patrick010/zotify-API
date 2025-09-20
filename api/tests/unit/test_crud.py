@@ -3,7 +3,13 @@ from unittest.mock import MagicMock, patch
 import pytest
 
 from zotify_api.database import crud
-from zotify_api.database.models import DownloadJob, SpotifyToken, Track
+from zotify_api.database.models import (
+    DownloadJob,
+    SpotifyToken,
+    Track,
+    User,
+    UserPreferences,
+)
 from zotify_api.schemas import download as schemas
 
 
@@ -173,3 +179,43 @@ def test_clear_all_playlists_and_tracks(db_session: MagicMock) -> None:
     crud.clear_all_playlists_and_tracks(db_session)
     assert db_session.query.return_value.delete.call_count == 3
     db_session.commit.assert_called_once()
+
+
+def test_create_user_preferences(db_session: MagicMock) -> None:
+    user = User(id="user_123")
+    crud.create_user_preferences(db_session, user=user)
+    db_session.add.assert_called_once()
+    # Check that the created object has the correct default values
+    created_prefs = db_session.add.call_args[0][0]
+    assert created_prefs.user_id == "user_123"
+    assert created_prefs.theme == "dark"
+    assert created_prefs.language == "en"
+    assert created_prefs.notifications_enabled is True
+    db_session.commit.assert_called_once()
+    db_session.refresh.assert_called_once()
+
+
+def test_get_user_preferences(db_session: MagicMock) -> None:
+    crud.get_user_preferences(db_session, "user_123")
+    db_session.query.assert_called_with(UserPreferences)
+    db_session.query.return_value.filter.assert_called_once()
+
+
+def test_update_user_preferences(db_session: MagicMock) -> None:
+    db_preferences = UserPreferences(
+        user_id="user_123",
+        theme="dark",
+        language="en",
+        notifications_enabled=True,
+    )
+    crud.update_user_preferences(
+        db_session,
+        db_preferences=db_preferences,
+        theme="light",
+        notifications_enabled=False,
+    )
+    assert db_preferences.theme == "light"
+    assert db_preferences.language == "en"  # Should not be updated
+    assert db_preferences.notifications_enabled is False
+    db_session.commit.assert_called_once()
+    db_session.refresh.assert_called_once_with(db_preferences)

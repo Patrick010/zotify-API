@@ -52,7 +52,7 @@ I've made a small correction to my plan in the last phase name. I will now creat
 
 My approach will be to:
 1.  Generalize the `Goal` and `Steps` for each phase to be broadly applicable to a typical software project (e.g., "Foundational Setup," "Core API & Testing," "Feature Enhancements").
-2.  Remove any project-specific details, such as the `JULES-NOTE` comments and the reference to `gonk-testUI`.
+2.  Remove any project-specific details, such as the `JULES-NOTE` comments and the reference to `Gonk/GonkUI`.
 3.  Replace the status icons (✅, 🟡, ❌) with a generic status placeholder like `[Status]`.
 
 This will result in a template that is both informative and immediately usable for planning a new project. I will now create the new `templates/EXECUTION_PLAN.md`.

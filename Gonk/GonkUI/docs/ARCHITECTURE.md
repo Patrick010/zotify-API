@@ -2,7 +2,7 @@
 
 ## Overview
 
-The `gonk-testUI` is a standalone web application built with Flask. It is designed to be completely independent of the main Zotify API application, acting only as an external client.
+The `Gonk/GonkUI` is a standalone web application built with Flask. It is designed to be completely independent of the main Zotify API application, acting only as an external client.
 
 ## Components
 
@@ -21,7 +21,7 @@ The `gonk-testUI` is a standalone web application built with Flask. It is design
     -   On load, it fetches the OpenAPI schema (`/openapi.json`) from the Zotify API. This makes the UI automatically adapt to any changes in the API's endpoints.
     -   It uses the schema to build interactive forms for each endpoint.
     -   It uses the `fetch` API to send requests to the Zotify API and displays the JSON response.
-    -   It interacts with the `gonk-testUI` backend to manage the `sqlite-web` process.
+    -   It interacts with the `Gonk/GonkUI` backend to manage the `sqlite-web` process.
 
 ### 3. `sqlite-web` Integration
 

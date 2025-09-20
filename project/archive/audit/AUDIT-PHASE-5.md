@@ -56,7 +56,7 @@ To perform a wide-ranging series of tasks to improve the project's organization,
 
 ### Outcome
 - **Repository Organized:** Addressed significant repository clutter by moving 8 utility scripts into `scripts/`, relocating `DEPENDENCIES.md`, and deleting 5 obsolete files. All internal script paths and project documentation were updated to reflect these changes.
-- **Code Quality Framework Established:** A new Code Quality Index system was implemented across all three modules (`api`, `snitch`, `gonk-testUI`), each with its own tracking file. A two-column scoring rubric was defined and documented in the developer guides.
+- **Code Quality Framework Established:** A new Code Quality Index system was implemented across all three modules (`api`, `snitch`, `Gonk/GonkUI`), each with its own tracking file. A two-column scoring rubric was defined and documented in the developer guides.
 - **Baseline Quality Assessment:** A baseline quality assessment was performed on the majority of source files across the project.
 - **"Gold Standard" Documentation:** A comprehensive documentation file for `tracks_service.py` was created to serve as a high-quality example, and its score was updated in the index.
 - **Process Hardening:** The project's `EXECUTION_PLAN.md` was updated to include a formal "Code QA" step in every phase, and the documentation linter was made more robust.

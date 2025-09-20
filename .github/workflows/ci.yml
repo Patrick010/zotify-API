@@ -24,7 +24,7 @@ jobs:
               - 'api/tests/**'
               - 'scripts/**'
               - 'snitch/**'
-              - 'gonk-testUI/**'
+              - 'Gonk/GonkUI/**'
               - 'pyproject.toml'
               - 'go.mod'
 

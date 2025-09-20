@@ -12,6 +12,7 @@ class UserProfileUpdate(BaseModel):
 class UserPreferences(BaseModel):
     theme: str
     language: str
+    notifications_enabled: bool
 
     class Config:
         from_attributes = True
@@ -20,6 +21,7 @@ class UserPreferences(BaseModel):
 class UserPreferencesUpdate(BaseModel):
     theme: Optional[str] = None
     language: Optional[str] = None
+    notifications_enabled: Optional[bool] = None
 
     class Config:
         from_attributes = True

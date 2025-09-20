@@ -7,12 +7,9 @@
         "track1",
         "track2"
     ],
-    "history": [
-        "track3",
-        "track4"
-    ],
+    "history": [],
     "preferences": {
-        "theme": "dark",
+        "theme": "light",
         "language": "en"
     },
     "notifications": []

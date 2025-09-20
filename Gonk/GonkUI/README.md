@@ -25,9 +25,9 @@ This guide will walk you through the setup and usage of the Gonk Test UI.
 
 This tool has its own set of dependencies, which need to be installed separately from the main Zotify API.
 
-First, navigate to the `gonk-testUI` directory in your terminal:
+First, navigate to the `Gonk/GonkUI` directory in your terminal:
 ```bash
-cd gonk-testUI
+cd Gonk/GonkUI
 ```
 
 Next, install the required Python packages using its `pyproject.toml` file. The recommended way to do this is with `pip` in editable mode:
@@ -51,7 +51,7 @@ export DATABASE_URI="sqlite:///../api/storage/zotify.db"
 ```bash
 set DATABASE_URI=sqlite:///../api/storage/zotify.db
 ```
-*Note: The path is relative to the `gonk-testUI` directory.*
+*Note: The path is relative to the `Gonk/GonkUI` directory.*
 
 ### 3. Running the Application
 
@@ -69,7 +69,7 @@ python app.py --ip 127.0.0.1 --port 8083
 # Point to a specific Zotify API instance
 python app.py --api-url http://192.168.1.100:8000
 ```
-*(Make sure you are still inside the `gonk-testUI` directory when running this command.)*
+*(Make sure you are still inside the `Gonk/GonkUI` directory when running this command.)*
 
 **Command-Line Arguments:**
 -   `--ip`: The IP address to bind the UI server to. Defaults to `0.0.0.0`.
