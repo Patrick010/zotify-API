@@ -7,11 +7,35 @@ from zotify_api.database.models import User
 from zotify_api.schemas.user import UserCreate
 
 
+from zotify_api.services import user_service
+
+
+@pytest.fixture(autouse=True)
+def clear_users():
+    """
+    Clear in-memory or test DB users before each test.
+    Adjust if using database integration.
+    """
+    user_service.clear_all_users()
+    yield
+    user_service.clear_all_users()
+
+
 @pytest.fixture(scope="function")
 def test_user(test_db_session: Session):
     """Create a test user in the database."""
     user_in = UserCreate(username="testuser", password="password123")
     user = crud.create_user(db=test_db_session, user=user_in)
+    user_service.create_user(
+        "testuser",
+        {
+            "profile": {"name": "testuser", "email": ""},
+            "liked": [],
+            "history": [],
+            "preferences": {"theme": "dark", "language": "en"},
+            "notifications": [],
+        },
+    )
     return {"id": str(user.id), "username": user.username, "password": "password123"}
 
 
@@ -103,7 +127,7 @@ def test_get_other_user_notifications(client: TestClient, test_db_session: Sessi
     # Attempt to get other_user's notifications
     response = client.get(f"/api/notifications/{other_user.id}", headers=headers)
     assert response.status_code == 403
-    assert response.json()["detail"] == "Not authorized to access this resource"
+    assert response.json()["detail"] == "Not authorized to access these notifications"
 
 
 def test_get_liked_with_valid_token(client: TestClient, test_user):

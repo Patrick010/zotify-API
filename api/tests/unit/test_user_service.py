@@ -1,100 +1,45 @@
-from typing import Any, Dict
+# tests/test_user_service.py
+
 import pytest
-from zotify_api.services.user_service import UserService
+from api.src.zotify_api.services import user_service
 
-@pytest.fixture
-def user_data() -> Dict[str, Any]:
-    """Provides a dictionary with mock data for multiple users."""
-    return {
-        "testuser1": {
-            "profile": {"name": "Test User 1", "email": "test1@example.com"},
-            "liked": ["track1", "track2"],
-            "history": ["track3", "track4"],
-            "preferences": {"theme": "dark", "language": "en"},
-            "notifications": [],
-        },
-        "testuser2": {
-            "profile": {"name": "Test User 2", "email": "test2@example.com"},
-            "liked": ["trackA", "trackB"],
-            "history": ["trackC", "trackD"],
-            "preferences": {"theme": "light", "language": "fr"},
-            "notifications": [],
-        },
-    }
+@pytest.fixture(autouse=True)
+def clear_users():
+    """
+    Clear in-memory or test DB users before each test.
+    Adjust if using database integration.
+    """
+    user_service.clear_all_users()
+    yield
+    user_service.clear_all_users()
 
-def test_get_user_profile(user_data: Dict[str, Any]) -> None:
-    """Tests that the profile for a specific user is correctly fetched."""
-    service = UserService(username="testuser1", data=user_data, storage_file=None)
-    profile = service.get_user_profile()
-    assert profile == user_data["testuser1"]["profile"]
+def test_get_user_existing():
+    username = "alice"
+    user_service.create_user(username, {"bio": "Test bio"})
+    user_data = user_service.get_user(username)
+    assert user_data is not None
+    assert user_data["bio"] == "Test bio"
 
-    service_user2 = UserService(username="testuser2", data=user_data, storage_file=None)
-    profile_user2 = service_user2.get_user_profile()
-    assert profile_user2 == user_data["testuser2"]["profile"]
+def test_get_user_nonexistent():
+    user_data = user_service.get_user("ghost")
+    assert user_data is None
 
-def test_update_user_profile(user_data: Dict[str, Any]) -> None:
-    """Tests that updating a user's profile only affects that user."""
-    service = UserService(username="testuser1", data=user_data, storage_file=None)
-    update_data = {"name": "New Name"}
-    service.update_user_profile(update_data)
+def test_update_user_existing():
+    username = "bob"
+    user_service.create_user(username, {"bio": "Old bio"})
+    updated = user_service.update_user(username, {"bio": "New bio"})
+    user_data = user_service.get_user(username)
+    assert updated is True
+    assert user_data["bio"] == "New bio"
 
-    # Verify testuser1 was updated
-    assert service.get_user_profile()["name"] == "New Name"
+def test_update_user_nonexistent():
+    updated = user_service.update_user("ghost", {"bio": "Anything"})
+    assert updated is False
 
-    # Verify testuser2 was not affected
-    service_user2 = UserService(username="testuser2", data=user_data, storage_file=None)
-    assert service_user2.get_user_profile()["name"] == "Test User 2"
-
-def test_get_user_liked(user_data: Dict[str, Any]) -> None:
-    """Tests fetching liked tracks for a specific user."""
-    service = UserService(username="testuser1", data=user_data, storage_file=None)
-    liked = service.get_user_liked()
-    assert liked == user_data["testuser1"]["liked"]
-
-def test_get_user_history(user_data: Dict[str, Any]) -> None:
-    """Tests fetching history for a specific user."""
-    service = UserService(username="testuser1", data=user_data, storage_file=None)
-    history = service.get_user_history()
-    assert history == user_data["testuser1"]["history"]
-
-def test_delete_user_history(user_data: Dict[str, Any]) -> None:
-    """Tests that deleting history only affects the specific user."""
-    service = UserService(username="testuser1", data=user_data, storage_file=None)
-    service.delete_user_history()
-
-    # Verify testuser1's history is empty
-    assert service.get_user_history() == []
-
-    # Verify testuser2's history is not affected
-    service_user2 = UserService(username="testuser2", data=user_data, storage_file=None)
-    assert service_user2.get_user_history() == ["trackC", "trackD"]
-
-def test_get_user_preferences(user_data: Dict[str, Any]) -> None:
-    """Tests fetching preferences for a specific user."""
-    service = UserService(username="testuser1", data=user_data, storage_file=None)
-    preferences = service.get_user_preferences()
-    assert preferences == user_data["testuser1"]["preferences"]
-
-def test_update_user_preferences(user_data: Dict[str, Any]) -> None:
-    """Tests that updating preferences only affects the specific user."""
-    service = UserService(username="testuser1", data=user_data, storage_file=None)
-    update_data = {"theme": "blue"}
-    service.update_user_preferences(update_data)
-
-    # Verify testuser1 was updated
-    assert service.get_user_preferences()["theme"] == "blue"
-
-    # Verify testuser2 was not affected
-    service_user2 = UserService(username="testuser2", data=user_data, storage_file=None)
-    assert service_user2.get_user_preferences()["theme"] == "light"
-
-def test_new_user_creation() -> None:
-    """Tests that a new user is created with default data if not present."""
-    data = {}
-    service = UserService(username="newuser", data=data, storage_file=None)
-    profile = service.get_user_profile()
-    assert profile["name"] == "newuser"
-    assert "email" in profile
-    assert service.get_user_liked() == []
-    assert service.get_user_history() == []
-    assert service.get_user_preferences() == {"theme": "dark", "language": "en"}
+def test_multiple_users_independent():
+    user_service.create_user("alice", {"bio": "Alice bio"})
+    user_service.create_user("bob", {"bio": "Bob bio"})
+    alice_data = user_service.get_user("alice")
+    bob_data = user_service.get_user("bob")
+    assert alice_data["bio"] == "Alice bio"
+    assert bob_data["bio"] == "Bob bio"

@@ -81,14 +81,3 @@ def get_provider_no_auth(
     raise HTTPException(
         status_code=404, detail=f"Provider '{provider_name}' not found."
     )
-
-
-from zotify_api.database.models import User
-from zotify_api.services.jwt_service import get_current_user
-from zotify_api.services.user_service import UserService, get_user_service
-
-
-def get_current_user_service(
-    current_user: User = Depends(get_current_user),
-) -> UserService:
-    return get_user_service(current_user.username)
