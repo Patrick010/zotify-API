@@ -26,6 +26,7 @@ dependencies = [
     "pydantic-settings",
     "sqlalchemy",
     "python-multipart",
+    "python-jose[cryptography]",
 	"pytest-cov",
 	"xenon",
 	"radon",

@@ -1,6 +1,13 @@
 ---
 ## Session Report: 2025-09-20
 
+**Summary:** fix: Add missing python-jose dependency
+**Findings:**
+Added the python-jose[cryptography] dependency to api/pyproject.toml to resolve a ModuleNotFoundError that was preventing the API server from starting.
+
+---
+## Session Report: 2025-09-20
+
 **Summary:** Fix ModuleNotFoundError in GonkUI and CLI
 **Findings:**
 Fixed a ModuleNotFoundError that occurred when running the GonkUI application. The issue was caused by an incorrect Python path. The fix involved adding the project root to sys.path in Gonk/GonkUI/app.py and correcting the import statements in app.py and Gonk/GonkUI/views/jwt_ui.py. Also fixed the same import issue in Gonk/GonkCLI/main.py and the tests for JWTClient.

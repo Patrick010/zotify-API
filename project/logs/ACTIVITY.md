@@ -1,4 +1,20 @@
 ---
+## ACT-108: fix: Add missing python-jose dependency
+
+**Date:** 2025-09-20
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+fix: Add missing python-jose dependency
+
+### Outcome
+Added the python-jose[cryptography] dependency to api/pyproject.toml to resolve a ModuleNotFoundError that was preventing the API server from starting.
+
+### Related Documents
+- `api/pyproject.toml`
+
+---
 ## ACT-107: Fix ModuleNotFoundError in GonkUI and CLI
 
 **Date:** 2025-09-20
