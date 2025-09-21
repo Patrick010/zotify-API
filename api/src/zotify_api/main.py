@@ -113,6 +113,10 @@ def initialize_logging_framework() -> None:
 @app.on_event("startup")
 def startup_event() -> None:
     """Application startup event handler."""
+    # Ensure the storage directory exists
+    storage_path = os.path.join(os.path.dirname(__file__), "..", "..", "storage")
+    os.makedirs(storage_path, exist_ok=True)
+
     # Create database tables
     Base.metadata.create_all(bind=engine)
 

@@ -1,4 +1,31 @@
 ---
+## ACT-110: docs: Create handover brief and fix startup issues
+
+**Date:** 2025-09-21
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+docs: Create handover brief and fix startup issues
+
+### Outcome
+Created a detailed handover brief for the next developer. Fixed several critical startup issues, including missing dependencies (python-jose, passlib), a missing storage directory, and incorrect Python paths for the Gonk project.
+
+### Related Documents
+- `Gonk/GonkUI/app.py`
+- `Gonk/GonkUI/views/jwt_ui.py`
+- `Gonk/GonkCLI/main.py`
+- `Gonk/GonkCLI/tests/test_jwt_mock.py`
+- `Gonk/pyproject.toml`
+- `api/MIGRATIONS.md`
+- `Gonk/GonkUI/docs/USER_MANUAL.md`
+- `Gonk/GonkCLI/README.md`
+- `api/docs/reference/API_REFERENCE.md`
+- `api/pyproject.toml`
+- `api/src/zotify_api/main.py`
+- `project/HANDOVER_BRIEF_2025-09-20.md`
+
+---
 ## ACT-109: fix: Add missing passlib dependency
 
 **Date:** 2025-09-20
