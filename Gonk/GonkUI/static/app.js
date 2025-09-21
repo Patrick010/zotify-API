@@ -388,4 +388,41 @@ document.addEventListener("DOMContentLoaded", () => {
             displayOutput("history-output", { error: error.message }, verbose);
         }
     }
+
+    // --- New Registration Form Handler ---
+    const registerForm = document.getElementById("register-form");
+    if (registerForm) {
+        registerForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const username = document.getElementById("register-username").value;
+            const password = document.getElementById("register-password").value;
+            const statusEl = document.getElementById("register-status");
+
+            if (!username || !password) {
+                statusEl.textContent = "Username and password are required.";
+                statusEl.style.color = "red";
+                return;
+            }
+
+            try {
+                const response = await fetch("/jwt/register", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ username, password }),
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    statusEl.textContent = "Registration successful! Please log in.";
+                    statusEl.style.color = "green";
+                    registerForm.reset(); // Clear the form
+                } else {
+                    statusEl.textContent = `Registration failed: ${data.message}`;
+                    statusEl.style.color = "red";
+                }
+            } catch (error) {
+                statusEl.textContent = `Error: ${error.message}`;
+                statusEl.style.color = "red";
+            }
+        });
+    }
 });

@@ -5,6 +5,14 @@ class JWTClient:
         self.api_base_url = api_base_url
         self.token = None
 
+    def register(self, username, password):
+        response = requests.post(
+            f"{self.api_base_url}/api/auth/register",
+            json={"username": username, "password": password},
+        )
+        response.raise_for_status()
+        return response.json()
+
     def _get_auth_headers(self):
         if not self.token:
             raise Exception("Not logged in")
