@@ -1,66 +1,25 @@
-# Handover Brief - 2025-09-20
+Handover Brief: User Registration Feature Complete
 
-## 1. Project Goal
+Context: This document describes the project state immediately following the implementation of the user registration feature for the GonkUI test application. The goal was to allow developers to create new local users directly from the UI to facilitate JWT testing. All work is on the api-phase-4a branch.
+1. Summary of Completed Work
 
-The primary goal of this work session was to implement Phase 3a and 3b of the project roadmap. This included:
--   Implementing a full JWT-based authentication system.
--   Refactoring the `gonk-testUI` project into a `Gonk` project with two sub-projects: `GonkUI` (a web UI for testing) and `GonkCLI` (a command-line tool).
--   Implementing a new `notifications_enabled` user preference, including a database migration.
+A complete user registration workflow has been added to the GonkUI. This feature complements the existing login functionality and allows for end-to-end testing of the local JWT authentication system.
 
-## 2. Current Status
+    Frontend: A "Register" panel with a form for a username and password was added to the main UI (index.html). JavaScript logic was implemented in app.js to send the registration data to the GonkUI backend and display status messages.
+    Backend: A new /jwt/register endpoint was added to the GonkUI's Flask backend (jwt_ui.py). This endpoint receives the request from the frontend.
+    API Client: The internal JWTClient was updated with a register() method that makes the final POST request to the main Zotify API's /api/auth/register endpoint.
 
-The implementation of all the above features is complete. However, the development process was hindered by several environment and dependency issues that blocked the API server and the GonkUI application from running.
+2. System State at Time of Handover
 
-The main focus of the latter part of the session was to diagnose and fix these blocking issues.
+    GonkUI Functionality: The GonkUI can now be used to both register new local users and log in with them to obtain a JWT. This makes it a much more self-contained tool for testing user-specific API endpoints.
+    Codebase: The changes are confined to the GonkUI application (Gonk/GonkUI/). The main API, project documentation, and developer scripts have not yet been modified.
+    Known Issues:
+        The passlib/bcrypt dependency conflict still exists in the main API.
+        The developer workflow for running the GonkUI testing application is not streamlined.
+        The new registration feature is not yet documented.
 
-## 3. Recent Fixes
+3. Recommended Next Steps
 
-The following critical issues have been addressed:
+Based on the completion of this feature, the following actions are recommended:
 
--   **`ModuleNotFoundError: No module named 'jose'`**: Fixed by adding the `python-jose[cryptography]` dependency to `api/pyproject.toml`.
--   **`ModuleNotFoundError: No module named 'passlib'`**: Fixed by adding the `passlib[bcrypt]` dependency to `api/pyproject.toml`.
--   **`sqlite3.OperationalError: unable to open database file`**: Fixed by adding code to `api/src/zotify_api/main.py` to create the `api/storage` directory on application startup.
--   **`ModuleNotFoundError: No module named 'Gonk'`**: Fixed by correcting the Python path for the Gonk project. This involved adding a `Gonk/pyproject.toml` file for `pytest` and modifying `Gonk/GonkUI/app.py` to add the project root to `sys.path` at runtime.
-
-## 4. Outstanding Issues & Next Steps
-
-The immediate next step is to verify that the recent fixes have resolved the startup issues for both the Zotify API and the GonkUI application.
-
-**Next Steps for the Next Developer:**
-
-1.  **Install Dependencies**: Make sure to install the newly added dependencies by running `pip install -e .` in the `api/` directory (for `python-jose` and `passlib`) and `pip install -e .` in the `Gonk/GonkUI` directory.
-2.  **Run the Zotify API Server**:
-    ```bash
-    cd api
-    PYTHONPATH=./src uvicorn zotify_api.main:app --host 0.0.0.0 --port 8000 --reload
-    ```
-    Verify that the server starts without any errors.
-
-3.  **Run the GonkUI Server**:
-    ```bash
-    cd Gonk/GonkUI
-    python3 app.py
-    ```
-    Verify that the UI application starts and is accessible in the browser.
-
-4.  **Final Validation**: Once the applications are running, perform a full manual validation of the GonkUI's JWT panel functionality against the checklist provided by the user in the task description.
-
-5.  **Submit**: If all validation passes, the work can be considered complete and ready for final submission.
-
-## 5. Relevant Files
-
-The following files have been created or modified in this session:
-
--   `api/pyproject.toml`
--   `api/src/zotify_api/main.py`
--   `Gonk/pyproject.toml`
--   `Gonk/GonkUI/app.py`
--   `Gonk/GonkUI/views/jwt_ui.py`
--   `Gonk/GonkCLI/main.py`
--   `Gonk/GonkCLI/modules/jwt_mock.py`
--   `Gonk/GonkCLI/tests/test_jwt_mock.py`
--   `Gonk/GonkUI/docs/USER_MANUAL.md`
--   `Gonk/GonkCLI/README.md`
--   `api/MIGRATIONS.md`
--   `api/docs/reference/API_REFERENCE.md`
--   All project log files.
+    Documentation: The Gonk/GonkUI/docs/USER_MANUAL.md should be updated immediately to include instructions on how to use the new registration panel.
