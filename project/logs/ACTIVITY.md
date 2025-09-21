@@ -1,4 +1,20 @@
 ---
+## ACT-109: fix: Add missing passlib dependency
+
+**Date:** 2025-09-20
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+fix: Add missing passlib dependency
+
+### Outcome
+Added the passlib[bcrypt] dependency to api/pyproject.toml to resolve a ModuleNotFoundError that was preventing the API server from starting.
+
+### Related Documents
+- `api/pyproject.toml`
+
+---
 ## ACT-108: fix: Add missing python-jose dependency
 
 **Date:** 2025-09-20

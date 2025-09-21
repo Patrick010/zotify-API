@@ -3,7 +3,7 @@
 **Status:** Live Document
 
 ## 1. Session Summary & Accomplishments
-fix: Add missing python-jose dependency
+fix: Add missing passlib dependency
 
 ## 2. Known Issues & Blockers
 - None

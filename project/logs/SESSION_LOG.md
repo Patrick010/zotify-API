@@ -1,6 +1,13 @@
 ---
 ## Session Report: 2025-09-20
 
+**Summary:** fix: Add missing passlib dependency
+**Findings:**
+Added the passlib[bcrypt] dependency to api/pyproject.toml to resolve a ModuleNotFoundError that was preventing the API server from starting.
+
+---
+## Session Report: 2025-09-20
+
 **Summary:** fix: Add missing python-jose dependency
 **Findings:**
 Added the python-jose[cryptography] dependency to api/pyproject.toml to resolve a ModuleNotFoundError that was preventing the API server from starting.
