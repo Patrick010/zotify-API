@@ -3,10 +3,10 @@
 **Status:** Live Document
 
 ## 1. Session Summary & Accomplishments
-Created a management script for GonkUI and updated documentation.
+Made GonkUI API URL configurable in the UI.
 
 ## 2. Known Issues & Blockers
 - None
 
 ## 3. Pending Work: Next Immediate Steps
-Submit the changes for final approval.
+Submit the feature for final approval.

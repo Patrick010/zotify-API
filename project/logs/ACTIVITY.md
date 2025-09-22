@@ -1,20 +1,22 @@
 ---
-## ACT-111: Created a management script for GonkUI and updated documentation.
+## ACT-111: Made GonkUI API URL configurable in the UI.
 
 **Date:** 2025-09-22
 **Status:** ✅ Done
 **Assignee:** Jules
 
 ### Objective
-Created a management script for GonkUI and updated documentation.
+Made GonkUI API URL configurable in the UI.
 
 ### Outcome
-Created scripts/gonkui for starting/stopping the UI. Made it executable. Added a 'Managing GonkUI' section to the user manual. Fixed several bugs in the GonkUI application (app.py) and its dependencies to ensure the script was verifiable and worked as specified.
+Re-applied previous fixes for scripts/gonkui and dependencies due to environment reset. Modified index.html to add a new input for the API URL. Refactored app.js to manage the URL via localStorage, making it persistent. Removed the corresponding backend logic from app.py.
 
 ### Related Documents
-- `scripts/gonkui`
-- `Gonk/GonkUI/docs/USER_MANUAL.md`
+- `Gonk/GonkUI/templates/index.html`
+- `Gonk/GonkUI/static/app.js`
 - `Gonk/GonkUI/app.py`
+- `scripts/gonkui`
+- `Gonk/GonkUI/pyproject.toml`
 
 ---
 ## ACT-110: docs: Create handover brief and fix startup issues

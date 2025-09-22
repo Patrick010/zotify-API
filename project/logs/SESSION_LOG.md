@@ -1,9 +1,9 @@
 ---
 ## Session Report: 2025-09-22
 
-**Summary:** Created a management script for GonkUI and updated documentation.
+**Summary:** Made GonkUI API URL configurable in the UI.
 **Findings:**
-Created scripts/gonkui for starting/stopping the UI. Made it executable. Added a 'Managing GonkUI' section to the user manual. Fixed several bugs in the GonkUI application (app.py) and its dependencies to ensure the script was verifiable and worked as specified.
+Re-applied previous fixes for scripts/gonkui and dependencies due to environment reset. Modified index.html to add a new input for the API URL. Refactored app.js to manage the URL via localStorage, making it persistent. Removed the corresponding backend logic from app.py.
 
 ---
 ## Session Report: 2025-09-21

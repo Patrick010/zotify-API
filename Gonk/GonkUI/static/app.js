@@ -1,15 +1,29 @@
 document.addEventListener("DOMContentLoaded", () => {
     const endpointsList = document.getElementById("endpoints-list");
-    // The global apiResponse is no longer needed
-    // const apiResponse = document.getElementById("api-response");
-
     const spotifyLoginBtn = document.getElementById("spotify-login");
     const launchSqliteBtn = document.getElementById("launch-sqlite");
     const stopSqliteBtn = document.getElementById("stop-sqlite");
     const sqliteIframe = document.getElementById("sqlite-iframe");
     const themeToggleBtn = document.getElementById("theme-toggle");
+    const apiUrlInput = document.getElementById("api-url-input");
 
-    const ZOTIFY_API_BASE = window.ZOTIFY_API_URL || "http://localhost:8000";
+    // --- API URL Handling ---
+    function getApiUrl() {
+        return localStorage.getItem("zotifyApiUrl") || "http://localhost:8000";
+    }
+
+    function setApiUrl(url) {
+        localStorage.setItem("zotifyApiUrl", url);
+    }
+
+    if (apiUrlInput) {
+        apiUrlInput.value = getApiUrl(); // Set initial value on load
+        apiUrlInput.addEventListener("input", () => {
+            setApiUrl(apiUrlInput.value);
+            // Optional: debounce this if it causes performance issues, but for a URL it's fine.
+        });
+    }
+
 
     // --- Theme Handling ---
     if (themeToggleBtn) {
@@ -40,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Fetch OpenAPI schema and build the UI
     async function loadEndpoints() {
         try {
-            const response = await fetch(`${ZOTIFY_API_BASE}/openapi.json`);
+            const response = await fetch(`${getApiUrl()}/openapi.json`);
             const schema = await response.json();
             endpointsList.innerHTML = ""; // Clear existing
 
@@ -56,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
         } catch (error) {
-            endpointsList.innerHTML = "Error loading API schema. Is the Zotify API running?";
+            endpointsList.innerHTML = `Error loading API schema from ${getApiUrl()}. Is the Zotify API running?`;
             console.error("Error loading endpoints:", error);
         }
     }
@@ -137,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        const url = `${ZOTIFY_API_BASE}${path}?${queryParams.toString()}`;
+        const url = `${getApiUrl()}${path}?${queryParams.toString()}`;
 
         const options = { method: method.toUpperCase(), headers };
         if (form.elements.requestBody && form.elements.requestBody.value) {
@@ -179,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            const response = await fetch(`${ZOTIFY_API_BASE}/api/auth/status`, {
+            const response = await fetch(`${getApiUrl()}/api/auth/status`, {
                 headers: { "X-API-Key": apiKey }
             });
             const data = await response.json();
@@ -206,7 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
                 try {
-                    await fetch(`${ZOTIFY_API_BASE}/api/auth/logout`, {
+                    await fetch(`${getApiUrl()}/api/auth/logout`, {
                         method: "POST",
                         headers: { "X-API-Key": apiKey }
                     });
@@ -217,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 // Login logic using polling
                 try {
-                    const response = await fetch(`${ZOTIFY_API_BASE}/api/auth/spotify/login`);
+                    const response = await fetch(`${getApiUrl()}/api/auth/spotify/login`);
                     const data = await response.json();
                     if (data.auth_url) {
                         loginPopup = window.open(data.auth_url, "spotify_login", "width=500,height=600");

@@ -38,6 +38,10 @@
                     <label for="global-admin-api-key">Admin API Key:</label>
                     <input type="text" id="global-admin-api-key" name="adminApiKey" placeholder="Enter Admin API Key" value="{{ admin_api_key or '' }}">
                 </div>
+                <div class="api-url-container">
+                    <label for="api-url-input">Zotify API URL:</label>
+                    <input type="text" id="api-url-input" name="apiUrl" placeholder="Enter Zotify API URL">
+                </div>
                 <button id="spotify-login">Login with Spotify</button>
                 <button id="launch-sqlite">Launch sqlite-web</button>
                 <button id="stop-sqlite">Stop sqlite-web</button>
@@ -114,9 +118,6 @@
         </main>
     </div>
 
-    <script>
-        window.ZOTIFY_API_URL = '{{ api_url }}';
-    </script>
     <script src="/app.js"></script>
 </body>
 </html>

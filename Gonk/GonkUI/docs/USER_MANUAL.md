@@ -71,41 +71,6 @@ You should now see the Gonk Test UI interface.
 
 ---
 
-## Managing GonkUI
-
-GonkUI can be started and stopped using the provided management script `scripts/gonkui`.
-
-### Start GonkUI
-
-```bash
-./scripts/gonkui --start
-```
--   Runs in foreground only.
--   Auto-reloads on code changes (developer mode enabled).
--   Logs are printed directly to the terminal.
--   Default host/port: 127.0.0.1:5000.
--   To override host/port, set environment variables:
-```bash
-export HOST=0.0.0.0
-export PORT=8000
-./scripts/gonkui --start
-```
-### Stop GonkUI
-```bash
-./scripts/gonkui --stop
-```
--   Stops the running GonkUI process using the PID file `/tmp/gonkui.pid`.
--   If the PID file exists but the process is gone, it will be cleaned up automatically.
-
-### Notes
--   **Foreground-only**: Do not expect the script to daemonize. Keep the terminal open while running.
--   **Auto-reload**: Any code changes in `Gonk/GonkUI/app.py` or imported modules will trigger a reload automatically.
--   **Logging**: All logs appear in the terminal. Use `Ctrl+C` to stop.
--   **PID management**: The script uses `/tmp/gonkui.pid`. Do not manually delete this file while GonkUI is running.
--   **Developer workflow**: This is suitable for local development and debugging. Do not use in production.
-
----
-
 ## Using the UI
 
 ### Main Interface
