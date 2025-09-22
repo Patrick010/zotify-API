@@ -1,4 +1,36 @@
 ---
+## ACT-113: Refactored GonkUI README to be a high-level overview.
+
+**Date:** 2025-09-22
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Refactored GonkUI README to be a high-level overview.
+
+### Outcome
+The Gonk/GonkUI/README.md file was rewritten to remove detailed installation instructions. It now contains a high-level summary of the tool's features and directs users to the user manual for setup information.
+
+### Related Documents
+- `Gonk/GonkUI/README.md`
+
+---
+## ACT-112: Refactored GonkUI README to be a high-level overview.
+
+**Date:** 2025-09-22
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Refactored GonkUI README to be a high-level overview.
+
+### Outcome
+The Gonk/GonkUI/README.md file was rewritten to remove detailed installation instructions. It now contains a high-level summary of the tool's features and directs users to the user manual for setup information.
+
+### Related Documents
+- `Gonk/GonkUI/README.md`
+
+---
 ## ACT-111: Made GonkUI API URL configurable in the UI.
 
 **Date:** 2025-09-22

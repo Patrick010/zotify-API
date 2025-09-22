@@ -1,6 +1,20 @@
 ---
 ## Session Report: 2025-09-22
 
+**Summary:** Refactored GonkUI README to be a high-level overview.
+**Findings:**
+The Gonk/GonkUI/README.md file was rewritten to remove detailed installation instructions. It now contains a high-level summary of the tool's features and directs users to the user manual for setup information.
+
+---
+## Session Report: 2025-09-22
+
+**Summary:** Refactored GonkUI README to be a high-level overview.
+**Findings:**
+The Gonk/GonkUI/README.md file was rewritten to remove detailed installation instructions. It now contains a high-level summary of the tool's features and directs users to the user manual for setup information.
+
+---
+## Session Report: 2025-09-22
+
 **Summary:** Made GonkUI API URL configurable in the UI.
 **Findings:**
 Re-applied previous fixes for scripts/gonkui and dependencies due to environment reset. Modified index.html to add a new input for the API URL. Refactored app.js to manage the URL via localStorage, making it persistent. Removed the corresponding backend logic from app.py.
