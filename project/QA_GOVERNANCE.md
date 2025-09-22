@@ -48,6 +48,11 @@ The primary mechanism for enforcing these policies is the unified linter script,
 - **Rule:** If any code or documentation file is changed, the three project log files (`project/logs/ACTIVITY.md`, `project/logs/SESSION_LOG.md`, `project/logs/CURRENT_STATE.md`) must also be modified.
 - **Enforcement:** The linter will fail if the log files are not included in a commit that contains other code/doc changes. This serves as a reminder to the developer to manually log their work using the `linter.py --log` command.
 
+### 3.7. Code File Index Enforcement
+- **Trigger:** Any addition, deletion, or renaming of a code file (`.py`, `.go`, `.js`).
+- **Rule:** The canonical `api/docs/CODE_FILE_INDEX.md` must be updated to reflect the change. This file serves as the single source of truth for all code files in the repository.
+- **Enforcement:** A dedicated CI script (`scripts/validate_code_index.py`) will run on every pull request. It compares the contents of the index with an actual file listing of the repository and fails if they do not match.
+
 ## 4. CI/CD & Pull Request (PR) Enforcement
 The project uses a multi-stage CI/CD pipeline defined in `.github/workflows/ci.yml` to enforce quality gates. The pipeline is structured to be efficient by separating documentation and code checks.
 

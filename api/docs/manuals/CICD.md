@@ -29,7 +29,7 @@ The full CI/CD pipeline is defined in `.github/workflows/ci.yml`. It is triggere
 -   `lint`: Runs linters for different languages (`ruff` for Python, `golangci-lint` for Go) to enforce code style and catch common errors.
 -   `type-check`: Runs `mypy` to perform static type checking on the Python codebase.
 -   `security-scan`: Runs `bandit` for static application security testing and `safety` to check for known vulnerabilities in dependencies.
--   `doc-linter`: Runs our custom documentation linter to ensure documentation is updated alongside code.
+-   `doc-linter`: Runs our custom documentation linter to ensure documentation is updated alongside code. This includes a check to validate that all code files are registered in the `api/docs/CODE_FILE_INDEX.md`.
 
 ---
 

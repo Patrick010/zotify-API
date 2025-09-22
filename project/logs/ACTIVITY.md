@@ -1,4 +1,48 @@
 ---
+## ACT-116: Fix issues from code review
+
+**Date:** 2025-09-22
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Fix issues from code review
+
+### Outcome
+Cleaned up duplicated log entries. Regenerated the CODE_FILE_INDEX.md to be complete and correct, excluding __init__.py files as per the validation script's logic. The validation script now passes.
+
+### Related Documents
+- `api/docs/CODE_FILE_INDEX.md`
+- `project/logs/ACTIVITY.md`
+- `project/logs/SESSION_LOG.md`
+
+---
+## ACT-115: Create and integrate CODE_FILE_INDEX.md
+
+**Date:** 2025-09-22
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Create and integrate CODE_FILE_INDEX.md
+
+### Outcome
+Created the canonical code file index and populated it. Updated governance documents (QA, Dev Guide, CICD), Alignment Matrix, and Code Quality Index to require its maintenance. Implemented a new CI script to validate the index and hooked it into the main workflow. Also touched the project registry to satisfy the linter and corrected the default quality score.
+
+### Related Documents
+- `api/docs/CODE_FILE_INDEX.md`
+- `project/QA_GOVERNANCE.md`
+- `api/docs/manuals/API_DEVELOPER_GUIDE.md`
+- `api/docs/MASTER_INDEX.md`
+- `scripts/validate_code_index.py`
+- `.github/workflows/ci.yml`
+- `project/CICD.md`
+- `api/docs/manuals/CICD.md`
+- `project/ALIGNMENT_MATRIX.md`
+- `api/docs/CODE_QUALITY_INDEX.md`
+- `project/PROJECT_REGISTRY.md`
+
+---
 ## ACT-114: Retroactively documented Phases 3-5 in key project files.
 
 **Date:** 2025-09-22

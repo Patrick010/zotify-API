@@ -114,3 +114,9 @@ This score assesses the implementation's clarity, efficiency, structure, and tes
 | `Gonk/GonkUI/static/app.js` | C | B | C | Excellent inline comments, but lacks function-level docstrings for complex UI state management. |
 | `Gonk/GonkUI/static/styles.css` | A | A | A | Excellent use of CSS variables and a clear, logical structure. |
 | `Gonk/GonkUI/templates/index.html` | A | A | A | Clean, semantic HTML5 structure. |
+
+## Scripts Module
+
+| File Path | Documentation Score | Code Score | Overall Score | Notes |
+|---|:---:|:---:|:---:|---|
+| `scripts/validate_code_index.py` | F | F | F | New file, pending review. |

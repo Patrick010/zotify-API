@@ -29,6 +29,7 @@ Follow these steps for every contribution:
     Create an Issue: Before starting work, ensure there is a GitHub issue describing the bug or feature.
     Create a Branch: Create a new feature branch from main.
     Implement Changes: Write your code and the corresponding documentation updates.
+    Update Code File Index: If you add, remove, or rename a code file, you must update `api/docs/CODE_FILE_INDEX.md`.
     Run Quality Checks: Ensure all quality checks (see section below) pass before committing.
     Update Logs: Use the log-work.py script to record your changes. This script automates the process of updating the "Trinity" logs (ACTIVITY.md, SESSION_LOG.md, and CURRENT_STATE.md). See AGENTS.md for full instructions.
 

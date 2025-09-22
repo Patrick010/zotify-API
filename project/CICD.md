@@ -40,7 +40,7 @@ When a developer submits a pull request, a series of automated jobs run to valid
 
 -   **`doc-linter`**
     -   **Purpose:** To enforce our "living documentation" policy automatically.
-    -   **What it does:** Runs a custom-built script that ensures that whenever a developer changes code, they also make a corresponding update to the project's documentation in the same pull request.
+    -   **What it does:** Runs a custom-built script that ensures that whenever a developer changes code, they also make a corresponding update to the project's documentation in the same pull request. This includes a check to validate that all code files are registered in the `api/docs/CODE_FILE_INDEX.md`.
 
 ---
 

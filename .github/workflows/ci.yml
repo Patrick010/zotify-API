@@ -63,6 +63,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install PyYAML mkdocs mkdocs-material mkdocs-monorepo-plugin
 
+    - name: Validate Code File Index
+      run: python3 scripts/validate_code_index.py
+
     - name: Run documentation linter
       run: python3 scripts/linter.py --from-file changed_files.txt
 

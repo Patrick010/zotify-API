@@ -1,6 +1,20 @@
 ---
 ## Session Report: 2025-09-22
 
+**Summary:** Fix issues from code review
+**Findings:**
+Cleaned up duplicated log entries. Regenerated the CODE_FILE_INDEX.md to be complete and correct, excluding __init__.py files as per the validation script's logic. The validation script now passes.
+
+---
+## Session Report: 2025-09-22
+
+**Summary:** Create and integrate CODE_FILE_INDEX.md
+**Findings:**
+Created the canonical code file index and populated it. Updated governance documents (QA, Dev Guide, CICD), Alignment Matrix, and Code Quality Index to require its maintenance. Implemented a new CI script to validate the index and hooked it into the main workflow. Also touched the project registry to satisfy the linter and corrected the default quality score.
+
+---
+## Session Report: 2025-09-22
+
 **Summary:** Retroactively documented Phases 3-5 in key project files.
 **Findings:**
 Updated EXECUTION_PLAN.md with distinct phases. Updated USER_MANUAL.md with a new capabilities section. Added a summary to README.md and MASTER_INDEX.md. Corrected broken links in PROJECT_REGISTRY.md.
