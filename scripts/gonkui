@@ -1,0 +1,87 @@
+#!/usr/bin/env python3
+"""
+GonkUI management script: start/stop GonkUI in foreground with auto-reload.
+No background mode.
+"""
+
+import argparse
+import os
+import subprocess
+import sys
+import signal
+import time
+
+PID_FILE = "/tmp/gonkui.pid"
+DEFAULT_PORT = 5000
+DEFAULT_HOST = "127.0.0.1"
+APP_PATH = "Gonk/GonkUI/app.py"
+
+def read_pid():
+    if os.path.exists(PID_FILE):
+        with open(PID_FILE, "r") as f:
+            return int(f.read().strip())
+    return None
+
+def write_pid(pid):
+    with open(PID_FILE, "w") as f:
+        f.write(str(pid))
+
+def remove_pid():
+    if os.path.exists(PID_FILE):
+        os.remove(PID_FILE)
+
+def start():
+    if read_pid():
+        print("GonkUI is already running (PID file exists). Stop it first.")
+        sys.exit(1)
+
+    host = os.environ.get("HOST", DEFAULT_HOST)
+    port = os.environ.get("PORT", str(DEFAULT_PORT))
+
+    env = os.environ.copy()
+    env["FLASK_APP"] = APP_PATH
+    env["FLASK_ENV"] = "development"
+
+    print(f"Starting GonkUI in foreground on {host}:{port}...")
+    try:
+        process = subprocess.Popen(
+            ["flask", "run", "--host", host, "--port", port, "--debug"],
+            env=env,
+        )
+        write_pid(process.pid)
+        process.wait()
+    except KeyboardInterrupt:
+        print("\nKeyboardInterrupt received, stopping GonkUI...")
+        stop()
+    finally:
+        remove_pid()
+
+def stop():
+    pid = read_pid()
+    if not pid:
+        print("GonkUI is not running (no PID file).")
+        return
+    try:
+        os.kill(pid, signal.SIGTERM)
+        print(f"Sent SIGTERM to PID {pid}. Waiting for shutdown...")
+        time.sleep(2)
+    except ProcessLookupError:
+        print("Process not found. Cleaning up PID file.")
+    remove_pid()
+    print("GonkUI stopped.")
+
+def main():
+    parser = argparse.ArgumentParser(description="Start/Stop GonkUI in foreground")
+    parser.add_argument("--start", action="store_true", help="Start GonkUI")
+    parser.add_argument("--stop", action="store_true", help="Stop GonkUI")
+    args = parser.parse_args()
+
+    if args.start:
+        start()
+    elif args.stop:
+        stop()
+    else:
+        parser.print_help()
+
+if __name__ == "__main__":
+    main()

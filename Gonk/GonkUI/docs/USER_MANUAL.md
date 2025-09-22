@@ -71,6 +71,41 @@ You should now see the Gonk Test UI interface.
 
 ---
 
+## Managing GonkUI
+
+GonkUI can be started and stopped using the provided management script `scripts/gonkui`.
+
+### Start GonkUI
+
+```bash
+./scripts/gonkui --start
+```
+-   Runs in foreground only.
+-   Auto-reloads on code changes (developer mode enabled).
+-   Logs are printed directly to the terminal.
+-   Default host/port: 127.0.0.1:5000.
+-   To override host/port, set environment variables:
+```bash
+export HOST=0.0.0.0
+export PORT=8000
+./scripts/gonkui --start
+```
+### Stop GonkUI
+```bash
+./scripts/gonkui --stop
+```
+-   Stops the running GonkUI process using the PID file `/tmp/gonkui.pid`.
+-   If the PID file exists but the process is gone, it will be cleaned up automatically.
+
+### Notes
+-   **Foreground-only**: Do not expect the script to daemonize. Keep the terminal open while running.
+-   **Auto-reload**: Any code changes in `Gonk/GonkUI/app.py` or imported modules will trigger a reload automatically.
+-   **Logging**: All logs appear in the terminal. Use `Ctrl+C` to stop.
+-   **PID management**: The script uses `/tmp/gonkui.pid`. Do not manually delete this file while GonkUI is running.
+-   **Developer workflow**: This is suitable for local development and debugging. Do not use in production.
+
+---
+
 ## Using the UI
 
 ### Main Interface
@@ -120,31 +155,16 @@ On page load, the UI automatically checks with the Zotify API to see if you are 
 
 ### GonkUI – JWT Mock Panel
 
-The JWT Mock Panel is a dedicated section in the GonkUI for testing the local JWT authentication provided by the Zotify API. It allows you to register new users, log in to get a token, and then use that token to access protected endpoints.
-
-#### Registering a New User
-Before you can log in, you may need to register a new user.
-1.  Locate the **"Register"** panel within the JWT CLI Panel.
-2.  Enter your desired username in the "Username" field.
-3.  Enter your desired password in the "Password" field.
-4.  Click the **"Register"** button.
-5.  A status message will appear below the button.
-    - On success, it will say "Registration successful! Please log in."
-    - If there's an error (e.g., the username already exists), it will display a failure message.
-
-#### Logging In
 1. Open GonkUI in browser.
 2. Navigate to the JWT CLI Panel.
-3. In the **"Login"** panel, enter the username and password for the user you just registered.
-4. Click the **"Login"** button.
-   - On success, a "Login successful!" message will appear.
+3. Enter username/password and click "Login".
    - Verbose mode will display JWT payload and API request details.
-5. Click "Get Profile" to fetch profile info.
-6. Update preferences using the form and click "Update Preferences".
-7. Fetch liked tracks by clicking "Fetch Liked".
-8. Fetch listening history by clicking "Fetch History".
-9. Clear history by clicking "Clear History".
-10. Verbose output panel displays request/response details for all actions.
+4. Click "Get Profile" to fetch profile info.
+5. Update preferences using the form and click "Update Preferences".
+6. Fetch liked tracks by clicking "Fetch Liked".
+7. Fetch listening history by clicking "Fetch History".
+8. Clear history by clicking "Clear History".
+9. Verbose output panel displays request/response details for all actions.
 
 ---
 

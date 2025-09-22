@@ -1,18 +1,20 @@
 ---
-## ACT-111: Documented the new user registration feature in the GonkUI User Manual.
+## ACT-111: Created a management script for GonkUI and updated documentation.
 
-**Date:** 2025-09-21
+**Date:** 2025-09-22
 **Status:** ✅ Done
 **Assignee:** Jules
 
 ### Objective
-Documented the new user registration feature in the GonkUI User Manual.
+Created a management script for GonkUI and updated documentation.
 
 ### Outcome
-Successfully added a new section to the user manual explaining the registration process. The documentation now reflects the current state of the GonkUI application.
+Created scripts/gonkui for starting/stopping the UI. Made it executable. Added a 'Managing GonkUI' section to the user manual. Fixed several bugs in the GonkUI application (app.py) and its dependencies to ensure the script was verifiable and worked as specified.
 
 ### Related Documents
+- `scripts/gonkui`
 - `Gonk/GonkUI/docs/USER_MANUAL.md`
+- `Gonk/GonkUI/app.py`
 
 ---
 ## ACT-110: docs: Create handover brief and fix startup issues

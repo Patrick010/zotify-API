@@ -1,9 +1,9 @@
 ---
-## Session Report: 2025-09-21
+## Session Report: 2025-09-22
 
-**Summary:** Documented the new user registration feature in the GonkUI User Manual.
+**Summary:** Created a management script for GonkUI and updated documentation.
 **Findings:**
-Successfully added a new section to the user manual explaining the registration process. The documentation now reflects the current state of the GonkUI application.
+Created scripts/gonkui for starting/stopping the UI. Made it executable. Added a 'Managing GonkUI' section to the user manual. Fixed several bugs in the GonkUI application (app.py) and its dependencies to ensure the script was verifiable and worked as specified.
 
 ---
 ## Session Report: 2025-09-21

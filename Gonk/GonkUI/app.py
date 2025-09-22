@@ -20,8 +20,10 @@ app.register_blueprint(jwt_ui)
 def index():
     # Use the same default dev key as the main API for convenience
     admin_api_key = os.environ.get("ADMIN_API_KEY", "zotify-admin-key-dev")
+    # When run with `flask run`, args aren't parsed, so get from env var with a fallback
+    api_url = os.environ.get("API_URL", "http://localhost:8000")
     return render_template(
-        "index.html", api_url=args.api_url, admin_api_key=admin_api_key
+        "index.html", api_url=api_url, admin_api_key=admin_api_key
     )
 
 
