@@ -1,6 +1,13 @@
 ---
 ## Session Report: 2025-09-21
 
+**Summary:** Documented the new user registration feature in the GonkUI User Manual.
+**Findings:**
+Successfully added a new section to the user manual explaining the registration process. The documentation now reflects the current state of the GonkUI application.
+
+---
+## Session Report: 2025-09-21
+
 **Summary:** docs: Create handover brief and fix startup issues
 **Findings:**
 Created a detailed handover brief for the next developer. Fixed several critical startup issues, including missing dependencies (python-jose, passlib), a missing storage directory, and incorrect Python paths for the Gonk project.

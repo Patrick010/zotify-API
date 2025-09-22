@@ -1,4 +1,20 @@
 ---
+## ACT-111: Documented the new user registration feature in the GonkUI User Manual.
+
+**Date:** 2025-09-21
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Documented the new user registration feature in the GonkUI User Manual.
+
+### Outcome
+Successfully added a new section to the user manual explaining the registration process. The documentation now reflects the current state of the GonkUI application.
+
+### Related Documents
+- `Gonk/GonkUI/docs/USER_MANUAL.md`
+
+---
 ## ACT-110: docs: Create handover brief and fix startup issues
 
 **Date:** 2025-09-21
