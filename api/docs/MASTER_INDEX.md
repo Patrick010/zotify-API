@@ -1,5 +1,7 @@
 # API Documentation Master Index
 
+"Phases 3–5 deliver the full core API, user authentication with JWT, endpoint protection, notifications preference, and comprehensive testing. Users can manage profiles, preferences, liked tracks, playback history, and interact with all content endpoints. The Gonk CLI and GonkUI provide an interface for all these actions, with the ability to toggle between simulated and real API testing. Documentation, examples, and OpenAPI specs are fully updated."
+
 This document serves as the central index for all documentation related to the Zotify API and its sub-modules. All new documentation files must be registered here.
 
 ## Core API

@@ -1,4 +1,24 @@
 ---
+## ACT-114: Retroactively documented Phases 3-5 in key project files.
+
+**Date:** 2025-09-22
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Retroactively documented Phases 3-5 in key project files.
+
+### Outcome
+Updated EXECUTION_PLAN.md with distinct phases. Updated USER_MANUAL.md with a new capabilities section. Added a summary to README.md and MASTER_INDEX.md. Corrected broken links in PROJECT_REGISTRY.md.
+
+### Related Documents
+- `project/EXECUTION_PLAN.md`
+- `api/docs/manuals/USER_MANUAL.md`
+- `api/docs/MASTER_INDEX.md`
+- `README.md`
+- `project/PROJECT_REGISTRY.md`
+
+---
 ## ACT-113: Refactored GonkUI README to be a high-level overview.
 
 **Date:** 2025-09-22

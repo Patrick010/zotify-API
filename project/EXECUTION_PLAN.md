@@ -17,18 +17,37 @@ This document provides a detailed breakdown of the tasks required to fulfill the
 - ✅ Establish basic Makefile and documentation references.
 - ✅ Code QA
 
-## Phase 3–5: Core API + Testing
+## Phase 3 – Core API Implementation
 **Goal:** Deliver core API functionality and test coverage.
 **Status:** ✅ Done
 **Steps:**
-- ✅ Implement core endpoints: albums, tracks, metadata.
-- ✅ Add notification endpoints, ensure proper response models.
-- ✅ Wire up Pytest suite with example test cases covering core API.
-- ✅ Integrate documentation and API specs (OpenAPI/Swagger). # JULES-NOTE: Completed. A new, canonical OpenAPI spec has been generated and integrated into the documentation.
-- ✅ Add reverse proxy support for `/docs`.
-- 🟡 Stub initial user system wiring (authentication placeholder). # JULES-NOTE: This is largely complete. Functional endpoints for profile, preferences, etc. exist.
-- ✅ Achieve stable CI passes across environments.
-- [x] Code QA
+- ✅ Implemented core endpoints: albums, tracks, metadata, downloads, playlists.
+- ✅ Notification endpoints added with proper response models.
+- ✅ Pytest suite covering core API.
+- ✅ OpenAPI/Swagger integration.
+- ✅ Reverse proxy support for /docs.
+- ✅ Stable CI passes and code QA.
+
+## Phase 4 / 3a – Authentication & User System
+**Goal:** Implement a robust authentication system and user-specific features.
+**Status:** ✅ Done
+**Steps:**
+- ✅ JWT-based authentication implemented.
+- ✅ /auth/register and /auth/login endpoints.
+- ✅ User-specific endpoints protected: /user/profile, /user/preferences, /user/liked, /user/history.
+- ✅ Notifications preference added to user schema and database; migration script included.
+- ✅ Tests for auth flow and protected endpoints.
+- ✅ Documentation updated (API_REFERENCE.md, OpenAPI spec).
+
+## Phase 5 / 3b – Testing, Documentation & Gonk Integration
+**Goal:** Provide comprehensive testing tools and user documentation.
+**Status:** ✅ Done
+**Steps:**
+- ✅ Gonk CLI (Gonk/GonkCLI) with login, profile, preferences, liked, history commands.
+- ✅ GonkUI (Gonk/GonkUI) panel for the same CLI functionality.
+- ✅ Internal/API JWT testing toggle (--api for CLI, toggle button in UI).
+- ✅ Expanded tests covering CLI, UI, and JWT integration.
+- ✅ Comprehensive user manual with examples added.
 
 ## Phase 6: Fork-Specific Enhancements
 **Goal:** Implement enhancements specific to client forks and improve docs.

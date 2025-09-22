@@ -100,3 +100,27 @@ When an API request fails, you will receive a JSON response with a standardized 
 }
 ```
 For a full list of error codes and their meanings, please consult the `ERROR_HANDLING_GUIDE.md`.
+
+## 5. What You Can Do With the API (Phases 1–5 Complete)
+
+The current version of the Zotify API provides a comprehensive set of features for user management, music library interaction, and system control. Here is a summary of the available capabilities:
+
+### User Management & Authentication
+*   **Register and Login:** Create a new account and authenticate to receive a JWT token via the `/auth/register` and `/auth/login` endpoints.
+*   **Manage Profile:** Access and update your user profile information through the `/user/profile` endpoint.
+*   **Manage Preferences:** View and update your application preferences, including the `notifications.enabled` toggle, at `/user/preferences`.
+*   **Manage Liked Tracks:** Add, remove, and view your list of liked tracks at `/user/liked`.
+*   **View Playback History:** Access your track playback history via the `/user/history` endpoint.
+
+### Music Library Interaction
+*   **Interact with Content:** Perform standard operations on albums, tracks, and playlists using their respective endpoints.
+*   **Manage Downloads:** Submit tracks for download and monitor their progress through the `/downloads` endpoint.
+*   **Receive Notifications:** View system notifications at the `/notifications` endpoint.
+
+### System & Configuration
+*   **Trigger System Actions:** Initiate system-level tasks like cache clearing via the `/system/clear-cache` endpoint.
+*   **Monitor System Status:** Check on the status of downloads, sync processes, and system configurations through their respective endpoints.
+
+### Gonk Testing Tools
+*   **Use the Gonk CLI:** Perform all user actions (login, profile/preference management, liked tracks, history) from the command line. The CLI can be pointed at a real API instance using the `--api` flag.
+*   **Use the GonkUI:** Access the same functionality through a convenient web interface, which includes a toggle to switch between an internal mock JWT and a real API JWT for flexible testing.

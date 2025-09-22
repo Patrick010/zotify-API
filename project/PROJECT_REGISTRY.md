@@ -42,7 +42,8 @@ This document serves as the master file, or single source of truth, for tracking
 | **Project Backlog** | [`BACKLOG.md`](./BACKLOG.md) | A tactical backlog of tasks managed by the formal qualification process defined in the PID. |
 | **Loose Ends Backlog** | [`LOOSE_ENDS_BACKLOG.md`](./LOOSE_ENDS_BACKLOG.md) | A temporary backlog for tracking design and documentation tasks that were discussed but not fully integrated. |
 | **Gap Analysis Template** | [`process/GAP_ANALYSIS_TEMPLATE.md`](./process/GAP_ANALYSIS_TEMPLATE.md) | A standardized template for developers to use when performing a gap analysis. |
-| **Traceability Matrix** | [`TRACEABILITY_MATRIX.md`](./TRACEABILITY_MATRIX.md) | A live matrix mapping requirements from use cases and design docs to implementation and test status. |
+| **Alignment Matrix** | [`ALIGNMENT_MATRIX.md`](./ALIGNMENT_MATRIX.md) | The primary, up-to-date matrix mapping requirements to design, implementation, and test status. |
+| **Traceability Matrix (Archived)** | [`archive/TRACEABILITY_MATRIX.md`](./archive/TRACEABILITY_MATRIX.md) | An archived matrix mapping requirements from use cases and design docs to implementation and test status. |
 | **Use Cases** | [`USECASES.md`](./USECASES.md) | A collection of user-driven scenarios and requirements for the API. |
 | **Use Case Gap Analysis** | [`USECASES_GAP_ANALYSIS.md`](./USECASES_GAP_ANALYSIS.md) | An analysis of the gaps between the desired use cases and the current implementation. |
 | **Task Checklist** | [`TASK_CHECKLIST.md`](./TASK_CHECKLIST.md) | A checklist to be used for every task to ensure compliance with project standards. |
@@ -56,7 +57,7 @@ This document serves as the master file, or single source of truth, for tracking
 | Document | Location | Description |
 |---|---|---|
 | **First Audit** | [`audit/FIRST_AUDIT.md`](./audit/FIRST_AUDIT.md) | The initial audit report for the project. |
-| **HLD/LLD Alignment Plan** | [`audit/HLD_LLD_ALIGNMENT_PLAN.md`](./audit/HLD_LLD_ALIGNMENT_PLAN.md) | The phased plan for bringing design documents into alignment with the codebase. |
+| **HLD/LLD Alignment Plan (Archived)** | [`archive/audit/HLD_LLD_ALIGNMENT_PLAN.md`](./archive/audit/HLD_LLD_ALIGNMENT_PLAN.md) | The phased plan for bringing design documents into alignment with the codebase. |
 | **Audit Log: Phase 1** | [`audit/AUDIT-phase-1.md`](./audit/AUDIT-phase-1.md) | Log of activities and findings from Phase 1 of the alignment plan. |
 | **Audit Log: Phase 2** | [`audit/AUDIT-phase-2.md`](./audit/AUDIT-phase-2.md) | Log of activities and findings from Phase 2 of the alignment plan. |
 | **Audit Log: Phase 3** | [`audit/AUDIT-PHASE-3.md`](./audit/AUDIT-PHASE-3.md) | Log of activities and findings from Phase 3 of the alignment plan. |
