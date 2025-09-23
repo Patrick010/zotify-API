@@ -1,18 +1,9 @@
 ---
-    ## Session Report: 2025-09-23
+## Session Report: 2025-09-23
 
-    **Objective:** To improve the project's file structure by moving and deleting misplaced and unnecessary files.
-**Summary:** Clean up root and api directories
-    **Findings:**
-    Moved verification reports to . Deleted temporary and obsolete files (, ).
-
----
-    ## Session Report: 2025-09-23
-
-    **Objective:** To restore the --objective argument to the linter script to align with the project's documentation and provide more detailed logging.
 **Summary:** Restore --objective option in linter.py
-    **Findings:**
-    The --objective argument has been successfully restored to the linter.py script. The logging functions have been updated to include the objective in all three log files. The AGENTS.md documentation has been updated to reflect the change.
+**Findings:**
+The --objective argument has been successfully restored to the linter.py script. The logging functions have been updated to include the objective in all three log files. The AGENTS.md documentation has been updated to reflect the change.
 
 ---
 ## Session Report: 2025-09-22

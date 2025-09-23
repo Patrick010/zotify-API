@@ -61,20 +61,14 @@ def format_activity_log(act_number, summary, objective, findings, files=None):
 {related_docs_section}""".strip()
 
 
-def format_session_log(summary, objective, findings):
+def format_session_log(summary, findings):
     """Formats the log entry for SESSION_LOG.md."""
-    objective_section = f"**Objective:** {objective}\n" if objective else ""
+    return f"""---
+## Session Report: {get_formatted_date()}
 
-    return textwrap.dedent(
-        f"""
-    ---
-    ## Session Report: {get_formatted_date()}
-
-    {objective_section}**Summary:** {summary}
-    **Findings:**
-    {findings}
-    """
-    )
+**Summary:** {summary}
+**Findings:**
+{findings}"""
 
 
 def format_current_state(summary, objective, next_steps):
@@ -128,7 +122,7 @@ def do_logging(summary: str, objective: str, findings: str, next_steps: str, fil
     activity_entry = format_activity_log(act_number, summary, objective, findings, files)
     prepend_to_file("project/logs/ACTIVITY.md", activity_entry)
 
-    session_entry = format_session_log(summary, objective, findings)
+    session_entry = format_session_log(summary, findings)
     prepend_to_file("project/logs/SESSION_LOG.md", session_entry)
 
     current_state_content = format_current_state(summary, objective, next_steps)

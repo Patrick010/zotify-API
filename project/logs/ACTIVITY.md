@@ -1,17 +1,4 @@
 ---
-## ACT-118: Clean up root and api directories
-
-**Date:** 2025-09-23
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Objective
-To improve the project's file structure by moving and deleting misplaced and unnecessary files.
-
-### Outcome
-Moved verification reports to . Deleted temporary and obsolete files (, ).
-
----
 ## ACT-117: Restore --objective option in linter.py
 
 **Date:** 2025-09-23
