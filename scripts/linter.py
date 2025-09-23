@@ -37,7 +37,7 @@ def get_next_act_number(file_path="project/logs/ACTIVITY.md"):
         return 1
 
 
-def format_activity_log(act_number, summary, objective, findings, files=None):
+def format_activity_log(act_number, summary, findings, files=None):
     """Formats the log entry for ACTIVITY.md."""
     related_docs_section = ""
     if files:
@@ -53,7 +53,7 @@ def format_activity_log(act_number, summary, objective, findings, files=None):
 **Assignee:** Jules
 
 ### Objective
-{objective or summary}
+{summary}
 
 ### Outcome
 {findings}
@@ -61,33 +61,29 @@ def format_activity_log(act_number, summary, objective, findings, files=None):
 {related_docs_section}""".strip()
 
 
-def format_session_log(summary, objective, findings):
+def format_session_log(summary, findings):
     """Formats the log entry for SESSION_LOG.md."""
-    objective_section = f"**Objective:** {objective}\n" if objective else ""
-
     return textwrap.dedent(
         f"""
     ---
     ## Session Report: {get_formatted_date()}
 
-    {objective_section}**Summary:** {summary}
+    **Summary:** {summary}
     **Findings:**
     {findings}
     """
     )
 
 
-def format_current_state(summary, objective, next_steps):
+def format_current_state(summary, next_steps):
     """Formats the content for CURRENT_STATE.md."""
-    objective_section = f"## Objective\n{objective}\n\n" if objective else ""
-
     return textwrap.dedent(
         f"""
     # Project State as of {get_formatted_date()}
 
     **Status:** Live Document
 
-{objective_section}    ## 1. Session Summary & Accomplishments
+    ## 1. Session Summary & Accomplishments
     {summary}
 
     ## 2. Known Issues & Blockers
@@ -121,17 +117,17 @@ def write_to_file(file_path, content):
         print(f"Error updating {file_path}: {e}")
 
 
-def do_logging(summary: str, objective: str, findings: str, next_steps: str, files: List[str]) -> int:
+def do_logging(summary: str, findings: str, next_steps: str, files: List[str]) -> int:
     """The main logic for the logging functionality."""
     print("--- Running Logging ---")
     act_number = get_next_act_number()
-    activity_entry = format_activity_log(act_number, summary, objective, findings, files)
+    activity_entry = format_activity_log(act_number, summary, findings, files)
     prepend_to_file("project/logs/ACTIVITY.md", activity_entry)
 
-    session_entry = format_session_log(summary, objective, findings)
+    session_entry = format_session_log(summary, findings)
     prepend_to_file("project/logs/SESSION_LOG.md", session_entry)
 
-    current_state_content = format_current_state(summary, objective, next_steps)
+    current_state_content = format_current_state(summary, next_steps)
     write_to_file("project/logs/CURRENT_STATE.md", current_state_content)
     print("--- Logging Complete ---")
     return 0
@@ -349,15 +345,11 @@ def main() -> int:
     parser.add_argument(
         "--log",
         action="store_true",
-        help="Run in logging mode. Requires --summary, --findings, and --next-steps.",
+        help="Run in logging mode. Requires --summary, --objective, and --outcome.",
     )
     parser.add_argument(
         "--summary",
         help="[Logger] A one-line summary of the task, used as the entry title.",
-    )
-    parser.add_argument(
-        "--objective",
-        help="[Logger] The high-level purpose of the task.",
     )
     parser.add_argument(
         "--findings",
@@ -396,11 +388,7 @@ def main() -> int:
             return 1
         # Run logging and exit
         return do_logging(
-            args.summary,
-            args.objective,
-            args.findings,
-            args.next_steps,
-            args.files or [],
+            args.summary, args.findings, args.next_steps, args.files or []
         )
 
     # --- Linter Mode ---
