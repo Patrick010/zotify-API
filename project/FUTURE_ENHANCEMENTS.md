@@ -44,6 +44,10 @@ This section lists specific technical features and improvements that are candida
 *   **Snitch Module Enhancement:**
     *   Investigate the further development of the conceptual `Snitch` module.
     *   Potential enhancements include running it as a persistent background service, developing it into a browser plugin for seamless integration, or expanding it to handle multi-service authentication flows.
+*   **Dynamic `dbstudio` Plugin for Database Browsing:**
+    -   Implement a modular, backend-agnostic, and role-aware database browser that can be dynamically mounted on the core FastAPI application in development environments. This will replace the current tightly-coupled SQLite browser in the `GonkUI`. See the full proposal at [`DBSTUDIO_PLUGIN.md`](./proposals/DBSTUDIO_PLUGIN.md).
+*   **Dynamic `GonkUI` Plugin for Developer UI:**
+    -   Convert the existing standalone `Gonk/GonkUI` Flask application into a dynamic plugin. This will create a modular, installable developer UI that is consistent with the main API's FastAPI framework and can be safely loaded only in development environments. See the full proposal at [`GONKUI_PLUGIN.md`](./proposals/GONKUI_PLUGIN.md).
 *   **Dynamic Logging Sink Plugin System:**
     -   Implement a dynamic plugin system for the Flexible Logging Framework, based on Python's `entry_points`. This will allow third-party developers to create and install their own custom sink types without modifying the core API code. See the full proposal at [`DYNAMIC_PLUGIN_PROPOSAL.md`](./proposals/DYNAMIC_PLUGIN_PROPOSAL.md).
 *   **Plugin-Driven Multi-Source Metadata System:**

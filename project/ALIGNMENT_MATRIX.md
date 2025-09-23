@@ -89,6 +89,8 @@ This document maintains a live mapping between strategic goals, design documents
 | AR-052 | FE-11 | Low-Code Platform Integration | ❌ | LOW_CODE_PROPOSAL.md | |
 | AR-053 | FE-12 | Home Automation Integration | ❌ | HOME_AUTOMATION_PROPOSAL.md | |
 | AR-054 | FE-13 | Plugin-Driven Metadata System | ❌ | MULTI_SOURCE_METADATA_PROPOSAL.md | |
+| AR-063 | FE-15 | Dynamic dbstudio Plugin | ❌ | [DBSTUDIO_PLUGIN.md](./proposals/DBSTUDIO_PLUGIN.md) | New proposal for a modular database browser. |
+| AR-064 | FE-16 | Dynamic GonkUI Plugin | ❌ | [GONKUI_PLUGIN.md](./proposals/GONKUI_PLUGIN.md) | New proposal to replace the Flask-based UI with a modular plugin. |
 
 ---
 
