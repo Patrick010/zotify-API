@@ -17,7 +17,6 @@ nav:
   - 'Modules': 'MODULES.md'
   - 'Phases': 'PHASES.md'
   - 'Test Runbook': 'TEST_RUNBOOK.md'
-  - 'Code Quality': 'CODE_QUALITY_INDEX.md'
   - 'Design':
     - 'Phase 2 - Secure Callback': 'PHASE_2_SECURE_CALLBACK.md'
     - 'Phase 2 - Zero Trust': 'PHASE_2_ZERO_TRUST_DESIGN.md'

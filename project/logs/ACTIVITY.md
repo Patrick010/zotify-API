@@ -1,4 +1,26 @@
 ---
+## ACT-117: Fixed all mkdocs build warnings by updating navigation, fixing broken links, and correcting documentation anchors.
+
+**Date:** 2025-09-23
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Fixed all mkdocs build warnings by updating navigation, fixing broken links, and correcting documentation anchors.
+
+### Outcome
+The mkdocs build command now runs cleanly with no warnings. All documentation is correctly indexed and linked.
+
+### Related Documents
+- `snitch/mkdocs.yml`
+- `Gonk/GonkUI/mkdocs.yml`
+- `mkdocs.yml`
+- `api/docs/MASTER_INDEX.md`
+- `api/docs/manuals/API_DEVELOPER_GUIDE.md`
+- `api/docs/manuals/USER_MANUAL.md`
+- `api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md`
+
+---
 ## ACT-116: Fix issues from code review
 
 **Date:** 2025-09-22

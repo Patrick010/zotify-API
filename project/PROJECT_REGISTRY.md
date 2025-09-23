@@ -16,6 +16,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **Project Registry** | [`PROJECT_REGISTRY.md`](./PROJECT_REGISTRY.md) | This document, the master index for all project artifacts. |
 | **Template Registry** | [`../templates/PROJECT_REGISTRY.md`](../templates/PROJECT_REGISTRY.md) | A registry of all reusable documentation templates. |
 | **Handover Brief** | [`HANDOVER_BRIEF.md`](./HANDOVER_BRIEF.md) | A detailed handover brief created at the request of the user. Not to be modified during the session. |
+| **Documentation Maintenance** | [`../mkdocs.yml`](../mkdocs.yml) | A record of the work done to fix `mkdocs` build warnings. |
 | **Onboarding Guide** | [`ONBOARDING.md`](./ONBOARDING.md) | The primary entry point and guide for new developers to get up to speed on the project. |
 | **Current State** | [`CURRENT_STATE.md`](./logs/CURRENT_STATE.md) | **High-Level Snapshot.** A brief, narrative summary of the entire project's state at the end of a work session. It should answer: What was just accomplished? What is the next immediate goal? Are there any blockers? |
 | **Session Log** | [`SESSION_LOG.md`](./logs/SESSION_LOG.md) | **Session-Level Reporting.** A detailed log of the activities, findings, and outcomes within a single work session. This is for project-related reporting and can be compared to the audit-specific logs (e.g., `AUDIT-PHASE-5.md`). |

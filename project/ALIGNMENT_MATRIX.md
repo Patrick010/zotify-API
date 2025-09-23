@@ -58,6 +58,7 @@ This document maintains a live mapping between strategic goals, design documents
 | AR-029 | GDPR Compliance Subsystem | FE-14 | ❌ | [Security Model](HIGH_LEVEL_DESIGN.md#hld-security-model) | [Privacy Subsystem](LOW_LEVEL_DESIGN.md#lld-privacy-subsystem) | `api/src/zotify_api/routes/privacy.py` | N/A | `api/docs/system/PRIVACY_COMPLIANCE.md` | Endpoints for data export and deletion. |
 | **Project Governance** | | | | | | | | | |
 | AR-030 | Task & Doc Hygiene | | ✅ | [Doc Governance](HIGH_LEVEL_DESIGN.md#hld-documentation-governance) | [Ongoing Maintenance](LOW_LEVEL_DESIGN.md#lld-ongoing-maintenance) | `scripts/linter.py` | | `project/TASK_CHECKLIST.md` | Enforced by linter. |
+| AR-030a | Documentation Maintenance | | ✅ | [Doc Governance](HIGH_LEVEL_DESIGN.md#hld-documentation-governance) | [Ongoing Maintenance](LOW_LEVEL_DESIGN.md#lld-ongoing-maintenance) | `mkdocs.yml` | N/A | `api/docs/` | Fixed `mkdocs` build warnings. |
 | **System Requirements (NFRs)** | | | | | | | | | |
 | AR-031 | Test Coverage >90% | SYS-01 | ❌ | [Testing NFR](HIGH_LEVEL_DESIGN.md#hld-non-functional-requirements) | | `pytest --cov` | | | CI gating not implemented |
 | AR-032 | Performance <200ms | SYS-02 | 🔍 | [Performance NFR](HIGH_LEVEL_DESIGN.md#hld-non-functional-requirements) | | | | | No performance benchmarks exist |

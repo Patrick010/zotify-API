@@ -8,7 +8,7 @@ This document serves as the central index for all documentation related to the Z
 
 *   [Code File Index](CODE_FILE_INDEX.md)
 *   [API Reference](reference/API_REFERENCE.md)
-*   [Code Quality Index](reference/CODE_QUALITY_INDEX.md)
+*   [Code Quality Index](CODE_QUALITY_INDEX.md)
 *   [Feature Specifications](reference/FEATURE_SPECS.md)
 
 ## Manuals
