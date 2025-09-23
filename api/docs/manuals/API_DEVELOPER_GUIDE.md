@@ -186,4 +186,4 @@ This score assesses the implementation's clarity, efficiency, structure, and tes
 
 A complete inventory of all source code files and their current quality scores is maintained in the **Code Quality Index**. Developers should consult this index to identify areas that need improvement and to update the scores after improving a file's quality.
 
--   **[View the API Code Quality Index](../CODE_QUALITY_INDEX.md)**
+-   **[View the API Code Quality Index](../reference/CODE_QUALITY_INDEX.md)**

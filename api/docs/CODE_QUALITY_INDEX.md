@@ -1,7 +1,5 @@
 # Project Code Quality Index
 
-<!-- Documentation maintenance complete. -->
-
 This document tracks the quality of every source code file in the project. Each file is assessed against the rubric defined below.
 
 ## Scoring Rubric

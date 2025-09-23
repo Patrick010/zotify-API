@@ -1,12 +1,15 @@
 # Project State as of 2025-09-23
 
-**Status:** Live Document
+    **Status:** Live Document
 
-## 1. Session Summary & Accomplishments
-Fixed all mkdocs build warnings by updating navigation, fixing broken links, and correcting documentation anchors.
+## Objective
+To restore the --objective argument to the linter script to align with the project's documentation and provide more detailed logging.
 
-## 2. Known Issues & Blockers
-- None
+    ## 1. Session Summary & Accomplishments
+    Restore --objective option in linter.py
 
-## 3. Pending Work: Next Immediate Steps
-Ready to submit the changes.
+    ## 2. Known Issues & Blockers
+    - None
+
+    ## 3. Pending Work: Next Immediate Steps
+    Ready to submit the changes.

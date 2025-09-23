@@ -1,24 +1,19 @@
 ---
-## ACT-117: Fixed all mkdocs build warnings by updating navigation, fixing broken links, and correcting documentation anchors.
+## ACT-117: Restore --objective option in linter.py
 
 **Date:** 2025-09-23
 **Status:** ✅ Done
 **Assignee:** Jules
 
 ### Objective
-Fixed all mkdocs build warnings by updating navigation, fixing broken links, and correcting documentation anchors.
+To restore the --objective argument to the linter script to align with the project's documentation and provide more detailed logging.
 
 ### Outcome
-The mkdocs build command now runs cleanly with no warnings. All documentation is correctly indexed and linked.
+The --objective argument has been successfully restored to the linter.py script. The logging functions have been updated to include the objective in all three log files. The AGENTS.md documentation has been updated to reflect the change.
 
 ### Related Documents
-- `snitch/mkdocs.yml`
-- `Gonk/GonkUI/mkdocs.yml`
-- `mkdocs.yml`
-- `api/docs/MASTER_INDEX.md`
-- `api/docs/manuals/API_DEVELOPER_GUIDE.md`
-- `api/docs/manuals/USER_MANUAL.md`
-- `api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md`
+- `scripts/linter.py`
+- `AGENTS.md`
 
 ---
 ## ACT-116: Fix issues from code review
