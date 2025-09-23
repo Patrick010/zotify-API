@@ -1,4 +1,34 @@
 ---
+## ACT-118: Clean up root and api directories
+
+**Date:** 2025-09-23
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To improve the project's file structure by moving and deleting misplaced and unnecessary files.
+
+### Outcome
+Moved verification reports to . Deleted temporary and obsolete files (, ).
+
+---
+## ACT-117: Restore --objective option in linter.py
+
+**Date:** 2025-09-23
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To restore the --objective argument to the linter script to align with the project's documentation and provide more detailed logging.
+
+### Outcome
+The --objective argument has been successfully restored to the linter.py script. The logging functions have been updated to include the objective in all three log files. The AGENTS.md documentation has been updated to reflect the change.
+
+### Related Documents
+- `scripts/linter.py`
+- `AGENTS.md`
+
+---
 ## ACT-116: Fix issues from code review
 
 **Date:** 2025-09-22

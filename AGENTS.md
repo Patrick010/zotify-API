@@ -66,7 +66,13 @@ To ensure a high standard of quality, all new **source code files** (`.py`, `.go
 ### Step 4: Log Your Work
 At the completion of any significant action, you **must** log the work using the unified linter script.
 
-*   **Command:** `python scripts/linter.py --log --summary "..." --objective "..." --outcome "..." --files ...`
+*   **Command:** `python3 scripts/linter.py --log --summary "..." --objective "..." --findings "..." --next-steps "..." --files ...`
+*   **Arguments:**
+    *   `--summary`: A one-line summary of the task.
+    *   `--objective`: The high-level purpose of the task.
+    *   `--findings`: A description of the discoveries, results, or outcome.
+    *   `--next-steps`: The concrete actions to take next.
+    *   `--files`: A space-separated list of files you changed.
 *   **Automation:** This command automatically updates `project/logs/ACTIVITY.md`, `project/logs/CURRENT_STATE.md` and `project/logs/SESSION_LOG.md`.
 *   **Enforcement:** The pre-submission linter (`python3 scripts/linter.py`) now includes an unconditional check to ensure these log files have been modified. If you do not run the `--log` command, the linter will fail.
 
