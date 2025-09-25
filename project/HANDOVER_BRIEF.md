@@ -1,25 +1,44 @@
-Handover Brief: New Developer Tooling Proposals
-1. Context
+# Handover Brief: Governance Audit System Refactor
 
-This work session was focused on expanding the project's long-term architectural vision, specifically regarding its developer tooling. The session began with a comprehensive onboarding process, which involved a deep review of all key project documents (PID, HLD, LLD, ALIGNMENT_MATRIX, BACKLOG, etc.). This provided a complete and up-to-date understanding of the project's current state, processes, and strategic goals before any new artifacts were created. The primary outcome of this session was the formal proposal of a more modular and extensible architecture for the project's developer tools.
-2. Summary of Completed Work
+**Date:** 2025-09-25
+**Author:** Jules
+**Status:** Pending Handover
 
-The work performed was purely documentary and architectural. No source code was modified. The key accomplishments were:
+## 1. Context
 
-    New Architectural Proposals Authored: Two new, detailed proposals were written and added to the project/proposals/ directory. These documents follow the established format and are intended to guide future development.
-        DBSTUDIO_PLUGIN.md: This proposal outlines a plan to replace the current, tightly-coupled sqlite-web tool with a dynamic, backend-agnostic dbstudio plugin. This would make the database browser modular, role-aware, and compatible with production database systems like PostgreSQL.
-        GONKUI_PLUGIN.md: This proposal details the conversion of the standalone GonkUI Flask application into a modular FastAPI plugin. The goal is to align the developer UI with the core API's architecture, decouple it from production code, and enable it to be loaded conditionally only in development environments.
+This work session has focused on the incremental development and refinement of a new, automated repository governance system, which is managed by the `scripts/repo_inventory_and_governance.py` script. The project operates under a strict "Living Documentation" model, where all artifacts (code, docs, proposals, etc.) must be correctly classified and registered in designated index files. This new governance script is the primary mechanism for enforcing this policy.
 
-    Integration with Living Documentation: The new proposals were woven into the project's existing governance framework to ensure they are properly tracked.
-        Future Enhancements Updated: The project/FUTURE_ENHANCEMENTS.md document was updated to include summaries of and links to the two new proposals, formally registering them as long-term project goals.
-        Alignment Matrix Updated: The project/ALIGNMENT_MATRIX.md was updated with new tracking rows (AR-063, AR-064) for each proposal. This ensures that these proposed features are traceable from conception through to potential implementation and documentation.
+A series of tasks were completed to build this system:
+1.  **Initial Implementation:** The script was created from scratch to scan the repository, classify files based on type, and use a rule-based `INDEX_MAP` to check for their registration in the appropriate index files.
+2.  **Schema Refinements:** The output schema of the machine-readable `TRACE_INDEX.yml` was iteratively improved to be more precise and unambiguous, culminating in a version that uses a literal string `"-"` for the `index` field for unregistered or exempt files.
+3.  **Component Indexing:** The system was extended to support component-level documentation, automatically creating and managing `DOCS_INDEX.md` files within component directories (e.g., `Gonk/GonkUI/`).
+4.  **Fixing Misclassifications:** The rules were updated to correctly classify and track project-level documentation (e.g., in `project/logs/`, `project/archive/`) that were previously being ignored.
+5.  **Integration:** The script is fully integrated into the main linter (`scripts/linter.py`) and runs by default on every execution, ensuring continuous verification.
 
-3. System State at Time of Handover
+All of these changes were documented via formal proposal files in `project/proposals/` and registered in the `project/PROJECT_REGISTRY.md` to maintain alignment with the project's core principles.
 
-    Functionality: The codebase is in a stable and clean state. As this session involved no changes to source code, all existing API functionality, tests, and supporting modules are unaffected and working as they were previously.
-    Known Issues: There are no new known issues or regressions resulting from this work. The primary "issue" remains the large, but well-documented, gap between the current feature set and the ambitious long-term goals defined in the USECASES.md document.
-    Governance: The project continues to operate under its strict, process-driven "living documentation" model. The creation and integration of these new proposals were performed in accordance with this model.
+## 2. System State at Time of Handover
 
-4. Next Immediate Steps & Recommendations
+*   **Functionality:** The governance script is functional and correctly identifies a large number of registration gaps in the repository. The linter integration is working, and the script will correctly cause the linter to fail. The `TRACE_INDEX.yml` is being generated according to the latest specified schema.
+*   **Known Issues / Pending Work:** The system is now ready for a final, major refactoring to elevate it to a complete audit system. The full specification for this work has already been provided in the last user prompt and represents the next logical and immediate task.
 
-With the architectural vision for developer tooling now formally proposed, the next logical step is to ask the user for a new task.
+## 3. Next Immediate Steps & Recommendations
+
+The next developer is tasked with executing the **"Refactor and Strengthen Governance Audit System"** task. This is a critical step to finalize the system's capabilities.
+
+The core objectives of this task are:
+1.  **Refactor the Governance Script:** Update `scripts/repo_inventory_and_governance.py` to use the new, more precise `FILETYPE_MAP` and `INDEX_MAP` rules provided in the task specification. A key change is the consolidation of all code and config files into a single index: `api/docs/CODE_FILE_INDEX.md`.
+2.  **Enhance the Audit Report:** The human-readable report must be saved to `project/reports/governance_audit_report.txt`. It needs to be enhanced to detect and list wrongly categorized files (e.g., a `.md` in a code index) and placeholder/stub files.
+3.  **Author and Register a New Proposal:** A new proposal document, `project/proposals/GOVERNANCE_AUDIT_REFACTOR.md`, must be created. **Crucially, this proposal must be registered in three separate files:**
+    *   `project/PROJECT_REGISTRY.md`
+    *   `project/FUTURE_ENHANCEMENTS.md`
+    *   `project/ALIGNMENT_MATRIX.md`
+    The developer must inspect the format of each of these files to ensure the registration is done correctly.
+4.  **Perform and Document a Demo:** After the implementation is complete, a demonstration must be performed to prove the system works as expected. This involves:
+    *   Adding a new `.py` file to the `api/src/` directory.
+    *   Running the audit script to show that the new file is correctly flagged as missing from the code index.
+    *   Fixing the violation by registering the file.
+    *   Re-running the audit to show a clean report.
+    *   Documenting this entire process in a new report file at `project/reports/governance_demo_report.md`.
+
+**Recommendation:** The next developer should start by creating a new, detailed plan based on the full specification provided in the last user prompt. Close attention should be paid to the new `INDEX_MAP` rules and the multi-file registration requirement for the proposal, as this is more complex than in previous tasks. The final deliverable is a fully autonomous, precise, and reliable governance audit system that ensures the project's "Living Documentation" stays alive.
