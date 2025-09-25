@@ -1,6 +1,13 @@
 ---
 ## Session Report: 2025-09-25
 
+**Summary:** Enforce explicit '-' string for index field in TRACE_INDEX.yml
+**Findings:**
+Modified the script to serialize the 'index' field to a '-' string for unregistered or exempt files, removing ambiguity with null values. Added a validation function to the script to enforce this new strict schema, ensuring the generated YAML is always correct. This completes the schema refinement.
+
+---
+## Session Report: 2025-09-25
+
 **Summary:** Fix TRACE_INDEX.yml Schema for Precision
 **Findings:**
 Modified the governance script to change the 'index' field's behavior. It now lists found indexes for registered files and is null for unregistered or exempt files. This removes ambiguity and improves the clarity of the governance report. A proposal document for this fix was also created and registered.

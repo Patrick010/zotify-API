@@ -3,13 +3,13 @@
     **Status:** Live Document
 
 ## Objective
-Adapt the repo_inventory_and_governance.py script to produce a more precise TRACE_INDEX.yml schema, clearly distinguishing between found and missing registrations.
+Update the governance script to use a literal '-' string for the 'index' field for missing/exempt entries and add a schema validation step.
 
     ## 1. Session Summary & Accomplishments
-    Fix TRACE_INDEX.yml Schema for Precision
+    Enforce explicit '-' string for index field in TRACE_INDEX.yml
 
     ## 2. Known Issues & Blockers
     - None
 
     ## 3. Pending Work: Next Immediate Steps
-    Submit the changes for review and merge.
+    Submit the final changes.

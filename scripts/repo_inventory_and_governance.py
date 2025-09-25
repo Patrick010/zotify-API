@@ -164,6 +164,51 @@ def generate_audit_report(trace_index: List[Dict[str, Any]]) -> int:
         print("\nStatus: ✅ PASS")
         return 0
 
+def validate_trace_index_schema(trace_index_path: Path) -> bool:
+    """Loads the generated TRACE_INDEX.yml and validates its schema."""
+    print("\n--- Validating TRACE_INDEX.yml Schema ---")
+    try:
+        with open(trace_index_path, 'r') as f:
+            data = yaml.safe_load(f)
+    except Exception as e:
+        print(f"ERROR: Could not load or parse TRACE_INDEX.yml: {e}", file=sys.stderr)
+        return False
+
+    errors = []
+    if 'artifacts' not in data or not isinstance(data['artifacts'], list):
+        errors.append("FATAL: 'artifacts' key is missing or not a list.")
+        print("\n".join(errors), file=sys.stderr)
+        return False
+
+    for i, artifact in enumerate(data['artifacts']):
+        path = artifact.get('path')
+        reg_status = artifact.get('registered')
+        index_val = artifact.get('index')
+
+        if reg_status is True:
+            if not isinstance(index_val, list) or not all(isinstance(x, str) for x in index_val):
+                errors.append(f"Schema Error (path: {path}): If registered is true, 'index' must be a list of strings.")
+        elif reg_status is False:
+            if index_val != "-":
+                errors.append(f"Schema Error (path: {path}): If registered is false, 'index' must be '-'.")
+            if 'missing_from' not in artifact or not isinstance(artifact['missing_from'], list):
+                errors.append(f"Schema Error (path: {path}): If registered is false, 'missing_from' must be a list.")
+        elif reg_status == "exempted":
+            if index_val != "-":
+                 errors.append(f"Schema Error (path: {path}): If registered is 'exempted', 'index' must be '-'.")
+        else:
+            errors.append(f"Schema Error (path: {path}): Invalid 'registered' status: {reg_status}")
+
+    if errors:
+        print("TRACE_INDEX.yml schema validation failed:", file=sys.stderr)
+        for error in errors:
+            print(f"- {error}", file=sys.stderr)
+        return False
+
+    print("Schema validation passed!")
+    return True
+
+
 def main():
     """Main function to run the governance check."""
     all_files = find_all_files()
@@ -194,7 +239,7 @@ def main():
 
         if not required_indexes:
             trace_entry["registered"] = "exempted"
-            trace_entry["index"] = None
+            trace_entry["index"] = "-"
         else:
             found_in, missing_from = check_registration(file_path, required_indexes, all_indexes_content)
 
@@ -203,7 +248,7 @@ def main():
                 trace_entry["index"] = found_in
             else:
                 trace_entry["registered"] = False
-                trace_entry["index"] = None
+                trace_entry["index"] = "-"
                 trace_entry["missing_from"] = missing_from
 
                 for index_file in missing_from:
@@ -218,15 +263,15 @@ def main():
             first_file_type = get_file_type(files[0])
             create_and_populate_index(index_path_str, files, first_file_type)
 
-    # Custom representer for None -> '-'
-    def represent_none(self, _):
-        return self.represent_scalar('tag:yaml.org,2002:null', '-')
-    yaml.add_representer(type(None), represent_none)
-
     output = {"artifacts": trace_index}
-    with open(PROJECT_ROOT / "TRACE_INDEX.yml", "w") as f:
-        yaml.dump(output, f, default_flow_style=False, sort_keys=False)
+    trace_index_path = PROJECT_ROOT / "TRACE_INDEX.yml"
+    with open(trace_index_path, "w") as f:
+        yaml.safe_dump(output, f, default_flow_style=False, sort_keys=False)
     print("TRACE_INDEX.yml generated successfully.")
+
+    # --- Validation and Reporting ---
+    if not validate_trace_index_schema(trace_index_path):
+        return 1 # Exit with failure if schema is invalid
 
     return generate_audit_report(trace_index)
 

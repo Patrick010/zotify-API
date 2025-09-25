@@ -1,4 +1,21 @@
 ---
+## ACT-121: Enforce explicit '-' string for index field in TRACE_INDEX.yml
+
+**Date:** 2025-09-25
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Update the governance script to use a literal '-' string for the 'index' field for missing/exempt entries and add a schema validation step.
+
+### Outcome
+Modified the script to serialize the 'index' field to a '-' string for unregistered or exempt files, removing ambiguity with null values. Added a validation function to the script to enforce this new strict schema, ensuring the generated YAML is always correct. This completes the schema refinement.
+
+### Related Documents
+- `scripts/repo_inventory_and_governance.py`
+- `TRACE_INDEX.yml`
+
+---
 ## ACT-120: Fix TRACE_INDEX.yml Schema for Precision
 
 **Date:** 2025-09-25
