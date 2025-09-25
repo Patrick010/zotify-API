@@ -81,14 +81,20 @@ def parse_markdown_index(index_path: Path) -> Set[str]:
         links = re.findall(r"\[[^\]]+\]\((?!https?://)([^)]+)\)", content)
         return {str(Path(index_path.parent / link).resolve().relative_to(PROJECT_ROOT)) for link in links}
 
-def check_registration(file_path: str, required_indexes: List[str], all_indexes_content: Dict[str, Set[str]]) -> List[str]:
-    """Checks if a file is registered in the required indexes."""
+def check_registration(file_path: str, required_indexes: List[str], all_indexes_content: Dict[str, Set[str]]) -> Tuple[List[str], List[str]]:
+    """
+    Checks if a file is registered in the required indexes.
+    Returns two lists: one of found indexes and one of missing indexes.
+    """
+    found_in = []
     missing_from = []
     normalized_file_path = str(Path(file_path).resolve().relative_to(PROJECT_ROOT))
     for index_file in required_indexes:
-        if normalized_file_path not in all_indexes_content.get(index_file, set()):
+        if normalized_file_path in all_indexes_content.get(index_file, set()):
+            found_in.append(index_file)
+        else:
             missing_from.append(index_file)
-    return missing_from
+    return sorted(found_in), sorted(missing_from)
 
 def create_and_populate_index(index_path_str: str, files_to_add: List[str], file_type: str):
     """Creates a new index file and populates it with the given files."""
@@ -185,15 +191,21 @@ def main():
                     required_indexes.extend(rule["indexes"])
 
         required_indexes = sorted(list(set(required_indexes)))
-        trace_entry["index"] = required_indexes
 
         if not required_indexes:
             trace_entry["registered"] = "exempted"
+            trace_entry["index"] = None
         else:
-            missing_from = check_registration(file_path, required_indexes, all_indexes_content)
-            trace_entry["registered"] = not bool(missing_from)
-            if missing_from:
-                trace_entry["missing_from"] = sorted(missing_from)
+            found_in, missing_from = check_registration(file_path, required_indexes, all_indexes_content)
+
+            if not missing_from:
+                trace_entry["registered"] = True
+                trace_entry["index"] = found_in
+            else:
+                trace_entry["registered"] = False
+                trace_entry["index"] = None
+                trace_entry["missing_from"] = missing_from
+
                 for index_file in missing_from:
                     if index_file not in files_to_create_in_indexes:
                         files_to_create_in_indexes[index_file] = []
@@ -205,6 +217,11 @@ def main():
         if not (PROJECT_ROOT / index_path_str).exists():
             first_file_type = get_file_type(files[0])
             create_and_populate_index(index_path_str, files, first_file_type)
+
+    # Custom representer for None -> '-'
+    def represent_none(self, _):
+        return self.represent_scalar('tag:yaml.org,2002:null', '-')
+    yaml.add_representer(type(None), represent_none)
 
     output = {"artifacts": trace_index}
     with open(PROJECT_ROOT / "TRACE_INDEX.yml", "w") as f:

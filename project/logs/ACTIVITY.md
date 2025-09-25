@@ -1,4 +1,23 @@
 ---
+## ACT-120: Fix TRACE_INDEX.yml Schema for Precision
+
+**Date:** 2025-09-25
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Adapt the repo_inventory_and_governance.py script to produce a more precise TRACE_INDEX.yml schema, clearly distinguishing between found and missing registrations.
+
+### Outcome
+Modified the governance script to change the 'index' field's behavior. It now lists found indexes for registered files and is null for unregistered or exempt files. This removes ambiguity and improves the clarity of the governance report. A proposal document for this fix was also created and registered.
+
+### Related Documents
+- `scripts/repo_inventory_and_governance.py`
+- `project/proposals/TRACE_INDEX_SCHEMA_FIX.md`
+- `project/PROJECT_REGISTRY.md`
+- `TRACE_INDEX.yml`
+
+---
 ## ACT-119: Adapt TRACE_INDEX.yml Schema for Uniformity
 
 **Date:** 2025-09-25

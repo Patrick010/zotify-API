@@ -1,2220 +1,2017 @@
 artifacts:
 - path: .github/workflows/ci.yml
   type: code
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: .github/workflows/pushmirror.yml
   type: code
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: .gitignore
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: .pre-commit-config.yaml
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: AGENTS.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: Gonk/CODE_FILE_INDEX.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: Gonk/GonkCLI/README.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: Gonk/GonkCLI/__init__.py
   type: code
+  registered: true
   index:
   - Gonk/CODE_FILE_INDEX.md
-  registered: true
 - path: Gonk/GonkCLI/main.py
   type: code
+  registered: true
   index:
   - Gonk/CODE_FILE_INDEX.md
-  registered: true
 - path: Gonk/GonkCLI/modules/__init__.py
   type: code
+  registered: true
   index:
   - Gonk/CODE_FILE_INDEX.md
-  registered: true
 - path: Gonk/GonkCLI/modules/jwt_mock.py
   type: code
+  registered: true
   index:
   - Gonk/CODE_FILE_INDEX.md
-  registered: true
 - path: Gonk/GonkCLI/tests/__init__.py
   type: code
+  registered: true
   index:
   - Gonk/CODE_FILE_INDEX.md
-  registered: true
 - path: Gonk/GonkCLI/tests/test_jwt_mock.py
   type: code
+  registered: true
   index:
   - Gonk/CODE_FILE_INDEX.md
-  registered: true
 - path: Gonk/GonkUI/README.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: Gonk/GonkUI/app.py
   type: code
+  registered: true
   index:
   - Gonk/CODE_FILE_INDEX.md
-  registered: true
 - path: Gonk/GonkUI/docs/ARCHITECTURE.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: Gonk/GonkUI/docs/CHANGELOG.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: Gonk/GonkUI/docs/CONTRIBUTING.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: Gonk/GonkUI/docs/LICENSE
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: Gonk/GonkUI/docs/USER_MANUAL.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: Gonk/GonkUI/mkdocs.yml
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: Gonk/GonkUI/pyproject.toml
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: Gonk/GonkUI/static/app.js
   type: code
+  registered: true
   index:
   - Gonk/CODE_FILE_INDEX.md
-  registered: true
 - path: Gonk/GonkUI/static/styles.css
   type: code
+  registered: true
   index:
   - Gonk/CODE_FILE_INDEX.md
-  registered: true
 - path: Gonk/GonkUI/templates/index.html
   type: code
+  registered: true
   index:
   - Gonk/CODE_FILE_INDEX.md
-  registered: true
 - path: Gonk/GonkUI/views/__init__.py
   type: code
+  registered: true
   index:
   - Gonk/CODE_FILE_INDEX.md
-  registered: true
 - path: Gonk/GonkUI/views/jwt_ui.py
   type: code
+  registered: true
   index:
   - Gonk/CODE_FILE_INDEX.md
-  registered: true
 - path: Gonk/pyproject.toml
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: README.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: TRACE_INDEX.yml
   type: code
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/.gitignore
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/MIGRATIONS.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/alembic.ini
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/alembic/README
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/alembic/env.py
   type: code
-  index:
-  - api/docs/CODE_FILE_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/CODE_FILE_INDEX.md
 - path: api/alembic/script.py.mako
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/alembic/versions/5f96175ff7c9_add_notifications_enabled_to_.py
   type: code
-  index:
-  - api/docs/CODE_FILE_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/CODE_FILE_INDEX.md
 - path: api/api_dumps/cache.json
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/api_dumps/downloads.json
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/api_dumps/logging.json
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/api_dumps/metadata.json
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/api_dumps/network.json
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/api_dumps/playlist.json
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/api_dumps/spotify.json
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/api_dumps/stubs.json
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/api_dumps/sync.json
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/api_dumps/system.json
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/api_dumps/tracks.json
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/api_dumps/user.json
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/docs/CHANGELOG.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
   - api/docs/MASTER_INDEX.md
 - path: api/docs/CODE_FILE_INDEX.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/CODE_QUALITY_INDEX.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
   - api/docs/MASTER_INDEX.md
 - path: api/docs/DOCS_QUALITY_INDEX.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
   - api/docs/MASTER_INDEX.md
 - path: api/docs/MASTER_INDEX.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
   - api/docs/MASTER_INDEX.md
 - path: api/docs/manuals/API_DEVELOPER_GUIDE.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/manuals/CICD.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/manuals/ERROR_HANDLING_GUIDE.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/manuals/LICENSE
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/docs/manuals/LOGGING_GUIDE.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/manuals/OPERATOR_MANUAL.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/manuals/USER_MANUAL.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/providers/SPOTIFY.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/API_REFERENCE.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/FEATURE_SPECS.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/features/AUTHENTICATION.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/features/AUTOMATED_DOCUMENTATION_WORKFLOW.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/features/DEVELOPER_FLEXIBLE_LOGGING_FRAMEWORK.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/features/PROVIDER_AGNOSTIC_EXTENSIONS.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/features/PROVIDER_OAUTH.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/ACTIONS____INIT__.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/APP.js.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/APP.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/AUDIT_API.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/AUDIT_ENDPOINTS.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/AUTH.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/AUTH_STATE.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/BASE.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/CACHE.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/CACHE_SERVICE.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/CONFIG.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/CONFIG_MODELS.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/CONFIG_SERVICE.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/CONSOLE_HANDLER.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/CRUD.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/DATABASE_JOB_HANDLER.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/DATABASE____INIT__.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/DB.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/DEPS.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/DOWNLOAD.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/DOWNLOADS.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/DOWNLOAD_SERVICE.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/ERROR_HANDLER____INIT__.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/FILTERS.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/FORMATTER.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/FUNCTIONAL_TEST.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/GENERATE_ENDPOINTS_DOC.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/GENERATE_OPENAPI.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/GENERATE_SOURCE_DOCS.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/GENERIC.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/GLOBALS.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/HOOKS.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/JSON_AUDIT_HANDLER.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/LINTER.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/LOGGING_CONFIG.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/LOGGING_FRAMEWORK____INIT__.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/LOGGING_HANDLERS____INIT__.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/LOGGING_SCHEMAS.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/LOGGING_SERVICE.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/LOG_CRITICAL.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/MAIN.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/METADATA.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/METADATA_SERVICE.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/MODELS.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/NETWORK.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/NETWORK_SERVICE.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/NOTIFICATIONS.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/NOTIFICATIONS_SERVICE.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/PLAYLISTS.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/PLAYLISTS_SERVICE.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/PROVIDERS____INIT__.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/REQUEST_ID.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/ROUTES____INIT__.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SCHEMAS.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SEARCH.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SERVICE.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SERVICES____INIT__.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SESSION.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SNITCH.go.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SPOTIFY.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SPOTIFY_CONNECTOR.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SPOTI_CLIENT.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SYNC.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SYNC_SERVICE.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SYSTEM.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/TEST_AUTH_FLOW.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/TRACKS.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/TRACKS_SERVICE.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/TRIGGERS.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/USER.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/USER_SERVICE.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/WEBHOOK.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/WEBHOOKS.py.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/system/ERROR_HANDLING_DESIGN.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/system/INSTALLATION.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/system/PRIVACY_COMPLIANCE.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/system/REQUIREMENTS.md
   type: doc
-  index:
-  - api/docs/DOCS_QUALITY_INDEX.md
-  - api/docs/MASTER_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/system/zotify-openapi-external-v1.json
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/docs/system/zotify-openapi-external-v1.yaml
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/logging_config.yml
   type: code
-  index:
-  - api/docs/CODE_FILE_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/CODE_FILE_INDEX.md
 - path: api/logging_framework.yml
   type: code
-  index:
-  - api/docs/CODE_FILE_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/CODE_FILE_INDEX.md
 - path: api/mypy.ini
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/pyproject.toml
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/ruff.toml
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/src/storage/spotify_tokens.json
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/src/zotify_api/auth_state.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/config.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/core/error_handler/__init__.py
   type: code
-  index:
-  - api/docs/CODE_FILE_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/CODE_FILE_INDEX.md
 - path: api/src/zotify_api/core/error_handler/actions/__init__.py
   type: code
-  index:
-  - api/docs/CODE_FILE_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/CODE_FILE_INDEX.md
 - path: api/src/zotify_api/core/error_handler/actions/log_critical.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/core/error_handler/actions/webhook.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/core/error_handler/config.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/core/error_handler/formatter.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/core/error_handler/hooks.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/core/error_handler/triggers.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/core/logging_framework/__init__.py
   type: code
-  index:
-  - api/docs/CODE_FILE_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/CODE_FILE_INDEX.md
 - path: api/src/zotify_api/core/logging_framework/filters.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/core/logging_framework/schemas.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/core/logging_framework/service.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/core/logging_handlers/__init__.py
   type: code
-  index:
-  - api/docs/CODE_FILE_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/CODE_FILE_INDEX.md
 - path: api/src/zotify_api/core/logging_handlers/base.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/core/logging_handlers/console_handler.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/core/logging_handlers/database_job_handler.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/core/logging_handlers/json_audit_handler.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/database/__init__.py
   type: code
-  index:
-  - api/docs/CODE_FILE_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/CODE_FILE_INDEX.md
 - path: api/src/zotify_api/database/crud.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/database/models.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/database/session.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/globals.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/logging_config.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/main.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/middleware/request_id.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/models/config_models.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/models/sync.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/providers/__init__.py
   type: code
-  index:
-  - api/docs/CODE_FILE_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/CODE_FILE_INDEX.md
 - path: api/src/zotify_api/providers/base.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/providers/spotify_connector.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/routes/__init__.py
   type: code
-  index:
-  - api/docs/CODE_FILE_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/CODE_FILE_INDEX.md
 - path: api/src/zotify_api/routes/auth.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/routes/cache.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/routes/config.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/routes/downloads.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/routes/jwt_auth.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/routes/network.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/routes/notifications.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/routes/playlists.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/routes/search.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/routes/sync.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/routes/system.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/routes/tracks.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/routes/user.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/routes/webhooks.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/schemas/auth.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/schemas/cache.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/schemas/download.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/schemas/generic.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/schemas/logging_schemas.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/schemas/metadata.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/schemas/network.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/schemas/notifications.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/schemas/playlists.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/schemas/spotify.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/schemas/system.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/schemas/tracks.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/schemas/user.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/schemas/webhooks.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/services/__init__.py
   type: code
-  index:
-  - api/docs/CODE_FILE_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/CODE_FILE_INDEX.md
 - path: api/src/zotify_api/services/auth.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/services/cache_service.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/services/config_service.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/services/db.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/services/deps.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/services/download_service.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/services/jwt_service.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/services/logging_service.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/services/metadata_service.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/services/network_service.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/services/notifications_service.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/services/playlists_service.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/services/search.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/services/spoti_client.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/services/sync_service.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/services/tracks_service.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/services/user_service.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/services/webhooks.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/src/zotify_api/storage/user_data.json
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: api/tests/__init__.py
   type: code
-  index:
-  - api/docs/CODE_FILE_INDEX.md
   registered: false
+  index: !!null '-'
   missing_from:
   - api/docs/CODE_FILE_INDEX.md
 - path: api/tests/conftest.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/test_cache.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/test_config.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/test_download.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/test_network.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/test_notifications.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/test_playlists.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/test_system.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/test_tracks.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/test_user.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/providers/test_spotify_connector.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_auth.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_cache_service.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_config.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_crud.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_deps.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_error_handler.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_error_handler_actions.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_flexible_logging.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_jwt_auth_db.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_logging_config.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_metadata_service.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_network_service.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_new_logging_system.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_notifications_service.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_playlists_service.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_search.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_spoti_client.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_sync.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_tracks_service.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_user_service.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_user_service_db.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: api/tests/unit/test_webhooks.py
   type: code
+  registered: true
   index:
   - api/docs/CODE_FILE_INDEX.md
-  registered: true
 - path: bandit.yml
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: changed_files.txt
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: mkdocs.yml
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: openapi.json
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/ALIGNMENT_MATRIX.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/BACKLOG.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/CICD.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/DEPENDENCIES.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/EXECUTION_PLAN.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/FUTURE_ENHANCEMENTS.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/HANDOVER_BRIEF.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/HIGH_LEVEL_DESIGN.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/LESSONS-LEARNT.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/LOGGING_PHASES.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/LOGGING_SYSTEM_DESIGN.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/LOGGING_TRACEABILITY_MATRIX.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/LOW_LEVEL_DESIGN.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/ONBOARDING.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/PID.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/PROJECT_BRIEF.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/PROJECT_PLAN.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/PROJECT_REGISTRY.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/QA_GOVERNANCE.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/ROADMAP.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/SECURITY.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/TASK_CHECKLIST.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/USECASES.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/USECASES_GAP_ANALYSIS.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/api/endpoints.yaml
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/.github/ISSUE_TEMPLATE/bug-report.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/.github/ISSUE_TEMPLATE/feature-request.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/TRACEABILITY_MATRIX.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/api/docs/CHANGELOG.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/api/docs/MANUAL.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/audit/AUDIT-PHASE-3.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/audit/AUDIT-PHASE-4.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/audit/AUDIT-PHASE-5.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/audit/AUDIT-phase-1.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/audit/AUDIT-phase-2.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/audit/AUDIT_TRACEABILITY_MATRIX.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/audit/FIRST_AUDIT.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/audit/HLD_LLD_ALIGNMENT_PLAN.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/audit/PHASE_4_TRACEABILITY_MATRIX.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/audit/audit-prompt.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/docs/projectplan/security.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/docs/projectplan/spotify_fullstack_capability_blueprint.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/docs/snitch/INTEGRATION_CHECKLIST.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/docs/snitch/PHASE_2_SECURE_CALLBACK.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/docs/snitch/TEST_RUNBOOK.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/archive/docs/snitch/phase5-ipc.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/logs/ACTIVITY.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/logs/CURRENT_STATE.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/logs/SESSION_LOG.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/process/GAP_ANALYSIS_TEMPLATE.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/proposals/DBSTUDIO_PLUGIN.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/proposals/GONKUI_PLUGIN.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/proposals/HOME_AUTOMATION_PROPOSAL.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/proposals/LOW_CODE_PROPOSAL.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
+- path: project/proposals/TRACE_INDEX_SCHEMA_FIX.md
+  type: doc
+  registered: exempted
+  index: !!null '-'
 - path: project/reports/PROJECT_AUDIT_FINAL_REPORT.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: scripts/CODE_FILE_INDEX.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: scripts/audit_api.py
   type: code
+  registered: true
   index:
   - scripts/CODE_FILE_INDEX.md
-  registered: true
 - path: scripts/audit_endpoints.py
   type: code
+  registered: true
   index:
   - scripts/CODE_FILE_INDEX.md
-  registered: true
 - path: scripts/doc-lint-rules.yml
   type: code
+  registered: true
   index:
   - scripts/CODE_FILE_INDEX.md
-  registered: true
 - path: scripts/functional_test.py
   type: code
+  registered: true
   index:
   - scripts/CODE_FILE_INDEX.md
-  registered: true
 - path: scripts/generate_endpoints_doc.py
   type: code
+  registered: true
   index:
   - scripts/CODE_FILE_INDEX.md
-  registered: true
 - path: scripts/generate_openapi.py
   type: code
+  registered: true
   index:
   - scripts/CODE_FILE_INDEX.md
-  registered: true
 - path: scripts/gonkui
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: scripts/linter.py
   type: code
+  registered: true
   index:
   - scripts/CODE_FILE_INDEX.md
-  registered: true
 - path: scripts/manage_docs_index.py
   type: code
+  registered: true
   index:
   - scripts/CODE_FILE_INDEX.md
-  registered: true
 - path: scripts/repo_inventory_and_governance.py
   type: code
+  registered: true
   index:
   - scripts/CODE_FILE_INDEX.md
-  registered: true
 - path: scripts/run_e2e_auth_test.sh
   type: code
+  registered: true
   index:
   - scripts/CODE_FILE_INDEX.md
-  registered: true
 - path: scripts/start.sh
   type: code
+  registered: true
   index:
   - scripts/CODE_FILE_INDEX.md
-  registered: true
 - path: scripts/test_auth_flow.py
   type: code
+  registered: true
   index:
   - scripts/CODE_FILE_INDEX.md
-  registered: true
 - path: scripts/test_single_config.sh
   type: code
+  registered: true
   index:
   - scripts/CODE_FILE_INDEX.md
-  registered: true
 - path: scripts/validate_code_index.py
   type: code
+  registered: true
   index:
   - scripts/CODE_FILE_INDEX.md
-  registered: true
 - path: snitch/.golangci.yml
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: snitch/CODE_FILE_INDEX.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: snitch/README.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: snitch/docs/ARCHITECTURE.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: snitch/docs/INSTALLATION.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: snitch/docs/MILESTONES.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: snitch/docs/MODULES.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: snitch/docs/PHASES.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: snitch/docs/PHASE_2_SECURE_CALLBACK.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: snitch/docs/PROJECT_PLAN.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: snitch/docs/ROADMAP.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: snitch/docs/STATUS.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: snitch/docs/TASKS.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: snitch/docs/TEST_RUNBOOK.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: snitch/docs/USER_MANUAL.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: snitch/docs/phase5-ipc.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: snitch/go.mod
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: snitch/mkdocs.yml
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: snitch/snitch.go
   type: code
+  registered: true
   index:
   - snitch/CODE_FILE_INDEX.md
-  registered: true
 - path: templates/AGENTS.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/API-DEVELOPER-GUIDE.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/BACKLOG.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/CICD-DEV.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/CICD-PROJ.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/ENDPOINTS.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/EXECUTION_PLAN.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/FUTURE_ENHANCEMENTS.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/HANDOVER_BRIEF.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/HIGH_LEVEL_DESIGN.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/INITIATION.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/LESSONS-LEARNT.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/LOGGING_PHASES.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/LOGGING_SYSTEM_DESIGN.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/LOGGING_TRACEABILITY_MATRIX.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/LOW_LEVEL_DESIGN.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/ONBOARDING.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/PID.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/PROJECT_BRIEF.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/PROJECT_REGISTRY.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/ROADMAP.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/SECURITY.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/SYSTEM-INTEGRATION-GUIDE.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/TASK_CHECKLIST.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/TRACEABILITY_MATRIX.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/USECASES.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/USECASES_GAP_ANALYSIS.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/_new project prompt.txt
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/audit/AUDIT-PHASE-1.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/audit/AUDIT_TRACEABILITY_MATRIX.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/audit/FIRST_AUDIT.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/audit/HLD_LLD_ALIGNMENT_PLAN.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/audit/PHASE_1_TRACEABILITY_MATRIX.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/audit/audit-prompt.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/logs/ACTIVITY.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/logs/CURRENT_STATE.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/logs/SESSION_LOG.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/proposals/DYNAMIC_PLUGIN_PROPOSAL.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/proposals/HOME_AUTOMATION_PROPOSAL.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/proposals/LOW_CODE_PROPOSAL.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: templates/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: verification/linter_enforcement_report.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: verification/mandatory_logging.md
   type: doc
-  index: []
   registered: exempted
+  index: !!null '-'
 - path: verification_report.md
   type: exempt
-  index: []
   registered: exempted
+  index: !!null '-'

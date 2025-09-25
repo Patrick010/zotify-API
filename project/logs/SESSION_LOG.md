@@ -1,6 +1,13 @@
 ---
 ## Session Report: 2025-09-25
 
+**Summary:** Fix TRACE_INDEX.yml Schema for Precision
+**Findings:**
+Modified the governance script to change the 'index' field's behavior. It now lists found indexes for registered files and is null for unregistered or exempt files. This removes ambiguity and improves the clarity of the governance report. A proposal document for this fix was also created and registered.
+
+---
+## Session Report: 2025-09-25
+
 **Summary:** Adapt TRACE_INDEX.yml Schema for Uniformity
 **Findings:**
 Modified the governance script to ensure every artifact in TRACE_INDEX.yml has an 'index' field. For exempted files, this is an empty list. For all other files, it lists the expected indexes. This change improves schema consistency for programmatic consumers of the file. Also created a proposal document for this adaptation.

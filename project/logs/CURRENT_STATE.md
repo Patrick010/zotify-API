@@ -3,10 +3,10 @@
     **Status:** Live Document
 
 ## Objective
-Adapt the repo_inventory_and_governance.py script to produce a TRACE_INDEX.yml with a uniform schema where the 'index' field is always present.
+Adapt the repo_inventory_and_governance.py script to produce a more precise TRACE_INDEX.yml schema, clearly distinguishing between found and missing registrations.
 
     ## 1. Session Summary & Accomplishments
-    Adapt TRACE_INDEX.yml Schema for Uniformity
+    Fix TRACE_INDEX.yml Schema for Precision
 
     ## 2. Known Issues & Blockers
     - None
