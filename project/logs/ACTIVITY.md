@@ -1,4 +1,23 @@
 ---
+## ACT-119: Adapt TRACE_INDEX.yml Schema for Uniformity
+
+**Date:** 2025-09-25
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Adapt the repo_inventory_and_governance.py script to produce a TRACE_INDEX.yml with a uniform schema where the 'index' field is always present.
+
+### Outcome
+Modified the governance script to ensure every artifact in TRACE_INDEX.yml has an 'index' field. For exempted files, this is an empty list. For all other files, it lists the expected indexes. This change improves schema consistency for programmatic consumers of the file. Also created a proposal document for this adaptation.
+
+### Related Documents
+- `scripts/repo_inventory_and_governance.py`
+- `project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md`
+- `project/PROJECT_REGISTRY.md`
+- `TRACE_INDEX.yml`
+
+---
 ## ACT-118: Refactor and Upgrade Repo Governance Script
 
 **Date:** 2025-09-25

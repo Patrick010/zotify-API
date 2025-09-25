@@ -1,6 +1,13 @@
 ---
 ## Session Report: 2025-09-25
 
+**Summary:** Adapt TRACE_INDEX.yml Schema for Uniformity
+**Findings:**
+Modified the governance script to ensure every artifact in TRACE_INDEX.yml has an 'index' field. For exempted files, this is an empty list. For all other files, it lists the expected indexes. This change improves schema consistency for programmatic consumers of the file. Also created a proposal document for this adaptation.
+
+---
+## Session Report: 2025-09-25
+
 **Summary:** Refactor and Upgrade Repo Governance Script
 **Findings:**
 Implemented a new governance script with filetype classification, rule-based index mapping, and automated index creation. Integrated the script into the main linter with a --skip-governance flag. The new system now correctly identifies and reports on unregistered files.

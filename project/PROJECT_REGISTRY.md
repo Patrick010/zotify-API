@@ -50,6 +50,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **Dependency Policy** | [`DEPENDENCIES.md`](./DEPENDENCIES.md) | The policy and registry for managing third-party dependencies. |
 | **Security Document** | [`SECURITY.md`](./SECURITY.md) | The definitive security reference for the project. |
 | **Project CI/CD Guide** | [`CICD.md`](./CICD.md) | A high-level guide to CI/CD philosophy for project management. |
+| **Trace Index Schema Adaptation** | [`proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md`](./proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md) | A proposal and implementation document for adapting the `TRACE_INDEX.yml` schema. |
 
 ---
 

@@ -3,10 +3,10 @@
     **Status:** Live Document
 
 ## Objective
-Replace the naive repo_inventory_and_governance.py with a robust, filetype- and path-aware system for accurate traceability and linter integration.
+Adapt the repo_inventory_and_governance.py script to produce a TRACE_INDEX.yml with a uniform schema where the 'index' field is always present.
 
     ## 1. Session Summary & Accomplishments
-    Refactor and Upgrade Repo Governance Script
+    Adapt TRACE_INDEX.yml Schema for Uniformity
 
     ## 2. Known Issues & Blockers
     - None
