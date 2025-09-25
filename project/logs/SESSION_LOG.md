@@ -1,6 +1,13 @@
 ---
 ## Session Report: 2025-09-25
 
+**Summary:** Create Handover Brief for Governance Refactor
+**Findings:**
+Authored the project/HANDOVER_BRIEF_NEXT_DEV.md file, summarizing the current state of the governance script and detailing the requirements for the upcoming refactoring task as specified by the user.
+
+---
+## Session Report: 2025-09-25
+
 **Summary:** Fix doc misclassification and add component DOCS_INDEX files
 **Findings:**
 Extended the INDEX_MAP in the governance script with new rules to correctly handle documentation in project/, Gonk/, and Snitch/ directories. The script now prevents .md files from being incorrectly exempted and creates new DOCS_INDEX.md files for components, populating them with the relevant documents. This resolves the misclassification issue and improves the accuracy of the governance trace.
