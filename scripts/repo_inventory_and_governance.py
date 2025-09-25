@@ -19,9 +19,10 @@ FILETYPE_MAP = {
     ".go": "code",
 }
 IGNORED_DIRS = {".git", ".idea", "venv", "node_modules", "build", "dist", "target", "__pycache__"}
-IGNORED_FILES = {"mkdocs.yml", "openapi.json", "bandit.yml", "changed_files.txt", "verification_report.md"}
+IGNORED_FILES = {"mkdocs.yml", "openapi.json", "bandit.yml", "changed_files.txt", "verification_report.md", "LICENSE"}
 
 INDEX_MAP = [
+    # --- API Documentation ---
     {
         "match": lambda path, ftype: ftype == "doc" and path.startswith("api/docs/"),
         "indexes": [
@@ -29,6 +30,32 @@ INDEX_MAP = [
             "api/docs/DOCS_QUALITY_INDEX.md",
         ],
     },
+    # --- Project-level Documentation ---
+    {
+        "match": lambda path, ftype: ftype == "doc" and (
+            path.startswith("project/archive/docs/") or
+            path.startswith("project/logs/") or
+            path.startswith("project/process/") or
+            path.startswith("project/proposals/") or
+            path.startswith("project/reports/") or
+            path.startswith("project/") and Path(path).parent.name == "project"
+        ),
+        "indexes": ["project/PROJECT_REGISTRY.md"],
+    },
+    # --- Component Documentation ---
+    {
+        "match": lambda path, ftype: ftype == "doc" and path.startswith("Gonk/GonkCLI/docs/"),
+        "indexes": ["Gonk/GonkCLI/DOCS_INDEX.md"],
+    },
+    {
+        "match": lambda path, ftype: ftype == "doc" and path.startswith("Gonk/GonkUI/docs/"),
+        "indexes": ["Gonk/GonkUI/DOCS_INDEX.md"],
+    },
+    {
+        "match": lambda path, ftype: ftype == "doc" and path.startswith("snitch/docs/"),
+        "indexes": ["snitch/DOCS_INDEX.md"],
+    },
+    # --- Code Indexes ---
     {
         "match": lambda path, ftype: ftype == "code" and path.startswith("api/"),
         "indexes": ["api/docs/CODE_FILE_INDEX.md"],
@@ -79,6 +106,7 @@ def parse_markdown_index(index_path: Path) -> Set[str]:
         return set(paths)
     else:
         links = re.findall(r"\[[^\]]+\]\((?!https?://)([^)]+)\)", content)
+        # Resolve path relative to the index file's location
         return {str(Path(index_path.parent / link).resolve().relative_to(PROJECT_ROOT)) for link in links}
 
 def check_registration(file_path: str, required_indexes: List[str], all_indexes_content: Dict[str, Set[str]]) -> Tuple[List[str], List[str]]:
@@ -113,11 +141,14 @@ def create_and_populate_index(index_path_str: str, files_to_add: List[str], file
         header += "| File Path | Documentation Score | Code Score | Reviewer | Review Date | Notes |\n"
         header += "|-----------|---------------------|------------|----------|-------------|-------|\n"
         lines = [f"| `{f}` | X | X | | | |" for f in sorted(files_to_add)]
-    else:
-        lines = [f"*   [{Path(f).name}]({f})" for f in sorted(files_to_add)]
+    else: # Default to a simple list for other doc indexes
+        # Make links relative to the new index file
+        relative_links = [os.path.relpath(PROJECT_ROOT / f, index_path.parent) for f in files_to_add]
+        lines = [f"*   [{Path(f).name}]({link})" for f, link in zip(files_to_add, relative_links)]
+
 
     with open(index_path, "w", encoding="utf-8") as f:
-        f.write(header + "\n".join(lines) + "\n")
+        f.write(header + "\n".join(sorted(lines)) + "\n")
 
 def generate_audit_report(trace_index: List[Dict[str, Any]]) -> int:
     """Generates a human-readable audit report and returns an exit code."""
@@ -129,10 +160,13 @@ def generate_audit_report(trace_index: List[Dict[str, Any]]) -> int:
     registered_count = 0
     missing_count = 0
     exempted_count = 0
+    wrongly_exempted = []
 
     for item in trace_index:
         if item["registered"] == "exempted":
             exempted_count += 1
+            if item['type'] == 'doc':
+                wrongly_exempted.append(item['path'])
         elif item["registered"] is True:
             registered_count += 1
         else:
@@ -141,6 +175,13 @@ def generate_audit_report(trace_index: List[Dict[str, Any]]) -> int:
                 if index_file not in missing_by_index:
                     missing_by_index[index_file] = []
                 missing_by_index[index_file].append(item["path"])
+
+    if wrongly_exempted:
+        print("\n--- 🚨 Wrongly Exempted Documents ---")
+        print("The following .md files were marked 'exempted' but should be registered:")
+        for path in sorted(wrongly_exempted):
+            print(f"  - {path}")
+
 
     if missing_count > 0:
         print("\n--- Missing Registrations ---")
@@ -155,9 +196,10 @@ def generate_audit_report(trace_index: List[Dict[str, Any]]) -> int:
     print(f"- Registered: {registered_count}")
     print(f"- Missing: {missing_count}")
     print(f"- Exempted: {exempted_count}")
+    print(f"- Wrongly Exempted Docs: {len(wrongly_exempted)}")
     print("-" * 20)
 
-    if missing_count > 0:
+    if missing_count > 0 or wrongly_exempted:
         print("\nStatus: ❌ FAIL")
         return 1
     else:
@@ -236,6 +278,12 @@ def main():
                     required_indexes.extend(rule["indexes"])
 
         required_indexes = sorted(list(set(required_indexes)))
+
+        # Core logic change: No .md file should be exempt unless explicitly ignored.
+        if file_type == 'doc' and not required_indexes and file_path not in IGNORED_FILES:
+             # This doc file has no rule. Flag it as unregistered against the default project registry.
+            required_indexes.append("project/PROJECT_REGISTRY.md")
+
 
         if not required_indexes:
             trace_entry["registered"] = "exempted"

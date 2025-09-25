@@ -1,6 +1,13 @@
 ---
 ## Session Report: 2025-09-25
 
+**Summary:** Fix doc misclassification and add component DOCS_INDEX files
+**Findings:**
+Extended the INDEX_MAP in the governance script with new rules to correctly handle documentation in project/, Gonk/, and Snitch/ directories. The script now prevents .md files from being incorrectly exempted and creates new DOCS_INDEX.md files for components, populating them with the relevant documents. This resolves the misclassification issue and improves the accuracy of the governance trace.
+
+---
+## Session Report: 2025-09-25
+
 **Summary:** Enforce explicit '-' string for index field in TRACE_INDEX.yml
 **Findings:**
 Modified the script to serialize the 'index' field to a '-' string for unregistered or exempt files, removing ambiguity with null values. Added a validation function to the script to enforce this new strict schema, ensuring the generated YAML is always correct. This completes the schema refinement.

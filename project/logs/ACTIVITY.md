@@ -1,4 +1,23 @@
 ---
+## ACT-122: Fix doc misclassification and add component DOCS_INDEX files
+
+**Date:** 2025-09-25
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Update the governance script to correctly classify all documentation files and create component-specific DOCS_INDEX.md files for improved modularity and accuracy.
+
+### Outcome
+Extended the INDEX_MAP in the governance script with new rules to correctly handle documentation in project/, Gonk/, and Snitch/ directories. The script now prevents .md files from being incorrectly exempted and creates new DOCS_INDEX.md files for components, populating them with the relevant documents. This resolves the misclassification issue and improves the accuracy of the governance trace.
+
+### Related Documents
+- `scripts/repo_inventory_and_governance.py`
+- `Gonk/GonkUI/DOCS_INDEX.md`
+- `snitch/DOCS_INDEX.md`
+- `TRACE_INDEX.yml`
+
+---
 ## ACT-121: Enforce explicit '-' string for index field in TRACE_INDEX.yml
 
 **Date:** 2025-09-25
