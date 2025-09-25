@@ -333,6 +333,23 @@ def check_quality_index_ratings() -> List[str]:
     return errors
 
 
+def run_governance_check() -> int:
+    """Runs the repository inventory and governance check."""
+    print("\n--- Running Repository Governance Check ---")
+    script_path = PROJECT_ROOT / "scripts" / "repo_inventory_and_governance.py"
+    if not script_path.exists():
+        print("ERROR: repo_inventory_and_governance.py not found.", file=sys.stderr)
+        return 1
+
+    return_code = run_command([sys.executable, str(script_path)])
+    if return_code != 0:
+        print("Repository Governance Check Failed!", file=sys.stderr)
+    else:
+        print("Repository Governance Check Passed!")
+    print("-" * 41)
+    return return_code
+
+
 def main() -> int:
     """Main function for the unified linter and logger."""
     parser = argparse.ArgumentParser(
@@ -376,6 +393,11 @@ def main() -> int:
         "--from-file",
         help="[Linter-CI] Read list of changed files from a text file (one file per line).",
     )
+    parser.add_argument(
+        "--skip-governance",
+        action="store_true",
+        help="[Linter] Skip the repository inventory and governance check.",
+    )
 
     args = parser.parse_args()
     os.chdir(PROJECT_ROOT)
@@ -401,6 +423,21 @@ def main() -> int:
     print("=" * 30)
     print("Running Unified Linter")
     print("=" * 30)
+
+    # The governance check runs independently of changed files, so we run it first.
+    final_return_code = 0
+    if not args.skip_governance:
+        gov_return_code = run_governance_check()
+        if gov_return_code != 0:
+            final_return_code = 1
+            # Early exit if governance fails, as it's a fundamental check
+            print("\n" + "=" * 30)
+            print("❌ Unified Linter Failed.")
+            print("=" * 30)
+            return final_return_code
+    else:
+        print("Skipping Repository Governance Check.")
+
 
     changed_files_with_status = []
     if args.from_file:
@@ -446,7 +483,6 @@ def main() -> int:
     print("-----------------------\n")
 
     # --- Execution Phase ---
-    final_return_code = 0
 
     # 1. Documentation Matrix Linter (Always runs)
     print("--- Running Documentation Matrix Linter ---")

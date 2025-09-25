@@ -1,0 +1,245 @@
+import os
+import re
+import sys
+import yaml
+from pathlib import Path
+from typing import List, Dict, Any, Set, Tuple
+
+# --- Configuration ---
+PROJECT_ROOT = Path(__file__).parent.parent
+FILETYPE_MAP = {
+    ".md": "doc",
+    ".py": "code",
+    ".sh": "code",
+    ".html": "code",
+    ".js": "code",
+    ".ts": "code",
+    ".css": "code",
+    ".yml": "code",
+    ".go": "code",
+}
+IGNORED_DIRS = {".git", ".idea", "venv", "node_modules", "build", "dist", "target", "__pycache__"}
+IGNORED_FILES = {"mkdocs.yml", "openapi.json", "bandit.yml", "changed_files.txt", "verification_report.md"}
+
+INDEX_MAP = [
+    {
+        "match": lambda path, ftype: ftype == "doc" and path.startswith("api/docs/"),
+        "indexes": [
+            "api/docs/MASTER_INDEX.md",
+            "api/docs/DOCS_QUALITY_INDEX.md",
+        ],
+    },
+    {
+        "match": lambda path, ftype: ftype == "code" and path.startswith("api/"),
+        "indexes": ["api/docs/CODE_FILE_INDEX.md"],
+    },
+    {
+        "match": lambda path, ftype: ftype == "code" and path.startswith("Gonk/"),
+        "indexes": ["Gonk/CODE_FILE_INDEX.md"],
+    },
+    {
+        "match": lambda path, ftype: ftype == "code" and path.startswith("snitch/"),
+        "indexes": ["snitch/CODE_FILE_INDEX.md"],
+    },
+    {
+        "match": lambda path, ftype: ftype == "code" and path.startswith("scripts/"),
+        "indexes": ["scripts/CODE_FILE_INDEX.md"],
+    },
+]
+
+def get_file_type(filepath: str) -> str:
+    """Classifies a file based on its extension using FILETYPE_MAP."""
+    if os.path.basename(filepath).startswith("."):
+        return "exempt"
+    if os.path.basename(filepath) in IGNORED_FILES:
+        return "exempt"
+
+    ext = os.path.splitext(filepath)[1]
+    return FILETYPE_MAP.get(ext, "exempt")
+
+def find_all_files() -> List[str]:
+    """Scans the project root for all files, respecting IGNORED_DIRS."""
+    all_files = []
+    for root, dirs, files in os.walk(PROJECT_ROOT):
+        # Modify dirs in-place to skip ignored directories
+        dirs[:] = [d for d in dirs if d not in IGNORED_DIRS]
+        for file in files:
+            all_files.append(
+                str(Path(os.path.join(root, file)).relative_to(PROJECT_ROOT))
+            )
+    return all_files
+
+def parse_markdown_index(index_path: Path) -> Set[str]:
+    """Parses a markdown file and extracts all linked paths or table rows."""
+    if not index_path.exists():
+        return set()
+    content = index_path.read_text(encoding="utf-8")
+
+    # Heuristic to decide parsing strategy
+    if "| Path " in content and "| Type " in content: # It's a code index file
+        # Regex to find file paths in markdown tables, assuming they are in backticks
+        paths = re.findall(r"\|\s*`([^`]+)`\s*\|", content)
+        # Paths in code indexes are already relative to the root
+        return set(paths)
+    else: # It's a documentation index file
+        # Regex to find markdown links and capture the path
+        links = re.findall(r"\[[^\]]+\]\((?!https?://)([^)]+)\)", content)
+        # Normalize paths to be relative to the project root
+        return {str(Path(index_path.parent / link).resolve().relative_to(PROJECT_ROOT)) for link in links}
+
+
+def check_registration(file_path: str, required_indexes: List[str], all_indexes_content: Dict[str, Set[str]]) -> List[str]:
+    """
+    Checks if a file is registered in the required indexes.
+    Returns a list of indexes where the file is missing.
+    """
+    missing_from = []
+    for index_file in required_indexes:
+        # Normalize the file_path to be comparable with index content
+        normalized_file_path = str(Path(file_path).resolve().relative_to(PROJECT_ROOT))
+        if normalized_file_path not in all_indexes_content.get(index_file, set()):
+            missing_from.append(index_file)
+    return missing_from
+
+
+def create_and_populate_index(index_path_str: str, files_to_add: List[str], file_type: str):
+    """Creates a new index file and populates it with the given files."""
+    index_path = PROJECT_ROOT / index_path_str
+    print(f"Creating missing index file: {index_path}")
+    index_path.parent.mkdir(parents=True, exist_ok=True)
+
+    header = f"# {index_path.stem.replace('_', ' ').title()}\n\nThis file is auto-generated. Do not edit manually.\n\n"
+    lines = []
+
+    if "CODE_FILE_INDEX" in index_path_str:
+        header += "| Path | Type | Description | Status | Linked Docs | Notes |\n"
+        header += "|------|------|-------------|--------|-------------|-------|\n"
+        lines = [f"| `{f}` | | | Active | | |" for f in sorted(files_to_add)]
+    elif "QUALITY_INDEX" in index_path_str:
+        header += "| File Path | Documentation Score | Code Score | Reviewer | Review Date | Notes |\n"
+        header += "|-----------|---------------------|------------|----------|-------------|-------|\n"
+        lines = [f"| `{f}` | X | X | | | |" for f in sorted(files_to_add)]
+    else: # Default to a simple list for other doc indexes
+        lines = [f"*   [{Path(f).name}]({f})" for f in sorted(files_to_add)]
+
+    with open(index_path, "w", encoding="utf-8") as f:
+        f.write(header + "\n".join(lines) + "\n")
+
+
+def generate_audit_report(trace_index: List[Dict[str, Any]]) -> int:
+    """Generates a human-readable audit report and returns an exit code."""
+    print("\n" + "=" * 50)
+    print("Governance Audit Report")
+    print("=" * 50)
+
+    missing_by_index = {}
+    wrongly_classified = []
+    registered_count = 0
+    missing_count = 0
+    exempted_count = 0
+
+    for item in trace_index:
+        if item["registered"] == "exempted":
+            exempted_count += 1
+        elif item["registered"] is True:
+            registered_count += 1
+        else:
+            missing_count += 1
+            for index_file in item.get("missing_from", []):
+                if index_file not in missing_by_index:
+                    missing_by_index[index_file] = []
+                missing_by_index[index_file].append(item["path"])
+
+    if missing_count > 0:
+        print("\n--- Missing Registrations ---")
+        for index_file, files in sorted(missing_by_index.items()):
+            print(f"\nMissing from {index_file}:")
+            for file_path in sorted(files):
+                print(f"  - {file_path}")
+
+    if wrongly_classified:
+        print("\n--- Wrongly Classified Files ---")
+        for item in wrongly_classified:
+            print(f"- {item['path']} (Expected: {item['expected']}, Got: {item['got']})")
+
+
+    print("\n" + "-" * 20)
+    print("Summary:")
+    print(f"- Total files checked: {len(trace_index)}")
+    print(f"- Registered: {registered_count}")
+    print(f"- Missing: {missing_count}")
+    print(f"- Exempted: {exempted_count}")
+    print("-" * 20)
+
+    if missing_count > 0 or wrongly_classified:
+        print("\nStatus: ❌ FAIL")
+        return 1
+    else:
+        print("\nStatus: ✅ PASS")
+        return 0
+
+
+def main():
+    """Main function to run the governance check."""
+    all_files = find_all_files()
+    trace_index = []
+
+    # Pre-load all index file contents into memory
+    all_index_paths = {idx for rule in INDEX_MAP for idx in rule["indexes"]}
+    all_indexes_content = {
+        str(p): parse_markdown_index(PROJECT_ROOT / p) for p in all_index_paths
+    }
+
+    files_to_create_in_indexes = {}
+
+    for file_path in sorted(all_files):
+        file_type = get_file_type(file_path)
+
+        if file_type == "exempt":
+            trace_index.append({"path": file_path, "type": "exempt", "registered": "exempted"})
+            continue
+
+        required_indexes = []
+        for rule in INDEX_MAP:
+            if rule["match"](file_path, file_type):
+                required_indexes.extend(rule["indexes"])
+
+        if not required_indexes:
+            trace_index.append({"path": file_path, "type": "exempt", "registered": "exempted"})
+            continue
+
+        missing_from = check_registration(file_path, required_indexes, all_indexes_content)
+
+        trace_entry = {
+            "path": file_path,
+            "type": file_type,
+            "registered": not bool(missing_from),
+        }
+        if missing_from:
+            trace_entry["missing_from"] = missing_from
+            for index_file in missing_from:
+                if index_file not in files_to_create_in_indexes:
+                    files_to_create_in_indexes[index_file] = []
+                files_to_create_in_indexes[index_file].append(file_path)
+
+        trace_index.append(trace_entry)
+
+    # After checking all files, create the missing index files
+    for index_path_str, files in files_to_create_in_indexes.items():
+        if not (PROJECT_ROOT / index_path_str).exists():
+            # Determine type from the first file, assuming all files for an index are the same type
+            first_file_type = get_file_type(files[0])
+            create_and_populate_index(index_path_str, files, first_file_type)
+
+
+    output = {"artifacts": trace_index}
+    with open(PROJECT_ROOT / "TRACE_INDEX.yml", "w") as f:
+        yaml.dump(output, f, default_flow_style=False, sort_keys=False)
+    print("TRACE_INDEX.yml generated successfully.")
+
+    # Generate and print the audit report, then get the exit code
+    return generate_audit_report(trace_index)
+
+if __name__ == "__main__":
+    exit_code = main()
+    sys.exit(exit_code)

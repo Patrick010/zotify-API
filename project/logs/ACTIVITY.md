@@ -1,4 +1,25 @@
 ---
+## ACT-118: Refactor and Upgrade Repo Governance Script
+
+**Date:** 2025-09-25
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Replace the naive repo_inventory_and_governance.py with a robust, filetype- and path-aware system for accurate traceability and linter integration.
+
+### Outcome
+Implemented a new governance script with filetype classification, rule-based index mapping, and automated index creation. Integrated the script into the main linter with a --skip-governance flag. The new system now correctly identifies and reports on unregistered files.
+
+### Related Documents
+- `scripts/repo_inventory_and_governance.py`
+- `scripts/linter.py`
+- `Gonk/CODE_FILE_INDEX.md`
+- `scripts/CODE_FILE_INDEX.md`
+- `snitch/CODE_FILE_INDEX.md`
+- `TRACE_INDEX.yml`
+
+---
 ## ACT-117: Restore --objective option in linter.py
 
 **Date:** 2025-09-23

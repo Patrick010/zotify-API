@@ -1,4 +1,11 @@
 ---
+## Session Report: 2025-09-25
+
+**Summary:** Refactor and Upgrade Repo Governance Script
+**Findings:**
+Implemented a new governance script with filetype classification, rule-based index mapping, and automated index creation. Integrated the script into the main linter with a --skip-governance flag. The new system now correctly identifies and reports on unregistered files.
+
+---
 ## Session Report: 2025-09-23
 
 **Summary:** Restore --objective option in linter.py
