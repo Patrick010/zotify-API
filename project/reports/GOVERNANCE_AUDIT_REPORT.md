@@ -1,5 +1,5 @@
 # Governance Audit Report
-**Date:** 2025-09-27 11:18:51
+**Date:** 2025-09-27 12:09:11
 
 | Path | File Type | Index(es) | Status |
 |------|-----------|-----------|--------|
@@ -141,6 +141,7 @@
 | `api/docs/system/zotify-openapi-external-v1.yaml` | config | api/docs/CODE_FILE_INDEX.md | Missing Index |
 | `api/logging_config.yml` | config | api/docs/CODE_FILE_INDEX.md | Missing Index |
 | `api/logging_framework.yml` | config | api/docs/CODE_FILE_INDEX.md | Missing Index |
+| `api/project/reports/HANDOVER_BRIEF_CHATGTP.md` | doc | project/PROJECT_REGISTRY.md | Missing Index, Stub/Placeholder |
 | `api/src/storage/spotify_tokens.json` | config | api/docs/CODE_FILE_INDEX.md | Missing Index |
 | `api/src/zotify_api/auth_state.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
 | `api/src/zotify_api/config.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
@@ -305,7 +306,7 @@
 | `project/archive/docs/snitch/TEST_RUNBOOK.md` | doc | project/PROJECT_REGISTRY.md | Missing Index |
 | `project/archive/docs/snitch/phase5-ipc.md` | doc | project/PROJECT_REGISTRY.md | Missing Index |
 | `project/logs/ACTIVITY.md` | doc | project/PROJECT_REGISTRY.md | OK, Stub/Placeholder |
-| `project/logs/CURRENT_STATE.md` | doc | project/PROJECT_REGISTRY.md | OK, Stub/Placeholder |
+| `project/logs/CURRENT_STATE.md` | doc | project/PROJECT_REGISTRY.md | OK |
 | `project/logs/SESSION_LOG.md` | doc | project/PROJECT_REGISTRY.md | OK, Stub/Placeholder |
 | `project/process/GAP_ANALYSIS_TEMPLATE.md` | doc | project/PROJECT_REGISTRY.md | OK |
 | `project/proposals/DBSTUDIO_PLUGIN.md` | doc | project/PROJECT_REGISTRY.md | Missing Index |
@@ -400,8 +401,8 @@
 | `verification/mandatory_logging.md` | doc | N/A | OK |
 
 ## Summary Statistics
-- **Total Files Scanned:** 395
+- **Total Files Scanned:** 396
 - **Files OK:** 318
-- **Files Missing from Index:** 77
+- **Files Missing from Index:** 78
 - **Files Flagged as Stubs:** 49
 - **Files Miscategorized:** 0 (Detection not yet implemented)

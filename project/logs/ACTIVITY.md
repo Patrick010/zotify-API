@@ -1,4 +1,20 @@
 ---
+## ACT-125: Created new handover brief for assistant internalization.
+
+**Date:** 2025-09-27
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To provide a detailed handover document for the next AI assistant to quickly get up to speed with the project state.
+
+### Outcome
+Successfully created the file at  with the user-provided content.
+
+### Related Documents
+- `api/project/reports/HANDOVER_BRIEF_CHATGTP.md`
+
+---
 ## ACT-124: Refactored the governance audit system and documented the process.
 
 **Date:** 2025-09-27
