@@ -49,6 +49,14 @@ This document provides a detailed breakdown of the tasks required to fulfill the
 - ✅ Expanded tests covering CLI, UI, and JWT integration.
 - ✅ Comprehensive user manual with examples added.
 
+## Phase 5b – Governance & Audit System
+**Goal:** Refactor and strengthen the repository's governance and audit capabilities.
+**Status:** 🟡 In Progress
+**Steps:**
+- [ ] **Refactor Governance Script:** Update `scripts/repo_inventory_and_governance.py` to consolidate code indexing, add stub detection, and generate a persistent Markdown report. (Source: `proposals/GOVERNANCE_AUDIT_REFACTOR.md`)
+- [ ] **Perform System Demo:** Create and document a live demonstration to verify the new script's functionality.
+- [ ] Code QA
+
 ## Phase 6: Fork-Specific Enhancements
 **Goal:** Implement enhancements specific to client forks and improve docs.
 **Status:** 🟡 In Progress

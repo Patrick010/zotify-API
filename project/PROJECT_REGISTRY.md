@@ -52,6 +52,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **Project CI/CD Guide** | [`CICD.md`](./CICD.md) | A high-level guide to CI/CD philosophy for project management. |
 | **Trace Index Schema Adaptation** | [`proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md`](./proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md) | A proposal and implementation document for adapting the `TRACE_INDEX.yml` schema. |
 | **Trace Index Schema Fix** | [`proposals/TRACE_INDEX_SCHEMA_FIX.md`](./proposals/TRACE_INDEX_SCHEMA_FIX.md) | A proposal and implementation document for fixing the `TRACE_INDEX.yml` schema. |
+| **Governance Audit Refactor** | [`proposals/GOVERNANCE_AUDIT_REFACTOR.md`](./proposals/GOVERNANCE_AUDIT_REFACTOR.md) | A formal proposal to refactor the governance script into a comprehensive audit system. |
 
 ---
 

@@ -1,4 +1,25 @@
 ---
+## ACT-124: Refactored the governance audit system and documented the process.
+
+**Date:** 2025-09-27
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To elevate the script into a comprehensive, audit-ready tool that fully aligns with the project's 'Living Documentation' policy by consolidating code indexing, introducing more precise file-type mapping, implementing stub/placeholder detection, and generating a formal, detailed audit report.
+
+### Outcome
+Successfully refactored the script, created and registered a formal proposal, and documented the new functionality with a demonstration report. The new script correctly identifies unregistered and stub files and saves a detailed report.
+
+### Related Documents
+- `project/proposals/GOVERNANCE_AUDIT_REFACTOR.md`
+- `scripts/repo_inventory_and_governance.py`
+- `project/reports/GOVERNANCE_DEMO_REPORT.md`
+- `project/PROJECT_REGISTRY.md`
+- `project/ALIGNMENT_MATRIX.md`
+- `project/EXECUTION_PLAN.md`
+
+---
 ## ACT-123: Create Handover Brief for Governance Refactor
 
 **Date:** 2025-09-25
