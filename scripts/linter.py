@@ -249,7 +249,8 @@ def check_doc_matrix_rules(changed_files: Set[str]) -> List[str]:
             else:
                 doc_changed = any(d in changed_files for d in required_docs)
 
-            if not doc_changed:
+            # A rule with required_docs fails if none of them are changed.
+            if required_docs and not doc_changed:
                 message = rule.get(
                     "message",
                     f"Changes in {source_paths} require updates to one of {required_docs}",
@@ -347,6 +348,23 @@ def run_governance_check() -> int:
     else:
         print("Repository Governance Check Passed!")
     print("-" * 41)
+    return return_code
+
+
+def run_manifest_generation() -> int:
+    """Runs the repository manifest generation script."""
+    print("\n--- Running Manifest Generation ---")
+    script_path = PROJECT_ROOT / "scripts" / "make_manifest.py"
+    if not script_path.exists():
+        print("ERROR: make_manifest.py not found.", file=sys.stderr)
+        return 1
+
+    return_code = run_command([sys.executable, str(script_path)])
+    if return_code != 0:
+        print("Manifest Generation Failed!", file=sys.stderr)
+    else:
+        print("Manifest Generation Succeeded!")
+    print("-" * 33)
     return return_code
 
 
@@ -524,6 +542,12 @@ def main() -> int:
         print("\nSkipping MkDocs Build: No relevant documentation changes detected.")
 
     print("\n" + "=" * 30)
+    if final_return_code == 0:
+        # All checks passed, now generate the manifest as the final step.
+        manifest_return_code = run_manifest_generation()
+        if manifest_return_code != 0:
+            final_return_code = 1  # Mark as failed if manifest generation fails
+
     if final_return_code == 0:
         print("✅ Unified Linter Passed!")
     else:

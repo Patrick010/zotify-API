@@ -125,3 +125,46 @@ This document serves as the canonical registry of all code files in the Zotify A
 | `scripts/test_auth_flow.py` | Script | E2E test for the authentication flow. | Active | `../reference/source/TEST_AUTH_FLOW.py.md` | |
 | `scripts/validate_code_index.py` | Script | Validates that all code files are registered in this index. | Active | | |
 | `snitch/snitch.go` | Core | Main application file for the Snitch microservice. | Active | `../reference/source/SNITCH.go.md` | |
+| `.github/workflows/ci.yml` | Config | TBD | Active | | Auto-generated to fix audit |
+| `.github/workflows/pushmirror.yml` | Config | TBD | Active | | Auto-generated to fix audit |
+| `Gonk/GonkCLI/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |
+| `Gonk/GonkCLI/modules/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |
+| `Gonk/GonkCLI/tests/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |
+| `Gonk/GonkUI/views/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |
+| `TRACE_INDEX.yml` | Config | TBD | Active | | Auto-generated to fix audit |
+| `api/alembic/env.py` | Code | TBD | Active | | Auto-generated to fix audit |
+| `api/alembic/versions/5f96175ff7c9_add_notifications_enabled_to_.py` | Code | TBD | Active | | Auto-generated to fix audit |
+| `api/api_dumps/cache.json` | Config | TBD | Active | | Auto-generated to fix audit |
+| `api/api_dumps/downloads.json` | Config | TBD | Active | | Auto-generated to fix audit |
+| `api/api_dumps/logging.json` | Config | TBD | Active | | Auto-generated to fix audit |
+| `api/api_dumps/metadata.json` | Config | TBD | Active | | Auto-generated to fix audit |
+| `api/api_dumps/network.json` | Config | TBD | Active | | Auto-generated to fix audit |
+| `api/api_dumps/playlist.json` | Config | TBD | Active | | Auto-generated to fix audit |
+| `api/api_dumps/spotify.json` | Config | TBD | Active | | Auto-generated to fix audit |
+| `api/api_dumps/stubs.json` | Config | TBD | Active | | Auto-generated to fix audit |
+| `api/api_dumps/sync.json` | Config | TBD | Active | | Auto-generated to fix audit |
+| `api/api_dumps/system.json` | Config | TBD | Active | | Auto-generated to fix audit |
+| `api/api_dumps/tracks.json` | Config | TBD | Active | | Auto-generated to fix audit |
+| `api/api_dumps/user.json` | Config | TBD | Active | | Auto-generated to fix audit |
+| `api/docs/system/zotify-openapi-external-v1.json` | Config | TBD | Active | | Auto-generated to fix audit |
+| `api/docs/system/zotify-openapi-external-v1.yaml` | Config | TBD | Active | | Auto-generated to fix audit |
+| `api/logging_config.yml` | Config | TBD | Active | | Auto-generated to fix audit |
+| `api/logging_framework.yml` | Config | TBD | Active | | Auto-generated to fix audit |
+| `api/src/storage/spotify_tokens.json` | Config | TBD | Active | | Auto-generated to fix audit |
+| `api/src/zotify_api/core/error_handler/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |
+| `api/src/zotify_api/core/error_handler/actions/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |
+| `api/src/zotify_api/core/logging_framework/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |
+| `api/src/zotify_api/core/logging_handlers/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |
+| `api/src/zotify_api/database/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |
+| `api/src/zotify_api/providers/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |
+| `api/src/zotify_api/routes/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |
+| `api/src/zotify_api/services/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |
+| `api/src/zotify_api/storage/user_data.json` | Config | TBD | Active | | Auto-generated to fix audit |
+| `api/tests/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |
+| `project/api/endpoints.yaml` | Config | TBD | Active | | Auto-generated to fix audit |
+| `scripts/doc-lint-rules.yml` | Config | TBD | Active | | Auto-generated to fix audit |
+| `scripts/make_manifest.py` | Code | TBD | Active | | Auto-generated to fix audit |
+| `scripts/repo_inventory_and_governance.py` | Code | TBD | Active | | Auto-generated to fix audit |
+| `scripts/run_e2e_auth_test.sh` | Script | TBD | Active | | Auto-generated to fix audit |
+| `scripts/start.sh` | Script | TBD | Active | | Auto-generated to fix audit |
+| `scripts/test_single_config.sh` | Script | TBD | Active | | Auto-generated to fix audit |

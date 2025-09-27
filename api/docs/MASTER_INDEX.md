@@ -10,6 +10,10 @@ This document serves as the central index for all documentation related to the Z
 *   [API Reference](reference/API_REFERENCE.md)
 *   [Code Quality Index](reference/CODE_QUALITY_INDEX.md)
 *   [Feature Specifications](reference/FEATURE_SPECS.md)
+*   [Changelog](CHANGELOG.md)
+*   [Code Quality Index](CODE_QUALITY_INDEX.md)
+*   [Docs Quality Index](DOCS_QUALITY_INDEX.md)
+*   [Master Index](MASTER_INDEX.md)
 
 ## Manuals
 

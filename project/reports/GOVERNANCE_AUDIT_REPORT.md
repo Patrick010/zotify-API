@@ -1,50 +1,51 @@
 # Governance Audit Report
-**Date:** 2025-09-27 22:43:10
+**Date:** 2025-09-27 23:09:44
 
 | Path | File Type | Status | Details |
 |------|-----------|--------|---------|
-| `.github/workflows/ci.yml` | config | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `.github/workflows/pushmirror.yml` | config | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
+| `.github/workflows/ci.yml` | config | OK |  |
+| `.github/workflows/pushmirror.yml` | config | OK |  |
 | `AGENTS.md` | doc | OK |  |
 | `Gonk/CODE_FILE_INDEX.md` | doc | OK |  |
-| `Gonk/GonkCLI/README.md` | doc | Missing Index | Expected in: `Gonk/GonkCLI/DOCS_INDEX.md` |
-| `Gonk/GonkCLI/__init__.py` | code | Missing Index, Stub | Expected in: `api/docs/CODE_FILE_INDEX.md` |
+| `Gonk/GonkCLI/DOCS_INDEX.md` | doc | OK, Stub |  |
+| `Gonk/GonkCLI/README.md` | doc | OK |  |
+| `Gonk/GonkCLI/__init__.py` | code | OK, Stub |  |
 | `Gonk/GonkCLI/main.py` | code | OK |  |
-| `Gonk/GonkCLI/modules/__init__.py` | code | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
+| `Gonk/GonkCLI/modules/__init__.py` | code | OK |  |
 | `Gonk/GonkCLI/modules/jwt_mock.py` | code | OK |  |
-| `Gonk/GonkCLI/tests/__init__.py` | code | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
+| `Gonk/GonkCLI/tests/__init__.py` | code | OK |  |
 | `Gonk/GonkCLI/tests/test_jwt_mock.py` | code | OK |  |
-| `Gonk/GonkUI/DOCS_INDEX.md` | doc | Missing Index | Expected in: `Gonk/GonkUI/DOCS_INDEX.md` |
-| `Gonk/GonkUI/README.md` | doc | Missing Index | Expected in: `Gonk/GonkUI/DOCS_INDEX.md` |
+| `Gonk/GonkUI/DOCS_INDEX.md` | doc | OK |  |
+| `Gonk/GonkUI/README.md` | doc | OK |  |
 | `Gonk/GonkUI/app.py` | code | OK |  |
 | `Gonk/GonkUI/docs/ARCHITECTURE.md` | doc | OK |  |
 | `Gonk/GonkUI/docs/CHANGELOG.md` | doc | OK |  |
 | `Gonk/GonkUI/docs/CONTRIBUTING.md` | doc | OK |  |
 | `Gonk/GonkUI/docs/USER_MANUAL.md` | doc | OK |  |
-| `Gonk/GonkUI/views/__init__.py` | code | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
+| `Gonk/GonkUI/views/__init__.py` | code | OK |  |
 | `Gonk/GonkUI/views/jwt_ui.py` | code | OK |  |
 | `README.md` | doc | OK |  |
-| `TRACE_INDEX.yml` | config | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
+| `TRACE_INDEX.yml` | config | OK |  |
 | `api/MIGRATIONS.md` | doc | OK |  |
-| `api/alembic/env.py` | code | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `api/alembic/versions/5f96175ff7c9_add_notifications_enabled_to_.py` | code | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `api/api_dumps/cache.json` | config | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `api/api_dumps/downloads.json` | config | Missing Index, Stub | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `api/api_dumps/logging.json` | config | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `api/api_dumps/metadata.json` | config | Missing Index, Stub | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `api/api_dumps/network.json` | config | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `api/api_dumps/playlist.json` | config | Missing Index, Stub | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `api/api_dumps/spotify.json` | config | Missing Index, Stub | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `api/api_dumps/stubs.json` | config | Missing Index, Stub | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `api/api_dumps/sync.json` | config | Missing Index, Stub | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `api/api_dumps/system.json` | config | Missing Index, Stub | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `api/api_dumps/tracks.json` | config | Missing Index, Stub | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `api/api_dumps/user.json` | config | Missing Index, Stub | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `api/docs/CHANGELOG.md` | doc | Missing Index, Stub | Expected in: `api/docs/MASTER_INDEX.md` |
-| `api/docs/CODE_FILE_INDEX.md` | doc | OK |  |
-| `api/docs/CODE_QUALITY_INDEX.md` | doc | Missing Index, Stub | Expected in: `api/docs/MASTER_INDEX.md` |
-| `api/docs/DOCS_QUALITY_INDEX.md` | doc | Missing Index, Stub | Expected in: `api/docs/MASTER_INDEX.md` |
-| `api/docs/MASTER_INDEX.md` | doc | Missing Index | Expected in: `api/docs/MASTER_INDEX.md` |
+| `api/alembic/env.py` | code | OK |  |
+| `api/alembic/versions/5f96175ff7c9_add_notifications_enabled_to_.py` | code | OK |  |
+| `api/api_dumps/cache.json` | config | OK |  |
+| `api/api_dumps/downloads.json` | config | OK, Stub |  |
+| `api/api_dumps/logging.json` | config | OK |  |
+| `api/api_dumps/metadata.json` | config | OK, Stub |  |
+| `api/api_dumps/network.json` | config | OK |  |
+| `api/api_dumps/playlist.json` | config | OK, Stub |  |
+| `api/api_dumps/spotify.json` | config | OK, Stub |  |
+| `api/api_dumps/stubs.json` | config | OK, Stub |  |
+| `api/api_dumps/sync.json` | config | OK, Stub |  |
+| `api/api_dumps/system.json` | config | OK, Stub |  |
+| `api/api_dumps/tracks.json` | config | OK, Stub |  |
+| `api/api_dumps/user.json` | config | OK, Stub |  |
+| `api/docs/CHANGELOG.md` | doc | OK, Stub |  |
+| `api/docs/CODE_FILE_INDEX.md` | doc | OK, Stub |  |
+| `api/docs/CODE_QUALITY_INDEX.md` | doc | OK, Stub |  |
+| `api/docs/DOCS_QUALITY_INDEX.md` | doc | OK, Stub |  |
+| `api/docs/MASTER_INDEX.md` | doc | OK |  |
 | `api/docs/manuals/API_DEVELOPER_GUIDE.md` | doc | OK |  |
 | `api/docs/manuals/CICD.md` | doc | OK |  |
 | `api/docs/manuals/ERROR_HANDLING_GUIDE.md` | doc | OK |  |
@@ -137,32 +138,32 @@
 | `api/docs/system/INSTALLATION.md` | doc | OK |  |
 | `api/docs/system/PRIVACY_COMPLIANCE.md` | doc | OK |  |
 | `api/docs/system/REQUIREMENTS.md` | doc | OK |  |
-| `api/docs/system/zotify-openapi-external-v1.json` | config | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `api/docs/system/zotify-openapi-external-v1.yaml` | config | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `api/logging_config.yml` | config | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `api/logging_framework.yml` | config | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `api/project/reports/HANDOVER_BRIEF_CHATGTP.md` | doc | Missing Index, Stub | Expected in: `project/PROJECT_REGISTRY.md` |
-| `api/src/storage/spotify_tokens.json` | config | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
+| `api/docs/system/zotify-openapi-external-v1.json` | config | OK |  |
+| `api/docs/system/zotify-openapi-external-v1.yaml` | config | OK |  |
+| `api/logging_config.yml` | config | OK |  |
+| `api/logging_framework.yml` | config | OK |  |
+| `api/project/reports/HANDOVER_BRIEF_CHATGTP.md` | doc | OK, Stub |  |
+| `api/src/storage/spotify_tokens.json` | config | OK |  |
 | `api/src/zotify_api/auth_state.py` | code | OK |  |
 | `api/src/zotify_api/config.py` | code | OK |  |
-| `api/src/zotify_api/core/error_handler/__init__.py` | code | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `api/src/zotify_api/core/error_handler/actions/__init__.py` | code | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
+| `api/src/zotify_api/core/error_handler/__init__.py` | code | OK |  |
+| `api/src/zotify_api/core/error_handler/actions/__init__.py` | code | OK |  |
 | `api/src/zotify_api/core/error_handler/actions/log_critical.py` | code | OK |  |
 | `api/src/zotify_api/core/error_handler/actions/webhook.py` | code | OK |  |
 | `api/src/zotify_api/core/error_handler/config.py` | code | OK |  |
 | `api/src/zotify_api/core/error_handler/formatter.py` | code | OK |  |
 | `api/src/zotify_api/core/error_handler/hooks.py` | code | OK |  |
 | `api/src/zotify_api/core/error_handler/triggers.py` | code | OK |  |
-| `api/src/zotify_api/core/logging_framework/__init__.py` | code | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
+| `api/src/zotify_api/core/logging_framework/__init__.py` | code | OK |  |
 | `api/src/zotify_api/core/logging_framework/filters.py` | code | OK |  |
 | `api/src/zotify_api/core/logging_framework/schemas.py` | code | OK |  |
 | `api/src/zotify_api/core/logging_framework/service.py` | code | OK |  |
-| `api/src/zotify_api/core/logging_handlers/__init__.py` | code | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
+| `api/src/zotify_api/core/logging_handlers/__init__.py` | code | OK |  |
 | `api/src/zotify_api/core/logging_handlers/base.py` | code | OK |  |
 | `api/src/zotify_api/core/logging_handlers/console_handler.py` | code | OK |  |
 | `api/src/zotify_api/core/logging_handlers/database_job_handler.py` | code | OK |  |
 | `api/src/zotify_api/core/logging_handlers/json_audit_handler.py` | code | OK |  |
-| `api/src/zotify_api/database/__init__.py` | code | Missing Index, Stub | Expected in: `api/docs/CODE_FILE_INDEX.md` |
+| `api/src/zotify_api/database/__init__.py` | code | OK, Stub |  |
 | `api/src/zotify_api/database/crud.py` | code | OK |  |
 | `api/src/zotify_api/database/models.py` | code | OK |  |
 | `api/src/zotify_api/database/session.py` | code | OK |  |
@@ -172,10 +173,10 @@
 | `api/src/zotify_api/middleware/request_id.py` | code | OK |  |
 | `api/src/zotify_api/models/config_models.py` | code | OK |  |
 | `api/src/zotify_api/models/sync.py` | code | OK |  |
-| `api/src/zotify_api/providers/__init__.py` | code | Missing Index, Stub | Expected in: `api/docs/CODE_FILE_INDEX.md` |
+| `api/src/zotify_api/providers/__init__.py` | code | OK, Stub |  |
 | `api/src/zotify_api/providers/base.py` | code | OK |  |
 | `api/src/zotify_api/providers/spotify_connector.py` | code | OK |  |
-| `api/src/zotify_api/routes/__init__.py` | code | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
+| `api/src/zotify_api/routes/__init__.py` | code | OK |  |
 | `api/src/zotify_api/routes/auth.py` | code | OK, Stub |  |
 | `api/src/zotify_api/routes/cache.py` | code | OK |  |
 | `api/src/zotify_api/routes/config.py` | code | OK |  |
@@ -204,7 +205,7 @@
 | `api/src/zotify_api/schemas/tracks.py` | code | OK |  |
 | `api/src/zotify_api/schemas/user.py` | code | OK |  |
 | `api/src/zotify_api/schemas/webhooks.py` | code | OK |  |
-| `api/src/zotify_api/services/__init__.py` | code | Missing Index, Stub | Expected in: `api/docs/CODE_FILE_INDEX.md` |
+| `api/src/zotify_api/services/__init__.py` | code | OK, Stub |  |
 | `api/src/zotify_api/services/auth.py` | code | OK |  |
 | `api/src/zotify_api/services/cache_service.py` | code | OK, Stub |  |
 | `api/src/zotify_api/services/config_service.py` | code | OK |  |
@@ -223,8 +224,8 @@
 | `api/src/zotify_api/services/tracks_service.py` | code | OK, Stub |  |
 | `api/src/zotify_api/services/user_service.py` | code | OK |  |
 | `api/src/zotify_api/services/webhooks.py` | code | OK |  |
-| `api/src/zotify_api/storage/user_data.json` | config | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `api/tests/__init__.py` | code | Missing Index, Stub | Expected in: `api/docs/CODE_FILE_INDEX.md` |
+| `api/src/zotify_api/storage/user_data.json` | config | OK |  |
+| `api/tests/__init__.py` | code | OK, Stub |  |
 | `api/tests/conftest.py` | code | OK |  |
 | `api/tests/test_cache.py` | code | OK |  |
 | `api/tests/test_config.py` | code | OK |  |
@@ -275,73 +276,73 @@
 | `project/PID.md` | doc | OK |  |
 | `project/PROJECT_BRIEF.md` | doc | OK |  |
 | `project/PROJECT_PLAN.md` | doc | OK, Stub |  |
-| `project/PROJECT_REGISTRY.md` | doc | OK |  |
-| `project/QA_GOVERNANCE.md` | doc | Missing Index | Expected in: `project/PROJECT_REGISTRY.md` |
+| `project/PROJECT_REGISTRY.md` | doc | OK, Stub |  |
+| `project/QA_GOVERNANCE.md` | doc | OK |  |
 | `project/ROADMAP.md` | doc | OK |  |
 | `project/SECURITY.md` | doc | OK |  |
 | `project/TASK_CHECKLIST.md` | doc | OK |  |
 | `project/USECASES.md` | doc | OK |  |
 | `project/USECASES_GAP_ANALYSIS.md` | doc | OK |  |
-| `project/api/endpoints.yaml` | config | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `project/archive/.github/ISSUE_TEMPLATE/bug-report.md` | doc | Missing Index | Expected in: `project/PROJECT_REGISTRY.md` |
-| `project/archive/.github/ISSUE_TEMPLATE/feature-request.md` | doc | Missing Index | Expected in: `project/PROJECT_REGISTRY.md` |
+| `project/api/endpoints.yaml` | config | OK |  |
+| `project/archive/.github/ISSUE_TEMPLATE/bug-report.md` | doc | OK |  |
+| `project/archive/.github/ISSUE_TEMPLATE/feature-request.md` | doc | OK |  |
 | `project/archive/TRACEABILITY_MATRIX.md` | doc | OK, Stub |  |
 | `project/archive/api/docs/CHANGELOG.md` | doc | OK, Stub |  |
 | `project/archive/api/docs/MANUAL.md` | doc | OK |  |
-| `project/archive/audit/AUDIT-PHASE-3.md` | doc | Missing Index | Expected in: `project/PROJECT_REGISTRY.md` |
-| `project/archive/audit/AUDIT-PHASE-4.md` | doc | Missing Index | Expected in: `project/PROJECT_REGISTRY.md` |
-| `project/archive/audit/AUDIT-PHASE-5.md` | doc | Missing Index, Stub | Expected in: `project/PROJECT_REGISTRY.md` |
-| `project/archive/audit/AUDIT-phase-1.md` | doc | Missing Index, Stub | Expected in: `project/PROJECT_REGISTRY.md` |
-| `project/archive/audit/AUDIT-phase-2.md` | doc | Missing Index | Expected in: `project/PROJECT_REGISTRY.md` |
-| `project/archive/audit/AUDIT_TRACEABILITY_MATRIX.md` | doc | Missing Index | Expected in: `project/PROJECT_REGISTRY.md` |
-| `project/archive/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md` | doc | Missing Index | Expected in: `project/PROJECT_REGISTRY.md` |
-| `project/archive/audit/FIRST_AUDIT.md` | doc | Missing Index, Stub | Expected in: `project/PROJECT_REGISTRY.md` |
+| `project/archive/audit/AUDIT-PHASE-3.md` | doc | OK |  |
+| `project/archive/audit/AUDIT-PHASE-4.md` | doc | OK |  |
+| `project/archive/audit/AUDIT-PHASE-5.md` | doc | OK, Stub |  |
+| `project/archive/audit/AUDIT-phase-1.md` | doc | OK, Stub |  |
+| `project/archive/audit/AUDIT-phase-2.md` | doc | OK |  |
+| `project/archive/audit/AUDIT_TRACEABILITY_MATRIX.md` | doc | OK |  |
+| `project/archive/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md` | doc | OK |  |
+| `project/archive/audit/FIRST_AUDIT.md` | doc | OK, Stub |  |
 | `project/archive/audit/HLD_LLD_ALIGNMENT_PLAN.md` | doc | OK |  |
-| `project/archive/audit/PHASE_4_TRACEABILITY_MATRIX.md` | doc | Missing Index | Expected in: `project/PROJECT_REGISTRY.md` |
-| `project/archive/audit/audit-prompt.md` | doc | Missing Index, Stub | Expected in: `project/PROJECT_REGISTRY.md` |
+| `project/archive/audit/PHASE_4_TRACEABILITY_MATRIX.md` | doc | OK |  |
+| `project/archive/audit/audit-prompt.md` | doc | OK, Stub |  |
 | `project/archive/docs/projectplan/security.md` | doc | OK |  |
 | `project/archive/docs/projectplan/spotify_fullstack_capability_blueprint.md` | doc | OK, Stub |  |
-| `project/archive/docs/snitch/INTEGRATION_CHECKLIST.md` | doc | Missing Index | Expected in: `project/PROJECT_REGISTRY.md` |
-| `project/archive/docs/snitch/PHASE_2_SECURE_CALLBACK.md` | doc | Missing Index | Expected in: `project/PROJECT_REGISTRY.md` |
-| `project/archive/docs/snitch/TEST_RUNBOOK.md` | doc | Missing Index | Expected in: `project/PROJECT_REGISTRY.md` |
-| `project/archive/docs/snitch/phase5-ipc.md` | doc | Missing Index | Expected in: `project/PROJECT_REGISTRY.md` |
+| `project/archive/docs/snitch/INTEGRATION_CHECKLIST.md` | doc | OK |  |
+| `project/archive/docs/snitch/PHASE_2_SECURE_CALLBACK.md` | doc | OK |  |
+| `project/archive/docs/snitch/TEST_RUNBOOK.md` | doc | OK |  |
+| `project/archive/docs/snitch/phase5-ipc.md` | doc | OK |  |
 | `project/logs/ACTIVITY.md` | doc | OK, Stub |  |
 | `project/logs/CURRENT_STATE.md` | doc | OK |  |
 | `project/logs/SESSION_LOG.md` | doc | OK, Stub |  |
 | `project/process/GAP_ANALYSIS_TEMPLATE.md` | doc | OK |  |
-| `project/proposals/DBSTUDIO_PLUGIN.md` | doc | Missing Index | Expected in: `project/PROJECT_REGISTRY.md` |
+| `project/proposals/DBSTUDIO_PLUGIN.md` | doc | OK |  |
 | `project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md` | doc | OK |  |
-| `project/proposals/GONKUI_PLUGIN.md` | doc | Missing Index | Expected in: `project/PROJECT_REGISTRY.md` |
+| `project/proposals/GONKUI_PLUGIN.md` | doc | OK |  |
 | `project/proposals/GOVERNANCE_AUDIT_REFACTOR.md` | doc | OK, Stub |  |
 | `project/proposals/HOME_AUTOMATION_PROPOSAL.md` | doc | OK |  |
 | `project/proposals/LOW_CODE_PROPOSAL.md` | doc | OK |  |
 | `project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md` | doc | OK |  |
-| `project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md` | doc | Missing Index, Stub | Expected in: `project/PROJECT_REGISTRY.md` |
+| `project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md` | doc | OK, Stub |  |
 | `project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md` | doc | OK |  |
 | `project/proposals/TRACE_INDEX_SCHEMA_FIX.md` | doc | OK |  |
-| `project/reports/GOVERNANCE_AUDIT_REPORT.md` | doc | Missing Index, Stub | Expected in: `project/PROJECT_REGISTRY.md` |
-| `project/reports/GOVERNANCE_DEMO_REPORT.md` | doc | Missing Index, Stub | Expected in: `project/PROJECT_REGISTRY.md` |
-| `project/reports/PROJECT_AUDIT_FINAL_REPORT.md` | doc | Missing Index | Expected in: `project/PROJECT_REGISTRY.md` |
-| `project/reports/REPO_MANIFEST.md` | doc | Missing Index, Stub | Expected in: `project/PROJECT_REGISTRY.md` |
-| `project/reports/governance_demo_report.md` | doc | Missing Index | Expected in: `project/PROJECT_REGISTRY.md` |
+| `project/reports/GOVERNANCE_AUDIT_REPORT.md` | doc | OK, Stub |  |
+| `project/reports/GOVERNANCE_DEMO_REPORT.md` | doc | OK, Stub |  |
+| `project/reports/PROJECT_AUDIT_FINAL_REPORT.md` | doc | OK |  |
+| `project/reports/REPO_MANIFEST.md` | doc | OK, Stub |  |
+| `project/reports/governance_demo_report.md` | doc | OK |  |
 | `scripts/audit_api.py` | code | OK |  |
 | `scripts/audit_endpoints.py` | code | OK, Stub |  |
-| `scripts/doc-lint-rules.yml` | config | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
+| `scripts/doc-lint-rules.yml` | config | OK |  |
 | `scripts/functional_test.py` | code | OK |  |
 | `scripts/generate_endpoints_doc.py` | code | OK |  |
 | `scripts/generate_openapi.py` | code | OK |  |
 | `scripts/linter.py` | code | OK |  |
-| `scripts/make_manifest.py` | code | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
+| `scripts/make_manifest.py` | code | OK |  |
 | `scripts/manage_docs_index.py` | code | OK |  |
-| `scripts/repo_inventory_and_governance.py` | code | Missing Index, Stub | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `scripts/run_e2e_auth_test.sh` | script | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
-| `scripts/start.sh` | script | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
+| `scripts/repo_inventory_and_governance.py` | code | OK, Stub |  |
+| `scripts/run_e2e_auth_test.sh` | script | OK |  |
+| `scripts/start.sh` | script | OK |  |
 | `scripts/test_auth_flow.py` | code | OK |  |
-| `scripts/test_single_config.sh` | script | Missing Index | Expected in: `api/docs/CODE_FILE_INDEX.md` |
+| `scripts/test_single_config.sh` | script | OK |  |
 | `scripts/validate_code_index.py` | code | OK |  |
-| `snitch/CODE_FILE_INDEX.md` | doc | Missing Index | Expected in: `snitch/DOCS_INDEX.md` |
-| `snitch/DOCS_INDEX.md` | doc | Missing Index | Expected in: `snitch/DOCS_INDEX.md` |
-| `snitch/README.md` | doc | Missing Index | Expected in: `snitch/DOCS_INDEX.md` |
+| `snitch/CODE_FILE_INDEX.md` | doc | OK |  |
+| `snitch/DOCS_INDEX.md` | doc | OK |  |
+| `snitch/README.md` | doc | OK |  |
 | `snitch/docs/ARCHITECTURE.md` | doc | OK |  |
 | `snitch/docs/INSTALLATION.md` | doc | OK |  |
 | `snitch/docs/MILESTONES.md` | doc | OK |  |
@@ -402,344 +403,11 @@
 | `verification/mandatory_logging.md` | doc | OK |  |
 
 ## Summary Statistics
-- **Total Files Scanned:** 397
-- **Files OK:** 318
-- **Files Missing from Index:** 79
+- **Total Files Scanned:** 398
+- **Files OK:** 398
+- **Files Missing from Index:** 0
 - **Files Miscategorized:** 0
-- **Files Flagged as Stubs:** 49
+- **Files Flagged as Stubs:** 52
 
 ## Index Fix Suggestions
-
-### Suggestions for `Gonk/GonkCLI/DOCS_INDEX.md`
-
-- **File**: `Gonk/GonkCLI/README.md`
-  **Expected Index**: `Gonk/GonkCLI/DOCS_INDEX.md`
-  **Suggested Entry**: `| `Gonk/GonkCLI/README.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-
-### Suggestions for `Gonk/GonkUI/DOCS_INDEX.md`
-
-- **File**: `Gonk/GonkUI/DOCS_INDEX.md`
-  **Expected Index**: `Gonk/GonkUI/DOCS_INDEX.md`
-  **Suggested Entry**: `| `Gonk/GonkUI/DOCS_INDEX.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `Gonk/GonkUI/README.md`
-  **Expected Index**: `Gonk/GonkUI/DOCS_INDEX.md`
-  **Suggested Entry**: `| `Gonk/GonkUI/README.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-
-### Suggestions for `api/docs/CODE_FILE_INDEX.md`
-
-- **File**: `.github/workflows/ci.yml`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `.github/workflows/ci.yml` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `.github/workflows/pushmirror.yml`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `.github/workflows/pushmirror.yml` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `Gonk/GonkCLI/__init__.py`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `Gonk/GonkCLI/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `Gonk/GonkCLI/modules/__init__.py`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `Gonk/GonkCLI/modules/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `Gonk/GonkCLI/tests/__init__.py`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `Gonk/GonkCLI/tests/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `Gonk/GonkUI/views/__init__.py`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `Gonk/GonkUI/views/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `TRACE_INDEX.yml`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `TRACE_INDEX.yml` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/alembic/env.py`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/alembic/env.py` | Code | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/alembic/versions/5f96175ff7c9_add_notifications_enabled_to_.py`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/alembic/versions/5f96175ff7c9_add_notifications_enabled_to_.py` | Code | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/api_dumps/cache.json`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/api_dumps/cache.json` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/api_dumps/downloads.json`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/api_dumps/downloads.json` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/api_dumps/logging.json`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/api_dumps/logging.json` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/api_dumps/metadata.json`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/api_dumps/metadata.json` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/api_dumps/network.json`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/api_dumps/network.json` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/api_dumps/playlist.json`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/api_dumps/playlist.json` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/api_dumps/spotify.json`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/api_dumps/spotify.json` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/api_dumps/stubs.json`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/api_dumps/stubs.json` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/api_dumps/sync.json`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/api_dumps/sync.json` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/api_dumps/system.json`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/api_dumps/system.json` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/api_dumps/tracks.json`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/api_dumps/tracks.json` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/api_dumps/user.json`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/api_dumps/user.json` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/docs/system/zotify-openapi-external-v1.json`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/docs/system/zotify-openapi-external-v1.json` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/docs/system/zotify-openapi-external-v1.yaml`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/docs/system/zotify-openapi-external-v1.yaml` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/logging_config.yml`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/logging_config.yml` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/logging_framework.yml`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/logging_framework.yml` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/src/storage/spotify_tokens.json`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/src/storage/spotify_tokens.json` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/src/zotify_api/core/error_handler/__init__.py`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/src/zotify_api/core/error_handler/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/src/zotify_api/core/error_handler/actions/__init__.py`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/src/zotify_api/core/error_handler/actions/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/src/zotify_api/core/logging_framework/__init__.py`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/src/zotify_api/core/logging_framework/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/src/zotify_api/core/logging_handlers/__init__.py`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/src/zotify_api/core/logging_handlers/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/src/zotify_api/database/__init__.py`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/src/zotify_api/database/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/src/zotify_api/providers/__init__.py`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/src/zotify_api/providers/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/src/zotify_api/routes/__init__.py`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/src/zotify_api/routes/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/src/zotify_api/services/__init__.py`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/src/zotify_api/services/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/src/zotify_api/storage/user_data.json`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/src/zotify_api/storage/user_data.json` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/tests/__init__.py`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `api/tests/__init__.py` | Code | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/api/endpoints.yaml`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `project/api/endpoints.yaml` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `scripts/doc-lint-rules.yml`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `scripts/doc-lint-rules.yml` | Config | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `scripts/make_manifest.py`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `scripts/make_manifest.py` | Code | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `scripts/repo_inventory_and_governance.py`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `scripts/repo_inventory_and_governance.py` | Code | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `scripts/run_e2e_auth_test.sh`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `scripts/run_e2e_auth_test.sh` | Script | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `scripts/start.sh`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `scripts/start.sh` | Script | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `scripts/test_single_config.sh`
-  **Expected Index**: `api/docs/CODE_FILE_INDEX.md`
-  **Suggested Entry**: `| `scripts/test_single_config.sh` | Script | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-
-### Suggestions for `api/docs/MASTER_INDEX.md`
-
-- **File**: `api/docs/CHANGELOG.md`
-  **Expected Index**: `api/docs/MASTER_INDEX.md`
-  **Suggested Entry**: `| `api/docs/CHANGELOG.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/docs/CODE_QUALITY_INDEX.md`
-  **Expected Index**: `api/docs/MASTER_INDEX.md`
-  **Suggested Entry**: `| `api/docs/CODE_QUALITY_INDEX.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/docs/DOCS_QUALITY_INDEX.md`
-  **Expected Index**: `api/docs/MASTER_INDEX.md`
-  **Suggested Entry**: `| `api/docs/DOCS_QUALITY_INDEX.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `api/docs/MASTER_INDEX.md`
-  **Expected Index**: `api/docs/MASTER_INDEX.md`
-  **Suggested Entry**: `| `api/docs/MASTER_INDEX.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-
-### Suggestions for `project/PROJECT_REGISTRY.md`
-
-- **File**: `api/project/reports/HANDOVER_BRIEF_CHATGTP.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `api/project/reports/HANDOVER_BRIEF_CHATGTP.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/QA_GOVERNANCE.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/QA_GOVERNANCE.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/archive/.github/ISSUE_TEMPLATE/bug-report.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/archive/.github/ISSUE_TEMPLATE/bug-report.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/archive/.github/ISSUE_TEMPLATE/feature-request.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/archive/.github/ISSUE_TEMPLATE/feature-request.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/archive/audit/AUDIT-PHASE-3.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/archive/audit/AUDIT-PHASE-3.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/archive/audit/AUDIT-PHASE-4.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/archive/audit/AUDIT-PHASE-4.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/archive/audit/AUDIT-PHASE-5.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/archive/audit/AUDIT-PHASE-5.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/archive/audit/AUDIT-phase-1.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/archive/audit/AUDIT-phase-1.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/archive/audit/AUDIT-phase-2.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/archive/audit/AUDIT-phase-2.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/archive/audit/AUDIT_TRACEABILITY_MATRIX.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/archive/audit/AUDIT_TRACEABILITY_MATRIX.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/archive/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/archive/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/archive/audit/FIRST_AUDIT.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/archive/audit/FIRST_AUDIT.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/archive/audit/PHASE_4_TRACEABILITY_MATRIX.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/archive/audit/PHASE_4_TRACEABILITY_MATRIX.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/archive/audit/audit-prompt.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/archive/audit/audit-prompt.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/archive/docs/snitch/INTEGRATION_CHECKLIST.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/archive/docs/snitch/INTEGRATION_CHECKLIST.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/archive/docs/snitch/PHASE_2_SECURE_CALLBACK.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/archive/docs/snitch/PHASE_2_SECURE_CALLBACK.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/archive/docs/snitch/TEST_RUNBOOK.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/archive/docs/snitch/TEST_RUNBOOK.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/archive/docs/snitch/phase5-ipc.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/archive/docs/snitch/phase5-ipc.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/proposals/DBSTUDIO_PLUGIN.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/proposals/DBSTUDIO_PLUGIN.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/proposals/GONKUI_PLUGIN.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/proposals/GONKUI_PLUGIN.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/reports/GOVERNANCE_AUDIT_REPORT.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/reports/GOVERNANCE_AUDIT_REPORT.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/reports/GOVERNANCE_DEMO_REPORT.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/reports/GOVERNANCE_DEMO_REPORT.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/reports/PROJECT_AUDIT_FINAL_REPORT.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/reports/PROJECT_AUDIT_FINAL_REPORT.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/reports/REPO_MANIFEST.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/reports/REPO_MANIFEST.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `project/reports/governance_demo_report.md`
-  **Expected Index**: `project/PROJECT_REGISTRY.md`
-  **Suggested Entry**: `| `project/reports/governance_demo_report.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-
-### Suggestions for `snitch/DOCS_INDEX.md`
-
-- **File**: `snitch/CODE_FILE_INDEX.md`
-  **Expected Index**: `snitch/DOCS_INDEX.md`
-  **Suggested Entry**: `| `snitch/CODE_FILE_INDEX.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `snitch/DOCS_INDEX.md`
-  **Expected Index**: `snitch/DOCS_INDEX.md`
-  **Suggested Entry**: `| `snitch/DOCS_INDEX.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
-- **File**: `snitch/README.md`
-  **Expected Index**: `snitch/DOCS_INDEX.md`
-  **Suggested Entry**: `| `snitch/README.md` | Doc | TBD | Active | | Auto-generated to fix audit |`
-  **Reason**: Missing from required index.
+No missing or miscategorized files detected.

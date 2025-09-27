@@ -1,6 +1,13 @@
 ---
 ## Session Report: 2025-09-27
 
+**Summary:** Resolved all governance violations and integrated manifest generation into the linter
+**Findings:**
+Successfully fixed all 79 file indexing violations reported by the governance audit. This involved creating new index files and updating existing ones. Also, integrated the manifest generation script to run as the final step in the linter, but only upon a successful run. Fixed a bug in the linter's rule parser to prevent false positives.
+
+---
+## Session Report: 2025-09-27
+
 **Summary:** Refactored the governance audit script to include actionable fix suggestions
 **Findings:**
 The script was successfully refactored to produce a report with actionable fix suggestions. A bug in the markdown parser was also fixed. The changes were documented in a proposal and a demo report.

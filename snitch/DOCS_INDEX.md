@@ -16,3 +16,6 @@ This file is auto-generated. Do not edit manually.
 *   [TEST_RUNBOOK.md](docs/TEST_RUNBOOK.md)
 *   [USER_MANUAL.md](docs/USER_MANUAL.md)
 *   [phase5-ipc.md](docs/phase5-ipc.md)
+*   [CODE_FILE_INDEX.md](./CODE_FILE_INDEX.md)
+*   [DOCS_INDEX.md](./DOCS_INDEX.md)
+*   [README.md](./README.md)
