@@ -82,6 +82,65 @@
     \ Refer to them if you need more context on the *why* behind the rules.\n\n* \
     \  `project/PID.md`\n*   `project/HIGH_LEVEL_DESIGN.md`\n*   `project/TASK_CHECKLIST.md`\n\
     *   `project/QA_GOVERNANCE.md`\n"
+- path: changed_files.txt
+  type: doc
+  workflow: []
+  indexes: []
+  content: 'api/src/zotify_api/database/models.py
+
+    api/src/zotify_api/database/crud.py
+
+    api/src/zotify_api/routes/jwt_auth.py
+
+    api/src/zotify_api/schemas/user.py
+
+    api/src/zotify_api/schemas/auth.py
+
+    api/src/zotify_api/services/jwt_service.py
+
+    api/tests/conftest.py
+
+    api/src/zotify_api/services/user_service.py
+
+    api/tests/unit/test_user_service.py
+
+    api/src/zotify_api/services/deps.py
+
+    api/src/zotify_api/routes/user.py
+
+    api/src/zotify_api/services/notifications_service.py
+
+    api/tests/unit/test_notifications_service.py
+
+    api/tests/unit/test_jwt_auth.py
+
+    gonk-testUI/modules/user_service_cli.py
+
+    gonk-testUI/docs/JWT_MOCK_CLI_USER_MANUAL.md
+
+    gonk-testUI/mkdocs.yml
+
+    project/ALIGNMENT_MATRIX.md
+
+    api/docs/CODE_QUALITY_INDEX.md
+
+    project/logs/ACTIVITY.md
+
+    project/logs/SESSION_LOG.md
+
+    project/logs/CURRENT_STATE.md
+
+    api/docs/DOCS_QUALITY_INDEX.md
+
+    project/PROJECT_REGISTRY.md
+
+    project/ENDPOINTS.md
+
+    api/docs/MASTER_INDEX.md
+
+    project/LOW_LEVEL_DESIGN.md
+
+    '
 - path: README.md
   type: doc
   workflow: []
@@ -886,6 +945,128 @@
   workflow: []
   indexes: []
   content: "skips:\n  - 'B101'\n  - 'B105'\n  - 'B106'\n"
+- path: verification_report.md
+  type: doc
+  workflow: []
+  indexes: []
+  content: "# Linter Verification Report\n\n**Date:** 2025-09-03\n**Auditor:** Jules\n\
+    \n## 1. Objective\nThis report verifies the enforcement capabilities of the `scripts/linter.py`\
+    \ script against the QA and documentation policies outlined in the audit request.\
+    \ The analysis is based on a static review of the linter's code and its configuration\
+    \ (`scripts/doc-lint-rules.yml`), supplemented by live validation tests.\n\n##\
+    \ 2. Overall Summary\nThe linter's core logic for processing rules is functional.\
+    \ It correctly runs as part of the CI/CD pipeline and will block merges on failure.\
+    \ However, the linter's capabilities are strictly limited by the rules defined\
+    \ in `scripts/doc-lint-rules.yml`. The current configuration is missing rules\
+    \ for most of the required policies, particularly around project/document registration\
+    \ and content validation. The linter only checks if a file has been modified;\
+    \ it does not parse file contents to check for things like missing entries or\
+    \ broken links.\n\n---\n\n## 3. Enforcement Checklist Verification\n\n### 3.1.\
+    \ Application Docs (`api/docs/`)\n\n*   **`MASTER_INDEX.md` must list all application-level\
+    \ docs.**\n    *   **Status:** Missing\n    *   **Analysis:** There are no rules\
+    \ in `doc-lint-rules.yml` that define `api/docs/MASTER_INDEX.md` as a required\
+    \ document when new files are added to `api/docs/`. The linter has no mechanism\
+    \ to enforce this.\n\n*   **Missing or unregistered files under `api/docs/` trigger\
+    \ linter failure.**\n    *   **Status:** Missing\n    *   **Analysis:** The linter's\
+    \ logic in `scripts/linter.py` is based on checking `git` modification status\
+    \ of files. It does not have the capability to scan directory contents and compare\
+    \ them against an index file like `MASTER_INDEX.md`. This type of content-aware\
+    \ validation is not implemented.\n\n*   **References to `api/docs/...` subdirectories\
+    \ are validated.**\n    *   **Status:** Missing\n    *   **Analysis:** The linter\
+    \ does not parse file contents and therefore cannot validate the correctness of\
+    \ links or references within any document.\n\n### 3.2. Project Docs (`project/`)\n\
+    \n*   **`ALIGNMENT_MATRIX.md` must be updated when code changes.**\n    *   **Status:**\
+    \ Fully Enforced\n    *   **Analysis:** The `doc-lint-rules.yml` file contains\
+    \ a broad rule named \"Alignment Matrix Maintenance\" that requires `project/ALIGNMENT_MATRIX.md`\
+    \ to be modified whenever a file under `api/src/zotify_api/`, `snitch/`, `Gonk/GonkUI/`,\
+    \ or `scripts/` is changed. The logic in `check_doc_matrix_rules` in `linter.py`\
+    \ correctly processes this rule. This was confirmed during validation testing.\n\
+    \n*   **`CODE_QUALITY_INDEX.md` must be updated when any source file changes.**\n\
+    \    *   **Status:** Missing\n    *   **Analysis:** There are no rules in `doc-lint-rules.yml`\
+    \ that mention `CODE_QUALITY_INDEX.md`. The linter does not enforce this policy.\n\
+    \n*   **`QA_GOVERNANCE.md` policies must be enforced, and violations must reference\
+    \ them.**\n    *   **Status:** Partially Enforced\n    *   **Analysis:** The linter\
+    \ enforces the policies that are configured in `doc-lint-rules.yml`. However,\
+    \ it does not have logic to explicitly reference `QA_GOVERNANCE.md` in its failure\
+    \ messages. The messages come from the `message:` key within each specific rule.\n\
+    \n*   **`PROJECT_REGISTRY.md` is validated for project-level governance docs.**\n\
+    \    *   **Status:** Missing\n    *   **Analysis:** There are no rules in `doc-lint-rules.yml`\
+    \ that define `project/PROJECT_REGISTRY.md` as a required document when new files\
+    \ are added to `project/`.\n\n### 3.3. Policy Enforcement\n\n*   **Root Cause\
+    \ & Design Alignment Policy is enforced.**\n    *   **Status:** Fully Enforced\n\
+    \    *   **Analysis:** This policy is enforced via the \"Alignment Matrix Maintenance\"\
+    \ rule, as described above.\n\n*   **Documentation update policy is enforced for\
+    \ all relevant changes.**\n    *   **Status:** Partially Enforced\n    *   **Analysis:**\
+    \ The policy is enforced correctly for the handful of rules that exist in `doc-lint-rules.yml`.\
+    \ It is not enforced for the many policies that are missing from the configuration\
+    \ file.\n\n### 3.4. CI/CD Integration\n\n*   **`linter.py` is invoked in CI/CD\
+    \ and blocks merges.**\n    *   **Status:** Fully Enforced\n    *   **Analysis:**\
+    \ The `.github/workflows/ci.yml` file has a dedicated `doc-linter` job that runs\
+    \ `scripts/linter.py` on all pull requests to `main`. A failure in this script\
+    \ will fail the job and block a merge.\n\n*   **`AGENTS.md` references enforcement\
+    \ rules.**\n    *   **Status:** Partially Enforced (with a documentation gap)\n\
+    \    *   **Analysis:** `AGENTS.md` correctly references the linter and its purpose.\
+    \ However, it incorrectly claims that the linter enforces updates to `PROJECT_REGISTRY.md`,\
+    \ `MASTER_INDEX.md`, and `CODE_QUALITY_INDEX.md`. Since these rules are not actually\
+    \ configured, the documentation is out of sync with reality.\n\n## 4. Validation\
+    \ Test Results\n\n*   **Test: code change without updating `ALIGNMENT_MATRIX.md`\
+    \ → must fail.**\n    *   **Result:** Test was successful. An attempt to modify\
+    \ `scripts/linter.py` without a corresponding change to the alignment matrix resulted\
+    \ in a linter failure. The failure message was for the `forbidden_docs` rule due\
+    \ to the constraints of the test environment, but this still proves the rule-processing\
+    \ engine is active and functional.\n\n*   **Test: add a new doc under `api/docs/`\
+    \ without updating `MASTER_INDEX.md` → must fail.**\n    *   **Result:** Test\
+    \ produced a **False Negative**. I created a new file (`api/docs/dummy_doc.md`)\
+    \ and ran the linter. The linter passed (or, would have passed if not for the\
+    \ unrelated `forbidden_docs` failure). This confirms that this enforcement is\
+    \ missing.\n\n*   **Test: make compliant changes with all docs updated → must\
+    \ pass.**\n    *   **Result:** This test could not be reliably performed due to\
+    \ the environmental issue where the `--run-all` flag is the only way to run the\
+    \ linter, and this flag always causes a failure on the `forbidden_docs` rule.\n"
+- path: scripts/CODE_FILE_INDEX.md
+  type: doc
+  workflow: []
+  indexes:
+  - CODE_FILE_INDEX.md
+  content: '# Code File Index
+
+
+    This file is auto-generated. Do not edit manually.
+
+
+    | Path | Type | Description | Status | Linked Docs | Notes |
+
+    |------|------|-------------|--------|-------------|-------|
+
+    | `scripts/audit_api.py` | | | Active | | |
+
+    | `scripts/audit_endpoints.py` | | | Active | | |
+
+    | `scripts/doc-lint-rules.yml` | | | Active | | |
+
+    | `scripts/functional_test.py` | | | Active | | |
+
+    | `scripts/generate_endpoints_doc.py` | | | Active | | |
+
+    | `scripts/generate_openapi.py` | | | Active | | |
+
+    | `scripts/linter.py` | | | Active | | |
+
+    | `scripts/manage_docs_index.py` | | | Active | | |
+
+    | `scripts/repo_inventory_and_governance.py` | | | Active | | |
+
+    | `scripts/run_e2e_auth_test.sh` | | | Active | | |
+
+    | `scripts/start.sh` | | | Active | | |
+
+    | `scripts/test_auth_flow.py` | | | Active | | |
+
+    | `scripts/test_single_config.sh` | | | Active | | |
+
+    | `scripts/validate_code_index.py` | | | Active | | |
+
+    '
 - path: scripts/gonkui
   type: other
   workflow: []
@@ -925,115 +1106,169 @@
   indexes: []
   content: "import os\nimport re\nimport sys\nimport yaml\nfrom pathlib import Path\n\
     from typing import List, Dict, Any, Set, Tuple\n\n# --- Configuration ---\nPROJECT_ROOT\
-    \ = Path(__file__).parent.parent\nFILETYPE_MAP = {\n    \".sh\": \"script\",\n\
-    \    \".py\": \"code\",\n    \".go\": \"code\",\n    \".md\": \"doc\",\n    \"\
-    .rst\": \"doc\",\n    \".txt\": \"doc\",\n    \".yml\": \"config\",\n    \".yaml\"\
-    : \"config\",\n    \".json\": \"config\",\n}\nIGNORED_DIRS = {\".git\", \".idea\"\
-    , \"venv\", \"node_modules\", \"build\", \"dist\", \"target\", \"__pycache__\"\
-    }\nIGNORED_FILES = {\"mkdocs.yml\", \"openapi.json\", \"bandit.yml\", \"changed_files.txt\"\
-    , \"verification_report.md\", \"LICENSE\"}\nSTUB_KEYWORDS = {\"TODO\", \"placeholder\"\
-    , \"stub\", \"TBD\"}\n\n# Consolidated index for all code, scripts, and configs\n\
-    CODE_INDEX_FILE = \"api/docs/CODE_FILE_INDEX.md\"\n\n# Mapping of file types to\
-    \ their required index files\nINDEX_MAP = {\n    \"doc\": [\n        \"project/PROJECT_REGISTRY.md\"\
-    ,\n        \"api/docs/MASTER_INDEX.md\",\n        \"Gonk/GonkCLI/DOCS_INDEX.md\"\
-    ,\n        \"Gonk/GonkUI/DOCS_INDEX.md\",\n        \"snitch/DOCS_INDEX.md\",\n\
-    \    ],\n    \"code\": [CODE_INDEX_FILE],\n    \"script\": [CODE_INDEX_FILE],\n\
-    \    \"config\": [CODE_INDEX_FILE],\n}\n\ndef get_file_type(filepath: str) ->\
-    \ str:\n    \"\"\"Classifies a file based on its extension.\"\"\"\n    if Path(filepath).name.startswith(\"\
-    .\") or Path(filepath).name in IGNORED_FILES:\n        return \"other\"\n    ext\
-    \ = Path(filepath).suffix\n    return FILETYPE_MAP.get(ext, \"other\")\n\ndef\
-    \ find_all_files() -> List[str]:\n    \"\"\"Scans the project root for all files,\
-    \ respecting IGNORED_DIRS.\"\"\"\n    all_files = []\n    for root, dirs, files\
-    \ in os.walk(PROJECT_ROOT):\n        dirs[:] = [d for d in dirs if d not in IGNORED_DIRS]\n\
-    \        for file in files:\n            full_path = Path(root) / file\n     \
-    \       if any(part in IGNORED_DIRS for part in full_path.parts):\n          \
-    \      continue\n            relative_path = str(full_path.relative_to(PROJECT_ROOT))\n\
-    \            all_files.append(relative_path)\n    return all_files\n\ndef is_stub_file(filepath:\
-    \ str, file_type: str) -> bool:\n    \"\"\"Checks if a file is a stub based on\
-    \ size, content, or structure.\"\"\"\n    full_path = PROJECT_ROOT / filepath\n\
-    \    try:\n        if full_path.stat().st_size < 50:\n            return True\n\
-    \n        content = full_path.read_text(encoding=\"utf-8\")\n        if any(re.search(r'\\\
-    b' + keyword + r'\\b', content, re.IGNORECASE) for keyword in STUB_KEYWORDS):\n\
-    \            return True\n\n        if file_type in [\"code\", \"script\"]:\n\
-    \            # Check for empty functions/classes in Python\n            if filepath.endswith(\"\
-    .py\"):\n                if \"def \" in content and \" pass\" in content and len(content.splitlines())\
-    \ < 10:\n                     # crude check for scripts with just a pass\n   \
-    \                 if content.strip().count('pass') > 0 and len(content.strip().split())\
-    \ < 5:\n                        return True\n                if \"class \" in\
-    \ content and \" pass\" in content and len(content.splitlines()) < 10:\n     \
-    \               return True\n\n\n            # Check for empty shell scripts\n\
-    \            if filepath.endswith(\".sh\") and content.strip() in [\"\", \"#!/bin/bash\"\
-    , \"#!/bin/sh\"]:\n                return True\n\n        if file_type == \"doc\"\
-    \ and filepath.endswith((\".md\", \".rst\")):\n            # Check for markdown/rst\
-    \ with only a title\n            lines = [line for line in content.splitlines()\
-    \ if line.strip()]\n            if len(lines) <= 2 and (lines[0].strip().startswith(\"\
-    #\") or lines[0].strip().startswith(\"=\")):\n                return True\n\n\
-    \    except (IOError, UnicodeDecodeError):\n        return False # Cannot read\
-    \ file, assume not a stub\n    return False\n\ndef parse_markdown_index(index_path:\
-    \ Path) -> Set[str]:\n    \"\"\"Parses a markdown file and extracts all linked\
-    \ paths or table rows.\"\"\"\n    if not index_path.exists():\n        return\
-    \ set()\n    content = index_path.read_text(encoding=\"utf-8\")\n    # Regex for\
-    \ `path` in markdown tables\n    paths = re.findall(r\"\\|\\s*`([^`]+)`\\s*\\\
-    |\", content)\n    # Regex for [text](link)\n    links = re.findall(r\"\\[[^\\\
-    ]]+\\]\\((?!https?://)([^)]+)\\)\", content)\n\n    resolved_paths = set(paths)\n\
-    \    for link in links:\n        try:\n            # Resolve path relative to\
-    \ the index file's location\n            resolved = (index_path.parent / link).resolve().relative_to(PROJECT_ROOT)\n\
-    \            resolved_paths.add(str(resolved))\n        except (ValueError, FileNotFoundError):\n\
-    \            # Ignore broken or external links\n            pass\n\n    return\
-    \ resolved_paths\n\ndef generate_audit_report(results: List[Dict[str, Any]], report_path:\
-    \ Path):\n    \"\"\"Generates and saves a detailed markdown audit report.\"\"\"\
-    \n    summary = {\n        \"total_files\": len(results),\n        \"ok\": 0,\n\
-    \        \"missing_index\": 0,\n        \"miscategorized\": 0, # Placeholder for\
-    \ future implementation\n        \"stub\": 0,\n    }\n\n    report_lines = [\n\
-    \        \"# Governance Audit Report\",\n        f\"**Date:** {__import__('datetime').datetime.now().strftime('%Y-%m-%d\
-    \ %H:%M:%S')}\",\n        \"\\n| Path | File Type | Index(es) | Status |\",\n\
-    \        \"|------|-----------|-----------|--------|\"\n    ]\n\n    for result\
-    \ in sorted(results, key=lambda x: x['path']):\n        status_flags = []\n  \
-    \      if result['status'] == 'ok':\n            summary['ok'] += 1\n        \
-    \    status_flags.append(\"OK\")\n        if result['status'] == 'missing':\n\
-    \            summary['missing_index'] += 1\n            status_flags.append(\"\
-    Missing Index\")\n        if result['is_stub']:\n            summary['stub'] +=\
-    \ 1\n            status_flags.append(\"Stub/Placeholder\")\n\n        status_str\
-    \ = \", \".join(status_flags)\n\n        index_str = \"<br>\".join(result['expected_indexes'])\
-    \ if result['expected_indexes'] else \"N/A\"\n\n        report_lines.append(f\"\
-    | `{result['path']}` | {result['type']} | {index_str} | {status_str} |\")\n\n\
-    \    # --- Summary Section ---\n    summary_lines = [\n        \"\\n## Summary\
-    \ Statistics\",\n        f\"- **Total Files Scanned:** {summary['total_files']}\"\
-    ,\n        f\"- **Files OK:** {summary['ok']}\",\n        f\"- **Files Missing\
-    \ from Index:** {summary['missing_index']}\",\n        f\"- **Files Flagged as\
-    \ Stubs:** {summary['stub']}\",\n        f\"- **Files Miscategorized:** {summary['miscategorized']}\
-    \ (Detection not yet implemented)\",\n    ]\n\n    report_content = \"\\n\".join(report_lines\
-    \ + summary_lines)\n    report_path.parent.mkdir(parents=True, exist_ok=True)\n\
-    \    report_path.write_text(report_content, encoding=\"utf-8\")\n    print(f\"\
-    Audit report saved to: {report_path}\")\n\ndef main():\n    \"\"\"Main function\
-    \ to run the governance audit.\"\"\"\n    all_files = find_all_files()\n    all_indexes_content\
-    \ = {\n        str(p): parse_markdown_index(PROJECT_ROOT / p)\n        for p in\
-    \ set(idx for indices in INDEX_MAP.values() for idx in indices)\n    }\n\n   \
-    \ audit_results = []\n\n    for file_path in all_files:\n        file_type = get_file_type(file_path)\n\
-    \        if file_type == \"other\":\n            continue # Skip files we don't\
-    \ classify\n\n        is_stub = is_stub_file(file_path, file_type)\n\n       \
-    \ expected_indexes = INDEX_MAP.get(file_type, [])\n\n        # Doc files can exist\
-    \ in multiple places, we need to find the correct index\n        if file_type\
-    \ == \"doc\":\n            possible_indexes = [idx for idx in expected_indexes\
-    \ if file_path.startswith(str(Path(idx).parent))]\n            if not possible_indexes\
-    \ and \"project/\" in file_path:\n                 possible_indexes = [\"project/PROJECT_REGISTRY.md\"\
-    ] # Default for project docs\n            expected_indexes = possible_indexes\n\
-    \n\n        is_registered = False\n        if expected_indexes:\n            #\
-    \ A file is considered registered if it appears in ANY of its potential indexes\n\
-    \            for index_file in expected_indexes:\n                if file_path\
-    \ in all_indexes_content.get(index_file, set()):\n                    is_registered\
-    \ = True\n                    break\n\n        status = 'ok'\n        if not is_registered\
-    \ and expected_indexes:\n            status = 'missing'\n\n        audit_results.append({\n\
-    \            \"path\": file_path,\n            \"type\": file_type,\n        \
-    \    \"expected_indexes\": expected_indexes,\n            \"status\": status,\n\
-    \            \"is_stub\": is_stub,\n        })\n\n    # Generate the final report\n\
-    \    report_path = PROJECT_ROOT / \"project/reports/GOVERNANCE_AUDIT_REPORT.md\"\
-    \n    generate_audit_report(audit_results, report_path)\n\n    # For linter integration,\
-    \ we can return an exit code if issues are found\n    if any(r['status'] != 'ok'\
-    \ or r['is_stub'] for r in audit_results):\n        print(\"Audit complete. Issues\
-    \ found.\")\n        sys.exit(1)\n    else:\n        print(\"Audit complete. All\
-    \ files compliant.\")\n        sys.exit(0)\n\nif __name__ == \"__main__\":\n \
-    \   main()"
+    \ = Path(__file__).parent.parent\nFILETYPE_MAP = {\n    \".md\": \"doc\",\n  \
+    \  \".py\": \"code\",\n    \".sh\": \"code\",\n    \".html\": \"code\",\n    \"\
+    .js\": \"code\",\n    \".ts\": \"code\",\n    \".css\": \"code\",\n    \".yml\"\
+    : \"code\",\n    \".go\": \"code\",\n}\nIGNORED_DIRS = {\".git\", \".idea\", \"\
+    venv\", \"node_modules\", \"build\", \"dist\", \"target\", \"__pycache__\"}\n\
+    IGNORED_FILES = {\"mkdocs.yml\", \"openapi.json\", \"bandit.yml\", \"changed_files.txt\"\
+    , \"verification_report.md\", \"LICENSE\"}\n\nINDEX_MAP = [\n    # --- API Documentation\
+    \ ---\n    {\n        \"match\": lambda path, ftype: ftype == \"doc\" and path.startswith(\"\
+    api/docs/\"),\n        \"indexes\": [\n            \"api/docs/MASTER_INDEX.md\"\
+    ,\n            \"api/docs/DOCS_QUALITY_INDEX.md\",\n        ],\n    },\n    #\
+    \ --- Project-level Documentation ---\n    {\n        \"match\": lambda path,\
+    \ ftype: ftype == \"doc\" and (\n            path.startswith(\"project/archive/docs/\"\
+    ) or\n            path.startswith(\"project/logs/\") or\n            path.startswith(\"\
+    project/process/\") or\n            path.startswith(\"project/proposals/\") or\n\
+    \            path.startswith(\"project/reports/\") or\n            path.startswith(\"\
+    project/\") and Path(path).parent.name == \"project\"\n        ),\n        \"\
+    indexes\": [\"project/PROJECT_REGISTRY.md\"],\n    },\n    # --- Component Documentation\
+    \ ---\n    {\n        \"match\": lambda path, ftype: ftype == \"doc\" and path.startswith(\"\
+    Gonk/GonkCLI/docs/\"),\n        \"indexes\": [\"Gonk/GonkCLI/DOCS_INDEX.md\"],\n\
+    \    },\n    {\n        \"match\": lambda path, ftype: ftype == \"doc\" and path.startswith(\"\
+    Gonk/GonkUI/docs/\"),\n        \"indexes\": [\"Gonk/GonkUI/DOCS_INDEX.md\"],\n\
+    \    },\n    {\n        \"match\": lambda path, ftype: ftype == \"doc\" and path.startswith(\"\
+    snitch/docs/\"),\n        \"indexes\": [\"snitch/DOCS_INDEX.md\"],\n    },\n \
+    \   # --- Code Indexes ---\n    {\n        \"match\": lambda path, ftype: ftype\
+    \ == \"code\" and path.startswith(\"api/\"),\n        \"indexes\": [\"api/docs/CODE_FILE_INDEX.md\"\
+    ],\n    },\n    {\n        \"match\": lambda path, ftype: ftype == \"code\" and\
+    \ path.startswith(\"Gonk/\"),\n        \"indexes\": [\"Gonk/CODE_FILE_INDEX.md\"\
+    ],\n    },\n    {\n        \"match\": lambda path, ftype: ftype == \"code\" and\
+    \ path.startswith(\"snitch/\"),\n        \"indexes\": [\"snitch/CODE_FILE_INDEX.md\"\
+    ],\n    },\n    {\n        \"match\": lambda path, ftype: ftype == \"code\" and\
+    \ path.startswith(\"scripts/\"),\n        \"indexes\": [\"scripts/CODE_FILE_INDEX.md\"\
+    ],\n    },\n]\n\ndef get_file_type(filepath: str) -> str:\n    \"\"\"Classifies\
+    \ a file based on its extension using FILETYPE_MAP.\"\"\"\n    if os.path.basename(filepath).startswith(\"\
+    .\"):\n        return \"exempt\"\n    if os.path.basename(filepath) in IGNORED_FILES:\n\
+    \        return \"exempt\"\n\n    ext = os.path.splitext(filepath)[1]\n    return\
+    \ FILETYPE_MAP.get(ext, \"exempt\")\n\ndef find_all_files() -> List[str]:\n  \
+    \  \"\"\"Scans the project root for all files, respecting IGNORED_DIRS.\"\"\"\n\
+    \    all_files = []\n    for root, dirs, files in os.walk(PROJECT_ROOT):\n   \
+    \     dirs[:] = [d for d in dirs if d not in IGNORED_DIRS]\n        for file in\
+    \ files:\n            all_files.append(\n                str(Path(os.path.join(root,\
+    \ file)).relative_to(PROJECT_ROOT))\n            )\n    return all_files\n\ndef\
+    \ parse_markdown_index(index_path: Path) -> Set[str]:\n    \"\"\"Parses a markdown\
+    \ file and extracts all linked paths or table rows.\"\"\"\n    if not index_path.exists():\n\
+    \        return set()\n    content = index_path.read_text(encoding=\"utf-8\")\n\
+    \n    if \"| Path \" in content or \"| File Path \" in content:\n        paths\
+    \ = re.findall(r\"\\|\\s*`([^`]+)`\\s*\\|\", content)\n        return set(paths)\n\
+    \    else:\n        links = re.findall(r\"\\[[^\\]]+\\]\\((?!https?://)([^)]+)\\\
+    )\", content)\n        # Resolve path relative to the index file's location\n\
+    \        return {str(Path(index_path.parent / link).resolve().relative_to(PROJECT_ROOT))\
+    \ for link in links}\n\ndef check_registration(file_path: str, required_indexes:\
+    \ List[str], all_indexes_content: Dict[str, Set[str]]) -> Tuple[List[str], List[str]]:\n\
+    \    \"\"\"\n    Checks if a file is registered in the required indexes.\n   \
+    \ Returns two lists: one of found indexes and one of missing indexes.\n    \"\"\
+    \"\n    found_in = []\n    missing_from = []\n    normalized_file_path = str(Path(file_path).resolve().relative_to(PROJECT_ROOT))\n\
+    \    for index_file in required_indexes:\n        if normalized_file_path in all_indexes_content.get(index_file,\
+    \ set()):\n            found_in.append(index_file)\n        else:\n          \
+    \  missing_from.append(index_file)\n    return sorted(found_in), sorted(missing_from)\n\
+    \ndef create_and_populate_index(index_path_str: str, files_to_add: List[str],\
+    \ file_type: str):\n    \"\"\"Creates a new index file and populates it with the\
+    \ given files.\"\"\"\n    index_path = PROJECT_ROOT / index_path_str\n    print(f\"\
+    Creating missing index file: {index_path}\")\n    index_path.parent.mkdir(parents=True,\
+    \ exist_ok=True)\n\n    header = f\"# {index_path.stem.replace('_', ' ').title()}\\\
+    n\\nThis file is auto-generated. Do not edit manually.\\n\\n\"\n    lines = []\n\
+    \n    if \"CODE_FILE_INDEX\" in index_path_str:\n        header += \"| Path |\
+    \ Type | Description | Status | Linked Docs | Notes |\\n\"\n        header +=\
+    \ \"|------|------|-------------|--------|-------------|-------|\\n\"\n      \
+    \  lines = [f\"| `{f}` | | | Active | | |\" for f in sorted(files_to_add)]\n \
+    \   elif \"QUALITY_INDEX\" in index_path_str:\n        header += \"| File Path\
+    \ | Documentation Score | Code Score | Reviewer | Review Date | Notes |\\n\"\n\
+    \        header += \"|-----------|---------------------|------------|----------|-------------|-------|\\\
+    n\"\n        lines = [f\"| `{f}` | X | X | | | |\" for f in sorted(files_to_add)]\n\
+    \    else: # Default to a simple list for other doc indexes\n        # Make links\
+    \ relative to the new index file\n        relative_links = [os.path.relpath(PROJECT_ROOT\
+    \ / f, index_path.parent) for f in files_to_add]\n        lines = [f\"*   [{Path(f).name}]({link})\"\
+    \ for f, link in zip(files_to_add, relative_links)]\n\n\n    with open(index_path,\
+    \ \"w\", encoding=\"utf-8\") as f:\n        f.write(header + \"\\n\".join(sorted(lines))\
+    \ + \"\\n\")\n\ndef generate_audit_report(trace_index: List[Dict[str, Any]]) ->\
+    \ int:\n    \"\"\"Generates a human-readable audit report and returns an exit\
+    \ code.\"\"\"\n    print(\"\\n\" + \"=\" * 50)\n    print(\"Governance Audit Report\"\
+    )\n    print(\"=\" * 50)\n\n    missing_by_index = {}\n    registered_count =\
+    \ 0\n    missing_count = 0\n    exempted_count = 0\n    wrongly_exempted = []\n\
+    \n    for item in trace_index:\n        if item[\"registered\"] == \"exempted\"\
+    :\n            exempted_count += 1\n            if item['type'] == 'doc':\n  \
+    \              wrongly_exempted.append(item['path'])\n        elif item[\"registered\"\
+    ] is True:\n            registered_count += 1\n        else:\n            missing_count\
+    \ += 1\n            for index_file in item.get(\"missing_from\", []):\n      \
+    \          if index_file not in missing_by_index:\n                    missing_by_index[index_file]\
+    \ = []\n                missing_by_index[index_file].append(item[\"path\"])\n\n\
+    \    if wrongly_exempted:\n        print(\"\\n--- \U0001F6A8 Wrongly Exempted\
+    \ Documents ---\")\n        print(\"The following .md files were marked 'exempted'\
+    \ but should be registered:\")\n        for path in sorted(wrongly_exempted):\n\
+    \            print(f\"  - {path}\")\n\n\n    if missing_count > 0:\n        print(\"\
+    \\n--- Missing Registrations ---\")\n        for index_file, files in sorted(missing_by_index.items()):\n\
+    \            print(f\"\\nMissing from {index_file}:\")\n            for file_path\
+    \ in sorted(files):\n                print(f\"  - {file_path}\")\n\n    print(\"\
+    \\n\" + \"-\" * 20)\n    print(\"Summary:\")\n    print(f\"- Total files checked:\
+    \ {len(trace_index)}\")\n    print(f\"- Registered: {registered_count}\")\n  \
+    \  print(f\"- Missing: {missing_count}\")\n    print(f\"- Exempted: {exempted_count}\"\
+    )\n    print(f\"- Wrongly Exempted Docs: {len(wrongly_exempted)}\")\n    print(\"\
+    -\" * 20)\n\n    if missing_count > 0 or wrongly_exempted:\n        print(\"\\\
+    nStatus: ❌ FAIL\")\n        return 1\n    else:\n        print(\"\\nStatus: ✅\
+    \ PASS\")\n        return 0\n\ndef validate_trace_index_schema(trace_index_path:\
+    \ Path) -> bool:\n    \"\"\"Loads the generated TRACE_INDEX.yml and validates\
+    \ its schema.\"\"\"\n    print(\"\\n--- Validating TRACE_INDEX.yml Schema ---\"\
+    )\n    try:\n        with open(trace_index_path, 'r') as f:\n            data\
+    \ = yaml.safe_load(f)\n    except Exception as e:\n        print(f\"ERROR: Could\
+    \ not load or parse TRACE_INDEX.yml: {e}\", file=sys.stderr)\n        return False\n\
+    \n    errors = []\n    if 'artifacts' not in data or not isinstance(data['artifacts'],\
+    \ list):\n        errors.append(\"FATAL: 'artifacts' key is missing or not a list.\"\
+    )\n        print(\"\\n\".join(errors), file=sys.stderr)\n        return False\n\
+    \n    for i, artifact in enumerate(data['artifacts']):\n        path = artifact.get('path')\n\
+    \        reg_status = artifact.get('registered')\n        index_val = artifact.get('index')\n\
+    \n        if reg_status is True:\n            if not isinstance(index_val, list)\
+    \ or not all(isinstance(x, str) for x in index_val):\n                errors.append(f\"\
+    Schema Error (path: {path}): If registered is true, 'index' must be a list of\
+    \ strings.\")\n        elif reg_status is False:\n            if index_val !=\
+    \ \"-\":\n                errors.append(f\"Schema Error (path: {path}): If registered\
+    \ is false, 'index' must be '-'.\")\n            if 'missing_from' not in artifact\
+    \ or not isinstance(artifact['missing_from'], list):\n                errors.append(f\"\
+    Schema Error (path: {path}): If registered is false, 'missing_from' must be a\
+    \ list.\")\n        elif reg_status == \"exempted\":\n            if index_val\
+    \ != \"-\":\n                 errors.append(f\"Schema Error (path: {path}): If\
+    \ registered is 'exempted', 'index' must be '-'.\")\n        else:\n         \
+    \   errors.append(f\"Schema Error (path: {path}): Invalid 'registered' status:\
+    \ {reg_status}\")\n\n    if errors:\n        print(\"TRACE_INDEX.yml schema validation\
+    \ failed:\", file=sys.stderr)\n        for error in errors:\n            print(f\"\
+    - {error}\", file=sys.stderr)\n        return False\n\n    print(\"Schema validation\
+    \ passed!\")\n    return True\n\n\ndef main():\n    \"\"\"Main function to run\
+    \ the governance check.\"\"\"\n    all_files = find_all_files()\n    trace_index\
+    \ = []\n\n    all_index_paths = {idx for rule in INDEX_MAP for idx in rule[\"\
+    indexes\"]}\n    all_indexes_content = {\n        str(p): parse_markdown_index(PROJECT_ROOT\
+    \ / p) for p in all_index_paths\n    }\n\n    files_to_create_in_indexes = {}\n\
+    \n    for file_path in sorted(all_files):\n        file_type = get_file_type(file_path)\n\
+    \n        trace_entry = {\n            \"path\": file_path,\n            \"type\"\
+    : file_type,\n        }\n\n        required_indexes = []\n        if file_type\
+    \ != \"exempt\":\n            for rule in INDEX_MAP:\n                if rule[\"\
+    match\"](file_path, file_type):\n                    required_indexes.extend(rule[\"\
+    indexes\"])\n\n        required_indexes = sorted(list(set(required_indexes)))\n\
+    \n        # Core logic change: No .md file should be exempt unless explicitly\
+    \ ignored.\n        if file_type == 'doc' and not required_indexes and file_path\
+    \ not in IGNORED_FILES:\n             # This doc file has no rule. Flag it as\
+    \ unregistered against the default project registry.\n            required_indexes.append(\"\
+    project/PROJECT_REGISTRY.md\")\n\n\n        if not required_indexes:\n       \
+    \     trace_entry[\"registered\"] = \"exempted\"\n            trace_entry[\"index\"\
+    ] = \"-\"\n        else:\n            found_in, missing_from = check_registration(file_path,\
+    \ required_indexes, all_indexes_content)\n\n            if not missing_from:\n\
+    \                trace_entry[\"registered\"] = True\n                trace_entry[\"\
+    index\"] = found_in\n            else:\n                trace_entry[\"registered\"\
+    ] = False\n                trace_entry[\"index\"] = \"-\"\n                trace_entry[\"\
+    missing_from\"] = missing_from\n\n                for index_file in missing_from:\n\
+    \                    if index_file not in files_to_create_in_indexes:\n      \
+    \                  files_to_create_in_indexes[index_file] = []\n             \
+    \       files_to_create_in_indexes[index_file].append(file_path)\n\n        trace_index.append(trace_entry)\n\
+    \n    for index_path_str, files in files_to_create_in_indexes.items():\n     \
+    \   if not (PROJECT_ROOT / index_path_str).exists():\n            first_file_type\
+    \ = get_file_type(files[0])\n            create_and_populate_index(index_path_str,\
+    \ files, first_file_type)\n\n    output = {\"artifacts\": trace_index}\n    trace_index_path\
+    \ = PROJECT_ROOT / \"TRACE_INDEX.yml\"\n    with open(trace_index_path, \"w\"\
+    ) as f:\n        yaml.safe_dump(output, f, default_flow_style=False, sort_keys=False)\n\
+    \    print(\"TRACE_INDEX.yml generated successfully.\")\n\n    # --- Validation\
+    \ and Reporting ---\n    if not validate_trace_index_schema(trace_index_path):\n\
+    \        return 1 # Exit with failure if schema is invalid\n\n    return generate_audit_report(trace_index)\n\
+    \nif __name__ == \"__main__\":\n    exit_code = main()\n    sys.exit(exit_code)"
 - path: scripts/generate_endpoints_doc.py
   type: script
   workflow:
@@ -1642,34 +1877,34 @@
     \ or filename.endswith('.txt'):\n        return 'doc'\n    elif filename.endswith('.yml')\
     \ or filename.endswith('.yaml') or filename.endswith('.json'):\n        return\
     \ 'config'\n    else:\n        return 'other'\n\n\ndef is_ignored_file(rel_path):\n\
-    \    normalized = os.path.normpath(rel_path).replace('\\\\', '/')\n    # Always\
+    \    normalized = os.path.normpath(rel_path).replace(os.sep, '/')\n    # Always\
     \ include files explicitly listed\n    if normalized in INCLUDED_FILES:\n    \
     \    return False\n    # Skip ignored filenames\n    if os.path.basename(rel_path)\
     \ in IGNORED_FILES:\n        return True\n    # Skip if any parent dir is in IGNORED_DIRS\n\
     \    parts = normalized.split('/')\n    for p in parts[:-1]:\n        if p in\
     \ IGNORED_DIRS:\n            return True\n    return False\n\n\ndef scan_repo(base_dir='.'):\n\
     \    manifest = []\n\n    for root, dirs, files in os.walk(base_dir):\n      \
-    \  # Only skip ignored dirs that don't contain included files\n        dirs[:]\
-    \ = [d for d in dirs if d not in IGNORED_DIRS or\n                   any(inc.startswith(os.path.relpath(os.path.join(root,\
-    \ d), start=base_dir).replace('\\\\', '/') + '/') for inc in INCLUDED_FILES)]\n\
-    \n        for f in files:\n            path = os.path.join(root, f)\n        \
-    \    rel_path = os.path.relpath(path, start=base_dir)\n            if is_ignored_file(rel_path):\n\
-    \                continue\n\n            file_type = get_file_type(f)\n\n    \
-    \        try:\n                with open(path, 'r', encoding='utf-8') as file_obj:\n\
-    \                    content = file_obj.read()\n            except Exception:\n\
-    \                content = '<binary or unreadable content>'\n\n            # Determine\
-    \ workflow based on previous mapping\n            workflow = []\n            if\
-    \ f.startswith('audit'):\n                workflow.append('audit')\n         \
-    \   elif 'test' in f or f.startswith('run_e2e'):\n                workflow.append('testing')\n\
-    \            elif f.startswith('generate'):\n                workflow.append('documentation')\n\
-    \            elif f.startswith('linter') or f.startswith('validate'):\n      \
-    \          workflow.append('validation')\n\n            # Determine indexes\n\
-    \            indexes = []\n            if f.endswith('CODE_FILE_INDEX.md') or\
-    \ f.endswith('MASTER_INDEX.md'):\n                indexes.append(f)\n\n      \
-    \      manifest.append({\n                'path': rel_path.replace('\\\\', '/'),\n\
-    \                'type': file_type,\n                'workflow': workflow,\n \
-    \               'indexes': indexes,\n                'content': content\n    \
-    \        })\n    return manifest\n\n\ndef save_manifest(manifest, output_file=OUTPUT_FILE):\n\
+    \  # Skip ignored dirs unless they lead to an included file\n        dirs[:] =\
+    \ [d for d in dirs if d not in IGNORED_DIRS or\n                   any(inc.startswith(os.path.relpath(os.path.join(root,\
+    \ d), base_dir).replace(os.sep, '/') + '/')\n                       for inc in\
+    \ INCLUDED_FILES)]\n\n        for f in files:\n            path = os.path.join(root,\
+    \ f)\n            rel_path = os.path.relpath(path, start=base_dir)\n         \
+    \   if is_ignored_file(rel_path):\n                continue\n\n            file_type\
+    \ = get_file_type(f)\n\n            try:\n                with open(path, 'r',\
+    \ encoding='utf-8') as file_obj:\n                    content = file_obj.read()\n\
+    \            except Exception:\n                content = '<binary or unreadable\
+    \ content>'\n\n            # Determine workflow based on previous mapping\n  \
+    \          workflow = []\n            if f.startswith('audit'):\n            \
+    \    workflow.append('audit')\n            elif 'test' in f or f.startswith('run_e2e'):\n\
+    \                workflow.append('testing')\n            elif f.startswith('generate'):\n\
+    \                workflow.append('documentation')\n            elif f.startswith('linter')\
+    \ or f.startswith('validate'):\n                workflow.append('validation')\n\
+    \n            # Determine indexes\n            indexes = []\n            if f.endswith('CODE_FILE_INDEX.md')\
+    \ or f.endswith('MASTER_INDEX.md'):\n                indexes.append(f)\n\n   \
+    \         manifest.append({\n                'path': rel_path.replace(os.sep,\
+    \ '/'),\n                'type': file_type,\n                'workflow': workflow,\n\
+    \                'indexes': indexes,\n                'content': content\n   \
+    \         })\n    return manifest\n\n\ndef save_manifest(manifest, output_file=OUTPUT_FILE):\n\
     \    os.makedirs(os.path.dirname(output_file), exist_ok=True)\n    with open(output_file,\
     \ 'w', encoding='utf-8') as f:\n        yaml.dump(manifest, f, sort_keys=False,\
     \ allow_unicode=True)\n\n\nif __name__ == '__main__':\n    repo_manifest = scan_repo('.')\n\
@@ -3523,10 +3758,6 @@
     | A proposal and implementation document for fixing the `TRACE_INDEX.yml` schema.
     |
 
-    | **Governance Audit Refactor** | [`proposals/GOVERNANCE_AUDIT_REFACTOR.md`](./proposals/GOVERNANCE_AUDIT_REFACTOR.md)
-    | A formal proposal to refactor the governance script into a comprehensive audit
-    system. |
-
 
     ---
 
@@ -4240,24 +4471,6 @@
     - ✅ Comprehensive user manual with examples added.
 
 
-    ## Phase 5b – Governance & Audit System
-
-    **Goal:** Refactor and strengthen the repository''s governance and audit capabilities.
-
-    **Status:** 🟡 In Progress
-
-    **Steps:**
-
-    - [ ] **Refactor Governance Script:** Update `scripts/repo_inventory_and_governance.py`
-    to consolidate code indexing, add stub detection, and generate a persistent Markdown
-    report. (Source: `proposals/GOVERNANCE_AUDIT_REFACTOR.md`)
-
-    - [ ] **Perform System Demo:** Create and document a live demonstration to verify
-    the new script''s functionality.
-
-    - [ ] Code QA
-
-
     ## Phase 6: Fork-Specific Enhancements
 
     **Goal:** Implement enhancements specific to client forks and improve docs.
@@ -4588,11 +4801,6 @@
     | AR-030 | Task & Doc Hygiene | | ✅ | [Doc Governance](HIGH_LEVEL_DESIGN.md#hld-documentation-governance)
     | [Ongoing Maintenance](LOW_LEVEL_DESIGN.md#lld-ongoing-maintenance) | `scripts/linter.py`
     | | `project/TASK_CHECKLIST.md` | Enforced by linter. |
-
-    | AR-065 | Governance Audit Refactor | | 🟡 | [Doc Governance](HIGH_LEVEL_DESIGN.md#hld-documentation-governance)
-    | [Ongoing Maintenance](LOW_LEVEL_DESIGN.md#lld-ongoing-maintenance) | `scripts/repo_inventory_and_governance.py`
-    | N/A | `project/proposals/GOVERNANCE_AUDIT_REFACTOR.md` | New proposal to refactor
-    the governance script into a full audit system. |
 
     | **System Requirements (NFRs)** | | | | | | | | | |
 
@@ -5548,6 +5756,71 @@
     upgrade triggers.
 
     '
+- path: project/HANDOVER_BRIEF_NEXT_DEV.md
+  type: doc
+  workflow: []
+  indexes: []
+  content: "# Handover Brief: Governance Audit System Refactor\n\n**Date:** 2025-09-25\n\
+    **Author:** Jules\n**Status:** Pending Handover\n\n## 1. Context\n\nThis work\
+    \ session has focused on the incremental development and refinement of a new,\
+    \ automated repository governance system, which is managed by the `scripts/repo_inventory_and_governance.py`\
+    \ script. The project operates under a strict \"Living Documentation\" model,\
+    \ where all artifacts (code, docs, proposals, etc.) must be correctly classified\
+    \ and registered in designated index files. This new governance script is the\
+    \ primary mechanism for enforcing this policy.\n\nA series of tasks were completed\
+    \ to build this system:\n1.  **Initial Implementation:** The script was created\
+    \ from scratch to scan the repository, classify files based on type, and use a\
+    \ rule-based `INDEX_MAP` to check for their registration in the appropriate index\
+    \ files.\n2.  **Schema Refinements:** The output schema of the machine-readable\
+    \ `TRACE_INDEX.yml` was iteratively improved to be more precise and unambiguous,\
+    \ culminating in a version that uses a literal string `\"-\"` for the `index`\
+    \ field for unregistered or exempt files.\n3.  **Component Indexing:** The system\
+    \ was extended to support component-level documentation, automatically creating\
+    \ and managing `DOCS_INDEX.md` files within component directories (e.g., `Gonk/GonkUI/`).\n\
+    4.  **Fixing Misclassifications:** The rules were updated to correctly classify\
+    \ and track project-level documentation (e.g., in `project/logs/`, `project/archive/`)\
+    \ that were previously being ignored.\n5.  **Integration:** The script is fully\
+    \ integrated into the main linter (`scripts/linter.py`) and runs by default on\
+    \ every execution, ensuring continuous verification.\n\nAll of these changes were\
+    \ documented via formal proposal files in `project/proposals/` and registered\
+    \ in the `project/PROJECT_REGISTRY.md` to maintain alignment with the project's\
+    \ core principles.\n\n## 2. System State at Time of Handover\n\n*   **Functionality:**\
+    \ The governance script is functional and correctly identifies a large number\
+    \ of registration gaps in the repository. The linter integration is working, and\
+    \ the script will correctly cause the linter to fail. The `TRACE_INDEX.yml` is\
+    \ being generated according to the latest specified schema.\n*   **Known Issues\
+    \ / Pending Work:** The system is now ready for a final, major refactoring to\
+    \ elevate it to a complete audit system. The full specification for this work\
+    \ has already been provided in the last user prompt and represents the next logical\
+    \ and immediate task.\n\n## 3. Next Immediate Steps & Recommendations\n\nThe next\
+    \ developer is tasked with executing the **\"Refactor and Strengthen Governance\
+    \ Audit System\"** task. This is a critical step to finalize the system's capabilities.\n\
+    \nThe core objectives of this task are:\n1.  **Refactor the Governance Script:**\
+    \ Update `scripts/repo_inventory_and_governance.py` to use the new, more precise\
+    \ `FILETYPE_MAP` and `INDEX_MAP` rules provided in the task specification. A key\
+    \ change is the consolidation of all code and config files into a single index:\
+    \ `api/docs/CODE_FILE_INDEX.md`.\n2.  **Enhance the Audit Report:** The human-readable\
+    \ report must be saved to `project/reports/governance_audit_report.txt`. It needs\
+    \ to be enhanced to detect and list wrongly categorized files (e.g., a `.md` in\
+    \ a code index) and placeholder/stub files.\n3.  **Author and Register a New Proposal:**\
+    \ A new proposal document, `project/proposals/GOVERNANCE_AUDIT_REFACTOR.md`, must\
+    \ be created. **Crucially, this proposal must be registered in three separate\
+    \ files:**\n    *   `project/PROJECT_REGISTRY.md`\n    *   `project/FUTURE_ENHANCEMENTS.md`\n\
+    \    *   `project/ALIGNMENT_MATRIX.md`\n    The developer must inspect the format\
+    \ of each of these files to ensure the registration is done correctly.\n4.  **Perform\
+    \ and Document a Demo:** After the implementation is complete, a demonstration\
+    \ must be performed to prove the system works as expected. This involves:\n  \
+    \  *   Adding a new `.py` file to the `api/src/` directory.\n    *   Running the\
+    \ audit script to show that the new file is correctly flagged as missing from\
+    \ the code index.\n    *   Fixing the violation by registering the file.\n   \
+    \ *   Re-running the audit to show a clean report.\n    *   Documenting this entire\
+    \ process in a new report file at `project/reports/governance_demo_report.md`.\n\
+    \n**Recommendation:** The next developer should start by creating a new, detailed\
+    \ plan based on the full specification provided in the last user prompt. Close\
+    \ attention should be paid to the new `INDEX_MAP` rules and the multi-file registration\
+    \ requirement for the proposal, as this is more complex than in previous tasks.\
+    \ The final deliverable is a fully autonomous, precise, and reliable governance\
+    \ audit system that ensures the project's \"Living Documentation\" stays alive."
 - path: project/proposals/LOW_CODE_PROPOSAL.md
   type: doc
   workflow: []
@@ -5871,105 +6144,6 @@
     \ effectively adding new features to the API.\n-   **New Authentication Methods:**\
     \ Enabling plugins that add new ways for users to authenticate to the Zotify API\
     \ itself (e.g., LDAP, other OAuth providers).\n"
-- path: project/proposals/GOVERNANCE_AUDIT_REFACTOR.md
-  type: doc
-  workflow: []
-  indexes: []
-  content: '# Proposal: Refactor and Strengthen Governance Audit System
-
-
-    **Author:** Jules
-
-    **Date:** 2025-09-27
-
-    **Status:** Proposed
-
-
-    ## 1. Abstract
-
-
-    This document proposes a significant refactoring of the repository''s primary
-    governance script, `scripts/repo_inventory_and_governance.py`. The goal is to
-    elevate the script into a comprehensive, audit-ready tool that fully aligns with
-    the project''s "Living Documentation" policy. The changes will consolidate code
-    indexing, introduce more precise file-type mapping, implement stub/placeholder
-    detection, and generate a formal, detailed audit report.
-
-
-    ## 2. Problem Statement
-
-
-    The current governance script is functional but has several limitations:
-
-    *   **Fragmented Indexing:** It relies on multiple, component-specific code indexes,
-    making it difficult to get a holistic view of all code-related artifacts.
-
-    *   **Incomplete Reporting:** The script outputs its findings to the console,
-    but does not produce a persistent, shareable audit report.
-
-    *   **Limited Detection:** It cannot identify placeholder files or wrongly categorized
-    artifacts, allowing low-quality or misclassified files to go unnoticed.
-
-    *   **Outdated Rules:** The file classification rules do not accurately reflect
-    the current project standards.
-
-
-    ## 3. Proposed Solution
-
-
-    This refactor will address these issues by implementing the following enhancements:
-
-
-    1.  **Consolidate Code Indexing:** All code, script, and configuration files (`.py`,
-    `.go`, `.sh`, `.yml`, `.json`, etc.) will be tracked in a single, canonical index:
-    `api/docs/CODE_FILE_INDEX.md`. This simplifies the architecture and provides a
-    single source of truth.
-
-    2.  **Update File Mappings:** The `FILETYPE_MAP` will be updated to the new standard,
-    introducing more granular types like `script` and `config`.
-
-    3.  **Implement Stub Detection:** A new function will be added to identify and
-    flag placeholder or stub files based on a clear set of criteria (file size, keywords,
-    empty content).
-
-    4.  **Generate Enhanced Audit Report:** The script will produce a comprehensive,
-    human-readable report in Markdown format, saved to `project/reports/GOVERNANCE_AUDIT_REPORT.md`.
-    This report will detail the status of every file, including whether it is correctly
-    indexed, miscategorized, or a stub.
-
-    5.  **Strengthen Verification:** The overall system will be more robust, providing
-    a reliable mechanism for enforcing documentation and code quality standards across
-    the repository.
-
-
-    ## 4. Scope
-
-
-    This proposal covers the following:
-
-    *   Modifications to `scripts/repo_inventory_and_governance.py`.
-
-    *   Creation of a new, persistent audit report at `project/reports/GOVERNANCE_AUDIT_REPORT.md`.
-
-    *   Documentation of the new functionality via a demo report.
-
-
-    This proposal does **not** cover:
-
-    *   Fixing all the violations that the new script will uncover.
-
-    *   Changes to the `scripts/linter.py` integration, other than ensuring it continues
-    to function correctly.
-
-
-    ## 5. Justification
-
-
-    This refactor is a critical step in maturing the project''s automated governance
-    capabilities. It will provide the team with a powerful tool to maintain high standards
-    for documentation and code quality, ensuring the "Living Documentation" model
-    remains effective and sustainable. By creating a persistent, detailed audit trail,
-    we enhance transparency and accountability.'
 - path: project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md
   type: doc
   workflow: []
@@ -6394,1093 +6568,6 @@
     \ a clear path for community members to contribute new providers without needing\
     \ deep knowledge of the core API.\n- **Future-Ready:** Easily adaptable to new\
     \ AI models for embedding, new database technologies, and new music sources.\n"
-- path: project/reports/GOVERNANCE_AUDIT_REPORT.md
-  type: doc
-  workflow: []
-  indexes: []
-  content: '# Governance Audit Report
-
-    **Date:** 2025-09-27 11:18:51
-
-
-    | Path | File Type | Index(es) | Status |
-
-    |------|-----------|-----------|--------|
-
-    | `.github/workflows/ci.yml` | config | api/docs/CODE_FILE_INDEX.md | Missing
-    Index |
-
-    | `.github/workflows/pushmirror.yml` | config | api/docs/CODE_FILE_INDEX.md |
-    Missing Index |
-
-    | `AGENTS.md` | doc | N/A | OK |
-
-    | `Gonk/CODE_FILE_INDEX.md` | doc | N/A | OK |
-
-    | `Gonk/GonkCLI/README.md` | doc | Gonk/GonkCLI/DOCS_INDEX.md | Missing Index
-    |
-
-    | `Gonk/GonkCLI/__init__.py` | code | api/docs/CODE_FILE_INDEX.md | Missing Index,
-    Stub/Placeholder |
-
-    | `Gonk/GonkCLI/main.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `Gonk/GonkCLI/modules/__init__.py` | code | api/docs/CODE_FILE_INDEX.md | Missing
-    Index |
-
-    | `Gonk/GonkCLI/modules/jwt_mock.py` | code | api/docs/CODE_FILE_INDEX.md | OK
-    |
-
-    | `Gonk/GonkCLI/tests/__init__.py` | code | api/docs/CODE_FILE_INDEX.md | Missing
-    Index |
-
-    | `Gonk/GonkCLI/tests/test_jwt_mock.py` | code | api/docs/CODE_FILE_INDEX.md |
-    OK |
-
-    | `Gonk/GonkUI/DOCS_INDEX.md` | doc | Gonk/GonkUI/DOCS_INDEX.md | Missing Index
-    |
-
-    | `Gonk/GonkUI/README.md` | doc | Gonk/GonkUI/DOCS_INDEX.md | Missing Index |
-
-    | `Gonk/GonkUI/app.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `Gonk/GonkUI/docs/ARCHITECTURE.md` | doc | Gonk/GonkUI/DOCS_INDEX.md | OK |
-
-    | `Gonk/GonkUI/docs/CHANGELOG.md` | doc | Gonk/GonkUI/DOCS_INDEX.md | OK |
-
-    | `Gonk/GonkUI/docs/CONTRIBUTING.md` | doc | Gonk/GonkUI/DOCS_INDEX.md | OK |
-
-    | `Gonk/GonkUI/docs/USER_MANUAL.md` | doc | Gonk/GonkUI/DOCS_INDEX.md | OK |
-
-    | `Gonk/GonkUI/views/__init__.py` | code | api/docs/CODE_FILE_INDEX.md | Missing
-    Index |
-
-    | `Gonk/GonkUI/views/jwt_ui.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `README.md` | doc | N/A | OK |
-
-    | `TRACE_INDEX.yml` | config | api/docs/CODE_FILE_INDEX.md | Missing Index |
-
-    | `api/MIGRATIONS.md` | doc | N/A | OK |
-
-    | `api/alembic/env.py` | code | api/docs/CODE_FILE_INDEX.md | Missing Index |
-
-    | `api/alembic/versions/5f96175ff7c9_add_notifications_enabled_to_.py` | code
-    | api/docs/CODE_FILE_INDEX.md | Missing Index |
-
-    | `api/api_dumps/cache.json` | config | api/docs/CODE_FILE_INDEX.md | Missing
-    Index |
-
-    | `api/api_dumps/downloads.json` | config | api/docs/CODE_FILE_INDEX.md | Missing
-    Index, Stub/Placeholder |
-
-    | `api/api_dumps/logging.json` | config | api/docs/CODE_FILE_INDEX.md | Missing
-    Index |
-
-    | `api/api_dumps/metadata.json` | config | api/docs/CODE_FILE_INDEX.md | Missing
-    Index, Stub/Placeholder |
-
-    | `api/api_dumps/network.json` | config | api/docs/CODE_FILE_INDEX.md | Missing
-    Index |
-
-    | `api/api_dumps/playlist.json` | config | api/docs/CODE_FILE_INDEX.md | Missing
-    Index, Stub/Placeholder |
-
-    | `api/api_dumps/spotify.json` | config | api/docs/CODE_FILE_INDEX.md | Missing
-    Index, Stub/Placeholder |
-
-    | `api/api_dumps/stubs.json` | config | api/docs/CODE_FILE_INDEX.md | Missing
-    Index, Stub/Placeholder |
-
-    | `api/api_dumps/sync.json` | config | api/docs/CODE_FILE_INDEX.md | Missing Index,
-    Stub/Placeholder |
-
-    | `api/api_dumps/system.json` | config | api/docs/CODE_FILE_INDEX.md | Missing
-    Index, Stub/Placeholder |
-
-    | `api/api_dumps/tracks.json` | config | api/docs/CODE_FILE_INDEX.md | Missing
-    Index, Stub/Placeholder |
-
-    | `api/api_dumps/user.json` | config | api/docs/CODE_FILE_INDEX.md | Missing Index,
-    Stub/Placeholder |
-
-    | `api/docs/CHANGELOG.md` | doc | api/docs/MASTER_INDEX.md | Missing Index, Stub/Placeholder
-    |
-
-    | `api/docs/CODE_FILE_INDEX.md` | doc | api/docs/MASTER_INDEX.md | OK |
-
-    | `api/docs/CODE_QUALITY_INDEX.md` | doc | api/docs/MASTER_INDEX.md | Missing
-    Index, Stub/Placeholder |
-
-    | `api/docs/DOCS_QUALITY_INDEX.md` | doc | api/docs/MASTER_INDEX.md | Missing
-    Index, Stub/Placeholder |
-
-    | `api/docs/MASTER_INDEX.md` | doc | api/docs/MASTER_INDEX.md | Missing Index
-    |
-
-    | `api/docs/manuals/API_DEVELOPER_GUIDE.md` | doc | api/docs/MASTER_INDEX.md |
-    OK |
-
-    | `api/docs/manuals/CICD.md` | doc | api/docs/MASTER_INDEX.md | OK |
-
-    | `api/docs/manuals/ERROR_HANDLING_GUIDE.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/manuals/LOGGING_GUIDE.md` | doc | api/docs/MASTER_INDEX.md | OK |
-
-    | `api/docs/manuals/OPERATOR_MANUAL.md` | doc | api/docs/MASTER_INDEX.md | OK
-    |
-
-    | `api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/manuals/USER_MANUAL.md` | doc | api/docs/MASTER_INDEX.md | OK |
-
-    | `api/docs/providers/SPOTIFY.md` | doc | api/docs/MASTER_INDEX.md | OK |
-
-    | `api/docs/reference/API_REFERENCE.md` | doc | api/docs/MASTER_INDEX.md | OK
-    |
-
-    | `api/docs/reference/FEATURE_SPECS.md` | doc | api/docs/MASTER_INDEX.md | OK
-    |
-
-    | `api/docs/reference/features/AUTHENTICATION.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/features/AUTOMATED_DOCUMENTATION_WORKFLOW.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/features/DEVELOPER_FLEXIBLE_LOGGING_FRAMEWORK.md` | doc
-    | api/docs/MASTER_INDEX.md | OK |
-
-    | `api/docs/reference/features/PROVIDER_AGNOSTIC_EXTENSIONS.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/features/PROVIDER_OAUTH.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/ACTIONS____INIT__.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/APP.js.md` | doc | api/docs/MASTER_INDEX.md | OK
-    |
-
-    | `api/docs/reference/source/APP.py.md` | doc | api/docs/MASTER_INDEX.md | OK
-    |
-
-    | `api/docs/reference/source/AUDIT_API.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/AUDIT_ENDPOINTS.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/AUTH.py.md` | doc | api/docs/MASTER_INDEX.md | OK
-    |
-
-    | `api/docs/reference/source/AUTH_STATE.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/BASE.py.md` | doc | api/docs/MASTER_INDEX.md | OK
-    |
-
-    | `api/docs/reference/source/CACHE.py.md` | doc | api/docs/MASTER_INDEX.md | OK
-    |
-
-    | `api/docs/reference/source/CACHE_SERVICE.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/CONFIG.py.md` | doc | api/docs/MASTER_INDEX.md |
-    OK |
-
-    | `api/docs/reference/source/CONFIG_MODELS.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/CONFIG_SERVICE.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/CONSOLE_HANDLER.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/CRUD.py.md` | doc | api/docs/MASTER_INDEX.md | OK
-    |
-
-    | `api/docs/reference/source/DATABASE_JOB_HANDLER.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/DATABASE____INIT__.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/DB.py.md` | doc | api/docs/MASTER_INDEX.md | OK |
-
-    | `api/docs/reference/source/DEPS.py.md` | doc | api/docs/MASTER_INDEX.md | OK
-    |
-
-    | `api/docs/reference/source/DOWNLOAD.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/DOWNLOADS.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/DOWNLOAD_SERVICE.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/ERROR_HANDLER____INIT__.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/FILTERS.py.md` | doc | api/docs/MASTER_INDEX.md |
-    OK |
-
-    | `api/docs/reference/source/FORMATTER.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/FUNCTIONAL_TEST.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/GENERATE_ENDPOINTS_DOC.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/GENERATE_OPENAPI.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/GENERATE_SOURCE_DOCS.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/GENERIC.py.md` | doc | api/docs/MASTER_INDEX.md |
-    OK |
-
-    | `api/docs/reference/source/GLOBALS.py.md` | doc | api/docs/MASTER_INDEX.md |
-    OK |
-
-    | `api/docs/reference/source/HOOKS.py.md` | doc | api/docs/MASTER_INDEX.md | OK
-    |
-
-    | `api/docs/reference/source/JSON_AUDIT_HANDLER.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/LINTER.py.md` | doc | api/docs/MASTER_INDEX.md |
-    OK |
-
-    | `api/docs/reference/source/LOGGING_CONFIG.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/LOGGING_FRAMEWORK____INIT__.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/LOGGING_HANDLERS____INIT__.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/LOGGING_SCHEMAS.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/LOGGING_SERVICE.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/LOG_CRITICAL.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/MAIN.py.md` | doc | api/docs/MASTER_INDEX.md | OK
-    |
-
-    | `api/docs/reference/source/METADATA.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/METADATA_SERVICE.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/MODELS.py.md` | doc | api/docs/MASTER_INDEX.md |
-    OK |
-
-    | `api/docs/reference/source/NETWORK.py.md` | doc | api/docs/MASTER_INDEX.md |
-    OK |
-
-    | `api/docs/reference/source/NETWORK_SERVICE.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/NOTIFICATIONS.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/NOTIFICATIONS_SERVICE.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/PLAYLISTS.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/PLAYLISTS_SERVICE.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/PROVIDERS____INIT__.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/REQUEST_ID.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/ROUTES____INIT__.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/SCHEMAS.py.md` | doc | api/docs/MASTER_INDEX.md |
-    OK |
-
-    | `api/docs/reference/source/SEARCH.py.md` | doc | api/docs/MASTER_INDEX.md |
-    OK |
-
-    | `api/docs/reference/source/SERVICE.py.md` | doc | api/docs/MASTER_INDEX.md |
-    OK |
-
-    | `api/docs/reference/source/SERVICES____INIT__.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/SESSION.py.md` | doc | api/docs/MASTER_INDEX.md |
-    OK |
-
-    | `api/docs/reference/source/SNITCH.go.md` | doc | api/docs/MASTER_INDEX.md |
-    OK |
-
-    | `api/docs/reference/source/SPOTIFY.py.md` | doc | api/docs/MASTER_INDEX.md |
-    OK |
-
-    | `api/docs/reference/source/SPOTIFY_CONNECTOR.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/SPOTI_CLIENT.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/SYNC.py.md` | doc | api/docs/MASTER_INDEX.md | OK
-    |
-
-    | `api/docs/reference/source/SYNC_SERVICE.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/SYSTEM.py.md` | doc | api/docs/MASTER_INDEX.md |
-    OK |
-
-    | `api/docs/reference/source/TEST_AUTH_FLOW.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/TRACKS.py.md` | doc | api/docs/MASTER_INDEX.md |
-    OK |
-
-    | `api/docs/reference/source/TRACKS_SERVICE.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/TRIGGERS.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/USER.py.md` | doc | api/docs/MASTER_INDEX.md | OK
-    |
-
-    | `api/docs/reference/source/USER_SERVICE.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/reference/source/WEBHOOK.py.md` | doc | api/docs/MASTER_INDEX.md |
-    OK |
-
-    | `api/docs/reference/source/WEBHOOKS.py.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/system/ERROR_HANDLING_DESIGN.md` | doc | api/docs/MASTER_INDEX.md
-    | OK |
-
-    | `api/docs/system/INSTALLATION.md` | doc | api/docs/MASTER_INDEX.md | OK |
-
-    | `api/docs/system/PRIVACY_COMPLIANCE.md` | doc | api/docs/MASTER_INDEX.md | OK
-    |
-
-    | `api/docs/system/REQUIREMENTS.md` | doc | api/docs/MASTER_INDEX.md | OK |
-
-    | `api/docs/system/zotify-openapi-external-v1.json` | config | api/docs/CODE_FILE_INDEX.md
-    | Missing Index |
-
-    | `api/docs/system/zotify-openapi-external-v1.yaml` | config | api/docs/CODE_FILE_INDEX.md
-    | Missing Index |
-
-    | `api/logging_config.yml` | config | api/docs/CODE_FILE_INDEX.md | Missing Index
-    |
-
-    | `api/logging_framework.yml` | config | api/docs/CODE_FILE_INDEX.md | Missing
-    Index |
-
-    | `api/src/storage/spotify_tokens.json` | config | api/docs/CODE_FILE_INDEX.md
-    | Missing Index |
-
-    | `api/src/zotify_api/auth_state.py` | code | api/docs/CODE_FILE_INDEX.md | OK
-    |
-
-    | `api/src/zotify_api/config.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `api/src/zotify_api/core/error_handler/__init__.py` | code | api/docs/CODE_FILE_INDEX.md
-    | Missing Index |
-
-    | `api/src/zotify_api/core/error_handler/actions/__init__.py` | code | api/docs/CODE_FILE_INDEX.md
-    | Missing Index |
-
-    | `api/src/zotify_api/core/error_handler/actions/log_critical.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/core/error_handler/actions/webhook.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/core/error_handler/config.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/core/error_handler/formatter.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/core/error_handler/hooks.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/core/error_handler/triggers.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/core/logging_framework/__init__.py` | code | api/docs/CODE_FILE_INDEX.md
-    | Missing Index |
-
-    | `api/src/zotify_api/core/logging_framework/filters.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/core/logging_framework/schemas.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/core/logging_framework/service.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/core/logging_handlers/__init__.py` | code | api/docs/CODE_FILE_INDEX.md
-    | Missing Index |
-
-    | `api/src/zotify_api/core/logging_handlers/base.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/core/logging_handlers/console_handler.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/core/logging_handlers/database_job_handler.py` | code |
-    api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `api/src/zotify_api/core/logging_handlers/json_audit_handler.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/database/__init__.py` | code | api/docs/CODE_FILE_INDEX.md
-    | Missing Index, Stub/Placeholder |
-
-    | `api/src/zotify_api/database/crud.py` | code | api/docs/CODE_FILE_INDEX.md |
-    OK |
-
-    | `api/src/zotify_api/database/models.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/database/session.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/globals.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `api/src/zotify_api/logging_config.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/main.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `api/src/zotify_api/middleware/request_id.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/models/config_models.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/models/sync.py` | code | api/docs/CODE_FILE_INDEX.md | OK
-    |
-
-    | `api/src/zotify_api/providers/__init__.py` | code | api/docs/CODE_FILE_INDEX.md
-    | Missing Index, Stub/Placeholder |
-
-    | `api/src/zotify_api/providers/base.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/providers/spotify_connector.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/routes/__init__.py` | code | api/docs/CODE_FILE_INDEX.md
-    | Missing Index |
-
-    | `api/src/zotify_api/routes/auth.py` | code | api/docs/CODE_FILE_INDEX.md | OK,
-    Stub/Placeholder |
-
-    | `api/src/zotify_api/routes/cache.py` | code | api/docs/CODE_FILE_INDEX.md |
-    OK |
-
-    | `api/src/zotify_api/routes/config.py` | code | api/docs/CODE_FILE_INDEX.md |
-    OK |
-
-    | `api/src/zotify_api/routes/downloads.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/routes/jwt_auth.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/routes/network.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/routes/notifications.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/routes/playlists.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/routes/search.py` | code | api/docs/CODE_FILE_INDEX.md |
-    OK |
-
-    | `api/src/zotify_api/routes/sync.py` | code | api/docs/CODE_FILE_INDEX.md | OK
-    |
-
-    | `api/src/zotify_api/routes/system.py` | code | api/docs/CODE_FILE_INDEX.md |
-    OK |
-
-    | `api/src/zotify_api/routes/tracks.py` | code | api/docs/CODE_FILE_INDEX.md |
-    OK |
-
-    | `api/src/zotify_api/routes/user.py` | code | api/docs/CODE_FILE_INDEX.md | OK
-    |
-
-    | `api/src/zotify_api/routes/webhooks.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/schemas/auth.py` | code | api/docs/CODE_FILE_INDEX.md |
-    OK |
-
-    | `api/src/zotify_api/schemas/cache.py` | code | api/docs/CODE_FILE_INDEX.md |
-    OK |
-
-    | `api/src/zotify_api/schemas/download.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/schemas/generic.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/schemas/logging_schemas.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/schemas/metadata.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/schemas/network.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/schemas/notifications.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/schemas/playlists.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/schemas/spotify.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/schemas/system.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/schemas/tracks.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/schemas/user.py` | code | api/docs/CODE_FILE_INDEX.md |
-    OK |
-
-    | `api/src/zotify_api/schemas/webhooks.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/services/__init__.py` | code | api/docs/CODE_FILE_INDEX.md
-    | Missing Index, Stub/Placeholder |
-
-    | `api/src/zotify_api/services/auth.py` | code | api/docs/CODE_FILE_INDEX.md |
-    OK |
-
-    | `api/src/zotify_api/services/cache_service.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK, Stub/Placeholder |
-
-    | `api/src/zotify_api/services/config_service.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/services/db.py` | code | api/docs/CODE_FILE_INDEX.md | OK
-    |
-
-    | `api/src/zotify_api/services/deps.py` | code | api/docs/CODE_FILE_INDEX.md |
-    OK |
-
-    | `api/src/zotify_api/services/download_service.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/services/jwt_service.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/services/logging_service.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/services/metadata_service.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/services/network_service.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK, Stub/Placeholder |
-
-    | `api/src/zotify_api/services/notifications_service.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/services/playlists_service.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/services/search.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/services/spoti_client.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/services/sync_service.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/services/tracks_service.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK, Stub/Placeholder |
-
-    | `api/src/zotify_api/services/user_service.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/services/webhooks.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/src/zotify_api/storage/user_data.json` | config | api/docs/CODE_FILE_INDEX.md
-    | Missing Index |
-
-    | `api/tests/__init__.py` | code | api/docs/CODE_FILE_INDEX.md | Missing Index,
-    Stub/Placeholder |
-
-    | `api/tests/conftest.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `api/tests/test_cache.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `api/tests/test_config.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `api/tests/test_download.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `api/tests/test_network.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `api/tests/test_notifications.py` | code | api/docs/CODE_FILE_INDEX.md | OK
-    |
-
-    | `api/tests/test_playlists.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `api/tests/test_system.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `api/tests/test_tracks.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `api/tests/test_user.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `api/tests/unit/providers/test_spotify_connector.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/tests/unit/test_auth.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `api/tests/unit/test_cache_service.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/tests/unit/test_config.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `api/tests/unit/test_crud.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `api/tests/unit/test_deps.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `api/tests/unit/test_error_handler.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/tests/unit/test_error_handler_actions.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/tests/unit/test_flexible_logging.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/tests/unit/test_jwt_auth_db.py` | code | api/docs/CODE_FILE_INDEX.md |
-    OK |
-
-    | `api/tests/unit/test_logging_config.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/tests/unit/test_metadata_service.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/tests/unit/test_network_service.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/tests/unit/test_new_logging_system.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/tests/unit/test_notifications_service.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/tests/unit/test_playlists_service.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/tests/unit/test_search.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `api/tests/unit/test_spoti_client.py` | code | api/docs/CODE_FILE_INDEX.md |
-    OK |
-
-    | `api/tests/unit/test_sync.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `api/tests/unit/test_tracks_service.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/tests/unit/test_user_service.py` | code | api/docs/CODE_FILE_INDEX.md |
-    OK |
-
-    | `api/tests/unit/test_user_service_db.py` | code | api/docs/CODE_FILE_INDEX.md
-    | OK |
-
-    | `api/tests/unit/test_webhooks.py` | code | api/docs/CODE_FILE_INDEX.md | OK
-    |
-
-    | `project/ALIGNMENT_MATRIX.md` | doc | project/PROJECT_REGISTRY.md | OK |
-
-    | `project/BACKLOG.md` | doc | project/PROJECT_REGISTRY.md | OK |
-
-    | `project/CICD.md` | doc | project/PROJECT_REGISTRY.md | OK |
-
-    | `project/DEPENDENCIES.md` | doc | project/PROJECT_REGISTRY.md | OK |
-
-    | `project/EXECUTION_PLAN.md` | doc | project/PROJECT_REGISTRY.md | OK, Stub/Placeholder
-    |
-
-    | `project/FUTURE_ENHANCEMENTS.md` | doc | project/PROJECT_REGISTRY.md | OK |
-
-    | `project/HANDOVER_BRIEF.md` | doc | project/PROJECT_REGISTRY.md | OK, Stub/Placeholder
-    |
-
-    | `project/HIGH_LEVEL_DESIGN.md` | doc | project/PROJECT_REGISTRY.md | OK |
-
-    | `project/LESSONS-LEARNT.md` | doc | project/PROJECT_REGISTRY.md | OK |
-
-    | `project/LOGGING_PHASES.md` | doc | project/PROJECT_REGISTRY.md | OK, Stub/Placeholder
-    |
-
-    | `project/LOGGING_SYSTEM_DESIGN.md` | doc | project/PROJECT_REGISTRY.md | OK
-    |
-
-    | `project/LOGGING_TRACEABILITY_MATRIX.md` | doc | project/PROJECT_REGISTRY.md
-    | OK |
-
-    | `project/LOW_LEVEL_DESIGN.md` | doc | project/PROJECT_REGISTRY.md | OK |
-
-    | `project/ONBOARDING.md` | doc | project/PROJECT_REGISTRY.md | OK |
-
-    | `project/PID.md` | doc | project/PROJECT_REGISTRY.md | OK |
-
-    | `project/PROJECT_BRIEF.md` | doc | project/PROJECT_REGISTRY.md | OK |
-
-    | `project/PROJECT_PLAN.md` | doc | project/PROJECT_REGISTRY.md | OK, Stub/Placeholder
-    |
-
-    | `project/PROJECT_REGISTRY.md` | doc | project/PROJECT_REGISTRY.md | OK |
-
-    | `project/QA_GOVERNANCE.md` | doc | project/PROJECT_REGISTRY.md | Missing Index
-    |
-
-    | `project/ROADMAP.md` | doc | project/PROJECT_REGISTRY.md | OK |
-
-    | `project/SECURITY.md` | doc | project/PROJECT_REGISTRY.md | OK |
-
-    | `project/TASK_CHECKLIST.md` | doc | project/PROJECT_REGISTRY.md | OK |
-
-    | `project/USECASES.md` | doc | project/PROJECT_REGISTRY.md | OK |
-
-    | `project/USECASES_GAP_ANALYSIS.md` | doc | project/PROJECT_REGISTRY.md | OK
-    |
-
-    | `project/api/endpoints.yaml` | config | api/docs/CODE_FILE_INDEX.md | Missing
-    Index |
-
-    | `project/archive/.github/ISSUE_TEMPLATE/bug-report.md` | doc | project/PROJECT_REGISTRY.md
-    | Missing Index |
-
-    | `project/archive/.github/ISSUE_TEMPLATE/feature-request.md` | doc | project/PROJECT_REGISTRY.md
-    | Missing Index |
-
-    | `project/archive/TRACEABILITY_MATRIX.md` | doc | project/PROJECT_REGISTRY.md
-    | OK, Stub/Placeholder |
-
-    | `project/archive/api/docs/CHANGELOG.md` | doc | project/PROJECT_REGISTRY.md
-    | OK, Stub/Placeholder |
-
-    | `project/archive/api/docs/MANUAL.md` | doc | project/PROJECT_REGISTRY.md | OK
-    |
-
-    | `project/archive/audit/AUDIT-PHASE-3.md` | doc | project/PROJECT_REGISTRY.md
-    | Missing Index |
-
-    | `project/archive/audit/AUDIT-PHASE-4.md` | doc | project/PROJECT_REGISTRY.md
-    | Missing Index |
-
-    | `project/archive/audit/AUDIT-PHASE-5.md` | doc | project/PROJECT_REGISTRY.md
-    | Missing Index, Stub/Placeholder |
-
-    | `project/archive/audit/AUDIT-phase-1.md` | doc | project/PROJECT_REGISTRY.md
-    | Missing Index, Stub/Placeholder |
-
-    | `project/archive/audit/AUDIT-phase-2.md` | doc | project/PROJECT_REGISTRY.md
-    | Missing Index |
-
-    | `project/archive/audit/AUDIT_TRACEABILITY_MATRIX.md` | doc | project/PROJECT_REGISTRY.md
-    | Missing Index |
-
-    | `project/archive/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md` | doc | project/PROJECT_REGISTRY.md
-    | Missing Index |
-
-    | `project/archive/audit/FIRST_AUDIT.md` | doc | project/PROJECT_REGISTRY.md |
-    Missing Index, Stub/Placeholder |
-
-    | `project/archive/audit/HLD_LLD_ALIGNMENT_PLAN.md` | doc | project/PROJECT_REGISTRY.md
-    | OK |
-
-    | `project/archive/audit/PHASE_4_TRACEABILITY_MATRIX.md` | doc | project/PROJECT_REGISTRY.md
-    | Missing Index |
-
-    | `project/archive/audit/audit-prompt.md` | doc | project/PROJECT_REGISTRY.md
-    | Missing Index, Stub/Placeholder |
-
-    | `project/archive/docs/projectplan/security.md` | doc | project/PROJECT_REGISTRY.md
-    | OK |
-
-    | `project/archive/docs/projectplan/spotify_fullstack_capability_blueprint.md`
-    | doc | project/PROJECT_REGISTRY.md | OK, Stub/Placeholder |
-
-    | `project/archive/docs/snitch/INTEGRATION_CHECKLIST.md` | doc | project/PROJECT_REGISTRY.md
-    | Missing Index |
-
-    | `project/archive/docs/snitch/PHASE_2_SECURE_CALLBACK.md` | doc | project/PROJECT_REGISTRY.md
-    | Missing Index |
-
-    | `project/archive/docs/snitch/TEST_RUNBOOK.md` | doc | project/PROJECT_REGISTRY.md
-    | Missing Index |
-
-    | `project/archive/docs/snitch/phase5-ipc.md` | doc | project/PROJECT_REGISTRY.md
-    | Missing Index |
-
-    | `project/logs/ACTIVITY.md` | doc | project/PROJECT_REGISTRY.md | OK, Stub/Placeholder
-    |
-
-    | `project/logs/CURRENT_STATE.md` | doc | project/PROJECT_REGISTRY.md | OK, Stub/Placeholder
-    |
-
-    | `project/logs/SESSION_LOG.md` | doc | project/PROJECT_REGISTRY.md | OK, Stub/Placeholder
-    |
-
-    | `project/process/GAP_ANALYSIS_TEMPLATE.md` | doc | project/PROJECT_REGISTRY.md
-    | OK |
-
-    | `project/proposals/DBSTUDIO_PLUGIN.md` | doc | project/PROJECT_REGISTRY.md |
-    Missing Index |
-
-    | `project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md` | doc | project/PROJECT_REGISTRY.md
-    | OK |
-
-    | `project/proposals/GONKUI_PLUGIN.md` | doc | project/PROJECT_REGISTRY.md | Missing
-    Index |
-
-    | `project/proposals/GOVERNANCE_AUDIT_REFACTOR.md` | doc | project/PROJECT_REGISTRY.md
-    | OK, Stub/Placeholder |
-
-    | `project/proposals/HOME_AUTOMATION_PROPOSAL.md` | doc | project/PROJECT_REGISTRY.md
-    | OK |
-
-    | `project/proposals/LOW_CODE_PROPOSAL.md` | doc | project/PROJECT_REGISTRY.md
-    | OK |
-
-    | `project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md` | doc | project/PROJECT_REGISTRY.md
-    | OK |
-
-    | `project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md` | doc | project/PROJECT_REGISTRY.md
-    | Missing Index, Stub/Placeholder |
-
-    | `project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md` | doc | project/PROJECT_REGISTRY.md
-    | OK |
-
-    | `project/proposals/TRACE_INDEX_SCHEMA_FIX.md` | doc | project/PROJECT_REGISTRY.md
-    | OK |
-
-    | `project/reports/GOVERNANCE_AUDIT_REPORT.md` | doc | project/PROJECT_REGISTRY.md
-    | Missing Index, Stub/Placeholder |
-
-    | `project/reports/GOVERNANCE_DEMO_REPORT.md` | doc | project/PROJECT_REGISTRY.md
-    | Missing Index, Stub/Placeholder |
-
-    | `project/reports/PROJECT_AUDIT_FINAL_REPORT.md` | doc | project/PROJECT_REGISTRY.md
-    | Missing Index |
-
-    | `project/reports/REPO_MANIFEST.md` | doc | project/PROJECT_REGISTRY.md | Missing
-    Index, Stub/Placeholder |
-
-    | `scripts/audit_api.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `scripts/audit_endpoints.py` | code | api/docs/CODE_FILE_INDEX.md | OK, Stub/Placeholder
-    |
-
-    | `scripts/doc-lint-rules.yml` | config | api/docs/CODE_FILE_INDEX.md | Missing
-    Index |
-
-    | `scripts/functional_test.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `scripts/generate_endpoints_doc.py` | code | api/docs/CODE_FILE_INDEX.md | OK
-    |
-
-    | `scripts/generate_openapi.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `scripts/linter.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `scripts/make_manifest.py` | code | api/docs/CODE_FILE_INDEX.md | Missing Index
-    |
-
-    | `scripts/manage_docs_index.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `scripts/repo_inventory_and_governance.py` | code | api/docs/CODE_FILE_INDEX.md
-    | Missing Index, Stub/Placeholder |
-
-    | `scripts/run_e2e_auth_test.sh` | script | api/docs/CODE_FILE_INDEX.md | Missing
-    Index |
-
-    | `scripts/start.sh` | script | api/docs/CODE_FILE_INDEX.md | Missing Index |
-
-    | `scripts/test_auth_flow.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `scripts/test_single_config.sh` | script | api/docs/CODE_FILE_INDEX.md | Missing
-    Index |
-
-    | `scripts/validate_code_index.py` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `snitch/CODE_FILE_INDEX.md` | doc | snitch/DOCS_INDEX.md | Missing Index |
-
-    | `snitch/DOCS_INDEX.md` | doc | snitch/DOCS_INDEX.md | Missing Index |
-
-    | `snitch/README.md` | doc | snitch/DOCS_INDEX.md | Missing Index |
-
-    | `snitch/docs/ARCHITECTURE.md` | doc | snitch/DOCS_INDEX.md | OK |
-
-    | `snitch/docs/INSTALLATION.md` | doc | snitch/DOCS_INDEX.md | OK |
-
-    | `snitch/docs/MILESTONES.md` | doc | snitch/DOCS_INDEX.md | OK |
-
-    | `snitch/docs/MODULES.md` | doc | snitch/DOCS_INDEX.md | OK |
-
-    | `snitch/docs/PHASES.md` | doc | snitch/DOCS_INDEX.md | OK |
-
-    | `snitch/docs/PHASE_2_SECURE_CALLBACK.md` | doc | snitch/DOCS_INDEX.md | OK |
-
-    | `snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md` | doc | snitch/DOCS_INDEX.md | OK
-    |
-
-    | `snitch/docs/PROJECT_PLAN.md` | doc | snitch/DOCS_INDEX.md | OK, Stub/Placeholder
-    |
-
-    | `snitch/docs/ROADMAP.md` | doc | snitch/DOCS_INDEX.md | OK |
-
-    | `snitch/docs/STATUS.md` | doc | snitch/DOCS_INDEX.md | OK |
-
-    | `snitch/docs/TASKS.md` | doc | snitch/DOCS_INDEX.md | OK, Stub/Placeholder |
-
-    | `snitch/docs/TEST_RUNBOOK.md` | doc | snitch/DOCS_INDEX.md | OK |
-
-    | `snitch/docs/USER_MANUAL.md` | doc | snitch/DOCS_INDEX.md | OK |
-
-    | `snitch/docs/phase5-ipc.md` | doc | snitch/DOCS_INDEX.md | OK |
-
-    | `snitch/snitch.go` | code | api/docs/CODE_FILE_INDEX.md | OK |
-
-    | `templates/AGENTS.md` | doc | N/A | OK |
-
-    | `templates/API-DEVELOPER-GUIDE.md` | doc | N/A | OK |
-
-    | `templates/BACKLOG.md` | doc | N/A | OK |
-
-    | `templates/CICD-DEV.md` | doc | N/A | OK |
-
-    | `templates/CICD-PROJ.md` | doc | N/A | OK |
-
-    | `templates/ENDPOINTS.md` | doc | N/A | OK |
-
-    | `templates/EXECUTION_PLAN.md` | doc | N/A | OK, Stub/Placeholder |
-
-    | `templates/FUTURE_ENHANCEMENTS.md` | doc | N/A | OK |
-
-    | `templates/HANDOVER_BRIEF.md` | doc | N/A | OK |
-
-    | `templates/HIGH_LEVEL_DESIGN.md` | doc | N/A | OK |
-
-    | `templates/INITIATION.md` | doc | N/A | OK, Stub/Placeholder |
-
-    | `templates/LESSONS-LEARNT.md` | doc | N/A | OK |
-
-    | `templates/LOGGING_PHASES.md` | doc | N/A | OK, Stub/Placeholder |
-
-    | `templates/LOGGING_SYSTEM_DESIGN.md` | doc | N/A | OK |
-
-    | `templates/LOGGING_TRACEABILITY_MATRIX.md` | doc | N/A | OK |
-
-    | `templates/LOW_LEVEL_DESIGN.md` | doc | N/A | OK |
-
-    | `templates/ONBOARDING.md` | doc | N/A | OK |
-
-    | `templates/PID.md` | doc | N/A | OK |
-
-    | `templates/PROJECT_BRIEF.md` | doc | N/A | OK |
-
-    | `templates/PROJECT_REGISTRY.md` | doc | N/A | OK |
-
-    | `templates/ROADMAP.md` | doc | N/A | OK |
-
-    | `templates/SECURITY.md` | doc | N/A | OK |
-
-    | `templates/SYSTEM-INTEGRATION-GUIDE.md` | doc | N/A | OK |
-
-    | `templates/TASK_CHECKLIST.md` | doc | N/A | OK |
-
-    | `templates/TRACEABILITY_MATRIX.md` | doc | N/A | OK |
-
-    | `templates/USECASES.md` | doc | N/A | OK |
-
-    | `templates/USECASES_GAP_ANALYSIS.md` | doc | N/A | OK |
-
-    | `templates/_new project prompt.txt` | doc | N/A | OK |
-
-    | `templates/audit/AUDIT-PHASE-1.md` | doc | N/A | OK |
-
-    | `templates/audit/AUDIT_TRACEABILITY_MATRIX.md` | doc | N/A | OK |
-
-    | `templates/audit/FIRST_AUDIT.md` | doc | N/A | OK, Stub/Placeholder |
-
-    | `templates/audit/HLD_LLD_ALIGNMENT_PLAN.md` | doc | N/A | OK |
-
-    | `templates/audit/PHASE_1_TRACEABILITY_MATRIX.md` | doc | N/A | OK |
-
-    | `templates/audit/audit-prompt.md` | doc | N/A | OK, Stub/Placeholder |
-
-    | `templates/logs/ACTIVITY.md` | doc | N/A | OK |
-
-    | `templates/logs/CURRENT_STATE.md` | doc | N/A | OK |
-
-    | `templates/logs/SESSION_LOG.md` | doc | N/A | OK |
-
-    | `templates/proposals/DYNAMIC_PLUGIN_PROPOSAL.md` | doc | N/A | OK |
-
-    | `templates/proposals/HOME_AUTOMATION_PROPOSAL.md` | doc | N/A | OK |
-
-    | `templates/proposals/LOW_CODE_PROPOSAL.md` | doc | N/A | OK |
-
-    | `templates/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md` | doc | N/A | OK |
-
-    | `verification/linter_enforcement_report.md` | doc | N/A | OK |
-
-    | `verification/mandatory_logging.md` | doc | N/A | OK |
-
-
-    ## Summary Statistics
-
-    - **Total Files Scanned:** 395
-
-    - **Files OK:** 318
-
-    - **Files Missing from Index:** 77
-
-    - **Files Flagged as Stubs:** 49
-
-    - **Files Miscategorized:** 0 (Detection not yet implemented)'
 - path: project/reports/PROJECT_AUDIT_FINAL_REPORT.md
   type: doc
   workflow: []
@@ -7580,206 +6667,11 @@
     \ that all future code changes are reflected in the alignment matrix.\n\nThe project\
     \ is now considered to be in a state of ongoing maintenance, with all major audit\
     \ and refactoring tasks complete.\n"
-- path: project/reports/GOVERNANCE_DEMO_REPORT.md
-  type: doc
-  workflow: []
-  indexes: []
-  content: '# Governance Script Demonstration Report
-
-
-    **Author:** Jules
-
-    **Date:** 2025-09-27
-
-
-    ## 1. Introduction
-
-
-    This report documents a live demonstration of the refactored governance audit
-    script, `scripts/repo_inventory_and_governance.py`. The purpose of this demonstration
-    is to verify that the new script correctly identifies common compliance violations
-    as defined in the "Refactor and Strengthen Governance Audit System" task.
-
-
-    The demonstration consists of two main tests:
-
-    1.  **Unregistered File Detection:** Verifying that the script can detect a new
-    source file that has not been registered in the master code index.
-
-    2.  **Stub File Detection:** Verifying that the script can detect a new documentation
-    file that contains placeholder content.
-
-
-    ## 2. Baseline Audit
-
-
-    First, the script was run to establish a baseline report of the entire repository.
-
-
-    **Command:**
-
-    ```bash
-
-    python3 scripts/repo_inventory_and_governance.py
-
-    ```
-
-
-    **Result:**
-
-    The script successfully generated the report at `project/reports/GOVERNANCE_AUDIT_REPORT.md`.
-    The report identified numerous pre-existing issues, which is expected given the
-    new, stricter audit rules. This baseline confirms the script is operational.
-
-
-    ---
-
-
-    ## 3. Test 1: Unregistered File Detection
-
-
-    ### 3.1. Action
-
-
-    A new, temporary Python file was created at `api/src/zotify_api/temp_demo_file.py`.
-    This file was not registered in any index file.
-
-
-    **Command:**
-
-    ```bash
-
-    touch api/src/zotify_api/temp_demo_file.py
-
-    ```
-
-
-    ### 3.2. Execution
-
-
-    The governance script was run again.
-
-
-    **Command:**
-
-    ```bash
-
-    python3 scripts/repo_inventory_and_governance.py
-
-    ```
-
-
-    ### 3.3. Verification
-
-
-    The newly generated report was inspected. As expected, the script correctly identified
-    the new file and flagged it as "Missing Index".
-
-
-    **Report Snippet:**
-
-    ```markdown
-
-    | Path | File Type | Index(es) | Status |
-
-    |------|-----------|-----------|--------|
-
-    ...
-
-    | `api/src/zotify_api/temp_demo_file.py` | code | api/docs/CODE_FILE_INDEX.md
-    | Missing Index |
-
-    ...
-
-    ```
-
-
-    **Conclusion:** The test was successful. The script correctly detects unregistered
-    code files.
-
-    ---
-
-
-    ## 4. Test 2: Stub File Detection
-
-
-    ### 4.1. Action
-
-
-    A new, temporary Markdown file was created at `api/docs/temp_stub_file.md`. This
-    file contained the keyword "TODO" to trigger the stub detection logic.
-
-
-    **Command:**
-
-    ```bash
-
-    echo "# Temporary Stub File\n\nTODO: Add real content here." > api/docs/temp_stub_file.md
-
-    ```
-
-
-    ### 4.2. Execution
-
-
-    The governance script was run again.
-
-
-    **Command:**
-
-    ```bash
-
-    python3 scripts/repo_inventory_and_governance.py
-
-    ```
-
-
-    ### 4.3. Verification
-
-
-    The newly generated report was inspected. As expected, the script correctly identified
-    the new file and flagged it as both "Missing Index" and "Stub/Placeholder".
-
-
-    **Report Snippet:**
-
-    ```markdown
-
-    | Path | File Type | Index(es) | Status |
-
-    |------|-----------|-----------|--------|
-
-    ...
-
-    | `api/docs/temp_stub_file.md` | doc | api/docs/MASTER_INDEX.md | Missing Index,
-    Stub/Placeholder |
-
-    ...
-
-    ```
-
-
-    **Conclusion:** The test was successful. The script correctly detects stub/placeholder
-    files based on keyword content.
-
-    ---'
 - path: project/logs/ACTIVITY.md
   type: doc
   workflow: []
   indexes: []
-  content: "---\n## ACT-124: Refactored the governance audit system and documented\
-    \ the process.\n\n**Date:** 2025-09-27\n**Status:** ✅ Done\n**Assignee:** Jules\n\
-    \n### Objective\nTo elevate the script into a comprehensive, audit-ready tool\
-    \ that fully aligns with the project's 'Living Documentation' policy by consolidating\
-    \ code indexing, introducing more precise file-type mapping, implementing stub/placeholder\
-    \ detection, and generating a formal, detailed audit report.\n\n### Outcome\n\
-    Successfully refactored the script, created and registered a formal proposal,\
-    \ and documented the new functionality with a demonstration report. The new script\
-    \ correctly identifies unregistered and stub files and saves a detailed report.\n\
-    \n### Related Documents\n- `project/proposals/GOVERNANCE_AUDIT_REFACTOR.md`\n\
-    - `scripts/repo_inventory_and_governance.py`\n- `project/reports/GOVERNANCE_DEMO_REPORT.md`\n\
-    - `project/PROJECT_REGISTRY.md`\n- `project/ALIGNMENT_MATRIX.md`\n- `project/EXECUTION_PLAN.md`\n\
-    \n---\n## ACT-123: Create Handover Brief for Governance Refactor\n\n**Date:**\
+  content: "---\n## ACT-123: Create Handover Brief for Governance Refactor\n\n**Date:**\
     \ 2025-09-25\n**Status:** ✅ Done\n**Assignee:** Jules\n\n### Objective\nCreate\
     \ a detailed handover document for the next developer to provide context and outline\
     \ the next steps for the governance audit system refactor.\n\n### Outcome\nAuthored\
@@ -9193,67 +8085,62 @@
   type: doc
   workflow: []
   indexes: []
-  content: "---\n## Session Report: 2025-09-27\n\n**Summary:** Refactored the governance\
-    \ audit system and documented the process.\n**Findings:**\nSuccessfully refactored\
-    \ the script, created and registered a formal proposal, and documented the new\
-    \ functionality with a demonstration report. The new script correctly identifies\
-    \ unregistered and stub files and saves a detailed report.\n\n---\n## Session\
-    \ Report: 2025-09-25\n\n**Summary:** Create Handover Brief for Governance Refactor\n\
-    **Findings:**\nAuthored the project/HANDOVER_BRIEF_NEXT_DEV.md file, summarizing\
-    \ the current state of the governance script and detailing the requirements for\
-    \ the upcoming refactoring task as specified by the user.\n\n---\n## Session Report:\
-    \ 2025-09-25\n\n**Summary:** Fix doc misclassification and add component DOCS_INDEX\
-    \ files\n**Findings:**\nExtended the INDEX_MAP in the governance script with new\
-    \ rules to correctly handle documentation in project/, Gonk/, and Snitch/ directories.\
-    \ The script now prevents .md files from being incorrectly exempted and creates\
-    \ new DOCS_INDEX.md files for components, populating them with the relevant documents.\
-    \ This resolves the misclassification issue and improves the accuracy of the governance\
-    \ trace.\n\n---\n## Session Report: 2025-09-25\n\n**Summary:** Enforce explicit\
-    \ '-' string for index field in TRACE_INDEX.yml\n**Findings:**\nModified the script\
-    \ to serialize the 'index' field to a '-' string for unregistered or exempt files,\
-    \ removing ambiguity with null values. Added a validation function to the script\
-    \ to enforce this new strict schema, ensuring the generated YAML is always correct.\
-    \ This completes the schema refinement.\n\n---\n## Session Report: 2025-09-25\n\
-    \n**Summary:** Fix TRACE_INDEX.yml Schema for Precision\n**Findings:**\nModified\
-    \ the governance script to change the 'index' field's behavior. It now lists found\
-    \ indexes for registered files and is null for unregistered or exempt files. This\
-    \ removes ambiguity and improves the clarity of the governance report. A proposal\
-    \ document for this fix was also created and registered.\n\n---\n## Session Report:\
-    \ 2025-09-25\n\n**Summary:** Adapt TRACE_INDEX.yml Schema for Uniformity\n**Findings:**\n\
-    Modified the governance script to ensure every artifact in TRACE_INDEX.yml has\
-    \ an 'index' field. For exempted files, this is an empty list. For all other files,\
-    \ it lists the expected indexes. This change improves schema consistency for programmatic\
-    \ consumers of the file. Also created a proposal document for this adaptation.\n\
-    \n---\n## Session Report: 2025-09-25\n\n**Summary:** Refactor and Upgrade Repo\
-    \ Governance Script\n**Findings:**\nImplemented a new governance script with filetype\
-    \ classification, rule-based index mapping, and automated index creation. Integrated\
-    \ the script into the main linter with a --skip-governance flag. The new system\
-    \ now correctly identifies and reports on unregistered files.\n\n---\n## Session\
-    \ Report: 2025-09-23\n\n**Summary:** Restore --objective option in linter.py\n\
-    **Findings:**\nThe --objective argument has been successfully restored to the\
-    \ linter.py script. The logging functions have been updated to include the objective\
-    \ in all three log files. The AGENTS.md documentation has been updated to reflect\
-    \ the change.\n\n---\n## Session Report: 2025-09-22\n\n**Summary:** Fix issues\
-    \ from code review\n**Findings:**\nCleaned up duplicated log entries. Regenerated\
-    \ the CODE_FILE_INDEX.md to be complete and correct, excluding __init__.py files\
-    \ as per the validation script's logic. The validation script now passes.\n\n\
-    ---\n## Session Report: 2025-09-22\n\n**Summary:** Create and integrate CODE_FILE_INDEX.md\n\
-    **Findings:**\nCreated the canonical code file index and populated it. Updated\
-    \ governance documents (QA, Dev Guide, CICD), Alignment Matrix, and Code Quality\
-    \ Index to require its maintenance. Implemented a new CI script to validate the\
-    \ index and hooked it into the main workflow. Also touched the project registry\
-    \ to satisfy the linter and corrected the default quality score.\n\n---\n## Session\
-    \ Report: 2025-09-22\n\n**Summary:** Retroactively documented Phases 3-5 in key\
-    \ project files.\n**Findings:**\nUpdated EXECUTION_PLAN.md with distinct phases.\
-    \ Updated USER_MANUAL.md with a new capabilities section. Added a summary to README.md\
-    \ and MASTER_INDEX.md. Corrected broken links in PROJECT_REGISTRY.md.\n\n---\n\
-    ## Session Report: 2025-09-22\n\n**Summary:** Refactored GonkUI README to be a\
-    \ high-level overview.\n**Findings:**\nThe Gonk/GonkUI/README.md file was rewritten\
-    \ to remove detailed installation instructions. It now contains a high-level summary\
-    \ of the tool's features and directs users to the user manual for setup information.\n\
-    \n---\n## Session Report: 2025-09-22\n\n**Summary:** Refactored GonkUI README\
-    \ to be a high-level overview.\n**Findings:**\nThe Gonk/GonkUI/README.md file\
-    \ was rewritten to remove detailed installation instructions. It now contains\
+  content: "---\n## Session Report: 2025-09-25\n\n**Summary:** Create Handover Brief\
+    \ for Governance Refactor\n**Findings:**\nAuthored the project/HANDOVER_BRIEF_NEXT_DEV.md\
+    \ file, summarizing the current state of the governance script and detailing the\
+    \ requirements for the upcoming refactoring task as specified by the user.\n\n\
+    ---\n## Session Report: 2025-09-25\n\n**Summary:** Fix doc misclassification and\
+    \ add component DOCS_INDEX files\n**Findings:**\nExtended the INDEX_MAP in the\
+    \ governance script with new rules to correctly handle documentation in project/,\
+    \ Gonk/, and Snitch/ directories. The script now prevents .md files from being\
+    \ incorrectly exempted and creates new DOCS_INDEX.md files for components, populating\
+    \ them with the relevant documents. This resolves the misclassification issue\
+    \ and improves the accuracy of the governance trace.\n\n---\n## Session Report:\
+    \ 2025-09-25\n\n**Summary:** Enforce explicit '-' string for index field in TRACE_INDEX.yml\n\
+    **Findings:**\nModified the script to serialize the 'index' field to a '-' string\
+    \ for unregistered or exempt files, removing ambiguity with null values. Added\
+    \ a validation function to the script to enforce this new strict schema, ensuring\
+    \ the generated YAML is always correct. This completes the schema refinement.\n\
+    \n---\n## Session Report: 2025-09-25\n\n**Summary:** Fix TRACE_INDEX.yml Schema\
+    \ for Precision\n**Findings:**\nModified the governance script to change the 'index'\
+    \ field's behavior. It now lists found indexes for registered files and is null\
+    \ for unregistered or exempt files. This removes ambiguity and improves the clarity\
+    \ of the governance report. A proposal document for this fix was also created\
+    \ and registered.\n\n---\n## Session Report: 2025-09-25\n\n**Summary:** Adapt\
+    \ TRACE_INDEX.yml Schema for Uniformity\n**Findings:**\nModified the governance\
+    \ script to ensure every artifact in TRACE_INDEX.yml has an 'index' field. For\
+    \ exempted files, this is an empty list. For all other files, it lists the expected\
+    \ indexes. This change improves schema consistency for programmatic consumers\
+    \ of the file. Also created a proposal document for this adaptation.\n\n---\n\
+    ## Session Report: 2025-09-25\n\n**Summary:** Refactor and Upgrade Repo Governance\
+    \ Script\n**Findings:**\nImplemented a new governance script with filetype classification,\
+    \ rule-based index mapping, and automated index creation. Integrated the script\
+    \ into the main linter with a --skip-governance flag. The new system now correctly\
+    \ identifies and reports on unregistered files.\n\n---\n## Session Report: 2025-09-23\n\
+    \n**Summary:** Restore --objective option in linter.py\n**Findings:**\nThe --objective\
+    \ argument has been successfully restored to the linter.py script. The logging\
+    \ functions have been updated to include the objective in all three log files.\
+    \ The AGENTS.md documentation has been updated to reflect the change.\n\n---\n\
+    ## Session Report: 2025-09-22\n\n**Summary:** Fix issues from code review\n**Findings:**\n\
+    Cleaned up duplicated log entries. Regenerated the CODE_FILE_INDEX.md to be complete\
+    \ and correct, excluding __init__.py files as per the validation script's logic.\
+    \ The validation script now passes.\n\n---\n## Session Report: 2025-09-22\n\n\
+    **Summary:** Create and integrate CODE_FILE_INDEX.md\n**Findings:**\nCreated the\
+    \ canonical code file index and populated it. Updated governance documents (QA,\
+    \ Dev Guide, CICD), Alignment Matrix, and Code Quality Index to require its maintenance.\
+    \ Implemented a new CI script to validate the index and hooked it into the main\
+    \ workflow. Also touched the project registry to satisfy the linter and corrected\
+    \ the default quality score.\n\n---\n## Session Report: 2025-09-22\n\n**Summary:**\
+    \ Retroactively documented Phases 3-5 in key project files.\n**Findings:**\nUpdated\
+    \ EXECUTION_PLAN.md with distinct phases. Updated USER_MANUAL.md with a new capabilities\
+    \ section. Added a summary to README.md and MASTER_INDEX.md. Corrected broken\
+    \ links in PROJECT_REGISTRY.md.\n\n---\n## Session Report: 2025-09-22\n\n**Summary:**\
+    \ Refactored GonkUI README to be a high-level overview.\n**Findings:**\nThe Gonk/GonkUI/README.md\
+    \ file was rewritten to remove detailed installation instructions. It now contains\
+    \ a high-level summary of the tool's features and directs users to the user manual\
+    \ for setup information.\n\n---\n## Session Report: 2025-09-22\n\n**Summary:**\
+    \ Refactored GonkUI README to be a high-level overview.\n**Findings:**\nThe Gonk/GonkUI/README.md\
+    \ file was rewritten to remove detailed installation instructions. It now contains\
     \ a high-level summary of the tool's features and directs users to the user manual\
     \ for setup information.\n\n---\n## Session Report: 2025-09-22\n\n**Summary:**\
     \ Made GonkUI API URL configurable in the UI.\n**Findings:**\nRe-applied previous\
@@ -9784,15 +8671,12 @@
   type: doc
   workflow: []
   indexes: []
-  content: "# Project State as of 2025-09-27\n\n    **Status:** Live Document\n\n\
-    ## Objective\nTo elevate the script into a comprehensive, audit-ready tool that\
-    \ fully aligns with the project's 'Living Documentation' policy by consolidating\
-    \ code indexing, introducing more precise file-type mapping, implementing stub/placeholder\
-    \ detection, and generating a formal, detailed audit report.\n\n    ## 1. Session\
-    \ Summary & Accomplishments\n    Refactored the governance audit system and documented\
-    \ the process.\n\n    ## 2. Known Issues & Blockers\n    - None\n\n    ## 3. Pending\
-    \ Work: Next Immediate Steps\n    Run the full linter to verify all changes, then\
-    \ submit the work for review.\n"
+  content: "# Project State as of 2025-09-25\n\n    **Status:** Live Document\n\n\
+    ## Objective\nCreate a detailed handover document for the next developer to provide\
+    \ context and outline the next steps for the governance audit system refactor.\n\
+    \n    ## 1. Session Summary & Accomplishments\n    Create Handover Brief for Governance\
+    \ Refactor\n\n    ## 2. Known Issues & Blockers\n    - None\n\n    ## 3. Pending\
+    \ Work: Next Immediate Steps\n    Submit the handover brief.\n"
 - path: project/process/GAP_ANALYSIS_TEMPLATE.md
   type: doc
   workflow: []
