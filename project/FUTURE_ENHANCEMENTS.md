@@ -33,6 +33,8 @@ This section lists specific technical features and improvements that are candida
 *   **Observability:**
     *   Improve the audit trail with more detailed event logging.
     *   Add real-time monitoring hooks for integration with external monitoring systems.
+*   **Governance Audit System Refactor:**
+    *   A comprehensive refactoring of the repository's governance audit script to elevate it into a complete, automated audit system that enforces the project's "Living Documentation" policy with greater precision. See the full proposal at [`proposals/GOVERNANCE_AUDIT_REFACTOR.md`](./proposals/GOVERNANCE_AUDIT_REFACTOR.md).
 *   **Standardized Error Handling & Logging:**
     *   Implement a standardized error schema for all API responses.
     *   Refactor the service layer to raise domain-specific exceptions instead of `HTTPException`s.
