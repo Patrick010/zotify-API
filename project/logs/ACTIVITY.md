@@ -1,4 +1,25 @@
 ---
+## ACT-126: Refactored the governance audit script to include actionable fix suggestions
+
+**Date:** 2025-09-27
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Enhance the governance script to add a ## Index Fix Suggestions section to the audit report, making it easier to fix violations.
+
+### Outcome
+The script was successfully refactored to produce a report with actionable fix suggestions. A bug in the markdown parser was also fixed. The changes were documented in a proposal and a demo report.
+
+### Related Documents
+- `project/proposals/GOVERNANCE_AUDIT_REFACTOR.md`
+- `project/FUTURE_ENHANCEMENTS.md`
+- `scripts/repo_inventory_and_governance.py`
+- `project/reports/GOVERNANCE_AUDIT_REPORT.md`
+- `project/reports/governance_demo_report.md`
+- `api/docs/CODE_FILE_INDEX.md`
+
+---
 ## ACT-125: Created new handover brief for assistant internalization.
 
 **Date:** 2025-09-27

@@ -3,13 +3,13 @@
     **Status:** Live Document
 
 ## Objective
-To provide a detailed handover document for the next AI assistant to quickly get up to speed with the project state.
+Enhance the governance script to add a ## Index Fix Suggestions section to the audit report, making it easier to fix violations.
 
     ## 1. Session Summary & Accomplishments
-    Created new handover brief for assistant internalization.
+    Refactored the governance audit script to include actionable fix suggestions
 
     ## 2. Known Issues & Blockers
     - None
 
     ## 3. Pending Work: Next Immediate Steps
-    Run the full linter to verify all changes, then submit all completed work.
+    Use the generated GOVERNANCE_AUDIT_REPORT.md to fix all outstanding file indexing violations and bring the repository into full compliance.
