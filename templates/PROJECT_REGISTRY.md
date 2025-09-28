@@ -34,7 +34,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **Task Checklist** | [`TASK_CHECKLIST.md`](./TASK_CHECKLIST.md) | A checklist to be used for every task to ensure compliance with project standards. |
 | **Dependency Policy** | [`DEPENDENCIES.md`](./DEPENDENCIES.md) | The policy and registry for managing third-party dependencies. |
 | **Security Document** | [`SECURITY.md`](./SECURITY.md) | The definitive security reference for the project. |
-| **Handover Brief** | [`HANDOVER_BRIEF.md`](./HANDOVER_BRIEF.md) | A summary of work completed and next steps for developer handover. |
+| **Handover Brief** | [`HANDOVER_BRIEF_JULES.md`](./reports/HANDOVER_BRIEF_JULES.md) | A summary of work completed and next steps for developer handover. |
 
 ---
 

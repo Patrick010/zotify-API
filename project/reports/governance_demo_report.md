@@ -5,7 +5,7 @@
 
 ## 1. Purpose
 
-This document provides a record of the live demonstration performed to validate the functionality of the refactored and strengthened governance audit system (`scripts/repo_inventory_and_governance.py`). The demonstration followed the procedure outlined in the `project/HANDOVER_BRIEF.md`.
+This document provides a record of the live demonstration performed to validate the functionality of the refactored and strengthened governance audit system (`scripts/repo_inventory_and_governance.py`). The demonstration followed the procedure outlined in the `project/reports/HANDOVER_BRIEF_JULES.md`.
 
 ## 2. Demonstration Steps & Outcomes
 

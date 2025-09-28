@@ -20,7 +20,7 @@ The refactoring will focus on the following key enhancements:
 
 ## 3. Justification
 
-This refactor is the next logical step in the project's development, as outlined in the `project/HANDOVER_BRIEF.md`. It will provide a robust, reliable, and fully automated mechanism for ensuring that all repository assets are correctly documented and tracked, significantly improving project governance and maintainability.
+This refactor is the next logical step in the project's development, as outlined in the `project/reports/HANDOVER_BRIEF_JULES.md`. It will provide a robust, reliable, and fully automated mechanism for ensuring that all repository assets are correctly documented and tracked, significantly improving project governance and maintainability.
 
 ## 4. Deliverables
 

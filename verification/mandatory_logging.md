@@ -2,7 +2,7 @@
 
 **Date:** 2025-09-04
 **Author:** Jules
-**Objective:** To verify that the "Enforce Mandatory Logging" feature, as described in `project/HANDOVER_BRIEF.md`, is correctly implemented and functioning.
+**Objective:** To verify that the "Enforce Mandatory Logging" feature, as described in `project/reports/HANDOVER_BRIEF_JULES.md`, is correctly implemented and functioning.
 
 ---
 
@@ -10,7 +10,7 @@
 
 The "Enforce Mandatory Logging" feature is **correctly implemented and fully functional**.
 
-The investigation began by confirming a contradiction between the `HANDOVER_BRIEF.md` (which stated the task was pending) and the `ACTIVITY.md` log (which stated the task was recently completed). An analysis of the linter script (`scripts/linter.py`) and its rules (`scripts/doc-lint-rules.yml`) confirmed that the implementation was indeed present.
+The investigation began by confirming a contradiction between the `project/reports/HANDOVER_BRIEF_JULES.md` (which stated the task was pending) and the `ACTIVITY.md` log (which stated the task was recently completed). An analysis of the linter script (`scripts/linter.py`) and its rules (`scripts/doc-lint-rules.yml`) confirmed that the implementation was indeed present.
 
 A series of tests were then conducted using the linter's `--test-files` argument to validate the logic in a controlled environment.
 

@@ -1485,7 +1485,7 @@ artifacts:
   registered: true
   index:
   - project/PROJECT_REGISTRY.md
-- path: project/HANDOVER_BRIEF.md
+- path: project/reports/HANDOVER_BRIEF_JULES.md
   type: doc
   registered: true
   index:

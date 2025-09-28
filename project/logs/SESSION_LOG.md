@@ -1,4 +1,11 @@
 ---
+## Session Report: 2025-09-28
+
+**Summary:** Moved two handover documents into the centralized project/reports/ directory. Renamed HANDOVER_BRIEF.md to HANDOVER_BRIEF_JULES.md. Updated all internal references across the project to reflect these changes.
+**Findings:**
+Successfully completed the file refactoring. All files were moved and renamed correctly, and all hardcoded references were updated. The repository is now in a consistent state, ready for verification.
+
+---
 ## Session Report: 2025-09-27
 
 **Summary:** Resolved all governance violations and integrated manifest generation into the linter
@@ -423,7 +430,7 @@ This is a test of the findings section.
 **Summary:** This session focused on correctly configuring the `mkdocs` build system. After a series of confusing and contradictory instructions, the final, correct requirement was established: to build a unified documentation site from the `api`, `snitch`, and `Gonk/GonkUI` modules, while explicitly excluding the `project` module.
 
 **Findings:**
-- The initial goal, derived from the `HANDOVER_BRIEF.md`, was to include all project documentation. This was later contradicted by user feedback, leading to several course corrections.
+- The initial goal, derived from the `project/reports/HANDOVER_BRIEF_JULES.md`, was to include all project documentation. This was later contradicted by user feedback, leading to several course corrections.
 - The final, correct implementation uses the `mkdocs-monorepo-plugin` to combine the documentation sets.
 - All documentation build warnings were resolved.
 

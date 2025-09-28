@@ -1,4 +1,32 @@
 ---
+## ACT-128: Moved two handover documents into the centralized project/reports/ directory. Renamed HANDOVER_BRIEF.md to HANDOVER_BRIEF_JULES.md. Updated all internal references across the project to reflect these changes.
+
+**Date:** 2025-09-28
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Refactor project documentation by moving and renaming handover briefs and updating all internal references, as per the approved plan in project/reports/HANDOVER_BRIEF_JULES.md.
+
+### Outcome
+Successfully completed the file refactoring. All files were moved and renamed correctly, and all hardcoded references were updated. The repository is now in a consistent state, ready for verification.
+
+### Related Documents
+- `project/reports/HANDOVER_BRIEF_CHATGTP.md`
+- `project/reports/HANDOVER_BRIEF_JULES.md`
+- `TRACE_INDEX.yml`
+- `api/docs/reference/features/AUTOMATED_DOCUMENTATION_WORKFLOW.md`
+- `project/PROJECT_REGISTRY.md`
+- `project/archive/audit/AUDIT-PHASE-5.md`
+- `project/logs/ACTIVITY.md`
+- `project/logs/SESSION_LOG.md`
+- `project/proposals/GOVERNANCE_AUDIT_REFACTOR.md`
+- `project/reports/governance_demo_report.md`
+- `scripts/doc-lint-rules.yml`
+- `templates/PROJECT_REGISTRY.md`
+- `verification/mandatory_logging.md`
+
+---
 ## ACT-127: Resolved all governance violations and integrated manifest generation into the linter
 
 **Date:** 2025-09-27
@@ -804,7 +832,7 @@ This is a test of the findings section.
     Created the final audit report and updated all relevant project planning documents (Handover, HLD, Execution Plan) to reflect the completion of the audit. The project now moves into a state of ongoing maintenance under the new, enforced governance policies.
     ### Related Documents
 - `project/reports/PROJECT_AUDIT_FINAL_REPORT.md`
-- `project/HANDOVER_BRIEF.md`
+- `project/reports/HANDOVER_BRIEF_JULES.md`
 - `project/HIGH_LEVEL_DESIGN.md`
 - `project/EXECUTION_PLAN.md`
 
@@ -1046,7 +1074,7 @@ Mark the 'Gap Analysis Framework' item as Done in project/LOOSE_ENDS_BACKLOG.md.
 **Assignee:** Jules
 
 ### Objective
-    Fulfill the first step of the post-audit cleanup outlined in project/HANDOVER_BRIEF.md. This involves creating the project/LOOSE_ENDS_BACKLOG.md to track outstanding tasks, and creating the project/process/GAP_ANALYSIS_TEMPLATE.md to address the first item in that backlog.
+    Fulfill the first step of the post-audit cleanup outlined in project/reports/HANDOVER_BRIEF_JULES.md. This involves creating the project/LOOSE_ENDS_BACKLOG.md to track outstanding tasks, and creating the project/process/GAP_ANALYSIS_TEMPLATE.md to address the first item in that backlog.
 
 ### Outcome
     Successfully created both project/LOOSE_ENDS_BACKLOG.md and project/process/GAP_ANALYSIS_TEMPLATE.md. Also updated the api/docs/reference/CODE_QUALITY_INDEX.md to register these new documentation files as per project process.
@@ -1459,7 +1487,7 @@ To diagnose and fix a persistent CI failure in the `security-scan` job, and to p
 - `project/logs/CURRENT_STATE.md`
 - `project/logs/ACTIVITY.md`
 - `project/logs/SESSION_LOG.md`
-- `project/HANDOVER_BRIEF.md`
+- `project/reports/HANDOVER_BRIEF_JULES.md`
 
 ---
 

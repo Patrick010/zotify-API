@@ -20,7 +20,7 @@ This feature consists of two primary, interconnected components: a documentation
     *   A script that runs as a `pre-commit` hook to enforce documentation standards. It has two main rules:
     *   **1. Registry Completeness Check:** The script first scans the entire repository for all `.md` files and helper scripts (`scripts/*`). It compares this list against all the file paths linked in the `project/PROJECT_REGISTRY.md`. If it finds any files that are not registered, the commit will fail. This ensures the project registry remains a true single source of truth.
     *   **2. Documentation-with-Code Check:** It inspects all files staged for a commit. If any source code or test files have been modified, it requires that at least one documentation file is also staged in the same commit. This makes the "docs-as-code" policy mandatory.
-    *   **Configuration:** The script's behavior is controlled by rules defined in `scripts/doc-lint-rules.yml`. This allows for project-specific customization, such as defining which files are considered "documentation" and which files are "forbidden" from being modified (e.g., `HANDOVER_BRIEF.md`).
+    *   **Configuration:** The script's behavior is controlled by rules defined in `scripts/doc-lint-rules.yml`. This allows for project-specific customization, such as defining which files are considered "documentation" and which files are "forbidden" from being modified (e.g., `project/reports/HANDOVER_BRIEF_JULES.md`).
 
 *   **`log-work.py` (The Scribe):**
     *   A command-line utility designed to simplify and standardize the process of logging work.
