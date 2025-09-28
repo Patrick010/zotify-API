@@ -1,6 +1,13 @@
 ---
 ## Session Report: 2025-09-28
 
+**Summary:** Standardize governance report filename and update references
+**Findings:**
+Successfully updated all references to the misnamed 'governance_demo_report.md' across multiple project files, including the project registry, logs, and various reports. The old file has been deleted. This resolves the naming convention violation.
+
+---
+## Session Report: 2025-09-28
+
 **Summary:** Moved two handover documents into the centralized project/reports/ directory. Renamed HANDOVER_BRIEF.md to HANDOVER_BRIEF_JULES.md. Updated all internal references across the project to reflect these changes.
 **Findings:**
 Successfully completed the file refactoring. All files were moved and renamed correctly, and all hardcoded references were updated. The repository is now in a consistent state, ready for verification.

@@ -1,5 +1,5 @@
 # Governance Audit Report
-**Date:** 2025-09-28 13:39:33
+**Date:** 2025-09-28 15:26:42
 
 | Path | File Type | Status | Details |
 |------|-----------|--------|---------|
@@ -324,7 +324,6 @@
 | `project/reports/HANDOVER_BRIEF_JULES.md` | doc | OK |  |
 | `project/reports/PROJECT_AUDIT_FINAL_REPORT.md` | doc | OK |  |
 | `project/reports/REPO_MANIFEST.md` | doc | OK, Stub |  |
-| `project/reports/governance_demo_report.md` | doc | OK |  |
 | `scripts/audit_api.py` | code | OK |  |
 | `scripts/audit_endpoints.py` | code | OK, Stub |  |
 | `scripts/doc-lint-rules.yml` | config | OK |  |
@@ -403,8 +402,8 @@
 | `verification/mandatory_logging.md` | doc | OK |  |
 
 ## Summary Statistics
-- **Total Files Scanned:** 398
-- **Files OK:** 398
+- **Total Files Scanned:** 397
+- **Files OK:** 397
 - **Files Missing from Index:** 0
 - **Files Miscategorized:** 0
 - **Files Flagged as Stubs:** 51

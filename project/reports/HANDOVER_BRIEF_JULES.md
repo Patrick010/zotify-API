@@ -43,7 +43,7 @@ The next developer must now execute the approved plan for this refactoring task.
             project/logs/ACTIVITY.md
             project/logs/SESSION_LOG.md
             project/proposals/GOVERNANCE_AUDIT_REFACTOR.md
-            project/reports/governance_demo_report.md
+            project/reports/GOVERNANCE_DEMO_REPORT.md
             scripts/doc-lint-rules.yml
             templates/PROJECT_REGISTRY.md
             verification/mandatory_logging.md

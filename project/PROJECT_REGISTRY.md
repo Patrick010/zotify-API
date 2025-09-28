@@ -79,7 +79,6 @@ This document serves as the master file, or single source of truth, for tracking
 | `project/reports/GOVERNANCE_DEMO_REPORT.md` | Doc | TBD |
 | `project/reports/PROJECT_AUDIT_FINAL_REPORT.md` | Doc | TBD |
 | `project/reports/REPO_MANIFEST.md` | Doc | TBD |
-| `project/reports/governance_demo_report.md` | Doc | TBD |
 
 ---
 

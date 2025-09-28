@@ -1,4 +1,24 @@
 ---
+## ACT-129: Standardize governance report filename and update references
+
+**Date:** 2025-09-28
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Standardize the filename for the governance demo report to GOVERNANCE_DEMO_REPORT.md, update all internal references to point to the new name, and remove the old, misnamed file. This enforces project naming conventions and improves maintainability.
+
+### Outcome
+Successfully updated all references to the misnamed 'governance_demo_report.md' across multiple project files, including the project registry, logs, and various reports. The old file has been deleted. This resolves the naming convention violation.
+
+### Related Documents
+- `project/PROJECT_REGISTRY.md`
+- `project/proposals/GOVERNANCE_AUDIT_REFACTOR.md`
+- `project/reports/GOVERNANCE_AUDIT_REPORT.md`
+- `project/reports/HANDOVER_BRIEF_JULES.md`
+- `project/reports/REPO_MANIFEST.md`
+
+---
 ## ACT-128: Moved two handover documents into the centralized project/reports/ directory. Renamed HANDOVER_BRIEF.md to HANDOVER_BRIEF_JULES.md. Updated all internal references across the project to reflect these changes.
 
 **Date:** 2025-09-28
@@ -21,7 +41,7 @@ Successfully completed the file refactoring. All files were moved and renamed co
 - `project/logs/ACTIVITY.md`
 - `project/logs/SESSION_LOG.md`
 - `project/proposals/GOVERNANCE_AUDIT_REFACTOR.md`
-- `project/reports/governance_demo_report.md`
+- `project/reports/GOVERNANCE_DEMO_REPORT.md`
 - `scripts/doc-lint-rules.yml`
 - `templates/PROJECT_REGISTRY.md`
 - `verification/mandatory_logging.md`
@@ -69,7 +89,7 @@ The script was successfully refactored to produce a report with actionable fix s
 - `project/FUTURE_ENHANCEMENTS.md`
 - `scripts/repo_inventory_and_governance.py`
 - `project/reports/GOVERNANCE_AUDIT_REPORT.md`
-- `project/reports/governance_demo_report.md`
+- `project/reports/GOVERNANCE_DEMO_REPORT.md`
 - `api/docs/CODE_FILE_INDEX.md`
 
 ---

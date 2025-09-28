@@ -26,4 +26,4 @@ This refactor is the next logical step in the project's development, as outlined
 
 *   Updated `scripts/repo_inventory_and_governance.py` script.
 *   Generated audit report at `project/reports/GOVERNANCE_AUDIT_REPORT.md`.
-*   Demonstration report at `project/reports/governance_demo_report.md`.
+*   Demonstration report at `project/reports/GOVERNANCE_DEMO_REPORT.md`.
