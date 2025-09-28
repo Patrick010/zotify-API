@@ -7497,6 +7497,8 @@
 
     | `project/reports/REPO_MANIFEST.md` | Doc | TBD |
 
+    | `project/reports/GOVERNANCE_DEMO_REPORT.md` | Doc | TBD |
+
 
     ---
 
@@ -9791,7 +9793,7 @@
   indexes: []
   content: '# Governance Audit Report
 
-    **Date:** 2025-09-28 15:26:42
+    **Date:** 2025-09-28 17:12:32
 
 
     | Path | File Type | Status | Details |
@@ -11047,27 +11049,25 @@
   workflow: []
   indexes: []
   content: "# Project State as of 2025-09-28\n\n    **Status:** Live Document\n\n\
-    ## Objective\nStandardize the filename for the governance demo report to GOVERNANCE_DEMO_REPORT.md,\
-    \ update all internal references to point to the new name, and remove the old,\
-    \ misnamed file. This enforces project naming conventions and improves maintainability.\n\
-    \n    ## 1. Session Summary & Accomplishments\n    Standardize governance report\
-    \ filename and update references\n\n    ## 2. Known Issues & Blockers\n    - None\n\
+    ## Objective\nTo align with project naming conventions, this task renames the\
+    \ governance demo report, updates all internal references, and removes the old\
+    \ file.\n\n    ## 1. Session Summary & Accomplishments\n    Refactor: Standardize\
+    \ governance report filename\n\n    ## 2. Known Issues & Blockers\n    - None\n\
     \n    ## 3. Pending Work: Next Immediate Steps\n    The refactoring is complete.\
-    \ The next step is to run the final verification checks, request a code review,\
-    \ and submit the changes to the api-phase-5e branch.\n"
+    \ The final step is to run the full linter to ensure all project standards are\
+    \ met, then submit the changes to the 'api-phase-5e' branch.\n"
 - path: project/logs/ACTIVITY.md
   type: doc
   workflow: []
   indexes: []
-  content: "---\n## ACT-129: Standardize governance report filename and update references\n\
-    \n**Date:** 2025-09-28\n**Status:** ✅ Done\n**Assignee:** Jules\n\n### Objective\n\
-    Standardize the filename for the governance demo report to GOVERNANCE_DEMO_REPORT.md,\
-    \ update all internal references to point to the new name, and remove the old,\
-    \ misnamed file. This enforces project naming conventions and improves maintainability.\n\
-    \n### Outcome\nSuccessfully updated all references to the misnamed 'governance_demo_report.md'\
-    \ across multiple project files, including the project registry, logs, and various\
-    \ reports. The old file has been deleted. This resolves the naming convention\
-    \ violation.\n\n### Related Documents\n- `project/PROJECT_REGISTRY.md`\n- `project/proposals/GOVERNANCE_AUDIT_REFACTOR.md`\n\
+  content: "---\n## ACT-129: Refactor: Standardize governance report filename\n\n\
+    **Date:** 2025-09-28\n**Status:** ✅ Done\n**Assignee:** Jules\n\n### Objective\n\
+    To align with project naming conventions, this task renames the governance demo\
+    \ report, updates all internal references, and removes the old file.\n\n### Outcome\n\
+    Successfully renamed 'governance_demo_report.md' to 'GOVERNANCE_DEMO_REPORT.md'\
+    \ and updated all references in the project registry, logs, and other documentation.\
+    \ The old file was deleted, resolving the naming inconsistency.\n\n### Related\
+    \ Documents\n- `project/PROJECT_REGISTRY.md`\n- `project/proposals/GOVERNANCE_AUDIT_REFACTOR.md`\n\
     - `project/reports/GOVERNANCE_AUDIT_REPORT.md`\n- `project/reports/HANDOVER_BRIEF_JULES.md`\n\
     - `project/reports/REPO_MANIFEST.md`\n\n---\n## ACT-128: Moved two handover documents\
     \ into the centralized project/reports/ directory. Renamed HANDOVER_BRIEF.md to\
@@ -12537,36 +12537,36 @@
   type: doc
   workflow: []
   indexes: []
-  content: "---\n## Session Report: 2025-09-28\n\n**Summary:** Standardize governance\
-    \ report filename and update references\n**Findings:**\nSuccessfully updated all\
-    \ references to the misnamed 'governance_demo_report.md' across multiple project\
-    \ files, including the project registry, logs, and various reports. The old file\
-    \ has been deleted. This resolves the naming convention violation.\n\n---\n##\
-    \ Session Report: 2025-09-28\n\n**Summary:** Moved two handover documents into\
-    \ the centralized project/reports/ directory. Renamed HANDOVER_BRIEF.md to HANDOVER_BRIEF_JULES.md.\
-    \ Updated all internal references across the project to reflect these changes.\n\
-    **Findings:**\nSuccessfully completed the file refactoring. All files were moved\
-    \ and renamed correctly, and all hardcoded references were updated. The repository\
-    \ is now in a consistent state, ready for verification.\n\n---\n## Session Report:\
-    \ 2025-09-27\n\n**Summary:** Resolved all governance violations and integrated\
-    \ manifest generation into the linter\n**Findings:**\nSuccessfully fixed all 79\
-    \ file indexing violations reported by the governance audit. This involved creating\
-    \ new index files and updating existing ones. Also, integrated the manifest generation\
-    \ script to run as the final step in the linter, but only upon a successful run.\
-    \ Fixed a bug in the linter's rule parser to prevent false positives.\n\n---\n\
-    ## Session Report: 2025-09-27\n\n**Summary:** Refactored the governance audit\
-    \ script to include actionable fix suggestions\n**Findings:**\nThe script was\
-    \ successfully refactored to produce a report with actionable fix suggestions.\
-    \ A bug in the markdown parser was also fixed. The changes were documented in\
-    \ a proposal and a demo report.\n\n---\n## Session Report: 2025-09-27\n\n**Summary:**\
-    \ Created new handover brief for assistant internalization.\n**Findings:**\nSuccessfully\
-    \ created the file at  with the user-provided content.\n\n---\n## Session Report:\
-    \ 2025-09-27\n\n**Summary:** Refactored the governance audit system and documented\
-    \ the process.\n**Findings:**\nSuccessfully refactored the script, created and\
-    \ registered a formal proposal, and documented the new functionality with a demonstration\
-    \ report. The new script correctly identifies unregistered and stub files and\
-    \ saves a detailed report.\n\n---\n## Session Report: 2025-09-25\n\n**Summary:**\
-    \ Create Handover Brief for Governance Refactor\n**Findings:**\nAuthored the project/HANDOVER_BRIEF_NEXT_DEV.md\
+  content: "---\n## Session Report: 2025-09-28\n\n**Summary:** Refactor: Standardize\
+    \ governance report filename\n**Findings:**\nSuccessfully renamed 'governance_demo_report.md'\
+    \ to 'GOVERNANCE_DEMO_REPORT.md' and updated all references in the project registry,\
+    \ logs, and other documentation. The old file was deleted, resolving the naming\
+    \ inconsistency.\n\n---\n## Session Report: 2025-09-28\n\n**Summary:** Moved two\
+    \ handover documents into the centralized project/reports/ directory. Renamed\
+    \ HANDOVER_BRIEF.md to HANDOVER_BRIEF_JULES.md. Updated all internal references\
+    \ across the project to reflect these changes.\n**Findings:**\nSuccessfully completed\
+    \ the file refactoring. All files were moved and renamed correctly, and all hardcoded\
+    \ references were updated. The repository is now in a consistent state, ready\
+    \ for verification.\n\n---\n## Session Report: 2025-09-27\n\n**Summary:** Resolved\
+    \ all governance violations and integrated manifest generation into the linter\n\
+    **Findings:**\nSuccessfully fixed all 79 file indexing violations reported by\
+    \ the governance audit. This involved creating new index files and updating existing\
+    \ ones. Also, integrated the manifest generation script to run as the final step\
+    \ in the linter, but only upon a successful run. Fixed a bug in the linter's rule\
+    \ parser to prevent false positives.\n\n---\n## Session Report: 2025-09-27\n\n\
+    **Summary:** Refactored the governance audit script to include actionable fix\
+    \ suggestions\n**Findings:**\nThe script was successfully refactored to produce\
+    \ a report with actionable fix suggestions. A bug in the markdown parser was also\
+    \ fixed. The changes were documented in a proposal and a demo report.\n\n---\n\
+    ## Session Report: 2025-09-27\n\n**Summary:** Created new handover brief for assistant\
+    \ internalization.\n**Findings:**\nSuccessfully created the file at  with the\
+    \ user-provided content.\n\n---\n## Session Report: 2025-09-27\n\n**Summary:**\
+    \ Refactored the governance audit system and documented the process.\n**Findings:**\n\
+    Successfully refactored the script, created and registered a formal proposal,\
+    \ and documented the new functionality with a demonstration report. The new script\
+    \ correctly identifies unregistered and stub files and saves a detailed report.\n\
+    \n---\n## Session Report: 2025-09-25\n\n**Summary:** Create Handover Brief for\
+    \ Governance Refactor\n**Findings:**\nAuthored the project/HANDOVER_BRIEF_NEXT_DEV.md\
     \ file, summarizing the current state of the governance script and detailing the\
     \ requirements for the upcoming refactoring task as specified by the user.\n\n\
     ---\n## Session Report: 2025-09-25\n\n**Summary:** Fix doc misclassification and\
