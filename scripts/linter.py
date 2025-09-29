@@ -327,7 +327,7 @@ def check_quality_index_ratings() -> List[str]:
     quality_index_file = PROJECT_ROOT / "api" / "docs" / "CODE_QUALITY_INDEX.md"
     if not quality_index_file.exists():
         return []
-    valid_scores = {"A", "B", "C", "D", "F", ""}
+    valid_scores = {"A", "B", "C", "D", "F", "X", ""}
     lines = quality_index_file.read_text(encoding="utf-8").splitlines()
     in_data_table = False
     for i, line in enumerate(lines):
@@ -381,19 +381,22 @@ def run_lint_governance_links() -> int:
     return result.returncode
 
 
-def staged_files_exist() -> bool:
-    """Return True if there are staged files to commit."""
-    out = run_command_capture(["git", "diff", "--cached", "--name-only"])
-    return bool(out.strip())
-
-
-def run_manifest_generation() -> int:
-    """Run make_manifest.py. Only run if manifest script exists."""
+def run_manifest_generation(test_files: list[str] | None = None) -> int:
+    """
+    Run make_manifest.py, passing test files if provided.
+    """
     if not MANIFEST_SCRIPT.exists():
         print("[WARN] make_manifest.py not found; cannot regenerate REPO_MANIFEST.md")
         return 1
-    print("[LINT] Running make_manifest.py to regenerate REPO_MANIFEST.md")
-    return run_command([sys.executable, str(MANIFEST_SCRIPT)], cwd=PROJECT_ROOT)
+
+    cmd = [sys.executable, str(MANIFEST_SCRIPT)]
+    if test_files:
+        print(f"[LINT] Propagating --test-files to make_manifest.py ({len(test_files)} files).")
+        cmd.extend(["--test-files"] + test_files)
+    else:
+        print("[LINT] Running make_manifest.py to regenerate REPO_MANIFEST.md")
+
+    return run_command(cmd, cwd=PROJECT_ROOT)
 
 
 # === Argument parser and main ===
@@ -494,31 +497,17 @@ def main() -> int:
     else:
         print("[INFO] No API docs changes detected; skipped mkdocs.")
 
-    # 6) All checks passed so far -> consider manifest generation
-    # Manifest should run only when there are staged files to commit (or in test mode).
+    # 6) Manifest Generation
     if args.skip_manifest:
         print("[INFO] Skipping manifest generation (--skip-manifest).")
     else:
-        should_generate_manifest = False
-        if args.test_files:
-            # in test mode assume commit will be made -> regenerate manifest (useful for tests)
-            should_generate_manifest = True
-        else:
-            # check staged files
-            try:
-                if staged_files_exist():
-                    should_generate_manifest = True
-            except Exception:
-                # fallback: if we cannot run git check, don't generate manifest
-                should_generate_manifest = False
-
-        if should_generate_manifest:
-            rc = run_manifest_generation()
-            if rc != 0:
-                print("[ERROR] Manifest generation failed.", file=sys.stderr)
-                return rc
-        else:
-            print("[INFO] No staged files detected -> not regenerating manifest.")
+        print("\n--- Running Repository Manifest Generation ---")
+        # Propagate --test-files if they were provided to the linter
+        manifest_return_code = run_manifest_generation(test_files=args.test_files)
+        if manifest_return_code != 0:
+            print("❌ Manifest Generation Failed!", file=sys.stderr)
+            return manifest_return_code
+        # No success message here, as the manifest script prints its own status.
 
     print("\n=== Linter completed successfully ===")
     return 0
