@@ -1,27 +1,4 @@
 ---
-## ACT-130: Deploy Unified Documentation and Governance Linter
-
-**Date:** 2025-09-29
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Objective
-Set up a fully automated documentation and governance linter that integrates with the existing workflow, as specified in the deployment instructions.
-
-### Outcome
-Successfully deployed the new governance linter. Created 'scripts/lint_governance_links.py' with the specified simulation logic and integrated it into the main 'linter.py'. Created the static 'project/reports/PROJECT_AUDIT_FINAL_REPORT.md' template and the 'scripts/test_linter_regression.sh' script. Followed all compliance steps from AGENTS.md by registering new files in 'project/PROJECT_REGISTRY.md' and 'api/docs/CODE_QUALITY_INDEX.md', and updated '.gitignore'.
-
-
-### Related Documents
-- `scripts/lint_governance_links.py`
-- `project/reports/PROJECT_AUDIT_FINAL_REPORT.md`
-- `scripts/test_linter_regression.sh`
-- `.gitignore`
-- `scripts/linter.py`
-- `project/PROJECT_REGISTRY.md`
-- `api/docs/CODE_QUALITY_INDEX.md`
-
----
 ## ACT-129: Refactor: Standardize governance report filename
 
 **Date:** 2025-09-28

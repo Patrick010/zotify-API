@@ -367,10 +367,18 @@ def run_mkdocs_check() -> bool:
 # === Governance & Manifest ===
 
 
-def run_governance_links_linter():
-    """Runs the governance links linter script."""
-    print("--- Running Governance Links Linter ---")
-    return run_command([sys.executable, str(PROJECT_ROOT / "scripts" / "lint_governance_links.py")])
+def run_lint_governance_links() -> int:
+    print("\n--- Running Governance Links Linter ---")
+    script_path = PROJECT_ROOT / "scripts" / "lint_governance_links.py"
+    if not script_path.exists():
+        print("ERROR: lint_governance_links.py not found.", file=sys.stderr)
+        return 1
+    result = subprocess.run([sys.executable, str(script_path)])
+    if result.returncode != 0:
+        print("Governance Links Linter Failed!", file=sys.stderr)
+    else:
+        print("Governance Links Linter Passed!")
+    return result.returncode
 
 
 def staged_files_exist() -> bool:
@@ -419,11 +427,9 @@ def main() -> int:
 
     # 1) Governance Links Linter (unless skipped)
     if not args.skip_governance:
-        ret = run_governance_links_linter()
-        if ret != 0:
-            print("❌ Governance Links Linter failed!", file=sys.stderr)
-            return 1
-        print("✅ Governance Links Linter passed!")
+        gov_links_return = run_lint_governance_links()
+        if gov_links_return != 0:
+            return gov_links_return
     else:
         print("[INFO] Skipping governance links linter (--skip-governance).")
 
