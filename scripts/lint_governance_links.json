@@ -1,197 +1,78 @@
 {
-    "fully_aligned": {},
-    "partially_aligned": {
-        "project/ALIGNMENT_MATRIX.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
+    "files": [
+        {
+            "path": "project/proposals/GONKUI_PLUGIN.md",
+            "status": "unlinked"
         },
-        "project/BACKLOG.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
+        {
+            "path": "project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md",
+            "status": "unlinked"
         },
-        "project/CICD.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
+        {
+            "path": "project/proposals/GOVERNANCE_AUDIT_REFACTOR.md",
+            "status": "unlinked"
         },
-        "project/DEPENDENCIES.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
+        {
+            "path": "project/proposals/LOW_CODE_PROPOSAL.md",
+            "status": "unlinked"
         },
-        "project/EXECUTION_PLAN.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
+        {
+            "path": "project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md",
+            "status": "unlinked"
         },
-        "project/FUTURE_ENHANCEMENTS.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
+        {
+            "path": "project/proposals/TRACE_INDEX_SCHEMA_FIX.md",
+            "status": "unlinked"
         },
-        "project/HIGH_LEVEL_DESIGN.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
+        {
+            "path": "project/proposals/DBSTUDIO_PLUGIN.md",
+            "status": "unlinked"
         },
-        "project/LESSONS-LEARNT.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
+        {
+            "path": "project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md",
+            "status": "unlinked"
         },
-        "project/LOGGING_PHASES.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
+        {
+            "path": "project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md",
+            "status": "unlinked"
         },
-        "project/LOGGING_SYSTEM_DESIGN.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
+        {
+            "path": "project/proposals/HOME_AUTOMATION_PROPOSAL.md",
+            "status": "unlinked"
         },
-        "project/LOGGING_TRACEABILITY_MATRIX.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
+        {
+            "path": "project/process/GAP_ANALYSIS_TEMPLATE.md",
+            "status": "unlinked"
         },
-        "project/LOW_LEVEL_DESIGN.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
+        {
+            "path": "project/reports/GOVERNANCE_AUDIT_REPORT.md",
+            "status": "unlinked"
         },
-        "project/ONBOARDING.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
+        {
+            "path": "project/reports/HANDOVER_BRIEF_JULES.md",
+            "status": "unlinked"
         },
-        "project/PID.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
+        {
+            "path": "project/reports/REPO_MANIFEST.md",
+            "status": "unlinked"
         },
-        "project/PROJECT_BRIEF.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
+        {
+            "path": "project/reports/PROJECT_AUDIT_FINAL_REPORT.md",
+            "status": "unlinked"
         },
-        "project/PROJECT_PLAN.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
+        {
+            "path": "project/reports/GOVERNANCE_DEMO_REPORT.md",
+            "status": "unlinked"
         },
-        "project/PROJECT_REGISTRY.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
-        },
-        "project/ROADMAP.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
-        },
-        "project/SECURITY.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
-        },
-        "project/TASK_CHECKLIST.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
-        },
-        "project/USECASES.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
-        },
-        "project/USECASES_GAP_ANALYSIS.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
-        },
-        "project/process/GAP_ANALYSIS_TEMPLATE.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
-        },
-        "project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
-        },
-        "project/proposals/GOVERNANCE_AUDIT_REFACTOR.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
-        },
-        "project/proposals/HOME_AUTOMATION_PROPOSAL.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
-        },
-        "project/proposals/LOW_CODE_PROPOSAL.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
-        },
-        "project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
-        },
-        "project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
-        },
-        "project/proposals/TRACE_INDEX_SCHEMA_FIX.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
-        },
-        "project/reports/HANDOVER_BRIEF_CHATGTP.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
-        },
-        "project/reports/HANDOVER_BRIEF_JULES.md": {
-            "present_in": [
-                "PROJECT_REGISTRY.md"
-            ]
+        {
+            "path": "project/reports/HANDOVER_BRIEF_CHATGTP.md",
+            "status": "unlinked"
         }
-    },
-    "unlinked": {
-        "project/QA_GOVERNANCE.md": {
-            "registered": false
-        },
-        "project/proposals/DBSTUDIO_PLUGIN.md": {
-            "registered": false
-        },
-        "project/proposals/GONKUI_PLUGIN.md": {
-            "registered": false
-        },
-        "project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md": {
-            "registered": false
-        },
-        "project/reports/GOVERNANCE_AUDIT_REPORT.md": {
-            "registered": false
-        },
-        "project/reports/GOVERNANCE_DEMO_REPORT.md": {
-            "registered": false
-        },
-        "project/reports/PROJECT_AUDIT_FINAL_REPORT.md": {
-            "registered": false
-        },
-        "project/reports/REPO_MANIFEST.md": {
-            "registered": false
-        }
-    },
+    ],
     "summary": {
-        "total_files": 40,
+        "total_files": 17,
         "fully_aligned": 0,
-        "partially_aligned": 32,
-        "unlinked": 8
+        "partially_aligned": 0,
+        "unlinked": 17
     }
 }

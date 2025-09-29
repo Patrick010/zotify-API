@@ -367,14 +367,10 @@ def run_mkdocs_check() -> bool:
 # === Governance & Manifest ===
 
 
-def run_governance_check() -> int:
-    """Call the repo_governance.py in enforce mode (or fallback) and return its exit code."""
-    if GOV_SCRIPT.exists():
-        return run_command([sys.executable, str(GOV_SCRIPT), "--enforce"])
-    if ALT_GOV_SCRIPT.exists():
-        return run_command([sys.executable, str(ALT_GOV_SCRIPT), "--enforce"])
-    print("[WARN] Governance script not found (repo_governance.py or lint_governance_links.py). Skipping governance check.")
-    return 0
+def run_governance_links_linter():
+    """Runs the governance links linter script."""
+    print("--- Running Governance Links Linter ---")
+    return run_command([sys.executable, str(PROJECT_ROOT / "scripts" / "lint_governance_links.py")])
 
 
 def staged_files_exist() -> bool:
@@ -421,14 +417,15 @@ def main() -> int:
     print("Running Unified Linter")
     print("=" * 40)
 
-    # 1) Governance check first (unless skipped)
+    # 1) Governance Links Linter (unless skipped)
     if not args.skip_governance:
-        rc = run_governance_check()
-        if rc != 0:
-            print("\n[ERROR] Governance check failed. Aborting linter run.", file=sys.stderr)
-            return rc
+        ret = run_governance_links_linter()
+        if ret != 0:
+            print("❌ Governance Links Linter failed!", file=sys.stderr)
+            return 1
+        print("✅ Governance Links Linter passed!")
     else:
-        print("[INFO] Skipping governance check (--skip-governance).")
+        print("[INFO] Skipping governance links linter (--skip-governance).")
 
     # 2) Find changed files
     changed_with_status: List[Tuple[str, str]] = []
