@@ -54,6 +54,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **Trace Index Schema Adaptation** | [`proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md`](./proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md) | A proposal and implementation document for adapting the `TRACE_INDEX.yml` schema. |
 | **Trace Index Schema Fix** | [`proposals/TRACE_INDEX_SCHEMA_FIX.md`](./proposals/TRACE_INDEX_SCHEMA_FIX.md) | A proposal and implementation document for fixing the `TRACE_INDEX.yml` schema. |
 | **Governance Audit Refactor** | [`proposals/GOVERNANCE_AUDIT_REFACTOR.md`](./proposals/GOVERNANCE_AUDIT_REFACTOR.md) | A formal proposal to refactor the governance script into a comprehensive audit system. |
+| **New Proposal** | [`proposals/NEW_PROPOSAL.md`](./proposals/NEW_PROPOSAL.md) | A test proposal to verify linter functionality. |
 | `api/project/reports/HANDOVER_BRIEF_CHATGTP.md` | Doc | TBD |
 | `project/QA_GOVERNANCE.md` | Doc | TBD |
 | `project/archive/.github/ISSUE_TEMPLATE/bug-report.md` | Doc | TBD |

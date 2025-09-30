@@ -1,4 +1,26 @@
 ---
+## ACT-130: Implement and verify the new governance linter
+
+**Date:** 2025-09-30
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Deploy the automated governance linter and verify its functionality
+
+### Outcome
+Created the linter script, integrated it, and created a test file to verify it catches unregistered documents. Registered the test file to satisfy the linter.
+
+
+### Related Documents
+- `scripts/lint_governance_links.py`
+- `project/reports/PROJECT_AUDIT_FINAL_REPORT.md`
+- `scripts/linter.py`
+- `.git/hooks/pre-commit`
+- `project/proposals/NEW_PROPOSAL.md`
+- `project/PROJECT_REGISTRY.md`
+
+---
 ## ACT-129: Refactor: Standardize governance report filename
 
 **Date:** 2025-09-28

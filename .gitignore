@@ -170,3 +170,10 @@ api/src/storage/spotify_tokens.json
 # Ignore API storage directory and database files
 api/storage/
 api/*.db
+
+# Generated reports and artifacts
+/project/reports/PROJECT_AUDIT_FINAL_REPORT.md
+/project/reports/PROJECT_DOCUMENT_ALIGNMENT.md
+/project/reports/REPO_MANIFEST.md
+/scripts/lint_governance_links.json
+/project/reports/TRACE_INDEX.yml

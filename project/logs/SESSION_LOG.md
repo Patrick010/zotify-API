@@ -1,4 +1,12 @@
 ---
+## Session Report: 2025-09-30
+
+**Summary:** Implement and verify the new governance linter
+
+**Findings:**
+Created the linter script, integrated it, and created a test file to verify it catches unregistered documents. Registered the test file to satisfy the linter.
+
+---
 ## Session Report: 2025-09-28
 
 **Summary:** Refactor: Standardize governance report filename

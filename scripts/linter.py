@@ -381,6 +381,28 @@ def run_lint_governance_links() -> int:
     return result.returncode
 
 
+def run_repo_inventory(test_files: list[str] | None = None) -> int:
+    """
+    Run repo_inventory_and_governance.py to generate TRACE_INDEX.yml.
+    """
+    print("\n--- Running Repository Inventory ---")
+    script_path = PROJECT_ROOT / "scripts" / "repo_inventory_and_governance.py"
+    if not script_path.exists():
+        print(f"ERROR: Inventory script not found at {script_path}", file=sys.stderr)
+        return 1
+
+    cmd = [sys.executable, str(script_path)]
+    if test_files:
+        print(f"[LINT] Propagating --test-files to repo_inventory_and_governance.py ({len(test_files)} files).")
+        cmd.extend(["--test-files"] + test_files)
+
+    return_code = run_command(cmd, cwd=PROJECT_ROOT)
+    if return_code != 0:
+        print("❌ Repository Inventory Failed!", file=sys.stderr)
+    # No success message here, as the script prints its own status.
+    return return_code
+
+
 def run_manifest_generation(test_files: list[str] | None = None) -> int:
     """
     Run make_manifest.py, passing test files if provided.
@@ -397,6 +419,48 @@ def run_manifest_generation(test_files: list[str] | None = None) -> int:
         print("[LINT] Running make_manifest.py to regenerate REPO_MANIFEST.md")
 
     return run_command(cmd, cwd=PROJECT_ROOT)
+
+
+def update_audit_report() -> bool:
+    """
+    Reads the generated alignment report and updates the final audit report.
+    """
+    print("\n--- Updating Project Audit Final Report ---")
+    alignment_report_path = REPORTS_DIR / "PROJECT_DOCUMENT_ALIGNMENT.md"
+    audit_report_path = REPORTS_DIR / "PROJECT_AUDIT_FINAL_REPORT.md"
+
+    if not alignment_report_path.exists():
+        print(f"ERROR: Alignment report not found at {alignment_report_path}", file=sys.stderr)
+        return False
+
+    try:
+        alignment_content = alignment_report_path.read_text(encoding="utf-8")
+        template_content = audit_report_path.read_text(encoding="utf-8")
+
+        # Extract summary from the alignment report
+        summary_match = re.search(r"(## Summary\n.*)", alignment_content, re.DOTALL)
+        if not summary_match:
+            print("ERROR: Could not find '## Summary' section in alignment report.", file=sys.stderr)
+            return False
+        summary_section = summary_match.group(1).strip()
+
+        # Extract details (everything before the summary)
+        details_content = alignment_content.split("## Summary")[0]
+        details_content = details_content.replace("# Project Document Alignment Report", "").strip()
+
+        # In the template, replace the summary section
+        updated_content = re.sub(r"## Summary\n.*?\n## Details", f"{summary_section}\n\n## Details", template_content, flags=re.DOTALL)
+
+        # In the updated content, replace the details placeholder comment
+        updated_content = updated_content.replace("<!-- Automatically paste relevant sections from PROJECT_DOCUMENT_ALIGNMENT.md -->", details_content)
+
+        write_to_file(audit_report_path, updated_content)
+        print(f"Successfully updated {audit_report_path}")
+        return True
+
+    except Exception as e:
+        print(f"ERROR: Failed to update audit report: {e}", file=sys.stderr)
+        return False
 
 
 # === Argument parser and main ===
@@ -428,15 +492,7 @@ def main() -> int:
     print("Running Unified Linter")
     print("=" * 40)
 
-    # 1) Governance Links Linter (unless skipped)
-    if not args.skip_governance:
-        gov_links_return = run_lint_governance_links()
-        if gov_links_return != 0:
-            return gov_links_return
-    else:
-        print("[INFO] Skipping governance links linter (--skip-governance).")
-
-    # 2) Find changed files
+    # 1) Find changed files
     changed_with_status: List[Tuple[str, str]] = []
     if args.from_file:
         try:
@@ -467,7 +523,7 @@ def main() -> int:
     for s, p in changed_with_status:
         print(f"- {s}\t{p}")
 
-    # 3) Doc-matrix rules – always run
+    # 2) Doc-matrix checks – always run
     print("\n--- Doc-matrix checks ---")
     doc_errors = check_doc_matrix_rules(changed_files_set)
     if doc_errors:
@@ -477,7 +533,7 @@ def main() -> int:
         return 1
     print("[OK] Documentation matrix checks passed.")
 
-    # 4) Quality index checks (conditional)
+    # 3) Quality index checks (conditional)
     print("\n--- Code quality index checks ---")
     quality_errors = check_quality_index_ratings()
     if quality_errors:
@@ -487,7 +543,7 @@ def main() -> int:
         return 1
     print("[OK] Code quality index checks passed.")
 
-    # 5) MkDocs build (if api docs changed)
+    # 4) MkDocs build (if api docs changed)
     print("\n--- MkDocs check ---")
     if any(f.startswith("api/docs/") or f.startswith("api/") and f.endswith(".md") for f in changed_files_set):
         if not run_mkdocs_check():
@@ -497,7 +553,25 @@ def main() -> int:
     else:
         print("[INFO] No API docs changes detected; skipped mkdocs.")
 
-    # 6) Manifest Generation
+    # 5) Repository Inventory
+    inventory_return_code = run_repo_inventory(test_files=args.test_files)
+    if inventory_return_code != 0:
+        return inventory_return_code
+
+    # 6) Governance Links Linter (unless skipped)
+    if not args.skip_governance:
+        gov_links_return = run_lint_governance_links()
+        if gov_links_return != 0:
+            return gov_links_return
+
+        # If governance linter succeeds, update the audit report
+        if not update_audit_report():
+            print("ERROR: Failed to update the audit report.", file=sys.stderr)
+            return 1
+    else:
+        print("[INFO] Skipping governance links linter (--skip-governance).")
+
+    # 7) Manifest Generation
     if args.skip_manifest:
         print("[INFO] Skipping manifest generation (--skip-manifest).")
     else:
