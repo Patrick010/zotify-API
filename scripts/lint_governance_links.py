@@ -14,9 +14,29 @@ TRACE_INDEX_FILE = PROJECT_ROOT / "project" / "reports" / "TRACE_INDEX.yml"
 OUTPUT_JSON = PROJECT_ROOT / "scripts" / "lint_governance_links.json"
 OUTPUT_MD = PROJECT_ROOT / "project" / "reports" / "PROJECT_DOCUMENT_ALIGNMENT.md"
 
-def load_trace_index():
+def load_and_normalize_trace_index():
+    """
+    Loads and normalizes the TRACE_INDEX.yml file.
+    Handles three formats:
+    1. A dictionary with an "artifacts" key holding a list of file objects.
+    2. A direct list of file objects.
+    3. A legacy dictionary where file paths are top-level keys.
+    Returns a unified dictionary mapping file paths to their data.
+    """
     with open(TRACE_INDEX_FILE, "r") as f:
-        return yaml.safe_load(f)
+        data = yaml.safe_load(f)
+
+    if isinstance(data, dict):
+        if "artifacts" in data and isinstance(data.get("artifacts"), list):
+            # New format: dict with "artifacts" key
+            return {item["path"]: item for item in data["artifacts"] if "path" in item}
+        else:
+            # Legacy format: dict with paths as keys
+            return data
+    elif isinstance(data, list):
+        # New format: list of objects
+        return {item["path"]: item for item in data if "path" in item}
+    raise ValueError("Unknown format for TRACE_INDEX.yml")
 
 def scan_project_files():
     files = list(PROJECT_ROOT.glob("project/**/*.md"))
@@ -28,20 +48,26 @@ def classify_files(trace_index, project_files):
     fully_aligned = partially_aligned = 0
     unlinked = []
 
-    registered = set(trace_index.keys())
+    traced_paths = set(trace_index.keys())
 
-    for f in project_files:
-        if f in registered:
-            linked_items = trace_index[f]
-            if linked_items:
-                fully_aligned += 1
+    for f_path in project_files:
+        status = "unlinked"
+        if f_path in traced_paths:
+            item = trace_index[f_path]
+            if item and item.get("registered"):
+                # A file is considered fully aligned if it is registered and has a valid index reference.
+                if item.get("index") and item.get("index") != "-":
+                    status = "fully_aligned"
+                    fully_aligned += 1
+                else:
+                    status = "partially_aligned"
+                    partially_aligned += 1
             else:
-                partially_aligned += 1
-            status = "fully_aligned" if linked_items else "partially_aligned"
+                unlinked.append(f_path)
         else:
-            status = "unlinked"
-            unlinked.append(f)
-        files_report.append({"path": f, "status": status})
+            unlinked.append(f_path)
+
+        files_report.append({"path": f_path, "status": status})
 
     return files_report, fully_aligned, partially_aligned, len(unlinked)
 
@@ -85,7 +111,7 @@ def write_md_report(report_data):
         f.write("\n".join(md_lines))
 
 def main():
-    trace_index = load_trace_index()
+    trace_index = load_and_normalize_trace_index()
     project_files = scan_project_files()
     files_report, full, partial, unlinked_count = classify_files(trace_index, project_files)
     report_data = {

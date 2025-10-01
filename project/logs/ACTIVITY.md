@@ -1,4 +1,23 @@
 ---
+## ACT-131: Fix governance linter script for TRACE_INDEX.yml compatibility
+
+**Date:** 2025-09-30
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Update scripts/lint_governance_links.py to correctly parse multiple formats of TRACE_INDEX.yml, ensuring backward compatibility and accurate document alignment reporting.
+
+### Outcome
+The 'lint_governance_links.py' script was failing due to its inability to handle the current 'TRACE_INDEX.yml' structure. I refactored the script to support three different YAML formats (list, dictionary with 'artifacts', and legacy dictionary). This makes the linter more robust. I also updated ALIGNMENT_MATRIX.md and CODE_QUALITY_INDEX.md to reflect the changes.
+
+
+### Related Documents
+- `scripts/lint_governance_links.py`
+- `project/ALIGNMENT_MATRIX.md`
+- `api/docs/CODE_QUALITY_INDEX.md`
+
+---
 ## ACT-130: Implement and verify the new governance linter
 
 **Date:** 2025-09-30

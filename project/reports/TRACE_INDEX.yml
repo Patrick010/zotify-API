@@ -1511,11 +1511,10 @@ artifacts:
   registered: false
   index: '-'
   missing_from: project/PROJECT_REGISTRY.md
-- path: project/reports/REPO_MANIFEST.md
-  type: doc
-  registered: false
+- path: project/reports/REPO_MANIFEST.zip
+  type: exempt
+  registered: exempted
   index: '-'
-  missing_from: project/PROJECT_REGISTRY.md
 - path: project/reports/TRACE_INDEX.yml
   type: code
   registered: exempted
@@ -1815,11 +1814,11 @@ artifacts:
   type: exempt
   registered: exempted
   index: '-'
-- path: site/assets/stylesheets/main.e53b48f4.min.css
+- path: site/assets/stylesheets/main.2a3383ac.min.css
   type: code
   registered: exempted
   index: '-'
-- path: site/assets/stylesheets/main.e53b48f4.min.css.map
+- path: site/assets/stylesheets/main.2a3383ac.min.css.map
   type: exempt
   registered: exempted
   index: '-'

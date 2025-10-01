@@ -1,6 +1,14 @@
 ---
 ## Session Report: 2025-09-30
 
+**Summary:** Fix governance linter script for TRACE_INDEX.yml compatibility
+
+**Findings:**
+The 'lint_governance_links.py' script was failing due to its inability to handle the current 'TRACE_INDEX.yml' structure. I refactored the script to support three different YAML formats (list, dictionary with 'artifacts', and legacy dictionary). This makes the linter more robust. I also updated ALIGNMENT_MATRIX.md and CODE_QUALITY_INDEX.md to reflect the changes.
+
+---
+## Session Report: 2025-09-30
+
 **Summary:** Implement and verify the new governance linter
 
 **Findings:**

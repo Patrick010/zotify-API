@@ -120,5 +120,5 @@ This score assesses the implementation's clarity, efficiency, structure, and tes
 | File Path | Documentation Score | Code Score | Overall Score | Notes |
 |---|:---:|:---:|:---:|---|
 | `scripts/validate_code_index.py` | F | F | F | New file, pending review. |
-| `scripts/lint_governance_links.py` | X | X | X | New file, pending review. |
+| `scripts/lint_governance_links.py` | B | B | B | Refactored to handle multiple `TRACE_INDEX.yml` formats, improving robustness and backward compatibility. The code is now more resilient to changes in the trace index schema. |
 | `scripts/linter.py` | X | X | X | File has been significantly refactored to integrate manifest generation; pending new quality review. |
