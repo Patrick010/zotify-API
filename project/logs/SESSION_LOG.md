@@ -1,6 +1,30 @@
 ---
 ## Session Report: 2025-10-01
 
+**Summary:** Fix linter bugs, resolve doc alignment, and ignore site directory.
+
+**Findings:**
+Discovered and fixed two critical bugs in the governance linter script. Registered the primary alignment report, removed orphaned duplicates, and updated the script to ignore the 'site/' directory, preventing build artifacts from bloating the trace index.
+
+---
+## Session Report: 2025-10-01
+
+**Summary:** Fix linter bugs and resolve documentation alignment issues.
+
+**Findings:**
+Discovered and fixed two critical bugs in the governance linter script that produced incorrect reports. Registered the primary alignment report and removed orphaned duplicates to ensure the linter passes cleanly.
+
+---
+## Session Report: 2025-10-01
+
+**Summary:** Register PROJECT_DOCUMENT_ALIGNMENT.md
+
+**Findings:**
+The linter flagged PROJECT_DOCUMENT_ALIGNMENT.md as unlinked because it was not registered in PROJECT_REGISTRY.md.
+
+---
+## Session Report: 2025-10-01
+
 **Summary:** Normalize PROJECT_REGISTRY.md to fix alignment reporting
 
 **Findings:**

@@ -79,6 +79,7 @@ This document serves as the master file, or single source of truth, for tracking
 | **Governance Demo Report** | [GOVERNANCE_DEMO_REPORT.md](./reports/GOVERNANCE_DEMO_REPORT.md) | A report summarizing the results of a governance tooling demonstration. |
 | **Project Audit Final Report** | [PROJECT_AUDIT_FINAL_REPORT.md](./reports/PROJECT_AUDIT_FINAL_REPORT.md) | The final, consolidated report summarizing the findings of a full project audit. |
 | **Repository Manifest** | [REPO_MANIFEST.md](./reports/REPO_MANIFEST.md) | A comprehensive, auto-generated manifest of all files in the repository. |
+| **PROJECT_DOCUMENT_ALIGNMENT.md** | [Link](./reports/PROJECT_DOCUMENT_ALIGNMENT.md) | Alignment status report, auto-generated, not to be edited manually. |
 
 ---
 

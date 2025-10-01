@@ -1,4 +1,43 @@
 ---
+## ACT-135: Fix linter bugs, resolve doc alignment, and ignore site directory.
+
+**Date:** 2025-10-01
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Fix linter bugs, resolve doc alignment, and ignore site directory.
+
+### Outcome
+Discovered and fixed two critical bugs in the governance linter script. Registered the primary alignment report, removed orphaned duplicates, and updated the script to ignore the 'site/' directory, preventing build artifacts from bloating the trace index.
+
+---
+## ACT-134: Fix linter bugs and resolve documentation alignment issues.
+
+**Date:** 2025-10-01
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Fix linter bugs and resolve documentation alignment issues.
+
+### Outcome
+Discovered and fixed two critical bugs in the governance linter script that produced incorrect reports. Registered the primary alignment report and removed orphaned duplicates to ensure the linter passes cleanly.
+
+---
+## ACT-133: Register PROJECT_DOCUMENT_ALIGNMENT.md
+
+**Date:** 2025-10-01
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Register PROJECT_DOCUMENT_ALIGNMENT.md
+
+### Outcome
+The linter flagged PROJECT_DOCUMENT_ALIGNMENT.md as unlinked because it was not registered in PROJECT_REGISTRY.md.
+
+---
 ## ACT-132: Normalize PROJECT_REGISTRY.md to fix alignment reporting
 
 **Date:** 2025-10-01

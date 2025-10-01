@@ -18,7 +18,7 @@ FILETYPE_MAP = {
     ".yml": "code",
     ".go": "code",
 }
-IGNORED_DIRS = {".git", ".idea", ".venv", "node_modules", "build", "dist", "target", "__pycache__"}
+IGNORED_DIRS = {".git", ".idea", ".venv", "node_modules", "build", "dist", "target", "__pycache__", "site"}
 IGNORED_FILES = {"mkdocs.yml", "openapi.json", "bandit.yml", "changed_files.txt", "verification_report.md", "LICENSE"}
 
 INDEX_MAP = [
@@ -147,8 +147,8 @@ def validate_trace_index_schema(trace_index_path: Path) -> bool:
         if reg is False:
             if idx!="-":
                 errors.append(f"Schema Error (path:{path}): If registered is false, 'index' must be '-'.")
-            if not isinstance(miss,str):
-                errors.append(f"Schema Error (path:{path}): If registered is false, 'missing_from' must be a string.")
+            if not isinstance(miss, list):
+                errors.append(f"Schema Error (path:{path}): If registered is false, 'missing_from' must be a list of strings.")
         if reg=="exempted" and idx!="-":
             errors.append(f"Schema Error (path:{path}): If registered is 'exempted', 'index' must be '-'.")
     if errors:
@@ -187,7 +187,7 @@ def main():
             else:
                 entry["registered"]=False
                 entry["index"]="-"
-                entry["missing_from"]=missing[0] if len(missing)==1 else missing
+                entry["missing_from"]=missing
                 for idx_file in missing:
                     files_to_create.setdefault(idx_file,[]).append(f)
         trace_index.append(entry)
