@@ -1,4 +1,21 @@
 ---
+## ACT-132: Normalize PROJECT_REGISTRY.md to fix alignment reporting
+
+**Date:** 2025-10-01
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To correct all malformed entries in project/PROJECT_REGISTRY.md to ensure the documentation linter can parse it correctly and generate accurate alignment reports.
+
+### Outcome
+The PROJECT_REGISTRY.md file contained numerous entries with incorrect formatting (raw file paths instead of markdown links, 'TBD' descriptions). This caused the linter to incorrectly flag many documents as 'unlinked'. I have corrected all malformed entries to adhere to the strict '| **Label** | [Link](./relative_path) | Description |' schema.
+
+
+### Related Documents
+- `project/PROJECT_REGISTRY.md`
+
+---
 ## ACT-131: Fix governance linter script for TRACE_INDEX.yml compatibility
 
 **Date:** 2025-09-30

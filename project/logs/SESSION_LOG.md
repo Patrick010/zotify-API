@@ -1,4 +1,12 @@
 ---
+## Session Report: 2025-10-01
+
+**Summary:** Normalize PROJECT_REGISTRY.md to fix alignment reporting
+
+**Findings:**
+The PROJECT_REGISTRY.md file contained numerous entries with incorrect formatting (raw file paths instead of markdown links, 'TBD' descriptions). This caused the linter to incorrectly flag many documents as 'unlinked'. I have corrected all malformed entries to adhere to the strict '| **Label** | [Link](./relative_path) | Description |' schema.
+
+---
 ## Session Report: 2025-09-30
 
 **Summary:** Fix governance linter script for TRACE_INDEX.yml compatibility

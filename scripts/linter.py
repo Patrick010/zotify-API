@@ -360,7 +360,7 @@ def run_mkdocs_check() -> bool:
         print("[INFO] No api/docs/ found; skipping mkdocs build.")
         return True
     print("[LINT] Running mkdocs build...")
-    rc = run_command([sys.executable, "-m", "mkdocs", "build"], cwd=PROJECT_ROOT)
+    rc = run_command(["mkdocs", "build"], cwd=PROJECT_ROOT)
     return rc == 0
 
 

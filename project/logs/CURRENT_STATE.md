@@ -1,15 +1,15 @@
-# Project State as of 2025-09-30
+# Project State as of 2025-10-01
 
 **Status:** Live Document
 
 ## Objective
-Update scripts/lint_governance_links.py to correctly parse multiple formats of TRACE_INDEX.yml, ensuring backward compatibility and accurate document alignment reporting.
+To correct all malformed entries in project/PROJECT_REGISTRY.md to ensure the documentation linter can parse it correctly and generate accurate alignment reports.
 
 ## 1. Session Summary & Accomplishments
-Fix governance linter script for TRACE_INDEX.yml compatibility
+Normalize PROJECT_REGISTRY.md to fix alignment reporting
 
 ## 2. Known Issues & Blockers
 - None
 
 ## 3. Pending Work: Next Immediate Steps
-The script is now fixed and validated. The next step is to submit the changes.
+With the registry normalized, the next step is to regenerate the alignment reports and analyze them for any remaining unlinked files.

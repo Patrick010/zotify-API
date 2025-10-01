@@ -55,32 +55,30 @@ This document serves as the master file, or single source of truth, for tracking
 | **Trace Index Schema Fix** | [`proposals/TRACE_INDEX_SCHEMA_FIX.md`](./proposals/TRACE_INDEX_SCHEMA_FIX.md) | A proposal and implementation document for fixing the `TRACE_INDEX.yml` schema. |
 | **Governance Audit Refactor** | [`proposals/GOVERNANCE_AUDIT_REFACTOR.md`](./proposals/GOVERNANCE_AUDIT_REFACTOR.md) | A formal proposal to refactor the governance script into a comprehensive audit system. |
 | **New Proposal** | [`proposals/NEW_PROPOSAL.md`](./proposals/NEW_PROPOSAL.md) | A test proposal to verify linter functionality. |
-| `api/project/reports/HANDOVER_BRIEF_CHATGTP.md` | Doc | TBD |
-| `project/QA_GOVERNANCE.md` | Doc | TBD |
-| `project/archive/.github/ISSUE_TEMPLATE/bug-report.md` | Doc | TBD |
-| `project/archive/.github/ISSUE_TEMPLATE/feature-request.md` | Doc | TBD |
-| `project/archive/audit/AUDIT-PHASE-3.md` | Doc | TBD |
-| `project/archive/audit/AUDIT-PHASE-4.md` | Doc | TBD |
-| `project/archive/audit/AUDIT-PHASE-5.md` | Doc | TBD |
-| `project/archive/audit/AUDIT-phase-1.md` | Doc | TBD |
-| `project/archive/audit/AUDIT-phase-2.md` | Doc | TBD |
-| `project/archive/audit/AUDIT_TRACEABILITY_MATRIX.md` | Doc | TBD |
-| `project/archive/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md` | Doc | TBD |
-| `project/archive/audit/FIRST_AUDIT.md` | Doc | TBD |
-| `project/archive/audit/PHASE_4_TRACEABILITY_MATRIX.md` | Doc | TBD |
-| `project/archive/audit/audit-prompt.md` | Doc | TBD |
-| `project/archive/docs/snitch/INTEGRATION_CHECKLIST.md` | Doc | TBD |
-| `project/archive/docs/snitch/PHASE_2_SECURE_CALLBACK.md` | Doc | TBD |
-| `project/archive/docs/snitch/TEST_RUNBOOK.md` | Doc | TBD |
-| `project/archive/docs/snitch/phase5-ipc.md` | Doc | TBD |
-| `project/proposals/DBSTUDIO_PLUGIN.md` | Doc | TBD |
-| `project/proposals/GONKUI_PLUGIN.md` | Doc | TBD |
-| `project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md` | Doc | TBD |
-| `project/reports/GOVERNANCE_AUDIT_REPORT.md` | Doc | TBD |
-| `project/reports/GOVERNANCE_DEMO_REPORT.md` | Doc | TBD |
-| `project/reports/PROJECT_AUDIT_FINAL_REPORT.md` | Doc | TBD |
-| `project/reports/REPO_MANIFEST.md` | Doc | TBD |
-| `project/reports/GOVERNANCE_DEMO_REPORT.md` | Doc | TBD |
+| **QA & Governance Policy** | [QA_GOVERNANCE.md](./QA_GOVERNANCE.md) | The single source of truth for all Quality Assurance (QA) and governance policies for the project. |
+| **Archived Bug Report Template** | [bug-report.md](./archive/.github/ISSUE_TEMPLATE/bug-report.md) | An archived GitHub issue template for reporting bugs. |
+| **Archived Feature Request Template** | [feature-request.md](./archive/.github/ISSUE_TEMPLATE/feature-request.md) | An archived GitHub issue template for requesting new features. |
+| **Archived Audit Log: Phase 1** | [AUDIT-phase-1.md](./archive/audit/AUDIT-phase-1.md) | An archived, comprehensive audit of the API and documentation, establishing a baseline for future work. |
+| **Archived Audit Log: Phase 2** | [AUDIT-phase-2.md](./archive/audit/AUDIT-phase-2.md) | An archived log of activities and findings from Phase 2 of the HLD/LLD Alignment Plan. |
+| **Archived Audit Log: Phase 3** | [AUDIT-PHASE-3.md](./archive/audit/AUDIT-PHASE-3.md) | An archived log of activities and findings from Phase 3 of the HLD/LLD Alignment Plan. |
+| **Archived Audit Log: Phase 4** | [AUDIT-PHASE-4.md](./archive/audit/AUDIT-PHASE-4.md) | An archived log of activities from Phase 4 of the audit, focusing on final consolidation and implementation of QA tooling. |
+| **Archived Audit Log: Phase 5** | [AUDIT-PHASE-5.md](./archive/audit/AUDIT-PHASE-5.md) | An archived log of activities from Phase 5 of the audit, focusing on overhauling the linter and documentation processes. |
+| **Archived Audit Traceability Matrix** | [AUDIT_TRACEABILITY_MATRIX.md](./archive/audit/AUDIT_TRACEABILITY_MATRIX.md) | An archived traceability matrix used during the initial project audit to track gaps. |
+| **Archived Code Optimization Plan** | [CODE_OPTIMIZATIONPLAN_PHASE_4.md](./archive/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md) | An archived planning document for the "Super-Lint" feature set developed during Phase 4. |
+| **Archived First Audit** | [FIRST_AUDIT.md](./archive/audit/FIRST_AUDIT.md) | An archived, early version of the comprehensive API and documentation audit. |
+| **Archived Phase 4 Traceability Matrix** | [PHASE_4_TRACEABILITY_MATRIX.md](./archive/audit/PHASE_4_TRACEABILITY_MATRIX.md) | An archived traceability matrix used to track tasks during Phase 4 of the audit. |
+| **Archived Audit Prompt** | [audit-prompt.md](./archive/audit/audit-prompt.md) | An archived prompt used to guide the audit process. |
+| **Archived Snitch Integration Checklist** | [INTEGRATION_CHECKLIST.md](./archive/docs/snitch/INTEGRATION_CHECKLIST.md) | An archived, context-free checklist related to the Snitch module. |
+| **Archived Snitch Secure Callback** | [PHASE_2_SECURE_CALLBACK.md](./archive/docs/snitch/PHASE_2_SECURE_CALLBACK.md) | An archived document describing security logic that was moved from Snitch to the main API. |
+| **Archived Snitch Test Runbook** | [TEST_RUNBOOK.md](./archive/docs/snitch/TEST_RUNBOOK.md) | An archived manual testing guide for a previous version of the Snitch application. |
+| **Archived Snitch IPC Design** | [phase5-ipc.md](./archive/docs/snitch/phase5-ipc.md) | An archived document describing a complex IPC architecture for Snitch that was never implemented. |
+| **DBStudio Plugin Proposal** | [DBSTUDIO_PLUGIN.md](./proposals/DBSTUDIO_PLUGIN.md) | A proposal for a modular database browser plugin. |
+| **GonkUI Plugin Proposal** | [GONKUI_PLUGIN.md](./proposals/GONKUI_PLUGIN.md) | A proposal to replace the Flask-based test UI with a modular plugin. |
+| **QA Gate Implementation Plan** | [QA_GATE_IMPLEMENTATION_PLAN.md](./proposals/QA_GATE_IMPLEMENTATION_PLAN.md) | A proposal for implementing a formal QA gate in the CI/CD pipeline. |
+| **Governance Audit Report** | [GOVERNANCE_AUDIT_REPORT.md](./reports/GOVERNANCE_AUDIT_REPORT.md) | A report generated by the governance linter, detailing documentation alignment. |
+| **Governance Demo Report** | [GOVERNANCE_DEMO_REPORT.md](./reports/GOVERNANCE_DEMO_REPORT.md) | A report summarizing the results of a governance tooling demonstration. |
+| **Project Audit Final Report** | [PROJECT_AUDIT_FINAL_REPORT.md](./reports/PROJECT_AUDIT_FINAL_REPORT.md) | The final, consolidated report summarizing the findings of a full project audit. |
+| **Repository Manifest** | [REPO_MANIFEST.md](./reports/REPO_MANIFEST.md) | A comprehensive, auto-generated manifest of all files in the repository. |
 
 ---
 
