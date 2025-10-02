@@ -1,132 +1,52 @@
-#!/usr/bin/env python3
-"""
-scripts/verify_governance.py
+# Zotify API Platform Roadmap
 
-Report-only verification of project governance:
-- proposals
-- roadmap
-- execution plan / backlog
-- alignment matrix
-- trace index
-- project registry
-- logs
+**Date:** 2025-09-01
+**Status:** Live Document
 
-Provides recommendations for missing or misaligned artifacts.
-"""
+## 1. Introduction
 
-import os
-import yaml
+This document provides a high-level, strategic roadmap for the Zotify API Platform. It is organized by project phase and outlines the development trajectory from the current stable state to future enhancements.
 
-# === CONFIG ===
-REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-PROJECT_REGISTRY = os.path.join(REPO_ROOT, 'project', 'PROJECT_REGISTRY.md')
-TRACE_INDEX_FILE = os.path.join(REPO_ROOT, 'project', 'TRACE_INDEX.yml')
-ALIGNMENT_MATRIX = os.path.join(REPO_ROOT, 'project', 'ALIGNMENT_MATRIX.md')
-ROADMAP = os.path.join(REPO_ROOT, 'project', 'roadmap.md')
-PROPOSALS_DIR = os.path.join(REPO_ROOT, 'project/proposals')
+---
 
-# === FUNCTIONS ===
+## 2. Project Phases
 
-def load_registry():
-    registry_files = set()
-    if os.path.exists(PROJECT_REGISTRY):
-        with open(PROJECT_REGISTRY, 'r') as f:
-            for line in f:
-                line = line.strip()
-                if line and not line.startswith('#'):
-                    registry_files.add(line)
-    return registry_files
+### Phase 1-2: Core Architecture & Refactoring (✅ Done)
+This phase focused on establishing the foundational architecture of the project, including the initial API, database models, and provider abstractions.
 
-def scan_proposals():
-    proposals = []
-    if os.path.exists(PROPOSALS_DIR):
-        for f in os.listdir(PROPOSALS_DIR):
-            if f.endswith('.md'):
-                proposals.append(f)
-    return proposals
+### Phase 3: HLD/LLD Alignment (✅ Done)
+This phase involved a comprehensive audit to align the High-Level Design (HLD) and Low-Level Design (LLD) with the implemented code, ensuring all documentation accurately reflects the state of the project.
 
-def load_trace_index():
-    if os.path.exists(TRACE_INDEX_FILE):
-        with open(TRACE_INDEX_FILE) as f:
-            return yaml.safe_load(f)
-    return {'artifacts': []}
+### Phase 4: Enforcement & Automation (✅ Done)
+This phase focused on hardening the development process by introducing and configuring a suite of static analysis tools (`ruff`, `mypy`), security scanners (`bandit`, `gosec`), and CI/CD pipeline improvements to enforce quality gates.
 
-def load_alignment_matrix():
-    matrix = {}
-    if os.path.exists(ALIGNMENT_MATRIX):
-        with open(ALIGNMENT_MATRIX) as f:
-            for line in f:
-                line = line.strip()
-                if line and not line.startswith('#'):
-                    parts = line.split(',')
-                    if len(parts) >= 3:
-                        matrix[parts[0]] = {'type': parts[1], 'path': parts[2]}
-    return matrix
+### Phase 5: Documentation & Process Hardening (✅ Done)
+This phase focused on resolving outstanding documentation and process gaps that were identified during the audit. The `LOOSE_ENDS_BACKLOG.md` file was created, processed, and deleted, and several core process documents (`AGENTS.md`, `TRACEABILITY_MATRIX.md`) were improved.
 
-def load_roadmap():
-    roadmap = set()
-    if os.path.exists(ROADMAP):
-        with open(ROADMAP) as f:
-            for line in f:
-                line = line.strip()
-                if line.startswith('-'):
-                    milestone = line.lstrip('-').strip()
-                    roadmap.add(milestone)
-    return roadmap
+### Phase 6: Platform Extensibility (Planned)
+This next major phase of work will focus on making the Zotify API a truly extensible platform, allowing the community to build and share new functionality.
 
-def report_issue(artifact_type, artifact_id, location, issue):
-    print(f"[{artifact_type}] {artifact_id} @ {location} -> {issue}")
+- **Dynamic Plugin System:** Implement a dynamic plugin system for custom logging sinks and other components.
+- **Providers as Plugins:** Refactor the existing providers to be standalone plugins.
+- **External Integrations:** Develop reference implementations for Low-Code and Home Automation platforms.
 
-def main():
-    registry = load_registry()
-    proposals = scan_proposals()
-    trace_index = load_trace_index()
-    alignment_matrix = load_alignment_matrix()
-    roadmap = load_roadmap()
+### Phase 7: Snitch Module Hardening (Planned)
+This phase will focus on implementing the security and reliability improvements for the Snitch module as defined in its project plan.
 
-    issues = []
+- **Source:** `snitch/docs/PROJECT_PLAN.md`
 
-    # 1. Proposals in trace index
-    for prop in proposals:
-        path = f'project/proposals/{prop}'
-        found = any(a['path'] == path for a in trace_index.get('artifacts', []))
-        if not found:
-            issues.append({'type': 'proposal', 'id': prop, 'location': path, 'issue': 'Missing in TRACE_INDEX'})
-    
-    # 2. Proposals in roadmap
-    for prop in proposals:
-        if prop not in roadmap:
-            issues.append({'type': 'proposal', 'id': prop, 'location': ROADMAP, 'issue': 'Missing in roadmap'})
+### Phase 8: Administrative & Fork-Specific Enhancements (Planned)
+This phase will focus on implementing administrative APIs, settings, and other enhancements that improve the operational control and management of the platform.
 
-    # 3. Proposals in registry
-    for prop in proposals:
-        reg_path = f'project/proposals/{prop}'
-        if reg_path not in registry:
-            issues.append({'type': 'proposal', 'id': prop, 'location': PROJECT_REGISTRY, 'issue': 'Missing in registry'})
+- **Source:** `EXECUTION_PLAN.md` (Phases 6 & 9)
 
-    # 4. Proposals in alignment matrix
-    for prop in proposals:
-        if prop not in alignment_matrix:
-            issues.append({'type': 'proposal', 'id': prop, 'location': ALIGNMENT_MATRIX, 'issue': 'Missing in alignment matrix'})
+### Phase 9: Release Readiness (Planned)
+This phase will focus on the final steps required to prepare for a stable, versioned release, including API versioning and packaging.
 
-    # === REPORT ===
-    if not issues:
-        print("✅ Governance check passed: all proposals are properly registered and aligned.")
-        return
+- **Source:** `EXECUTION_PLAN.md` (Phase 10)
 
-    print("\n=== Governance Issues and Recommendations ===")
-    for i, issue in enumerate(issues, 1):
-        rec = ""
-        if 'TRACE_INDEX' in issue['issue']:
-            rec = f"Recommendation: Add {issue['id']} as artifact in TRACE_INDEX.yml"
-        elif 'roadmap' in issue['issue']:
-            rec = f"Recommendation: Add milestone {issue['id']} to roadmap.md"
-        elif 'registry' in issue['issue']:
-            rec = f"Recommendation: Add {issue['id']} path to PROJECT_REGISTRY.md"
-        elif 'alignment matrix' in issue['issue']:
-            rec = f"Recommendation: Add row for {issue['id']} in ALIGNMENT_MATRIX.md"
-        print(f"{i}. [{issue['type']}] {issue['id']} @ {issue['location']} -> {issue['issue']}")
-        print(f"   {rec}")
+---
 
-if __name__ == "__main__":
-    main()
+## 4. Future Vision
+
+Beyond the planned phases, development will focus on expanding the core feature set. See `FUTURE_ENHANCEMENTS.md` for a full list of long-term ideas.
