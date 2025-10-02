@@ -17,7 +17,7 @@ PROJECT_ROOT = Path(__file__).parent.parent
 
 # Configuration
 IGNORED_DIRS = {'.git', '.github', '.venv', '__pycache__', 'archive', 'api_dumps',
-                'zotify_api.egg-info', 'src', 'templates', 'docs', 'alembic'}
+                'zotify_api.egg-info', 'templates', 'docs', 'alembic', 'build', 'dist'}
 IGNORED_FILES = {'.DS_Store', '.gitignore', 'REPO_MANIFEST.md', 'openapi.json',
                  'LICENSE', 'CONTRIBUTING.md', 'alembic.ini'}
 # Files that should be included even if in ignored dirs
