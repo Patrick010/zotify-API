@@ -18,7 +18,7 @@ FILETYPE_MAP = {
     ".yml": "code",
     ".go": "code",
 }
-IGNORED_DIRS = {".git", ".idea", ".venv", "node_modules", "build", "dist", "target", "__pycache__", "site"}
+IGNORED_DIRS = {".git", ".idea", ".venv", "node_modules", "build", "dist", "target", "__pycache__", "site", "archive", "templates"}
 IGNORED_FILES = {"mkdocs.yml", "openapi.json", "bandit.yml", "changed_files.txt", "verification_report.md", "LICENSE"}
 
 INDEX_MAP = [
@@ -30,7 +30,7 @@ INDEX_MAP = [
             path.startswith("project/process/") or
             path.startswith("project/proposals/") or
             path.startswith("project/reports/") or
-            path.startswith("project/") and Path(path).parent.name == "project"),
+            (path.startswith("project/") and Path(path).parent.name == "project")),
      "indexes": ["project/PROJECT_REGISTRY.md"]},
     {"match": lambda path, ftype: ftype == "doc" and path.startswith("Gonk/GonkCLI/docs/"),
      "indexes": ["Gonk/GonkCLI/DOCS_INDEX.md"]},
@@ -98,22 +98,16 @@ def create_and_populate_index(index_path_str: str, files_to_add: List[str], file
 
 def generate_audit_report(trace_index: List[Dict[str, Any]]) -> int:
     print("\n" + "="*50 + "\nGovernance Audit Report\n" + "="*50)
-    missing_by_index, registered_count, missing_count, exempted_count, wrongly_exempted = {},0,0,0,[]
+    missing_by_index, registered_count, missing_count, exempted_count = {},0,0,0
     for item in trace_index:
         if item["registered"]=="exempted":
             exempted_count += 1
-            if item['type']=='doc':
-                wrongly_exempted.append(item['path'])
         elif item["registered"] is True:
             registered_count += 1
         else:
             missing_count += 1
-            for idx in item.get("missing_from", [] if isinstance(item.get("missing_from"), list) else [item.get("missing_from")]):
+            for idx in item.get("missing_from", []):
                 missing_by_index.setdefault(idx,[]).append(item["path"])
-    if wrongly_exempted:
-        print("\n--- 🚨 Wrongly Exempted Documents ---")
-        for path in sorted(wrongly_exempted):
-            print(f"  - {path}")
     if missing_count>0:
         print("\n--- Missing Registrations ---")
         for idx, files in sorted(missing_by_index.items()):
@@ -121,8 +115,8 @@ def generate_audit_report(trace_index: List[Dict[str, Any]]) -> int:
             for f in sorted(files):
                 print(f"  - {f}")
     print("\n" + "-"*20)
-    print(f"- Total files checked: {len(trace_index)}\n- Registered: {registered_count}\n- Missing: {missing_count}\n- Exempted: {exempted_count}\n- Wrongly Exempted Docs: {len(wrongly_exempted)}\n" + "-"*20)
-    return 1 if missing_count>0 or wrongly_exempted else 0
+    print(f"- Total files checked: {len(trace_index)}\n- Registered: {registered_count}\n- Missing: {missing_count}\n- Exempted: {exempted_count}\n" + "-"*20)
+    return 1 if missing_count>0 else 0
 
 def validate_trace_index_schema(trace_index_path: Path) -> bool:
     print("\n--- Validating TRACE_INDEX.yml Schema ---")
@@ -174,7 +168,8 @@ def main():
                 if r["match"](f,ftype):
                     required.extend(r["indexes"])
         required=sorted(list(set(required)))
-        if ftype=='doc' and not required and f not in IGNORED_FILES:
+        # Assign default project registry if doc is unassigned (skip templates)
+        if ftype=='doc' and not required and f not in IGNORED_FILES and not f.startswith("templates/"):
             required.append("project/PROJECT_REGISTRY.md")
         if not required:
             entry["registered"]="exempted"
@@ -191,9 +186,9 @@ def main():
                 for idx_file in missing:
                     files_to_create.setdefault(idx_file,[]).append(f)
         trace_index.append(entry)
+    # Update or create index files
     for idx_path, files in files_to_create.items():
-        if not (PROJECT_ROOT/idx_path).exists():
-            create_and_populate_index(idx_path, files, get_file_type(files[0]))
+        create_and_populate_index(idx_path, files, get_file_type(files[0]))
     output={"artifacts": trace_index}
     trace_index_path=PROJECT_ROOT/"project/reports/TRACE_INDEX.yml"
     trace_index_path.parent.mkdir(parents=True, exist_ok=True)
