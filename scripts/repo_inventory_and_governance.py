@@ -312,7 +312,30 @@ def main():
     if test_mode:
         return 0
 
-    return generate_audit_report(trace_index)
+    exit_code = generate_audit_report(trace_index)
+
+    # Automatically run the governance link linter
+    import subprocess
+    linter_script = PROJECT_ROOT / "scripts" / "lint_governance_links.py"
+    try:
+        result = subprocess.run(
+            [sys.executable, str(linter_script)],
+            check=True,
+            capture_output=True,
+            text=True
+        )
+        print("\n--- Governance Links Linter Output ---")
+        print(result.stdout)
+        print("✅ lint_governance_links.py completed successfully.\n")
+    except subprocess.CalledProcessError as e:
+        print("\n⚠️ lint_governance_links.py failed with the following output:\n")
+        print(e.stdout)
+        print(e.stderr, file=sys.stderr)
+        # Preserve the original exit code from the inventory audit
+        if exit_code == 0:
+            exit_code = e.returncode
+
+    return exit_code
 
 if __name__=="__main__":
     sys.exit(main())

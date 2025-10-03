@@ -2,7 +2,7 @@ import pytest
 import httpx
 
 BASE_URL = "http://localhost:8000"
-TEST_TOKEN = "test_key"
+TEST_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0dXNlcjgiLCJleHAiOjE3NTk0ODIwMTJ9.-xzurlSjdtMUtWJ_5UqQCoN_wiWm5zyYlcdC_wLRdJk"
 
 
 @pytest.fixture
@@ -40,9 +40,8 @@ def test_get_user_profile(client):
     r = client.get("/api/user/profile", headers=headers)
     assert r.status_code == 200
     json_resp = r.json()
-    assert "data" in json_resp
     # The user service returns 'email', not 'id'.
-    assert "email" in json_resp["data"]
+    assert "email" in json_resp
 
 
 if __name__ == "__main__":
