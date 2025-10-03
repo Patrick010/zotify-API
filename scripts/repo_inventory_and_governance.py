@@ -248,187 +248,6 @@ def main():
 
     trace_index = []
     all_index_paths = {idx for rule in INDEX_MAP for idx in rule["indexes"]}
-    all_indexes_content = {str(p): parse_markdown_.md" in str(index_path):
-        return set(re.findall(r"^\s*\|\s*`([^`]+)`", content, re.MULTILINE))
-
-    # Logic for link-based registries like PROJECT_REGISTRY.md
-    if "PROJECT_REGISTRY.md" in str(index_path):
-        links = re.findall(r"\[`([^`]+)`\]\(([^)]+)\)", content)
-        # We need to reconstruct the full path from the relative link
-        return {str(Path(os.path.normpath(os.path.join(index_path.parent, link[1]))).relative_to(PROJECT_ROOT)) for link in links}
-
-    # Fallback for other markdown link styles (like MASTER_INDEX.md)
-    links = re.findall(r"\[[^\]]+\]\((?!https?://)([^)]+)\)", content)
-    return {str(Path(os.path.normpath(os.path.join(index_path.parent, link))).relative_to(PROJECT_ROOT)) for link in links}
-
-
-def check_registration(file_path: str, required_indexes: List[str], all_indexes_content: Dict[str, Set[str]]) -> Tuple[List[str], List[str]]:
-    found, missing = [], []
-    normalized_path = file_path # Path is already normalized by find_all_files
-    for idx in required_indexes:
-        if normalized_path in all_indexes_content.get(idx, set()):
-            found.append(idx)
-        else:
-            missing.append(idx)
-    return sorted(found), sorted(missing)
-
-
-def create_and_populate_index(index_path_str: str, files_to_add: List[str], file_type: str):
-    index_path = PROJECT_ROOT / index_path_str
-    index_path.parent.mkdir(parents=True, exist_ok=True)
-
-    existing_files = set()
-    if index_path.exists():
-        existing_files = parse_markdown_index(index_path)
-
-    new_files_to_add = sorted([f for f in files_to_add if f not in existing_files])
-
-    if not new_files_to_add:
-        return
-
-    lines_to_append = []
-    # Handle PROJECT_REGISTRY.md separately because of its table structure
-    if "PROJECT_REGISTRY.md" in index_path_str and index_path.exists():
-        content = index_path.read_text(encoding="utf-8").splitlines()
-
-        try:
-            separator_index = -1
-            # Find the specific table separator to be more precise
-            for i, line in enumerate(content):
-                if line.strip() == '|---|---|---|' and i > 0 and "Document" in content[i-1] and "Location" in content[i-1]:
-                    separator_index = i
-                    break
-
-            if separator_index == -1:
-                 raise ValueError("Main table separator not found in PROJECT_REGISTRY.md")
-
-            insertion_point = separator_index + 1
-        except (ValueError, IndexError):
-            # Fallback if table not found, append at end (less ideal but safe)
-            insertion_point = len(content)
-
-        for f in new_files_to_add:
-            relative_link = os.path.relpath(PROJECT_ROOT / f, index_path.parent)
-            doc_name_human = Path(f).stem.replace('_', ' ').replace('-', ' ').title()
-            lines_to_append.append(f"| **{doc_name_human}** | [`{Path(f).name}`]({relative_link}) | |")
-
-        for line in reversed(sorted(lines_to_append)):
-            content.insert(insertion_point, line)
-
-        index_path.write_text("\n".join(content) + "\n", encoding="utf-8")
-        return
-
-    # --- Logic for other, simpler index files ---
-    if "CODE_FILE_INDEX" in index_path_str:
-        lines_to_append = [f"| `{f}` | | | Active | | |" for f in new_files_to_add]
-    elif "DOCS_QUALITY_INDEX" in index_path_str:
-        lines_to_append = [f"| `{f}` | X | X | | | |" for f in new_files_to_add]
-    else: # For list-based indexes like MASTER_INDEX.md
-        relative_links = [os.path.relpath(PROJECT_ROOT / f, index_path.parent) for f in new_files_to_add]
-        lines_to_append = [f"*   [{Path(f).name}]({link})" for f, link in zip(new_files_to_add, relative_links)]
-
-    # Append to existing file or create a new one
-    if index_path.exists():
-        with open(index_path, "a", encoding="utf-8") as f:
-            content = index_path.read_text(encoding="utf-8")
-            if content and content[-1] != '\n':
-                f.write('\n')
-            f.write("\n".join(sorted(lines_to_append)) + "\n")
-    else:
-        header = f"# {index_path.stem.replace('_',' ').title()}\n\nThis file is auto-generated. Do not edit manually.\n\n"
-        if "CODE_FILE_INDEX" in index_path_str:
-            header += "| Path | Type | Description | Status | Linked Docs | Notes |\n|------|------|-------------|--------|-------------|-------|\n"
-        elif "QUALITY_INDEX" in index_path_str:
-            header += "| File Path | Documentation Score | Code Score | Reviewer | Review Date | Notes |\n|-----------|---------------------|------------|----------|-------------|-------|\n"
-
-        index_path.write_text(header + "\n".join(sorted(lines_to_append)) + "\n", encoding="utf-8")
-
-
-def generate_audit_report(trace_index: List[Dict[str, Any]]) -> int:
-    print("\n" + "="*50 + "\nGovernance Audit Report\n" + "="*50)
-    missing_by_index, registered_count, missing_count, exempted_count = {},0,0,0
-    for item in trace_index:
-        if item["registered"]=="exempted":
-            exempted_count += 1
-        elif item["registered"] is True:
-            registered_count += 1
-        else:
-            missing_count += 1
-            for idx in item.get("missing_from", []):
-                missing_by_index.setdefault(idx,[]).append(item["path"])
-    if missing_count>0:
-        print("\n--- Missing Registrations ---")
-        for idx, files in sorted(missing_by_index.items()):
-            print(f"\nMissing from {idx}:")
-            for f in sorted(files):
-                print(f"  - {f}")
-    print("\n" + "-"*20)
-    print(f"- Total files checked: {len(trace_index)}\n- Registered: {registered_count}\n- Missing: {missing_count}\n- Exempted: {exempted_count}\n" + "-"*20)
-    return 1 if missing_count>0 else 0
-
-
-def validate_trace_index_schema(trace_index_path: Path) -> bool:
-    print("\n--- Validating TRACE_INDEX.yml Schema ---")
-    try:
-        with open(trace_index_path, 'r') as f:
-            data = yaml.safe_load(f)
-    except Exception as e:
-        print(f"ERROR: Could not load TRACE_INDEX.yml: {e}", file=sys.stderr)
-        return False
-    errors=[]
-    if 'artifacts' not in data or not isinstance(data['artifacts'], list):
-        errors.append("FATAL: 'artifacts' key missing or not a list.")
-        print("\n".join(errors), file=sys.stderr)
-        return False
-    for a in data['artifacts']:
-        path=a.get('path')
-        reg=a.get('registered')
-        idx=a.get('index')
-        miss=a.get('missing_from')
-        if reg is True and not isinstance(idx, str):
-            errors.append(f"Schema Error (path:{path}): If registered is true, 'index' must be a string.")
-        if reg is False:
-            if idx!="-":
-                errors.append(f"Schema Error (path:{path}): If registered is false, 'index' must be '-'.")
-            if not isinstance(miss, list):
-                errors.append(f"Schema Error (path:{path}): If registered is false, 'missing_from' must be a list of strings.")
-        if reg=="exempted" and idx!="-":
-            errors.append(f"Schema Error (path:{path}): If registered is 'exempted', 'index' must be '-'.")
-    if errors:
-        print("TRACE_INDEX.yml schema validation failed:", file=sys.stderr)
-        for e in errors:
-            print(f"- {e}", file=sys.stderr)
-        return False
-    print("Schema validation passed!")
-    return True
-
-
-def main():
-    # Determine if running in test mode (for linter)
-    test_mode = "--test-files" in sys.argv
-    full_mode = "--full" in sys.argv
-
-    if full_mode:
-        all_files = find_all_files()
-    elif test_mode:
-        # In test mode, we get the file list from the command line
-        try:
-            file_list_index = sys.argv.index("--test-files") + 1
-            all_files = sys.argv[file_list_index:]
-        except (ValueError, IndexError):
-            all_files = []
-    else:
-        # Default mode: read from manifest
-        manifest_path = PROJECT_ROOT / "project" / "reports" / "REPO_MANIFEST.md"
-        if manifest_path.exists():
-            content = manifest_path.read_text(encoding="utf-8")
-            all_files = re.findall(r"^\s*\|\s*`([^`]+)`\s*\|.*", content, re.MULTILINE)
-        else:
-            print("INFO: REPO_MANIFEST.md not found. Running a full scan.", file=sys.stderr)
-            all_files = find_all_files()
-
-    trace_index = []
-    all_index_paths = {idx for rule in INDEX_MAP for idx in rule["indexes"]}
     all_indexes_content = {str(p): parse_markdown_index(PROJECT_ROOT / p) for p in all_index_paths}
 
     files_to_create = {}
@@ -493,7 +312,30 @@ def main():
     if test_mode:
         return 0
 
-    return generate_audit_report(trace_index)
+    exit_code = generate_audit_report(trace_index)
+
+    # Automatically run the governance link linter
+    import subprocess
+    linter_script = PROJECT_ROOT / "scripts" / "lint_governance_links.py"
+    try:
+        result = subprocess.run(
+            [sys.executable, str(linter_script)],
+            check=True,
+            capture_output=True,
+            text=True
+        )
+        print("\n--- Governance Links Linter Output ---")
+        print(result.stdout)
+        print("✅ lint_governance_links.py completed successfully.\n")
+    except subprocess.CalledProcessError as e:
+        print("\n⚠️ lint_governance_links.py failed with the following output:\n")
+        print(e.stdout)
+        print(e.stderr, file=sys.stderr)
+        # Preserve the original exit code from the inventory audit
+        if exit_code == 0:
+            exit_code = e.returncode
+
+    return exit_code
 
 if __name__ == "__main__":
     sys.exit(main())

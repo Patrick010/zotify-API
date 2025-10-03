@@ -22,3 +22,4 @@ This file is auto-generated. Do not edit manually.
 | `scripts/test_single_config.sh` | | | Active | | |
 | `scripts/validate_code_index.py` | | | Active | | |
 | `scripts/verify_governance.py` | | | Active | | |
+| `scripts/repo_governance.py` | | | Active | | |

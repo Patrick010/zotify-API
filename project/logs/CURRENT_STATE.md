@@ -1,12 +1,9 @@
-# Project State as of 2025-10-03
+# Project State as of 2025-10-01
 
 **Status:** Live Document
 
-## Objective
-Fix the failing linter by registering all unregistered files and fixing the test suite.
-
 ## 1. Session Summary & Accomplishments
-Fix governance script and register all files
+Fix linter bugs, resolve doc alignment, and ignore site directory.
 
 ## 2. Known Issues & Blockers
 - None
