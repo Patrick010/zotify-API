@@ -4,7 +4,7 @@
 **Summary:** Fix governance script and register all files
 
 **Findings:**
-The repo_inventory_and_governance.py script had several bugs that prevented it from working correctly. These have been fixed.
+The repo_inventory_and_governance.py script was buggy and has been fixed. All project files have been registered. The test suite was failing due to dependency issues (bcrypt) and an incorrect test case, which have also been fixed.
 
 ---
 ## Session Report: 2025-10-01

@@ -17,8 +17,10 @@ artifacts:
   index: '-'
 - path: AGENTS.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
 - path: Gonk/CODE_FILE_INDEX.md
   type: doc
   registered: exempted
@@ -125,8 +127,10 @@ artifacts:
   index: '-'
 - path: api/MIGRATIONS.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
 - path: api/alembic.ini
   type: exempt
   registered: exempted
@@ -197,396 +201,588 @@ artifacts:
   index: '-'
 - path: api/docs/CHANGELOG.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/CODE_FILE_INDEX.md
   type: doc
   registered: exempted
   index: '-'
 - path: api/docs/CODE_QUALITY_INDEX.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/DOCS_QUALITY_INDEX.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/MASTER_INDEX.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/manuals/API_DEVELOPER_GUIDE.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/manuals/CICD.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/manuals/ERROR_HANDLING_GUIDE.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/manuals/LICENSE
   type: exempt
   registered: exempted
   index: '-'
 - path: api/docs/manuals/LOGGING_GUIDE.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/manuals/OPERATOR_MANUAL.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/manuals/USER_MANUAL.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/providers/SPOTIFY.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/API_REFERENCE.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/FEATURE_SPECS.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/features/AUTHENTICATION.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/features/AUTOMATED_DOCUMENTATION_WORKFLOW.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/features/DEVELOPER_FLEXIBLE_LOGGING_FRAMEWORK.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/features/PROVIDER_AGNOSTIC_EXTENSIONS.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/features/PROVIDER_OAUTH.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/ACTIONS____INIT__.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/APP.js.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/APP.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/AUDIT_API.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/AUDIT_ENDPOINTS.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/AUTH.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/AUTH_STATE.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/BASE.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/CACHE.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/CACHE_SERVICE.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/CONFIG.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/CONFIG_MODELS.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/CONFIG_SERVICE.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/CONSOLE_HANDLER.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/CRUD.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/DATABASE_JOB_HANDLER.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/DATABASE____INIT__.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/DB.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/DEPS.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/DOWNLOAD.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/DOWNLOADS.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/DOWNLOAD_SERVICE.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/ERROR_HANDLER____INIT__.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/FILTERS.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/FORMATTER.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/FUNCTIONAL_TEST.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/GENERATE_ENDPOINTS_DOC.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/GENERATE_OPENAPI.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/GENERATE_SOURCE_DOCS.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/GENERIC.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/GLOBALS.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/HOOKS.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/JSON_AUDIT_HANDLER.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/LINTER.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/LOGGING_CONFIG.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/LOGGING_FRAMEWORK____INIT__.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/LOGGING_HANDLERS____INIT__.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/LOGGING_SCHEMAS.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/LOGGING_SERVICE.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/LOG_CRITICAL.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/MAIN.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/METADATA.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/METADATA_SERVICE.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/MODELS.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/NETWORK.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/NETWORK_SERVICE.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/NOTIFICATIONS.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/NOTIFICATIONS_SERVICE.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/PLAYLISTS.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/PLAYLISTS_SERVICE.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/PROVIDERS____INIT__.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/REQUEST_ID.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/ROUTES____INIT__.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SCHEMAS.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SEARCH.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SERVICE.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SERVICES____INIT__.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SESSION.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SNITCH.go.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SPOTIFY.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SPOTIFY_CONNECTOR.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SPOTI_CLIENT.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SYNC.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SYNC_SERVICE.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/SYSTEM.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/TEST_AUTH_FLOW.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/TRACKS.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/TRACKS_SERVICE.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/TRIGGERS.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/USER.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/USER_SERVICE.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/WEBHOOK.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/reference/source/WEBHOOKS.py.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/system/ERROR_HANDLING_DESIGN.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/system/INSTALLATION.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/system/PRIVACY_COMPLIANCE.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/system/REQUIREMENTS.md
   type: doc
-  registered: true
-  index: api/docs/DOCS_QUALITY_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/DOCS_QUALITY_INDEX.md
 - path: api/docs/system/zotify-openapi-external-v1.json
   type: exempt
   registered: exempted
@@ -973,8 +1169,10 @@ artifacts:
   index: '-'
 - path: api/src/zotify_api/temp_violation.py
   type: code
-  registered: true
-  index: api/docs/CODE_FILE_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - api/docs/CODE_FILE_INDEX.md
 - path: api/storage/zotify.db
   type: exempt
   registered: exempted
@@ -1205,8 +1403,10 @@ artifacts:
   index: project/PROJECT_REGISTRY.md
 - path: project/QA_GOVERNANCE.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
 - path: project/ROADMAP.md
   type: doc
   registered: true
@@ -1249,16 +1449,20 @@ artifacts:
   index: project/PROJECT_REGISTRY.md
 - path: project/proposals/DBSTUDIO_PLUGIN.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
 - path: project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
 - path: project/proposals/GONKUI_PLUGIN.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
 - path: project/proposals/GOVERNANCE_AUDIT_REFACTOR.md
   type: doc
   registered: true
@@ -1281,8 +1485,10 @@ artifacts:
   index: project/PROJECT_REGISTRY.md
 - path: project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
 - path: project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md
   type: doc
   registered: true
@@ -1293,8 +1499,10 @@ artifacts:
   index: project/PROJECT_REGISTRY.md
 - path: project/reports/GOVERNANCE_DEMO_REPORT.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
 - path: project/reports/HANDOVER_BRIEF_CHATGTP.md
   type: doc
   registered: true
@@ -1305,12 +1513,16 @@ artifacts:
   index: project/PROJECT_REGISTRY.md
 - path: project/reports/PROJECT_AUDIT_FINAL_REPORT.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
 - path: project/reports/PROJECT_DOCUMENT_ALIGNMENT.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
 - path: project/reports/TRACE_INDEX.yml
   type: code
   registered: exempted
@@ -1373,8 +1585,10 @@ artifacts:
   index: scripts/CODE_FILE_INDEX.md
 - path: scripts/repo_governance.py
   type: code
-  registered: true
-  index: scripts/CODE_FILE_INDEX.md
+  registered: false
+  index: '-'
+  missing_from:
+  - scripts/CODE_FILE_INDEX.md
 - path: scripts/repo_inventory_and_governance.py
   type: code
   registered: true

@@ -3,7 +3,7 @@
 **Status:** Live Document
 
 ## Objective
-Fix the failing linter by registering all unregistered files.
+Fix the failing linter by registering all unregistered files and fixing the test suite.
 
 ## 1. Session Summary & Accomplishments
 Fix governance script and register all files
@@ -12,4 +12,4 @@ Fix governance script and register all files
 - None
 
 ## 3. Pending Work: Next Immediate Steps
-Submit the changes.
+Submit the final, clean changes.

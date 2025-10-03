@@ -10,7 +10,7 @@
         },
         {
             "path": "project/QA_GOVERNANCE.md",
-            "status": "fully_aligned"
+            "status": "unlinked"
         },
         {
             "path": "project/ONBOARDING.md",
@@ -98,11 +98,11 @@
         },
         {
             "path": "project/reports/PROJECT_AUDIT_FINAL_REPORT.md",
-            "status": "fully_aligned"
+            "status": "unlinked"
         },
         {
             "path": "project/reports/GOVERNANCE_DEMO_REPORT.md",
-            "status": "fully_aligned"
+            "status": "unlinked"
         },
         {
             "path": "project/reports/HANDOVER_BRIEF_JULES.md",
@@ -110,7 +110,7 @@
         },
         {
             "path": "project/reports/PROJECT_DOCUMENT_ALIGNMENT.md",
-            "status": "fully_aligned"
+            "status": "unlinked"
         },
         {
             "path": "project/archive/TRACEABILITY_MATRIX.md",
@@ -150,15 +150,15 @@
         },
         {
             "path": "project/proposals/GONKUI_PLUGIN.md",
-            "status": "fully_aligned"
+            "status": "unlinked"
         },
         {
             "path": "project/proposals/DBSTUDIO_PLUGIN.md",
-            "status": "fully_aligned"
+            "status": "unlinked"
         },
         {
             "path": "project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md",
-            "status": "fully_aligned"
+            "status": "unlinked"
         },
         {
             "path": "project/proposals/TRACE_INDEX_SCHEMA_FIX.md",
@@ -247,8 +247,8 @@
     ],
     "summary": {
         "total_files": 61,
-        "fully_aligned": 43,
+        "fully_aligned": 36,
         "partially_aligned": 0,
-        "unlinked": 18
+        "unlinked": 25
     }
 }
