@@ -1,4 +1,12 @@
 ---
+## Session Report: 2025-10-03
+
+**Summary:** Fix governance script and register all files
+
+**Findings:**
+The repo_inventory_and_governance.py script had several bugs that prevented it from working correctly. These have been fixed.
+
+---
 ## Session Report: 2025-10-01
 
 **Summary:** Fix linter bugs, resolve doc alignment, and ignore site directory.

@@ -1,4 +1,17 @@
 ---
+## ACT-136: Fix governance script and register all files
+
+**Date:** 2025-10-03
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Fix the failing linter by registering all unregistered files.
+
+### Outcome
+The repo_inventory_and_governance.py script had several bugs that prevented it from working correctly. These have been fixed.
+
+---
 ## ACT-135: Fix linter bugs, resolve doc alignment, and ignore site directory.
 
 **Date:** 2025-10-01
