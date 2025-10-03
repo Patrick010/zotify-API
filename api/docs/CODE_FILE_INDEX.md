@@ -168,4 +168,3 @@ This document serves as the canonical registry of all code files in the Zotify A
 | `scripts/run_e2e_auth_test.sh` | Script | TBD | Active | | Auto-generated to fix audit |
 | `scripts/start.sh` | Script | TBD | Active | | Auto-generated to fix audit |
 | `scripts/test_single_config.sh` | Script | TBD | Active | | Auto-generated to fix audit |
-| `api/src/zotify_api/temp_violation.py` | | | Active | | |

@@ -13,15 +13,6 @@ This document serves as the master file, or single source of truth, for tracking
 
 | Document | Location | Description |
 |---|---|---|
-| **Agents** | [`AGENTS.md`](../AGENTS.md) | |
-| **Dbstudio Plugin** | [`DBSTUDIO_PLUGIN.md`](proposals/DBSTUDIO_PLUGIN.md) | |
-| **Gonkui Plugin** | [`GONKUI_PLUGIN.md`](proposals/GONKUI_PLUGIN.md) | |
-| **Governance Demo Report** | [`GOVERNANCE_DEMO_REPORT.md`](reports/GOVERNANCE_DEMO_REPORT.md) | |
-| **Migrations** | [`MIGRATIONS.md`](../api/MIGRATIONS.md) | |
-| **Project Audit Final Report** | [`PROJECT_AUDIT_FINAL_REPORT.md`](reports/PROJECT_AUDIT_FINAL_REPORT.md) | |
-| **Project Document Alignment** | [`PROJECT_DOCUMENT_ALIGNMENT.md`](reports/PROJECT_DOCUMENT_ALIGNMENT.md) | |
-| **Qa Gate Implementation Plan** | [`QA_GATE_IMPLEMENTATION_PLAN.md`](proposals/QA_GATE_IMPLEMENTATION_PLAN.md) | |
-| **Qa Governance** | [`QA_GOVERNANCE.md`](QA_GOVERNANCE.md) | |
 | **Project Registry** | [`PROJECT_REGISTRY.md`](./PROJECT_REGISTRY.md) | This document, the master index for all project artifacts. |
 | **Template Registry** | [`../templates/PROJECT_REGISTRY.md`](../templates/PROJECT_REGISTRY.md) | A registry of all reusable documentation templates. |
 | **Handover Brief** | [`HANDOVER_BRIEF_JULES.md`](./reports/HANDOVER_BRIEF_JULES.md) | A detailed handover brief created at the request of the user. Not to be modified during the session. |
