@@ -46,3 +46,12 @@ repos:
         language: python
         types: [python]
         pass_filenames: false
+  # 6. Repo Inventory and Governance
+  - repo: local
+    hooks:
+      - id: repo-inventory-and-governance
+        name: Repo Inventory and Governance
+        entry: python scripts/repo_inventory_and_governance.py
+        language: system
+        always_run: true
+        pass_filenames: false
