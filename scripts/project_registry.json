@@ -16,12 +16,21 @@
         "type": "doc",
         "module": "project",
         "category": "api",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "",
         "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "Endpoints",
+        "path": "project/api/endpoints.yaml",
+        "type": "exempt",
+        "module": "project",
+        "category": "api",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
     },
     {
         "name": "bug-report.md",
@@ -29,9 +38,7 @@
         "type": "doc",
         "module": "project",
         "category": "archive",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "An archived GitHub issue template for reporting bugs.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -42,9 +49,7 @@
         "type": "doc",
         "module": "project",
         "category": "archive",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "An archived GitHub issue template for requesting new features.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -55,12 +60,10 @@
         "type": "doc",
         "module": "project",
         "category": "archive",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
-        "status": "legacy",
+        "registered_in": [],
+        "status": "orphan",
         "notes": "An archived matrix mapping requirements from use cases and design docs to implementation and test status.",
-        "source": "project/PROJECT_REGISTRY.md"
+        "source": "TRACE_INDEX.yml"
     },
     {
         "name": "AUDIT-PHASE-3.md",
@@ -68,12 +71,10 @@
         "type": "doc",
         "module": "project",
         "category": "archive",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
-        "status": "legacy",
+        "registered_in": [],
+        "status": "orphan",
         "notes": "An archived log of activities and findings from Phase 3 of the HLD/LLD Alignment Plan.",
-        "source": "project/PROJECT_REGISTRY.md"
+        "source": "TRACE_INDEX.yml"
     },
     {
         "name": "AUDIT-PHASE-4.md",
@@ -81,12 +82,10 @@
         "type": "doc",
         "module": "project",
         "category": "archive",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
-        "status": "legacy",
+        "registered_in": [],
+        "status": "orphan",
         "notes": "An archived log of activities from Phase 4 of the audit, focusing on final consolidation and implementation of QA tooling.",
-        "source": "project/PROJECT_REGISTRY.md"
+        "source": "TRACE_INDEX.yml"
     },
     {
         "name": "AUDIT-PHASE-5.md",
@@ -94,12 +93,10 @@
         "type": "doc",
         "module": "project",
         "category": "archive",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
-        "status": "legacy",
+        "registered_in": [],
+        "status": "orphan",
         "notes": "An archived log of activities from Phase 5 of the audit, focusing on overhauling the linter and documentation processes.",
-        "source": "project/PROJECT_REGISTRY.md"
+        "source": "TRACE_INDEX.yml"
     },
     {
         "name": "AUDIT-phase-1.md",
@@ -107,12 +104,10 @@
         "type": "doc",
         "module": "project",
         "category": "archive",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
-        "status": "legacy",
+        "registered_in": [],
+        "status": "orphan",
         "notes": "An archived, comprehensive audit of the API and documentation, establishing a baseline for future work.",
-        "source": "project/PROJECT_REGISTRY.md"
+        "source": "TRACE_INDEX.yml"
     },
     {
         "name": "AUDIT-phase-2.md",
@@ -120,12 +115,10 @@
         "type": "doc",
         "module": "project",
         "category": "archive",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
-        "status": "legacy",
+        "registered_in": [],
+        "status": "orphan",
         "notes": "An archived log of activities and findings from Phase 2 of the HLD/LLD Alignment Plan.",
-        "source": "project/PROJECT_REGISTRY.md"
+        "source": "TRACE_INDEX.yml"
     },
     {
         "name": "AUDIT_TRACEABILITY_MATRIX.md",
@@ -133,12 +126,10 @@
         "type": "doc",
         "module": "project",
         "category": "archive",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
-        "status": "legacy",
+        "registered_in": [],
+        "status": "orphan",
         "notes": "An archived traceability matrix used during the initial project audit to track gaps.",
-        "source": "project/PROJECT_REGISTRY.md"
+        "source": "TRACE_INDEX.yml"
     },
     {
         "name": "CODE_OPTIMIZATIONPLAN_PHASE_4.md",
@@ -146,12 +137,10 @@
         "type": "doc",
         "module": "project",
         "category": "archive",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
-        "status": "legacy",
+        "registered_in": [],
+        "status": "orphan",
         "notes": "An archived planning document for the \"Super-Lint\" feature set developed during Phase 4.",
-        "source": "project/PROJECT_REGISTRY.md"
+        "source": "TRACE_INDEX.yml"
     },
     {
         "name": "FIRST_AUDIT.md",
@@ -159,12 +148,10 @@
         "type": "doc",
         "module": "project",
         "category": "archive",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
-        "status": "legacy",
+        "registered_in": [],
+        "status": "orphan",
         "notes": "An archived, early version of the comprehensive API and documentation audit.",
-        "source": "project/PROJECT_REGISTRY.md"
+        "source": "TRACE_INDEX.yml"
     },
     {
         "name": "`archive/audit/HLD_LLD_ALIGNMENT_PLAN.md`",
@@ -172,12 +159,10 @@
         "type": "doc",
         "module": "project",
         "category": "archive",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
-        "status": "legacy",
+        "registered_in": [],
+        "status": "orphan",
         "notes": "The phased plan for bringing design documents into alignment with the codebase.",
-        "source": "project/PROJECT_REGISTRY.md"
+        "source": "TRACE_INDEX.yml"
     },
     {
         "name": "PHASE_4_TRACEABILITY_MATRIX.md",
@@ -185,12 +170,10 @@
         "type": "doc",
         "module": "project",
         "category": "archive",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
-        "status": "legacy",
+        "registered_in": [],
+        "status": "orphan",
         "notes": "An archived traceability matrix used to track tasks during Phase 4 of the audit.",
-        "source": "project/PROJECT_REGISTRY.md"
+        "source": "TRACE_INDEX.yml"
     },
     {
         "name": "audit-prompt.md",
@@ -198,12 +181,10 @@
         "type": "doc",
         "module": "project",
         "category": "archive",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
-        "status": "legacy",
+        "registered_in": [],
+        "status": "orphan",
         "notes": "An archived prompt used to guide the audit process.",
-        "source": "project/PROJECT_REGISTRY.md"
+        "source": "TRACE_INDEX.yml"
     },
     {
         "name": "Security",
@@ -233,12 +214,10 @@
         "type": "doc",
         "module": "project",
         "category": "archive",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
-        "status": "legacy",
+        "registered_in": [],
+        "status": "orphan",
         "notes": "An archived, context-free checklist related to the Snitch module.",
-        "source": "project/PROJECT_REGISTRY.md"
+        "source": "TRACE_INDEX.yml"
     },
     {
         "name": "PHASE_2_SECURE_CALLBACK.md",
@@ -246,12 +225,10 @@
         "type": "doc",
         "module": "project",
         "category": "archive",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
-        "status": "legacy",
+        "registered_in": [],
+        "status": "orphan",
         "notes": "An archived document describing security logic that was moved from Snitch to the main API.",
-        "source": "project/PROJECT_REGISTRY.md"
+        "source": "TRACE_INDEX.yml"
     },
     {
         "name": "TEST_RUNBOOK.md",
@@ -259,12 +236,10 @@
         "type": "doc",
         "module": "project",
         "category": "archive",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
-        "status": "legacy",
+        "registered_in": [],
+        "status": "orphan",
         "notes": "An archived manual testing guide for a previous version of the Snitch application.",
-        "source": "project/PROJECT_REGISTRY.md"
+        "source": "TRACE_INDEX.yml"
     },
     {
         "name": "phase5-ipc.md",
@@ -272,12 +247,10 @@
         "type": "doc",
         "module": "project",
         "category": "archive",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
-        "status": "legacy",
+        "registered_in": [],
+        "status": "orphan",
         "notes": "An archived document describing a complex IPC architecture for Snitch that was never implemented.",
-        "source": "project/PROJECT_REGISTRY.md"
+        "source": "TRACE_INDEX.yml"
     },
     {
         "name": "Alignment Matrix",
@@ -329,9 +302,7 @@
         "type": "doc",
         "module": "project",
         "category": "general",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A canonical reference for all public API endpoints for both the Zotify and Snitch projects.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -419,9 +390,7 @@
         "type": "doc",
         "module": "project",
         "category": "general",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A temporary backlog for tracking design and documentation tasks that were discussed but not fully integrated.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -608,9 +577,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "The primary, up-to-date matrix mapping requirements to design, implementation, and test status.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -621,9 +588,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A tactical backlog of tasks managed by the formal qualification process defined in the PID.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -634,9 +599,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A high-level guide to CI/CD philosophy for project management.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -647,9 +610,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "The policy and registry for managing third-party dependencies.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -660,9 +621,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "Provides a detailed breakdown of tasks required to fulfill the roadmap.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -673,9 +632,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A \"parking lot\" for new ideas and long-term ambitions not on the current roadmap.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -686,9 +643,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "Outlines the high-level architecture, scope, and principles.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -699,9 +654,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A log of key takeaways and insights from each project phase.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -712,9 +665,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "The authoritative document tracking the phased design and implementation of the Extendable Logging System.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -725,9 +676,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "The detailed architectural design for the centralized logging system.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -738,9 +687,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "Maps logging system requirements to design documents and backlog tasks.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -751,9 +698,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "Describes specific work items and detailed implementation designs.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -764,9 +709,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "The primary entry point and guide for new developers to get up to speed on the project.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -777,9 +720,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "The formal 'living document' that defines the project's scope, plans, and controls (PRINCE2).",
         "source": "project/PROJECT_REGISTRY.md"
@@ -790,9 +731,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A high-level summary of the project's purpose, scope, and justification (PRINCE2).",
         "source": "project/PROJECT_REGISTRY.md"
@@ -803,9 +742,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A detailed, execution-oriented plan linking roadmap goals to specific modules and tasks.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -816,9 +753,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "This document, the master index for all project artifacts.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -829,9 +764,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "The single source of truth for all Quality Assurance (QA) and governance policies for the project.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -842,9 +775,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "Outlines the high-level phases and major milestones of development.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -855,9 +786,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "The definitive security reference for the project.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -868,9 +797,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A checklist to be used for every task to ensure compliance with project standards.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -881,9 +808,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A collection of user-driven scenarios and requirements for the API.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -894,9 +819,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "An analysis of the gaps between the desired use cases and the current implementation.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -907,9 +830,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "",
         "source": "project/PROJECT_REGISTRY.md"
@@ -920,9 +841,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "",
         "source": "project/PROJECT_REGISTRY.md"
@@ -933,9 +852,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "**Granular Task Log.** A reverse-chronological list of every specific, discrete task or action performed (e.g., \"Implemented `log-work.py` script\", \"Fixed CI test failure\"). Each entry should be a self-contained unit of work.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -946,9 +863,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "**High-Level Snapshot.** A brief, narrative summary of the entire project's state at the end of a work session. It should answer: What was just accomplished? What is the next immediate goal? Are there any blockers?",
         "source": "project/PROJECT_REGISTRY.md"
@@ -959,9 +874,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "**Session-Level Reporting.** A detailed log of the activities, findings, and outcomes within a single work session. This is for project-related reporting and can be compared to the audit-specific logs (e.g., `AUDIT-PHASE-5.md`).",
         "source": "project/PROJECT_REGISTRY.md"
@@ -972,9 +885,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A standardized template for developers to use when performing a gap analysis.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -985,9 +896,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A proposal for a modular database browser plugin.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -998,9 +907,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A formal proposal for adding a dynamic plugin system for custom logging sinks.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -1011,9 +918,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A proposal to replace the Flask-based test UI with a modular plugin.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -1024,9 +929,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A formal proposal to refactor the governance script into a comprehensive audit system.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -1037,9 +940,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A formal proposal for integrating with home automation platforms like Home Assistant.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -1050,9 +951,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A formal proposal for integrating with low-code platforms like Node-RED.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -1063,9 +962,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A formal proposal for a plugin-driven, multi-source metadata ingestion and querying system.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -1076,9 +973,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A test proposal to verify linter functionality.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -1089,9 +984,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A proposal for implementing a formal QA gate in the CI/CD pipeline.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -1102,9 +995,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A proposal and implementation document for adapting the `TRACE_INDEX.yml` schema.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -1115,9 +1006,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A proposal and implementation document for fixing the `TRACE_INDEX.yml` schema.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -1128,9 +1017,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A report summarizing the results of a governance tooling demonstration.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -1141,9 +1028,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "An auto-generated handover brief for context.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -1154,9 +1039,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A detailed handover brief created at the request of the user. Not to be modified during the session.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -1167,9 +1050,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "The final, consolidated report summarizing the findings of a full project audit.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -1180,9 +1061,7 @@
         "type": "doc",
         "module": "project",
         "category": "project",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "Alignment status report, auto-generated, not to be edited manually.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -1314,9 +1193,7 @@
         "type": "doc",
         "module": "project",
         "category": "reports",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A report generated by the governance linter, detailing documentation alignment.",
         "source": "project/PROJECT_REGISTRY.md"
@@ -1382,24 +1259,20 @@
         "type": "doc",
         "module": "project",
         "category": "reports",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
+        "registered_in": [],
         "status": "legacy",
         "notes": "A comprehensive, auto-generated manifest of all files in the repository.",
         "source": "project/PROJECT_REGISTRY.md"
     },
     {
-        "name": "`../templates/PROJECT_REGISTRY.md`",
-        "path": "templates/PROJECT_REGISTRY.md",
-        "type": "doc",
-        "module": "templates",
-        "category": "general",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
-        "status": "legacy",
-        "notes": "A registry of all reusable documentation templates.",
-        "source": "project/PROJECT_REGISTRY.md"
+        "name": "Trace Index",
+        "path": "project/reports/TRACE_INDEX.yml",
+        "type": "code",
+        "module": "project",
+        "category": "reports",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
     }
 ]

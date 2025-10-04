@@ -129,6 +129,7 @@ def main():
     parser.add_argument("--test-files", nargs='*', help="Run in test mode with a specific list of files.")
     parser.add_argument("--update-project-registry", action="store_true", help="Update the project registry JSON and Markdown files.")
     parser.add_argument("--extras-file", type=Path, default=PROJECT_ROOT / "scripts/project_registry_extras.yml", help="Path to the project registry extras file.")
+    parser.add_argument("--debug", action="store_true", help="Enable debug printing for scripts that support it.")
 
     args = parser.parse_args()
 
@@ -136,6 +137,8 @@ def main():
         print("--- Updating Project Registry ---")
         script_path = PROJECT_ROOT / "scripts" / "build_project_registry.py"
         cmd = [sys.executable, str(script_path), "--extras-file", str(args.extras_file)]
+        if args.debug:
+            cmd.append("--debug")
 
         try:
             result = subprocess.run(cmd, check=True, capture_output=True, text=True, encoding='utf-8')

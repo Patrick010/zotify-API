@@ -1,4 +1,25 @@
 ---
+## ACT-138: Corrected path normalization, filtering logic, status assignment, and Markdown generation in build_project_registry.py. Also removed a hardcoded JWT from functional tests.
+
+**Date:** 2025-10-04
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Fix bugs in the project registry generation script
+
+### Outcome
+The initial implementation had several flaws: incorrect path normalization, overly permissive filtering, incorrect status assignment for legacy/orphan files, and a hardcoded test token. These have all been addressed.
+
+
+### Related Documents
+- `scripts/build_project_registry.py`
+- `scripts/repo_inventory_and_governance.py`
+- `scripts/functional_test.py`
+- `project/PROJECT_REGISTRY.md`
+- `scripts/project_registry.json`
+
+---
 ## ACT-137: Created a new script to build the project registry from TRACE_INDEX.yml, integrated it into the main governance script, added tests, and updated documentation.
 
 **Date:** 2025-10-04

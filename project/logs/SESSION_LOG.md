@@ -1,6 +1,14 @@
 ---
 ## Session Report: 2025-10-04
 
+**Summary:** Corrected path normalization, filtering logic, status assignment, and Markdown generation in build_project_registry.py. Also removed a hardcoded JWT from functional tests.
+
+**Findings:**
+The initial implementation had several flaws: incorrect path normalization, overly permissive filtering, incorrect status assignment for legacy/orphan files, and a hardcoded test token. These have all been addressed.
+
+---
+## Session Report: 2025-10-04
+
 **Summary:** Created a new script to build the project registry from TRACE_INDEX.yml, integrated it into the main governance script, added tests, and updated documentation.
 
 **Findings:**

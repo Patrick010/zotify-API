@@ -9,6 +9,7 @@ import json
 import re
 import sys
 from pathlib import Path
+import os
 
 import yaml
 
@@ -24,9 +25,6 @@ def derive_module_category(path_obj):
 
     module = parts[0]
 
-    # Category is the second directory segment, if it exists.
-    # e.g., project/reports/file.md -> category is 'reports'
-    # e.g., project/file.md -> category is 'general'
     if len(parts) > 2:
         category = parts[1]
     else:
@@ -52,6 +50,7 @@ def parse_legacy_registry(md_content, md_path, repo_root):
         match = table_row_re.search(line)
         if match:
             name, rel_path, description = [m.strip() for m in match.groups()]
+            # Resolve the path relative to the markdown file, then make it relative to the repo root
             full_path = (base_dir / rel_path).resolve()
             repo_relative_path = full_path.relative_to(repo_root).as_posix()
 
@@ -65,7 +64,7 @@ def parse_legacy_registry(md_content, md_path, repo_root):
 
 
 def build_registry(
-    trace_index_path, project_registry_md_path, extras_file_path, output_json_path, project_dir, repo_root
+    trace_index_path, project_registry_md_path, extras_file_path, output_json_path, project_dir, repo_root, debug=False
 ):
     """Builds the project registry."""
     trace_map = {}
@@ -90,53 +89,59 @@ def build_registry(
     registry = []
     processed_paths = set()
 
-    for path_str, trace_item in trace_map.items():
-        processed_paths.add(path_str)
-        is_project_doc = path_str.startswith("project/") and trace_item.get("type") == "doc"
-        is_code_file_index = path_str == "api/docs/CODE_FILE_INDEX.md"
-        is_in_extras = any(fnmatch.fnmatch(path_str, pattern) for pattern in extras_to_include)
+    all_paths_to_process = set(trace_map.keys()) | set(legacy_entries.keys()) | set(extras_to_include)
 
-        if not (is_project_doc or is_code_file_index or is_in_extras):
+    for path_str in all_paths_to_process:
+        # 1. Path Normalization
+        normalized_path_str = os.path.normpath(path_str).replace("\\", "/")
+        path_obj = Path(normalized_path_str)
+
+        # 2. Stricter Filtering
+        is_project_doc = normalized_path_str.startswith("project/")
+        is_code_file_index = normalized_path_str == "api/docs/CODE_FILE_INDEX.md"
+
+        if not (is_project_doc or is_code_file_index):
+            if debug:
+                print(f"[FILTERED OUT] {normalized_path_str}")
             continue
 
-        path_obj = Path(path_str)
+        processed_paths.add(normalized_path_str)
+
+        trace_item = trace_map.get(normalized_path_str, {})
+        legacy_entry = legacy_entries.get(normalized_path_str)
+
+        # 3. Correct Status Assignment
+        exists_on_disk = (repo_root / normalized_path_str).exists()
+
+        if legacy_entry and not trace_item and not exists_on_disk:
+            status = "legacy"
+        elif exists_on_disk and trace_item.get("registered"):
+             status = "registered"
+        elif not exists_on_disk:
+             status = "missing"
+        else: # Exists on disk but not registered in trace
+             status = "orphan"
+
+        source = "project/PROJECT_REGISTRY.md" if status == "legacy" else "TRACE_INDEX.yml"
+
         module, category = derive_module_category(path_obj)
-        legacy_entry = legacy_entries.get(path_str)
-
-        if not trace_item.get("exists_on_disk", True):
-            status = "missing"
-        elif trace_item.get("registered"):
-            status = "registered"
-        else:
-            status = "orphan"
-
         entry = {
-            "name": derive_name(path_obj, legacy_entry), "path": path_str, "type": trace_item.get("type", "doc"),
+            "name": derive_name(path_obj, legacy_entry), "path": normalized_path_str, "type": trace_item.get("type", "doc"),
             "module": module, "category": category, "registered_in": trace_item.get("registered_in", []),
-            "status": status, "notes": legacy_entry["notes"] if legacy_entry else "", "source": "TRACE_INDEX.yml",
+            "status": status, "notes": legacy_entry["notes"] if legacy_entry else "", "source": source,
         }
         registry.append(entry)
 
-    true_legacy_verbatim_lines = []
-    for path_str, legacy_item in legacy_entries.items():
-        if path_str not in processed_paths:
-            processed_paths.add(path_str)
-            path_obj = Path(path_str)
-            module, category = derive_module_category(path_obj)
-            entry = {
-                "name": legacy_item["name"], "path": path_str, "type": "doc", "module": module, "category": category,
-                "registered_in": ["project/PROJECT_REGISTRY.md"], "status": "legacy",
-                "notes": legacy_item["notes"], "source": "project/PROJECT_REGISTRY.md",
-            }
-            registry.append(entry)
-            true_legacy_verbatim_lines.append(legacy_item['verbatim'])
-
+    # Orphan detection for files on disk but not in any loaded source
     if project_dir.exists():
-        ignore_paths = { trace_index_path.relative_to(repo_root).as_posix(), project_registry_md_path.relative_to(repo_root).as_posix() }
         for file_path in project_dir.rglob('*'):
             if file_path.is_file():
                 path_str = file_path.relative_to(repo_root).as_posix()
-                if path_str not in processed_paths and path_str not in ignore_paths:
+                if path_str not in processed_paths:
+                    if not (path_str.startswith("project/")):
+                        if debug:
+                            print(f"[FILTERED OUT] Orphan scan skipped non-project file: {path_str}")
+                        continue
                     processed_paths.add(path_str)
                     path_obj = Path(path_str)
                     module, category = derive_module_category(path_obj)
@@ -146,17 +151,6 @@ def build_registry(
                     }
                     registry.append(entry)
 
-    for pattern in extras_to_include:
-        if "*" not in pattern and pattern not in processed_paths:
-             processed_paths.add(pattern)
-             path_obj = Path(pattern)
-             module, category = derive_module_category(path_obj)
-             entry = {
-                "name": derive_name(path_obj), "path": pattern, "type": "doc", "module": module, "category": category,
-                "registered_in": [], "status": "legacy", "notes": "From extras file", "source": "extras",
-            }
-             registry.append(entry)
-
     registry.sort(key=lambda x: (x["module"], x["category"], x["path"]))
 
     if output_json_path.exists():
@@ -164,29 +158,23 @@ def build_registry(
             with open(output_json_path, "r", encoding="utf-8") as f:
                 if json.load(f) == registry:
                     print(f"No changes to {output_json_path}. Skipping write.")
-                    return registry, true_legacy_verbatim_lines
+                    return registry
         except (json.JSONDecodeError, IOError):
             pass
 
     with open(output_json_path, "w", encoding="utf-8") as f:
         json.dump(registry, f, indent=4, sort_keys=False)
     print(f"Successfully wrote project registry to {output_json_path}")
-    return registry, true_legacy_verbatim_lines
+    return registry
 
 
-def generate_markdown(registry_data, historical_lines, output_md_path):
+def generate_markdown(registry_data, output_md_path):
     """Generates the project registry markdown file."""
     header = "<!-- AUTO-GENERATED from scripts/project_registry.json — manual edits may be overwritten. Historical legacy entries preserved below. -->\n\n"
     table_header = "| Document | Location | Description | Status |\n|---|---|---|---|\n"
 
-    # Filter entries for the main table (registered, missing, or legacy from extras)
-    main_entries = [
-        e for e in registry_data
-        if e.get("status") in ["registered", "missing"] or
-           (e.get("status") == "legacy" and e.get("source") == "extras")
-    ]
-
-    # Filter for orphan entries
+    main_entries = [e for e in registry_data if e.get("status") in ["registered", "missing"]]
+    legacy_entries = [e for e in registry_data if e.get("status") == "legacy"]
     orphan_entries = [e for e in registry_data if e.get("status") == "orphan"]
 
     table_rows = []
@@ -196,24 +184,19 @@ def generate_markdown(registry_data, historical_lines, output_md_path):
         except ValueError:
             relative_path = Path(entry["path"])
         location_str = f"[`{relative_path}`](./{relative_path})"
-        table_rows.append(
-            f"| **{entry['name']}** | {location_str} | {entry['notes']} | {entry['status']} |"
-        )
+        table_rows.append(f"| **{entry['name']}** | {location_str} | {entry['notes']} | {entry['status']} |")
 
-    # Build the main content
     content = header + table_header + "\n".join(sorted(table_rows))
 
-    # Add the historical legacy section if it has content
-    if historical_lines:
-        content += "\n\n## Historical / Legacy Entries\n\n" + "\n".join(sorted(historical_lines))
+    if legacy_entries:
+        legacy_lines = [f"| **{e['name']}** | [`{e['path']}`](./{e['path']}) | {e['notes']} | {e['status']} |" for e in legacy_entries]
+        content += "\n\n## Historical / Legacy Entries\n\n" + table_header + "\n".join(sorted(legacy_lines))
 
-    # Add the orphan files section if it has content
     if orphan_entries:
         content += "\n\n## Orphan Files\n\n"
         orphan_list = [f"- `{entry['path']}`" for entry in orphan_entries]
         content += "\n".join(sorted(orphan_list))
 
-    # Check for changes before writing to avoid unnecessary file modifications
     if output_md_path.exists():
         with open(output_md_path, 'r', encoding='utf-8') as f:
             if f.read() == content:
@@ -234,14 +217,15 @@ def main():
     parser.add_argument("--output-json", type=Path, default=repo_root / "scripts/project_registry.json")
     parser.add_argument("--output-md", type=Path, default=repo_root / "project/PROJECT_REGISTRY.md")
     parser.add_argument("--project-dir", type=Path, default=repo_root / "project", help="The project directory to scan for orphans.")
+    parser.add_argument("--debug", action="store_true", help="Enable debug printing.")
     args = parser.parse_args()
 
-    registry_data, historical_lines = build_registry(
-        args.trace_index, args.project_registry_md, args.extras_file, args.output_json, args.project_dir, repo_root
+    registry_data = build_registry(
+        args.trace_index, args.project_registry_md, args.extras_file, args.output_json, args.project_dir, repo_root, args.debug
     )
 
     if registry_data is not None:
-        generate_markdown(registry_data, historical_lines, args.output_md)
+        generate_markdown(registry_data, args.output_md)
 
 
 if __name__ == "__main__":

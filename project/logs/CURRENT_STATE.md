@@ -3,13 +3,13 @@
 **Status:** Live Document
 
 ## Objective
-Implement an automated project registry system
+Fix bugs in the project registry generation script
 
 ## 1. Session Summary & Accomplishments
-Created a new script to build the project registry from TRACE_INDEX.yml, integrated it into the main governance script, added tests, and updated documentation.
+Corrected path normalization, filtering logic, status assignment, and Markdown generation in build_project_registry.py. Also removed a hardcoded JWT from functional tests.
 
 ## 2. Known Issues & Blockers
 - None
 
 ## 3. Pending Work: Next Immediate Steps
-Submit the completed work.
+Submit the final, corrected work.
