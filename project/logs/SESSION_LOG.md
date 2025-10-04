@@ -1,4 +1,12 @@
 ---
+## Session Report: 2025-10-04
+
+**Summary:** Created a new script to build the project registry from TRACE_INDEX.yml, integrated it into the main governance script, added tests, and updated documentation.
+
+**Findings:**
+The initial implementation had several bugs related to category derivation, orphan file handling, and test environment issues (dependencies, tokens). These were resolved through iterative testing.
+
+---
 ## Session Report: 2025-10-03
 
 **Summary:** Fix governance script and register all files
