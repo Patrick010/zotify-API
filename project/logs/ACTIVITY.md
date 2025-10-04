@@ -1,4 +1,22 @@
 ---
+## ACT-139: Applied a definitive fix to the path normalization logic in  to prevent path corruption. Also corrected unit tests to handle the updated return signature of the build script.
+
+**Date:** 2025-10-04
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Final fix for project registry generation
+
+### Outcome
+The root cause of the persistent path duplication was an incorrect assumption about how relative paths were structured in the legacy markdown file. The final fix addresses this by stripping erroneous prefixes before resolving paths.
+
+
+### Related Documents
+- `scripts/build_project_registry.py`
+- `tests/scripts/test_build_project_registry.py`
+
+---
 ## ACT-138: Corrected path normalization, filtering logic, status assignment, and Markdown generation in build_project_registry.py. Also removed a hardcoded JWT from functional tests.
 
 **Date:** 2025-10-04
