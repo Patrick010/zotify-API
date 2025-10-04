@@ -11,285 +11,6 @@
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "Alignment Matrix",
-        "path": "project/ALIGNMENT_MATRIX.md",
-        "type": "doc",
-        "module": "project",
-        "category": "ALIGNMENT_MATRIX.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "Backlog",
-        "path": "project/BACKLOG.md",
-        "type": "doc",
-        "module": "project",
-        "category": "BACKLOG.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "Cicd",
-        "path": "project/CICD.md",
-        "type": "doc",
-        "module": "project",
-        "category": "CICD.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "Dependencies",
-        "path": "project/DEPENDENCIES.md",
-        "type": "doc",
-        "module": "project",
-        "category": "DEPENDENCIES.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "`ENDPOINTS.md`",
-        "path": "project/ENDPOINTS.md",
-        "type": "doc",
-        "module": "project",
-        "category": "ENDPOINTS.md",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
-        "status": "legacy",
-        "notes": "A canonical reference for all public API endpoints for both the Zotify and Snitch projects.",
-        "source": "project/PROJECT_REGISTRY.md"
-    },
-    {
-        "name": "Execution Plan",
-        "path": "project/EXECUTION_PLAN.md",
-        "type": "doc",
-        "module": "project",
-        "category": "EXECUTION_PLAN.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "Future Enhancements",
-        "path": "project/FUTURE_ENHANCEMENTS.md",
-        "type": "doc",
-        "module": "project",
-        "category": "FUTURE_ENHANCEMENTS.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "High Level Design",
-        "path": "project/HIGH_LEVEL_DESIGN.md",
-        "type": "doc",
-        "module": "project",
-        "category": "HIGH_LEVEL_DESIGN.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "Lessons Learnt",
-        "path": "project/LESSONS-LEARNT.md",
-        "type": "doc",
-        "module": "project",
-        "category": "LESSONS-LEARNT.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "Logging Phases",
-        "path": "project/LOGGING_PHASES.md",
-        "type": "doc",
-        "module": "project",
-        "category": "LOGGING_PHASES.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "Logging System Design",
-        "path": "project/LOGGING_SYSTEM_DESIGN.md",
-        "type": "doc",
-        "module": "project",
-        "category": "LOGGING_SYSTEM_DESIGN.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "Logging Traceability Matrix",
-        "path": "project/LOGGING_TRACEABILITY_MATRIX.md",
-        "type": "doc",
-        "module": "project",
-        "category": "LOGGING_TRACEABILITY_MATRIX.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "`LOOSE_ENDS_BACKLOG.md`",
-        "path": "project/LOOSE_ENDS_BACKLOG.md",
-        "type": "doc",
-        "module": "project",
-        "category": "LOOSE_ENDS_BACKLOG.md",
-        "registered_in": [
-            "project/PROJECT_REGISTRY.md"
-        ],
-        "status": "legacy",
-        "notes": "A temporary backlog for tracking design and documentation tasks that were discussed but not fully integrated.",
-        "source": "project/PROJECT_REGISTRY.md"
-    },
-    {
-        "name": "Low Level Design",
-        "path": "project/LOW_LEVEL_DESIGN.md",
-        "type": "doc",
-        "module": "project",
-        "category": "LOW_LEVEL_DESIGN.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "Onboarding",
-        "path": "project/ONBOARDING.md",
-        "type": "doc",
-        "module": "project",
-        "category": "ONBOARDING.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "Pid",
-        "path": "project/PID.md",
-        "type": "doc",
-        "module": "project",
-        "category": "PID.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "Project Brief",
-        "path": "project/PROJECT_BRIEF.md",
-        "type": "doc",
-        "module": "project",
-        "category": "PROJECT_BRIEF.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "Project Plan",
-        "path": "project/PROJECT_PLAN.md",
-        "type": "doc",
-        "module": "project",
-        "category": "PROJECT_PLAN.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "Project Registry",
-        "path": "project/PROJECT_REGISTRY.md",
-        "type": "doc",
-        "module": "project",
-        "category": "PROJECT_REGISTRY.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "Qa Governance",
-        "path": "project/QA_GOVERNANCE.md",
-        "type": "doc",
-        "module": "project",
-        "category": "QA_GOVERNANCE.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "Roadmap",
-        "path": "project/ROADMAP.md",
-        "type": "doc",
-        "module": "project",
-        "category": "ROADMAP.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "Security",
-        "path": "project/SECURITY.md",
-        "type": "doc",
-        "module": "project",
-        "category": "SECURITY.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "Task Checklist",
-        "path": "project/TASK_CHECKLIST.md",
-        "type": "doc",
-        "module": "project",
-        "category": "TASK_CHECKLIST.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "Usecases",
-        "path": "project/USECASES.md",
-        "type": "doc",
-        "module": "project",
-        "category": "USECASES.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
-        "name": "Usecases Gap Analysis",
-        "path": "project/USECASES_GAP_ANALYSIS.md",
-        "type": "doc",
-        "module": "project",
-        "category": "USECASES_GAP_ANALYSIS.md",
-        "registered_in": [],
-        "status": "registered",
-        "notes": "",
-        "source": "TRACE_INDEX.yml"
-    },
-    {
         "name": "`api/docs/CODE_FILE_INDEX.md`",
         "path": "project/api/docs/CODE_FILE_INDEX.md",
         "type": "doc",
@@ -557,6 +278,285 @@
         "status": "legacy",
         "notes": "An archived document describing a complex IPC architecture for Snitch that was never implemented.",
         "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "Alignment Matrix",
+        "path": "project/ALIGNMENT_MATRIX.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Backlog",
+        "path": "project/BACKLOG.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Cicd",
+        "path": "project/CICD.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Dependencies",
+        "path": "project/DEPENDENCIES.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`ENDPOINTS.md`",
+        "path": "project/ENDPOINTS.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A canonical reference for all public API endpoints for both the Zotify and Snitch projects.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "Execution Plan",
+        "path": "project/EXECUTION_PLAN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Future Enhancements",
+        "path": "project/FUTURE_ENHANCEMENTS.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "High Level Design",
+        "path": "project/HIGH_LEVEL_DESIGN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Lessons Learnt",
+        "path": "project/LESSONS-LEARNT.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Logging Phases",
+        "path": "project/LOGGING_PHASES.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Logging System Design",
+        "path": "project/LOGGING_SYSTEM_DESIGN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Logging Traceability Matrix",
+        "path": "project/LOGGING_TRACEABILITY_MATRIX.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`LOOSE_ENDS_BACKLOG.md`",
+        "path": "project/LOOSE_ENDS_BACKLOG.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A temporary backlog for tracking design and documentation tasks that were discussed but not fully integrated.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "Low Level Design",
+        "path": "project/LOW_LEVEL_DESIGN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Onboarding",
+        "path": "project/ONBOARDING.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Pid",
+        "path": "project/PID.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Project Brief",
+        "path": "project/PROJECT_BRIEF.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Project Plan",
+        "path": "project/PROJECT_PLAN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Project Registry",
+        "path": "project/PROJECT_REGISTRY.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Qa Governance",
+        "path": "project/QA_GOVERNANCE.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Roadmap",
+        "path": "project/ROADMAP.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Security",
+        "path": "project/SECURITY.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Task Checklist",
+        "path": "project/TASK_CHECKLIST.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Usecases",
+        "path": "project/USECASES.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Usecases Gap Analysis",
+        "path": "project/USECASES_GAP_ANALYSIS.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
     },
     {
         "name": "Activity",
@@ -1394,7 +1394,7 @@
         "path": "templates/PROJECT_REGISTRY.md",
         "type": "doc",
         "module": "templates",
-        "category": "PROJECT_REGISTRY.md",
+        "category": "general",
         "registered_in": [
             "project/PROJECT_REGISTRY.md"
         ],

@@ -1,8 +1,20 @@
 import pytest
 import httpx
 
+import os
+from pathlib import Path
+
 BASE_URL = "http://localhost:8000"
-TEST_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImV4cCI6MTc1OTYwMzU4NH0.u8Bf9jls8JqbOB9IVve67vPAONHhLtkramhe1cYSApI"
+
+def get_test_token():
+    """Reads the test token from the .gonk_token file."""
+    token_path = Path.home() / ".gonk_token"
+    if not token_path.exists():
+        return None
+    return token_path.read_text().strip()
+
+TEST_TOKEN = get_test_token()
+auth_skip_condition = pytest.mark.skipif(not TEST_TOKEN, reason="Test token not found. Generate one with 'GonkCLI login'.")
 
 
 @pytest.fixture
@@ -19,6 +31,7 @@ def test_health_endpoint(client):
     assert json_resp.get("status") == "ok"
 
 
+@auth_skip_condition
 def test_get_playlists(client):
     headers = {"Authorization": f"Bearer {TEST_TOKEN}"}
     r = client.get("/api/playlists/", headers=headers)
@@ -35,6 +48,7 @@ def test_error_handling(client):
     assert "detail" in json_resp
 
 
+@auth_skip_condition
 def test_get_user_profile(client):
     headers = {"Authorization": f"Bearer {TEST_TOKEN}"}
     r = client.get("/api/user/profile", headers=headers)

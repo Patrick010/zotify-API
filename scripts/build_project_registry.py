@@ -19,11 +19,19 @@ sys.path.append(str(Path(__file__).resolve().parents[1]))
 def derive_module_category(path_obj):
     """Derives the module and category from a given path."""
     parts = path_obj.parts
-    module = parts[0] if parts else "general"
-    if len(parts) > 1 and parts[1] not in ("src", "tests"):
+    if not parts:
+        return "general", "general"
+
+    module = parts[0]
+
+    # Category is the second directory segment, if it exists.
+    # e.g., project/reports/file.md -> category is 'reports'
+    # e.g., project/file.md -> category is 'general'
+    if len(parts) > 2:
         category = parts[1]
     else:
         category = "general"
+
     return module, category
 
 
@@ -167,10 +175,19 @@ def build_registry(
 
 
 def generate_markdown(registry_data, historical_lines, output_md_path):
+    """Generates the project registry markdown file."""
     header = "<!-- AUTO-GENERATED from scripts/project_registry.json — manual edits may be overwritten. Historical legacy entries preserved below. -->\n\n"
     table_header = "| Document | Location | Description | Status |\n|---|---|---|---|\n"
 
-    main_entries = [e for e in registry_data if e.get("source") != "project/PROJECT_REGISTRY.md"]
+    # Filter entries for the main table (registered, missing, or legacy from extras)
+    main_entries = [
+        e for e in registry_data
+        if e.get("status") in ["registered", "missing"] or
+           (e.get("status") == "legacy" and e.get("source") == "extras")
+    ]
+
+    # Filter for orphan entries
+    orphan_entries = [e for e in registry_data if e.get("status") == "orphan"]
 
     table_rows = []
     for entry in main_entries:
@@ -178,18 +195,25 @@ def generate_markdown(registry_data, historical_lines, output_md_path):
             relative_path = Path(entry["path"]).relative_to(output_md_path.parent)
         except ValueError:
             relative_path = Path(entry["path"])
-
         location_str = f"[`{relative_path}`](./{relative_path})"
         table_rows.append(
             f"| **{entry['name']}** | {location_str} | {entry['notes']} | {entry['status']} |"
         )
 
-    legacy_section = ""
+    # Build the main content
+    content = header + table_header + "\n".join(sorted(table_rows))
+
+    # Add the historical legacy section if it has content
     if historical_lines:
-        legacy_section = "\n## Historical / Legacy Entries\n\n" + "\n".join(historical_lines)
+        content += "\n\n## Historical / Legacy Entries\n\n" + "\n".join(sorted(historical_lines))
 
-    content = header + table_header + "\n".join(table_rows) + legacy_section
+    # Add the orphan files section if it has content
+    if orphan_entries:
+        content += "\n\n## Orphan Files\n\n"
+        orphan_list = [f"- `{entry['path']}`" for entry in orphan_entries]
+        content += "\n".join(sorted(orphan_list))
 
+    # Check for changes before writing to avoid unnecessary file modifications
     if output_md_path.exists():
         with open(output_md_path, 'r', encoding='utf-8') as f:
             if f.read() == content:
