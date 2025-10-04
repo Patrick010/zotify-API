@@ -1,0 +1,807 @@
+[
+    {
+        "name": "Code File Index",
+        "path": "api/docs/CODE_FILE_INDEX.md",
+        "type": "doc",
+        "module": "api",
+        "category": "docs",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`ALIGNMENT_MATRIX.md`",
+        "path": "project/ALIGNMENT_MATRIX.md",
+        "type": "doc",
+        "module": "project",
+        "category": "ALIGNMENT_MATRIX.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "The primary, up-to-date matrix mapping requirements to design, implementation, and test status.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`BACKLOG.md`",
+        "path": "project/BACKLOG.md",
+        "type": "doc",
+        "module": "project",
+        "category": "BACKLOG.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A tactical backlog of tasks managed by the formal qualification process defined in the PID.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`CICD.md`",
+        "path": "project/CICD.md",
+        "type": "doc",
+        "module": "project",
+        "category": "CICD.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A high-level guide to CI/CD philosophy for project management.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`DEPENDENCIES.md`",
+        "path": "project/DEPENDENCIES.md",
+        "type": "doc",
+        "module": "project",
+        "category": "DEPENDENCIES.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "The policy and registry for managing third-party dependencies.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`ENDPOINTS.md`",
+        "path": "project/ENDPOINTS.md",
+        "type": "doc",
+        "module": "project",
+        "category": "ENDPOINTS.md",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A canonical reference for all public API endpoints for both the Zotify and Snitch projects.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`EXECUTION_PLAN.md`",
+        "path": "project/EXECUTION_PLAN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "EXECUTION_PLAN.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "Provides a detailed breakdown of tasks required to fulfill the roadmap.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`FUTURE_ENHANCEMENTS.md`",
+        "path": "project/FUTURE_ENHANCEMENTS.md",
+        "type": "doc",
+        "module": "project",
+        "category": "FUTURE_ENHANCEMENTS.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A \"parking lot\" for new ideas and long-term ambitions not on the current roadmap.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`HIGH_LEVEL_DESIGN.md`",
+        "path": "project/HIGH_LEVEL_DESIGN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "HIGH_LEVEL_DESIGN.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "Outlines the high-level architecture, scope, and principles.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`LESSONS-LEARNT.md`",
+        "path": "project/LESSONS-LEARNT.md",
+        "type": "doc",
+        "module": "project",
+        "category": "LESSONS-LEARNT.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A log of key takeaways and insights from each project phase.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`LOGGING_PHASES.md`",
+        "path": "project/LOGGING_PHASES.md",
+        "type": "doc",
+        "module": "project",
+        "category": "LOGGING_PHASES.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "The authoritative document tracking the phased design and implementation of the Extendable Logging System.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`LOGGING_SYSTEM_DESIGN.md`",
+        "path": "project/LOGGING_SYSTEM_DESIGN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "LOGGING_SYSTEM_DESIGN.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "The detailed architectural design for the centralized logging system.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`LOGGING_TRACEABILITY_MATRIX.md`",
+        "path": "project/LOGGING_TRACEABILITY_MATRIX.md",
+        "type": "doc",
+        "module": "project",
+        "category": "LOGGING_TRACEABILITY_MATRIX.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "Maps logging system requirements to design documents and backlog tasks.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`LOOSE_ENDS_BACKLOG.md`",
+        "path": "project/LOOSE_ENDS_BACKLOG.md",
+        "type": "doc",
+        "module": "project",
+        "category": "LOOSE_ENDS_BACKLOG.md",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A temporary backlog for tracking design and documentation tasks that were discussed but not fully integrated.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`LOW_LEVEL_DESIGN.md`",
+        "path": "project/LOW_LEVEL_DESIGN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "LOW_LEVEL_DESIGN.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "Describes specific work items and detailed implementation designs.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`ONBOARDING.md`",
+        "path": "project/ONBOARDING.md",
+        "type": "doc",
+        "module": "project",
+        "category": "ONBOARDING.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "The primary entry point and guide for new developers to get up to speed on the project.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`PID.md`",
+        "path": "project/PID.md",
+        "type": "doc",
+        "module": "project",
+        "category": "PID.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "The formal 'living document' that defines the project's scope, plans, and controls (PRINCE2).",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`PROJECT_BRIEF.md`",
+        "path": "project/PROJECT_BRIEF.md",
+        "type": "doc",
+        "module": "project",
+        "category": "PROJECT_BRIEF.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A high-level summary of the project's purpose, scope, and justification (PRINCE2).",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`PROJECT_PLAN.md`",
+        "path": "project/PROJECT_PLAN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "PROJECT_PLAN.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A detailed, execution-oriented plan linking roadmap goals to specific modules and tasks.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`PROJECT_REGISTRY.md`",
+        "path": "project/PROJECT_REGISTRY.md",
+        "type": "doc",
+        "module": "project",
+        "category": "PROJECT_REGISTRY.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "This document, the master index for all project artifacts.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "QA_GOVERNANCE.md",
+        "path": "project/QA_GOVERNANCE.md",
+        "type": "doc",
+        "module": "project",
+        "category": "QA_GOVERNANCE.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "The single source of truth for all Quality Assurance (QA) and governance policies for the project.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`ROADMAP.md`",
+        "path": "project/ROADMAP.md",
+        "type": "doc",
+        "module": "project",
+        "category": "ROADMAP.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "Outlines the high-level phases and major milestones of development.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`SECURITY.md`",
+        "path": "project/SECURITY.md",
+        "type": "doc",
+        "module": "project",
+        "category": "SECURITY.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "The definitive security reference for the project.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`TASK_CHECKLIST.md`",
+        "path": "project/TASK_CHECKLIST.md",
+        "type": "doc",
+        "module": "project",
+        "category": "TASK_CHECKLIST.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A checklist to be used for every task to ensure compliance with project standards.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`USECASES.md`",
+        "path": "project/USECASES.md",
+        "type": "doc",
+        "module": "project",
+        "category": "USECASES.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A collection of user-driven scenarios and requirements for the API.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`USECASES_GAP_ANALYSIS.md`",
+        "path": "project/USECASES_GAP_ANALYSIS.md",
+        "type": "doc",
+        "module": "project",
+        "category": "USECASES_GAP_ANALYSIS.md",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "An analysis of the gaps between the desired use cases and the current implementation.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "bug-report.md",
+        "path": "project/archive/.github/ISSUE_TEMPLATE/bug-report.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "An archived GitHub issue template for reporting bugs.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "feature-request.md",
+        "path": "project/archive/.github/ISSUE_TEMPLATE/feature-request.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "An archived GitHub issue template for requesting new features.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`archive/TRACEABILITY_MATRIX.md`",
+        "path": "project/archive/TRACEABILITY_MATRIX.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "An archived matrix mapping requirements from use cases and design docs to implementation and test status.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "AUDIT-PHASE-3.md",
+        "path": "project/archive/audit/AUDIT-PHASE-3.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "An archived log of activities and findings from Phase 3 of the HLD/LLD Alignment Plan.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "AUDIT-PHASE-4.md",
+        "path": "project/archive/audit/AUDIT-PHASE-4.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "An archived log of activities from Phase 4 of the audit, focusing on final consolidation and implementation of QA tooling.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "AUDIT-PHASE-5.md",
+        "path": "project/archive/audit/AUDIT-PHASE-5.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "An archived log of activities from Phase 5 of the audit, focusing on overhauling the linter and documentation processes.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "AUDIT-phase-1.md",
+        "path": "project/archive/audit/AUDIT-phase-1.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "An archived, comprehensive audit of the API and documentation, establishing a baseline for future work.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "AUDIT-phase-2.md",
+        "path": "project/archive/audit/AUDIT-phase-2.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "An archived log of activities and findings from Phase 2 of the HLD/LLD Alignment Plan.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "AUDIT_TRACEABILITY_MATRIX.md",
+        "path": "project/archive/audit/AUDIT_TRACEABILITY_MATRIX.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "An archived traceability matrix used during the initial project audit to track gaps.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "CODE_OPTIMIZATIONPLAN_PHASE_4.md",
+        "path": "project/archive/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "An archived planning document for the \"Super-Lint\" feature set developed during Phase 4.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "FIRST_AUDIT.md",
+        "path": "project/archive/audit/FIRST_AUDIT.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "An archived, early version of the comprehensive API and documentation audit.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`archive/audit/HLD_LLD_ALIGNMENT_PLAN.md`",
+        "path": "project/archive/audit/HLD_LLD_ALIGNMENT_PLAN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "The phased plan for bringing design documents into alignment with the codebase.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "PHASE_4_TRACEABILITY_MATRIX.md",
+        "path": "project/archive/audit/PHASE_4_TRACEABILITY_MATRIX.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "An archived traceability matrix used to track tasks during Phase 4 of the audit.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "audit-prompt.md",
+        "path": "project/archive/audit/audit-prompt.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "An archived prompt used to guide the audit process.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "Security",
+        "path": "project/archive/docs/projectplan/security.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "Spotify Fullstack Capability Blueprint",
+        "path": "project/archive/docs/projectplan/spotify_fullstack_capability_blueprint.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "INTEGRATION_CHECKLIST.md",
+        "path": "project/archive/docs/snitch/INTEGRATION_CHECKLIST.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "An archived, context-free checklist related to the Snitch module.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "PHASE_2_SECURE_CALLBACK.md",
+        "path": "project/archive/docs/snitch/PHASE_2_SECURE_CALLBACK.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "An archived document describing security logic that was moved from Snitch to the main API.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "TEST_RUNBOOK.md",
+        "path": "project/archive/docs/snitch/TEST_RUNBOOK.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "An archived manual testing guide for a previous version of the Snitch application.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "phase5-ipc.md",
+        "path": "project/archive/docs/snitch/phase5-ipc.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "An archived document describing a complex IPC architecture for Snitch that was never implemented.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`ACTIVITY.md`",
+        "path": "project/logs/ACTIVITY.md",
+        "type": "doc",
+        "module": "project",
+        "category": "logs",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "**Granular Task Log.** A reverse-chronological list of every specific, discrete task or action performed (e.g., \"Implemented `log-work.py` script\", \"Fixed CI test failure\"). Each entry should be a self-contained unit of work.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`CURRENT_STATE.md`",
+        "path": "project/logs/CURRENT_STATE.md",
+        "type": "doc",
+        "module": "project",
+        "category": "logs",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "**High-Level Snapshot.** A brief, narrative summary of the entire project's state at the end of a work session. It should answer: What was just accomplished? What is the next immediate goal? Are there any blockers?",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`SESSION_LOG.md`",
+        "path": "project/logs/SESSION_LOG.md",
+        "type": "doc",
+        "module": "project",
+        "category": "logs",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "**Session-Level Reporting.** A detailed log of the activities, findings, and outcomes within a single work session. This is for project-related reporting and can be compared to the audit-specific logs (e.g., `AUDIT-PHASE-5.md`).",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`process/GAP_ANALYSIS_TEMPLATE.md`",
+        "path": "project/process/GAP_ANALYSIS_TEMPLATE.md",
+        "type": "doc",
+        "module": "project",
+        "category": "process",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A standardized template for developers to use when performing a gap analysis.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "DBSTUDIO_PLUGIN.md",
+        "path": "project/proposals/DBSTUDIO_PLUGIN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A proposal for a modular database browser plugin.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`proposals/DYNAMIC_PLUGIN_PROPOSAL.md`",
+        "path": "project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A formal proposal for adding a dynamic plugin system for custom logging sinks.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "GONKUI_PLUGIN.md",
+        "path": "project/proposals/GONKUI_PLUGIN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A proposal to replace the Flask-based test UI with a modular plugin.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`proposals/GOVERNANCE_AUDIT_REFACTOR.md`",
+        "path": "project/proposals/GOVERNANCE_AUDIT_REFACTOR.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A formal proposal to refactor the governance script into a comprehensive audit system.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`proposals/HOME_AUTOMATION_PROPOSAL.md`",
+        "path": "project/proposals/HOME_AUTOMATION_PROPOSAL.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A formal proposal for integrating with home automation platforms like Home Assistant.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`proposals/LOW_CODE_PROPOSAL.md`",
+        "path": "project/proposals/LOW_CODE_PROPOSAL.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A formal proposal for integrating with low-code platforms like Node-RED.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`proposals/MULTI_SOURCE_METADATA_PROPOSAL.md`",
+        "path": "project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A formal proposal for a plugin-driven, multi-source metadata ingestion and querying system.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`proposals/NEW_PROPOSAL.md`",
+        "path": "project/proposals/NEW_PROPOSAL.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A test proposal to verify linter functionality.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "QA_GATE_IMPLEMENTATION_PLAN.md",
+        "path": "project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A proposal for implementing a formal QA gate in the CI/CD pipeline.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md`",
+        "path": "project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A proposal and implementation document for adapting the `TRACE_INDEX.yml` schema.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`proposals/TRACE_INDEX_SCHEMA_FIX.md`",
+        "path": "project/proposals/TRACE_INDEX_SCHEMA_FIX.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A proposal and implementation document for fixing the `TRACE_INDEX.yml` schema.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "GOVERNANCE_AUDIT_REPORT.md",
+        "path": "project/reports/GOVERNANCE_AUDIT_REPORT.md",
+        "type": "doc",
+        "module": "project",
+        "category": "reports",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A report generated by the governance linter, detailing documentation alignment.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "GOVERNANCE_DEMO_REPORT.md",
+        "path": "project/reports/GOVERNANCE_DEMO_REPORT.md",
+        "type": "doc",
+        "module": "project",
+        "category": "reports",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A report summarizing the results of a governance tooling demonstration.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`HANDOVER_BRIEF_CHATGTP.md`",
+        "path": "project/reports/HANDOVER_BRIEF_CHATGTP.md",
+        "type": "doc",
+        "module": "project",
+        "category": "reports",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "An auto-generated handover brief for context.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`HANDOVER_BRIEF_JULES.md`",
+        "path": "project/reports/HANDOVER_BRIEF_JULES.md",
+        "type": "doc",
+        "module": "project",
+        "category": "reports",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "A detailed handover brief created at the request of the user. Not to be modified during the session.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "PROJECT_AUDIT_FINAL_REPORT.md",
+        "path": "project/reports/PROJECT_AUDIT_FINAL_REPORT.md",
+        "type": "doc",
+        "module": "project",
+        "category": "reports",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "The final, consolidated report summarizing the findings of a full project audit.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Link",
+        "path": "project/reports/PROJECT_DOCUMENT_ALIGNMENT.md",
+        "type": "doc",
+        "module": "project",
+        "category": "reports",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "Alignment status report, auto-generated, not to be edited manually.",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "REPO_MANIFEST.md",
+        "path": "project/reports/REPO_MANIFEST.md",
+        "type": "doc",
+        "module": "project",
+        "category": "reports",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A comprehensive, auto-generated manifest of all files in the repository.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`../templates/PROJECT_REGISTRY.md`",
+        "path": "templates/PROJECT_REGISTRY.md",
+        "type": "doc",
+        "module": "templates",
+        "category": "PROJECT_REGISTRY.md",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A registry of all reusable documentation templates.",
+        "source": "project/PROJECT_REGISTRY.md"
+    }
+]

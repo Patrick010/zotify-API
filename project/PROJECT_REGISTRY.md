@@ -1,27 +1,64 @@
-# PRINCE2 Project Registry
+<!-- AUTO-GENERATED from scripts/project_registry.json — manual edits may be overwritten. Historical legacy entries preserved below. -->
 
-**Date:** 2025-08-17
-**Status:** Live Document
+| Document | Location | Description | Status |
+|---|---|---|---|
+| **Code File Index** | [`api/docs/CODE_FILE_INDEX.md`](./api/docs/CODE_FILE_INDEX.md) |  | registered |
+| **`ALIGNMENT_MATRIX.md`** | [`project/ALIGNMENT_MATRIX.md`](./project/ALIGNMENT_MATRIX.md) | The primary, up-to-date matrix mapping requirements to design, implementation, and test status. | registered |
+| **`BACKLOG.md`** | [`project/BACKLOG.md`](./project/BACKLOG.md) | A tactical backlog of tasks managed by the formal qualification process defined in the PID. | registered |
+| **`CICD.md`** | [`project/CICD.md`](./project/CICD.md) | A high-level guide to CI/CD philosophy for project management. | registered |
+| **`DEPENDENCIES.md`** | [`project/DEPENDENCIES.md`](./project/DEPENDENCIES.md) | The policy and registry for managing third-party dependencies. | registered |
+| **`EXECUTION_PLAN.md`** | [`project/EXECUTION_PLAN.md`](./project/EXECUTION_PLAN.md) | Provides a detailed breakdown of tasks required to fulfill the roadmap. | registered |
+| **`FUTURE_ENHANCEMENTS.md`** | [`project/FUTURE_ENHANCEMENTS.md`](./project/FUTURE_ENHANCEMENTS.md) | A "parking lot" for new ideas and long-term ambitions not on the current roadmap. | registered |
+| **`HIGH_LEVEL_DESIGN.md`** | [`project/HIGH_LEVEL_DESIGN.md`](./project/HIGH_LEVEL_DESIGN.md) | Outlines the high-level architecture, scope, and principles. | registered |
+| **`LESSONS-LEARNT.md`** | [`project/LESSONS-LEARNT.md`](./project/LESSONS-LEARNT.md) | A log of key takeaways and insights from each project phase. | registered |
+| **`LOGGING_PHASES.md`** | [`project/LOGGING_PHASES.md`](./project/LOGGING_PHASES.md) | The authoritative document tracking the phased design and implementation of the Extendable Logging System. | registered |
+| **`LOGGING_SYSTEM_DESIGN.md`** | [`project/LOGGING_SYSTEM_DESIGN.md`](./project/LOGGING_SYSTEM_DESIGN.md) | The detailed architectural design for the centralized logging system. | registered |
+| **`LOGGING_TRACEABILITY_MATRIX.md`** | [`project/LOGGING_TRACEABILITY_MATRIX.md`](./project/LOGGING_TRACEABILITY_MATRIX.md) | Maps logging system requirements to design documents and backlog tasks. | registered |
+| **`LOW_LEVEL_DESIGN.md`** | [`project/LOW_LEVEL_DESIGN.md`](./project/LOW_LEVEL_DESIGN.md) | Describes specific work items and detailed implementation designs. | registered |
+| **`ONBOARDING.md`** | [`project/ONBOARDING.md`](./project/ONBOARDING.md) | The primary entry point and guide for new developers to get up to speed on the project. | registered |
+| **`PID.md`** | [`project/PID.md`](./project/PID.md) | The formal 'living document' that defines the project's scope, plans, and controls (PRINCE2). | registered |
+| **`PROJECT_BRIEF.md`** | [`project/PROJECT_BRIEF.md`](./project/PROJECT_BRIEF.md) | A high-level summary of the project's purpose, scope, and justification (PRINCE2). | registered |
+| **`PROJECT_PLAN.md`** | [`project/PROJECT_PLAN.md`](./project/PROJECT_PLAN.md) | A detailed, execution-oriented plan linking roadmap goals to specific modules and tasks. | registered |
+| **`PROJECT_REGISTRY.md`** | [`project/PROJECT_REGISTRY.md`](./project/PROJECT_REGISTRY.md) | This document, the master index for all project artifacts. | registered |
+| **QA_GOVERNANCE.md** | [`project/QA_GOVERNANCE.md`](./project/QA_GOVERNANCE.md) | The single source of truth for all Quality Assurance (QA) and governance policies for the project. | registered |
+| **`ROADMAP.md`** | [`project/ROADMAP.md`](./project/ROADMAP.md) | Outlines the high-level phases and major milestones of development. | registered |
+| **`SECURITY.md`** | [`project/SECURITY.md`](./project/SECURITY.md) | The definitive security reference for the project. | registered |
+| **`TASK_CHECKLIST.md`** | [`project/TASK_CHECKLIST.md`](./project/TASK_CHECKLIST.md) | A checklist to be used for every task to ensure compliance with project standards. | registered |
+| **`USECASES.md`** | [`project/USECASES.md`](./project/USECASES.md) | A collection of user-driven scenarios and requirements for the API. | registered |
+| **`USECASES_GAP_ANALYSIS.md`** | [`project/USECASES_GAP_ANALYSIS.md`](./project/USECASES_GAP_ANALYSIS.md) | An analysis of the gaps between the desired use cases and the current implementation. | registered |
+| **Security** | [`project/archive/docs/projectplan/security.md`](./project/archive/docs/projectplan/security.md) |  | orphan |
+| **Spotify Fullstack Capability Blueprint** | [`project/archive/docs/projectplan/spotify_fullstack_capability_blueprint.md`](./project/archive/docs/projectplan/spotify_fullstack_capability_blueprint.md) |  | orphan |
+| **`ACTIVITY.md`** | [`project/logs/ACTIVITY.md`](./project/logs/ACTIVITY.md) | **Granular Task Log.** A reverse-chronological list of every specific, discrete task or action performed (e.g., "Implemented `log-work.py` script", "Fixed CI test failure"). Each entry should be a self-contained unit of work. | registered |
+| **`CURRENT_STATE.md`** | [`project/logs/CURRENT_STATE.md`](./project/logs/CURRENT_STATE.md) | **High-Level Snapshot.** A brief, narrative summary of the entire project's state at the end of a work session. It should answer: What was just accomplished? What is the next immediate goal? Are there any blockers? | registered |
+| **`SESSION_LOG.md`** | [`project/logs/SESSION_LOG.md`](./project/logs/SESSION_LOG.md) | **Session-Level Reporting.** A detailed log of the activities, findings, and outcomes within a single work session. This is for project-related reporting and can be compared to the audit-specific logs (e.g., `AUDIT-PHASE-5.md`). | registered |
+| **`process/GAP_ANALYSIS_TEMPLATE.md`** | [`project/process/GAP_ANALYSIS_TEMPLATE.md`](./project/process/GAP_ANALYSIS_TEMPLATE.md) | A standardized template for developers to use when performing a gap analysis. | registered |
+| **DBSTUDIO_PLUGIN.md** | [`project/proposals/DBSTUDIO_PLUGIN.md`](./project/proposals/DBSTUDIO_PLUGIN.md) | A proposal for a modular database browser plugin. | registered |
+| **`proposals/DYNAMIC_PLUGIN_PROPOSAL.md`** | [`project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md`](./project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md) | A formal proposal for adding a dynamic plugin system for custom logging sinks. | registered |
+| **GONKUI_PLUGIN.md** | [`project/proposals/GONKUI_PLUGIN.md`](./project/proposals/GONKUI_PLUGIN.md) | A proposal to replace the Flask-based test UI with a modular plugin. | registered |
+| **`proposals/GOVERNANCE_AUDIT_REFACTOR.md`** | [`project/proposals/GOVERNANCE_AUDIT_REFACTOR.md`](./project/proposals/GOVERNANCE_AUDIT_REFACTOR.md) | A formal proposal to refactor the governance script into a comprehensive audit system. | registered |
+| **`proposals/HOME_AUTOMATION_PROPOSAL.md`** | [`project/proposals/HOME_AUTOMATION_PROPOSAL.md`](./project/proposals/HOME_AUTOMATION_PROPOSAL.md) | A formal proposal for integrating with home automation platforms like Home Assistant. | registered |
+| **`proposals/LOW_CODE_PROPOSAL.md`** | [`project/proposals/LOW_CODE_PROPOSAL.md`](./project/proposals/LOW_CODE_PROPOSAL.md) | A formal proposal for integrating with low-code platforms like Node-RED. | registered |
+| **`proposals/MULTI_SOURCE_METADATA_PROPOSAL.md`** | [`project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md`](./project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md) | A formal proposal for a plugin-driven, multi-source metadata ingestion and querying system. | registered |
+| **`proposals/NEW_PROPOSAL.md`** | [`project/proposals/NEW_PROPOSAL.md`](./project/proposals/NEW_PROPOSAL.md) | A test proposal to verify linter functionality. | registered |
+| **QA_GATE_IMPLEMENTATION_PLAN.md** | [`project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md`](./project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md) | A proposal for implementing a formal QA gate in the CI/CD pipeline. | registered |
+| **`proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md`** | [`project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md`](./project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md) | A proposal and implementation document for adapting the `TRACE_INDEX.yml` schema. | registered |
+| **`proposals/TRACE_INDEX_SCHEMA_FIX.md`** | [`project/proposals/TRACE_INDEX_SCHEMA_FIX.md`](./project/proposals/TRACE_INDEX_SCHEMA_FIX.md) | A proposal and implementation document for fixing the `TRACE_INDEX.yml` schema. | registered |
+| **GOVERNANCE_DEMO_REPORT.md** | [`project/reports/GOVERNANCE_DEMO_REPORT.md`](./project/reports/GOVERNANCE_DEMO_REPORT.md) | A report summarizing the results of a governance tooling demonstration. | registered |
+| **`HANDOVER_BRIEF_CHATGTP.md`** | [`project/reports/HANDOVER_BRIEF_CHATGTP.md`](./project/reports/HANDOVER_BRIEF_CHATGTP.md) | An auto-generated handover brief for context. | registered |
+| **`HANDOVER_BRIEF_JULES.md`** | [`project/reports/HANDOVER_BRIEF_JULES.md`](./project/reports/HANDOVER_BRIEF_JULES.md) | A detailed handover brief created at the request of the user. Not to be modified during the session. | registered |
+| **PROJECT_AUDIT_FINAL_REPORT.md** | [`project/reports/PROJECT_AUDIT_FINAL_REPORT.md`](./project/reports/PROJECT_AUDIT_FINAL_REPORT.md) | The final, consolidated report summarizing the findings of a full project audit. | registered |
+| **Link** | [`project/reports/PROJECT_DOCUMENT_ALIGNMENT.md`](./project/reports/PROJECT_DOCUMENT_ALIGNMENT.md) | Alignment status report, auto-generated, not to be edited manually. | registered |
+## Historical / Legacy Entries
 
-## 1. Purpose
-
-This document serves as the master file, or single source of truth, for tracking all key documents, records, and artifacts for the Zotify API project. It provides a centralized index for all stakeholders to ensure traceability and transparency. To maintain this document's value, it is mandatory that any new markdown documentation file created anywhere in the project is added to this registry.
-
----
-
-## 2. Core Project Planning Documents
-
-| Document | Location | Description |
-|---|---|---|
 | **Agents** | [`AGENTS.md`](../AGENTS.md) | |
-| **Dbstudio Plugin** | [`DBSTUDIO_PLUGIN.md`](proposals/DBSTUDIO_PLUGIN.md) | |
-| **Gonkui Plugin** | [`GONKUI_PLUGIN.md`](proposals/GONKUI_PLUGIN.md) | |
-| **Governance Demo Report** | [`GOVERNANCE_DEMO_REPORT.md`](reports/GOVERNANCE_DEMO_REPORT.md) | |
+| **DBStudio Plugin Proposal** | [DBSTUDIO_PLUGIN.md](./proposals/DBSTUDIO_PLUGIN.md) | A proposal for a modular database browser plugin. |
+| **GonkUI Plugin Proposal** | [GONKUI_PLUGIN.md](./proposals/GONKUI_PLUGIN.md) | A proposal to replace the Flask-based test UI with a modular plugin. |
+| **Governance Demo Report** | [GOVERNANCE_DEMO_REPORT.md](./reports/GOVERNANCE_DEMO_REPORT.md) | A report summarizing the results of a governance tooling demonstration. |
 | **Migrations** | [`MIGRATIONS.md`](../api/MIGRATIONS.md) | |
-| **Project Audit Final Report** | [`PROJECT_AUDIT_FINAL_REPORT.md`](reports/PROJECT_AUDIT_FINAL_REPORT.md) | |
-| **Project Document Alignment** | [`PROJECT_DOCUMENT_ALIGNMENT.md`](reports/PROJECT_DOCUMENT_ALIGNMENT.md) | |
-| **Qa Gate Implementation Plan** | [`QA_GATE_IMPLEMENTATION_PLAN.md`](proposals/QA_GATE_IMPLEMENTATION_PLAN.md) | |
-| **Qa Governance** | [`QA_GOVERNANCE.md`](QA_GOVERNANCE.md) | |
+| **Project Audit Final Report** | [PROJECT_AUDIT_FINAL_REPORT.md](./reports/PROJECT_AUDIT_FINAL_REPORT.md) | The final, consolidated report summarizing the findings of a full project audit. |
+| **PROJECT_DOCUMENT_ALIGNMENT.md** | [Link](./reports/PROJECT_DOCUMENT_ALIGNMENT.md) | Alignment status report, auto-generated, not to be edited manually. |
+| **QA Gate Implementation Plan** | [QA_GATE_IMPLEMENTATION_PLAN.md](./proposals/QA_GATE_IMPLEMENTATION_PLAN.md) | A proposal for implementing a formal QA gate in the CI/CD pipeline. |
+| **QA & Governance Policy** | [QA_GOVERNANCE.md](./QA_GOVERNANCE.md) | The single source of truth for all Quality Assurance (QA) and governance policies for the project. |
 | **Project Registry** | [`PROJECT_REGISTRY.md`](./PROJECT_REGISTRY.md) | This document, the master index for all project artifacts. |
 | **Template Registry** | [`../templates/PROJECT_REGISTRY.md`](../templates/PROJECT_REGISTRY.md) | A registry of all reusable documentation templates. |
 | **Handover Brief** | [`HANDOVER_BRIEF_JULES.md`](./reports/HANDOVER_BRIEF_JULES.md) | A detailed handover brief created at the request of the user. Not to be modified during the session. |
@@ -64,7 +101,6 @@ This document serves as the master file, or single source of truth, for tracking
 | **Trace Index Schema Fix** | [`proposals/TRACE_INDEX_SCHEMA_FIX.md`](./proposals/TRACE_INDEX_SCHEMA_FIX.md) | A proposal and implementation document for fixing the `TRACE_INDEX.yml` schema. |
 | **Governance Audit Refactor** | [`proposals/GOVERNANCE_AUDIT_REFACTOR.md`](./proposals/GOVERNANCE_AUDIT_REFACTOR.md) | A formal proposal to refactor the governance script into a comprehensive audit system. |
 | **New Proposal** | [`proposals/NEW_PROPOSAL.md`](./proposals/NEW_PROPOSAL.md) | A test proposal to verify linter functionality. |
-| **QA & Governance Policy** | [QA_GOVERNANCE.md](./QA_GOVERNANCE.md) | The single source of truth for all Quality Assurance (QA) and governance policies for the project. |
 | **Archived Bug Report Template** | [bug-report.md](./archive/.github/ISSUE_TEMPLATE/bug-report.md) | An archived GitHub issue template for reporting bugs. |
 | **Archived Feature Request Template** | [feature-request.md](./archive/.github/ISSUE_TEMPLATE/feature-request.md) | An archived GitHub issue template for requesting new features. |
 | **Archived Audit Log: Phase 1** | [AUDIT-phase-1.md](./archive/audit/AUDIT-phase-1.md) | An archived, comprehensive audit of the API and documentation, establishing a baseline for future work. |
@@ -81,54 +117,6 @@ This document serves as the master file, or single source of truth, for tracking
 | **Archived Snitch Secure Callback** | [PHASE_2_SECURE_CALLBACK.md](./archive/docs/snitch/PHASE_2_SECURE_CALLBACK.md) | An archived document describing security logic that was moved from Snitch to the main API. |
 | **Archived Snitch Test Runbook** | [TEST_RUNBOOK.md](./archive/docs/snitch/TEST_RUNBOOK.md) | An archived manual testing guide for a previous version of the Snitch application. |
 | **Archived Snitch IPC Design** | [phase5-ipc.md](./archive/docs/snitch/phase5-ipc.md) | An archived document describing a complex IPC architecture for Snitch that was never implemented. |
-| **DBStudio Plugin Proposal** | [DBSTUDIO_PLUGIN.md](./proposals/DBSTUDIO_PLUGIN.md) | A proposal for a modular database browser plugin. |
-| **GonkUI Plugin Proposal** | [GONKUI_PLUGIN.md](./proposals/GONKUI_PLUGIN.md) | A proposal to replace the Flask-based test UI with a modular plugin. |
-| **QA Gate Implementation Plan** | [QA_GATE_IMPLEMENTATION_PLAN.md](./proposals/QA_GATE_IMPLEMENTATION_PLAN.md) | A proposal for implementing a formal QA gate in the CI/CD pipeline. |
 | **Governance Audit Report** | [GOVERNANCE_AUDIT_REPORT.md](./reports/GOVERNANCE_AUDIT_REPORT.md) | A report generated by the governance linter, detailing documentation alignment. |
-| **Governance Demo Report** | [GOVERNANCE_DEMO_REPORT.md](./reports/GOVERNANCE_DEMO_REPORT.md) | A report summarizing the results of a governance tooling demonstration. |
-| **Project Audit Final Report** | [PROJECT_AUDIT_FINAL_REPORT.md](./reports/PROJECT_AUDIT_FINAL_REPORT.md) | The final, consolidated report summarizing the findings of a full project audit. |
 | **Repository Manifest** | [REPO_MANIFEST.md](./reports/REPO_MANIFEST.md) | A comprehensive, auto-generated manifest of all files in the repository. |
-| **PROJECT_DOCUMENT_ALIGNMENT.md** | [Link](./reports/PROJECT_DOCUMENT_ALIGNMENT.md) | Alignment status report, auto-generated, not to be edited manually. |
-
----
-
-## 3. Audit & Alignment Documents
-| Document | Location | Description |
-|---|---|---|
 | **HLD/LLD Alignment Plan (Archived)** | [`archive/audit/HLD_LLD_ALIGNMENT_PLAN.md`](./archive/audit/HLD_LLD_ALIGNMENT_PLAN.md) | The phased plan for bringing design documents into alignment with the codebase. |
-
----
-
-## 4. Archived Documents
-This section is for reference and should not be considered current.
-| Document | Location |
-|---|---|
-| **Archived README** | [`archive/README.md`](./archive/README.md) |
-| **Archived API Changelog** | [`archive/api/docs/CHANGELOG.md`](./archive/api/docs/CHANGELOG.md) |
-| **Archived API Contributing** | [`archive/api/docs/CONTRIBUTING.md`](./archive/api/docs/CONTRIBUTING.md) |
-| **Archived API Database** | [`archive/api/docs/DATABASE.md`](./archive/api/docs/DATABASE.md) |
-| **Archived API Installation** | [`archive/api/docs/INSTALLATION.md`](./archive/api/docs/INSTALLATION.md) |
-| **Archived API Manual** | [`archive/api/docs/MANUAL.md`](./archive/api/docs/MANUAL.md) |
-| **Archived Docs Integration Checklist** | [`archive/docs/INTEGRATION_CHECKLIST.md`](./archive/docs/INTEGRATION_CHECKLIST.md) |
-| **Archived Docs Developer Guide** | [`archive/docs/developer_guide.md`](./archive/docs/developer_guide.md) |
-| **Archived Docs Operator Guide** | [`archive/docs/operator_guide.md`](./archive/docs/operator_guide.md) |
-| **Archived Docs Roadmap** | [`archive/docs/roadmap.md`](./archive/docs/roadmap.md) |
-| **Archived Zotify API Manual** | [`archive/docs/zotify-api-manual.md`](./archive/docs/zotify-api-manual.md) |
-| **Archived Project Plan HLD** | [`archive/docs/projectplan/HLD_Zotify_API.md`](./archive/docs/projectplan/HLD_Zotify_API.md) |
-| **Archived Project Plan LLD** | [`archive/docs/projectplan/LLD_18step_plan_Zotify_API.md`](./archive/docs/projectplan/LLD_18step_plan_Zotify_API.md) |
-| **Archived Project Plan Security** | [`archive/docs/projectplan/security.md`](./archive/docs/projectplan/security.md) |
-| **Archived PP Admin Key Mitigation** | [`archive/docs/projectplan/admin_api_key_mitigation.md`](./archive/docs/projectplan/admin_api_key_mitigation.md) |
-| **Archived PP Admin Key Risk** | [`archive/docs/projectplan/admin_api_key_security_risk.md`](./archive/docs/projectplan/admin_api_key_security_risk.md) |
-| **Archived PP Doc Maintenance** | [`archive/docs/projectplan/doc_maintenance.md`](./archive/docs/projectplan/doc_maintenance.md) |
-| **Archived PP Privacy Compliance** | [`archive/docs/projectplan/privacy_compliance.md`](./archive/docs/projectplan/privacy_compliance.md) |
-| **Archived PP Spotify Audit** | [`archive/docs/projectplan/spotify_capability_audit.md`](./archive/docs/projectplan/spotify_capability_audit.md) |
-| **Archived PP Spotify Blueprint** | [`archive/docs/projectplan/spotify_fullstack_capability_blueprint.md`](./archive/docs/projectplan/spotify_fullstack_capability_blueprint.md) |
-| **Archived PP Spotify Gap Report** | [`archive/docs/projectplan/spotify_gap_alignment_report.md`](./archive/docs/projectplan/spotify_gap_alignment_report.md) |
-
----
-
-## 5. Change Log
-| Date | Change | Author |
-|---|---|---|
-| 2025-08-11 | Initial creation of the project registry. | Jules |
-| 2025-08-17 | Comprehensive audit and update to include all project documentation. | Jules |

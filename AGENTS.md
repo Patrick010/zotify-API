@@ -47,8 +47,13 @@ This workflow is designed to be followed for every task that involves code or do
 The first step of any task is to understand where to register new files. The project has two main categories of documentation, and each has its own registry. Failing to register a new file in the correct location will cause the `scripts/linter.py` verification script to fail.
 
 *   **Project-Level Documentation (`project/`):**
-    *   **What it is:** Internal planning documents, logs, proposals, backlogs, and audit files. Anything that lives in the `project/` directory.
-    *   **Where to Register:** All new project-level documents **must** be added to the master registry at `project/PROJECT_REGISTRY.md`.
+    *   **What it is:** Internal planning documents, logs, proposals, backlogs, and audit files. The project registry is strictly limited to files within the `project/` directory, with one exception: the repo-wide `api/docs/CODE_FILE_INDEX.md` is also included.
+    *   **How to Register:** The project registry is now **auto-generated**. The file `project/PROJECT_REGISTRY.md` is built programmatically from the canonical `project/reports/TRACE_INDEX.yml`. Manual edits to this file will be overwritten.
+    *   **Command to Update:** To regenerate the project registry after changes, run:
+        ```bash
+        python3 scripts/repo_inventory_and_governance.py --update-project-registry
+        ```
+    *   **Adding Special Cases:** If a file from outside the `project/` directory needs to be intentionally included in the project registry, it must be added to `scripts/project_registry_extras.yml`. This ensures all exceptions are explicitly approved and documented.
 
 *   **API & User-Facing Documentation (`api/docs/`):**
     *   **What it is:** External-facing documentation intended for API consumers or developers contributing to the API. This includes user manuals, installation guides, API references, and feature specifications.

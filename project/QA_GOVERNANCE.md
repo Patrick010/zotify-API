@@ -53,6 +53,16 @@ The primary mechanism for enforcing these policies is the unified linter script,
 - **Rule:** The canonical `api/docs/CODE_FILE_INDEX.md` must be updated to reflect the change. This file serves as the single source of truth for all code files in the repository.
 - **Enforcement:** A dedicated CI script (`scripts/validate_code_index.py`) will run on every pull request. It compares the contents of the index with an actual file listing of the repository and fails if they do not match.
 
+### 3.8. Project Registry Governance
+- **Trigger:** Any change to files within the `project/` directory.
+- **Rule:** The `project/PROJECT_REGISTRY.md` file serves as the canonical, human-readable index for all internal project documentation. This file is **auto-generated** from the master `project/reports/TRACE_INDEX.yml` and must not be edited manually.
+- **Scope:** The registry is strictly limited to documents within the `project/` directory. The only exception is `api/docs/CODE_FILE_INDEX.md`, which is included as a cross-cutting project artifact.
+- **Enforcement & Updates:** The registry is updated by running the governance script with a specific flag. To regenerate both the machine-readable JSON (`scripts/project_registry.json`) and the human-readable Markdown (`project/PROJECT_REGISTRY.md`), use the following command:
+    ```bash
+    python3 scripts/repo_inventory_and_governance.py --update-project-registry
+    ```
+- **Handling Exceptions:** To intentionally include a file that falls outside the standard `project/` scope, its path must be added to the `scripts/project_registry_extras.yml` file. This creates a clear, auditable trail for any exceptions to the rule.
+
 ## 4. CI/CD & Pull Request (PR) Enforcement
 The project uses a multi-stage CI/CD pipeline defined in `.github/workflows/ci.yml` to enforce quality gates. The pipeline is structured to be efficient by separating documentation and code checks.
 
