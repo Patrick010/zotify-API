@@ -11,47 +11,47 @@
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`ALIGNMENT_MATRIX.md`",
+        "name": "Alignment Matrix",
         "path": "project/ALIGNMENT_MATRIX.md",
         "type": "doc",
         "module": "project",
         "category": "ALIGNMENT_MATRIX.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "The primary, up-to-date matrix mapping requirements to design, implementation, and test status.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`BACKLOG.md`",
+        "name": "Backlog",
         "path": "project/BACKLOG.md",
         "type": "doc",
         "module": "project",
         "category": "BACKLOG.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "A tactical backlog of tasks managed by the formal qualification process defined in the PID.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`CICD.md`",
+        "name": "Cicd",
         "path": "project/CICD.md",
         "type": "doc",
         "module": "project",
         "category": "CICD.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "A high-level guide to CI/CD philosophy for project management.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`DEPENDENCIES.md`",
+        "name": "Dependencies",
         "path": "project/DEPENDENCIES.md",
         "type": "doc",
         "module": "project",
         "category": "DEPENDENCIES.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "The policy and registry for managing third-party dependencies.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -68,80 +68,80 @@
         "source": "project/PROJECT_REGISTRY.md"
     },
     {
-        "name": "`EXECUTION_PLAN.md`",
+        "name": "Execution Plan",
         "path": "project/EXECUTION_PLAN.md",
         "type": "doc",
         "module": "project",
         "category": "EXECUTION_PLAN.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "Provides a detailed breakdown of tasks required to fulfill the roadmap.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`FUTURE_ENHANCEMENTS.md`",
+        "name": "Future Enhancements",
         "path": "project/FUTURE_ENHANCEMENTS.md",
         "type": "doc",
         "module": "project",
         "category": "FUTURE_ENHANCEMENTS.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "A \"parking lot\" for new ideas and long-term ambitions not on the current roadmap.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`HIGH_LEVEL_DESIGN.md`",
+        "name": "High Level Design",
         "path": "project/HIGH_LEVEL_DESIGN.md",
         "type": "doc",
         "module": "project",
         "category": "HIGH_LEVEL_DESIGN.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "Outlines the high-level architecture, scope, and principles.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`LESSONS-LEARNT.md`",
+        "name": "Lessons Learnt",
         "path": "project/LESSONS-LEARNT.md",
         "type": "doc",
         "module": "project",
         "category": "LESSONS-LEARNT.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "A log of key takeaways and insights from each project phase.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`LOGGING_PHASES.md`",
+        "name": "Logging Phases",
         "path": "project/LOGGING_PHASES.md",
         "type": "doc",
         "module": "project",
         "category": "LOGGING_PHASES.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "The authoritative document tracking the phased design and implementation of the Extendable Logging System.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`LOGGING_SYSTEM_DESIGN.md`",
+        "name": "Logging System Design",
         "path": "project/LOGGING_SYSTEM_DESIGN.md",
         "type": "doc",
         "module": "project",
         "category": "LOGGING_SYSTEM_DESIGN.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "The detailed architectural design for the centralized logging system.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`LOGGING_TRACEABILITY_MATRIX.md`",
+        "name": "Logging Traceability Matrix",
         "path": "project/LOGGING_TRACEABILITY_MATRIX.md",
         "type": "doc",
         "module": "project",
         "category": "LOGGING_TRACEABILITY_MATRIX.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "Maps logging system requirements to design documents and backlog tasks.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -158,136 +158,149 @@
         "source": "project/PROJECT_REGISTRY.md"
     },
     {
-        "name": "`LOW_LEVEL_DESIGN.md`",
+        "name": "Low Level Design",
         "path": "project/LOW_LEVEL_DESIGN.md",
         "type": "doc",
         "module": "project",
         "category": "LOW_LEVEL_DESIGN.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "Describes specific work items and detailed implementation designs.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`ONBOARDING.md`",
+        "name": "Onboarding",
         "path": "project/ONBOARDING.md",
         "type": "doc",
         "module": "project",
         "category": "ONBOARDING.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "The primary entry point and guide for new developers to get up to speed on the project.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`PID.md`",
+        "name": "Pid",
         "path": "project/PID.md",
         "type": "doc",
         "module": "project",
         "category": "PID.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "The formal 'living document' that defines the project's scope, plans, and controls (PRINCE2).",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`PROJECT_BRIEF.md`",
+        "name": "Project Brief",
         "path": "project/PROJECT_BRIEF.md",
         "type": "doc",
         "module": "project",
         "category": "PROJECT_BRIEF.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "A high-level summary of the project's purpose, scope, and justification (PRINCE2).",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`PROJECT_PLAN.md`",
+        "name": "Project Plan",
         "path": "project/PROJECT_PLAN.md",
         "type": "doc",
         "module": "project",
         "category": "PROJECT_PLAN.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "A detailed, execution-oriented plan linking roadmap goals to specific modules and tasks.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`PROJECT_REGISTRY.md`",
+        "name": "Project Registry",
         "path": "project/PROJECT_REGISTRY.md",
         "type": "doc",
         "module": "project",
         "category": "PROJECT_REGISTRY.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "This document, the master index for all project artifacts.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "QA_GOVERNANCE.md",
+        "name": "Qa Governance",
         "path": "project/QA_GOVERNANCE.md",
         "type": "doc",
         "module": "project",
         "category": "QA_GOVERNANCE.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "The single source of truth for all Quality Assurance (QA) and governance policies for the project.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`ROADMAP.md`",
+        "name": "Roadmap",
         "path": "project/ROADMAP.md",
         "type": "doc",
         "module": "project",
         "category": "ROADMAP.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "Outlines the high-level phases and major milestones of development.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`SECURITY.md`",
+        "name": "Security",
         "path": "project/SECURITY.md",
         "type": "doc",
         "module": "project",
         "category": "SECURITY.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "The definitive security reference for the project.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`TASK_CHECKLIST.md`",
+        "name": "Task Checklist",
         "path": "project/TASK_CHECKLIST.md",
         "type": "doc",
         "module": "project",
         "category": "TASK_CHECKLIST.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "A checklist to be used for every task to ensure compliance with project standards.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`USECASES.md`",
+        "name": "Usecases",
         "path": "project/USECASES.md",
         "type": "doc",
         "module": "project",
         "category": "USECASES.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "A collection of user-driven scenarios and requirements for the API.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`USECASES_GAP_ANALYSIS.md`",
+        "name": "Usecases Gap Analysis",
         "path": "project/USECASES_GAP_ANALYSIS.md",
         "type": "doc",
         "module": "project",
         "category": "USECASES_GAP_ANALYSIS.md",
         "registered_in": [],
         "status": "registered",
-        "notes": "An analysis of the gaps between the desired use cases and the current implementation.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`api/docs/CODE_FILE_INDEX.md`",
+        "path": "project/api/docs/CODE_FILE_INDEX.md",
+        "type": "doc",
+        "module": "project",
+        "category": "api",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "",
+        "source": "project/PROJECT_REGISTRY.md"
     },
     {
         "name": "bug-report.md",
@@ -546,168 +559,753 @@
         "source": "project/PROJECT_REGISTRY.md"
     },
     {
-        "name": "`ACTIVITY.md`",
+        "name": "Activity",
         "path": "project/logs/ACTIVITY.md",
         "type": "doc",
         "module": "project",
         "category": "logs",
         "registered_in": [],
         "status": "registered",
-        "notes": "**Granular Task Log.** A reverse-chronological list of every specific, discrete task or action performed (e.g., \"Implemented `log-work.py` script\", \"Fixed CI test failure\"). Each entry should be a self-contained unit of work.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`CURRENT_STATE.md`",
+        "name": "Current State",
         "path": "project/logs/CURRENT_STATE.md",
         "type": "doc",
         "module": "project",
         "category": "logs",
         "registered_in": [],
         "status": "registered",
-        "notes": "**High-Level Snapshot.** A brief, narrative summary of the entire project's state at the end of a work session. It should answer: What was just accomplished? What is the next immediate goal? Are there any blockers?",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`SESSION_LOG.md`",
+        "name": "Session Log",
         "path": "project/logs/SESSION_LOG.md",
         "type": "doc",
         "module": "project",
         "category": "logs",
         "registered_in": [],
         "status": "registered",
-        "notes": "**Session-Level Reporting.** A detailed log of the activities, findings, and outcomes within a single work session. This is for project-related reporting and can be compared to the audit-specific logs (e.g., `AUDIT-PHASE-5.md`).",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`process/GAP_ANALYSIS_TEMPLATE.md`",
+        "name": "Gap Analysis Template",
         "path": "project/process/GAP_ANALYSIS_TEMPLATE.md",
         "type": "doc",
         "module": "project",
         "category": "process",
         "registered_in": [],
         "status": "registered",
-        "notes": "A standardized template for developers to use when performing a gap analysis.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "DBSTUDIO_PLUGIN.md",
+        "name": "`project/ALIGNMENT_MATRIX.md`",
+        "path": "project/project/ALIGNMENT_MATRIX.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "The primary, up-to-date matrix mapping requirements to design, implementation, and test status.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/BACKLOG.md`",
+        "path": "project/project/BACKLOG.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A tactical backlog of tasks managed by the formal qualification process defined in the PID.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/CICD.md`",
+        "path": "project/project/CICD.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A high-level guide to CI/CD philosophy for project management.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/DEPENDENCIES.md`",
+        "path": "project/project/DEPENDENCIES.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "The policy and registry for managing third-party dependencies.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/EXECUTION_PLAN.md`",
+        "path": "project/project/EXECUTION_PLAN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "Provides a detailed breakdown of tasks required to fulfill the roadmap.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/FUTURE_ENHANCEMENTS.md`",
+        "path": "project/project/FUTURE_ENHANCEMENTS.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A \"parking lot\" for new ideas and long-term ambitions not on the current roadmap.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/HIGH_LEVEL_DESIGN.md`",
+        "path": "project/project/HIGH_LEVEL_DESIGN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "Outlines the high-level architecture, scope, and principles.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/LESSONS-LEARNT.md`",
+        "path": "project/project/LESSONS-LEARNT.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A log of key takeaways and insights from each project phase.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/LOGGING_PHASES.md`",
+        "path": "project/project/LOGGING_PHASES.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "The authoritative document tracking the phased design and implementation of the Extendable Logging System.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/LOGGING_SYSTEM_DESIGN.md`",
+        "path": "project/project/LOGGING_SYSTEM_DESIGN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "The detailed architectural design for the centralized logging system.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/LOGGING_TRACEABILITY_MATRIX.md`",
+        "path": "project/project/LOGGING_TRACEABILITY_MATRIX.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "Maps logging system requirements to design documents and backlog tasks.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/LOW_LEVEL_DESIGN.md`",
+        "path": "project/project/LOW_LEVEL_DESIGN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "Describes specific work items and detailed implementation designs.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/ONBOARDING.md`",
+        "path": "project/project/ONBOARDING.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "The primary entry point and guide for new developers to get up to speed on the project.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/PID.md`",
+        "path": "project/project/PID.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "The formal 'living document' that defines the project's scope, plans, and controls (PRINCE2).",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/PROJECT_BRIEF.md`",
+        "path": "project/project/PROJECT_BRIEF.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A high-level summary of the project's purpose, scope, and justification (PRINCE2).",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/PROJECT_PLAN.md`",
+        "path": "project/project/PROJECT_PLAN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A detailed, execution-oriented plan linking roadmap goals to specific modules and tasks.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/PROJECT_REGISTRY.md`",
+        "path": "project/project/PROJECT_REGISTRY.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "This document, the master index for all project artifacts.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/QA_GOVERNANCE.md`",
+        "path": "project/project/QA_GOVERNANCE.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "The single source of truth for all Quality Assurance (QA) and governance policies for the project.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/ROADMAP.md`",
+        "path": "project/project/ROADMAP.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "Outlines the high-level phases and major milestones of development.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/SECURITY.md`",
+        "path": "project/project/SECURITY.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "The definitive security reference for the project.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/TASK_CHECKLIST.md`",
+        "path": "project/project/TASK_CHECKLIST.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A checklist to be used for every task to ensure compliance with project standards.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/USECASES.md`",
+        "path": "project/project/USECASES.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A collection of user-driven scenarios and requirements for the API.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/USECASES_GAP_ANALYSIS.md`",
+        "path": "project/project/USECASES_GAP_ANALYSIS.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "An analysis of the gaps between the desired use cases and the current implementation.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/archive/docs/projectplan/security.md`",
+        "path": "project/project/archive/docs/projectplan/security.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/archive/docs/projectplan/spotify_fullstack_capability_blueprint.md`",
+        "path": "project/project/archive/docs/projectplan/spotify_fullstack_capability_blueprint.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/logs/ACTIVITY.md`",
+        "path": "project/project/logs/ACTIVITY.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "**Granular Task Log.** A reverse-chronological list of every specific, discrete task or action performed (e.g., \"Implemented `log-work.py` script\", \"Fixed CI test failure\"). Each entry should be a self-contained unit of work.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/logs/CURRENT_STATE.md`",
+        "path": "project/project/logs/CURRENT_STATE.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "**High-Level Snapshot.** A brief, narrative summary of the entire project's state at the end of a work session. It should answer: What was just accomplished? What is the next immediate goal? Are there any blockers?",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/logs/SESSION_LOG.md`",
+        "path": "project/project/logs/SESSION_LOG.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "**Session-Level Reporting.** A detailed log of the activities, findings, and outcomes within a single work session. This is for project-related reporting and can be compared to the audit-specific logs (e.g., `AUDIT-PHASE-5.md`).",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/process/GAP_ANALYSIS_TEMPLATE.md`",
+        "path": "project/project/process/GAP_ANALYSIS_TEMPLATE.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A standardized template for developers to use when performing a gap analysis.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/proposals/DBSTUDIO_PLUGIN.md`",
+        "path": "project/project/proposals/DBSTUDIO_PLUGIN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A proposal for a modular database browser plugin.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md`",
+        "path": "project/project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A formal proposal for adding a dynamic plugin system for custom logging sinks.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/proposals/GONKUI_PLUGIN.md`",
+        "path": "project/project/proposals/GONKUI_PLUGIN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A proposal to replace the Flask-based test UI with a modular plugin.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/proposals/GOVERNANCE_AUDIT_REFACTOR.md`",
+        "path": "project/project/proposals/GOVERNANCE_AUDIT_REFACTOR.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A formal proposal to refactor the governance script into a comprehensive audit system.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/proposals/HOME_AUTOMATION_PROPOSAL.md`",
+        "path": "project/project/proposals/HOME_AUTOMATION_PROPOSAL.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A formal proposal for integrating with home automation platforms like Home Assistant.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/proposals/LOW_CODE_PROPOSAL.md`",
+        "path": "project/project/proposals/LOW_CODE_PROPOSAL.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A formal proposal for integrating with low-code platforms like Node-RED.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md`",
+        "path": "project/project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A formal proposal for a plugin-driven, multi-source metadata ingestion and querying system.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/proposals/NEW_PROPOSAL.md`",
+        "path": "project/project/proposals/NEW_PROPOSAL.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A test proposal to verify linter functionality.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md`",
+        "path": "project/project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A proposal for implementing a formal QA gate in the CI/CD pipeline.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md`",
+        "path": "project/project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A proposal and implementation document for adapting the `TRACE_INDEX.yml` schema.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/proposals/TRACE_INDEX_SCHEMA_FIX.md`",
+        "path": "project/project/proposals/TRACE_INDEX_SCHEMA_FIX.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A proposal and implementation document for fixing the `TRACE_INDEX.yml` schema.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/reports/GOVERNANCE_DEMO_REPORT.md`",
+        "path": "project/project/reports/GOVERNANCE_DEMO_REPORT.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A report summarizing the results of a governance tooling demonstration.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/reports/HANDOVER_BRIEF_CHATGTP.md`",
+        "path": "project/project/reports/HANDOVER_BRIEF_CHATGTP.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "An auto-generated handover brief for context.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/reports/HANDOVER_BRIEF_JULES.md`",
+        "path": "project/project/reports/HANDOVER_BRIEF_JULES.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "A detailed handover brief created at the request of the user. Not to be modified during the session.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/reports/PROJECT_AUDIT_FINAL_REPORT.md`",
+        "path": "project/project/reports/PROJECT_AUDIT_FINAL_REPORT.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "The final, consolidated report summarizing the findings of a full project audit.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/reports/PROJECT_DOCUMENT_ALIGNMENT.md`",
+        "path": "project/project/reports/PROJECT_DOCUMENT_ALIGNMENT.md",
+        "type": "doc",
+        "module": "project",
+        "category": "project",
+        "registered_in": [
+            "project/PROJECT_REGISTRY.md"
+        ],
+        "status": "legacy",
+        "notes": "Alignment status report, auto-generated, not to be edited manually.",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "Dbstudio Plugin",
         "path": "project/proposals/DBSTUDIO_PLUGIN.md",
         "type": "doc",
         "module": "project",
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "A proposal for a modular database browser plugin.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`proposals/DYNAMIC_PLUGIN_PROPOSAL.md`",
+        "name": "Dynamic Plugin Proposal",
         "path": "project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md",
         "type": "doc",
         "module": "project",
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "A formal proposal for adding a dynamic plugin system for custom logging sinks.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "GONKUI_PLUGIN.md",
+        "name": "Gonkui Plugin",
         "path": "project/proposals/GONKUI_PLUGIN.md",
         "type": "doc",
         "module": "project",
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "A proposal to replace the Flask-based test UI with a modular plugin.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`proposals/GOVERNANCE_AUDIT_REFACTOR.md`",
+        "name": "Governance Audit Refactor",
         "path": "project/proposals/GOVERNANCE_AUDIT_REFACTOR.md",
         "type": "doc",
         "module": "project",
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "A formal proposal to refactor the governance script into a comprehensive audit system.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`proposals/HOME_AUTOMATION_PROPOSAL.md`",
+        "name": "Home Automation Proposal",
         "path": "project/proposals/HOME_AUTOMATION_PROPOSAL.md",
         "type": "doc",
         "module": "project",
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "A formal proposal for integrating with home automation platforms like Home Assistant.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`proposals/LOW_CODE_PROPOSAL.md`",
+        "name": "Low Code Proposal",
         "path": "project/proposals/LOW_CODE_PROPOSAL.md",
         "type": "doc",
         "module": "project",
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "A formal proposal for integrating with low-code platforms like Node-RED.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`proposals/MULTI_SOURCE_METADATA_PROPOSAL.md`",
+        "name": "Multi Source Metadata Proposal",
         "path": "project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md",
         "type": "doc",
         "module": "project",
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "A formal proposal for a plugin-driven, multi-source metadata ingestion and querying system.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`proposals/NEW_PROPOSAL.md`",
+        "name": "New Proposal",
         "path": "project/proposals/NEW_PROPOSAL.md",
         "type": "doc",
         "module": "project",
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "A test proposal to verify linter functionality.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "QA_GATE_IMPLEMENTATION_PLAN.md",
+        "name": "Qa Gate Implementation Plan",
         "path": "project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md",
         "type": "doc",
         "module": "project",
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "A proposal for implementing a formal QA gate in the CI/CD pipeline.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md`",
+        "name": "Trace Index Schema Adaptation",
         "path": "project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md",
         "type": "doc",
         "module": "project",
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "A proposal and implementation document for adapting the `TRACE_INDEX.yml` schema.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`proposals/TRACE_INDEX_SCHEMA_FIX.md`",
+        "name": "Trace Index Schema Fix",
         "path": "project/proposals/TRACE_INDEX_SCHEMA_FIX.md",
         "type": "doc",
         "module": "project",
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "A proposal and implementation document for fixing the `TRACE_INDEX.yml` schema.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -724,58 +1322,58 @@
         "source": "project/PROJECT_REGISTRY.md"
     },
     {
-        "name": "GOVERNANCE_DEMO_REPORT.md",
+        "name": "Governance Demo Report",
         "path": "project/reports/GOVERNANCE_DEMO_REPORT.md",
         "type": "doc",
         "module": "project",
         "category": "reports",
         "registered_in": [],
         "status": "registered",
-        "notes": "A report summarizing the results of a governance tooling demonstration.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`HANDOVER_BRIEF_CHATGTP.md`",
+        "name": "Handover Brief Chatgtp",
         "path": "project/reports/HANDOVER_BRIEF_CHATGTP.md",
         "type": "doc",
         "module": "project",
         "category": "reports",
         "registered_in": [],
         "status": "registered",
-        "notes": "An auto-generated handover brief for context.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "`HANDOVER_BRIEF_JULES.md`",
+        "name": "Handover Brief Jules",
         "path": "project/reports/HANDOVER_BRIEF_JULES.md",
         "type": "doc",
         "module": "project",
         "category": "reports",
         "registered_in": [],
         "status": "registered",
-        "notes": "A detailed handover brief created at the request of the user. Not to be modified during the session.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "PROJECT_AUDIT_FINAL_REPORT.md",
+        "name": "Project Audit Final Report",
         "path": "project/reports/PROJECT_AUDIT_FINAL_REPORT.md",
         "type": "doc",
         "module": "project",
         "category": "reports",
         "registered_in": [],
         "status": "registered",
-        "notes": "The final, consolidated report summarizing the findings of a full project audit.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {
-        "name": "Link",
+        "name": "Project Document Alignment",
         "path": "project/reports/PROJECT_DOCUMENT_ALIGNMENT.md",
         "type": "doc",
         "module": "project",
         "category": "reports",
         "registered_in": [],
         "status": "registered",
-        "notes": "Alignment status report, auto-generated, not to be edited manually.",
+        "notes": "",
         "source": "TRACE_INDEX.yml"
     },
     {

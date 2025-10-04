@@ -68,12 +68,10 @@ def build_registry(
             trace_map = {item["path"]: item for item in artifacts}
 
     legacy_entries = {}
-    historical_verbatim_lines = []
     if project_registry_md_path.exists():
         with open(project_registry_md_path, "r", encoding="utf-8") as f:
             md_content = f.read()
             legacy_entries = parse_legacy_registry(md_content, project_registry_md_path, repo_root)
-            historical_verbatim_lines = [v["verbatim"] for v in legacy_entries.values()]
 
     extras_to_include = []
     if extras_file_path.exists():
@@ -97,7 +95,6 @@ def build_registry(
         module, category = derive_module_category(path_obj)
         legacy_entry = legacy_entries.get(path_str)
 
-        # Corrected status logic
         if not trace_item.get("exists_on_disk", True):
             status = "missing"
         elif trace_item.get("registered"):
@@ -106,18 +103,13 @@ def build_registry(
             status = "orphan"
 
         entry = {
-            "name": derive_name(path_obj, legacy_entry),
-            "path": path_str,
-            "type": trace_item.get("type", "doc"),
-            "module": module,
-            "category": category,
-            "registered_in": trace_item.get("registered_in", []),
-            "status": status,
-            "notes": legacy_entry["notes"] if legacy_entry else "",
-            "source": "TRACE_INDEX.yml",
+            "name": derive_name(path_obj, legacy_entry), "path": path_str, "type": trace_item.get("type", "doc"),
+            "module": module, "category": category, "registered_in": trace_item.get("registered_in", []),
+            "status": status, "notes": legacy_entry["notes"] if legacy_entry else "", "source": "TRACE_INDEX.yml",
         }
         registry.append(entry)
 
+    true_legacy_verbatim_lines = []
     for path_str, legacy_item in legacy_entries.items():
         if path_str not in processed_paths:
             processed_paths.add(path_str)
@@ -129,12 +121,10 @@ def build_registry(
                 "notes": legacy_item["notes"], "source": "project/PROJECT_REGISTRY.md",
             }
             registry.append(entry)
+            true_legacy_verbatim_lines.append(legacy_item['verbatim'])
 
     if project_dir.exists():
-        ignore_paths = {
-            trace_index_path.relative_to(repo_root).as_posix(),
-            project_registry_md_path.relative_to(repo_root).as_posix()
-        }
+        ignore_paths = { trace_index_path.relative_to(repo_root).as_posix(), project_registry_md_path.relative_to(repo_root).as_posix() }
         for file_path in project_dir.rglob('*'):
             if file_path.is_file():
                 path_str = file_path.relative_to(repo_root).as_posix()
@@ -166,14 +156,14 @@ def build_registry(
             with open(output_json_path, "r", encoding="utf-8") as f:
                 if json.load(f) == registry:
                     print(f"No changes to {output_json_path}. Skipping write.")
-                    return registry, historical_verbatim_lines
+                    return registry, true_legacy_verbatim_lines
         except (json.JSONDecodeError, IOError):
             pass
 
     with open(output_json_path, "w", encoding="utf-8") as f:
         json.dump(registry, f, indent=4, sort_keys=False)
     print(f"Successfully wrote project registry to {output_json_path}")
-    return registry, historical_verbatim_lines
+    return registry, true_legacy_verbatim_lines
 
 
 def generate_markdown(registry_data, historical_lines, output_md_path):
