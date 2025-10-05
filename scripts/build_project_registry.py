@@ -1,16 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Builds a machine-readable project registry from the TRACE_INDEX.yml.
+Builds a machine-readable project registry from various sources.
 """
 import argparse
-import fnmatch
 import json
 import re
 import sys
 from pathlib import Path
 import os
-
 import yaml
 
 # Add the project root to the Python path
@@ -20,13 +18,19 @@ sys.path.append(str(Path(__file__).resolve().parents[1]))
 def normalize_path(path_str: str) -> str:
     """
     Normalize and clean file paths so duplicates across data sources resolve to a single form.
+    This implementation is based on the user's specific request.
     """
-    path_str = re.sub(r"[`\[\]]", "", path_str)  # Remove markdown formatting
-    path_str = path_str.strip().replace("\\", "/")  # Consistent slashes
-    norm = Path(path_str).as_posix()
-    while norm.startswith("./") or norm.startswith("../"):
-        norm = norm.split("/", 1)[-1]
-    norm = re.sub(r"/+", "/", norm)  # Collapse double slashes
+    path_str = re.sub(r"[`\[\]]", "", path_str)
+    path_str = path_str.strip().replace("\\", "/")
+    # Use os.path.normpath for robust handling of '..' and '.'
+    norm = os.path.normpath(path_str)
+    # Further cleaning to handle cases normpath might miss and ensure posix style
+    norm = Path(norm).as_posix()
+    while norm.startswith("./"):
+        norm = norm[2:]
+    # Remove any leading slashes that might result from aggressive splitting
+    norm = norm.lstrip('/')
+    norm = re.sub(r"/+", "/", norm)
     return norm
 
 
@@ -35,26 +39,26 @@ def derive_module_category(path_obj):
     parts = path_obj.parts
     if not parts:
         return "general", "general"
-
     module = parts[0]
-
     if len(parts) > 2 and parts[1] not in ("src", "tests"):
         category = parts[1]
     else:
         category = "general"
-
     return module, category
 
 
-def derive_name(path_obj, legacy_entry=None):
-    """Derives a human-readable name from a path or legacy entry."""
-    if legacy_entry and legacy_entry.get("name"):
-        return legacy_entry["name"]
+def derive_name(path_obj, item=None):
+    """Derives a human-readable name from a path or an item entry."""
+    if item and item.get("name"):
+        return item["name"]
     return path_obj.stem.replace("_", " ").replace("-", " ").title()
 
 
 def parse_legacy_registry(md_content, md_path, repo_root):
-    """Parses the legacy PROJECT_REGISTRY.md to extract entries."""
+    """
+    Parses the legacy PROJECT_REGISTRY.md to extract entries. This function
+    now correctly distinguishes between file-relative and repo-relative paths.
+    """
     legacy_entries = {}
     base_dir = md_path.parent
     table_row_re = re.compile(r"\|\s*\[([^\]]+)\]\(([^)]+)\)\s*\|([^|]*)\|")
@@ -64,24 +68,18 @@ def parse_legacy_registry(md_content, md_path, repo_root):
         if match:
             name, rel_path, description = [m.strip() for m in match.groups()]
 
-            # Correct the corrupted path before resolving it.
-            # This handles the case where './project/' was incorrectly prepended.
-            if rel_path.startswith('./project/'):
-                rel_path = rel_path[len('./project/'):]
+            # If the path starts with './' or '../', it's relative to the MD file.
+            if rel_path.startswith('./') or rel_path.startswith('../'):
+                try:
+                    full_path = (base_dir / rel_path).resolve()
+                    repo_relative_path = str(full_path.relative_to(repo_root))
+                except (FileNotFoundError, ValueError):
+                    repo_relative_path = os.path.normpath(os.path.join(base_dir.name, rel_path))
+            else:
+                # Otherwise, assume it's relative to the repository root.
+                repo_relative_path = rel_path
 
-            # Resolve the path relative to the markdown file, then make it relative to the repo root
-            try:
-                # Using os.path.join and then resolving is safer
-                full_path = Path(os.path.join(base_dir, rel_path)).resolve()
-                repo_relative_path = str(full_path.relative_to(repo_root))
-            except (FileNotFoundError, ValueError):
-                # Handle cases where the file doesn't exist or path is outside root, fall back to string manipulation
-                repo_relative_path = os.path.join(base_dir.relative_to(repo_root), rel_path)
-
-
-            # Use the new robust normalize_path function
             normalized_repo_path = normalize_path(repo_relative_path)
-
             legacy_entries[normalized_repo_path] = {
                 "name": name, "path": normalized_repo_path, "notes": description,
             }
@@ -91,8 +89,8 @@ def parse_legacy_registry(md_content, md_path, repo_root):
 def build_registry(
     trace_index_path, project_registry_md_path, extras_file_path, output_json_path, project_dir, repo_root, debug=False
 ):
-    """Builds the project registry using a multi-pass approach to ensure correct priority."""
-    # --- 1. Load all data sources (paths will be normalized as they are processed) ---
+    """Builds the project registry using a definitive multi-pass approach."""
+    # --- 1. Load all data sources ---
     trace_map = {}
     if trace_index_path.exists():
         with open(trace_index_path, "r", encoding="utf-8") as f:
@@ -116,11 +114,12 @@ def build_registry(
     registry_map = {}
     processed = set()
 
-    # Create a non-normalized version for the check inside is_path_allowed
+    blacklist = {
+        normalize_path(str(project_registry_md_path.relative_to(repo_root)))
+    }
     raw_extras = set(extras_to_include)
 
     def is_path_allowed(path_str):
-        """Checks if a path is within the scope of the project registry."""
         norm_path = normalize_path(path_str)
         is_project_doc = norm_path.startswith("project/")
         is_code_file_index = norm_path == "api/docs/CODE_FILE_INDEX.md"
@@ -140,56 +139,46 @@ def build_registry(
             "name": derive_name(path_obj, item), "path": path_str, "type": "doc",
             "module": derive_module_category(path_obj)[0], "category": derive_module_category(path_obj)[1],
             "registered_in": item.get("registered_in", []),
-            "status": final_status, "notes": item.get("notes", ""), "source": "", # Source will be set in register
+            "status": final_status, "notes": item.get("notes", ""), "source": "",
         }
 
     def register(path_str, entry_data, source):
         p = normalize_path(path_str)
-        if not is_path_allowed(p) or p in processed:
-            if debug and not is_path_allowed(p):
-                print(f"[FILTERED] Path '{p}' not in project scope.")
+        if p in blacklist or not is_path_allowed(p) or p in processed:
             return
-
         processed.add(p)
         entry_data["source"] = source
         registry_map[p] = entry_data
 
-    # Pass 1: TRACE_INDEX.yml (highest priority)
+    # Pass 0: Special Cases
+    code_file_index_path = "api/docs/CODE_FILE_INDEX.md"
+    if is_path_allowed(code_file_index_path):
+        register(code_file_index_path, make_entry({"path": code_file_index_path, "notes": "Canonical source code index."}, "registered"), "Special Case")
+
+    # Pass 1: TRACE_INDEX.yml
     for path_str, item in trace_map.items():
-        entry = make_entry(item, status="registered")
-        register(path_str, entry, source="TRACE_INDEX.yml")
+        register(path_str, make_entry(item, "registered"), "TRACE_INDEX.yml")
 
-    # Pass 2: extras.yml (second priority)
+    # Pass 2: extras.yml
     for path_str in extras_to_include:
-        item = {"path": path_str, "notes": "Included via extras file"}
-        entry = make_entry(item, status="registered")
-        register(path_str, entry, source="extras.yml")
+        register(path_str, make_entry({"path": path_str, "notes": "Included via extras file"}, "registered"), "extras.yml")
 
-    # Pass 3: Legacy registry (lowest priority)
+    # Pass 3: Legacy registry
     for path_str, item in legacy_entries.items():
         p = normalize_path(path_str)
         if p in registry_map:
             if "Originally in legacy registry" not in registry_map[p]["notes"]:
-                 registry_map[p]["notes"] += "; Originally in legacy registry"
+                registry_map[p]["notes"] += "; Originally in legacy registry"
             continue
-
-        # If a legacy file exists on disk but is not in TRACE_INDEX, it's an orphan.
         exists_on_disk = (repo_root / p).exists()
-        status = "orphan" if exists_on_disk else "legacy"
+        register(p, make_entry(item, "orphan" if exists_on_disk else "legacy"), "project/PROJECT_REGISTRY.md")
 
-        entry = make_entry(item, status=status)
-        register(p, entry, source="project/PROJECT_REGISTRY.md")
-
-    # --- 3. Scan for orphan files ---
+    # Pass 4: Orphan scan
     if project_dir.exists():
         for file_path in project_dir.rglob('*'):
             if file_path.is_file():
                 path_str = str(file_path.relative_to(repo_root))
-                p = normalize_path(path_str)
-                if p not in processed and is_path_allowed(p):
-                    item = {"path": p, "notes": "File exists on disk but is not tracked."}
-                    entry = make_entry(item, status="orphan")
-                    register(p, entry, source="filesystem")
+                register(path_str, make_entry({"path": path_str, "notes": "File exists on disk but is not tracked."}, "orphan"), "filesystem")
 
     # --- 4. Finalize and write to JSON ---
     registry = list(registry_map.values())
@@ -202,7 +191,7 @@ def build_registry(
                     print(f"No changes to {output_json_path}. Skipping write.")
                     return registry
         except (json.JSONDecodeError, IOError):
-            pass
+            pass # File is corrupt or unreadable, so we'll overwrite it.
 
     with open(output_json_path, "w", encoding="utf-8") as f:
         json.dump(registry, f, indent=4, sort_keys=False)
@@ -221,7 +210,6 @@ def generate_markdown(registry_data, output_md_path):
 
     def create_table_row(entry, base_path):
         try:
-            # Paths are already repo-relative, so make them relative to the MD file's location
             relative_path = Path(entry["path"]).relative_to(base_path.parent)
         except ValueError:
             relative_path = Path(entry["path"])
@@ -239,12 +227,6 @@ def generate_markdown(registry_data, output_md_path):
         content += "\n\n## Orphan Files\n\n"
         orphan_list = [f"- `{entry['path']}`" for entry in orphan_entries]
         content += "\n".join(orphan_list)
-
-    if output_md_path.exists():
-        with open(output_md_path, 'r', encoding='utf-8') as f:
-            if f.read() == content:
-                print(f"No changes to {output_md_path}. Skipping write.")
-                return
 
     with open(output_md_path, "w", encoding="utf-8") as f:
         f.write(content)
