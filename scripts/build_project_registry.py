@@ -21,21 +21,13 @@ def normalize_path(path_str: str) -> str:
     """
     Normalize and clean file paths so duplicates across data sources resolve to a single form.
     """
-    # Remove markdown formatting like `[text](path)` or ``path``
-    path_str = re.sub(r"[`\[\]]", "", path_str)
-
-    # Normalize path separators and collapse `..` and `.`
-    # Using os.path.normpath is more robust than manual string manipulation.
-    norm_path = os.path.normpath(path_str.strip()).replace("\\", "/")
-
-    # Remove leading './' which might be left by normpath
-    if norm_path.startswith('./'):
-        norm_path = norm_path[2:]
-
-    # Collapse multiple slashes, e.g., `a//b` -> `a/b`
-    norm_path = re.sub(r'/+', '/', norm_path)
-
-    return norm_path
+    path_str = re.sub(r"[`\[\]]", "", path_str)  # Remove markdown formatting
+    path_str = path_str.strip().replace("\\", "/")  # Consistent slashes
+    norm = Path(path_str).as_posix()
+    while norm.startswith("./") or norm.startswith("../"):
+        norm = norm.split("/", 1)[-1]
+    norm = re.sub(r"/+", "/", norm)  # Collapse double slashes
+    return norm
 
 
 def derive_module_category(path_obj):

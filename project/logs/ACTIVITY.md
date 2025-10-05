@@ -16,23 +16,6 @@ The root cause was inconsistent path normalization. Implemented a robust normali
 - `scripts/build_project_registry.py`
 
 ---
-## ACT-140: Fixed path normalization bug causing duplicate entries in project registry
-
-**Date:** 2025-10-05
-**Status:** ✅ Done
-**Assignee:** Jules
-
-### Objective
-Eliminate duplicate entries in project_registry.json by fixing path normalization in scripts/build_project_registry.py
-
-### Outcome
-The root cause was inconsistent path normalization. Implemented a robust normalize_path function and refactored the build_registry function to enforce priority. Validated with jq. Installed missing pyyaml dependency.
-
-
-### Related Documents
-- `scripts/build_project_registry.py`
-
----
 ## ACT-139: Applied a definitive fix to the path normalization logic in  to prevent path corruption. Also corrected unit tests to handle the updated return signature of the build script.
 
 **Date:** 2025-10-04
