@@ -1,6 +1,14 @@
 ---
 ## Session Report: 2025-10-05
 
+**Summary:** Implement description compliance policy and enforcement script
+
+**Findings:**
+Added the new Description Enforcement Policy to project/QA_GOVERNANCE.md. Created a new script, scripts/description_compliance_check.py, to scan all project indexes and generate a compliance report. Fixed an initial bug in the script's parsing logic. Also restored and rewrote the obsolete test file for the separate build_project_registry.py script to ensure it remains correctly tested.
+
+---
+## Session Report: 2025-10-05
+
 **Summary:** Simplify project registry builder and fix all related bugs
 
 **Findings:**

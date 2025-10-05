@@ -63,6 +63,28 @@ The primary mechanism for enforcing these policies is the unified linter script,
     ```
 - **Handling Exceptions:** To intentionally include a file that falls outside the standard `project/` scope, its path must be added to the `scripts/project_registry_extras.yml` file. This creates a clear, auditable trail for any exceptions to the rule.
 
+### 3.9. Description Enforcement Policy
+
+- **Trigger:** Any addition or modification of file entries in project indexes or registries, including:
+  - `project/reports/TRACE_INDEX.yml`
+  - Any `CODE_FILE_INDEX.md` (in any directory)
+  - `project/PROJECT_REGISTRY.md`
+  - Any future registry or traceability index under `project/` or `scripts/`
+
+- **Rule:** Every file entry added to a registry **must** include a concise, meaningful one-line description at the moment it is added.
+  - Descriptions must summarize the file’s function or purpose in clear, human-readable language.
+  - Descriptions are mandatory for all file types — including `.md`, `.yml`, `.py`, `.sh`, and any others tracked by the system.
+  - No placeholder or empty descriptions are allowed (e.g., “TBD”, “N/A”, “temp”).
+
+- **Rationale:**
+  This ensures that every file tracked in the repository is self-descriptive and immediately understandable from its registry entry.
+  The policy eliminates the need for retroactive description passes and guarantees traceable documentation hygiene at the point of file registration.
+
+- **Enforcement:**
+  - The unified `scripts/linter.py` and CI/CD checks must verify that every file listed in any index or registry contains a valid, non-empty description field.
+  - Missing or placeholder descriptions will trigger a **policy violation**, blocking commits or merges until corrected.
+  - Contributors are responsible for supplying descriptions during file registration. Automation scripts should never auto-fill descriptions.
+
 ## 4. CI/CD & Pull Request (PR) Enforcement
 The project uses a multi-stage CI/CD pipeline defined in `.github/workflows/ci.yml` to enforce quality gates. The pipeline is structured to be efficient by separating documentation and code checks.
 

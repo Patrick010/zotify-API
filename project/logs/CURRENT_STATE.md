@@ -3,13 +3,13 @@
 **Status:** Live Document
 
 ## Objective
-Fix path normalization and deduplication bugs by radically simplifying the script to use only TRACE_INDEX.yml as a source, removing all legacy and multi-pass logic.
+Update QA policy to require descriptions for all indexed files and create a script to enforce this rule.
 
 ## 1. Session Summary & Accomplishments
-Simplify project registry builder and fix all related bugs
+Implement description compliance policy and enforcement script
 
 ## 2. Known Issues & Blockers
 - None
 
 ## 3. Pending Work: Next Immediate Steps
-Submit the final, simplified, and validated solution.
+Submit the new policy and tooling.
