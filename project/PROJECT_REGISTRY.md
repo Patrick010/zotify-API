@@ -3,43 +3,43 @@
 
 | Path | Status | Description |
 |------|---------|-------------|
-| `project/ALIGNMENT_MATRIX.md` | registered | Project documentation file |
-| `project/BACKLOG.md` | registered | Project documentation file |
-| `project/CICD.md` | registered | Project documentation file |
-| `project/DEPENDENCIES.md` | registered | Project documentation file |
-| `project/EXECUTION_PLAN.md` | registered | Project documentation file |
-| `project/FUTURE_ENHANCEMENTS.md` | registered | Project documentation file |
-| `project/HIGH_LEVEL_DESIGN.md` | registered | Project documentation file |
-| `project/LESSONS-LEARNT.md` | registered | Project documentation file |
-| `project/LOGGING_PHASES.md` | registered | Project documentation file |
-| `project/LOGGING_SYSTEM_DESIGN.md` | registered | Project documentation file |
-| `project/LOGGING_TRACEABILITY_MATRIX.md` | registered | Project documentation file |
-| `project/LOW_LEVEL_DESIGN.md` | registered | Project documentation file |
-| `project/ONBOARDING.md` | registered | Project documentation file |
-| `project/PID.md` | registered | Project documentation file |
-| `project/PROJECT_BRIEF.md` | registered | Project documentation file |
-| `project/PROJECT_PLAN.md` | registered | Project documentation file |
-| `project/PROJECT_REGISTRY.md` | registered | Project documentation file |
-| `project/QA_GOVERNANCE.md` | registered | Project documentation file |
-| `project/ROADMAP.md` | registered | Project documentation file |
-| `project/SECURITY.md` | registered | Project documentation file |
-| `project/TASK_CHECKLIST.md` | registered | Project documentation file |
-| `project/USECASES.md` | registered | Project documentation file |
-| `project/USECASES_GAP_ANALYSIS.md` | registered | Project documentation file |
-| `project/process/GAP_ANALYSIS_TEMPLATE.md` | registered | Project documentation file |
-| `project/proposals/DBSTUDIO_PLUGIN.md` | registered | Project documentation file |
-| `project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md` | registered | Project documentation file |
-| `project/proposals/GONKUI_PLUGIN.md` | registered | Project documentation file |
-| `project/proposals/GOVERNANCE_AUDIT_REFACTOR.md` | registered | Project documentation file |
-| `project/proposals/HOME_AUTOMATION_PROPOSAL.md` | registered | Project documentation file |
-| `project/proposals/LOW_CODE_PROPOSAL.md` | registered | Project documentation file |
-| `project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md` | registered | Project documentation file |
-| `project/proposals/NEW_PROPOSAL.md` | registered | Project documentation file |
-| `project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md` | registered | Project documentation file |
-| `project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md` | registered | Project documentation file |
-| `project/proposals/TRACE_INDEX_SCHEMA_FIX.md` | registered | Project documentation file |
-| `project/reports/GOVERNANCE_DEMO_REPORT.md` | registered | Project documentation file |
-| `project/reports/HANDOVER_BRIEF_CHATGTP.md` | registered | Project documentation file |
-| `project/reports/HANDOVER_BRIEF_JULES.md` | registered | Project documentation file |
-| `project/reports/PROJECT_AUDIT_FINAL_REPORT.md` | registered | Project documentation file |
-| `project/reports/PROJECT_DOCUMENT_ALIGNMENT.md` | registered | Project documentation file |
+| `project/ALIGNMENT_MATRIX.md` | registered | Maps strategic goals to design documents, implementation, and documentation. |
+| `project/BACKLOG.md` | registered | A prioritized list of approved, actionable tasks for future development. |
+| `project/CICD.md` | registered | High-level overview of the CI/CD pipeline and its quality gates for stakeholders. |
+| `project/DEPENDENCIES.md` | registered | Outlines the policy and approval process for adding new third-party dependencies. |
+| `project/EXECUTION_PLAN.md` | registered | Detailed task breakdown for each phase of the project, aligned with the roadmap. |
+| `project/FUTURE_ENHANCEMENTS.md` | registered | A living document capturing long-term product vision and feature ideas. |
+| `project/HIGH_LEVEL_DESIGN.md` | registered | Outlines the high-level architecture, layers, and non-functional requirements for the Zotify API platform. |
+| `project/LESSONS-LEARNT.md` | registered | A log of key takeaways and lessons learned during each project phase. |
+| `project/LOGGING_PHASES.md` | registered | Authoritative tracker for the phased design and implementation of the Extendable Logging System. |
+| `project/LOGGING_SYSTEM_DESIGN.md` | registered | Technical design document for the centralized, extendable logging system. |
+| `project/LOGGING_TRACEABILITY_MATRIX.md` | registered | Maps logging requirements to design artifacts and implementation tasks. |
+| `project/LOW_LEVEL_DESIGN.md` | registered | Provides detailed, low-level design specifications for key architectural components. |
+| `project/ONBOARDING.md` | registered | A guide for new developers to get up to speed on the project's context and procedures. |
+| `project/PID.md` | registered | Defines the project's business case, strategic goals, scope, and governance controls. |
+| `project/PROJECT_BRIEF.md` | registered | A high-level, one-page summary of the project's objectives, scope, and deliverables. |
+| `project/PROJECT_PLAN.md` | registered | A central, execution-oriented plan for developers, synthesized from the roadmap and PID. |
+| `project/PROJECT_REGISTRY.md` | registered | The master index for all project-level documentation, auto-generated by the build script. |
+| `project/QA_GOVERNANCE.md` | registered | Defines the project's quality assurance policies and the linter rules that enforce them. |
+| `project/ROADMAP.md` | registered | Provides a high-level, strategic overview of the project's major development phases. |
+| `project/SECURITY.md` | registered | Outlines the platform's security philosophy, details implemented features, and tracks future security enhancements. |
+| `project/TASK_CHECKLIST.md` | registered | A mandatory quality gate checklist for all development work before completion. |
+| `project/USECASES.md` | registered | Defines target user scenarios and primary use cases for the Zotify platform. |
+| `project/USECASES_GAP_ANALYSIS.md` | registered | Analyzes current feature coverage against defined use cases to identify development opportunities. |
+| `project/process/GAP_ANALYSIS_TEMPLATE.md` | registered | A standardized template for performing and documenting gap analysis. |
+| `project/proposals/DBSTUDIO_PLUGIN.md` | registered | Proposal for a modular, backend-agnostic database browser plugin. |
+| `project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md` | registered | Proposal for a dynamic plugin system for custom components like logging sinks. |
+| `project/proposals/GONKUI_PLUGIN.md` | registered | Proposal to convert the GonkUI testing tool into a dynamic, installable plugin. |
+| `project/proposals/GOVERNANCE_AUDIT_REFACTOR.md` | registered | Proposal to refactor the governance script into a comprehensive, automated audit system. |
+| `project/proposals/HOME_AUTOMATION_PROPOSAL.md` | registered | Proposal for integrating with home automation platforms like Home Assistant. |
+| `project/proposals/LOW_CODE_PROPOSAL.md` | registered | Proposal for integrating with low-code/no-code platforms like Node-RED. |
+| `project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md` | registered | Proposal for a plugin-driven system to manage metadata from multiple sources. |
+| `project/proposals/NEW_PROPOSAL.md` | registered | A template for creating new project proposals. |
+| `project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md` | registered | A phased implementation plan for the new QA Gate system. |
+| `project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md` | registered | Proposal to adapt the TRACE_INDEX.yml schema for improved uniformity. |
+| `project/proposals/TRACE_INDEX_SCHEMA_FIX.md` | registered | Proposal to fix the TRACE_INDEX.yml schema for improved precision. |
+| `project/reports/GOVERNANCE_DEMO_REPORT.md` | registered | A demonstration report showcasing the functionality of the governance audit script. |
+| `project/reports/HANDOVER_BRIEF_CHATGTP.md` | registered | A handover brief created for a previous AI assistant. |
+| `project/reports/HANDOVER_BRIEF_JULES.md` | registered | A handover brief created by Jules for the next developer. |
+| `project/reports/PROJECT_AUDIT_FINAL_REPORT.md` | registered | The final report concluding the comprehensive project-wide audit and governance refactoring. |
+| `project/reports/PROJECT_DOCUMENT_ALIGNMENT.md` | registered | A report documenting the alignment of project documents. |
