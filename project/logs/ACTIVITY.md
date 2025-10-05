@@ -1,4 +1,30 @@
 ---
+## ACT-143: Project documentation is now fully compliant with the description policy.
+
+**Date:** 2025-10-05
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Project documentation is now fully compliant with the description policy.
+
+### Outcome
+All indexed files in TRACE_INDEX.yml and all CODE_FILE_INDEX.md files now have descriptions. The description_compliance_check.py script passes without errors.
+
+---
+## ACT-142: Automated compliance update.
+
+**Date:** 2025-10-05
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Automated compliance update.
+
+### Outcome
+Automated compliance update.
+
+---
 ## ACT-141: Implement description compliance policy and enforcement script
 
 **Date:** 2025-10-05
