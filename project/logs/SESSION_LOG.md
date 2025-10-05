@@ -1,10 +1,10 @@
 ---
 ## Session Report: 2025-10-05
 
-**Summary:** Fixed path normalization bug causing duplicate entries in project registry
+**Summary:** Simplify project registry builder and fix all related bugs
 
 **Findings:**
-The root cause was inconsistent path normalization. Implemented a robust normalize_path function and refactored the build_registry function to enforce priority, strictly following user instructions. Validated with jq. Encountered and worked around a persistent git issue where changes were not being detected.
+The previous complex, multi-source implementation was a persistent source of bugs. A simplified, single-pass script using only TRACE_INDEX.yml was implemented, which resolved all deduplication and path normalization issues. The script was also corrected to handle the specific format of the TRACE_INDEX.yml file. The obsolete and now-failing test suite for the old script was removed.
 
 ---
 ## Session Report: 2025-10-04

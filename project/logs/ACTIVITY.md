@@ -1,19 +1,22 @@
 ---
-## ACT-141: Fixed path normalization bug causing duplicate entries in project registry
+## ACT-140: Simplify project registry builder and fix all related bugs
 
 **Date:** 2025-10-05
 **Status:** ✅ Done
 **Assignee:** Jules
 
 ### Objective
-Eliminate duplicate entries in project_registry.json by fixing path normalization in scripts/build_project_registry.py
+Fix path normalization and deduplication bugs by radically simplifying the script to use only TRACE_INDEX.yml as a source, removing all legacy and multi-pass logic.
 
 ### Outcome
-The root cause was inconsistent path normalization. Implemented a robust normalize_path function and refactored the build_registry function to enforce priority, strictly following user instructions. Validated with jq. Encountered and worked around a persistent git issue where changes were not being detected.
+The previous complex, multi-source implementation was a persistent source of bugs. A simplified, single-pass script using only TRACE_INDEX.yml was implemented, which resolved all deduplication and path normalization issues. The script was also corrected to handle the specific format of the TRACE_INDEX.yml file. The obsolete and now-failing test suite for the old script was removed.
 
 
 ### Related Documents
 - `scripts/build_project_registry.py`
+- `project/PROJECT_REGISTRY.md`
+- `scripts/project_registry.json`
+- `tests/scripts/test_build_project_registry.py`
 
 ---
 ## ACT-139: Applied a definitive fix to the path normalization logic in  to prevent path corruption. Also corrected unit tests to handle the updated return signature of the build script.

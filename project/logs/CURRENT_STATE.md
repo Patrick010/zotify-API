@@ -3,13 +3,13 @@
 **Status:** Live Document
 
 ## Objective
-Eliminate duplicate entries in project_registry.json by fixing path normalization in scripts/build_project_registry.py
+Fix path normalization and deduplication bugs by radically simplifying the script to use only TRACE_INDEX.yml as a source, removing all legacy and multi-pass logic.
 
 ## 1. Session Summary & Accomplishments
-Fixed path normalization bug causing duplicate entries in project registry
+Simplify project registry builder and fix all related bugs
 
 ## 2. Known Issues & Blockers
 - None
 
 ## 3. Pending Work: Next Immediate Steps
-Submit the changes.
+Submit the final, simplified, and validated solution.
