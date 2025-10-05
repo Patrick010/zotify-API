@@ -1,4 +1,20 @@
 ---
+## Session Report: 2025-10-05
+
+**Summary:** Fixed path normalization bug causing duplicate entries in project registry
+
+**Findings:**
+The root cause was inconsistent path normalization. Implemented a robust normalize_path function and refactored the build_registry function to enforce priority, strictly following user instructions. Validated with jq. Encountered and worked around a persistent git issue where changes were not being detected.
+
+---
+## Session Report: 2025-10-05
+
+**Summary:** Fixed path normalization bug causing duplicate entries in project registry
+
+**Findings:**
+The root cause was inconsistent path normalization. Implemented a robust normalize_path function and refactored the build_registry function to enforce priority. Validated with jq. Installed missing pyyaml dependency.
+
+---
 ## Session Report: 2025-10-04
 
 **Summary:** Applied a definitive fix to the path normalization logic in  to prevent path corruption. Also corrected unit tests to handle the updated return signature of the build script.

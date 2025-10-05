@@ -11,6 +11,17 @@
         "source": "TRACE_INDEX.yml"
     },
     {
+        "name": "`project/api/docs/CODE_FILE_INDEX.md`",
+        "path": "project/api/docs/CODE_FILE_INDEX.md",
+        "type": "doc",
+        "module": "project",
+        "category": "api",
+        "registered_in": [],
+        "status": "legacy",
+        "notes": "",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
         "name": "Endpoints",
         "path": "project/api/endpoints.yaml",
         "type": "doc",
@@ -18,7 +29,7 @@
         "category": "api",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -29,7 +40,7 @@
         "category": "archive",
         "registered_in": [],
         "status": "orphan",
-        "notes": "",
+        "notes": "File exists on disk but is not tracked.",
         "source": "filesystem"
     },
     {
@@ -40,7 +51,7 @@
         "category": "archive",
         "registered_in": [],
         "status": "orphan",
-        "notes": "",
+        "notes": "File exists on disk but is not tracked.",
         "source": "filesystem"
     },
     {
@@ -51,7 +62,7 @@
         "category": "archive",
         "registered_in": [],
         "status": "orphan",
-        "notes": "",
+        "notes": "File exists on disk but is not tracked.",
         "source": "filesystem"
     },
     {
@@ -62,7 +73,7 @@
         "category": "archive",
         "registered_in": [],
         "status": "orphan",
-        "notes": "",
+        "notes": "File exists on disk but is not tracked.",
         "source": "filesystem"
     },
     {
@@ -73,7 +84,7 @@
         "category": "archive",
         "registered_in": [],
         "status": "orphan",
-        "notes": "",
+        "notes": "File exists on disk but is not tracked.",
         "source": "filesystem"
     },
     {
@@ -84,7 +95,7 @@
         "category": "archive",
         "registered_in": [],
         "status": "orphan",
-        "notes": "",
+        "notes": "File exists on disk but is not tracked.",
         "source": "filesystem"
     },
     {
@@ -95,7 +106,7 @@
         "category": "archive",
         "registered_in": [],
         "status": "orphan",
-        "notes": "",
+        "notes": "File exists on disk but is not tracked.",
         "source": "filesystem"
     },
     {
@@ -106,7 +117,7 @@
         "category": "archive",
         "registered_in": [],
         "status": "orphan",
-        "notes": "",
+        "notes": "File exists on disk but is not tracked.",
         "source": "filesystem"
     },
     {
@@ -117,7 +128,7 @@
         "category": "archive",
         "registered_in": [],
         "status": "orphan",
-        "notes": "",
+        "notes": "File exists on disk but is not tracked.",
         "source": "filesystem"
     },
     {
@@ -128,7 +139,7 @@
         "category": "archive",
         "registered_in": [],
         "status": "orphan",
-        "notes": "",
+        "notes": "File exists on disk but is not tracked.",
         "source": "filesystem"
     },
     {
@@ -139,7 +150,7 @@
         "category": "archive",
         "registered_in": [],
         "status": "orphan",
-        "notes": "",
+        "notes": "File exists on disk but is not tracked.",
         "source": "filesystem"
     },
     {
@@ -150,7 +161,7 @@
         "category": "archive",
         "registered_in": [],
         "status": "orphan",
-        "notes": "",
+        "notes": "File exists on disk but is not tracked.",
         "source": "filesystem"
     },
     {
@@ -161,7 +172,7 @@
         "category": "archive",
         "registered_in": [],
         "status": "orphan",
-        "notes": "",
+        "notes": "File exists on disk but is not tracked.",
         "source": "filesystem"
     },
     {
@@ -172,7 +183,7 @@
         "category": "archive",
         "registered_in": [],
         "status": "orphan",
-        "notes": "",
+        "notes": "File exists on disk but is not tracked.",
         "source": "filesystem"
     },
     {
@@ -183,7 +194,7 @@
         "category": "archive",
         "registered_in": [],
         "status": "orphan",
-        "notes": "",
+        "notes": "File exists on disk but is not tracked.",
         "source": "filesystem"
     },
     {
@@ -194,7 +205,7 @@
         "category": "archive",
         "registered_in": [],
         "status": "orphan",
-        "notes": "",
+        "notes": "File exists on disk but is not tracked.",
         "source": "filesystem"
     },
     {
@@ -205,7 +216,7 @@
         "category": "archive",
         "registered_in": [],
         "status": "orphan",
-        "notes": "",
+        "notes": "File exists on disk but is not tracked.",
         "source": "filesystem"
     },
     {
@@ -216,7 +227,7 @@
         "category": "archive",
         "registered_in": [],
         "status": "orphan",
-        "notes": "",
+        "notes": "File exists on disk but is not tracked.",
         "source": "filesystem"
     },
     {
@@ -227,7 +238,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -238,7 +249,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -249,7 +260,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -260,7 +271,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -271,7 +282,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -282,7 +293,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -293,7 +304,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -304,7 +315,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -315,7 +326,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -326,7 +337,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -337,7 +348,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -348,7 +359,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -359,7 +370,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -370,7 +381,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -381,7 +392,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -392,7 +403,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -402,8 +413,8 @@
         "module": "project",
         "category": "general",
         "registered_in": [],
-        "status": "missing",
-        "notes": "",
+        "status": "registered",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -414,7 +425,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -425,7 +436,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -436,7 +447,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -447,7 +458,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -458,7 +469,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -469,7 +480,7 @@
         "category": "general",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -480,7 +491,7 @@
         "category": "logs",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -491,7 +502,7 @@
         "category": "logs",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -502,7 +513,7 @@
         "category": "logs",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -513,7 +524,7 @@
         "category": "process",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -524,7 +535,7 @@
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -535,7 +546,7 @@
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -546,7 +557,7 @@
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -557,7 +568,7 @@
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -568,7 +579,7 @@
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -579,7 +590,7 @@
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -590,7 +601,7 @@
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -601,7 +612,7 @@
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -612,7 +623,7 @@
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -623,7 +634,7 @@
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -634,7 +645,7 @@
         "category": "proposals",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -645,7 +656,7 @@
         "category": "reports",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -656,7 +667,7 @@
         "category": "reports",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -667,7 +678,7 @@
         "category": "reports",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -678,7 +689,7 @@
         "category": "reports",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -689,7 +700,7 @@
         "category": "reports",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     },
     {
@@ -700,7 +711,7 @@
         "category": "reports",
         "registered_in": [],
         "status": "registered",
-        "notes": "",
+        "notes": "; Originally in legacy registry",
         "source": "TRACE_INDEX.yml"
     }
 ]

@@ -17,9 +17,25 @@ import yaml
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 
 
-def normalize_path(path_str):
-    """Normalizes a path string to a consistent format, removing leading './'."""
-    return os.path.normpath(path_str).replace("\\", "/").lstrip("./")
+def normalize_path(path_str: str) -> str:
+    """
+    Normalize and clean file paths so duplicates across data sources resolve to a single form.
+    """
+    # Remove markdown formatting like `[text](path)` or ``path``
+    path_str = re.sub(r"[`\[\]]", "", path_str)
+
+    # Normalize path separators and collapse `..` and `.`
+    # Using os.path.normpath is more robust than manual string manipulation.
+    norm_path = os.path.normpath(path_str.strip()).replace("\\", "/")
+
+    # Remove leading './' which might be left by normpath
+    if norm_path.startswith('./'):
+        norm_path = norm_path[2:]
+
+    # Collapse multiple slashes, e.g., `a//b` -> `a/b`
+    norm_path = re.sub(r'/+', '/', norm_path)
+
+    return norm_path
 
 
 def derive_module_category(path_obj):
@@ -61,11 +77,21 @@ def parse_legacy_registry(md_content, md_path, repo_root):
             if rel_path.startswith('./project/'):
                 rel_path = rel_path[len('./project/'):]
 
-            full_path = (base_dir / rel_path).resolve()
-            repo_relative_path = normalize_path(str(full_path.relative_to(repo_root)))
+            # Resolve the path relative to the markdown file, then make it relative to the repo root
+            try:
+                # Using os.path.join and then resolving is safer
+                full_path = Path(os.path.join(base_dir, rel_path)).resolve()
+                repo_relative_path = str(full_path.relative_to(repo_root))
+            except (FileNotFoundError, ValueError):
+                # Handle cases where the file doesn't exist or path is outside root, fall back to string manipulation
+                repo_relative_path = os.path.join(base_dir.relative_to(repo_root), rel_path)
 
-            legacy_entries[repo_relative_path] = {
-                "name": name, "path": repo_relative_path, "notes": description,
+
+            # Use the new robust normalize_path function
+            normalized_repo_path = normalize_path(repo_relative_path)
+
+            legacy_entries[normalized_repo_path] = {
+                "name": name, "path": normalized_repo_path, "notes": description,
             }
     return legacy_entries
 
@@ -73,13 +99,14 @@ def parse_legacy_registry(md_content, md_path, repo_root):
 def build_registry(
     trace_index_path, project_registry_md_path, extras_file_path, output_json_path, project_dir, repo_root, debug=False
 ):
-    """Builds the project registry."""
+    """Builds the project registry using a multi-pass approach to ensure correct priority."""
+    # --- 1. Load all data sources (paths will be normalized as they are processed) ---
     trace_map = {}
     if trace_index_path.exists():
         with open(trace_index_path, "r", encoding="utf-8") as f:
             trace_data = yaml.safe_load(f)
             artifacts = trace_data.get("artifacts", []) if isinstance(trace_data, dict) else trace_data or []
-            trace_map = {normalize_path(item["path"]): item for item in artifacts}
+            trace_map = {item["path"]: item for item in artifacts}
 
     legacy_entries = {}
     if project_registry_md_path.exists():
@@ -91,72 +118,89 @@ def build_registry(
     if extras_file_path.exists():
         with open(extras_file_path, "r", encoding="utf-8") as f:
             extras_data = yaml.safe_load(f)
-            extras_to_include = [normalize_path(p) for p in extras_data.get("include", [])]
+            extras_to_include = extras_data.get("include", [])
 
-    registry = []
-    processed_paths = set()
+    # --- 2. Process entries with a clear priority order ---
+    registry_map = {}
+    processed = set()
 
-    all_paths_to_process = set(trace_map.keys()) | set(legacy_entries.keys()) | set(extras_to_include)
+    # Create a non-normalized version for the check inside is_path_allowed
+    raw_extras = set(extras_to_include)
 
-    for path_str in all_paths_to_process:
+    def is_path_allowed(path_str):
+        """Checks if a path is within the scope of the project registry."""
+        norm_path = normalize_path(path_str)
+        is_project_doc = norm_path.startswith("project/")
+        is_code_file_index = norm_path == "api/docs/CODE_FILE_INDEX.md"
+        is_in_extras = any(normalize_path(p) == norm_path for p in raw_extras)
+        return is_project_doc or is_code_file_index or is_in_extras
+
+    def make_entry(item, status):
+        path_str = item.get("path")
         path_obj = Path(path_str)
-
-        is_project_doc = path_str.startswith("project/")
-        is_code_file_index = path_str == "api/docs/CODE_FILE_INDEX.md"
-        is_in_extras = path_str in extras_to_include
-
-        if not (is_project_doc or is_code_file_index or is_in_extras):
-            if debug: print(f"[FILTERED OUT] Path '{path_str}' does not match project scope.")
-            continue
-
-        processed_paths.add(path_str)
-
-        trace_item = trace_map.get(path_str)
-        legacy_item = legacy_entries.get(path_str)
         exists_on_disk = (repo_root / path_str).exists()
 
-        status = "unknown"
-        source = "unknown"
+        final_status = status
+        if status == "registered" and not exists_on_disk:
+            final_status = "missing"
 
-        if trace_item:
-            status = "registered" if exists_on_disk else "missing"
-            source = "TRACE_INDEX.yml"
-        elif legacy_item:
-            status = "legacy" if not exists_on_disk else "orphan"
-            source = "project/PROJECT_REGISTRY.md"
-        elif path_str in extras_to_include:
-             status = "missing"
-             source = "extras"
-
-        if exists_on_disk and not trace_item and not legacy_item:
-            status = "orphan"
-            source = "filesystem"
-
-        module, category = derive_module_category(path_obj)
-        entry = {
-            "name": derive_name(path_obj, legacy_item), "path": path_str, "type": "doc",
-            "module": module, "category": category, "registered_in": trace_item.get("registered_in", []) if trace_item else [],
-            "status": status, "notes": legacy_item["notes"] if legacy_item else "", "source": source,
+        return {
+            "name": derive_name(path_obj, item), "path": path_str, "type": "doc",
+            "module": derive_module_category(path_obj)[0], "category": derive_module_category(path_obj)[1],
+            "registered_in": item.get("registered_in", []),
+            "status": final_status, "notes": item.get("notes", ""), "source": "", # Source will be set in register
         }
-        registry.append(entry)
 
+    def register(path_str, entry_data, source):
+        p = normalize_path(path_str)
+        if not is_path_allowed(p) or p in processed:
+            if debug and not is_path_allowed(p):
+                print(f"[FILTERED] Path '{p}' not in project scope.")
+            return
+
+        processed.add(p)
+        entry_data["source"] = source
+        registry_map[p] = entry_data
+
+    # Pass 1: TRACE_INDEX.yml (highest priority)
+    for path_str, item in trace_map.items():
+        entry = make_entry(item, status="registered")
+        register(path_str, entry, source="TRACE_INDEX.yml")
+
+    # Pass 2: extras.yml (second priority)
+    for path_str in extras_to_include:
+        item = {"path": path_str, "notes": "Included via extras file"}
+        entry = make_entry(item, status="registered")
+        register(path_str, entry, source="extras.yml")
+
+    # Pass 3: Legacy registry (lowest priority)
+    for path_str, item in legacy_entries.items():
+        p = normalize_path(path_str)
+        if p in registry_map:
+            if "Originally in legacy registry" not in registry_map[p]["notes"]:
+                 registry_map[p]["notes"] += "; Originally in legacy registry"
+            continue
+
+        # If a legacy file exists on disk but is not in TRACE_INDEX, it's an orphan.
+        exists_on_disk = (repo_root / p).exists()
+        status = "orphan" if exists_on_disk else "legacy"
+
+        entry = make_entry(item, status=status)
+        register(p, entry, source="project/PROJECT_REGISTRY.md")
+
+    # --- 3. Scan for orphan files ---
     if project_dir.exists():
         for file_path in project_dir.rglob('*'):
             if file_path.is_file():
-                path_str = normalize_path(str(file_path.relative_to(repo_root)))
-                if path_str not in processed_paths:
-                    if not path_str.startswith("project/"):
-                        if debug: print(f"[FILTERED OUT] Orphan scan skipped non-project file: {path_str}")
-                        continue
+                path_str = str(file_path.relative_to(repo_root))
+                p = normalize_path(path_str)
+                if p not in processed and is_path_allowed(p):
+                    item = {"path": p, "notes": "File exists on disk but is not tracked."}
+                    entry = make_entry(item, status="orphan")
+                    register(p, entry, source="filesystem")
 
-                    processed_paths.add(path_str)
-                    path_obj = Path(path_str)
-                    module, category = derive_module_category(path_obj)
-                    entry = { "name": derive_name(path_obj), "path": path_str, "type": "doc", "module": module, "category": category,
-                        "registered_in": [], "status": "orphan", "notes": "", "source": "filesystem",
-                    }
-                    registry.append(entry)
-
+    # --- 4. Finalize and write to JSON ---
+    registry = list(registry_map.values())
     registry.sort(key=lambda x: (x["module"], x["category"], x["path"]))
 
     if output_json_path.exists():
