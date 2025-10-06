@@ -246,6 +246,37 @@ This section describes the low-level design of the official supporting modules f
 
 ---
 
+## Component Implementation Details
+
+This section provides explicit links to the source code for the key components described in this LLD.
+
+| Component / Feature | Linked Code Artifacts |
+|---|---|
+| **API Middleware** | `api/src/zotify_api/middleware/request_id.py` |
+| **Provider Abstraction** | `api/src/zotify_api/providers/base.py`, `api/src/zotify_api/providers/spotify_connector.py` |
+| **Database Architecture** | `api/src/zotify_api/database/session.py`, `api/src/zotify_api/database/models.py`, `api/src/zotify_api/database/crud.py` |
+| **Spotify Integration** | `api/src/zotify_api/services/spoti_client.py`, `api/src/zotify_api/routes/auth.py` |
+| **Configuration Management** | `api/src/zotify_api/config.py`, `api/src/zotify_api/services/config_service.py`, `api/src/zotify_api/routes/config.py` |
+| **Downloads Subsystem** | `api/src/zotify_api/services/download_service.py`, `api/src/zotify_api/routes/downloads.py` |
+| **Error Handling Module** | The error handling module (`api/src/zotify_api/core/error_handler/`) includes a main handler class, configuration models (`config.py`), and a system of triggers (`triggers.py`) and actions (`actions/`). |
+| **Logging Framework** | The logging framework (`api/src/zotify_api/core/logging_framework/`) is composed of a core `service.py`, Pydantic `schemas.py`, custom `filters.py`, and various logging handlers (`handlers/`). |
+| **Gonk-TestUI** | The Gonk test UI is composed of a Flask backend (`Gonk/GonkUI/app.py`), a JavaScript frontend (`Gonk/GonkUI/static/app.js`), and various views (`Gonk/GonkUI/views/jwt_ui.py`). It also includes a CLI component (`Gonk/GonkCLI/main.py`) with helper modules like `Gonk/GonkCLI/modules/jwt_mock.py`. |
+| **Snitch** | The Snitch microservice (`snitch/snitch.go`) is a standalone Go application. Its documentation, including `snitch/docs/ARCHITECTURE.md` and `snitch/docs/PROJECT_PLAN.md`, details its Zero Trust security model. |
+| **System & Health** | `api/src/zotify_api/routes/system.py` |
+| **User & Profile Mgt.** | `api/src/zotify_api/routes/user.py`, `api/src/zotify_api/services/user_service.py` |
+| **Playlist Mgt.** | `api/src/zotify_api/routes/playlists.py`, `api/src/zotify_api/services/playlists_service.py` |
+| **Track Mgt.** | `api/src/zotify_api/routes/tracks.py`, `api/src/zotify_api/services/tracks_service.py` |
+| **Search** | `api/src/zotify_api/routes/search.py`, `api/src/zotify_api/services/search.py` |
+| **Cache Mgt.** | `api/src/zotify_api/routes/cache.py`, `api/src/zotify_api/services/cache_service.py` |
+| **Webhooks** | `api/src/zotify_api/routes/webhooks.py`, `api/src/zotify_api/services/webhooks.py` |
+| **Notifications** | `api/src/zotify_api/routes/notifications.py`, `api/src/zotify_api/services/notifications_service.py` |
+| **Sync** | `api/src/zotify_api/routes/sync.py`, `api/src/zotify_api/services/sync_service.py` |
+| **Network Utilities** | `api/src/zotify_api/routes/network.py`, `api/src/zotify_api/services/network_service.py` |
+| **Data Schemas** | The full set of Pydantic models for request/response validation is located in `api/src/zotify_api/schemas/`. This includes schemas for all major data models, such as `auth.py`, `user.py`, `tracks.py`, `playlists.py`, and system-level models like `config.py`. Key schemas are `api/src/zotify_api/schemas/user.py` and `api/src/zotify_api/schemas/auth.py`. |
+| **Test Suite** | The full suite of functional and unit tests is located in `api/tests/`. This includes tests for all API endpoints (e.g., `api/tests/test_playlists.py`, `api/tests/test_system.py`) and services (e.g., `api/tests/unit/test_user_service.py`, `api/tests/unit/test_tracks_service.py`). |
+
+---
+
 ## Ongoing Maintenance {#lld-ongoing-maintenance}
 All development tasks must follow the [Task Execution Checklist](./TASK_CHECKLIST.md) to ensure consistency, quality, and security.
 

@@ -68,6 +68,19 @@ This component is critical for debugging, monitoring, and creating detailed audi
 
 --8<-- "api/docs/manuals/LOGGING_GUIDE.md"
 
+### 3.4 Component Overview
+
+The following table provides a high-level overview of the major components and documents that constitute the Zotify platform. This serves as a central map for navigating the repository.
+
+| Component | Description | Key Documents & Links |
+|-----------|-------------|-----------------------|
+| **Core Project Docs** | Foundational documents defining the project's purpose, scope, and governance. | - [`PROJECT_REGISTRY.md`](./PROJECT_REGISTRY.md)<br>- [`ALIGNMENT_MATRIX.md`](./ALIGNMENT_MATRIX.md)<br>- [`USECASES.md`](./USECASES.md) |
+| **Agent Guidance** | Instructions and workflows for AI agents working on this repository. | - [`AGENTS.md`](../AGENTS.md) |
+| **API Module** | The core FastAPI application, including all routes, services, and database logic. | - `api/` |
+| **Gonk Module** | A suite of developer tools for testing and interacting with the API. | - `Gonk/` |
+| **Snitch Module** | A helper microservice for handling OAuth callbacks securely. | - `snitch/` |
+| **Scripts Module** | A collection of utility and automation scripts for development, CI, and governance. | - `scripts/` |
+
 ## 4. Non-Functional Requirements
 - **Test Coverage**: >90% unit test coverage.
 - **Performance**: <200ms average API response time for common queries.
