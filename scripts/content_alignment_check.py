@@ -32,7 +32,7 @@ DESIGN_DOCS = {
 
 # Noise filters: anything outside documentation scope
 NOISE_PATTERNS = [
-    r"^api/(?!docs/)",     # code under api/, except api/docs/
+    r"^api/",     # code under api/, except api/docs/
     r"^scripts/",
     r"^snitch/",
     r"^Gonk/",
