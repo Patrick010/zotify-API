@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Tests for the simplified build_project_registry script.
+Tests for the corrected build_project_registry script.
 """
 import json
 import sys
@@ -16,8 +16,8 @@ sys.path.append(str(Path(__file__).resolve().parents[2]))
 from scripts import build_project_registry
 
 
-class TestSimplifiedBuildProjectRegistry(unittest.TestCase):
-    """Tests for the new, simplified build_project_registry script."""
+class TestCorrectedBuildProjectRegistry(unittest.TestCase):
+    """Tests for the corrected build_project_registry script that uses TRACE_INDEX.yml for descriptions."""
 
     def setUp(self):
         self.tmpdir = TemporaryDirectory()
@@ -46,19 +46,19 @@ class TestSimplifiedBuildProjectRegistry(unittest.TestCase):
     def tearDown(self):
         self.tmpdir.cleanup()
 
-    def test_registry_generation_with_descriptions(self):
+    def test_registry_generation_uses_trace_index_descriptions(self):
         """
-        Test the full registry generation logic from a mock TRACE_INDEX.yml
-        to ensure it correctly enriches entries with descriptions.
+        Test that the registry generation logic correctly pulls descriptions
+        from the mock TRACE_INDEX.yml, not a hardcoded map.
         """
         trace_content = """
 artifacts:
   - path: project/proposals/NEW_PROPOSAL.md
-    description: "Old placeholder description"
+    description: "This is the correct description from TRACE_INDEX."
   - path: project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md
-    description: "Another placeholder"
+    description: "This is also the correct description."
   - path: api/docs/some_api_doc.md
-    description: "This should be ignored"
+    description: "This description for a non-project file should be ignored."
   - path: project/proposals/MISSING_FILE.md
     description: "A file that does not exist on disk"
 """
@@ -85,16 +85,16 @@ artifacts:
         self.assertEqual(status_map["project/proposals/NEW_PROPOSAL.md"], "registered")
         self.assertEqual(status_map["project/proposals/MISSING_FILE.md"], "missing")
 
-        # Check that descriptions from METADATA_MAP are used
-        self.assertEqual(desc_map["project/proposals/NEW_PROPOSAL.md"], "A template for creating new project proposals.")
-        self.assertEqual(desc_map["project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md"], "A phased implementation plan for the new QA Gate system.")
+        # Check that descriptions now come from the mock TRACE_INDEX.yml
+        self.assertEqual(desc_map["project/proposals/NEW_PROPOSAL.md"], "This is the correct description from TRACE_INDEX.")
+        self.assertEqual(desc_map["project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md"], "This is also the correct description.")
 
         # --- Validate Markdown Output ---
         self.assertTrue(build_project_registry.OUTPUT_MD.exists())
         md_content = build_project_registry.OUTPUT_MD.read_text()
 
         self.assertIn("`project/proposals/NEW_PROPOSAL.md`", md_content)
-        self.assertIn("A template for creating new project proposals.", md_content)
+        self.assertIn("This is the correct description from TRACE_INDEX.", md_content)
         self.assertIn("`project/proposals/MISSING_FILE.md`", md_content)
         self.assertIn("| missing |", md_content)
         self.assertNotIn("api/docs/some_api_doc.md", md_content)
