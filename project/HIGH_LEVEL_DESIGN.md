@@ -89,6 +89,16 @@ The following table provides a high-level overview of the major components and d
 
 ## 5. Documentation Governance
 
+<!-- trace:begin FEAT-ZOTIFY-GOVERNANCE-01 -->
+**Feature:** Core Project Governance (`FEAT-ZOTIFY-GOVERNANCE-01`)
+**Linked File:** [`AGENTS.md`](../AGENTS.md)
+**Trace ID:** FEAT-ZOTIFY-GOVERNANCE-01
+**Source:** [BACKLOG.md](BACKLOG.md#feat-zotify-governance-01)
+**Registry:** [PROJECT_REGISTRY.md](PROJECT_REGISTRY.md)
+**Alignment:** [ALIGNMENT_MATRIX.md](ALIGNMENT_MATRIX.md)
+**Description:** The core project governance framework, including the agent operating manual (`AGENTS.md`), quality assurance policies (`QA_GOVERNANCE.md`), and automated tooling (`scripts/linter.py`, `scripts/repo_inventory_and_governance.py`) to enforce standards.
+<!-- trace:end FEAT-ZOTIFY-GOVERNANCE-01 -->
+
 The project has completed a comprehensive audit and alignment phase. The primary goal of this phase was to bring all documentation in sync with the implemented reality of the codebase. The project now operates under the following "living documentation" principles, which are enforced by the tooling established during the audit:
 
 - **Reality First**: The codebase is treated as the ground truth. Documentation is updated to reflect the actual, verified behavior of the application.

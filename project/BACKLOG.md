@@ -80,6 +80,173 @@ All new tasks added to this backlog **must** use the template defined in the `PI
 
 ### Low Priority
 
+### FEAT-ZOTIFY-PLAYLISTS-01
+- **Task ID:** `FEAT-ZOTIFY-PLAYLISTS-01`
+- **Audit Ref:** `AR-013`
+- **Source:** `Trace Policy: Retrospective — added for alignment completeness.`
+- **Priority:** LOW
+- **Dependencies:** None
+- **Description:** Retrospective alignment for the initial implementation of the core playlist management service, including creating, reading, and managing user playlists.
+- **Acceptance Criteria:**
+  - [x] The `playlists_service.py` module provides core business logic for playlists.
+  - [x] The `playlists.py` routes expose this functionality via the API.
+  - [x] The feature is fully aligned in the `ALIGNMENT_MATRIX.md` and design documents.
+- **Estimated Effort:** Small
+
+### FEAT-ZOTIFY-TRACKS-01
+- **Task ID:** `FEAT-ZOTIFY-TRACKS-01`
+- **Audit Ref:** `AR-017`
+- **Source:** `Trace Policy: Retrospective — added for alignment completeness.`
+- **Priority:** LOW
+- **Dependencies:** None
+- **Description:** Retrospective alignment for the core track management feature, including API endpoints for retrieving track information.
+- **Acceptance Criteria:**
+  - [x] The `tracks_service.py` module provides core business logic for tracks.
+  - [x] The `tracks.py` routes expose this functionality via the API.
+  - [x] The feature is fully aligned in the `ALIGNMENT_MATRIX.md` and design documents.
+- **Estimated Effort:** Small
+
+### FEAT-ZOTIFY-SEARCH-01
+- **Task ID:** `FEAT-ZOTIFY-SEARCH-01`
+- **Audit Ref:** `AR-014`
+- **Source:** `Trace Policy: Retrospective — added for alignment completeness.`
+- **Priority:** LOW
+- **Dependencies:** None
+- **Description:** Retrospective alignment for the core search feature, which allows users to search for tracks, albums, and artists.
+- **Acceptance Criteria:**
+  - [x] The `search.py` service provides the core business logic for search.
+  - [x] The `search.py` route exposes this functionality via the API.
+  - [x] The feature is fully aligned in the `ALIGNMENT_MATRIX.md` and design documents.
+- **Estimated Effort:** Small
+
+### FEAT-ZOTIFY-USER-01
+- **Task ID:** `FEAT-ZOTIFY-USER-01`
+- **Audit Ref:** `AR-018`
+- **Source:** `Trace Policy: Retrospective — added for alignment completeness.`
+- **Priority:** LOW
+- **Dependencies:** None
+- **Description:** Retrospective alignment for the core user management feature, including API endpoints for retrieving user profiles and preferences.
+- **Acceptance Criteria:**
+  - [x] The `user_service.py` module provides core business logic for user management.
+  - [x] The `user.py` route exposes this functionality via the API.
+  - [x] The feature is fully aligned in the `ALIGNMENT_MATRIX.md` and design documents.
+- **Estimated Effort:** Small
+
+### FEAT-ZOTIFY-SYNC-01
+- **Task ID:** `FEAT-ZOTIFY-SYNC-01`
+- **Audit Ref:** `AR-015`
+- **Source:** `Trace Policy: Retrospective — added for alignment completeness.`
+- **Priority:** LOW
+- **Dependencies:** None
+- **Description:** Retrospective alignment for the core sync feature, which handles synchronization of data between the local database and the music provider.
+- **Acceptance Criteria:**
+  - [x] The `sync_service.py` module provides core business logic for synchronization.
+  - [x] The `sync.py` route exposes this functionality via the API.
+  - [x] The feature is fully aligned in the `ALIGNMENT_MATRIX.md` and design documents.
+- **Estimated Effort:** Small
+
+### FEAT-ZOTIFY-CACHE-01
+- **Task ID:** `FEAT-ZOTIFY-CACHE-01`
+- **Audit Ref:** `AR-008`
+- **Source:** `Trace Policy: Retrospective — added for alignment completeness.`
+- **Priority:** LOW
+- **Dependencies:** None
+- **Description:** Retrospective alignment for the cache management feature, which provides endpoints for inspecting and clearing the application cache.
+- **Acceptance Criteria:**
+  - [x] The `cache_service.py` module provides core business logic for cache management.
+  - [x] The `cache.py` route exposes this functionality via the API.
+  - [x] The feature is fully aligned in the `ALIGNMENT_MATRIX.md` and design documents.
+- **Estimated Effort:** Small
+
+### FEAT-ZOTIFY-NOTIFICATIONS-01
+- **Task ID:** `FEAT-ZOTIFY-NOTIFICATIONS-01`
+- **Audit Ref:** `AR-012`
+- **Source:** `Trace Policy: Retrospective — added for alignment completeness.`
+- **Priority:** LOW
+- **Dependencies:** None
+- **Description:** Retrospective alignment for the notifications feature, which provides endpoints for managing notifications.
+- **Acceptance Criteria:**
+  - [x] The `notifications_service.py` module provides core business logic for notifications.
+  - [x] The `notifications.py` route exposes this functionality via the API.
+  - [x] The feature is fully aligned in the `ALIGNMENT_MATRIX.md` and design documents.
+- **Estimated Effort:** Small
+
+### FEAT-ZOTIFY-NETWORK-01
+- **Task ID:** `FEAT-ZOTIFY-NETWORK-01`
+- **Audit Ref:** `AR-011`
+- **Source:** `Trace Policy: Retrospective — added for alignment completeness.`
+- **Priority:** LOW
+- **Dependencies:** None
+- **Description:** Retrospective alignment for the network utilities feature, which provides endpoints for network-related diagnostics.
+- **Acceptance Criteria:**
+  - [x] The `network_service.py` module provides core business logic for network utilities.
+  - [x] The `network.py` route exposes this functionality via the API.
+  - [x] The feature is fully aligned in the `ALIGNMENT_MATRIX.md` and design documents.
+- **Estimated Effort:** Small
+
+### FEAT-ZOTIFY-WEBHOOKS-01
+- **Task ID:** `FEAT-ZOTIFY-WEBHOOKS-01`
+- **Audit Ref:** `AR-019`
+- **Source:** `Trace Policy: Retrospective — added for alignment completeness.`
+- **Priority:** LOW
+- **Dependencies:** None
+- **Description:** Retrospective alignment for the webhooks feature, which provides endpoints for managing webhooks.
+- **Acceptance Criteria:**
+  - [x] The `webhooks.py` service provides core business logic for webhooks.
+  - [x] The `webhooks.py` route exposes this functionality via the API.
+  - [x] The feature is fully aligned in the `ALIGNMENT_MATRIX.md` and design documents.
+- **Estimated Effort:** Small
+
+### FEAT-ZOTIFY-DATABASE-01
+- **Task ID:** `FEAT-ZOTIFY-DATABASE-01`
+- **Audit Ref:** `AR-004`
+- **Source:** `Trace Policy: Retrospective — added for alignment completeness.`
+- **Priority:** LOW
+- **Dependencies:** None
+- **Description:** Retrospective alignment for the core database management components, including the SQLAlchemy ORM, Alembic migrations, and related documentation.
+- **Acceptance Criteria:**
+  - [x] The database module provides core ORM and session management.
+  - [x] Alembic is configured for schema migrations.
+  - [x] The feature is fully aligned in the `ALIGNMENT_MATRIX.md` and design documents.
+- **Estimated Effort:** Small
+
+### FEAT-ZOTIFY-GONK-01
+- **Task ID:** `FEAT-ZOTIFY-GONK-01`
+- **Audit Ref:** `AR-024`
+- **Source:** `Trace Policy: Retrospective — added for alignment completeness.`
+- **Priority:** LOW
+- **Dependencies:** None
+- **Description:** Retrospective alignment for the Gonk Test UI, a standalone developer tool for testing the Zotify API.
+- **Acceptance Criteria:**
+  - [x] The Gonk Test UI provides a web interface and CLI for API interaction.
+  - [x] The feature is fully aligned in the `ALIGNMENT_MATRIX.md` and design documents.
+- **Estimated Effort:** Small
+
+### FEAT-ZOTIFY-SNITCH-01
+- **Task ID:** `FEAT-ZOTIFY-SNITCH-01`
+- **Audit Ref:** `AR-025`
+- **Source:** `Trace Policy: Retrospective — added for alignment completeness.`
+- **Priority:** LOW
+- **Dependencies:** None
+- **Description:** Retrospective alignment for the Snitch microservice, a helper application to securely manage the OAuth callback flow.
+- **Acceptance Criteria:**
+  - [x] The Snitch microservice is a self-contained Go application.
+  - [x] The feature is fully aligned in the `ALIGNMENT_MATRIX.md` and design documents.
+- **Estimated Effort:** Small
+
+### FEAT-ZOTIFY-GOVERNANCE-01
+- **Task ID:** `FEAT-ZOTIFY-GOVERNANCE-01`
+- **Audit Ref:** `AR-027, AR-030, AR-065, AR-066`
+- **Source:** `Trace Policy: Retrospective — added for alignment completeness.`
+- **Priority:** LOW
+- **Dependencies:** None
+- **Description:** Retrospective alignment for the core project governance framework, including the agent operating manual, QA policies, and automated linting and validation scripts.
+- **Acceptance Criteria:**
+  - [x] The core governance documents (`AGENTS.md`, `QA_GOVERNANCE.md`) are defined.
+  - [x] The core governance scripts (`linter.py`, `repo_inventory_and_governance.py`) are implemented.
+  - [x] The feature is fully aligned in the `ALIGNMENT_MATRIX.md` and design documents.
+- **Estimated Effort:** Medium
+
 *(This section includes tasks from a previous audit that are still relevant but are a lower priority than the new feature work.)*
 
 -   **Task ID:** `TD-TASK-01`

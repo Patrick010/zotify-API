@@ -85,6 +85,16 @@ The FastAPI application uses several middleware to provide cross-cutting concern
 
 ## Unified Database Architecture {#lld-unified-database-architecture}
 
+<!-- trace:begin FEAT-ZOTIFY-DATABASE-01 -->
+**Feature:** Unified Database Architecture (`FEAT-ZOTIFY-DATABASE-01`)
+**Linked File:** [`api/src/zotify_api/database/`](../api/src/zotify_api/database/)
+**Trace ID:** FEAT-ZOTIFY-DATABASE-01
+**Source:** [BACKLOG.md](BACKLOG.md#feat-zotify-database-01)
+**Registry:** [CODE_FILE_INDEX.md](../api/docs/CODE_FILE_INDEX.md)
+**Alignment:** [ALIGNMENT_MATRIX.md](ALIGNMENT_MATRIX.md)
+**Description:** The core persistence layer, including the SQLAlchemy ORM, Alembic for migrations, and all database models and session management.
+<!-- trace:end FEAT-ZOTIFY-DATABASE-01 -->
+
 **Goal:** To establish a single, unified, and backend-agnostic persistence layer for the entire application, managed by SQLAlchemy.
 
 **Module:** `api/src/zotify_api/database/`
@@ -224,6 +234,16 @@ This section describes the low-level design of the official supporting modules f
 
 ### Gonk-TestUI {#lld-gonk-testui}
 
+<!-- trace:begin FEAT-ZOTIFY-GONK-01 -->
+**Feature:** Gonk Test UI (`FEAT-ZOTIFY-GONK-01`)
+**Linked File:** [`Gonk/`](../Gonk/)
+**Trace ID:** FEAT-ZOTIFY-GONK-01
+**Source:** [BACKLOG.md](BACKLOG.md#feat-zotify-gonk-01)
+**Registry:** [CODE_FILE_INDEX.md](../Gonk/CODE_FILE_INDEX.md)
+**Alignment:** [ALIGNMENT_MATRIX.md](ALIGNMENT_MATRIX.md)
+**Description:** A standalone developer tool for testing the Zotify API, including a web UI and a command-line interface.
+<!-- trace:end FEAT-ZOTIFY-GONK-01 -->
+
 **Purpose:** A standalone developer tool for testing the Zotify API.
 
 *   **Backend (`app.py`):** A lightweight Flask server.
@@ -237,6 +257,16 @@ This section describes the low-level design of the official supporting modules f
 *   **Templating:** The `index.html` is rendered as a Flask template to allow the backend to inject the configurable `--api-url` into the frontend at runtime.
 
 ### Snitch {#lld-snitch}
+
+<!-- trace:begin FEAT-ZOTIFY-SNITCH-01 -->
+**Feature:** Snitch Microservice (`FEAT-ZOTIFY-SNITCH-01`)
+**Linked File:** [`snitch/`](../snitch/)
+**Trace ID:** FEAT-ZOTIFY-SNITCH-01
+**Source:** [BACKLOG.md](BACKLOG.md#feat-zotify-snitch-01)
+**Registry:** [CODE_FILE_INDEX.md](../snitch/CODE_FILE_INDEX.md)
+**Alignment:** [ALIGNMENT_MATRIX.md](ALIGNMENT_MATRIX.md)
+**Description:** A helper application to securely manage the OAuth callback flow for CLI clients, built as a self-contained Go application.
+<!-- trace:end FEAT-ZOTIFY-SNITCH-01 -->
 
 **Purpose:** A helper application to securely manage the OAuth callback flow for CLI clients.
 
@@ -274,6 +304,114 @@ This section provides explicit links to the source code for the key components d
 | **Network Utilities** | `api/src/zotify_api/routes/network.py`, `api/src/zotify_api/services/network_service.py` |
 | **Data Schemas** | The full set of Pydantic models for request/response validation is located in `api/src/zotify_api/schemas/`. This includes schemas for all major data models, such as `auth.py`, `user.py`, `tracks.py`, `playlists.py`, and system-level models like `config.py`. Key schemas are `api/src/zotify_api/schemas/user.py` and `api/src/zotify_api/schemas/auth.py`. |
 | **Test Suite** | The full suite of functional and unit tests is located in `api/tests/`. This includes tests for all API endpoints (e.g., `api/tests/test_playlists.py`, `api/tests/test_system.py`) and services (e.g., `api/tests/unit/test_user_service.py`, `api/tests/unit/test_tracks_service.py`). |
+
+#### Playlist Service {#lld-playlist-service}
+
+<!-- trace:begin FEAT-ZOTIFY-PLAYLISTS-01 -->
+**Feature:** Playlist Management Service (`FEAT-ZOTIFY-PLAYLISTS-01`)
+**Linked File:** [`api/src/zotify_api/services/playlists_service.py`](../api/src/zotify_api/services/playlists_service.py)
+**Trace ID:** FEAT-ZOTIFY-PLAYLISTS-01
+**Source:** [BACKLOG.md](BACKLOG.md#feat-zotify-playlists-01)
+**Registry:** [CODE_FILE_INDEX.md](../api/docs/CODE_FILE_INDEX.md)
+**Alignment:** [ALIGNMENT_MATRIX.md](ALIGNMENT_MATRIX.md)
+**Description:** Core business logic for creating, retrieving, and managing user playlists.
+<!-- trace:end FEAT-ZOTIFY-PLAYLISTS-01 -->
+
+#### Track Service {#lld-track-service}
+
+<!-- trace:begin FEAT-ZOTIFY-TRACKS-01 -->
+**Feature:** Track Management Service (`FEAT-ZOTIFY-TRACKS-01`)
+**Linked File:** [`api/src/zotify_api/services/tracks_service.py`](../api/src/zotify_api/services/tracks_service.py)
+**Trace ID:** FEAT-ZOTIFY-TRACKS-01
+**Source:** [BACKLOG.md](BACKLOG.md#feat-zotify-tracks-01)
+**Registry:** [CODE_FILE_INDEX.md](../api/docs/CODE_FILE_INDEX.md)
+**Alignment:** [ALIGNMENT_MATRIX.md](ALIGNMENT_MATRIX.md)
+**Description:** Core business logic for retrieving and managing track information.
+<!-- trace:end FEAT-ZOTIFY-TRACKS-01 -->
+
+#### Search Service {#lld-search-service}
+
+<!-- trace:begin FEAT-ZOTIFY-SEARCH-01 -->
+**Feature:** Search Service (`FEAT-ZOTIFY-SEARCH-01`)
+**Linked File:** [`api/src/zotify_api/services/search.py`](../api/src/zotify_api/services/search.py)
+**Trace ID:** FEAT-ZOTIFY-SEARCH-01
+**Source:** [BACKLOG.md](BACKLOG.md#feat-zotify-search-01)
+**Registry:** [CODE_FILE_INDEX.md](../api/docs/CODE_FILE_INDEX.md)
+**Alignment:** [ALIGNMENT_MATRIX.md](ALIGNMENT_MATRIX.md)
+**Description:** Core business logic for executing search queries against the music provider.
+<!-- trace:end FEAT-ZOTIFY-SEARCH-01 -->
+
+#### User Service {#lld-user-service}
+
+<!-- trace:begin FEAT-ZOTIFY-USER-01 -->
+**Feature:** User Management Service (`FEAT-ZOTIFY-USER-01`)
+**Linked File:** [`api/src/zotify_api/services/user_service.py`](../api/src/zotify_api/services/user_service.py)
+**Trace ID:** FEAT-ZOTIFY-USER-01
+**Source:** [BACKLOG.md](BACKLOG.md#feat-zotify-user-01)
+**Registry:** [CODE_FILE_INDEX.md](../api/docs/CODE_FILE_INDEX.md)
+**Alignment:** [ALIGNMENT_MATRIX.md](ALIGNMENT_MATRIX.md)
+**Description:** Core business logic for retrieving and managing user profiles and preferences.
+<!-- trace:end FEAT-ZOTIFY-USER-01 -->
+
+#### Sync Service {#lld-sync-service}
+
+<!-- trace:begin FEAT-ZOTIFY-SYNC-01 -->
+**Feature:** Sync Service (`FEAT-ZOTIFY-SYNC-01`)
+**Linked File:** [`api/src/zotify_api/services/sync_service.py`](../api/src/zotify_api/services/sync_service.py)
+**Trace ID:** FEAT-ZOTIFY-SYNC-01
+**Source:** [BACKLOG.md](BACKLOG.md#feat-zotify-sync-01)
+**Registry:** [CODE_FILE_INDEX.md](../api/docs/CODE_FILE_INDEX.md)
+**Alignment:** [ALIGNMENT_MATRIX.md](ALIGNMENT_MATRIX.md)
+**Description:** Core business logic for synchronizing data between the local database and the music provider.
+<!-- trace:end FEAT-ZOTIFY-SYNC-01 -->
+
+#### Cache Service {#lld-cache-service}
+
+<!-- trace:begin FEAT-ZOTIFY-CACHE-01 -->
+**Feature:** Cache Management Service (`FEAT-ZOTIFY-CACHE-01`)
+**Linked File:** [`api/src/zotify_api/services/cache_service.py`](../api/src/zotify_api/services/cache_service.py)
+**Trace ID:** FEAT-ZOTIFY-CACHE-01
+**Source:** [BACKLOG.md](BACKLOG.md#feat-zotify-cache-01)
+**Registry:** [CODE_FILE_INDEX.md](../api/docs/CODE_FILE_INDEX.md)
+**Alignment:** [ALIGNMENT_MATRIX.md](ALIGNMENT_MATRIX.md)
+**Description:** Core business logic for inspecting and clearing the application cache.
+<!-- trace:end FEAT-ZOTIFY-CACHE-01 -->
+
+#### Notifications Service {#lld-notifications-service}
+
+<!-- trace:begin FEAT-ZOTIFY-NOTIFICATIONS-01 -->
+**Feature:** Notifications Service (`FEAT-ZOTIFY-NOTIFICATIONS-01`)
+**Linked File:** [`api/src/zotify_api/services/notifications_service.py`](../api/src/zotify_api/services/notifications_service.py)
+**Trace ID:** FEAT-ZOTIFY-NOTIFICATIONS-01
+**Source:** [BACKLOG.md](BACKLOG.md#feat-zotify-notifications-01)
+**Registry:** [CODE_FILE_INDEX.md](../api/docs/CODE_FILE_INDEX.md)
+**Alignment:** [ALIGNMENT_MATRIX.md](ALIGNMENT_MATRIX.md)
+**Description:** Core business logic for managing and dispatching notifications.
+<!-- trace:end FEAT-ZOTIFY-NOTIFICATIONS-01 -->
+
+#### Network Service {#lld-network-service}
+
+<!-- trace:begin FEAT-ZOTIFY-NETWORK-01 -->
+**Feature:** Network Utilities Service (`FEAT-ZOTIFY-NETWORK-01`)
+**Linked File:** [`api/src/zotify_api/services/network_service.py`](../api/src/zotify_api/services/network_service.py)
+**Trace ID:** FEAT-ZOTIFY-NETWORK-01
+**Source:** [BACKLOG.md](BACKLOG.md#feat-zotify-network-01)
+**Registry:** [CODE_FILE_INDEX.md](../api/docs/CODE_FILE_INDEX.md)
+**Alignment:** [ALIGNMENT_MATRIX.md](ALIGNMENT_MATRIX.md)
+**Description:** Core business logic for providing network-related diagnostics.
+<!-- trace:end FEAT-ZOTIFY-NETWORK-01 -->
+
+#### Webhooks Service {#lld-webhooks-service}
+
+<!-- trace:begin FEAT-ZOTIFY-WEBHOOKS-01 -->
+**Feature:** Webhooks Service (`FEAT-ZOTIFY-WEBHOOKS-01`)
+**Linked File:** [`api/src/zotify_api/services/webhooks.py`](../api/src/zotify_api/services/webhooks.py)
+**Trace ID:** FEAT-ZOTIFY-WEBHOOKS-01
+**Source:** [BACKLOG.md](BACKLOG.md#feat-zotify-webhooks-01)
+**Registry:** [CODE_FILE_INDEX.md](../api/docs/CODE_FILE_INDEX.md)
+**Alignment:** [ALIGNMENT_MATRIX.md](ALIGNMENT_MATRIX.md)
+**Description:** Core business logic for managing and dispatching webhooks.
+<!-- trace:end FEAT-ZOTIFY-WEBHOOKS-01 -->
 
 ---
 
