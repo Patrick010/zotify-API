@@ -21,7 +21,6 @@ SCAN_SCOPE = [
     "project/USECASES.md",
     "project/USECASES_GAP_ANALYSIS.md",
     "project/FUTURE_ENHANCEMENTS.md",
-    "api/docs/CODE_FILE_INDEX.md",
 ]
 
 # Design docs for alignment checks
