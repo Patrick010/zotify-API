@@ -3,123 +3,138 @@ import os
 import re
 import yaml
 import sys
+import argparse
+from pathlib import Path
+from collections import defaultdict
 
-OUTPUT_PATH = "reports/description_compliance_report.md"
-TRACE_INDEX_PATH = 'project/reports/TRACE_INDEX.yml'
+OUTPUT_PATH = Path("project/reports/DESCRIPTION_COMPLIANCE_REPORT.md")
+TRACE_INDEX_PATH = Path("project/reports/TRACE_INDEX.yml")
 
-def get_master_descriptions(trace_index_path):
-    """
-    Loads descriptions from the master TRACE_INDEX.yml file for non-exempt artifacts.
-    """
-    with open(trace_index_path, 'r', encoding='utf-8') as f:
-        trace_index = yaml.safe_load(f)
+def load_trace_index_data():
+    """Loads all file paths and their descriptions from the TRACE_INDEX."""
+    with open(TRACE_INDEX_PATH, 'r', encoding='utf-8') as f:
+        data = yaml.safe_load(f).get('artifacts', [])
 
-    description_map = {}
-    for item in trace_index.get('artifacts', []):
-        if item.get('type') != 'exempt':
-            description_map[item['path']] = item.get('description', '').strip()
+    master_descriptions = {}
+    exempt_files = []
 
-    return description_map
+    for item in data:
+        path = item.get('path')
+        if not path:
+            continue
 
-def check_md_index(index_path, master_descriptions):
-    """
-    Checks a markdown index file against the master descriptions.
-    """
-    results = []
-    try:
-        with open(index_path, 'r', encoding='utf-8') as f:
-            lines = f.readlines()
-    except FileNotFoundError:
-        return [(index_path, "File not found", "⚠️ Missing", "The index file itself is missing.")]
+        if item.get('type') == 'exempt' or item.get('registered') == 'exempted':
+            exempt_files.append(path)
+        elif item.get('registered') is True and 'index' in item and item['index'] != '-':
+            master_descriptions[path] = {
+                "description": item.get('description', '').strip(),
+                "index_file": item['index']
+            }
 
-    header_found = False
-    headers = []
+    return master_descriptions, exempt_files
+
+def parse_unified_md_index(index_path_str):
+    """Parses the new, unified markdown table format."""
+    found_in_index = {}
+    index_path = Path(index_path_str)
+
+    if not index_path.exists():
+        return {}
+
+    with open(index_path, 'r', encoding='utf-8') as f:
+        lines = f.readlines()
+
     for line in lines:
-        if not header_found:
-            if re.match(r'\|.*Path.*\|', line):
-                header_found = True
-                headers = [h.strip().lower() for h in line.split('|') if h.strip()]
+        if not line.strip().startswith('|'):
             continue
 
-        if re.match(r'^\|-.*\|$', line.strip()):
+        cols = [c.strip() for c in line.split('|')]
+        if len(cols) < 3: # | `path` | description |
             continue
 
-        if re.match(r'^\|.*\|$', line.strip()):
-            cols = [c.strip() for c in line.strip().split('|')][1:-1]
-            if len(cols) < 1:
-                continue
+        path_match = re.search(r'`([^`]+)`', cols[1])
+        if path_match:
+            file_path = path_match.group(1)
+            description = cols[2]
+            found_in_index[file_path] = description.strip()
 
-            path_match = re.search(r'`([^`]+)`', cols[0])
-            file_path = path_match.group(1) if path_match else cols[0]
-
-            if file_path not in master_descriptions:
-                continue # Skip files not in the master index (or exempt)
-
-            try:
-                desc_index = headers.index('description')
-                current_desc = cols[desc_index].strip() if desc_index < len(cols) else ""
-                master_desc = master_descriptions[file_path]
-
-                status = "✅ Valid"
-                notes = ""
-                if not current_desc:
-                    status = "⚠️ Missing"
-                    notes = "Description is missing from index file."
-                elif current_desc != master_desc:
-                    status = "⚠️ Mismatched"
-                    notes = f"Description does not match master. Expected: '{master_desc}'"
-
-                results.append((file_path, index_path, status, notes))
-
-            except ValueError:
-                results.append((file_path, index_path, "⚠️ Missing", "Could not find 'Description' column in table."))
-                break # Stop processing this file if header is broken
-
-    return results
-
-def find_all_indices():
-    """Finds all CODE_FILE_INDEX.md and PROJECT_REGISTRY.md files."""
-    index_files = []
-    for root, _, files in os.walk("."):
-        for file in files:
-            if file in ["CODE_FILE_INDEX.md", "PROJECT_REGISTRY.md"]:
-                index_files.append(os.path.join(root, file))
-    return index_files
+    return found_in_index
 
 def main():
-    """
-    Main function to run the compliance check and generate the report.
-    """
-    master_descriptions = get_master_descriptions(TRACE_INDEX_PATH)
-    all_indices = find_all_indices()
+    parser = argparse.ArgumentParser(description="Validates that all registered files have descriptions in their respective indices.")
+    parser.add_argument("--validate", action="store_true", help="Run the validation process.")
+    args = parser.parse_args()
 
-    all_results = []
-    for index_path in all_indices:
-        all_results.extend(check_md_index(index_path, master_descriptions))
+    if not args.validate:
+        print("Script requires the --validate flag to run.", file=sys.stderr)
+        sys.exit(0)
 
-    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
+    master_descriptions, exempt_files = load_trace_index_data()
+
+    report_lines = [
+        "# Description Compliance Report\n",
+        "| File | Registered In | Status | Notes |",
+        "|------|----------------|--------|-------|",
+    ]
+
+    valid_count = 0
+    missing_count = 0
+
+    all_found_descriptions = {}
+    all_indices = set(v['index_file'] for v in master_descriptions.values())
+    for index_file in all_indices:
+        all_found_descriptions.update(parse_unified_md_index(index_file))
+
+    for file_path, data in sorted(master_descriptions.items()):
+        index_file = data['index_file']
+        master_desc = data['description']
+
+        status = "✅ Valid"
+        notes = "Description present"
+
+        if file_path not in all_found_descriptions:
+            status = "⚠️ Missing"
+            notes = "File not found in its registered index."
+            missing_count += 1
+        else:
+            found_desc = all_found_descriptions[file_path]
+            if not found_desc or found_desc.lower() in ["tbd", "n/a", ""]:
+                status = "⚠️ Missing"
+                notes = "Description is missing or a placeholder in the index file."
+                missing_count += 1
+            elif found_desc != master_desc:
+                status = "⚠️ Mismatched"
+                notes = f"Description does not match master. Expected: '{master_desc}', Found: '{found_desc}'"
+                missing_count += 1
+            else:
+                valid_count += 1
+
+        report_lines.append(f"| `{file_path}` | `{index_file}` | {status} | {notes} |")
+
+    total_checked = len(master_descriptions)
+    compliance_rate = 100
+    if total_checked > 0:
+        compliance_rate = int((valid_count / total_checked) * 100)
+
+    summary = [
+        "\n## Summary\n",
+        f"**Total files checked:** {total_checked}",
+        f"**Valid:** {valid_count}",
+        f"**Missing/Mismatched:** {missing_count}",
+        f"**Exempt:** {len(exempt_files)}",
+        f"**Overall compliance:** {compliance_rate}%"
+    ]
+
+    report_lines.extend(summary)
+
+    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
-        f.write("# Description Compliance Report\n\n")
-        f.write("| File | Index | Status | Notes |\n")
-        f.write("|------|-------|--------|-------|\n")
-
-        for file_path, index, status, notes in sorted(all_results):
-            f.write(f"| `{file_path}` | `{index}` | {status} | {notes} |\n")
-
-        total = len(all_results)
-        non_compliant = sum(1 for _, _, s, _ in all_results if "⚠️" in s)
-        compliance = 100
-        if total > 0:
-            compliance = int(((total - non_compliant) / total) * 100)
-
-        f.write(f"\n**Total entries checked:** {total}\n")
-        f.write(f"**Non-compliant entries:** {non_compliant}\n")
-        f.write(f"**Overall compliance:** {compliance}%\n")
+        f.write("\n".join(report_lines))
 
     print(f"Compliance report generated at {OUTPUT_PATH}")
-    if non_compliant > 0:
-        print(f"Found {non_compliant} non-compliant entries.")
-        # sys.exit(1) # We won't fail the build for now, just report.
+    if missing_count > 0:
+        print(f"Found {missing_count} non-compliant entries.", file=sys.stderr)
+        sys.exit(1)
     else:
         print("All checked files are compliant.")
 

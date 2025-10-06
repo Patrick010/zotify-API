@@ -2,9 +2,9 @@
 
 This file is auto-generated. Do not edit manually.
 
-*   [ARCHITECTURE.md](docs/ARCHITECTURE.md)
-*   [CHANGELOG.md](docs/CHANGELOG.md)
-*   [CONTRIBUTING.md](docs/CONTRIBUTING.md)
-*   [USER_MANUAL.md](docs/USER_MANUAL.md)
-*   [DOCS_INDEX.md](./DOCS_INDEX.md)
-*   [README.md](./README.md)
+| Path | Description |
+|------|-------------|
+| `Gonk/GonkUI/docs/ARCHITECTURE.md` | Architectural overview of the Gonk Web UI. |
+| `Gonk/GonkUI/docs/CHANGELOG.md` | Changelog for the Gonk Web UI. |
+| `Gonk/GonkUI/docs/CONTRIBUTING.md` | Contribution guidelines for the Gonk Web UI. |
+| `Gonk/GonkUI/docs/USER_MANUAL.md` | User manual for the Gonk Web UI. |

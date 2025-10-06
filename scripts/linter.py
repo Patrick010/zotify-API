@@ -558,6 +558,18 @@ def main() -> int:
     if inventory_return_code != 0:
         return inventory_return_code
 
+    # 5b) Description Compliance Check
+    print("\n--- Running Description Compliance Check ---")
+    compliance_script = SCRIPTS_DIR / "description_compliance_check.py"
+    if compliance_script.exists():
+        compliance_rc = run_command([sys.executable, str(compliance_script), "--validate"])
+        if compliance_rc != 0:
+            print("❌ Description Compliance Check Failed!", file=sys.stderr)
+            return compliance_rc
+        print("✅ Description Compliance Check Passed.")
+    else:
+        print("[WARN] description_compliance_check.py not found, skipping check.", file=sys.stderr)
+
     # 6) Governance Links Linter (unless skipped)
     if not args.skip_governance:
         gov_links_return = run_lint_governance_links()

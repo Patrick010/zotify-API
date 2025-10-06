@@ -2,6 +2,6 @@
 
 This file is auto-generated. Do not edit manually.
 
-| Path | Type | Description | Status | Linked Docs | Notes |
-|------|------|-------------|--------|-------------|-------|
-|`snitch/snitch.go`|| The main Go source file for the snitch module. |Active|||
+| Path | Description |
+|------|-------------|
+| `snitch/snitch.go` | The main Go source file for the snitch module. |

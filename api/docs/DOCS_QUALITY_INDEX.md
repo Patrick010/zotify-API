@@ -1,320 +1,102 @@
-# Source Documentation Quality Index
+# Docs Quality Index
 
-This document tracks the quality of the standalone documentation file for each source code module. Each file is assessed against the rubric defined below.
+This file is auto-generated. Do not edit manually.
 
-## Scoring Rubric
-
-This score assesses the quality, completeness, and clarity of the standalone markdown file for a given source code module.
-
-| Grade | Criteria |
-| :---: | --- |
-| **A** | **Excellent:** The document is comprehensive and well-structured. It clearly explains the module's role, all key functions, its architectural context, and provides clear code examples. A new developer could understand the module without reading the source code. |
-| **B** | **Good:** The document is mostly complete but may be missing some details, have sections that are unclear, or lack sufficient examples. |
-| **C** | **Needs Improvement:** The document is little more than the generated stub. Key sections like 'Purpose' and 'Key Functions' are not filled in, or are very sparse. |
-| **D** | **Poor:** The documentation is actively misleading, incorrect, or significantly out of date with the source code it describes. |
-| **F** | **Unacceptable:** No effort has been made to populate the stub with any meaningful information. |
-| **X** | **Unknown:** The documentation has not yet been reviewed. This is the default state for all new documentation. |
-
----
-
-| Module | File | Docs Rating |
-|---|---|:---:|
-| Auth_State | reference/source/AUTH_STATE.py.md | X |
-| Globals | reference/source/GLOBALS.py.md | X |
-| Main | reference/source/MAIN.py.md | X |
-| Logging_Config | reference/source/LOGGING_CONFIG.py.md | X |
-| Config | reference/source/CONFIG.py.md | X |
-| Filters | reference/source/FILTERS.py.md | X |
-| Service | reference/source/SERVICE.py.md | X |
-| __Init__ | reference/source/LOGGING_FRAMEWORK____INIT__.py.md | X |
-| Schemas | reference/source/SCHEMAS.py.md | X |
-| Console_Handler | reference/source/CONSOLE_HANDLER.py.md | X |
-| Json_Audit_Handler | reference/source/JSON_AUDIT_HANDLER.py.md | X |
-| Database_Job_Handler | reference/source/DATABASE_JOB_HANDLER.py.md | X |
-| __Init__ | reference/source/LOGGING_HANDLERS____INIT__.py.md | X |
-| Base | reference/source/BASE.py.md | X |
-| Triggers | reference/source/TRIGGERS.py.md | X |
-| __Init__ | reference/source/ERROR_HANDLER____INIT__.py.md | X |
-| Config | reference/source/CONFIG.py.md | X |
-| Formatter | reference/source/FORMATTER.py.md | X |
-| Hooks | reference/source/HOOKS.py.md | X |
-| Webhook | reference/source/WEBHOOK.py.md | X |
-| __Init__ | reference/source/ACTIONS____INIT__.py.md | X |
-| Log_Critical | reference/source/LOG_CRITICAL.py.md | X |
-| Models | reference/source/MODELS.py.md | X |
-| Crud | reference/source/CRUD.py.md | X |
-| Session | reference/source/SESSION.py.md | X |
-| __Init__ | reference/source/DATABASE____INIT__.py.md | X |
-| Request_Id | reference/source/REQUEST_ID.py.md | X |
-| Spotify_Connector | reference/source/SPOTIFY_CONNECTOR.py.md | X |
-| __Init__ | reference/source/PROVIDERS____INIT__.py.md | X |
-| Base | reference/source/BASE.py.md | X |
-| Config_Models | reference/source/CONFIG_MODELS.py.md | X |
-| Sync | reference/source/SYNC.py.md | X |
-| Playlists | reference/source/PLAYLISTS.py.md | X |
-| System | reference/source/SYSTEM.py.md | X |
-| Cache | reference/source/CACHE.py.md | X |
-| Webhooks | reference/source/WEBHOOKS.py.md | X |
-| Downloads | reference/source/DOWNLOADS.py.md | X |
-| Notifications | reference/source/NOTIFICATIONS.py.md | X |
-| __Init__ | reference/source/ROUTES____INIT__.py.md | X |
-| Config | reference/source/CONFIG.py.md | X |
-| Search | reference/source/SEARCH.py.md | X |
-| User | reference/source/USER.py.md | X |
-| Sync | reference/source/SYNC.py.md | X |
-| Auth | reference/source/AUTH.py.md | X |
-| Network | reference/source/NETWORK.py.md | X |
-| Tracks | reference/source/TRACKS.py.md | X |
-| Webhooks | reference/source/WEBHOOKS.py.md | X |
-| Tracks_Service | reference/source/TRACKS_SERVICE.py.md | X |
-| Spoti_Client | reference/source/SPOTI_CLIENT.py.md | X |
-| User_Service | reference/source/USER_SERVICE.py.md | X |
-| Sync_Service | reference/source/SYNC_SERVICE.py.md | X |
-| Network_Service | reference/source/NETWORK_SERVICE.py.md | X |
-| Config_Service | reference/source/CONFIG_SERVICE.py.md | X |
-| Logging_Service | reference/source/LOGGING_SERVICE.py.md | X |
-| __Init__ | reference/source/SERVICES____INIT__.py.md | X |
-| Notifications_Service | reference/source/NOTIFICATIONS_SERVICE.py.md | X |
-| Metadata_Service | reference/source/METADATA_SERVICE.py.md | X |
-| Search | reference/source/SEARCH.py.md | X |
-| Playlists_Service | reference/source/PLAYLISTS_SERVICE.py.md | X |
-| Db | reference/source/DB.py.md | X |
-| Auth | reference/source/AUTH.py.md | X |
-| Cache_Service | reference/source/CACHE_SERVICE.py.md | X |
-| Deps | reference/source/DEPS.py.md | X |
-| Download_Service | reference/source/DOWNLOAD_SERVICE.py.md | X |
-| Playlists | reference/source/PLAYLISTS.py.md | X |
-| System | reference/source/SYSTEM.py.md | X |
-| Cache | reference/source/CACHE.py.md | X |
-| Logging_Schemas | reference/source/LOGGING_SCHEMAS.py.md | X |
-| Webhooks | reference/source/WEBHOOKS.py.md | X |
-| Generic | reference/source/GENERIC.py.md | X |
-| Spotify | reference/source/SPOTIFY.py.md | X |
-| Download | reference/source/DOWNLOAD.py.md | X |
-| Notifications | reference/source/NOTIFICATIONS.py.md | X |
-| Metadata | reference/source/METADATA.py.md | X |
-| User | reference/source/USER.py.md | X |
-| Auth | reference/source/AUTH.py.md | X |
-| Network | reference/source/NETWORK.py.md | X |
-| Tracks | reference/source/TRACKS.py.md | X |
-| Snitch | reference/source/SNITCH.go.md | X |
-| App | reference/source/APP.py.md | X |
-| App | reference/source/APP.js.md | X |
-| Linter | reference/source/LINTER.py.md | X |
-| Generate_Openapi | reference/source/GENERATE_OPENAPI.py.md | X |
-| Audit_Api | reference/source/AUDIT_API.py.md | X |
-| Functional_Test | reference/source/FUNCTIONAL_TEST.py.md | X |
-| Generate_Endpoints_Doc | reference/source/GENERATE_ENDPOINTS_DOC.py.md | X |
-| Generate_Source_Docs | reference/source/GENERATE_SOURCE_DOCS.py.md | X |
-| Audit_Endpoints | reference/source/AUDIT_ENDPOINTS.py.md | X |
-| Test_Auth_Flow | reference/source/TEST_AUTH_FLOW.py.md | X |
-| Code Quality Index | api/docs/CODE_QUALITY_INDEX.md | X |
-| Docs Quality Index | api/docs/DOCS_QUALITY_INDEX.md | X |
-| Changelog | api/docs/CHANGELOG.md | X |
-| Master Index | api/docs/MASTER_INDEX.md | X |
-| Cicd | api/docs/manuals/CICD.md | X |
-| Operator Manual | api/docs/manuals/OPERATOR_MANUAL.md | X |
-| System Integration Guide | api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md | X |
-| Error Handling Guide | api/docs/manuals/ERROR_HANDLING_GUIDE.md | X |
-| Api Developer Guide | api/docs/manuals/API_DEVELOPER_GUIDE.md | X |
-| User Manual | api/docs/manuals/USER_MANUAL.md | X |
-| Logging Guide | api/docs/manuals/LOGGING_GUIDE.md | X |
-| Spotify | api/docs/providers/SPOTIFY.md | X |
-| Feature Specs | api/docs/reference/FEATURE_SPECS.md | X |
-| Api Reference | api/docs/reference/API_REFERENCE.md | X |
-| Generate Endpoints Doc.Py | api/docs/reference/source/GENERATE_ENDPOINTS_DOC.py.md | X |
-| Cache Service.Py | api/docs/reference/source/CACHE_SERVICE.py.md | X |
-| Network Service.Py | api/docs/reference/source/NETWORK_SERVICE.py.md | X |
-| Triggers.Py | api/docs/reference/source/TRIGGERS.py.md | X |
-| Audit Api.Py | api/docs/reference/source/AUDIT_API.py.md | X |
-| Download.Py | api/docs/reference/source/DOWNLOAD.py.md | X |
-| Auth.Py | api/docs/reference/source/AUTH.py.md | X |
-| Logging Service.Py | api/docs/reference/source/LOGGING_SERVICE.py.md | X |
-| Tracks Service.Py | api/docs/reference/source/TRACKS_SERVICE.py.md | X |
-| Sync.Py | api/docs/reference/source/SYNC.py.md | X |
-| Filters.Py | api/docs/reference/source/FILTERS.py.md | X |
-| Notifications Service.Py | api/docs/reference/source/NOTIFICATIONS_SERVICE.py.md | X |
-| Tracks.Py | api/docs/reference/source/TRACKS.py.md | X |
-| Auth State.Py | api/docs/reference/source/AUTH_STATE.py.md | X |
-| Playlists.Py | api/docs/reference/source/PLAYLISTS.py.md | X |
-| Audit Endpoints.Py | api/docs/reference/source/AUDIT_ENDPOINTS.py.md | X |
-| Download Service.Py | api/docs/reference/source/DOWNLOAD_SERVICE.py.md | X |
-| Spotify Connector.Py | api/docs/reference/source/SPOTIFY_CONNECTOR.py.md | X |
-| Config.Py | api/docs/reference/source/CONFIG.py.md | X |
-| Snitch.Go | api/docs/reference/source/SNITCH.go.md | X |
-| Logging Config.Py | api/docs/reference/source/LOGGING_CONFIG.py.md | X |
-| Notifications.Py | api/docs/reference/source/NOTIFICATIONS.py.md | X |
-| Linter.Py | api/docs/reference/source/LINTER.py.md | X |
-| Logging Schemas.Py | api/docs/reference/source/LOGGING_SCHEMAS.py.md | X |
-| Service.Py | api/docs/reference/source/SERVICE.py.md | X |
-| Error Handler    Init  .Py | api/docs/reference/source/ERROR_HANDLER____INIT__.py.md | X |
-| App.Py | api/docs/reference/source/APP.py.md | X |
-| Generate Source Docs.Py | api/docs/reference/source/GENERATE_SOURCE_DOCS.py.md | X |
-| Search.Py | api/docs/reference/source/SEARCH.py.md | X |
-| Db.Py | api/docs/reference/source/DB.py.md | X |
-| Downloads.Py | api/docs/reference/source/DOWNLOADS.py.md | X |
-| Generate Openapi.Py | api/docs/reference/source/GENERATE_OPENAPI.py.md | X |
-| Logging Framework    Init  .Py | api/docs/reference/source/LOGGING_FRAMEWORK____INIT__.py.md | X |
-| Console Handler.Py | api/docs/reference/source/CONSOLE_HANDLER.py.md | X |
-| Providers    Init  .Py | api/docs/reference/source/PROVIDERS____INIT__.py.md | X |
-| Request Id.Py | api/docs/reference/source/REQUEST_ID.py.md | X |
-| Hooks.Py | api/docs/reference/source/HOOKS.py.md | X |
-| Formatter.Py | api/docs/reference/source/FORMATTER.py.md | X |
-| System.Py | api/docs/reference/source/SYSTEM.py.md | X |
-| Database Job Handler.Py | api/docs/reference/source/DATABASE_JOB_HANDLER.py.md | X |
-| Routes    Init  .Py | api/docs/reference/source/ROUTES____INIT__.py.md | X |
-| Models.Py | api/docs/reference/source/MODELS.py.md | X |
-| Log Critical.Py | api/docs/reference/source/LOG_CRITICAL.py.md | X |
-| Webhook.Py | api/docs/reference/source/WEBHOOK.py.md | X |
-| User Service.Py | api/docs/reference/source/USER_SERVICE.py.md | X |
-| Spotify.Py | api/docs/reference/source/SPOTIFY.py.md | X |
-| Logging Handlers    Init  .Py | api/docs/reference/source/LOGGING_HANDLERS____INIT__.py.md | X |
-| Config Models.Py | api/docs/reference/source/CONFIG_MODELS.py.md | X |
-| Test Auth Flow.Py | api/docs/reference/source/TEST_AUTH_FLOW.py.md | X |
-| Actions    Init  .Py | api/docs/reference/source/ACTIONS____INIT__.py.md | X |
-| Cache.Py | api/docs/reference/source/CACHE.py.md | X |
-| Metadata.Py | api/docs/reference/source/METADATA.py.md | X |
-| Session.Py | api/docs/reference/source/SESSION.py.md | X |
-| Webhooks.Py | api/docs/reference/source/WEBHOOKS.py.md | X |
-| Functional Test.Py | api/docs/reference/source/FUNCTIONAL_TEST.py.md | X |
-| Metadata Service.Py | api/docs/reference/source/METADATA_SERVICE.py.md | X |
-| Database    Init  .Py | api/docs/reference/source/DATABASE____INIT__.py.md | X |
-| User.Py | api/docs/reference/source/USER.py.md | X |
-| Main.Py | api/docs/reference/source/MAIN.py.md | X |
-| Sync Service.Py | api/docs/reference/source/SYNC_SERVICE.py.md | X |
-| Schemas.Py | api/docs/reference/source/SCHEMAS.py.md | X |
-| Base.Py | api/docs/reference/source/BASE.py.md | X |
-| Spoti Client.Py | api/docs/reference/source/SPOTI_CLIENT.py.md | X |
-| Crud.Py | api/docs/reference/source/CRUD.py.md | X |
-| App.Js | api/docs/reference/source/APP.js.md | X |
-| Json Audit Handler.Py | api/docs/reference/source/JSON_AUDIT_HANDLER.py.md | X |
-| Config Service.Py | api/docs/reference/source/CONFIG_SERVICE.py.md | X |
-| Services    Init  .Py | api/docs/reference/source/SERVICES____INIT__.py.md | X |
-| Generic.Py | api/docs/reference/source/GENERIC.py.md | X |
-| Globals.Py | api/docs/reference/source/GLOBALS.py.md | X |
-| Deps.Py | api/docs/reference/source/DEPS.py.md | X |
-| Network.Py | api/docs/reference/source/NETWORK.py.md | X |
-| Playlists Service.Py | api/docs/reference/source/PLAYLISTS_SERVICE.py.md | X |
-| Provider Agnostic Extensions | api/docs/reference/features/PROVIDER_AGNOSTIC_EXTENSIONS.md | X |
-| Provider Oauth | api/docs/reference/features/PROVIDER_OAUTH.md | X |
-| Developer Flexible Logging Framework | api/docs/reference/features/DEVELOPER_FLEXIBLE_LOGGING_FRAMEWORK.md | X |
-| Authentication | api/docs/reference/features/AUTHENTICATION.md | X |
-| Automated Documentation Workflow | api/docs/reference/features/AUTOMATED_DOCUMENTATION_WORKFLOW.md | X |
-| Requirements | api/docs/system/REQUIREMENTS.md | X |
-| Installation | api/docs/system/INSTALLATION.md | X |
-| Error Handling Design | api/docs/system/ERROR_HANDLING_DESIGN.md | X |
-| Privacy Compliance | api/docs/system/PRIVACY_COMPLIANCE.md | X |
-| Phase5-Ipc | snitch/docs/phase5-ipc.md | X |
-| Installation | snitch/docs/INSTALLATION.md | X |
-| Roadmap | snitch/docs/ROADMAP.md | X |
-| Architecture | snitch/docs/ARCHITECTURE.md | X |
-| Modules | snitch/docs/MODULES.md | X |
-| Tasks | snitch/docs/TASKS.md | X |
-| Status | snitch/docs/STATUS.md | X |
-| Project Plan | snitch/docs/PROJECT_PLAN.md | X |
-| Test Runbook | snitch/docs/TEST_RUNBOOK.md | X |
-| User Manual | snitch/docs/USER_MANUAL.md | X |
-| Phases | snitch/docs/PHASES.md | X |
-| Milestones | snitch/docs/MILESTONES.md | X |
-| Phase 2 Secure Callback | snitch/docs/PHASE_2_SECURE_CALLBACK.md | X |
-| Phase 2 Zero Trust Design | snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md | X |
-| Architecture | Gonk/GonkUI/docs/ARCHITECTURE.md | X |
-| Contributing | Gonk/GonkUI/docs/CONTRIBUTING.md | X |
-| User Manual | Gonk/GonkUI/docs/USER_MANUAL.md | X |
-| Changelog | Gonk/GonkUI/docs/CHANGELOG.md | X |
-| `api/docs/CHANGELOG.md` | X | X | | | |
-| `api/docs/CODE_QUALITY_INDEX.md` | X | X | | | |
-| `api/docs/DOCS_QUALITY_INDEX.md` | X | X | | | |
-| `api/docs/MASTER_INDEX.md` | X | X | | | |
-| `api/docs/manuals/API_DEVELOPER_GUIDE.md` | X | X | | | |
-| `api/docs/manuals/CICD.md` | X | X | | | |
-| `api/docs/manuals/ERROR_HANDLING_GUIDE.md` | X | X | | | |
-| `api/docs/manuals/LOGGING_GUIDE.md` | X | X | | | |
-| `api/docs/manuals/OPERATOR_MANUAL.md` | X | X | | | |
-| `api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md` | X | X | | | |
-| `api/docs/manuals/USER_MANUAL.md` | X | X | | | |
-| `api/docs/providers/SPOTIFY.md` | X | X | | | |
-| `api/docs/reference/API_REFERENCE.md` | X | X | | | |
-| `api/docs/reference/FEATURE_SPECS.md` | X | X | | | |
-| `api/docs/reference/features/AUTHENTICATION.md` | X | X | | | |
-| `api/docs/reference/features/AUTOMATED_DOCUMENTATION_WORKFLOW.md` | X | X | | | |
-| `api/docs/reference/features/DEVELOPER_FLEXIBLE_LOGGING_FRAMEWORK.md` | X | X | | | |
-| `api/docs/reference/features/PROVIDER_AGNOSTIC_EXTENSIONS.md` | X | X | | | |
-| `api/docs/reference/features/PROVIDER_OAUTH.md` | X | X | | | |
-| `api/docs/reference/source/ACTIONS____INIT__.py.md` | X | X | | | |
-| `api/docs/reference/source/APP.js.md` | X | X | | | |
-| `api/docs/reference/source/APP.py.md` | X | X | | | |
-| `api/docs/reference/source/AUDIT_API.py.md` | X | X | | | |
-| `api/docs/reference/source/AUDIT_ENDPOINTS.py.md` | X | X | | | |
-| `api/docs/reference/source/AUTH.py.md` | X | X | | | |
-| `api/docs/reference/source/AUTH_STATE.py.md` | X | X | | | |
-| `api/docs/reference/source/BASE.py.md` | X | X | | | |
-| `api/docs/reference/source/CACHE.py.md` | X | X | | | |
-| `api/docs/reference/source/CACHE_SERVICE.py.md` | X | X | | | |
-| `api/docs/reference/source/CONFIG.py.md` | X | X | | | |
-| `api/docs/reference/source/CONFIG_MODELS.py.md` | X | X | | | |
-| `api/docs/reference/source/CONFIG_SERVICE.py.md` | X | X | | | |
-| `api/docs/reference/source/CONSOLE_HANDLER.py.md` | X | X | | | |
-| `api/docs/reference/source/CRUD.py.md` | X | X | | | |
-| `api/docs/reference/source/DATABASE_JOB_HANDLER.py.md` | X | X | | | |
-| `api/docs/reference/source/DATABASE____INIT__.py.md` | X | X | | | |
-| `api/docs/reference/source/DB.py.md` | X | X | | | |
-| `api/docs/reference/source/DEPS.py.md` | X | X | | | |
-| `api/docs/reference/source/DOWNLOAD.py.md` | X | X | | | |
-| `api/docs/reference/source/DOWNLOADS.py.md` | X | X | | | |
-| `api/docs/reference/source/DOWNLOAD_SERVICE.py.md` | X | X | | | |
-| `api/docs/reference/source/ERROR_HANDLER____INIT__.py.md` | X | X | | | |
-| `api/docs/reference/source/FILTERS.py.md` | X | X | | | |
-| `api/docs/reference/source/FORMATTER.py.md` | X | X | | | |
-| `api/docs/reference/source/FUNCTIONAL_TEST.py.md` | X | X | | | |
-| `api/docs/reference/source/GENERATE_ENDPOINTS_DOC.py.md` | X | X | | | |
-| `api/docs/reference/source/GENERATE_OPENAPI.py.md` | X | X | | | |
-| `api/docs/reference/source/GENERATE_SOURCE_DOCS.py.md` | X | X | | | |
-| `api/docs/reference/source/GENERIC.py.md` | X | X | | | |
-| `api/docs/reference/source/GLOBALS.py.md` | X | X | | | |
-| `api/docs/reference/source/HOOKS.py.md` | X | X | | | |
-| `api/docs/reference/source/JSON_AUDIT_HANDLER.py.md` | X | X | | | |
-| `api/docs/reference/source/LINTER.py.md` | X | X | | | |
-| `api/docs/reference/source/LOGGING_CONFIG.py.md` | X | X | | | |
-| `api/docs/reference/source/LOGGING_FRAMEWORK____INIT__.py.md` | X | X | | | |
-| `api/docs/reference/source/LOGGING_HANDLERS____INIT__.py.md` | X | X | | | |
-| `api/docs/reference/source/LOGGING_SCHEMAS.py.md` | X | X | | | |
-| `api/docs/reference/source/LOGGING_SERVICE.py.md` | X | X | | | |
-| `api/docs/reference/source/LOG_CRITICAL.py.md` | X | X | | | |
-| `api/docs/reference/source/MAIN.py.md` | X | X | | | |
-| `api/docs/reference/source/METADATA.py.md` | X | X | | | |
-| `api/docs/reference/source/METADATA_SERVICE.py.md` | X | X | | | |
-| `api/docs/reference/source/MODELS.py.md` | X | X | | | |
-| `api/docs/reference/source/NETWORK.py.md` | X | X | | | |
-| `api/docs/reference/source/NETWORK_SERVICE.py.md` | X | X | | | |
-| `api/docs/reference/source/NOTIFICATIONS.py.md` | X | X | | | |
-| `api/docs/reference/source/NOTIFICATIONS_SERVICE.py.md` | X | X | | | |
-| `api/docs/reference/source/PLAYLISTS.py.md` | X | X | | | |
-| `api/docs/reference/source/PLAYLISTS_SERVICE.py.md` | X | X | | | |
-| `api/docs/reference/source/PROVIDERS____INIT__.py.md` | X | X | | | |
-| `api/docs/reference/source/REQUEST_ID.py.md` | X | X | | | |
-| `api/docs/reference/source/ROUTES____INIT__.py.md` | X | X | | | |
-| `api/docs/reference/source/SCHEMAS.py.md` | X | X | | | |
-| `api/docs/reference/source/SEARCH.py.md` | X | X | | | |
-| `api/docs/reference/source/SERVICE.py.md` | X | X | | | |
-| `api/docs/reference/source/SERVICES____INIT__.py.md` | X | X | | | |
-| `api/docs/reference/source/SESSION.py.md` | X | X | | | |
-| `api/docs/reference/source/SNITCH.go.md` | X | X | | | |
-| `api/docs/reference/source/SPOTIFY.py.md` | X | X | | | |
-| `api/docs/reference/source/SPOTIFY_CONNECTOR.py.md` | X | X | | | |
-| `api/docs/reference/source/SPOTI_CLIENT.py.md` | X | X | | | |
-| `api/docs/reference/source/SYNC.py.md` | X | X | | | |
-| `api/docs/reference/source/SYNC_SERVICE.py.md` | X | X | | | |
-| `api/docs/reference/source/SYSTEM.py.md` | X | X | | | |
-| `api/docs/reference/source/TEST_AUTH_FLOW.py.md` | X | X | | | |
-| `api/docs/reference/source/TRACKS.py.md` | X | X | | | |
-| `api/docs/reference/source/TRACKS_SERVICE.py.md` | X | X | | | |
-| `api/docs/reference/source/TRIGGERS.py.md` | X | X | | | |
-| `api/docs/reference/source/USER.py.md` | X | X | | | |
-| `api/docs/reference/source/USER_SERVICE.py.md` | X | X | | | |
-| `api/docs/reference/source/WEBHOOK.py.md` | X | X | | | |
-| `api/docs/reference/source/WEBHOOKS.py.md` | X | X | | | |
-| `api/docs/system/ERROR_HANDLING_DESIGN.md` | X | X | | | |
-| `api/docs/system/INSTALLATION.md` | X | X | | | |
-| `api/docs/system/PRIVACY_COMPLIANCE.md` | X | X | | | |
-| `api/docs/system/REQUIREMENTS.md` | X | X | | | |
+| Path | Description |
+|------|-------------|
+| `api/docs/CHANGELOG.md` | Record of all notable changes made to the API. |
+| `api/docs/CODE_QUALITY_INDEX.md` | Index for documents related to code quality standards and reports. |
+| `api/docs/DOCS_QUALITY_INDEX.md` | Index for documents related to documentation quality and standards. |
+| `api/docs/MASTER_INDEX.md` | Master index for all API documentation. |
+| `api/docs/manuals/API_DEVELOPER_GUIDE.md` | Guide for developers working on or with the API. |
+| `api/docs/manuals/CICD.md` | Documentation for the Continuous Integration and Continuous Deployment pipeline. |
+| `api/docs/manuals/ERROR_HANDLING_GUIDE.md` | Guide on how errors are handled within the API. |
+| `api/docs/manuals/LOGGING_GUIDE.md` | Guide to the logging framework and conventions. |
+| `api/docs/manuals/OPERATOR_MANUAL.md` | Manual for operators responsible for deploying and maintaining the API. |
+| `api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md` | Guide for integrating other systems with the API. |
+| `api/docs/manuals/USER_MANUAL.md` | Manual for end-users of the API. |
+| `api/docs/providers/SPOTIFY.md` | Documentation specific to the Spotify music provider integration. |
+| `api/docs/reference/API_REFERENCE.md` | Comprehensive reference for all API endpoints. |
+| `api/docs/reference/FEATURE_SPECS.md` | Specifications for various features of the API. |
+| `api/docs/reference/features/AUTHENTICATION.md` | Detailed documentation of the API's authentication mechanism. |
+| `api/docs/reference/features/AUTOMATED_DOCUMENTATION_WORKFLOW.md` | Documentation of the automated workflow for generating documentation. |
+| `api/docs/reference/features/DEVELOPER_FLEXIBLE_LOGGING_FRAMEWORK.md` | Documentation of the flexible logging framework for developers. |
+| `api/docs/reference/features/PROVIDER_AGNOSTIC_EXTENSIONS.md` | Documentation of the provider-agnostic extension system. |
+| `api/docs/reference/features/PROVIDER_OAUTH.md` | Documentation of the OAuth flow for music providers. |
+| `api/docs/reference/source/ACTIONS____INIT__.py.md` | Auto-generated documentation for the error handler actions module. |
+| `api/docs/reference/source/APP.js.md` | Auto-generated documentation for the main JavaScript application file. |
+| `api/docs/reference/source/APP.py.md` | Auto-generated documentation for the main Flask application file. |
+| `api/docs/reference/source/AUDIT_API.py.md` | Auto-generated documentation for the API auditing script. |
+| `api/docs/reference/source/AUDIT_ENDPOINTS.py.md` | Auto-generated documentation for the endpoint auditing script. |
+| `api/docs/reference/source/AUTH.py.md` | Auto-generated documentation for the authentication routes. |
+| `api/docs/reference/source/AUTH_STATE.py.md` | Auto-generated documentation for the authentication state management module. |
+| `api/docs/reference/source/BASE.py.md` | Auto-generated documentation for the base provider class. |
+| `api/docs/reference/source/CACHE.py.md` | Auto-generated documentation for the cache management routes. |
+| `api/docs/reference/source/CACHE_SERVICE.py.md` | Auto-generated documentation for the cache management service. |
+| `api/docs/reference/source/CONFIG.py.md` | Auto-generated documentation for the configuration management module. |
+| `api/docs/reference/source/CONFIG_MODELS.py.md` | Auto-generated documentation for the Pydantic configuration models. |
+| `api/docs/reference/source/CONFIG_SERVICE.py.md` | Auto-generated documentation for the configuration management service. |
+| `api/docs/reference/source/CONSOLE_HANDLER.py.md` | Auto-generated documentation for the console logging handler. |
+| `api/docs/reference/source/CRUD.py.md` | Auto-generated documentation for the database CRUD operations. |
+| `api/docs/reference/source/DATABASE_JOB_HANDLER.py.md` | Auto-generated documentation for the database job logging handler. |
+| `api/docs/reference/source/DATABASE____INIT__.py.md` | Auto-generated documentation for the database module. |
+| `api/docs/reference/source/DB.py.md` | Auto-generated documentation for the database service. |
+| `api/docs/reference/source/DEPS.py.md` | Auto-generated documentation for FastAPI dependency injection. |
+| `api/docs/reference/source/DOWNLOAD.py.md` | Auto-generated documentation for the download schema. |
+| `api/docs/reference/source/DOWNLOADS.py.md` | Auto-generated documentation for the download routes. |
+| `api/docs/reference/source/DOWNLOAD_SERVICE.py.md` | Auto-generated documentation for the download management service. |
+| `api/docs/reference/source/ERROR_HANDLER____INIT__.py.md` | Auto-generated documentation for the error handler module. |
+| `api/docs/reference/source/FILTERS.py.md` | Auto-generated documentation for the logging filters module. |
+| `api/docs/reference/source/FORMATTER.py.md` | Auto-generated documentation for the error handler formatter. |
+| `api/docs/reference/source/FUNCTIONAL_TEST.py.md` | Auto-generated documentation for the functional test script. |
+| `api/docs/reference/source/GENERATE_ENDPOINTS_DOC.py.md` | Auto-generated documentation for the endpoint documentation generator. |
+| `api/docs/reference/source/GENERATE_OPENAPI.py.md` | Auto-generated documentation for the OpenAPI specification generator. |
+| `api/docs/reference/source/GENERATE_SOURCE_DOCS.py.md` | Auto-generated documentation for the source code documentation generator. |
+| `api/docs/reference/source/GENERIC.py.md` | Auto-generated documentation for the generic schemas module. |
+| `api/docs/reference/source/GLOBALS.py.md` | Auto-generated documentation for the global variables module. |
+| `api/docs/reference/source/HOOKS.py.md` | Auto-generated documentation for the error handler hooks module. |
+| `api/docs/reference/source/JSON_AUDIT_HANDLER.py.md` | Auto-generated documentation for the JSON audit logging handler. |
+| `api/docs/reference/source/LINTER.py.md` | Auto-generated documentation for the project linter script. |
+| `api/docs/reference/source/LOGGING_CONFIG.py.md` | Auto-generated documentation for the logging configuration module. |
+| `api/docs/reference/source/LOGGING_FRAMEWORK____INIT__.py.md` | Auto-generated documentation for the logging framework module. |
+| `api/docs/reference/source/LOGGING_HANDLERS____INIT__.py.md` | Auto-generated documentation for the logging handlers module. |
+| `api/docs/reference/source/LOGGING_SCHEMAS.py.md` | Auto-generated documentation for the logging schemas module. |
+| `api/docs/reference/source/LOGGING_SERVICE.py.md` | Auto-generated documentation for the logging service. |
+| `api/docs/reference/source/LOG_CRITICAL.py.md` | Auto-generated documentation for the critical log action. |
+| `api/docs/reference/source/MAIN.py.md` | Auto-generated documentation for the main API entry point. |
+| `api/docs/reference/source/METADATA.py.md` | Auto-generated documentation for the metadata schemas module. |
+| `api/docs/reference/source/METADATA_SERVICE.py.md` | Auto-generated documentation for the metadata management service. |
+| `api/docs/reference/source/MODELS.py.md` | Auto-generated documentation for the database models. |
+| `api/docs/reference/source/NETWORK.py.md` | Auto-generated documentation for the network routes. |
+| `api/docs/reference/source/NETWORK_SERVICE.py.md` | Auto-generated documentation for the network management service. |
+| `api/docs/reference/source/NOTIFICATIONS.py.md` | Auto-generated documentation for the notifications routes. |
+| `api/docs/reference/source/NOTIFICATIONS_SERVICE.py.md` | Auto-generated documentation for the notifications service. |
+| `api/docs/reference/source/PLAYLISTS.py.md` | Auto-generated documentation for the playlists routes. |
+| `api/docs/reference/source/PLAYLISTS_SERVICE.py.md` | Auto-generated documentation for the playlists service. |
+| `api/docs/reference/source/PROVIDERS____INIT__.py.md` | Auto-generated documentation for the providers module. |
+| `api/docs/reference/source/REQUEST_ID.py.md` | Auto-generated documentation for the request ID middleware. |
+| `api/docs/reference/source/ROUTES____INIT__.py.md` | Auto-generated documentation for the routes module. |
+| `api/docs/reference/source/SCHEMAS.py.md` | Auto-generated documentation for the main schemas module. |
+| `api/docs/reference/source/SEARCH.py.md` | Auto-generated documentation for the search routes and service. |
+| `api/docs/reference/source/SERVICE.py.md` | Auto-generated documentation for the logging service module. |
+| `api/docs/reference/source/SERVICES____INIT__.py.md` | Auto-generated documentation for the services module. |
+| `api/docs/reference/source/SESSION.py.md` | Auto-generated documentation for the database session management. |
+| `api/docs/reference/source/SNITCH.go.md` | Auto-generated documentation for the snitch Go program. |
+| `api/docs/reference/source/SPOTIFY.py.md` | Auto-generated documentation for the Spotify schemas module. |
+| `api/docs/reference/source/SPOTIFY_CONNECTOR.py.md` | Auto-generated documentation for the Spotify provider connector. |
+| `api/docs/reference/source/SPOTI_CLIENT.py.md` | Auto-generated documentation for the Spotify client service. |
+| `api/docs/reference/source/SYNC.py.md` | Auto-generated documentation for the sync routes and models. |
+| `api/docs/reference/source/SYNC_SERVICE.py.md` | Auto-generated documentation for the sync service. |
+| `api/docs/reference/source/SYSTEM.py.md` | Auto-generated documentation for the system routes. |
+| `api/docs/reference/source/TEST_AUTH_FLOW.py.md` | Auto-generated documentation for the authentication flow test script. |
+| `api/docs/reference/source/TRACKS.py.md` | Auto-generated documentation for the tracks routes. |
+| `api/docs/reference/source/TRACKS_SERVICE.py.md` | Auto-generated documentation for the tracks service. |
+| `api/docs/reference/source/TRIGGERS.py.md` | Auto-generated documentation for the error handler triggers. |
+| `api/docs/reference/source/USER.py.md` | Auto-generated documentation for the user routes. |
+| `api/docs/reference/source/USER_SERVICE.py.md` | Auto-generated documentation for the user service. |
+| `api/docs/reference/source/WEBHOOK.py.md` | Auto-generated documentation for the webhook error handler action. |
+| `api/docs/reference/source/WEBHOOKS.py.md` | Auto-generated documentation for the webhooks routes. |
+| `api/docs/system/ERROR_HANDLING_DESIGN.md` | Design document for the error handling system. |
+| `api/docs/system/INSTALLATION.md` | Installation instructions for the API. |
+| `api/docs/system/PRIVACY_COMPLIANCE.md` | Documentation regarding privacy compliance and data handling. |
+| `api/docs/system/REQUIREMENTS.md` | System and software requirements for the API. |

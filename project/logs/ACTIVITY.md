@@ -1,4 +1,17 @@
 ---
+## ACT-147: Final validation run after unifying index formats and cleaning up redundant files.
+
+**Date:** 2025-10-06
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Final validation run after unifying index formats and cleaning up redundant files.
+
+### Outcome
+All index files are now 100% compliant with the description policy. The linter now enforces this policy. All tests pass.
+
+---
 ## ACT-146: Final validation run.
 
 **Date:** 2025-10-06
