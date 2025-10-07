@@ -126,6 +126,7 @@ def validate_trace_index_schema(trace_index_path: Path) -> bool:
 def main():
     parser = argparse.ArgumentParser(description="Repository inventory and governance script.")
     parser.add_argument("--full", action="store_true", help="Run a full scan of all files.")
+    parser.add_argument("--full-scan", action="store_true", help="Force a full scan of all files, ignoring other modes.")
     parser.add_argument("--test-files", nargs='*', help="Run in test mode with a specific list of files.")
     parser.add_argument("--update-project-registry", action="store_true", help="Update the project registry JSON and Markdown files.")
     parser.add_argument("--extras-file", type=Path, default=PROJECT_ROOT / "scripts/project_registry_extras.yml", help="Path to the project registry extras file.")
@@ -153,7 +154,10 @@ def main():
             return e.returncode
 
     test_mode = args.test_files is not None
-    if args.full:
+    if args.full_scan:
+        print("Running full repository scan (forced).")
+        all_files = find_all_files()
+    elif args.full:
         all_files = find_all_files()
     elif test_mode:
         all_files = args.test_files

@@ -584,6 +584,35 @@ def main() -> int:
     else:
         print("[WARN] content_alignment_check.py not found, skipping check.", file=sys.stderr)
 
+    # 5c) Semantic Alignment Check
+    print("\n--- Running Semantic Alignment Check ---")
+    semantic_script = SCRIPTS_DIR / "semantic_alignment_check.py"
+    inventory_script = SCRIPTS_DIR / "repo_inventory_and_governance.py"
+    if semantic_script.exists() and inventory_script.exists():
+        print("[INFO] Forcing full repository scan for semantic alignment check...")
+        inventory_rc = run_command([sys.executable, str(inventory_script), "--full-scan"])
+        if inventory_rc != 0:
+            print("❌ Failed to generate a full repository index for the semantic check.", file=sys.stderr)
+            return inventory_rc
+
+        cmd = [sys.executable, str(semantic_script), "--enforce"]
+        if args.test_files:
+            cmd.extend(["--test-files"] + list(args.test_files))
+        elif args.from_file:
+            cmd.extend(["--from-file", args.from_file])
+
+        print(f"[LINT] Running semantic alignment: {' '.join(cmd)}")
+        semantic_rc = run_command(cmd)
+        if semantic_rc != 0:
+            print("❌ Semantic Alignment Check Failed!", file=sys.stderr)
+            return semantic_rc
+        print("✅ Semantic Alignment Check Passed.")
+    else:
+        if not semantic_script.exists():
+            print("[WARN] semantic_alignment_check.py not found, skipping check.", file=sys.stderr)
+        if not inventory_script.exists():
+            print("[WARN] repo_inventory_and_governance.py not found, cannot run semantic check.", file=sys.stderr)
+
     # 6) Governance Links Linter (unless skipped)
     if not args.skip_governance:
         gov_links_return = run_lint_governance_links()
