@@ -562,11 +562,25 @@ def main() -> int:
     print("\n--- Running Content Alignment Check ---")
     alignment_script = SCRIPTS_DIR / "content_alignment_check.py"
     if alignment_script.exists():
-        alignment_rc = run_command([sys.executable, str(alignment_script), "--enforce"])
-        if alignment_rc != 0:
-            print("❌ Content Alignment Check Failed!", file=sys.stderr)
-            return alignment_rc
-        print("✅ Content Alignment Check Passed.")
+        # Only run alignment if there are changes in project/ (docs) or if test-files include project items
+        project_changes_present = any(p.startswith("project/") for p in changed_files_set)
+        test_files_have_project = bool(args.test_files and any(str(f).startswith("project/") for f in args.test_files))
+        if project_changes_present or test_files_have_project:
+            cmd = [sys.executable, str(alignment_script), "--enforce"]
+            # propagate test-files/from-file so the alignment script can run incrementally
+            if args.test_files:
+                cmd.extend(["--test-files"] + list(args.test_files))
+            elif args.from_file:
+                cmd.extend(["--from-file", args.from_file])
+
+            print(f"[LINT] Running content alignment: {' '.join(cmd)}")
+            alignment_rc = run_command(cmd)
+            if alignment_rc != 0:
+                print("❌ Content Alignment Check Failed!", file=sys.stderr)
+                return alignment_rc
+            print("✅ Content Alignment Check Passed.")
+        else:
+            print("[INFO] No project/ documentation changes detected — skipping Content Alignment Check.")
     else:
         print("[WARN] content_alignment_check.py not found, skipping check.", file=sys.stderr)
 
