@@ -51,6 +51,7 @@ PROJECT_PREFIX = "project/"
 DEFAULT_EXCLUDE_PATTERNS = [
     r"^project/logs/",       # project logs (ACTIVITY, SESSION_LOG, CURRENT_STATE)
     r"^project/archive/",    # archived docs are out of scope
+    r"^project/reports/",    # reports docs are out of scope
 ]
 
 # Minimum inbound links to consider something as "meaningful" (helps filter noise)
