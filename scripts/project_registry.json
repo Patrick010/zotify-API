@@ -1,202 +1,772 @@
 [
-  {
-    "path": "project/ALIGNMENT_MATRIX.md",
-    "status": "registered",
-    "description": "Maps project goals to implementation artifacts."
-  },
-  {
-    "path": "project/BACKLOG.md",
-    "status": "registered",
-    "description": "A list of pending tasks and features."
-  },
-  {
-    "path": "project/CICD.md",
-    "status": "registered",
-    "description": "Documentation for the project's CI/CD pipeline."
-  },
-  {
-    "path": "project/DEPENDENCIES.md",
-    "status": "registered",
-    "description": "A list of project dependencies."
-  },
-  {
-    "path": "project/EXECUTION_PLAN.md",
-    "status": "registered",
-    "description": "The plan for executing the project."
-  },
-  {
-    "path": "project/FUTURE_ENHANCEMENTS.md",
-    "status": "registered",
-    "description": "A list of potential future enhancements."
-  },
-  {
-    "path": "project/HIGH_LEVEL_DESIGN.md",
-    "status": "registered",
-    "description": "A high-level overview of the project's architecture."
-  },
-  {
-    "path": "project/LESSONS-LEARNT.md",
-    "status": "registered",
-    "description": "A document detailing lessons learned during the project."
-  },
-  {
-    "path": "project/LOGGING_PHASES.md",
-    "status": "registered",
-    "description": "Documentation of the different phases of the logging system implementation."
-  },
-  {
-    "path": "project/LOGGING_SYSTEM_DESIGN.md",
-    "status": "registered",
-    "description": "The design of the logging system."
-  },
-  {
-    "path": "project/LOGGING_TRACEABILITY_MATRIX.md",
-    "status": "registered",
-    "description": "A matrix tracing logging requirements to implementation."
-  },
-  {
-    "path": "project/LOW_LEVEL_DESIGN.md",
-    "status": "registered",
-    "description": "A detailed, low-level design of the project's components."
-  },
-  {
-    "path": "project/ONBOARDING.md",
-    "status": "registered",
-    "description": "A guide for new developers joining the project."
-  },
-  {
-    "path": "project/PID.md",
-    "status": "registered",
-    "description": "The Project Initiation Document."
-  },
-  {
-    "path": "project/PROJECT_BRIEF.md",
-    "status": "registered",
-    "description": "A brief overview of the project."
-  },
-  {
-    "path": "project/PROJECT_PLAN.md",
-    "status": "registered",
-    "description": "The detailed project plan."
-  },
-  {
-    "path": "project/PROJECT_REGISTRY.md",
-    "status": "registered",
-    "description": "The central registry for all project artifacts."
-  },
-  {
-    "path": "project/QA_GOVERNANCE.md",
-    "status": "registered",
-    "description": "The quality assurance and governance plan."
-  },
-  {
-    "path": "project/ROADMAP.md",
-    "status": "registered",
-    "description": "The project's roadmap."
-  },
-  {
-    "path": "project/SECURITY.md",
-    "status": "registered",
-    "description": "A document detailing the project's security measures."
-  },
-  {
-    "path": "project/TASK_CHECKLIST.md",
-    "status": "registered",
-    "description": "A checklist of tasks to be completed."
-  },
-  {
-    "path": "project/USECASES.md",
-    "status": "registered",
-    "description": "A list of use cases for the project."
-  },
-  {
-    "path": "project/USECASES_GAP_ANALYSIS.md",
-    "status": "registered",
-    "description": "A gap analysis of the project's use cases."
-  },
-  {
-    "path": "project/process/GAP_ANALYSIS_TEMPLATE.md",
-    "status": "registered",
-    "description": "A template for performing a gap analysis."
-  },
-  {
-    "path": "project/proposals/DBSTUDIO_PLUGIN.md",
-    "status": "registered",
-    "description": "A proposal for a DBStudio plugin."
-  },
-  {
-    "path": "project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md",
-    "status": "registered",
-    "description": "A proposal for a dynamic plugin system."
-  },
-  {
-    "path": "project/proposals/GONKUI_PLUGIN.md",
-    "status": "registered",
-    "description": "A proposal for a GonkUI plugin."
-  },
-  {
-    "path": "project/proposals/GOVERNANCE_AUDIT_REFACTOR.md",
-    "status": "registered",
-    "description": "A proposal for refactoring the governance audit system."
-  },
-  {
-    "path": "project/proposals/HOME_AUTOMATION_PROPOSAL.md",
-    "status": "registered",
-    "description": "A proposal for a home automation system."
-  },
-  {
-    "path": "project/proposals/LOW_CODE_PROPOSAL.md",
-    "status": "registered",
-    "description": "A proposal for a low-code development platform."
-  },
-  {
-    "path": "project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md",
-    "status": "registered",
-    "description": "A proposal for a multi-source metadata system."
-  },
-  {
-    "path": "project/proposals/NEW_PROPOSAL.md",
-    "status": "registered",
-    "description": "A template for new proposals."
-  },
-  {
-    "path": "project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md",
-    "status": "registered",
-    "description": "A plan for implementing a QA gate."
-  },
-  {
-    "path": "project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md",
-    "status": "registered",
-    "description": "A proposal for adapting the TRACE_INDEX schema."
-  },
-  {
-    "path": "project/proposals/TRACE_INDEX_SCHEMA_FIX.md",
-    "status": "registered",
-    "description": "A proposal for fixing the TRACE_INDEX schema."
-  },
-  {
-    "path": "project/reports/GOVERNANCE_DEMO_REPORT.md",
-    "status": "registered",
-    "description": "A report on the governance demo."
-  },
-  {
-    "path": "project/reports/HANDOVER_BRIEF_CHATGTP.md",
-    "status": "registered",
-    "description": "A handover brief for ChatGPT."
-  },
-  {
-    "path": "project/reports/HANDOVER_BRIEF_JULES.md",
-    "status": "registered",
-    "description": "A handover brief for Jules."
-  },
-  {
-    "path": "project/reports/PROJECT_AUDIT_FINAL_REPORT.md",
-    "status": "registered",
-    "description": "The final report of the project audit."
-  },
-  {
-    "path": "project/reports/PROJECT_DOCUMENT_ALIGNMENT.md",
-    "status": "registered",
-    "description": "A report on the alignment of project documents."
-  }
+    {
+        "name": "Code File Index",
+        "path": "api/docs/CODE_FILE_INDEX.md",
+        "type": "doc",
+        "module": "api",
+        "category": "docs",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`api/docs/CODE_FILE_INDEX.md`",
+        "path": "project/api/docs/CODE_FILE_INDEX.md",
+        "type": "doc",
+        "module": "project",
+        "category": "api",
+        "registered_in": [],
+        "status": "legacy",
+        "notes": "",
+        "source": "project/PROJECT_REGISTRY.md"
+    },
+    {
+        "name": "`project/api/endpoints.yaml`",
+        "path": "project/api/endpoints.yaml",
+        "type": "doc",
+        "module": "project",
+        "category": "api",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Traceability Matrix",
+        "path": "project/archive/TRACEABILITY_MATRIX.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "Audit Phase 3",
+        "path": "project/archive/audit/AUDIT-PHASE-3.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "Audit Phase 4",
+        "path": "project/archive/audit/AUDIT-PHASE-4.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "Audit Phase 5",
+        "path": "project/archive/audit/AUDIT-PHASE-5.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "Audit Phase 1",
+        "path": "project/archive/audit/AUDIT-phase-1.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "Audit Phase 2",
+        "path": "project/archive/audit/AUDIT-phase-2.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "Audit Traceability Matrix",
+        "path": "project/archive/audit/AUDIT_TRACEABILITY_MATRIX.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "Code Optimizationplan Phase 4",
+        "path": "project/archive/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "First Audit",
+        "path": "project/archive/audit/FIRST_AUDIT.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "Hld Lld Alignment Plan",
+        "path": "project/archive/audit/HLD_LLD_ALIGNMENT_PLAN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "Phase 4 Traceability Matrix",
+        "path": "project/archive/audit/PHASE_4_TRACEABILITY_MATRIX.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "Audit Prompt",
+        "path": "project/archive/audit/audit-prompt.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "Security",
+        "path": "project/archive/docs/projectplan/security.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "Spotify Fullstack Capability Blueprint",
+        "path": "project/archive/docs/projectplan/spotify_fullstack_capability_blueprint.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "Integration Checklist",
+        "path": "project/archive/docs/snitch/INTEGRATION_CHECKLIST.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "Phase 2 Secure Callback",
+        "path": "project/archive/docs/snitch/PHASE_2_SECURE_CALLBACK.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "Test Runbook",
+        "path": "project/archive/docs/snitch/TEST_RUNBOOK.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "Phase5 Ipc",
+        "path": "project/archive/docs/snitch/phase5-ipc.md",
+        "type": "doc",
+        "module": "project",
+        "category": "archive",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "`project/ALIGNMENT_MATRIX.md`",
+        "path": "project/ALIGNMENT_MATRIX.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Alignment Matrix",
+        "path": "project/ALIGNMENT_MATRIX.yml",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "`project/BACKLOG.md`",
+        "path": "project/BACKLOG.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/CICD.md`",
+        "path": "project/CICD.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/DEPENDENCIES.md`",
+        "path": "project/DEPENDENCIES.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/EXECUTION_PLAN.md`",
+        "path": "project/EXECUTION_PLAN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/FUTURE_ENHANCEMENTS.md`",
+        "path": "project/FUTURE_ENHANCEMENTS.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/HIGH_LEVEL_DESIGN.md`",
+        "path": "project/HIGH_LEVEL_DESIGN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/LESSONS-LEARNT.md`",
+        "path": "project/LESSONS-LEARNT.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/LOGGING_PHASES.md`",
+        "path": "project/LOGGING_PHASES.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/LOGGING_SYSTEM_DESIGN.md`",
+        "path": "project/LOGGING_SYSTEM_DESIGN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/LOGGING_TRACEABILITY_MATRIX.md`",
+        "path": "project/LOGGING_TRACEABILITY_MATRIX.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/LOW_LEVEL_DESIGN.md`",
+        "path": "project/LOW_LEVEL_DESIGN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/ONBOARDING.md`",
+        "path": "project/ONBOARDING.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/PID.md`",
+        "path": "project/PID.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/PROJECT_BRIEF.md`",
+        "path": "project/PROJECT_BRIEF.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/PROJECT_PLAN.md`",
+        "path": "project/PROJECT_PLAN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/PROJECT_REGISTRY.md`",
+        "path": "project/PROJECT_REGISTRY.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/QA_GOVERNANCE.md`",
+        "path": "project/QA_GOVERNANCE.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/ROADMAP.md`",
+        "path": "project/ROADMAP.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/SECURITY.md`",
+        "path": "project/SECURITY.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/TASK_CHECKLIST.md`",
+        "path": "project/TASK_CHECKLIST.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/USECASES.md`",
+        "path": "project/USECASES.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/USECASES_GAP_ANALYSIS.md`",
+        "path": "project/USECASES_GAP_ANALYSIS.md",
+        "type": "doc",
+        "module": "project",
+        "category": "general",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/logs/ACTIVITY.md`",
+        "path": "project/logs/ACTIVITY.md",
+        "type": "doc",
+        "module": "project",
+        "category": "logs",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/logs/CURRENT_STATE.md`",
+        "path": "project/logs/CURRENT_STATE.md",
+        "type": "doc",
+        "module": "project",
+        "category": "logs",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/logs/SESSION_LOG.md`",
+        "path": "project/logs/SESSION_LOG.md",
+        "type": "doc",
+        "module": "project",
+        "category": "logs",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/process/GAP_ANALYSIS_TEMPLATE.md`",
+        "path": "project/process/GAP_ANALYSIS_TEMPLATE.md",
+        "type": "doc",
+        "module": "project",
+        "category": "process",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/proposals/DBSTUDIO_PLUGIN.md`",
+        "path": "project/proposals/DBSTUDIO_PLUGIN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md`",
+        "path": "project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/proposals/GONKUI_PLUGIN.md`",
+        "path": "project/proposals/GONKUI_PLUGIN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/proposals/GOVERNANCE_AUDIT_REFACTOR.md`",
+        "path": "project/proposals/GOVERNANCE_AUDIT_REFACTOR.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/proposals/HOME_AUTOMATION_PROPOSAL.md`",
+        "path": "project/proposals/HOME_AUTOMATION_PROPOSAL.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/proposals/LOW_CODE_PROPOSAL.md`",
+        "path": "project/proposals/LOW_CODE_PROPOSAL.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md`",
+        "path": "project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/proposals/NEW_PROPOSAL.md`",
+        "path": "project/proposals/NEW_PROPOSAL.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md`",
+        "path": "project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md`",
+        "path": "project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/proposals/TRACE_INDEX_SCHEMA_FIX.md`",
+        "path": "project/proposals/TRACE_INDEX_SCHEMA_FIX.md",
+        "type": "doc",
+        "module": "project",
+        "category": "proposals",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "Archive Alignment Matrix Old",
+        "path": "project/reports/ARCHIVE_ALIGNMENT_MATRIX_OLD.md",
+        "type": "doc",
+        "module": "project",
+        "category": "reports",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "Content Alignment Report",
+        "path": "project/reports/CONTENT_ALIGNMENT_REPORT.md",
+        "type": "doc",
+        "module": "project",
+        "category": "reports",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "Description Compliance Report",
+        "path": "project/reports/DESCRIPTION_COMPLIANCE_REPORT.md",
+        "type": "doc",
+        "module": "project",
+        "category": "reports",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "Document Tag Inventory",
+        "path": "project/reports/DOCUMENT_TAG_INVENTORY.yml",
+        "type": "doc",
+        "module": "project",
+        "category": "reports",
+        "registered_in": [],
+        "status": "orphan",
+        "notes": "",
+        "source": "filesystem"
+    },
+    {
+        "name": "`project/reports/GOVERNANCE_DEMO_REPORT.md`",
+        "path": "project/reports/GOVERNANCE_DEMO_REPORT.md",
+        "type": "doc",
+        "module": "project",
+        "category": "reports",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/reports/HANDOVER_BRIEF_CHATGTP.md`",
+        "path": "project/reports/HANDOVER_BRIEF_CHATGTP.md",
+        "type": "doc",
+        "module": "project",
+        "category": "reports",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/reports/HANDOVER_BRIEF_JULES.md`",
+        "path": "project/reports/HANDOVER_BRIEF_JULES.md",
+        "type": "doc",
+        "module": "project",
+        "category": "reports",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/reports/PROJECT_AUDIT_FINAL_REPORT.md`",
+        "path": "project/reports/PROJECT_AUDIT_FINAL_REPORT.md",
+        "type": "doc",
+        "module": "project",
+        "category": "reports",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/reports/PROJECT_DOCUMENT_ALIGNMENT.md`",
+        "path": "project/reports/PROJECT_DOCUMENT_ALIGNMENT.md",
+        "type": "doc",
+        "module": "project",
+        "category": "reports",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    },
+    {
+        "name": "`project/reports/TRACE_INDEX.yml`",
+        "path": "project/reports/TRACE_INDEX.yml",
+        "type": "doc",
+        "module": "project",
+        "category": "reports",
+        "registered_in": [],
+        "status": "registered",
+        "notes": "",
+        "source": "TRACE_INDEX.yml"
+    }
 ]

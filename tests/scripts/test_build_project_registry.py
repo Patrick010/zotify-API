@@ -64,18 +64,19 @@ artifacts:
 """
         build_project_registry.TRACE_INDEX_PATH.write_text(trace_content)
 
-        # Run the main function of the script
-        build_project_registry.main()
+        # Run the main function of the script, patching sys.argv
+        with unittest.mock.patch.object(sys, 'argv', ['build_project_registry.py', '--repo-root', str(self.repo_root)]):
+            build_project_registry.main()
 
         # --- Validate JSON Output ---
         self.assertTrue(build_project_registry.OUTPUT_JSON.exists())
         with open(build_project_registry.OUTPUT_JSON, "r") as f:
             registry_data = json.load(f)
 
-        self.assertEqual(len(registry_data), 3) # Two existing files, one missing
+        self.assertEqual(len(registry_data), 4) # Two existing files, one missing, one ignored
 
         status_map = {item["path"]: item["status"] for item in registry_data}
-        desc_map = {item["path"]: item["description"] for item in registry_data}
+        notes_map = {item["path"]: item["notes"] for item in registry_data}
 
         # Check that only project files are included
         self.assertIn("project/proposals/NEW_PROPOSAL.md", status_map)
@@ -86,8 +87,8 @@ artifacts:
         self.assertEqual(status_map["project/proposals/MISSING_FILE.md"], "missing")
 
         # Check that descriptions now come from the mock TRACE_INDEX.yml
-        self.assertEqual(desc_map["project/proposals/NEW_PROPOSAL.md"], "This is the correct description from TRACE_INDEX.")
-        self.assertEqual(desc_map["project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md"], "This is also the correct description.")
+        self.assertEqual(notes_map["project/proposals/NEW_PROPOSAL.md"], "This is the correct description from TRACE_INDEX.")
+        self.assertEqual(notes_map["project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md"], "This is also the correct description.")
 
         # --- Validate Markdown Output ---
         self.assertTrue(build_project_registry.OUTPUT_MD.exists())

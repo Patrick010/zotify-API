@@ -1,3 +1,4 @@
+# ID: OPS-018
 #!/usr/bin/env python3
 """
 Self-checking repository manifest generator.

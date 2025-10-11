@@ -1,3 +1,4 @@
+<!-- ID: API-263 -->
 # Snitch Module Project Plan
 
 **Date:** 2025-09-01

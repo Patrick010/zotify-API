@@ -1,3 +1,4 @@
+<!-- ID: API-189 -->
 # user_service.py
 
 ## 1. Role / Purpose

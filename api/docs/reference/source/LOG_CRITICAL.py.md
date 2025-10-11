@@ -1,3 +1,4 @@
+<!-- ID: API-158 -->
 # log_critical.py
 
 ## 1. Role / Purpose

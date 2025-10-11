@@ -1,3 +1,4 @@
+<!-- ID: DOC-023 -->
 # Gap Analysis – Zotify API vs. User Use Cases
 
 This document compares the **desired capabilities** from `USECASES.md` with the **current** Zotify API implementation.

@@ -1,3 +1,4 @@
+<!-- ID: DOC-048 -->
 # Proposal: Dynamic Plugin System for Logging Sinks
 
 **Date:** 2025-08-18

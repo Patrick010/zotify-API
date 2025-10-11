@@ -1,3 +1,4 @@
+# ID: OPS-005
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -102,10 +103,9 @@ def build_registry(
         path_obj = Path(path_str)
 
         is_project_doc = path_str.startswith("project/")
-        is_code_file_index = path_str == "api/docs/CODE_FILE_INDEX.md"
         is_in_extras = path_str in extras_to_include
 
-        if not (is_project_doc or is_code_file_index or is_in_extras):
+        if not (is_project_doc or is_in_extras):
             if debug: print(f"[FILTERED OUT] Path '{path_str}' does not match project scope.")
             continue
 
@@ -136,7 +136,7 @@ def build_registry(
         entry = {
             "name": derive_name(path_obj, legacy_item), "path": path_str, "type": "doc",
             "module": module, "category": category, "registered_in": trace_item.get("registered_in", []) if trace_item else [],
-            "status": status, "notes": legacy_item["notes"] if legacy_item else "", "source": source,
+            "status": status, "notes": trace_item.get("description") or (legacy_item["notes"] if legacy_item else ""), "source": source,
         }
         registry.append(entry)
 
@@ -190,7 +190,7 @@ def generate_markdown(registry_data, output_md_path):
         except ValueError:
             relative_path = Path(entry["path"])
         location_str = f"[`{entry['path']}`](./{relative_path})"
-        return f"| **{entry['name']}** | {location_str} | {entry['notes']} | {entry['status']} |"
+        return f"| **{entry['name']}** | {location_str} | {entry.get('notes', '')} | {entry['status']} |"
 
     table_rows = [create_table_row(e, output_md_path) for e in main_entries]
     content = header + table_header + "\n".join(table_rows)
@@ -217,7 +217,10 @@ def generate_markdown(registry_data, output_md_path):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    repo_root = Path.cwd()
+    parser.add_argument("--repo-root", type=Path, default=Path.cwd(), help="The root directory of the repository.")
+    args, _ = parser.parse_known_args()
+    repo_root = args.repo_root.resolve()
+
     parser.add_argument("--trace-index", type=Path, default=repo_root / "project/reports/TRACE_INDEX.yml")
     parser.add_argument("--project-registry-md", type=Path, default=repo_root / "project/PROJECT_REGISTRY.md")
     parser.add_argument("--extras-file", type=Path, default=repo_root / "scripts/project_registry_extras.yml")

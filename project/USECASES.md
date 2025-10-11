@@ -1,3 +1,4 @@
+<!-- ID: DOC-022 -->
 # Zotify API – User-Driven Use Cases (Spotify Provider Only)
 
 This document captures realistic, demanding user scenarios that the API should ideally support.

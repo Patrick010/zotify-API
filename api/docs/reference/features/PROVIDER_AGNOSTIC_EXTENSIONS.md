@@ -1,3 +1,4 @@
+<!-- ID: API-117 -->
 # Proposal: Feature Specification for Provider-Agnostic Extensions
 
 ## 1. Purpose

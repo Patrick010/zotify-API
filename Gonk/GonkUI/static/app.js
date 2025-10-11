@@ -1,3 +1,4 @@
+// ID: API-020
 document.addEventListener("DOMContentLoaded", () => {
     const endpointsList = document.getElementById("endpoints-list");
     const spotifyLoginBtn = document.getElementById("spotify-login");

@@ -1,3 +1,4 @@
+<!-- ID: DOC-036 -->
 Bootstrap Prompt: Comprehensive Reality Audit
 Goal
 

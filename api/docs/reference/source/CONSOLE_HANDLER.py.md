@@ -1,3 +1,4 @@
+<!-- ID: API-132 -->
 # console_handler.py
 
 ## 1. Role / Purpose

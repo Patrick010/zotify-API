@@ -1,51 +1,82 @@
-# Project Registry
+<!-- AUTO-GENERATED from scripts/project_registry.json — manual edits may be overwritten. Historical legacy entries preserved below. -->
 
-This file is auto-generated. Do not edit manually.
+| Document | Location | Description | Status |
+|---|---|---|---|
+| **Code File Index** | [`api/docs/CODE_FILE_INDEX.md`](./api/docs/CODE_FILE_INDEX.md) |  | registered |
+| **`project/ALIGNMENT_MATRIX.md`** | [`project/ALIGNMENT_MATRIX.md`](./project/ALIGNMENT_MATRIX.md) |  | registered |
+| **`project/BACKLOG.md`** | [`project/BACKLOG.md`](./project/BACKLOG.md) |  | registered |
+| **`project/CICD.md`** | [`project/CICD.md`](./project/CICD.md) |  | registered |
+| **`project/DEPENDENCIES.md`** | [`project/DEPENDENCIES.md`](./project/DEPENDENCIES.md) |  | registered |
+| **`project/EXECUTION_PLAN.md`** | [`project/EXECUTION_PLAN.md`](./project/EXECUTION_PLAN.md) |  | registered |
+| **`project/FUTURE_ENHANCEMENTS.md`** | [`project/FUTURE_ENHANCEMENTS.md`](./project/FUTURE_ENHANCEMENTS.md) |  | registered |
+| **`project/HIGH_LEVEL_DESIGN.md`** | [`project/HIGH_LEVEL_DESIGN.md`](./project/HIGH_LEVEL_DESIGN.md) |  | registered |
+| **`project/LESSONS-LEARNT.md`** | [`project/LESSONS-LEARNT.md`](./project/LESSONS-LEARNT.md) |  | registered |
+| **`project/LOGGING_PHASES.md`** | [`project/LOGGING_PHASES.md`](./project/LOGGING_PHASES.md) |  | registered |
+| **`project/LOGGING_SYSTEM_DESIGN.md`** | [`project/LOGGING_SYSTEM_DESIGN.md`](./project/LOGGING_SYSTEM_DESIGN.md) |  | registered |
+| **`project/LOGGING_TRACEABILITY_MATRIX.md`** | [`project/LOGGING_TRACEABILITY_MATRIX.md`](./project/LOGGING_TRACEABILITY_MATRIX.md) |  | registered |
+| **`project/LOW_LEVEL_DESIGN.md`** | [`project/LOW_LEVEL_DESIGN.md`](./project/LOW_LEVEL_DESIGN.md) |  | registered |
+| **`project/ONBOARDING.md`** | [`project/ONBOARDING.md`](./project/ONBOARDING.md) |  | registered |
+| **`project/PID.md`** | [`project/PID.md`](./project/PID.md) |  | registered |
+| **`project/PROJECT_BRIEF.md`** | [`project/PROJECT_BRIEF.md`](./project/PROJECT_BRIEF.md) |  | registered |
+| **`project/PROJECT_PLAN.md`** | [`project/PROJECT_PLAN.md`](./project/PROJECT_PLAN.md) |  | registered |
+| **`project/PROJECT_REGISTRY.md`** | [`project/PROJECT_REGISTRY.md`](./project/PROJECT_REGISTRY.md) |  | registered |
+| **`project/QA_GOVERNANCE.md`** | [`project/QA_GOVERNANCE.md`](./project/QA_GOVERNANCE.md) |  | registered |
+| **`project/ROADMAP.md`** | [`project/ROADMAP.md`](./project/ROADMAP.md) |  | registered |
+| **`project/SECURITY.md`** | [`project/SECURITY.md`](./project/SECURITY.md) |  | registered |
+| **`project/TASK_CHECKLIST.md`** | [`project/TASK_CHECKLIST.md`](./project/TASK_CHECKLIST.md) |  | registered |
+| **`project/USECASES.md`** | [`project/USECASES.md`](./project/USECASES.md) |  | registered |
+| **`project/USECASES_GAP_ANALYSIS.md`** | [`project/USECASES_GAP_ANALYSIS.md`](./project/USECASES_GAP_ANALYSIS.md) |  | registered |
+| **`project/api/endpoints.yaml`** | [`project/api/endpoints.yaml`](./project/api/endpoints.yaml) |  | registered |
+| **`project/logs/ACTIVITY.md`** | [`project/logs/ACTIVITY.md`](./project/logs/ACTIVITY.md) |  | registered |
+| **`project/logs/CURRENT_STATE.md`** | [`project/logs/CURRENT_STATE.md`](./project/logs/CURRENT_STATE.md) |  | registered |
+| **`project/logs/SESSION_LOG.md`** | [`project/logs/SESSION_LOG.md`](./project/logs/SESSION_LOG.md) |  | registered |
+| **`project/process/GAP_ANALYSIS_TEMPLATE.md`** | [`project/process/GAP_ANALYSIS_TEMPLATE.md`](./project/process/GAP_ANALYSIS_TEMPLATE.md) |  | registered |
+| **`project/proposals/DBSTUDIO_PLUGIN.md`** | [`project/proposals/DBSTUDIO_PLUGIN.md`](./project/proposals/DBSTUDIO_PLUGIN.md) |  | registered |
+| **`project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md`** | [`project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md`](./project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md) |  | registered |
+| **`project/proposals/GONKUI_PLUGIN.md`** | [`project/proposals/GONKUI_PLUGIN.md`](./project/proposals/GONKUI_PLUGIN.md) |  | registered |
+| **`project/proposals/GOVERNANCE_AUDIT_REFACTOR.md`** | [`project/proposals/GOVERNANCE_AUDIT_REFACTOR.md`](./project/proposals/GOVERNANCE_AUDIT_REFACTOR.md) |  | registered |
+| **`project/proposals/HOME_AUTOMATION_PROPOSAL.md`** | [`project/proposals/HOME_AUTOMATION_PROPOSAL.md`](./project/proposals/HOME_AUTOMATION_PROPOSAL.md) |  | registered |
+| **`project/proposals/LOW_CODE_PROPOSAL.md`** | [`project/proposals/LOW_CODE_PROPOSAL.md`](./project/proposals/LOW_CODE_PROPOSAL.md) |  | registered |
+| **`project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md`** | [`project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md`](./project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md) |  | registered |
+| **`project/proposals/NEW_PROPOSAL.md`** | [`project/proposals/NEW_PROPOSAL.md`](./project/proposals/NEW_PROPOSAL.md) |  | registered |
+| **`project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md`** | [`project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md`](./project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md) |  | registered |
+| **`project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md`** | [`project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md`](./project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md) |  | registered |
+| **`project/proposals/TRACE_INDEX_SCHEMA_FIX.md`** | [`project/proposals/TRACE_INDEX_SCHEMA_FIX.md`](./project/proposals/TRACE_INDEX_SCHEMA_FIX.md) |  | registered |
+| **`project/reports/GOVERNANCE_DEMO_REPORT.md`** | [`project/reports/GOVERNANCE_DEMO_REPORT.md`](./project/reports/GOVERNANCE_DEMO_REPORT.md) |  | registered |
+| **`project/reports/HANDOVER_BRIEF_CHATGTP.md`** | [`project/reports/HANDOVER_BRIEF_CHATGTP.md`](./project/reports/HANDOVER_BRIEF_CHATGTP.md) |  | registered |
+| **`project/reports/HANDOVER_BRIEF_JULES.md`** | [`project/reports/HANDOVER_BRIEF_JULES.md`](./project/reports/HANDOVER_BRIEF_JULES.md) |  | registered |
+| **`project/reports/PROJECT_AUDIT_FINAL_REPORT.md`** | [`project/reports/PROJECT_AUDIT_FINAL_REPORT.md`](./project/reports/PROJECT_AUDIT_FINAL_REPORT.md) |  | registered |
+| **`project/reports/PROJECT_DOCUMENT_ALIGNMENT.md`** | [`project/reports/PROJECT_DOCUMENT_ALIGNMENT.md`](./project/reports/PROJECT_DOCUMENT_ALIGNMENT.md) |  | registered |
+| **`project/reports/TRACE_INDEX.yml`** | [`project/reports/TRACE_INDEX.yml`](./project/reports/TRACE_INDEX.yml) |  | registered |
 
-| Path | Description |
-|------|-------------|
-| `AGENTS.md` | Core instruction manual and workflow guide for AI agents working on this repository. |
-| `api/MIGRATIONS.md` | Documentation for database migrations. |
-| `project/ALIGNMENT_MATRIX.md` | Maps project goals to implementation artifacts. |
-| `project/BACKLOG.md` | A list of pending tasks and features. |
-| `project/CICD.md` | Documentation for the project's CI/CD pipeline. |
-| `project/DEPENDENCIES.md` | A list of project dependencies. |
-| `project/EXECUTION_PLAN.md` | The plan for executing the project. |
-| `project/FUTURE_ENHANCEMENTS.md` | A list of potential future enhancements. |
-| `project/HIGH_LEVEL_DESIGN.md` | A high-level overview of the project's architecture. |
-| `project/LESSONS-LEARNT.md` | A document detailing lessons learned during the project. |
-| `project/LOGGING_PHASES.md` | Documentation of the different phases of the logging system implementation. |
-| `project/LOGGING_SYSTEM_DESIGN.md` | The design of the logging system. |
-| `project/LOGGING_TRACEABILITY_MATRIX.md` | A matrix tracing logging requirements to implementation. |
-| `project/LOW_LEVEL_DESIGN.md` | A detailed, low-level design of the project's components. |
-| `project/ONBOARDING.md` | A guide for new developers joining the project. |
-| `project/PID.md` | The Project Initiation Document. |
-| `project/PROJECT_BRIEF.md` | A brief overview of the project. |
-| `project/PROJECT_PLAN.md` | The detailed project plan. |
-| `project/PROJECT_REGISTRY.md` | The central registry for all project artifacts. |
-| `project/QA_GOVERNANCE.md` | The quality assurance and governance plan. |
-| `project/ROADMAP.md` | The project's roadmap. |
-| `project/SECURITY.md` | A document detailing the project's security measures. |
-| `project/TASK_CHECKLIST.md` | A checklist of tasks to be completed. |
-| `project/USECASES.md` | A list of use cases for the project. |
-| `project/USECASES_GAP_ANALYSIS.md` | A gap analysis of the project's use cases. |
-| `project/logs/ACTIVITY.md` | A log of all activities performed on the project. |
-| `project/logs/CURRENT_STATE.md` | A snapshot of the project's current state. |
-| `project/logs/SESSION_LOG.md` | A log of the current session's activities. |
-| `project/process/GAP_ANALYSIS_TEMPLATE.md` | A template for performing a gap analysis. |
-| `project/proposals/DBSTUDIO_PLUGIN.md` | A proposal for a DBStudio plugin. |
-| `project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md` | A proposal for a dynamic plugin system. |
-| `project/proposals/GONKUI_PLUGIN.md` | A proposal for a GonkUI plugin. |
-| `project/proposals/GOVERNANCE_AUDIT_REFACTOR.md` | A proposal for refactoring the governance audit system. |
-| `project/proposals/HOME_AUTOMATION_PROPOSAL.md` | A proposal for a home automation system. |
-| `project/proposals/LOW_CODE_PROPOSAL.md` | A proposal for a low-code development platform. |
-| `project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md` | A proposal for a multi-source metadata system. |
-| `project/proposals/NEW_PROPOSAL.md` | A template for new proposals. |
-| `project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md` | A plan for implementing a QA gate. |
-| `project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md` | A proposal for adapting the TRACE_INDEX schema. |
-| `project/proposals/TRACE_INDEX_SCHEMA_FIX.md` | A proposal for fixing the TRACE_INDEX schema. |
-| `project/reports/GOVERNANCE_DEMO_REPORT.md` | A report on the governance demo. |
-| `project/reports/HANDOVER_BRIEF_CHATGTP.md` | A handover brief for ChatGPT. |
-| `project/reports/HANDOVER_BRIEF_JULES.md` | A handover brief for Jules. |
-| `project/reports/PROJECT_AUDIT_FINAL_REPORT.md` | The final report of the project audit. |
-| `project/reports/PROJECT_DOCUMENT_ALIGNMENT.md` | A report on the alignment of project documents. |
+## Historical / Legacy Entries
+
+| Document | Location | Description | Status |
+|---|---|---|---|
+| **`api/docs/CODE_FILE_INDEX.md`** | [`project/api/docs/CODE_FILE_INDEX.md`](./project/api/docs/CODE_FILE_INDEX.md) |  | legacy |
+
+## Orphan Files
+
+- `project/ALIGNMENT_MATRIX.yml`
+- `project/archive/TRACEABILITY_MATRIX.md`
+- `project/archive/audit/AUDIT-PHASE-3.md`
+- `project/archive/audit/AUDIT-PHASE-4.md`
+- `project/archive/audit/AUDIT-PHASE-5.md`
+- `project/archive/audit/AUDIT-phase-1.md`
+- `project/archive/audit/AUDIT-phase-2.md`
+- `project/archive/audit/AUDIT_TRACEABILITY_MATRIX.md`
+- `project/archive/audit/CODE_OPTIMIZATIONPLAN_PHASE_4.md`
+- `project/archive/audit/FIRST_AUDIT.md`
+- `project/archive/audit/HLD_LLD_ALIGNMENT_PLAN.md`
+- `project/archive/audit/PHASE_4_TRACEABILITY_MATRIX.md`
+- `project/archive/audit/audit-prompt.md`
+- `project/archive/docs/projectplan/security.md`
+- `project/archive/docs/projectplan/spotify_fullstack_capability_blueprint.md`
+- `project/archive/docs/snitch/INTEGRATION_CHECKLIST.md`
+- `project/archive/docs/snitch/PHASE_2_SECURE_CALLBACK.md`
+- `project/archive/docs/snitch/TEST_RUNBOOK.md`
+- `project/archive/docs/snitch/phase5-ipc.md`
+- `project/reports/ARCHIVE_ALIGNMENT_MATRIX_OLD.md`
+- `project/reports/CONTENT_ALIGNMENT_REPORT.md`
+- `project/reports/DESCRIPTION_COMPLIANCE_REPORT.md`
+- `project/reports/DOCUMENT_TAG_INVENTORY.yml`

@@ -1,3 +1,4 @@
+<!-- ID: DOC-051 -->
 # Proposal: Home Automation Platform Integration
 
 **Date:** 2025-08-18

@@ -1,3 +1,4 @@
+<!-- ID: API-157 -->
 # logging_service.py
 
 ## 1. Role / Purpose

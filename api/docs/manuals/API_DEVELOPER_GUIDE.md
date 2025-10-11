@@ -1,3 +1,4 @@
+<!-- ID: API-106 -->
 # Zotify API: Contributor's Guide
 
 This document is for developers who wish to contribute directly to the Zotify API codebase. It outlines the development workflow, architectural patterns, and quality standards required for all contributions.

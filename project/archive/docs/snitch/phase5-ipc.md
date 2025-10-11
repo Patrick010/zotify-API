@@ -1,3 +1,4 @@
+<!-- ID: DOC-042 -->
 # Phase 5: IPC Communication Layer
 
 This document outlines the secure Inter-Process Communication (IPC) mechanism implemented between the Zotify API and the Snitch helper application.

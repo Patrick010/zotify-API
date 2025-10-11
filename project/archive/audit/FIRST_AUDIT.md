@@ -1,3 +1,4 @@
+<!-- ID: DOC-033 -->
 # **FIRST_AUDIT: Comprehensive API & Documentation Reality Audit**
 
 **Date:** 2025-08-10

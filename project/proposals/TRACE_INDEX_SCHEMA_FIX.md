@@ -1,3 +1,4 @@
+<!-- ID: DOC-057 -->
 # Proposal: Schema Fix for TRACE_INDEX.yml
 
 **Date:** 2025-09-25

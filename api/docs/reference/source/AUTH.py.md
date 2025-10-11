@@ -1,3 +1,4 @@
+<!-- ID: API-124 -->
 # auth.py
 
 ## 1. Role / Purpose

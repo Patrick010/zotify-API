@@ -1,3 +1,4 @@
+<!-- ID: DOC-006 -->
 # Future Enhancements & Product Vision
 
 > **Note:** See the [`ALIGNMENT_MATRIX.md`](./ALIGNMENT_MATRIX.md) for status and implementation tracking of these enhancements.

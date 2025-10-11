@@ -1,3 +1,4 @@
+# ID: CFG-002
 repos:
   # 1. Code formatting & linting
   - repo: https://github.com/astral-sh/ruff-pre-commit

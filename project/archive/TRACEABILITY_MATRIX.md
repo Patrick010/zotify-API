@@ -1,3 +1,4 @@
+<!-- ID: DOC-025 -->
 ⚠️ This file has been migrated into ALIGNMENT_MATRIX.md and is no longer maintained.
 
 # Traceability Matrix – Zotify API

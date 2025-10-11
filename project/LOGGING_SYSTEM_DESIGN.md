@@ -1,3 +1,4 @@
+<!-- ID: DOC-010 -->
 # Logging System Design
 
 **Status:** Proposed

@@ -1,3 +1,4 @@
+<!-- ID: DOC-052 -->
 # Proposal: Low-Code/No-Code Platform Integration
 
 **Date:** 2025-08-18

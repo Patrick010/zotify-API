@@ -1,3 +1,4 @@
+# ID: CFG-001
 # Byte-compiled / optimized / DLL files
 __pycache__/
 src/__pycache__/
@@ -170,3 +171,4 @@ api/src/storage/spotify_tokens.json
 # Ignore API storage directory and database files
 api/storage/
 api/*.db
+project/logs/chat/

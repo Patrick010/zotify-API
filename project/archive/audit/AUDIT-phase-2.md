@@ -1,3 +1,4 @@
+<!-- ID: DOC-030 -->
 # AUDIT-phase-3: HLD/LLD Alignment Analysis
 
 **Date:** 2025-08-10

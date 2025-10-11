@@ -1,3 +1,4 @@
+<!-- ID: DOC-053 -->
 # Proposal: Plugin-Driven Multi-Source Metadata System
 
 **Date:** 2025-08-18

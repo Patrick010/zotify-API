@@ -1,3 +1,4 @@
+<!-- ID: DOC-049 -->
 # Proposal: Dynamic GonkUI Plugin for Developer UI
 
 **Date:** 2025-09-23

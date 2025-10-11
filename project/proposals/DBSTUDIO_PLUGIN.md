@@ -1,3 +1,4 @@
+<!-- ID: DOC-047 -->
 # Proposal: Dynamic dbstudio Plugin for Database Browsing
 
 **Date:** 2025-09-23

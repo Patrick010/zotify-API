@@ -1,0 +1,372 @@
+# ID: DOC-072
+- id: AR-001
+  description: API Routes Layer
+  linked_docs:
+  - API-106
+  - API-111
+  - API-112
+  - API-113
+  - API-137
+  - API-149
+  - API-159
+  - API-171
+  - API-192
+  - API-193
+  - API-195
+  - API-197
+  - API-201
+  - API-205
+  - DOC-024
+  code_paths:
+  - API-048
+  - API-050
+  - API-057
+  related_tasks: []
+- id: AR-002
+  description: Business Logic Service Layer
+  linked_docs:
+  - API-161
+  - API-174
+  - API-175
+  - API-192
+  code_paths:
+  - API-086
+  related_tasks: []
+- id: AR-003
+  description: Pydantic Schema Layer
+  linked_docs:
+  - API-148
+  - API-160
+  - API-172
+  - API-192
+  code_paths: []
+  related_tasks: []
+- id: FEAT-ZOTIFY-DATABASE-01
+  description: Unified Persistence (SQLAlchemy)
+  linked_docs:
+  - API-133
+  - API-135
+  - API-136
+  - API-162
+  - API-176
+  - API-245
+  code_paths:
+  - API-044
+  - API-207
+  - API-209
+  related_tasks:
+  - AR-004
+- id: SYS-04
+  description: Provider Abstraction
+  linked_docs:
+  - API-117
+  - API-126
+  - API-169
+  - API-178
+  - API-179
+  - API-180
+  - API-200
+  - DOC-048
+  code_paths:
+  - API-054
+  related_tasks:
+  - AR-005
+- id: AR-006
+  description: Centralized Configuration
+  linked_docs:
+  - API-129
+  - API-130
+  - API-131
+  code_paths:
+  - API-026
+  - API-089
+  related_tasks: []
+- id: SYS-07
+  description: Auth Routes & Provider-Agnostic Flow
+  linked_docs:
+  - API-114
+  - API-118
+  - API-124
+  - API-125
+  - API-184
+  - DOC-024
+  code_paths:
+  - API-025
+  - API-058
+  related_tasks:
+  - AR-007
+- id: FEAT-ZOTIFY-CACHE-01
+  description: Cache Routes & Service
+  linked_docs:
+  - API-127
+  - API-128
+  - DOC-024
+  code_paths:
+  - API-059
+  - API-088
+  related_tasks:
+  - AR-008
+- id: AR-009
+  description: Config Routes
+  linked_docs:
+  - DOC-024
+  code_paths:
+  - API-060
+  related_tasks: []
+- id: UC-04
+  description: Downloads Routes & Service
+  linked_docs:
+  - API-138
+  - API-139
+  - API-140
+  - DOC-024
+  code_paths:
+  - API-061
+  related_tasks:
+  - AR-010
+- id: FEAT-ZOTIFY-NETWORK-01
+  description: Network Routes & Service
+  linked_docs:
+  - API-163
+  - API-164
+  - DOC-024
+  code_paths:
+  - API-063
+  - API-096
+  related_tasks:
+  - AR-011
+- id: FEAT-ZOTIFY-NOTIFICATIONS-01
+  description: Notifications Routes & Service
+  linked_docs:
+  - API-165
+  - API-166
+  - DOC-024
+  code_paths:
+  - API-064
+  - API-097
+  related_tasks:
+  - AR-012
+- id: FEAT-ZOTIFY-PLAYLISTS-01
+  description: Playlists Routes & Service
+  linked_docs:
+  - API-167
+  - API-168
+  - DOC-024
+  code_paths:
+  - API-065
+  - API-098
+  related_tasks:
+  - AR-013
+- id: FEAT-ZOTIFY-SEARCH-01
+  description: Search Routes & Service
+  linked_docs:
+  - API-173
+  - DOC-024
+  code_paths:
+  - API-066
+  - API-099
+  related_tasks:
+  - AR-014
+- id: FEAT-ZOTIFY-SYNC-01
+  description: Sync Routes & Service
+  linked_docs:
+  - API-181
+  - API-182
+  - DOC-024
+  code_paths:
+  - API-067
+  - API-101
+  related_tasks:
+  - AR-015
+- id: AR-016
+  description: System Routes & Health Checks
+  linked_docs:
+  - API-183
+  - DOC-024
+  code_paths:
+  - API-068
+  related_tasks: []
+- id: FEAT-ZOTIFY-TRACKS-01
+  description: Tracks Routes & Service
+  linked_docs:
+  - API-185
+  - API-186
+  - DOC-024
+  code_paths:
+  - API-069
+  - API-102
+  related_tasks:
+  - AR-017
+- id: FEAT-ZOTIFY-USER-01
+  description: User Routes & Service
+  linked_docs:
+  - API-188
+  - API-189
+  - DOC-024
+  code_paths:
+  - API-070
+  - API-103
+  related_tasks:
+  - AR-018
+- id: FEAT-ZOTIFY-WEBHOOKS-01
+  description: Webhooks Routes & Service
+  linked_docs:
+  - API-190
+  - API-191
+  - DOC-024
+  code_paths:
+  - API-071
+  - API-104
+  related_tasks:
+  - AR-019
+- id: AR-021
+  description: Generic Error Handling
+  linked_docs:
+  - API-108
+  - API-119
+  - API-141
+  - API-143
+  - API-150
+  - API-158
+  - API-187
+  - API-194
+  code_paths:
+  - API-027
+  - API-028
+  - API-029
+  - API-030
+  - API-031
+  - API-032
+  - API-033
+  - API-034
+  related_tasks: []
+- id: AR-022
+  description: Flexible Logging Framework
+  linked_docs:
+  - API-110
+  - API-116
+  - API-132
+  - API-134
+  - API-142
+  - API-151
+  - API-153
+  - API-154
+  - API-155
+  - API-156
+  - API-157
+  code_paths:
+  - API-035
+  - API-036
+  - API-037
+  - API-038
+  - API-039
+  - API-040
+  - API-041
+  - API-042
+  - API-043
+  - API-049
+  - API-247
+  - API-248
+  related_tasks: []
+- id: SYS-05
+  description: API Middleware
+  linked_docs:
+  - API-170
+  code_paths: []
+  related_tasks:
+  - AR-023
+- id: FEAT-ZOTIFY-GONK-01
+  description: Gonk-TestUI
+  linked_docs:
+  - API-011
+  - API-013
+  - API-014
+  - API-015
+  - API-017
+  - API-021
+  - API-120
+  - API-121
+  code_paths:
+  - API-004
+  - API-005
+  - API-006
+  - API-007
+  - API-008
+  - API-009
+  - API-012
+  - API-020
+  - API-022
+  - API-023
+  related_tasks:
+  - AR-024
+- id: FEAT-ZOTIFY-SNITCH-01
+  description: Snitch
+  linked_docs:
+  - API-177
+  - API-256
+  - API-257
+  - API-258
+  - API-259
+  - API-260
+  - API-261
+  - API-262
+  - API-263
+  - API-264
+  - API-265
+  - API-266
+  - API-267
+  - API-268
+  - API-269
+  code_paths:
+  - API-272
+  related_tasks:
+  - AR-025
+- id: AR-026
+  description: CI/CD Pipeline
+  linked_docs:
+  - API-107
+  - DOC-003
+  code_paths: []
+  related_tasks: []
+- id: FEAT-ZOTIFY-GOVERNANCE-01
+  description: Core Project Governance
+  linked_docs:
+  - API-115
+  - API-122
+  - API-123
+  - API-145
+  - API-146
+  - API-147
+  - API-203
+  - API-204
+  code_paths:
+  - DOC-018
+  - DOC-067
+  - OPS-006
+  - OPS-007
+  - OPS-017
+  - OPS-023
+  - OPS-025
+  related_tasks:
+  - AR-066
+- id: AR-028
+  description: Code Index Validator
+  linked_docs:
+  - DOC-018
+  code_paths:
+  - OPS-031
+  related_tasks: []
+- id: AR-029
+  description: GDPR Compliance Subsystem
+  linked_docs:
+  - API-196
+  code_paths: []
+  related_tasks: []
+- id: SYS-01
+  description: Test Coverage >90%
+  linked_docs:
+  - API-144
+  code_paths:
+  - API-233
+  related_tasks:
+  - AR-031

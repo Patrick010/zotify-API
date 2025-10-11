@@ -1,3 +1,4 @@
+<!-- ID: DOC-031 -->
 # HLD/LLD Traceability Matrix
 
 > **2025-09-01** TRACEABILITY_MATRIX fully reconciled. All roadmap themes and execution phases mapped. Matrix review complete.

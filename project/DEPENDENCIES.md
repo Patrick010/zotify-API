@@ -1,3 +1,4 @@
+<!-- ID: DOC-004 -->
 # Dependency Management Policy
 
 This document outlines the policy for adding new third-party dependencies to the Zotify API project.

@@ -1,3 +1,4 @@
+<!-- ID: DOC-056 -->
 # Proposal: Adaptation of TRACE_INDEX.yml Schema
 
 **Date:** 2025-09-25

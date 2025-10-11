@@ -1,3 +1,4 @@
+<!-- ID: DOC-032 -->
 # Action Plan: Phase 4 "Super-Lint" (Comprehensive)
 
 **Status:** ✅ Superseded & Consolidated

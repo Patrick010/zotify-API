@@ -1,3 +1,4 @@
+<!-- ID: DOC-007 -->
 # High-Level Design (HLD) – Zotify API Refactor
 
 **Status:** Live Document
