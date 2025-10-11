@@ -17,6 +17,7 @@ from collections import defaultdict
 PROJECT_ROOT = Path(__file__).parent.parent
 TAG_PATTERN = re.compile(r"(?:#|<!--)\s*ID:\s*([A-Z0-9\-]+)", re.IGNORECASE)
 TAG_INVENTORY = PROJECT_ROOT / "project/reports/DOCUMENT_TAG_INVENTORY.yml"
+TRACE_INDEX_PATH = PROJECT_ROOT / "project/reports/TRACE_INDEX.yml"
 
 def load_tag_inventory():
     if not TAG_INVENTORY.exists():
@@ -33,6 +34,28 @@ def load_tag_inventory():
                 return {}
         except yaml.YAMLError as e:
             print(f"❌ YAML parse error: {e}", file=sys.stderr)
+            return {}
+
+def load_trace_index():
+    """Loads the TRACE_INDEX.yml file and returns a path-to-index mapping."""
+    if not TRACE_INDEX_PATH.exists():
+        print(f"❌ Missing TRACE_INDEX.yml", file=sys.stderr)
+        return {}
+    with open(TRACE_INDEX_PATH, "r", encoding="utf-8") as f:
+        try:
+            data = yaml.safe_load(f)
+            if not isinstance(data, dict) or "artifacts" not in data:
+                return {}
+
+            path_to_index_map = {}
+            for item in data.get("artifacts", []):
+                path = item.get("path")
+                index = item.get("index", "-")
+                if path:
+                    path_to_index_map[path] = index
+            return path_to_index_map
+        except yaml.YAMLError as e:
+            print(f"❌ YAML parse error in TRACE_INDEX.yml: {e}", file=sys.stderr)
             return {}
 
 def find_embedded_id(file_path):
@@ -54,6 +77,12 @@ def main():
 
     if args.rebuild:
         print("--- Rebuilding Tag Inventory from Embedded IDs ---")
+
+        path_to_index_map = load_trace_index()
+        if not path_to_index_map:
+            print("❌ Could not build path-to-index map from TRACE_INDEX.yml. Aborting rebuild.", file=sys.stderr)
+            sys.exit(1)
+
         new_inventory = []
         for root, _, files in os.walk(PROJECT_ROOT):
             if any(part in root for part in [".git", ".venv", "node_modules", "__pycache__"]):
@@ -63,8 +92,8 @@ def main():
                 rel_path = str(full_path.relative_to(PROJECT_ROOT))
                 embedded_id = find_embedded_id(full_path)
                 if embedded_id:
-                    prefix = embedded_id.split('-')[0]
-                    new_inventory.append({"id": embedded_id, "path": rel_path, "prefix": prefix})
+                    index = path_to_index_map.get(rel_path, "-")
+                    new_inventory.append({"id": embedded_id, "path": rel_path, "index": index})
 
         with open(TAG_INVENTORY, "w", encoding="utf-8") as f:
             yaml.safe_dump(new_inventory, f, sort_keys=False)
@@ -83,7 +112,7 @@ def main():
     summary = defaultdict(list)
 
     for root, _, files in os.walk(PROJECT_ROOT):
-        if any(part in root for part in [".git", ".venv", "node_modules", "archive", "__pycache__", "templates", "reports"]):
+        if any(part in root for part in [".git", ".venv", "node_modules", "archive", "__pycache__", "templates", "reports", ".pytest_cache"]):
             continue
         for f in files:
             if not f.endswith((".py", ".md", ".sh", ".yml", ".yaml")):

@@ -774,6 +774,31 @@ artifacts:
   registered: exempted
   index: '-'
   id: MISSING
+- path: api/src/zotify_api.egg-info/PKG-INFO
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: api/src/zotify_api.egg-info/SOURCES.txt
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: api/src/zotify_api.egg-info/dependency_links.txt
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: api/src/zotify_api.egg-info/requires.txt
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: api/src/zotify_api.egg-info/top_level.txt
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
 - path: api/src/zotify_api/auth_state.py
   type: code
   registered: true
@@ -1184,6 +1209,11 @@ artifacts:
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-105
+- path: api/storage/zotify.db
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
 - path: api/tests/__init__.py
   type: code
   registered: true
@@ -1359,6 +1389,16 @@ artifacts:
   registered: exempted
   index: '-'
   id: CFG-003
+- path: logs/debug.log
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: logs/security.log
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
 - path: mkdocs.yml
   type: exempt
   registered: exempted
@@ -1498,17 +1538,17 @@ artifacts:
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: DOC-043
+  id: DOC-127
 - path: project/logs/CURRENT_STATE.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: DOC-044
+  id: DOC-128
 - path: project/logs/SESSION_LOG.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: DOC-045
+  id: DOC-129
 - path: project/logs/conversations.json
   type: exempt
   registered: exempted
@@ -1648,7 +1688,7 @@ artifacts:
   type: exempt
   registered: exempted
   index: '-'
-  id: DOC-155
+  id: MISSING
 - path: scripts/CODE_FILE_INDEX.md
   type: doc
   registered: exempted
@@ -1693,7 +1733,7 @@ artifacts:
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: OPS-033
+  id: OPS-061
 - path: scripts/functional_test.py
   type: code
   registered: true
