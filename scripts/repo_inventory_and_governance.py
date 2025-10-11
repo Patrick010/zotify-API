@@ -205,6 +205,18 @@ def main():
             file_type_for_index = get_file_type(files[0]) if files else "doc"
             create_and_populate_index(idx_path, files, file_type_for_index)
 
+    # --- Inject IDs from DOCUMENT_TAG_INVENTORY.yml ---
+    doc_tag_inventory_path = PROJECT_ROOT / "project/reports/DOCUMENT_TAG_INVENTORY.yml"
+    if doc_tag_inventory_path.exists():
+        with doc_tag_inventory_path.open("r") as f:
+            tag_inventory = yaml.safe_load(f)
+        file_to_id = {entry['file']: entry['id'] for entry in tag_inventory if 'id' in entry}
+        for entry in trace_index:
+            if entry["path"] in file_to_id:
+                entry['id'] = file_to_id[entry["path"]]
+            else:
+                entry['id'] = entry.get('id', 'MISSING')
+
     output = {"artifacts": trace_index}
     trace_index_path = PROJECT_ROOT / "project/reports/TRACE_INDEX.yml"
     trace_index_path.parent.mkdir(parents=True, exist_ok=True)

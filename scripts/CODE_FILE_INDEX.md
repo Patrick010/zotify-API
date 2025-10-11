@@ -24,3 +24,15 @@ This file is auto-generated. Do not edit manually.
 | `scripts/test_single_config.sh` | A script to test a single configuration. |
 | `scripts/validate_code_index.py` | A script to validate the code index. |
 | `scripts/verify_governance.py` | A script to verify the governance policies. |
+| `scripts/build_project_registry.py` | | | Active | | |
+| `scripts/content_alignment_check.py` | | | Active | | |
+| `scripts/description_compliance_check.py` | | | Active | | |
+| `scripts/generate_alignment_matrix_md.py` | | | Active | | |
+| `scripts/generate_repo_manifest.py` | | | Active | | |
+| `scripts/migrate_alignment_matrix.py` | | | Active | | |
+| `scripts/migrate_and_tag_repository.py` | | | Active | | |
+| `scripts/propagate_descriptions.py` | | | Active | | |
+| `scripts/semantic_alignment_check.py` | | | Active | | |
+| `scripts/test_full_pipeline.sh` | | | Active | | |
+| `scripts/fix_tag_inventory.py` | | | Active | | |
+| `scripts/verify_alignment_migration.py` | | | Active | | |

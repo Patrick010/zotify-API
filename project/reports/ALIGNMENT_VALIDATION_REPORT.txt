@@ -1,0 +1,41 @@
+=== STRUCTURE VALIDATION ===
+✅ Structure OK
+
+=== TAG COVERAGE ===
+❌ Missing ID tags in 46643 files:
+ - ./openapi.json
+ - ./scripts/verify_alignment_migration.py
+ - ./scripts/project_registry.json
+ - ./scripts/.venv/.gitignore
+ - ./scripts/.venv/pyvenv.cfg
+ - ./scripts/.venv/share/man/man1/bandit.1
+ - ./scripts/.venv/share/man/man1/mid3iconv.1
+ - ./scripts/.venv/share/man/man1/moggsplit.1
+ - ./scripts/.venv/share/man/man1/mid3cp.1
+ - ./scripts/.venv/share/man/man1/mid3v2.1
+ - ./scripts/.venv/share/man/man1/mutagen-inspect.1
+ - ./scripts/.venv/share/man/man1/mutagen-pony.1
+ - ./scripts/.venv/lib/python3.13/site-packages/_black_version.py
+ - ./scripts/.venv/lib/python3.13/site-packages/cfgv.py
+ - ./scripts/.venv/lib/python3.13/site-packages/six.py
+ - ./scripts/.venv/lib/python3.13/site-packages/pwiz.py
+ - ./scripts/.venv/lib/python3.13/site-packages/distutils-precedence.pth
+ - ./scripts/.venv/lib/python3.13/site-packages/_black_version.pyi
+ - ./scripts/.venv/lib/python3.13/site-packages/yaml_env_tag.py
+ - ./scripts/.venv/lib/python3.13/site-packages/mypy_extensions.py
+
+=== INVENTORY CONSISTENCY ===
+✅ Inventory matches repository state (379 entries checked)
+
+=== MATRIX CONSISTENCY ===
+❌ IDs in YAML not in MD (29): ['AR-001', 'AR-002', 'AR-003', 'AR-006', 'AR-009', 'AR-016', 'AR-021', 'AR-022', 'AR-026', 'AR-028'] ...
+❌ IDs in MD not in YAML (1): ['DOC-071']
+
+=== ARCHIVE INTEGRITY ===
+❌ 1 archived IDs still exist in inventory (should be orphans): ['DOC-074']
+
+=== DETERMINISM CHECK ===
+❌ Determinism failed — content changed for: ['project/ALIGNMENT_MATRIX.md']
+
+=== FINAL RESULT ===
+❌ VALIDATION FAILED — Review the above sections.

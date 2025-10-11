@@ -1,4 +1,3 @@
-<!-- ID: DOC-071 -->
 # Alignment Matrix
 
 ## AR-001

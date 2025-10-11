@@ -1,1868 +1,2041 @@
-# ID: DOC-066
 artifacts:
 - path: .github/workflows/ci.yml
   type: code
   registered: exempted
   index: '-'
-  description: Defines the Continuous Integration (CI) pipeline for running tests, linting, and security scans.
+  id: MISSING
 - path: .github/workflows/pushmirror.yml
   type: code
   registered: exempted
   index: '-'
-  description: GitHub Actions workflow to mirror the repository to another location on merge.
+  id: MISSING
 - path: .gitignore
   type: exempt
   registered: exempted
   index: '-'
-  description: Specifies intentionally untracked files to ignore in Git version control.
+  id: MISSING
 - path: .pre-commit-config.yaml
   type: exempt
   registered: exempted
   index: '-'
-  description: Configuration for pre-commit hooks to automate code quality and style checks.
+  id: MISSING
 - path: AGENTS.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: Core instruction manual and workflow guide for AI agents working on this repository.
+  id: MISSING
 - path: Gonk/CODE_FILE_INDEX.md
   type: doc
   registered: exempted
   index: '-'
-  description: Master index for all documentation related to the GonkCLI component.
-  description: An auto-generated index of all code files within the Gonk module.
+  id: MISSING
 - path: Gonk/GonkCLI/DOCS_INDEX.md
   type: doc
   registered: exempted
   index: '-'
-  description: Index of documentation for the Gonk Command Line Interface.
+  id: MISSING
 - path: Gonk/GonkCLI/README.md
   type: doc
   registered: exempted
   index: '-'
-  description: Overview and usage instructions for the Gonk Command Line Interface.
+  id: MISSING
 - path: Gonk/GonkCLI/__init__.py
   type: code
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
-  description: Initializes the GonkCLI Python package.
+  id: MISSING
 - path: Gonk/GonkCLI/main.py
   type: code
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
-  description: Main entry point for the Gonk command-line tool.
+  id: MISSING
 - path: Gonk/GonkCLI/modules/__init__.py
   type: code
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
-  description: Initializes the modules for the GonkCLI.
+  id: MISSING
 - path: Gonk/GonkCLI/modules/jwt_mock.py
   type: code
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
-  description: A mock JWT generator for testing purposes.
+  id: MISSING
 - path: Gonk/GonkCLI/tests/__init__.py
   type: code
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
-  description: Initializes the test suite for the GonkCLI.
+  id: MISSING
 - path: Gonk/GonkCLI/tests/test_jwt_mock.py
   type: code
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
-  description: Unit tests for the mock JWT generator.
+  id: MISSING
 - path: Gonk/GonkUI/DOCS_INDEX.md
   type: doc
   registered: exempted
   index: '-'
-  description: Index of documentation for the Gonk Web UI.
+  id: MISSING
+- path: Gonk/GonkUI/GonkUI.egg-info/PKG-INFO
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: Gonk/GonkUI/GonkUI.egg-info/SOURCES.txt
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: Gonk/GonkUI/GonkUI.egg-info/dependency_links.txt
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: Gonk/GonkUI/GonkUI.egg-info/requires.txt
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: Gonk/GonkUI/GonkUI.egg-info/top_level.txt
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
 - path: Gonk/GonkUI/README.md
   type: doc
   registered: exempted
   index: '-'
-  description: Overview and usage instructions for the Gonk Web UI.
+  id: MISSING
 - path: Gonk/GonkUI/app.py
   type: code
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
-  description: Main Flask application file for the Gonk Web UI.
+  id: MISSING
 - path: Gonk/GonkUI/docs/ARCHITECTURE.md
   type: doc
   registered: true
   index: Gonk/GonkUI/DOCS_INDEX.md
-  description: Architectural overview of the Gonk Web UI.
+  id: MISSING
 - path: Gonk/GonkUI/docs/CHANGELOG.md
   type: doc
   registered: true
   index: Gonk/GonkUI/DOCS_INDEX.md
-  description: Changelog for the Gonk Web UI.
+  id: MISSING
 - path: Gonk/GonkUI/docs/CONTRIBUTING.md
   type: doc
   registered: true
   index: Gonk/GonkUI/DOCS_INDEX.md
-  description: Contribution guidelines for the Gonk Web UI.
+  id: MISSING
 - path: Gonk/GonkUI/docs/LICENSE
   type: exempt
   registered: exempted
   index: '-'
-  description: License file for the Gonk Web UI.
+  id: MISSING
 - path: Gonk/GonkUI/docs/USER_MANUAL.md
   type: doc
   registered: true
   index: Gonk/GonkUI/DOCS_INDEX.md
-  description: User manual for the Gonk Web UI.
+  id: MISSING
 - path: Gonk/GonkUI/mkdocs.yml
   type: exempt
   registered: exempted
   index: '-'
-  description: MkDocs configuration for the Gonk Web UI documentation.
+  id: MISSING
 - path: Gonk/GonkUI/pyproject.toml
   type: exempt
   registered: exempted
   index: '-'
-  description: Python project configuration for the Gonk Web UI.
+  id: MISSING
 - path: Gonk/GonkUI/static/app.js
   type: code
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
-  description: JavaScript for the Gonk Web UI frontend.
+  id: MISSING
 - path: Gonk/GonkUI/static/styles.css
   type: code
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
-  description: CSS styles for the Gonk Web UI.
+  id: MISSING
 - path: Gonk/GonkUI/views/__init__.py
   type: code
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
-  description: Initializes the views module for the Gonk Web UI.
+  id: MISSING
 - path: Gonk/GonkUI/views/jwt_ui.py
   type: code
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
-  description: Flask view for the JWT generation UI.
+  id: MISSING
 - path: Gonk/pyproject.toml
   type: exempt
   registered: exempted
   index: '-'
-  description: Python project configuration for the Gonk monorepo.
+  id: MISSING
 - path: README.md
   type: doc
   registered: exempted
   index: '-'
-  description: Main README for the entire project, providing an overview and setup instructions.
+  id: MISSING
 - path: api/.gitignore
   type: exempt
   registered: exempted
   index: '-'
-  description: Specifies files to be ignored by Git within the api directory.
+  id: MISSING
+- path: api/.ruff_cache/.gitignore
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: api/.ruff_cache/CACHEDIR.TAG
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
 - path: api/MIGRATIONS.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: Documentation for database migrations.
+  id: MISSING
 - path: api/alembic.ini
   type: exempt
   registered: exempted
   index: '-'
-  description: Configuration file for Alembic database migration tool.
+  id: MISSING
 - path: api/alembic/README
   type: exempt
   registered: exempted
   index: '-'
-  description: README for the Alembic migration directory.
+  id: MISSING
 - path: api/alembic/env.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Alembic environment script, configures and runs migrations.
+  id: MISSING
 - path: api/alembic/script.py.mako
   type: exempt
   registered: exempted
   index: '-'
-  description: Mako template for generating Alembic migration scripts.
+  id: MISSING
 - path: api/alembic/versions/5f96175ff7c9_add_notifications_enabled_to_.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Alembic migration script to add notification settings to users.
+  id: MISSING
 - path: api/api_dumps/cache.json
   type: exempt
   registered: exempted
   index: '-'
-  description: JSON dump of the API cache for debugging or analysis.
+  id: MISSING
 - path: api/api_dumps/downloads.json
   type: exempt
   registered: exempted
   index: '-'
-  description: JSON dump of the downloads endpoint for debugging or analysis.
+  id: MISSING
 - path: api/api_dumps/logging.json
   type: exempt
   registered: exempted
   index: '-'
-  description: JSON dump of the logging endpoint for debugging or analysis.
+  id: MISSING
 - path: api/api_dumps/metadata.json
   type: exempt
   registered: exempted
   index: '-'
-  description: JSON dump of the metadata endpoint for debugging or analysis.
+  id: MISSING
 - path: api/api_dumps/network.json
   type: exempt
   registered: exempted
   index: '-'
-  description: JSON dump of the network endpoint for debugging or analysis.
+  id: MISSING
 - path: api/api_dumps/playlist.json
   type: exempt
   registered: exempted
   index: '-'
-  description: JSON dump of the playlist endpoint for debugging or analysis.
+  id: MISSING
 - path: api/api_dumps/spotify.json
   type: exempt
   registered: exempted
   index: '-'
-  description: JSON dump of the spotify endpoint for debugging or analysis.
+  id: MISSING
 - path: api/api_dumps/stubs.json
   type: exempt
   registered: exempted
   index: '-'
-  description: JSON dump of API stubs for testing or development.
+  id: MISSING
 - path: api/api_dumps/sync.json
   type: exempt
   registered: exempted
   index: '-'
-  description: JSON dump of the sync endpoint for debugging or analysis.
+  id: MISSING
 - path: api/api_dumps/system.json
   type: exempt
   registered: exempted
   index: '-'
-  description: JSON dump of the system endpoint for debugging or analysis.
+  id: MISSING
 - path: api/api_dumps/tracks.json
   type: exempt
   registered: exempted
   index: '-'
-  description: JSON dump of the tracks endpoint for debugging or analysis.
+  id: MISSING
 - path: api/api_dumps/user.json
   type: exempt
   registered: exempted
   index: '-'
-  description: JSON dump of the user endpoint for debugging or analysis.
+  id: MISSING
 - path: api/docs/CHANGELOG.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Record of all notable changes made to the API.
+  id: MISSING
 - path: api/docs/CODE_FILE_INDEX.md
   type: doc
   registered: exempted
   index: '-'
-  description: Auto-generated index of all code files within the API module.
+  id: MISSING
 - path: api/docs/CODE_QUALITY_INDEX.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Index for documents related to code quality standards and reports.
+  id: MISSING
 - path: api/docs/DOCS_QUALITY_INDEX.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Index for documents related to documentation quality and standards.
+  id: MISSING
 - path: api/docs/MASTER_INDEX.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Master index for all API documentation.
+  id: MISSING
 - path: api/docs/manuals/API_DEVELOPER_GUIDE.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Guide for developers working on or with the API.
+  id: MISSING
 - path: api/docs/manuals/CICD.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Documentation for the Continuous Integration and Continuous Deployment pipeline.
+  id: MISSING
 - path: api/docs/manuals/ERROR_HANDLING_GUIDE.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Guide on how errors are handled within the API.
+  id: MISSING
 - path: api/docs/manuals/LICENSE
   type: exempt
   registered: exempted
   index: '-'
-  description: License file for the API.
+  id: MISSING
 - path: api/docs/manuals/LOGGING_GUIDE.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Guide to the logging framework and conventions.
+  id: MISSING
 - path: api/docs/manuals/OPERATOR_MANUAL.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Manual for operators responsible for deploying and maintaining the API.
+  id: MISSING
 - path: api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Guide for integrating other systems with the API.
+  id: MISSING
 - path: api/docs/manuals/USER_MANUAL.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Manual for end-users of the API.
+  id: MISSING
 - path: api/docs/providers/SPOTIFY.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Documentation specific to the Spotify music provider integration.
+  id: MISSING
 - path: api/docs/reference/API_REFERENCE.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Comprehensive reference for all API endpoints.
+  id: MISSING
 - path: api/docs/reference/FEATURE_SPECS.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Specifications for various features of the API.
+  id: MISSING
 - path: api/docs/reference/features/AUTHENTICATION.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Detailed documentation of the API's authentication mechanism.
+  id: MISSING
 - path: api/docs/reference/features/AUTOMATED_DOCUMENTATION_WORKFLOW.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Documentation of the automated workflow for generating documentation.
+  id: MISSING
 - path: api/docs/reference/features/DEVELOPER_FLEXIBLE_LOGGING_FRAMEWORK.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Documentation of the flexible logging framework for developers.
+  id: MISSING
 - path: api/docs/reference/features/PROVIDER_AGNOSTIC_EXTENSIONS.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Documentation of the provider-agnostic extension system.
+  id: MISSING
 - path: api/docs/reference/features/PROVIDER_OAUTH.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Documentation of the OAuth flow for music providers.
+  id: MISSING
 - path: api/docs/reference/source/ACTIONS____INIT__.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the error handler actions module.
+  id: MISSING
 - path: api/docs/reference/source/APP.js.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the main JavaScript application file.
+  id: MISSING
 - path: api/docs/reference/source/APP.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the main Flask application file.
+  id: MISSING
 - path: api/docs/reference/source/AUDIT_API.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the API auditing script.
+  id: MISSING
 - path: api/docs/reference/source/AUDIT_ENDPOINTS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the endpoint auditing script.
+  id: MISSING
 - path: api/docs/reference/source/AUTH.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the authentication routes.
+  id: MISSING
 - path: api/docs/reference/source/AUTH_STATE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the authentication state management module.
+  id: MISSING
 - path: api/docs/reference/source/BASE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the base provider class.
+  id: MISSING
 - path: api/docs/reference/source/CACHE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the cache management routes.
+  id: MISSING
 - path: api/docs/reference/source/CACHE_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the cache management service.
+  id: MISSING
 - path: api/docs/reference/source/CONFIG.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the configuration management module.
+  id: MISSING
 - path: api/docs/reference/source/CONFIG_MODELS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the Pydantic configuration models.
+  id: MISSING
 - path: api/docs/reference/source/CONFIG_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the configuration management service.
+  id: MISSING
 - path: api/docs/reference/source/CONSOLE_HANDLER.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the console logging handler.
+  id: MISSING
 - path: api/docs/reference/source/CRUD.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the database CRUD operations.
+  id: MISSING
 - path: api/docs/reference/source/DATABASE_JOB_HANDLER.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the database job logging handler.
+  id: MISSING
 - path: api/docs/reference/source/DATABASE____INIT__.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the database module.
+  id: MISSING
 - path: api/docs/reference/source/DB.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the database service.
+  id: MISSING
 - path: api/docs/reference/source/DEPS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for FastAPI dependency injection.
+  id: MISSING
 - path: api/docs/reference/source/DOWNLOAD.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the download schema.
+  id: MISSING
 - path: api/docs/reference/source/DOWNLOADS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the download routes.
+  id: MISSING
 - path: api/docs/reference/source/DOWNLOAD_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the download management service.
+  id: MISSING
 - path: api/docs/reference/source/ERROR_HANDLER____INIT__.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the error handler module.
+  id: MISSING
 - path: api/docs/reference/source/FILTERS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the logging filters module.
+  id: MISSING
 - path: api/docs/reference/source/FORMATTER.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the error handler formatter.
+  id: MISSING
 - path: api/docs/reference/source/FUNCTIONAL_TEST.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the functional test script.
+  id: MISSING
 - path: api/docs/reference/source/GENERATE_ENDPOINTS_DOC.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the endpoint documentation generator.
+  id: MISSING
 - path: api/docs/reference/source/GENERATE_OPENAPI.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the OpenAPI specification generator.
+  id: MISSING
 - path: api/docs/reference/source/GENERATE_SOURCE_DOCS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the source code documentation generator.
+  id: MISSING
 - path: api/docs/reference/source/GENERIC.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the generic schemas module.
+  id: MISSING
 - path: api/docs/reference/source/GLOBALS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the global variables module.
+  id: MISSING
 - path: api/docs/reference/source/HOOKS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the error handler hooks module.
+  id: MISSING
 - path: api/docs/reference/source/JSON_AUDIT_HANDLER.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the JSON audit logging handler.
+  id: MISSING
 - path: api/docs/reference/source/LINTER.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the project linter script.
+  id: MISSING
 - path: api/docs/reference/source/LOGGING_CONFIG.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the logging configuration module.
+  id: MISSING
 - path: api/docs/reference/source/LOGGING_FRAMEWORK____INIT__.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the logging framework module.
+  id: MISSING
 - path: api/docs/reference/source/LOGGING_HANDLERS____INIT__.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the logging handlers module.
+  id: MISSING
 - path: api/docs/reference/source/LOGGING_SCHEMAS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the logging schemas module.
+  id: MISSING
 - path: api/docs/reference/source/LOGGING_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the logging service.
+  id: MISSING
 - path: api/docs/reference/source/LOG_CRITICAL.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the critical log action.
+  id: MISSING
 - path: api/docs/reference/source/MAIN.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the main API entry point.
+  id: MISSING
 - path: api/docs/reference/source/METADATA.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the metadata schemas module.
+  id: MISSING
 - path: api/docs/reference/source/METADATA_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the metadata management service.
+  id: MISSING
 - path: api/docs/reference/source/MODELS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the database models.
+  id: MISSING
 - path: api/docs/reference/source/NETWORK.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the network routes.
+  id: MISSING
 - path: api/docs/reference/source/NETWORK_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the network management service.
+  id: MISSING
 - path: api/docs/reference/source/NOTIFICATIONS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the notifications routes.
+  id: MISSING
 - path: api/docs/reference/source/NOTIFICATIONS_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the notifications service.
+  id: MISSING
 - path: api/docs/reference/source/PLAYLISTS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the playlists routes.
+  id: MISSING
 - path: api/docs/reference/source/PLAYLISTS_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the playlists service.
+  id: MISSING
 - path: api/docs/reference/source/PROVIDERS____INIT__.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the providers module.
+  id: MISSING
 - path: api/docs/reference/source/REQUEST_ID.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the request ID middleware.
+  id: MISSING
 - path: api/docs/reference/source/ROUTES____INIT__.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the routes module.
+  id: MISSING
 - path: api/docs/reference/source/SCHEMAS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the main schemas module.
+  id: MISSING
 - path: api/docs/reference/source/SEARCH.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the search routes and service.
+  id: MISSING
 - path: api/docs/reference/source/SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the logging service module.
+  id: MISSING
 - path: api/docs/reference/source/SERVICES____INIT__.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the services module.
+  id: MISSING
 - path: api/docs/reference/source/SESSION.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the database session management.
+  id: MISSING
 - path: api/docs/reference/source/SNITCH.go.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the snitch Go program.
+  id: MISSING
 - path: api/docs/reference/source/SPOTIFY.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the Spotify schemas module.
+  id: MISSING
 - path: api/docs/reference/source/SPOTIFY_CONNECTOR.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the Spotify provider connector.
+  id: MISSING
 - path: api/docs/reference/source/SPOTI_CLIENT.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the Spotify client service.
+  id: MISSING
 - path: api/docs/reference/source/SYNC.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the sync routes and models.
+  id: MISSING
 - path: api/docs/reference/source/SYNC_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the sync service.
+  id: MISSING
 - path: api/docs/reference/source/SYSTEM.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the system routes.
+  id: MISSING
 - path: api/docs/reference/source/TEST_AUTH_FLOW.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the authentication flow test script.
+  id: MISSING
 - path: api/docs/reference/source/TRACKS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the tracks routes.
+  id: MISSING
 - path: api/docs/reference/source/TRACKS_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the tracks service.
+  id: MISSING
 - path: api/docs/reference/source/TRIGGERS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the error handler triggers.
+  id: MISSING
 - path: api/docs/reference/source/USER.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the user routes.
+  id: MISSING
 - path: api/docs/reference/source/USER_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the user service.
+  id: MISSING
 - path: api/docs/reference/source/WEBHOOK.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the webhook error handler action.
+  id: MISSING
 - path: api/docs/reference/source/WEBHOOKS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Auto-generated documentation for the webhooks routes.
+  id: MISSING
 - path: api/docs/system/ERROR_HANDLING_DESIGN.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Design document for the error handling system.
+  id: MISSING
 - path: api/docs/system/INSTALLATION.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Installation instructions for the API.
+  id: MISSING
 - path: api/docs/system/PRIVACY_COMPLIANCE.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: Documentation regarding privacy compliance and data handling.
+  id: MISSING
 - path: api/docs/system/REQUIREMENTS.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  description: System and software requirements for the API.
+  id: MISSING
 - path: api/docs/system/zotify-openapi-external-v1.json
   type: exempt
   registered: exempted
   index: '-'
-  description: External OpenAPI (v1) specification in JSON format.
+  id: MISSING
 - path: api/docs/system/zotify-openapi-external-v1.yaml
   type: exempt
   registered: exempted
   index: '-'
-  description: External OpenAPI (v1) specification in YAML format.
+  id: MISSING
 - path: api/logging_config.yml
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Configuration file for the legacy logging system.
+  id: MISSING
 - path: api/logging_framework.yml
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Configuration for the flexible logging framework.
+  id: MISSING
 - path: api/logs/debug.log
   type: exempt
   registered: exempted
   index: '-'
-  description: Debug log file for the API.
+  id: MISSING
 - path: api/logs/security.log
   type: exempt
   registered: exempted
   index: '-'
-  description: Security-related log file for the API.
+  id: MISSING
 - path: api/mypy.ini
   type: exempt
   registered: exempted
   index: '-'
-  description: Configuration file for the MyPy static type checker.
+  id: MISSING
 - path: api/pyproject.toml
   type: exempt
   registered: exempted
   index: '-'
-  description: Project metadata and dependency configuration for the API.
+  id: MISSING
 - path: api/ruff.toml
   type: exempt
   registered: exempted
   index: '-'
-  description: Configuration file for the Ruff linter.
+  id: MISSING
 - path: api/src/storage/spotify_tokens.json
   type: exempt
   registered: exempted
   index: '-'
-  description: Storage file for Spotify API tokens.
+  id: MISSING
 - path: api/src/zotify_api.egg-info/PKG-INFO
   type: exempt
   registered: exempted
   index: '-'
-  description: Package information for the zotify_api distribution.
+  id: MISSING
 - path: api/src/zotify_api.egg-info/SOURCES.txt
   type: exempt
   registered: exempted
   index: '-'
-  description: List of source files for the zotify_api package.
+  id: MISSING
 - path: api/src/zotify_api.egg-info/dependency_links.txt
   type: exempt
   registered: exempted
   index: '-'
-  description: Dependency links for the zotify_api package.
+  id: MISSING
 - path: api/src/zotify_api.egg-info/requires.txt
   type: exempt
   registered: exempted
   index: '-'
-  description: List of required packages for the zotify_api package.
+  id: MISSING
 - path: api/src/zotify_api.egg-info/top_level.txt
   type: exempt
   registered: exempted
   index: '-'
-  description: Top-level packages for the zotify_api distribution.
+  id: MISSING
 - path: api/src/zotify_api/auth_state.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Manages the state of user authentication.
+  id: MISSING
 - path: api/src/zotify_api/config.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Handles application configuration loading and management.
+  id: MISSING
 - path: api/src/zotify_api/core/error_handler/__init__.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Initializes the error handler module.
+  id: MISSING
 - path: api/src/zotify_api/core/error_handler/actions/__init__.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Initializes the error handler actions module.
+  id: MISSING
 - path: api/src/zotify_api/core/error_handler/actions/log_critical.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Error handler action to log critical errors.
+  id: MISSING
 - path: api/src/zotify_api/core/error_handler/actions/webhook.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Error handler action to send a webhook notification.
+  id: MISSING
 - path: api/src/zotify_api/core/error_handler/config.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Configuration for the error handling system.
+  id: MISSING
 - path: api/src/zotify_api/core/error_handler/formatter.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Formatter for error messages.
+  id: MISSING
 - path: api/src/zotify_api/core/error_handler/hooks.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Hooks for the error handling system.
+  id: MISSING
 - path: api/src/zotify_api/core/error_handler/triggers.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Triggers for the error handling system.
+  id: MISSING
 - path: api/src/zotify_api/core/logging_framework/__init__.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Initializes the flexible logging framework.
+  id: MISSING
 - path: api/src/zotify_api/core/logging_framework/filters.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Custom filters for the logging framework.
+  id: MISSING
 - path: api/src/zotify_api/core/logging_framework/schemas.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Pydantic schemas for the logging framework.
+  id: MISSING
 - path: api/src/zotify_api/core/logging_framework/service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Service for the flexible logging framework.
+  id: MISSING
 - path: api/src/zotify_api/core/logging_handlers/__init__.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Initializes the logging handlers module.
+  id: MISSING
 - path: api/src/zotify_api/core/logging_handlers/base.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Base class for logging handlers.
+  id: MISSING
 - path: api/src/zotify_api/core/logging_handlers/console_handler.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Logging handler for console output.
+  id: MISSING
 - path: api/src/zotify_api/core/logging_handlers/database_job_handler.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Logging handler for database jobs.
+  id: MISSING
 - path: api/src/zotify_api/core/logging_handlers/json_audit_handler.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Logging handler for JSON audit logs.
+  id: MISSING
 - path: api/src/zotify_api/database/__init__.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Initializes the database module.
+  id: MISSING
 - path: api/src/zotify_api/database/crud.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Implements CRUD (Create, Read, Update, Delete) database operations.
+  id: MISSING
 - path: api/src/zotify_api/database/models.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Defines SQLAlchemy database models.
+  id: MISSING
 - path: api/src/zotify_api/database/session.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Manages database sessions.
+  id: MISSING
 - path: api/src/zotify_api/globals.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Defines global variables and constants.
+  id: MISSING
 - path: api/src/zotify_api/logging_config.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Configures the application's logging.
+  id: MISSING
 - path: api/src/zotify_api/main.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Main entry point for the FastAPI application.
+  id: MISSING
 - path: api/src/zotify_api/middleware/request_id.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Middleware to add a unique request ID to each request.
+  id: MISSING
 - path: api/src/zotify_api/models/config_models.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Pydantic models for application configuration.
+  id: MISSING
 - path: api/src/zotify_api/models/sync.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Pydantic models related to the sync functionality.
+  id: MISSING
 - path: api/src/zotify_api/providers/__init__.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Initializes the music providers module.
+  id: MISSING
 - path: api/src/zotify_api/providers/base.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Base class for music provider connectors.
+  id: MISSING
 - path: api/src/zotify_api/providers/spotify_connector.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Connector for the Spotify API.
+  id: MISSING
 - path: api/src/zotify_api/routes/__init__.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Initializes the API routes module.
+  id: MISSING
 - path: api/src/zotify_api/routes/auth.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Defines authentication-related API endpoints.
+  id: MISSING
 - path: api/src/zotify_api/routes/cache.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Defines cache management API endpoints.
+  id: MISSING
 - path: api/src/zotify_api/routes/config.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Defines configuration management API endpoints.
+  id: MISSING
 - path: api/src/zotify_api/routes/downloads.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Defines download-related API endpoints.
+  id: MISSING
 - path: api/src/zotify_api/routes/jwt_auth.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Defines JWT-based authentication endpoints.
+  id: MISSING
 - path: api/src/zotify_api/routes/network.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Defines network-related API endpoints.
+  id: MISSING
 - path: api/src/zotify_api/routes/notifications.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Defines notification-related API endpoints.
+  id: MISSING
 - path: api/src/zotify_api/routes/playlists.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Defines playlist-related API endpoints.
+  id: MISSING
 - path: api/src/zotify_api/routes/search.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Defines search-related API endpoints.
+  id: MISSING
 - path: api/src/zotify_api/routes/sync.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Defines sync-related API endpoints.
+  id: MISSING
 - path: api/src/zotify_api/routes/system.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Defines system-related API endpoints.
+  id: MISSING
 - path: api/src/zotify_api/routes/tracks.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Defines track-related API endpoints.
+  id: MISSING
 - path: api/src/zotify_api/routes/user.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Defines user-related API endpoints.
+  id: MISSING
 - path: api/src/zotify_api/routes/webhooks.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Defines webhook-related API endpoints.
+  id: MISSING
 - path: api/src/zotify_api/schemas/auth.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Pydantic models for authentication requests and responses.
+  id: MISSING
 - path: api/src/zotify_api/schemas/cache.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Pydantic models for cache management.
+  id: MISSING
 - path: api/src/zotify_api/schemas/download.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Pydantic models for download requests and responses.
+  id: MISSING
 - path: api/src/zotify_api/schemas/generic.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Generic Pydantic models used across the API.
+  id: MISSING
 - path: api/src/zotify_api/schemas/logging_schemas.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Pydantic models for logging.
+  id: MISSING
 - path: api/src/zotify_api/schemas/metadata.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Pydantic models for metadata.
+  id: MISSING
 - path: api/src/zotify_api/schemas/network.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Pydantic models for network-related data.
+  id: MISSING
 - path: api/src/zotify_api/schemas/notifications.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Pydantic models for notifications.
+  id: MISSING
 - path: api/src/zotify_api/schemas/playlists.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Pydantic models for playlists.
+  id: MISSING
 - path: api/src/zotify_api/schemas/spotify.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Pydantic models for Spotify-specific data.
+  id: MISSING
 - path: api/src/zotify_api/schemas/system.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Pydantic models for system-related data.
+  id: MISSING
 - path: api/src/zotify_api/schemas/tracks.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Pydantic models for tracks.
+  id: MISSING
 - path: api/src/zotify_api/schemas/user.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Pydantic models for user data.
+  id: MISSING
 - path: api/src/zotify_api/schemas/webhooks.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Pydantic models for webhooks.
+  id: MISSING
 - path: api/src/zotify_api/services/__init__.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Initializes the services module.
+  id: MISSING
 - path: api/src/zotify_api/services/auth.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Handles authentication logic and user management.
+  id: MISSING
 - path: api/src/zotify_api/services/cache_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Provides caching services for the application.
+  id: MISSING
 - path: api/src/zotify_api/services/config_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Provides configuration management services.
+  id: MISSING
 - path: api/src/zotify_api/services/db.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Provides database-related services.
+  id: MISSING
 - path: api/src/zotify_api/services/deps.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Defines FastAPI dependencies.
+  id: MISSING
 - path: api/src/zotify_api/services/download_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Handles download logic.
+  id: MISSING
 - path: api/src/zotify_api/services/jwt_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Handles JWT creation and validation.
+  id: MISSING
 - path: api/src/zotify_api/services/logging_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Provides logging services.
+  id: MISSING
 - path: api/src/zotify_api/services/metadata_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Handles metadata retrieval and processing.
+  id: MISSING
 - path: api/src/zotify_api/services/network_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Provides network-related services.
+  id: MISSING
 - path: api/src/zotify_api/services/notifications_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Handles sending notifications.
+  id: MISSING
 - path: api/src/zotify_api/services/playlists_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Handles playlist management.
+  id: MISSING
 - path: api/src/zotify_api/services/search.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Handles search queries.
+  id: MISSING
 - path: api/src/zotify_api/services/spoti_client.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Client for interacting with the Spotify API.
+  id: MISSING
 - path: api/src/zotify_api/services/sync_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Handles synchronization logic.
+  id: MISSING
 - path: api/src/zotify_api/services/tracks_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Handles track management.
+  id: MISSING
 - path: api/src/zotify_api/services/user_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Handles user management.
+  id: MISSING
 - path: api/src/zotify_api/services/webhooks.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Handles webhook logic.
+  id: MISSING
 - path: api/src/zotify_api/storage/user_data.json
   type: exempt
   registered: exempted
   index: '-'
-  description: Storage file for user data.
+  id: MISSING
 - path: api/src/zotify_api/temp_violation.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Temporary file to test linter violations.
+  id: MISSING
 - path: api/storage/zotify.db
   type: exempt
   registered: exempted
   index: '-'
-  description: SQLite database file for the application.
+  id: MISSING
 - path: api/tests/__init__.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Initializes the tests module.
+  id: MISSING
 - path: api/tests/conftest.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Pytest configuration and fixtures for the test suite.
+  id: MISSING
 - path: api/tests/test_cache.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Functional tests for the cache API endpoints.
+  id: MISSING
 - path: api/tests/test_config.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Functional tests for the config API endpoints.
+  id: MISSING
 - path: api/tests/test_download.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Functional tests for the download API endpoints.
+  id: MISSING
 - path: api/tests/test_network.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Functional tests for the network API endpoints.
+  id: MISSING
 - path: api/tests/test_notifications.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Functional tests for the notifications API endpoints.
+  id: MISSING
 - path: api/tests/test_playlists.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Functional tests for the playlists API endpoints.
+  id: MISSING
 - path: api/tests/test_system.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Functional tests for the system API endpoints.
+  id: MISSING
 - path: api/tests/test_tracks.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Functional tests for the tracks API endpoints.
+  id: MISSING
 - path: api/tests/test_user.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Functional tests for the user API endpoints.
+  id: MISSING
 - path: api/tests/unit/providers/test_spotify_connector.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the Spotify provider connector.
+  id: MISSING
 - path: api/tests/unit/test_auth.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the authentication service.
+  id: MISSING
 - path: api/tests/unit/test_cache_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the cache service.
+  id: MISSING
 - path: api/tests/unit/test_config.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the configuration service.
+  id: MISSING
 - path: api/tests/unit/test_crud.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the database CRUD operations.
+  id: MISSING
 - path: api/tests/unit/test_deps.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for FastAPI dependencies.
+  id: MISSING
 - path: api/tests/unit/test_error_handler.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the error handling system.
+  id: MISSING
 - path: api/tests/unit/test_error_handler_actions.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the error handler actions.
+  id: MISSING
 - path: api/tests/unit/test_flexible_logging.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the flexible logging framework.
+  id: MISSING
 - path: api/tests/unit/test_jwt_auth_db.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the JWT authentication with database.
+  id: MISSING
 - path: api/tests/unit/test_logging_config.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the logging configuration.
+  id: MISSING
 - path: api/tests/unit/test_metadata_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the metadata service.
+  id: MISSING
 - path: api/tests/unit/test_network_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the network service.
+  id: MISSING
 - path: api/tests/unit/test_new_logging_system.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the new logging system.
+  id: MISSING
 - path: api/tests/unit/test_notifications_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the notifications service.
+  id: MISSING
 - path: api/tests/unit/test_playlists_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the playlists service.
+  id: MISSING
 - path: api/tests/unit/test_search.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the search service.
+  id: MISSING
 - path: api/tests/unit/test_spoti_client.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the Spotify client.
+  id: MISSING
 - path: api/tests/unit/test_sync.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the sync service.
+  id: MISSING
 - path: api/tests/unit/test_tracks_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the tracks service.
+  id: MISSING
 - path: api/tests/unit/test_user_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the user service.
+  id: MISSING
 - path: api/tests/unit/test_user_service_db.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the user service with database.
+  id: MISSING
 - path: api/tests/unit/test_webhooks.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  description: Unit tests for the webhooks service.
+  id: MISSING
+- path: api/zotify.db
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
 - path: bandit.yml
   type: exempt
   registered: exempted
   index: '-'
-  description: Configuration file for the Bandit security linter.
-- path: logs/debug.log
-  type: exempt
-  registered: exempted
-  index: '-'
-  description: Main debug log file for the project.
-- path: logs/security.log
-  type: exempt
-  registered: exempted
-  index: '-'
-  description: Main security log file for the project.
+  id: MISSING
 - path: mkdocs.yml
   type: exempt
   registered: exempted
   index: '-'
-  description: Configuration file for the MkDocs documentation generator.
+  id: MISSING
 - path: openapi.json
   type: exempt
   registered: exempted
   index: '-'
-  description: OpenAPI specification for the entire project.
+  id: MISSING
 - path: project/ALIGNMENT_MATRIX.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: Maps project goals to implementation artifacts.
+  id: MISSING
+- path: project/ALIGNMENT_MATRIX.yml
+  type: code
+  registered: exempted
+  index: '-'
+  id: MISSING
 - path: project/BACKLOG.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A list of pending tasks and features.
+  id: MISSING
 - path: project/CICD.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: Documentation for the project's CI/CD pipeline.
+  id: MISSING
 - path: project/DEPENDENCIES.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A list of project dependencies.
+  id: MISSING
 - path: project/EXECUTION_PLAN.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: The plan for executing the project.
+  id: MISSING
 - path: project/FUTURE_ENHANCEMENTS.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A list of potential future enhancements.
+  id: MISSING
 - path: project/HIGH_LEVEL_DESIGN.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A high-level overview of the project's architecture.
+  id: MISSING
 - path: project/LESSONS-LEARNT.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A document detailing lessons learned during the project.
+  id: MISSING
 - path: project/LOGGING_PHASES.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: Documentation of the different phases of the logging system implementation.
+  id: MISSING
 - path: project/LOGGING_SYSTEM_DESIGN.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: The design of the logging system.
+  id: MISSING
 - path: project/LOGGING_TRACEABILITY_MATRIX.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A matrix tracing logging requirements to implementation.
+  id: MISSING
 - path: project/LOW_LEVEL_DESIGN.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A detailed, low-level design of the project's components.
+  id: MISSING
 - path: project/ONBOARDING.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A guide for new developers joining the project.
+  id: MISSING
 - path: project/PID.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: The Project Initiation Document.
+  id: MISSING
 - path: project/PROJECT_BRIEF.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A brief overview of the project.
+  id: MISSING
 - path: project/PROJECT_PLAN.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: The detailed project plan.
+  id: MISSING
 - path: project/PROJECT_REGISTRY.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: The central registry for all project artifacts.
+  id: MISSING
 - path: project/QA_GOVERNANCE.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: The quality assurance and governance plan.
+  id: MISSING
 - path: project/ROADMAP.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: The project's roadmap.
+  id: MISSING
 - path: project/SECURITY.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A document detailing the project's security measures.
+  id: MISSING
 - path: project/TASK_CHECKLIST.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A checklist of tasks to be completed.
+  id: MISSING
 - path: project/USECASES.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A list of use cases for the project.
+  id: MISSING
 - path: project/USECASES_GAP_ANALYSIS.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A gap analysis of the project's use cases.
+  id: MISSING
 - path: project/api/endpoints.yaml
   type: exempt
   registered: exempted
   index: '-'
-  description: A list of API endpoints.
+  id: MISSING
 - path: project/logs/ACTIVITY.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A log of all activities performed on the project.
+  id: MISSING
 - path: project/logs/CURRENT_STATE.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A snapshot of the project's current state.
+  id: MISSING
 - path: project/logs/SESSION_LOG.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A log of the current session's activities.
+  id: MISSING
+- path: project/logs/chat/Manifest_review_and_mapping.md
+  type: doc
+  registered: true
+  index: project/PROJECT_REGISTRY.md
+  id: MISSING
+- path: project/logs/chat/Manifest_review_and_mapping_manifest.md
+  type: doc
+  registered: true
+  index: project/PROJECT_REGISTRY.md
+  id: MISSING
+- path: project/logs/chat/chats.py
+  type: code
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: project/logs/chat/combined_chats_manifest.md
+  type: doc
+  registered: true
+  index: project/PROJECT_REGISTRY.md
+  id: MISSING
+- path: project/logs/chat/conversations.json
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: project/logs/conversations.json
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
 - path: project/process/GAP_ANALYSIS_TEMPLATE.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A template for performing a gap analysis.
+  id: MISSING
 - path: project/proposals/DBSTUDIO_PLUGIN.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A proposal for a DBStudio plugin.
+  id: MISSING
 - path: project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A proposal for a dynamic plugin system.
+  id: MISSING
 - path: project/proposals/GONKUI_PLUGIN.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A proposal for a GonkUI plugin.
+  id: MISSING
 - path: project/proposals/GOVERNANCE_AUDIT_REFACTOR.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A proposal for refactoring the governance audit system.
+  id: MISSING
 - path: project/proposals/HOME_AUTOMATION_PROPOSAL.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A proposal for a home automation system.
+  id: MISSING
 - path: project/proposals/LOW_CODE_PROPOSAL.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A proposal for a low-code development platform.
+  id: MISSING
 - path: project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A proposal for a multi-source metadata system.
+  id: MISSING
 - path: project/proposals/NEW_PROPOSAL.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A template for new proposals.
+  id: MISSING
 - path: project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A plan for implementing a QA gate.
+  id: MISSING
 - path: project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A proposal for adapting the TRACE_INDEX schema.
+  id: MISSING
 - path: project/proposals/TRACE_INDEX_SCHEMA_FIX.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A proposal for fixing the TRACE_INDEX schema.
+  id: MISSING
+- path: project/reports/ALIGNMENT_INTEGRITY_SNAPSHOT.yml
+  type: code
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: project/reports/ALIGNMENT_VALIDATION_REPORT.txt
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: project/reports/ARCHIVE_ALIGNMENT_MATRIX_OLD.md
+  type: doc
+  registered: true
+  index: project/PROJECT_REGISTRY.md
+  id: MISSING
+- path: project/reports/CONTENT_ALIGNMENT_REPORT.md
+  type: doc
+  registered: true
+  index: project/PROJECT_REGISTRY.md
+  id: MISSING
+- path: project/reports/DESCRIPTION_COMPLIANCE_REPORT.md
+  type: doc
+  registered: true
+  index: project/PROJECT_REGISTRY.md
+  id: MISSING
+- path: project/reports/DOCUMENT_TAG_INVENTORY.yml
+  type: code
+  registered: exempted
+  index: '-'
+  id: MISSING
 - path: project/reports/GOVERNANCE_DEMO_REPORT.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A report on the governance demo.
+  id: MISSING
 - path: project/reports/HANDOVER_BRIEF_CHATGTP.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A handover brief for ChatGPT.
+  id: MISSING
 - path: project/reports/HANDOVER_BRIEF_JULES.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A handover brief for Jules.
+  id: MISSING
 - path: project/reports/PROJECT_AUDIT_FINAL_REPORT.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: The final report of the project audit.
+  id: MISSING
 - path: project/reports/PROJECT_DOCUMENT_ALIGNMENT.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  description: A report on the alignment of project documents.
+  id: MISSING
+- path: project/reports/SEMANTIC_ALIGNMENT_REPORT.md
+  type: doc
+  registered: true
+  index: project/PROJECT_REGISTRY.md
+  id: MISSING
 - path: project/reports/TRACE_INDEX.yml
   type: code
   registered: exempted
   index: '-'
-  description: The central registry of all project artifacts.
+  id: MISSING
+- path: project/reports/TRACE_INDEX.yml.bak
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
 - path: scripts/CODE_FILE_INDEX.md
   type: doc
   registered: exempted
   index: '-'
-  description: An auto-generated index of all code files within the scripts module.
+  id: MISSING
 - path: scripts/api/src/zotify_api/temp_violation.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  description: A temporary file to test linter violations.
+  id: MISSING
 - path: scripts/audit_api.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  description: A script to audit the API.
+  id: MISSING
 - path: scripts/audit_endpoints.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  description: A script to audit the API endpoints.
+  id: MISSING
+- path: scripts/build_project_registry.py
+  type: code
+  registered: true
+  index: scripts/CODE_FILE_INDEX.md
+  id: MISSING
+- path: scripts/content_alignment_check.py
+  type: code
+  registered: true
+  index: scripts/CODE_FILE_INDEX.md
+  id: MISSING
+- path: scripts/description_compliance_check.py
+  type: code
+  registered: true
+  index: scripts/CODE_FILE_INDEX.md
+  id: MISSING
 - path: scripts/doc-lint-rules.yml
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  description: A set of rules for the documentation linter.
+  id: MISSING
+- path: scripts/fix_tag_inventory.py
+  type: code
+  registered: true
+  index: scripts/CODE_FILE_INDEX.md
+  id: MISSING
 - path: scripts/functional_test.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  description: A script for running functional tests.
+  id: MISSING
+- path: scripts/generate_alignment_matrix_md.py
+  type: code
+  registered: true
+  index: scripts/CODE_FILE_INDEX.md
+  id: MISSING
 - path: scripts/generate_endpoints_doc.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  description: A script to generate documentation for the API endpoints.
+  id: MISSING
 - path: scripts/generate_openapi.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  description: A script to generate the OpenAPI specification.
+  id: MISSING
+- path: scripts/generate_repo_manifest.py
+  type: code
+  registered: true
+  index: scripts/CODE_FILE_INDEX.md
+  id: MISSING
 - path: scripts/gonkui
   type: exempt
   registered: exempted
   index: '-'
-  description: A script to run the GonkUI.
+  id: MISSING
 - path: scripts/lint_governance_links.json
   type: exempt
   registered: exempted
   index: '-'
-  description: A list of links to be checked by the governance linter.
+  id: MISSING
 - path: scripts/lint_governance_links.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  description: A script to lint the governance links.
+  id: MISSING
 - path: scripts/linter.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  description: The main linter script.
+  id: MISSING
 - path: scripts/make_manifest.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  description: A script to create a manifest of all project files.
+  id: MISSING
 - path: scripts/manage_docs_index.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  description: A script to manage the documentation index.
+  id: MISSING
+- path: scripts/migrate_alignment_matrix.py
+  type: code
+  registered: true
+  index: scripts/CODE_FILE_INDEX.md
+  id: MISSING
+- path: scripts/migrate_and_tag_repository.py
+  type: code
+  registered: true
+  index: scripts/CODE_FILE_INDEX.md
+  id: MISSING
+- path: scripts/project_registry.json
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: scripts/propagate_descriptions.py
+  type: code
+  registered: true
+  index: scripts/CODE_FILE_INDEX.md
+  id: MISSING
 - path: scripts/repo_governance.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  description: A script to enforce repository governance policies.
+  id: MISSING
 - path: scripts/repo_inventory_and_governance.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  description: A script to manage the repository inventory and governance.
+  id: MISSING
+- path: scripts/repo_inventory_and_governance.py.bak
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
 - path: scripts/run_e2e_auth_test.sh
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  description: A script to run the end-to-end authentication tests.
+  id: MISSING
+- path: scripts/semantic_alignment_check.py
+  type: code
+  registered: true
+  index: scripts/CODE_FILE_INDEX.md
+  id: MISSING
 - path: scripts/start.sh
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  description: A script to start the application.
+  id: MISSING
 - path: scripts/test_auth_flow.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  description: A script to test the authentication flow.
+  id: MISSING
+- path: scripts/test_full_pipeline.sh
+  type: code
+  registered: true
+  index: scripts/CODE_FILE_INDEX.md
+  id: MISSING
 - path: scripts/test_single_config.sh
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  description: A script to test a single configuration.
+  id: MISSING
 - path: scripts/validate_code_index.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  description: A script to validate the code index.
+  id: MISSING
+- path: scripts/verify_alignment_migration.py
+  type: code
+  registered: true
+  index: scripts/CODE_FILE_INDEX.md
+  id: MISSING
 - path: scripts/verify_governance.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  description: A script to verify the governance policies.
-- path: server.log
-  type: exempt
-  registered: exempted
-  index: '-'
-  description: A log file for the server.
+  id: MISSING
 - path: snitch/.golangci.yml
   type: exempt
   registered: exempted
   index: '-'
-  description: Configuration file for the golangci-lint linter.
+  id: MISSING
 - path: snitch/CODE_FILE_INDEX.md
   type: doc
   registered: exempted
   index: '-'
-  description: An auto-generated index of all code files within the snitch module.
+  id: MISSING
 - path: snitch/DOCS_INDEX.md
   type: doc
   registered: exempted
   index: '-'
-  description: An auto-generated index of all documentation files within the snitch module.
+  id: MISSING
 - path: snitch/README.md
   type: doc
   registered: exempted
   index: '-'
-  description: The README file for the snitch module.
+  id: MISSING
 - path: snitch/docs/ARCHITECTURE.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  description: The architecture of the snitch module.
+  id: MISSING
 - path: snitch/docs/INSTALLATION.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  description: Installation instructions for the snitch module.
+  id: MISSING
 - path: snitch/docs/MILESTONES.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  description: The milestones for the snitch module.
+  id: MISSING
 - path: snitch/docs/MODULES.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  description: The modules of the snitch module.
+  id: MISSING
 - path: snitch/docs/PHASES.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  description: The phases of the snitch module.
+  id: MISSING
 - path: snitch/docs/PHASE_2_SECURE_CALLBACK.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  description: The design for a secure callback in phase 2 of the snitch module.
+  id: MISSING
 - path: snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  description: The zero-trust design for phase 2 of the snitch module.
+  id: MISSING
 - path: snitch/docs/PROJECT_PLAN.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  description: The project plan for the snitch module.
+  id: MISSING
 - path: snitch/docs/ROADMAP.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  description: The roadmap for the snitch module.
+  id: MISSING
 - path: snitch/docs/STATUS.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  description: The status of the snitch module.
+  id: MISSING
 - path: snitch/docs/TASKS.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  description: The tasks for the snitch module.
+  id: MISSING
 - path: snitch/docs/TEST_RUNBOOK.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  description: The test runbook for the snitch module.
+  id: MISSING
 - path: snitch/docs/USER_MANUAL.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  description: The user manual for the snitch module.
+  id: MISSING
 - path: snitch/docs/phase5-ipc.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  description: The design for inter-process communication in phase 5 of the snitch module.
+  id: MISSING
 - path: snitch/go.mod
   type: exempt
   registered: exempted
   index: '-'
-  description: The Go module definition for the snitch module.
+  id: MISSING
 - path: snitch/mkdocs.yml
   type: exempt
   registered: exempted
   index: '-'
-  description: Configuration file for the MkDocs documentation generator for the snitch module.
+  id: MISSING
 - path: snitch/snitch.go
   type: code
   registered: true
   index: snitch/CODE_FILE_INDEX.md
-  description: The main Go source file for the snitch module.
+  id: MISSING
+- path: tests/scripts/test_build_project_registry.py
+  type: code
+  registered: exempted
+  index: '-'
+  id: MISSING
