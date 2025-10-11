@@ -1,3 +1,4 @@
+# ID: OPS-036
 #!/usr/bin/env python3
 # ID: OPS-031
 """
@@ -9,6 +10,7 @@ import os
 import re
 import sys
 import yaml
+import argparse
 from pathlib import Path
 from collections import defaultdict
 
@@ -46,6 +48,30 @@ def find_embedded_id(file_path):
     return None
 
 def main():
+    parser = argparse.ArgumentParser(description="Verify and optionally rebuild the tag inventory.")
+    parser.add_argument("--rebuild", action="store_true", help="Rebuild the inventory from embedded tags.")
+    args = parser.parse_args()
+
+    if args.rebuild:
+        print("--- Rebuilding Tag Inventory from Embedded IDs ---")
+        new_inventory = []
+        for root, _, files in os.walk(PROJECT_ROOT):
+            if any(part in root for part in [".git", ".venv", "node_modules", "__pycache__"]):
+                continue
+            for f in files:
+                full_path = Path(root) / f
+                rel_path = str(full_path.relative_to(PROJECT_ROOT))
+                embedded_id = find_embedded_id(full_path)
+                if embedded_id:
+                    prefix = embedded_id.split('-')[0]
+                    new_inventory.append({"id": embedded_id, "path": rel_path, "prefix": prefix})
+
+        with open(TAG_INVENTORY, "w", encoding="utf-8") as f:
+            yaml.safe_dump(new_inventory, f, sort_keys=False)
+        print(f"✅ Rebuilt inventory with {len(new_inventory)} items.")
+        sys.exit(0)
+
+
     print("=== Verifying alignment migration (enhanced report) ===\n")
 
     tag_inventory = load_tag_inventory()
@@ -57,7 +83,7 @@ def main():
     summary = defaultdict(list)
 
     for root, _, files in os.walk(PROJECT_ROOT):
-        if any(part in root for part in [".git", ".venv", "node_modules", "archive", "__pycache__"]):
+        if any(part in root for part in [".git", ".venv", "node_modules", "archive", "__pycache__", "templates", "reports"]):
             continue
         for f in files:
             if not f.endswith((".py", ".md", ".sh", ".yml", ".yaml")):
@@ -77,13 +103,13 @@ def main():
 
     if summary["missing_id"]:
         print("--- Files Missing ID Tags ---")
-        for path in sorted(summary["missing_id"]):
+        for path in sorted(summary['missing_id']):
             print(f"  - {path}")
         print()
 
     if summary["unregistered_id"]:
         print("--- Files With Unregistered IDs ---")
-        for path in sorted(summary["unregistered_id"]):
+        for path in sorted(summary['unregistered_id']):
             print(f"  - {path}")
         print()
 

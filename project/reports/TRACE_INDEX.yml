@@ -13,137 +13,112 @@ artifacts:
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: CFG-001
 - path: .pre-commit-config.yaml
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: CFG-002
 - path: AGENTS.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-067
 - path: Gonk/CODE_FILE_INDEX.md
   type: doc
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-001
 - path: Gonk/GonkCLI/DOCS_INDEX.md
   type: doc
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-002
 - path: Gonk/GonkCLI/README.md
   type: doc
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-003
 - path: Gonk/GonkCLI/__init__.py
   type: code
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-004
 - path: Gonk/GonkCLI/main.py
   type: code
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-005
 - path: Gonk/GonkCLI/modules/__init__.py
   type: code
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-006
 - path: Gonk/GonkCLI/modules/jwt_mock.py
   type: code
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-007
 - path: Gonk/GonkCLI/tests/__init__.py
   type: code
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-008
 - path: Gonk/GonkCLI/tests/test_jwt_mock.py
   type: code
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-009
 - path: Gonk/GonkUI/DOCS_INDEX.md
   type: doc
   registered: exempted
   index: '-'
-  id: MISSING
-- path: Gonk/GonkUI/GonkUI.egg-info/PKG-INFO
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: Gonk/GonkUI/GonkUI.egg-info/SOURCES.txt
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: Gonk/GonkUI/GonkUI.egg-info/dependency_links.txt
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: Gonk/GonkUI/GonkUI.egg-info/requires.txt
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: Gonk/GonkUI/GonkUI.egg-info/top_level.txt
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
+  id: API-010
 - path: Gonk/GonkUI/README.md
   type: doc
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-011
 - path: Gonk/GonkUI/app.py
   type: code
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-012
 - path: Gonk/GonkUI/docs/ARCHITECTURE.md
   type: doc
   registered: true
   index: Gonk/GonkUI/DOCS_INDEX.md
-  id: MISSING
+  id: API-013
 - path: Gonk/GonkUI/docs/CHANGELOG.md
   type: doc
   registered: true
   index: Gonk/GonkUI/DOCS_INDEX.md
-  id: MISSING
+  id: API-014
 - path: Gonk/GonkUI/docs/CONTRIBUTING.md
   type: doc
   registered: true
   index: Gonk/GonkUI/DOCS_INDEX.md
-  id: MISSING
+  id: API-015
 - path: Gonk/GonkUI/docs/LICENSE
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-016
 - path: Gonk/GonkUI/docs/USER_MANUAL.md
   type: doc
   registered: true
   index: Gonk/GonkUI/DOCS_INDEX.md
-  id: MISSING
+  id: API-017
 - path: Gonk/GonkUI/mkdocs.yml
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-018
 - path: Gonk/GonkUI/pyproject.toml
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-019
 - path: Gonk/GonkUI/static/app.js
   type: code
   registered: true
@@ -158,67 +133,57 @@ artifacts:
   type: code
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-022
 - path: Gonk/GonkUI/views/jwt_ui.py
   type: code
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-023
 - path: Gonk/pyproject.toml
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-024
 - path: README.md
   type: doc
   registered: exempted
   index: '-'
-  id: MISSING
+  id: DOC-068
 - path: api/.gitignore
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
-- path: api/.ruff_cache/.gitignore
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: api/.ruff_cache/CACHEDIR.TAG
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
+  id: API-244
 - path: api/MIGRATIONS.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: API-245
 - path: api/alembic.ini
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-246
 - path: api/alembic/README
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-206
 - path: api/alembic/env.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-207
 - path: api/alembic/script.py.mako
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-208
 - path: api/alembic/versions/5f96175ff7c9_add_notifications_enabled_to_.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-209
 - path: api/api_dumps/cache.json
   type: exempt
   registered: exempted
@@ -283,563 +248,528 @@ artifacts:
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-201
 - path: api/docs/CODE_FILE_INDEX.md
   type: doc
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-202
 - path: api/docs/CODE_QUALITY_INDEX.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-203
 - path: api/docs/DOCS_QUALITY_INDEX.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-204
 - path: api/docs/MASTER_INDEX.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-205
 - path: api/docs/manuals/API_DEVELOPER_GUIDE.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-106
 - path: api/docs/manuals/CICD.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-107
 - path: api/docs/manuals/ERROR_HANDLING_GUIDE.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-108
 - path: api/docs/manuals/LICENSE
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-109
 - path: api/docs/manuals/LOGGING_GUIDE.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-110
 - path: api/docs/manuals/OPERATOR_MANUAL.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-111
 - path: api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-112
 - path: api/docs/manuals/USER_MANUAL.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-113
 - path: api/docs/providers/SPOTIFY.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-200
 - path: api/docs/reference/API_REFERENCE.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-192
 - path: api/docs/reference/FEATURE_SPECS.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-193
 - path: api/docs/reference/features/AUTHENTICATION.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-114
 - path: api/docs/reference/features/AUTOMATED_DOCUMENTATION_WORKFLOW.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-115
 - path: api/docs/reference/features/DEVELOPER_FLEXIBLE_LOGGING_FRAMEWORK.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-116
 - path: api/docs/reference/features/PROVIDER_AGNOSTIC_EXTENSIONS.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-117
 - path: api/docs/reference/features/PROVIDER_OAUTH.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-118
 - path: api/docs/reference/source/ACTIONS____INIT__.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-119
 - path: api/docs/reference/source/APP.js.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-120
 - path: api/docs/reference/source/APP.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-121
 - path: api/docs/reference/source/AUDIT_API.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-122
 - path: api/docs/reference/source/AUDIT_ENDPOINTS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-123
 - path: api/docs/reference/source/AUTH.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-124
 - path: api/docs/reference/source/AUTH_STATE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-125
 - path: api/docs/reference/source/BASE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-126
 - path: api/docs/reference/source/CACHE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-127
 - path: api/docs/reference/source/CACHE_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-128
 - path: api/docs/reference/source/CONFIG.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-129
 - path: api/docs/reference/source/CONFIG_MODELS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-130
 - path: api/docs/reference/source/CONFIG_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-131
 - path: api/docs/reference/source/CONSOLE_HANDLER.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-132
 - path: api/docs/reference/source/CRUD.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-133
 - path: api/docs/reference/source/DATABASE_JOB_HANDLER.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-134
 - path: api/docs/reference/source/DATABASE____INIT__.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-135
 - path: api/docs/reference/source/DB.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-136
 - path: api/docs/reference/source/DEPS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-137
 - path: api/docs/reference/source/DOWNLOAD.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-138
 - path: api/docs/reference/source/DOWNLOADS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-139
 - path: api/docs/reference/source/DOWNLOAD_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-140
 - path: api/docs/reference/source/ERROR_HANDLER____INIT__.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-141
 - path: api/docs/reference/source/FILTERS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-142
 - path: api/docs/reference/source/FORMATTER.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-143
 - path: api/docs/reference/source/FUNCTIONAL_TEST.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-144
 - path: api/docs/reference/source/GENERATE_ENDPOINTS_DOC.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-145
 - path: api/docs/reference/source/GENERATE_OPENAPI.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-146
 - path: api/docs/reference/source/GENERATE_SOURCE_DOCS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-147
 - path: api/docs/reference/source/GENERIC.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-148
 - path: api/docs/reference/source/GLOBALS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-149
 - path: api/docs/reference/source/HOOKS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-150
 - path: api/docs/reference/source/JSON_AUDIT_HANDLER.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-151
 - path: api/docs/reference/source/LINTER.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-152
 - path: api/docs/reference/source/LOGGING_CONFIG.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-153
 - path: api/docs/reference/source/LOGGING_FRAMEWORK____INIT__.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-154
 - path: api/docs/reference/source/LOGGING_HANDLERS____INIT__.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-155
 - path: api/docs/reference/source/LOGGING_SCHEMAS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-156
 - path: api/docs/reference/source/LOGGING_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-157
 - path: api/docs/reference/source/LOG_CRITICAL.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-158
 - path: api/docs/reference/source/MAIN.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-159
 - path: api/docs/reference/source/METADATA.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-160
 - path: api/docs/reference/source/METADATA_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-161
 - path: api/docs/reference/source/MODELS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-162
 - path: api/docs/reference/source/NETWORK.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-163
 - path: api/docs/reference/source/NETWORK_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-164
 - path: api/docs/reference/source/NOTIFICATIONS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-165
 - path: api/docs/reference/source/NOTIFICATIONS_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-166
 - path: api/docs/reference/source/PLAYLISTS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-167
 - path: api/docs/reference/source/PLAYLISTS_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-168
 - path: api/docs/reference/source/PROVIDERS____INIT__.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-169
 - path: api/docs/reference/source/REQUEST_ID.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-170
 - path: api/docs/reference/source/ROUTES____INIT__.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-171
 - path: api/docs/reference/source/SCHEMAS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-172
 - path: api/docs/reference/source/SEARCH.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-173
 - path: api/docs/reference/source/SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-174
 - path: api/docs/reference/source/SERVICES____INIT__.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-175
 - path: api/docs/reference/source/SESSION.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-176
 - path: api/docs/reference/source/SNITCH.go.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-177
 - path: api/docs/reference/source/SPOTIFY.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-178
 - path: api/docs/reference/source/SPOTIFY_CONNECTOR.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-179
 - path: api/docs/reference/source/SPOTI_CLIENT.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-180
 - path: api/docs/reference/source/SYNC.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-181
 - path: api/docs/reference/source/SYNC_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-182
 - path: api/docs/reference/source/SYSTEM.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-183
 - path: api/docs/reference/source/TEST_AUTH_FLOW.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-184
 - path: api/docs/reference/source/TRACKS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-185
 - path: api/docs/reference/source/TRACKS_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-186
 - path: api/docs/reference/source/TRIGGERS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-187
 - path: api/docs/reference/source/USER.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-188
 - path: api/docs/reference/source/USER_SERVICE.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-189
 - path: api/docs/reference/source/WEBHOOK.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-190
 - path: api/docs/reference/source/WEBHOOKS.py.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-191
 - path: api/docs/system/ERROR_HANDLING_DESIGN.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-194
 - path: api/docs/system/INSTALLATION.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-195
 - path: api/docs/system/PRIVACY_COMPLIANCE.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-196
 - path: api/docs/system/REQUIREMENTS.md
   type: doc
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
-  id: MISSING
+  id: API-197
 - path: api/docs/system/zotify-openapi-external-v1.json
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-198
 - path: api/docs/system/zotify-openapi-external-v1.yaml
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-199
 - path: api/logging_config.yml
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-247
 - path: api/logging_framework.yml
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
-- path: api/logs/debug.log
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: api/logs/security.log
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
+  id: API-248
 - path: api/mypy.ini
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-249
 - path: api/pyproject.toml
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-250
 - path: api/ruff.toml
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-251
 - path: api/src/storage/spotify_tokens.json
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: api/src/zotify_api.egg-info/PKG-INFO
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: api/src/zotify_api.egg-info/SOURCES.txt
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: api/src/zotify_api.egg-info/dependency_links.txt
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: api/src/zotify_api.egg-info/requires.txt
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: api/src/zotify_api.egg-info/top_level.txt
   type: exempt
   registered: exempted
   index: '-'
@@ -848,402 +778,402 @@ artifacts:
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-025
 - path: api/src/zotify_api/config.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-026
 - path: api/src/zotify_api/core/error_handler/__init__.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-027
 - path: api/src/zotify_api/core/error_handler/actions/__init__.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-028
 - path: api/src/zotify_api/core/error_handler/actions/log_critical.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-029
 - path: api/src/zotify_api/core/error_handler/actions/webhook.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-030
 - path: api/src/zotify_api/core/error_handler/config.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-031
 - path: api/src/zotify_api/core/error_handler/formatter.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-032
 - path: api/src/zotify_api/core/error_handler/hooks.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-033
 - path: api/src/zotify_api/core/error_handler/triggers.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-034
 - path: api/src/zotify_api/core/logging_framework/__init__.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-035
 - path: api/src/zotify_api/core/logging_framework/filters.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-036
 - path: api/src/zotify_api/core/logging_framework/schemas.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-037
 - path: api/src/zotify_api/core/logging_framework/service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-038
 - path: api/src/zotify_api/core/logging_handlers/__init__.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-039
 - path: api/src/zotify_api/core/logging_handlers/base.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-040
 - path: api/src/zotify_api/core/logging_handlers/console_handler.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-041
 - path: api/src/zotify_api/core/logging_handlers/database_job_handler.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-042
 - path: api/src/zotify_api/core/logging_handlers/json_audit_handler.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-043
 - path: api/src/zotify_api/database/__init__.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-428
 - path: api/src/zotify_api/database/crud.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-045
 - path: api/src/zotify_api/database/models.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-046
 - path: api/src/zotify_api/database/session.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-047
 - path: api/src/zotify_api/globals.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-048
 - path: api/src/zotify_api/logging_config.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-049
 - path: api/src/zotify_api/main.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-050
 - path: api/src/zotify_api/middleware/request_id.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-051
 - path: api/src/zotify_api/models/config_models.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-052
 - path: api/src/zotify_api/models/sync.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-053
 - path: api/src/zotify_api/providers/__init__.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-438
 - path: api/src/zotify_api/providers/base.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-055
 - path: api/src/zotify_api/providers/spotify_connector.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-056
 - path: api/src/zotify_api/routes/__init__.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-057
 - path: api/src/zotify_api/routes/auth.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-058
 - path: api/src/zotify_api/routes/cache.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-059
 - path: api/src/zotify_api/routes/config.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-060
 - path: api/src/zotify_api/routes/downloads.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-061
 - path: api/src/zotify_api/routes/jwt_auth.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-062
 - path: api/src/zotify_api/routes/network.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-063
 - path: api/src/zotify_api/routes/notifications.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-064
 - path: api/src/zotify_api/routes/playlists.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-065
 - path: api/src/zotify_api/routes/search.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-066
 - path: api/src/zotify_api/routes/sync.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-067
 - path: api/src/zotify_api/routes/system.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-068
 - path: api/src/zotify_api/routes/tracks.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-069
 - path: api/src/zotify_api/routes/user.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-070
 - path: api/src/zotify_api/routes/webhooks.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-071
 - path: api/src/zotify_api/schemas/auth.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-072
 - path: api/src/zotify_api/schemas/cache.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-073
 - path: api/src/zotify_api/schemas/download.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-074
 - path: api/src/zotify_api/schemas/generic.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-075
 - path: api/src/zotify_api/schemas/logging_schemas.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-076
 - path: api/src/zotify_api/schemas/metadata.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-077
 - path: api/src/zotify_api/schemas/network.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-078
 - path: api/src/zotify_api/schemas/notifications.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-079
 - path: api/src/zotify_api/schemas/playlists.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-080
 - path: api/src/zotify_api/schemas/spotify.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-081
 - path: api/src/zotify_api/schemas/system.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-082
 - path: api/src/zotify_api/schemas/tracks.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-083
 - path: api/src/zotify_api/schemas/user.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-084
 - path: api/src/zotify_api/schemas/webhooks.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-085
 - path: api/src/zotify_api/services/__init__.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-470
 - path: api/src/zotify_api/services/auth.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-087
 - path: api/src/zotify_api/services/cache_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-088
 - path: api/src/zotify_api/services/config_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-089
 - path: api/src/zotify_api/services/db.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-090
 - path: api/src/zotify_api/services/deps.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-091
 - path: api/src/zotify_api/services/download_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-092
 - path: api/src/zotify_api/services/jwt_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-093
 - path: api/src/zotify_api/services/logging_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-094
 - path: api/src/zotify_api/services/metadata_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-095
 - path: api/src/zotify_api/services/network_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-096
 - path: api/src/zotify_api/services/notifications_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-097
 - path: api/src/zotify_api/services/playlists_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-098
 - path: api/src/zotify_api/services/search.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-099
 - path: api/src/zotify_api/services/spoti_client.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-100
 - path: api/src/zotify_api/services/sync_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-101
 - path: api/src/zotify_api/services/tracks_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-102
 - path: api/src/zotify_api/services/user_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-103
 - path: api/src/zotify_api/services/webhooks.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-104
 - path: api/src/zotify_api/storage/user_data.json
   type: exempt
   registered: exempted
@@ -1253,197 +1183,187 @@ artifacts:
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
-- path: api/storage/zotify.db
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
+  id: API-105
 - path: api/tests/__init__.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-233
 - path: api/tests/conftest.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-234
 - path: api/tests/test_cache.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-235
 - path: api/tests/test_config.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-236
 - path: api/tests/test_download.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-237
 - path: api/tests/test_network.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-238
 - path: api/tests/test_notifications.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-239
 - path: api/tests/test_playlists.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-240
 - path: api/tests/test_system.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-241
 - path: api/tests/test_tracks.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-242
 - path: api/tests/test_user.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-243
 - path: api/tests/unit/providers/test_spotify_connector.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-210
 - path: api/tests/unit/test_auth.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-211
 - path: api/tests/unit/test_cache_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-212
 - path: api/tests/unit/test_config.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-213
 - path: api/tests/unit/test_crud.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-214
 - path: api/tests/unit/test_deps.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-215
 - path: api/tests/unit/test_error_handler.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-216
 - path: api/tests/unit/test_error_handler_actions.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-217
 - path: api/tests/unit/test_flexible_logging.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-218
 - path: api/tests/unit/test_jwt_auth_db.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-219
 - path: api/tests/unit/test_logging_config.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-220
 - path: api/tests/unit/test_metadata_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-221
 - path: api/tests/unit/test_network_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-222
 - path: api/tests/unit/test_new_logging_system.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-223
 - path: api/tests/unit/test_notifications_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-224
 - path: api/tests/unit/test_playlists_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-225
 - path: api/tests/unit/test_search.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-226
 - path: api/tests/unit/test_spoti_client.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-227
 - path: api/tests/unit/test_sync.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-228
 - path: api/tests/unit/test_tracks_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-229
 - path: api/tests/unit/test_user_service.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-230
 - path: api/tests/unit/test_user_service_db.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-231
 - path: api/tests/unit/test_webhooks.py
   type: code
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
-  id: MISSING
-- path: api/zotify.db
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
+  id: API-232
 - path: bandit.yml
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: CFG-003
 - path: mkdocs.yml
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: CFG-004
 - path: openapi.json
   type: exempt
   registered: exempted
@@ -1453,257 +1373,232 @@ artifacts:
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-083
 - path: project/ALIGNMENT_MATRIX.yml
   type: code
   registered: exempted
   index: '-'
-  id: MISSING
+  id: DOC-072
 - path: project/BACKLOG.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-002
 - path: project/CICD.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-003
 - path: project/DEPENDENCIES.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-004
 - path: project/EXECUTION_PLAN.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-005
 - path: project/FUTURE_ENHANCEMENTS.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-006
 - path: project/HIGH_LEVEL_DESIGN.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-007
 - path: project/LESSONS-LEARNT.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-008
 - path: project/LOGGING_PHASES.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-009
 - path: project/LOGGING_SYSTEM_DESIGN.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-010
 - path: project/LOGGING_TRACEABILITY_MATRIX.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-011
 - path: project/LOW_LEVEL_DESIGN.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-012
 - path: project/ONBOARDING.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-013
 - path: project/PID.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-014
 - path: project/PROJECT_BRIEF.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-015
 - path: project/PROJECT_PLAN.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-016
 - path: project/PROJECT_REGISTRY.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-100
 - path: project/QA_GOVERNANCE.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-018
 - path: project/ROADMAP.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-019
 - path: project/SECURITY.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-020
 - path: project/TASK_CHECKLIST.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-021
 - path: project/USECASES.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-022
 - path: project/USECASES_GAP_ANALYSIS.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-023
 - path: project/api/endpoints.yaml
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: DOC-024
 - path: project/logs/ACTIVITY.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-043
 - path: project/logs/CURRENT_STATE.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-044
 - path: project/logs/SESSION_LOG.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
-- path: project/logs/chat/Manifest_review_and_mapping.md
-  type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
-  id: MISSING
-- path: project/logs/chat/Manifest_review_and_mapping_manifest.md
-  type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
-  id: MISSING
-- path: project/logs/chat/chats.py
-  type: code
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: project/logs/chat/combined_chats_manifest.md
-  type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
-  id: MISSING
-- path: project/logs/chat/conversations.json
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
+  id: DOC-045
 - path: project/logs/conversations.json
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: DOC-123
 - path: project/process/GAP_ANALYSIS_TEMPLATE.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-046
 - path: project/proposals/DBSTUDIO_PLUGIN.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-047
 - path: project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-048
 - path: project/proposals/GONKUI_PLUGIN.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-049
 - path: project/proposals/GOVERNANCE_AUDIT_REFACTOR.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-050
 - path: project/proposals/HOME_AUTOMATION_PROPOSAL.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-051
 - path: project/proposals/LOW_CODE_PROPOSAL.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-052
 - path: project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-053
 - path: project/proposals/NEW_PROPOSAL.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-054
 - path: project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-055
 - path: project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-056
 - path: project/proposals/TRACE_INDEX_SCHEMA_FIX.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-057
 - path: project/reports/ALIGNMENT_INTEGRITY_SNAPSHOT.yml
   type: code
   registered: exempted
   index: '-'
-  id: MISSING
+  id: DOC-076
 - path: project/reports/ALIGNMENT_VALIDATION_REPORT.txt
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: DOC-077
 - path: project/reports/ARCHIVE_ALIGNMENT_MATRIX_OLD.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-074
 - path: project/reports/CONTENT_ALIGNMENT_REPORT.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-058
 - path: project/reports/DESCRIPTION_COMPLIANCE_REPORT.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-059
 - path: project/reports/DOCUMENT_TAG_INVENTORY.yml
   type: code
   registered: exempted
@@ -1713,32 +1608,37 @@ artifacts:
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-061
 - path: project/reports/HANDOVER_BRIEF_CHATGTP.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-062
 - path: project/reports/HANDOVER_BRIEF_JULES.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-063
 - path: project/reports/PROJECT_AUDIT_FINAL_REPORT.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-064
 - path: project/reports/PROJECT_DOCUMENT_ALIGNMENT.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
   id: MISSING
+- path: project/reports/REPO_MANIFEST.md
+  type: doc
+  registered: true
+  index: project/PROJECT_REGISTRY.md
+  id: DOC-078
 - path: project/reports/SEMANTIC_ALIGNMENT_REPORT.md
   type: doc
   registered: true
   index: project/PROJECT_REGISTRY.md
-  id: MISSING
+  id: DOC-079
 - path: project/reports/TRACE_INDEX.yml
   type: code
   registered: exempted
@@ -1748,82 +1648,82 @@ artifacts:
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: DOC-155
 - path: scripts/CODE_FILE_INDEX.md
   type: doc
   registered: exempted
   index: '-'
-  id: MISSING
+  id: OPS-001
 - path: scripts/api/src/zotify_api/temp_violation.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-002
 - path: scripts/audit_api.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-003
 - path: scripts/audit_endpoints.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-004
 - path: scripts/build_project_registry.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-005
 - path: scripts/content_alignment_check.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-006
 - path: scripts/description_compliance_check.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-007
 - path: scripts/doc-lint-rules.yml
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-008
 - path: scripts/fix_tag_inventory.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-033
 - path: scripts/functional_test.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-009
 - path: scripts/generate_alignment_matrix_md.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-010
 - path: scripts/generate_endpoints_doc.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-011
 - path: scripts/generate_openapi.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-012
 - path: scripts/generate_repo_manifest.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-013
 - path: scripts/gonkui
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: OPS-014
 - path: scripts/lint_governance_links.json
   type: exempt
   registered: exempted
@@ -1833,209 +1733,209 @@ artifacts:
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-016
 - path: scripts/linter.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-017
 - path: scripts/make_manifest.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-018
 - path: scripts/manage_docs_index.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-019
 - path: scripts/migrate_alignment_matrix.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-020
 - path: scripts/migrate_and_tag_repository.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-021
 - path: scripts/project_registry.json
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: OPS-059
 - path: scripts/propagate_descriptions.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-023
 - path: scripts/repo_governance.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-024
 - path: scripts/repo_inventory_and_governance.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-025
 - path: scripts/repo_inventory_and_governance.py.bak
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: OPS-025
 - path: scripts/run_e2e_auth_test.sh
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-026
 - path: scripts/semantic_alignment_check.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-027
 - path: scripts/start.sh
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-028
 - path: scripts/test_auth_flow.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-029
 - path: scripts/test_full_pipeline.sh
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-035
 - path: scripts/test_single_config.sh
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-030
 - path: scripts/validate_code_index.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-031
 - path: scripts/verify_alignment_migration.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-036
 - path: scripts/verify_governance.py
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: MISSING
+  id: OPS-032
 - path: snitch/.golangci.yml
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-252
 - path: snitch/CODE_FILE_INDEX.md
   type: doc
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-253
 - path: snitch/DOCS_INDEX.md
   type: doc
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-254
 - path: snitch/README.md
   type: doc
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-255
 - path: snitch/docs/ARCHITECTURE.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  id: MISSING
+  id: API-256
 - path: snitch/docs/INSTALLATION.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  id: MISSING
+  id: API-257
 - path: snitch/docs/MILESTONES.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  id: MISSING
+  id: API-258
 - path: snitch/docs/MODULES.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  id: MISSING
+  id: API-259
 - path: snitch/docs/PHASES.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  id: MISSING
+  id: API-260
 - path: snitch/docs/PHASE_2_SECURE_CALLBACK.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  id: MISSING
+  id: API-261
 - path: snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  id: MISSING
+  id: API-262
 - path: snitch/docs/PROJECT_PLAN.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  id: MISSING
+  id: API-263
 - path: snitch/docs/ROADMAP.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  id: MISSING
+  id: API-264
 - path: snitch/docs/STATUS.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  id: MISSING
+  id: API-265
 - path: snitch/docs/TASKS.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  id: MISSING
+  id: API-266
 - path: snitch/docs/TEST_RUNBOOK.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  id: MISSING
+  id: API-267
 - path: snitch/docs/USER_MANUAL.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  id: MISSING
+  id: API-268
 - path: snitch/docs/phase5-ipc.md
   type: doc
   registered: true
   index: snitch/DOCS_INDEX.md
-  id: MISSING
+  id: API-269
 - path: snitch/go.mod
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-270
 - path: snitch/mkdocs.yml
   type: exempt
   registered: exempted
   index: '-'
-  id: MISSING
+  id: API-271
 - path: snitch/snitch.go
   type: code
   registered: true
   index: snitch/CODE_FILE_INDEX.md
-  id: MISSING
+  id: API-272
 - path: tests/scripts/test_build_project_registry.py
   type: code
   registered: exempted
   index: '-'
-  id: MISSING
+  id: TEST-002

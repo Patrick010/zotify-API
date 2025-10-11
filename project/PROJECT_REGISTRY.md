@@ -1,3 +1,4 @@
+<!-- ID: DOC-100 -->
 <!-- AUTO-GENERATED from scripts/project_registry.json — manual edits may be overwritten. Historical legacy entries preserved below. -->
 
 | Document | Location | Description | Status |
@@ -132,3 +133,4 @@
 | **Trace Index Schema Fix** | [`TRACE_INDEX_SCHEMA_FIX.md`](proposals/TRACE_INDEX_SCHEMA_FIX.md) | |
 | **Usecases Gap Analysis** | [`USECASES_GAP_ANALYSIS.md`](USECASES_GAP_ANALYSIS.md) | |
 | **Usecases** | [`USECASES.md`](USECASES.md) | |
+| **Repo Manifest** | [`REPO_MANIFEST.md`](reports/REPO_MANIFEST.md) | |

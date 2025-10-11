@@ -59,6 +59,17 @@ Covers insights from initial planning (Phase 0) through current active developme
 
 ---
 
+## Phase 4 – Pipeline Integrity & Reconciliation
+
+| Lesson | Impact | Reference |
+|--------|--------|-----------|
+| **A multi-layered verification system requires a multi-layered solution.** A single script failure can indicate deeper data integrity issues. The initial `test_full_pipeline.sh` failure was not just a script bug, but a symptom of an out-of-sync `DOCUMENT_TAG_INVENTORY.yml` and missing embedded file IDs. | **Critical** | (code: `scripts/test_full_pipeline.sh`, `scripts/verify_alignment_migration.py`) |
+| **Generated artifacts should be trusted but verifiable.** The `TRACE_INDEX.yml` is generated from the state of the repository, but its correctness depends on the `DOCUMENT_TAG_INVENTORY.yml`. When the inventory is wrong, the index is wrong. A mechanism to rebuild the inventory from the source-of-truth (embedded IDs) is essential for recovery. | **High** | (code: `scripts/repo_inventory_and_governance.py`, `scripts/verify_alignment_migration.py --rebuild`) |
+| **Verification scripts must respect their own system's boundaries.** The `verify_alignment_migration.py` script was incorrectly scanning directories (`templates/`, `reports/`) that are intentionally excluded from the ID tagging process, leading to false-positive errors. Aligning the verification scope with the implementation scope is crucial. | **Medium** | (code: `scripts/verify_alignment_migration.py`) |
+| **The `file` vs. `path` key mismatch.** A subtle but critical bug in `repo_inventory_and_governance.py` was its use of the `file` key to look up IDs from the tag inventory, when the correct key was `path`. This highlights the importance of data consistency across all scripts and data files. | **High** | (code: `scripts/repo_inventory_and_governance.py`) |
+
+---
+
 ## Cross-Phase Lessons
 
 | Lesson | Impact | Reference |

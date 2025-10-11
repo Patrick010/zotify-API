@@ -210,12 +210,9 @@ def main():
     if doc_tag_inventory_path.exists():
         with doc_tag_inventory_path.open("r") as f:
             tag_inventory = yaml.safe_load(f)
-        file_to_id = {entry['file']: entry['id'] for entry in tag_inventory if 'id' in entry}
+        file_to_id = {item['path']: item['id'] for item in tag_inventory if 'path' in item and 'id' in item}
         for entry in trace_index:
-            if entry["path"] in file_to_id:
-                entry['id'] = file_to_id[entry["path"]]
-            else:
-                entry['id'] = entry.get('id', 'MISSING')
+            entry['id'] = file_to_id.get(entry['path'], 'MISSING')
 
     output = {"artifacts": trace_index}
     trace_index_path = PROJECT_ROOT / "project/reports/TRACE_INDEX.yml"

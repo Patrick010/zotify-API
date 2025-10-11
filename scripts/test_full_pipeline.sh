@@ -1,11 +1,12 @@
+# ID: OPS-035
 #!/usr/bin/env bash
 set -euo pipefail
 
 echo "=== Starting full pipeline test (dry-run) ==="
 
 # Step 1: Backup TRACE_INDEX.yml
-TRACE_INDEX="/root/zotify-API/project/reports/TRACE_INDEX.yml"
-BACKUP_TRACE_INDEX="/root/zotify-API/project/reports/TRACE_INDEX.yml.bak"
+TRACE_INDEX="project/reports/TRACE_INDEX.yml"
+BACKUP_TRACE_INDEX="project/reports/TRACE_INDEX.yml.bak"
 if [ -f "$TRACE_INDEX" ]; then
     echo "[Step 1] Backing up TRACE_INDEX.yml"
     cp "$TRACE_INDEX" "$BACKUP_TRACE_INDEX"
