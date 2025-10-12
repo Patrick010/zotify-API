@@ -13,7 +13,7 @@ artifacts:
   type: exempt
   registered: exempted
   index: '-'
-  id: CFG-001
+  id: MISSING
 - path: .pre-commit-config.yaml
   type: exempt
   registered: exempted
@@ -21,8 +21,8 @@ artifacts:
   id: CFG-002
 - path: AGENTS.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: exempted
+  index: '-'
   id: DOC-067
 - path: Gonk/CODE_FILE_INDEX.md
   type: doc
@@ -74,6 +74,31 @@ artifacts:
   registered: exempted
   index: '-'
   id: API-010
+- path: Gonk/GonkUI/GonkUI.egg-info/PKG-INFO
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: Gonk/GonkUI/GonkUI.egg-info/SOURCES.txt
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: Gonk/GonkUI/GonkUI.egg-info/dependency_links.txt
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: Gonk/GonkUI/GonkUI.egg-info/requires.txt
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: Gonk/GonkUI/GonkUI.egg-info/top_level.txt
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
 - path: Gonk/GonkUI/README.md
   type: doc
   registered: exempted
@@ -99,26 +124,16 @@ artifacts:
   registered: true
   index: Gonk/GonkUI/DOCS_INDEX.md
   id: API-015
-- path: Gonk/GonkUI/docs/LICENSE
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: API-016
 - path: Gonk/GonkUI/docs/USER_MANUAL.md
   type: doc
   registered: true
   index: Gonk/GonkUI/DOCS_INDEX.md
   id: API-017
-- path: Gonk/GonkUI/mkdocs.yml
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: API-018
 - path: Gonk/GonkUI/pyproject.toml
   type: exempt
   registered: exempted
   index: '-'
-  id: API-019
+  id: MISSING
 - path: Gonk/GonkUI/static/app.js
   type: code
   registered: true
@@ -143,7 +158,7 @@ artifacts:
   type: exempt
   registered: exempted
   index: '-'
-  id: API-024
+  id: MISSING
 - path: README.md
   type: doc
   registered: exempted
@@ -153,22 +168,32 @@ artifacts:
   type: exempt
   registered: exempted
   index: '-'
-  id: API-244
+  id: MISSING
+- path: api/.ruff_cache/.gitignore
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: api/.ruff_cache/CACHEDIR.TAG
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
 - path: api/MIGRATIONS.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: exempted
+  index: '-'
   id: API-245
 - path: api/alembic.ini
   type: exempt
   registered: exempted
   index: '-'
-  id: API-246
+  id: MISSING
 - path: api/alembic/README
   type: exempt
   registered: exempted
   index: '-'
-  id: API-206
+  id: MISSING
 - path: api/alembic/env.py
   type: code
   registered: true
@@ -178,7 +203,7 @@ artifacts:
   type: exempt
   registered: exempted
   index: '-'
-  id: API-208
+  id: MISSING
 - path: api/alembic/versions/5f96175ff7c9_add_notifications_enabled_to_.py
   type: code
   registered: true
@@ -251,8 +276,8 @@ artifacts:
   id: API-201
 - path: api/docs/CODE_FILE_INDEX.md
   type: doc
-  registered: exempted
-  index: '-'
+  registered: true
+  index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-202
 - path: api/docs/CODE_QUALITY_INDEX.md
   type: doc
@@ -284,11 +309,6 @@ artifacts:
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-108
-- path: api/docs/manuals/LICENSE
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: API-109
 - path: api/docs/manuals/LOGGING_GUIDE.md
   type: doc
   registered: true
@@ -738,7 +758,7 @@ artifacts:
   type: exempt
   registered: exempted
   index: '-'
-  id: API-198
+  id: MISSING
 - path: api/docs/system/zotify-openapi-external-v1.yaml
   type: exempt
   registered: exempted
@@ -754,21 +774,31 @@ artifacts:
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-248
+- path: api/logs/debug.log
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: api/logs/security.log
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
 - path: api/mypy.ini
   type: exempt
   registered: exempted
   index: '-'
-  id: API-249
+  id: MISSING
 - path: api/pyproject.toml
   type: exempt
   registered: exempted
   index: '-'
-  id: API-250
+  id: MISSING
 - path: api/ruff.toml
   type: exempt
   registered: exempted
   index: '-'
-  id: API-251
+  id: MISSING
 - path: api/src/storage/spotify_tokens.json
   type: exempt
   registered: exempted
@@ -1384,35 +1414,17 @@ artifacts:
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-232
-- path: bandit.yml
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: CFG-003
-- path: logs/debug.log
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: logs/security.log
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: mkdocs.yml
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: CFG-004
-- path: openapi.json
+- path: api/zotify.db
   type: exempt
   registered: exempted
   index: '-'
   id: MISSING
 - path: project/ALIGNMENT_MATRIX.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-083
 - path: project/ALIGNMENT_MATRIX.yml
   type: code
@@ -1421,113 +1433,150 @@ artifacts:
   id: DOC-072
 - path: project/BACKLOG.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-002
 - path: project/CICD.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-003
 - path: project/DEPENDENCIES.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-004
 - path: project/EXECUTION_PLAN.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-005
 - path: project/FUTURE_ENHANCEMENTS.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-006
 - path: project/HIGH_LEVEL_DESIGN.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-007
 - path: project/LESSONS-LEARNT.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-008
 - path: project/LOGGING_PHASES.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-009
 - path: project/LOGGING_SYSTEM_DESIGN.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-010
 - path: project/LOGGING_TRACEABILITY_MATRIX.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-011
 - path: project/LOW_LEVEL_DESIGN.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-012
 - path: project/ONBOARDING.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-013
 - path: project/PID.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-014
 - path: project/PROJECT_BRIEF.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-015
 - path: project/PROJECT_PLAN.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-016
-- path: project/PROJECT_REGISTRY.md
-  type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
-  id: DOC-100
 - path: project/QA_GOVERNANCE.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-018
 - path: project/ROADMAP.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-019
 - path: project/SECURITY.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-020
 - path: project/TASK_CHECKLIST.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-021
 - path: project/USECASES.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-022
 - path: project/USECASES_GAP_ANALYSIS.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-023
 - path: project/api/endpoints.yaml
   type: exempt
@@ -1536,83 +1585,142 @@ artifacts:
   id: DOC-024
 - path: project/logs/ACTIVITY.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
-  id: DOC-127
+  registered: exempted
+  index: '-'
+  id: MISSING
 - path: project/logs/CURRENT_STATE.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
-  id: DOC-128
+  registered: exempted
+  index: '-'
+  id: MISSING
 - path: project/logs/SESSION_LOG.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
-  id: DOC-129
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: project/logs/chat/File_linting_review.md
+  type: doc
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: project/logs/chat/File_linting_review_manifest.md
+  type: doc
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: project/logs/chat/Manifest_review_and_mapping.md
+  type: doc
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: project/logs/chat/Manifest_review_and_mapping_manifest.md
+  type: doc
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: project/logs/chat/chats.py
+  type: code
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: project/logs/chat/combined_chats_manifest.md
+  type: doc
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: project/logs/chat/conversations.json
+  type: exempt
+  registered: exempted
+  index: '-'
+  id: MISSING
 - path: project/logs/conversations.json
   type: exempt
   registered: exempted
   index: '-'
-  id: DOC-123
+  id: MISSING
 - path: project/process/GAP_ANALYSIS_TEMPLATE.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-046
 - path: project/proposals/DBSTUDIO_PLUGIN.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-047
 - path: project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-048
 - path: project/proposals/GONKUI_PLUGIN.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-049
 - path: project/proposals/GOVERNANCE_AUDIT_REFACTOR.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-050
 - path: project/proposals/HOME_AUTOMATION_PROPOSAL.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-051
 - path: project/proposals/LOW_CODE_PROPOSAL.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-052
 - path: project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-053
 - path: project/proposals/NEW_PROPOSAL.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-054
 - path: project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-055
 - path: project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-056
 - path: project/proposals/TRACE_INDEX_SCHEMA_FIX.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-057
 - path: project/reports/ALIGNMENT_INTEGRITY_SNAPSHOT.yml
   type: code
@@ -1623,21 +1731,27 @@ artifacts:
   type: exempt
   registered: exempted
   index: '-'
-  id: DOC-077
+  id: MISSING
 - path: project/reports/ARCHIVE_ALIGNMENT_MATRIX_OLD.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-074
 - path: project/reports/CONTENT_ALIGNMENT_REPORT.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-058
 - path: project/reports/DESCRIPTION_COMPLIANCE_REPORT.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-059
 - path: project/reports/DOCUMENT_TAG_INVENTORY.yml
   type: code
@@ -1646,38 +1760,52 @@ artifacts:
   id: MISSING
 - path: project/reports/GOVERNANCE_DEMO_REPORT.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-061
 - path: project/reports/HANDOVER_BRIEF_CHATGTP.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-062
 - path: project/reports/HANDOVER_BRIEF_JULES.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-063
 - path: project/reports/PROJECT_AUDIT_FINAL_REPORT.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-064
 - path: project/reports/PROJECT_DOCUMENT_ALIGNMENT.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: MISSING
 - path: project/reports/REPO_MANIFEST.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-078
 - path: project/reports/SEMANTIC_ALIGNMENT_REPORT.md
   type: doc
-  registered: true
-  index: project/PROJECT_REGISTRY.md
+  registered: false
+  index: '-'
+  missing_from:
+  - project/PROJECT_REGISTRY.md
   id: DOC-079
 - path: project/reports/TRACE_INDEX.yml
   type: code
@@ -1694,6 +1822,21 @@ artifacts:
   registered: exempted
   index: '-'
   id: OPS-001
+- path: scripts/api/docs/CODE_FILE_INDEX.md
+  type: doc
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: scripts/api/docs/DOCS_QUALITY_INDEX.md
+  type: doc
+  registered: exempted
+  index: '-'
+  id: MISSING
+- path: scripts/api/docs/MASTER_INDEX.md
+  type: doc
+  registered: exempted
+  index: '-'
+  id: MISSING
 - path: scripts/api/src/zotify_api/temp_violation.py
   type: code
   registered: true
@@ -1763,7 +1906,7 @@ artifacts:
   type: exempt
   registered: exempted
   index: '-'
-  id: OPS-014
+  id: MISSING
 - path: scripts/lint_governance_links.json
   type: exempt
   registered: exempted
@@ -1799,11 +1942,16 @@ artifacts:
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-021
+- path: scripts/project/reports/TRACE_INDEX.yml
+  type: code
+  registered: true
+  index: scripts/CODE_FILE_INDEX.md
+  id: MISSING
 - path: scripts/project_registry.json
   type: exempt
   registered: exempted
   index: '-'
-  id: OPS-059
+  id: MISSING
 - path: scripts/propagate_descriptions.py
   type: code
   registered: true
@@ -1818,11 +1966,6 @@ artifacts:
   type: code
   registered: true
   index: scripts/CODE_FILE_INDEX.md
-  id: OPS-025
-- path: scripts/repo_inventory_and_governance.py.bak
-  type: exempt
-  registered: exempted
-  index: '-'
   id: OPS-025
 - path: scripts/run_e2e_auth_test.sh
   type: code
@@ -1963,17 +2106,12 @@ artifacts:
   type: exempt
   registered: exempted
   index: '-'
-  id: API-270
-- path: snitch/mkdocs.yml
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: API-271
+  id: MISSING
 - path: snitch/snitch.go
   type: code
   registered: true
   index: snitch/CODE_FILE_INDEX.md
-  id: API-272
+  id: MISSING
 - path: tests/scripts/test_build_project_registry.py
   type: code
   registered: exempted

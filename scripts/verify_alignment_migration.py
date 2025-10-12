@@ -1,6 +1,5 @@
 # ID: OPS-036
 #!/usr/bin/env python3
-# ID: OPS-031
 """
 Enhanced alignment verification script.
 Summarizes missing or mismatched IDs clearly by type (doc/code/config).
@@ -18,6 +17,10 @@ PROJECT_ROOT = Path(__file__).parent.parent
 TAG_PATTERN = re.compile(r"(?:#|<!--)\s*ID:\s*([A-Z0-9\-]+)", re.IGNORECASE)
 TAG_INVENTORY = PROJECT_ROOT / "project/reports/DOCUMENT_TAG_INVENTORY.yml"
 TRACE_INDEX_PATH = PROJECT_ROOT / "project/reports/TRACE_INDEX.yml"
+
+# --- Ignored directories and file types consistent with governance scripts ---
+IGNORED_DIRS = {".git", ".venv", "node_modules", "__pycache__", "archive", "templates", ".pytest_cache", "logs", "site"}
+SCAN_EXTENSIONS = (".py", ".md", ".sh", ".yml", ".yaml")
 
 def load_tag_inventory():
     if not TAG_INVENTORY.exists():
@@ -37,7 +40,7 @@ def load_tag_inventory():
             return {}
 
 def load_trace_index():
-    """Loads the TRACE_INDEX.yml file and returns a path-to-index mapping."""
+    """Loads TRACE_INDEX.yml and returns a path-to-index mapping."""
     if not TRACE_INDEX_PATH.exists():
         print(f"❌ Missing TRACE_INDEX.yml", file=sys.stderr)
         return {}
@@ -46,14 +49,13 @@ def load_trace_index():
             data = yaml.safe_load(f)
             if not isinstance(data, dict) or "artifacts" not in data:
                 return {}
-
-            path_to_index_map = {}
+            path_to_index = {}
             for item in data.get("artifacts", []):
                 path = item.get("path")
                 index = item.get("index", "-")
                 if path:
-                    path_to_index_map[path] = index
-            return path_to_index_map
+                    path_to_index[path] = index
+            return path_to_index
         except yaml.YAMLError as e:
             print(f"❌ YAML parse error in TRACE_INDEX.yml: {e}", file=sys.stderr)
             return {}
@@ -70,24 +72,28 @@ def find_embedded_id(file_path):
         return None
     return None
 
+def should_skip_dir(path: str) -> bool:
+    return any(part in IGNORED_DIRS for part in Path(path).parts)
+
 def main():
     parser = argparse.ArgumentParser(description="Verify and optionally rebuild the tag inventory.")
     parser.add_argument("--rebuild", action="store_true", help="Rebuild the inventory from embedded tags.")
     args = parser.parse_args()
 
-    if args.rebuild:
-        print("--- Rebuilding Tag Inventory from Embedded IDs ---")
+    tag_inventory = load_tag_inventory()
+    path_to_index_map = load_trace_index()
 
-        path_to_index_map = load_trace_index()
+    if args.rebuild:
         if not path_to_index_map:
             print("❌ Could not build path-to-index map from TRACE_INDEX.yml. Aborting rebuild.", file=sys.stderr)
             sys.exit(1)
 
         new_inventory = []
-        for root, _, files in os.walk(PROJECT_ROOT):
-            if any(part in root for part in [".git", ".venv", "node_modules", "__pycache__"]):
-                continue
+        for root, dirs, files in os.walk(PROJECT_ROOT):
+            dirs[:] = [d for d in dirs if d not in IGNORED_DIRS]
             for f in files:
+                if not f.endswith(SCAN_EXTENSIONS):
+                    continue
                 full_path = Path(root) / f
                 rel_path = str(full_path.relative_to(PROJECT_ROOT))
                 embedded_id = find_embedded_id(full_path)
@@ -100,10 +106,8 @@ def main():
         print(f"✅ Rebuilt inventory with {len(new_inventory)} items.")
         sys.exit(0)
 
-
+    # --- Verification ---
     print("=== Verifying alignment migration (enhanced report) ===\n")
-
-    tag_inventory = load_tag_inventory()
     if not tag_inventory:
         print("❌ Could not load tag inventory.")
         sys.exit(1)
@@ -111,11 +115,10 @@ def main():
     mismatched = []
     summary = defaultdict(list)
 
-    for root, _, files in os.walk(PROJECT_ROOT):
-        if any(part in root for part in [".git", ".venv", "node_modules", "archive", "__pycache__", "templates", "reports", ".pytest_cache"]):
-            continue
+    for root, dirs, files in os.walk(PROJECT_ROOT):
+        dirs[:] = [d for d in dirs if d not in IGNORED_DIRS]
         for f in files:
-            if not f.endswith((".py", ".md", ".sh", ".yml", ".yaml")):
+            if not f.endswith(SCAN_EXTENSIONS):
                 continue
             full_path = Path(root) / f
             rel_path = str(full_path.relative_to(PROJECT_ROOT))

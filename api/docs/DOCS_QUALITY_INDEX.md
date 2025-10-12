@@ -101,3 +101,4 @@ This file is auto-generated. Do not edit manually.
 | `api/docs/system/INSTALLATION.md` | Installation instructions for the API. |
 | `api/docs/system/PRIVACY_COMPLIANCE.md` | Documentation regarding privacy compliance and data handling. |
 | `api/docs/system/REQUIREMENTS.md` | System and software requirements for the API. |
+| `api/docs/CODE_FILE_INDEX.md` | X | X | | | |
