@@ -1,2119 +1,4991 @@
 artifacts:
 - path: .github/workflows/ci.yml
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - .github
+    - workflows
+    - app
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: .github/workflows/pushmirror.yml
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - .github
+    - workflows
+    - app
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: .gitignore
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - app
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: .pre-commit-config.yaml
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - app
+    - /
   registered: exempted
   index: '-'
   id: CFG-002
 - path: AGENTS.md
   type: doc
+  meta:
+    description: '**Version:** 2.0'
+    tags:
+    - app
+    - /
   registered: exempted
   index: '-'
   id: DOC-067
 - path: Gonk/CODE_FILE_INDEX.md
   type: doc
+  meta:
+    description: This file is auto-generated. Do not edit manually.
+    tags:
+    - app
+    - Gonk
+    - /
   registered: exempted
   index: '-'
   id: API-001
 - path: Gonk/GonkCLI/DOCS_INDEX.md
   type: doc
+  meta:
+    description: This document serves as the master index for all documentation related
+      to the GonkCLI component.
+    tags:
+    - GonkCLI
+    - app
+    - Gonk
+    - /
   registered: exempted
   index: '-'
   id: API-002
 - path: Gonk/GonkCLI/README.md
   type: doc
+  meta:
+    description: The Gonk Command Line Interface (CLI) is a tool for interacting with
+      the Zotify API from the command line. It is intended for developers and power
+      users who want to script interactions with the Zotify platform.
+    tags:
+    - GonkCLI
+    - app
+    - Gonk
+    - /
   registered: exempted
   index: '-'
   id: API-003
 - path: Gonk/GonkCLI/__init__.py
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - GonkCLI
+    - app
+    - Gonk
+    - /
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
   id: API-004
 - path: Gonk/GonkCLI/main.py
   type: code
+  meta:
+    description: import argparse
+    tags:
+    - GonkCLI
+    - app
+    - Gonk
+    - /
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
   id: API-005
 - path: Gonk/GonkCLI/modules/__init__.py
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - app
+    - Gonk
+    - /
+    - GonkCLI
+    - modules
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
   id: API-006
 - path: Gonk/GonkCLI/modules/jwt_mock.py
   type: code
+  meta:
+    description: import requests
+    tags:
+    - app
+    - Gonk
+    - /
+    - GonkCLI
+    - modules
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
   id: API-007
 - path: Gonk/GonkCLI/tests/__init__.py
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - app
+    - Gonk
+    - /
+    - tests
+    - GonkCLI
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
   id: API-008
 - path: Gonk/GonkCLI/tests/test_jwt_mock.py
   type: code
+  meta:
+    description: import pytest
+    tags:
+    - app
+    - Gonk
+    - /
+    - tests
+    - GonkCLI
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
   id: API-009
 - path: Gonk/GonkUI/DOCS_INDEX.md
   type: doc
+  meta:
+    description: This file is auto-generated. Do not edit manually.
+    tags:
+    - GonkUI
+    - app
+    - Gonk
+    - /
   registered: exempted
   index: '-'
   id: API-010
-- path: Gonk/GonkUI/GonkUI.egg-info/PKG-INFO
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: Gonk/GonkUI/GonkUI.egg-info/SOURCES.txt
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: Gonk/GonkUI/GonkUI.egg-info/dependency_links.txt
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: Gonk/GonkUI/GonkUI.egg-info/requires.txt
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: Gonk/GonkUI/GonkUI.egg-info/top_level.txt
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
 - path: Gonk/GonkUI/README.md
   type: doc
+  meta:
+    description: GonkUI is a web-based development and testing tool designed specifically
+      for the Zotify API. It provides a rich user interface to streamline common development
+      workflows and facilitate interactive API testing.
+    tags:
+    - GonkUI
+    - app
+    - Gonk
+    - /
   registered: exempted
   index: '-'
   id: API-011
 - path: Gonk/GonkUI/app.py
   type: code
+  meta:
+    description: import os
+    tags:
+    - GonkUI
+    - app
+    - Gonk
+    - /
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
   id: API-012
 - path: Gonk/GonkUI/docs/ARCHITECTURE.md
   type: doc
+  meta:
+    description: The `Gonk/GonkUI` is a standalone web application built with Flask.
+      It is designed to be completely independent of the main Zotify API application,
+      acting only as an external client.
+    tags:
+    - app
+    - Gonk
+    - /
+    - GonkUI
+    - docs
   registered: true
   index: Gonk/GonkUI/DOCS_INDEX.md
   id: API-013
 - path: Gonk/GonkUI/docs/CHANGELOG.md
   type: doc
+  meta:
+    description: All notable changes to this project will be documented in this file.
+    tags:
+    - app
+    - Gonk
+    - /
+    - GonkUI
+    - docs
   registered: true
   index: Gonk/GonkUI/DOCS_INDEX.md
   id: API-014
 - path: Gonk/GonkUI/docs/CONTRIBUTING.md
   type: doc
+  meta:
+    description: Contributions are welcome!
+    tags:
+    - app
+    - Gonk
+    - /
+    - GonkUI
+    - docs
   registered: true
   index: Gonk/GonkUI/DOCS_INDEX.md
   id: API-015
 - path: Gonk/GonkUI/docs/USER_MANUAL.md
   type: doc
+  meta:
+    description: This section will guide you through the setup and launch of the Gonk
+      Test UI application.
+    tags:
+    - app
+    - Gonk
+    - /
+    - GonkUI
+    - docs
   registered: true
   index: Gonk/GonkUI/DOCS_INDEX.md
   id: API-017
 - path: Gonk/GonkUI/pyproject.toml
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - GonkUI
+    - app
+    - Gonk
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: Gonk/GonkUI/static/app.js
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - app
+    - Gonk
+    - /
+    - GonkUI
+    - static
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
   id: MISSING
 - path: Gonk/GonkUI/static/styles.css
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - app
+    - Gonk
+    - /
+    - GonkUI
+    - static
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
   id: MISSING
 - path: Gonk/GonkUI/views/__init__.py
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - views
+    - app
+    - Gonk
+    - /
+    - GonkUI
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
   id: API-022
 - path: Gonk/GonkUI/views/jwt_ui.py
   type: code
+  meta:
+    description: from flask import Blueprint, request, jsonify
+    tags:
+    - views
+    - app
+    - Gonk
+    - /
+    - GonkUI
   registered: true
   index: Gonk/CODE_FILE_INDEX.md
   id: API-023
 - path: Gonk/pyproject.toml
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - app
+    - Gonk
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: README.md
   type: doc
+  meta:
+    description: "\"Phases 3\u20135 deliver the full core API, user authentication\
+      \ with JWT, endpoint protection, notifications preference, and comprehensive\
+      \ testing. Users can manage profiles, preferences, liked tracks, playback history,\
+      \ and interact with all content endpoints. The Gonk CLI and GonkUI provide an\
+      \ interface for all these actions, with the ability to toggle between simulated\
+      \ and real API testing. Documentation, examples, and OpenAPI specs are fully\
+      \ updated.\""
+    tags:
+    - app
+    - /
   registered: exempted
   index: '-'
   id: DOC-068
 - path: api/.gitignore
   type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: api/.ruff_cache/.gitignore
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: api/.ruff_cache/CACHEDIR.TAG
-  type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/MIGRATIONS.md
   type: doc
+  meta:
+    description: This file tracks the database migrations for the Zotify API.
+    tags:
+    - api
+    - app
+    - /
   registered: exempted
   index: '-'
   id: API-245
 - path: api/alembic.ini
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/alembic/README
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - alembic
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/alembic/env.py
   type: code
+  meta:
+    description: from logging.config import fileConfig
+    tags:
+    - api
+    - app
+    - alembic
+    - /
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-207
 - path: api/alembic/script.py.mako
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - alembic
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/alembic/versions/5f96175ff7c9_add_notifications_enabled_to_.py
   type: code
+  meta:
+    description: '"""Add notifications_enabled to UserPreferences'
+    tags:
+    - app
+    - /
+    - alembic
+    - api
+    - versions
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-209
 - path: api/api_dumps/cache.json
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - api_dumps
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/api_dumps/downloads.json
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - api_dumps
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/api_dumps/logging.json
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - api_dumps
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/api_dumps/metadata.json
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - api_dumps
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/api_dumps/network.json
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - api_dumps
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/api_dumps/playlist.json
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - api_dumps
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/api_dumps/spotify.json
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - api_dumps
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/api_dumps/stubs.json
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - api_dumps
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/api_dumps/sync.json
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - api_dumps
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/api_dumps/system.json
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - api_dumps
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/api_dumps/tracks.json
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - api_dumps
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/api_dumps/user.json
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - api_dumps
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/docs/CHANGELOG.md
   type: doc
+  meta:
+    description: All notable changes to this project will be documented in this file.
+    tags:
+    - api
+    - app
+    - docs
+    - /
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-201
 - path: api/docs/CODE_FILE_INDEX.md
   type: doc
+  meta:
+    description: This file is auto-generated. Do not edit manually.
+    tags:
+    - api
+    - app
+    - docs
+    - /
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-202
 - path: api/docs/CODE_QUALITY_INDEX.md
   type: doc
+  meta:
+    description: This document tracks the quality of every source code file in the
+      project. Each file is assessed against the rubric defined below.
+    tags:
+    - api
+    - app
+    - docs
+    - /
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-203
 - path: api/docs/DOCS_QUALITY_INDEX.md
   type: doc
+  meta:
+    description: This file is auto-generated. Do not edit manually.
+    tags:
+    - api
+    - app
+    - docs
+    - /
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-204
 - path: api/docs/MASTER_INDEX.md
   type: doc
+  meta:
+    description: "\"Phases 3\u20135 deliver the full core API, user authentication\
+      \ with JWT, endpoint protection, notifications preference, and comprehensive\
+      \ testing. Users can manage profiles, preferences, liked tracks, playback history,\
+      \ and interact with all content endpoints. The Gonk CLI and GonkUI provide an\
+      \ interface for all these actions, with the ability to toggle between simulated\
+      \ and real API testing. Documentation, examples, and OpenAPI specs are fully\
+      \ updated.\""
+    tags:
+    - api
+    - app
+    - docs
+    - /
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-205
 - path: api/docs/manuals/API_DEVELOPER_GUIDE.md
   type: doc
+  meta:
+    description: This document is for developers who wish to contribute directly to
+      the Zotify API codebase. It outlines the development workflow, architectural
+      patterns, and quality standards required for all contributions.
+    tags:
+    - app
+    - /
+    - manuals
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-106
 - path: api/docs/manuals/CICD.md
   type: doc
+  meta:
+    description: This document provides a comprehensive overview of the CI/CD and
+      local linting infrastructure used in this project. It is designed to be a reusable
+      template that can be adapted for other projects.
+    tags:
+    - app
+    - /
+    - manuals
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-107
 - path: api/docs/manuals/ERROR_HANDLING_GUIDE.md
   type: doc
+  meta:
+    description: '**Status:** Implemented'
+    tags:
+    - app
+    - /
+    - manuals
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-108
 - path: api/docs/manuals/LOGGING_GUIDE.md
   type: doc
+  meta:
+    description: '**Version:** 1.1'
+    tags:
+    - app
+    - /
+    - manuals
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-110
 - path: api/docs/manuals/OPERATOR_MANUAL.md
   type: doc
+  meta:
+    description: '**Version:** 1.1'
+    tags:
+    - app
+    - /
+    - manuals
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-111
 - path: api/docs/manuals/SYSTEM_INTEGRATION_GUIDE.md
   type: doc
+  meta:
+    description: This document provides essential information for developers who need
+      to integrate with or consume the Zotify API. It covers project setup, testing
+      procedures, core architectural principles, and documentation conventions.
+    tags:
+    - app
+    - /
+    - manuals
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-112
 - path: api/docs/manuals/USER_MANUAL.md
   type: doc
+  meta:
+    description: '**Version:** 1.1'
+    tags:
+    - app
+    - /
+    - manuals
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-113
 - path: api/docs/providers/SPOTIFY.md
   type: doc
+  meta:
+    description: This document describes the implementation of the Spotify provider
+      connector, which is the first provider to be integrated into the new provider-agnostic
+      architecture.
+    tags:
+    - providers
+    - app
+    - /
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-200
 - path: api/docs/reference/API_REFERENCE.md
   type: doc
+  meta:
+    description: '> This file is auto-generated from the OpenAPI specification. For
+      planned endpoints (not yet implemented), see `../../project/api/endpoints.yaml`.'
+    tags:
+    - app
+    - /
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-192
 - path: api/docs/reference/FEATURE_SPECS.md
   type: doc
+  meta:
+    description: '**Status:** Live Document'
+    tags:
+    - app
+    - /
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-193
 - path: api/docs/reference/features/AUTHENTICATION.md
   type: doc
+  meta:
+    description: '**Status:** Implemented & Live'
+    tags:
+    - app
+    - /
+    - features
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-114
 - path: api/docs/reference/features/AUTOMATED_DOCUMENTATION_WORKFLOW.md
   type: doc
+  meta:
+    description: '**Status:** Implemented & Live'
+    tags:
+    - app
+    - /
+    - features
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-115
 - path: api/docs/reference/features/DEVELOPER_FLEXIBLE_LOGGING_FRAMEWORK.md
   type: doc
+  meta:
+    description: This module extends the current global error handling system into
+      a fully programmable, developer-facing logging framework that becomes part of
+      the API framework itself.
+    tags:
+    - app
+    - /
+    - features
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-116
 - path: api/docs/reference/features/PROVIDER_AGNOSTIC_EXTENSIONS.md
   type: doc
+  meta:
+    description: "This proposal extends the existing provider-agnostic design of the\
+      \ API by ensuring all features, endpoints, and modules\u2014current and future\u2014\
+      are documented with a consistent, detailed, and discoverable specification.\
+      \ While the API can already work across multiple providers, there is currently\
+      \ no formalized structure for documenting the expected behavior, capabilities,\
+      \ and metadata handling of each provider integration."
+    tags:
+    - app
+    - /
+    - features
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-117
 - path: api/docs/reference/features/PROVIDER_OAUTH.md
   type: doc
+  meta:
+    description: '**Status:** In Design'
+    tags:
+    - app
+    - /
+    - features
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-118
 - path: api/docs/reference/source/ACTIONS____INIT__.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-119
 - path: api/docs/reference/source/APP.js.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-120
 - path: api/docs/reference/source/APP.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-121
 - path: api/docs/reference/source/AUDIT_API.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-122
 - path: api/docs/reference/source/AUDIT_ENDPOINTS.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-123
 - path: api/docs/reference/source/AUTH.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-124
 - path: api/docs/reference/source/AUTH_STATE.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-125
 - path: api/docs/reference/source/BASE.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-126
 - path: api/docs/reference/source/CACHE.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-127
 - path: api/docs/reference/source/CACHE_SERVICE.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-128
 - path: api/docs/reference/source/CONFIG.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-129
 - path: api/docs/reference/source/CONFIG_MODELS.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-130
 - path: api/docs/reference/source/CONFIG_SERVICE.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-131
 - path: api/docs/reference/source/CONSOLE_HANDLER.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-132
 - path: api/docs/reference/source/CRUD.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-133
 - path: api/docs/reference/source/DATABASE_JOB_HANDLER.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-134
 - path: api/docs/reference/source/DATABASE____INIT__.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-135
 - path: api/docs/reference/source/DB.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-136
 - path: api/docs/reference/source/DEPS.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-137
 - path: api/docs/reference/source/DOWNLOAD.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-138
 - path: api/docs/reference/source/DOWNLOADS.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-139
 - path: api/docs/reference/source/DOWNLOAD_SERVICE.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-140
 - path: api/docs/reference/source/ERROR_HANDLER____INIT__.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-141
 - path: api/docs/reference/source/FILTERS.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-142
 - path: api/docs/reference/source/FORMATTER.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-143
 - path: api/docs/reference/source/FUNCTIONAL_TEST.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-144
 - path: api/docs/reference/source/GENERATE_ENDPOINTS_DOC.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-145
 - path: api/docs/reference/source/GENERATE_OPENAPI.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-146
 - path: api/docs/reference/source/GENERATE_SOURCE_DOCS.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-147
 - path: api/docs/reference/source/GENERIC.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-148
 - path: api/docs/reference/source/GLOBALS.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-149
 - path: api/docs/reference/source/HOOKS.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-150
 - path: api/docs/reference/source/JSON_AUDIT_HANDLER.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-151
 - path: api/docs/reference/source/LINTER.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-152
 - path: api/docs/reference/source/LOGGING_CONFIG.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-153
 - path: api/docs/reference/source/LOGGING_FRAMEWORK____INIT__.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-154
 - path: api/docs/reference/source/LOGGING_HANDLERS____INIT__.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-155
 - path: api/docs/reference/source/LOGGING_SCHEMAS.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-156
 - path: api/docs/reference/source/LOGGING_SERVICE.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-157
 - path: api/docs/reference/source/LOG_CRITICAL.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-158
 - path: api/docs/reference/source/MAIN.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-159
 - path: api/docs/reference/source/METADATA.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-160
 - path: api/docs/reference/source/METADATA_SERVICE.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-161
 - path: api/docs/reference/source/MODELS.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-162
 - path: api/docs/reference/source/NETWORK.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-163
 - path: api/docs/reference/source/NETWORK_SERVICE.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-164
 - path: api/docs/reference/source/NOTIFICATIONS.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-165
 - path: api/docs/reference/source/NOTIFICATIONS_SERVICE.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-166
 - path: api/docs/reference/source/PLAYLISTS.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-167
 - path: api/docs/reference/source/PLAYLISTS_SERVICE.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-168
 - path: api/docs/reference/source/PROVIDERS____INIT__.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-169
 - path: api/docs/reference/source/REQUEST_ID.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-170
 - path: api/docs/reference/source/ROUTES____INIT__.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-171
 - path: api/docs/reference/source/SCHEMAS.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-172
 - path: api/docs/reference/source/SEARCH.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-173
 - path: api/docs/reference/source/SERVICE.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-174
 - path: api/docs/reference/source/SERVICES____INIT__.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-175
 - path: api/docs/reference/source/SESSION.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-176
 - path: api/docs/reference/source/SNITCH.go.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-177
 - path: api/docs/reference/source/SPOTIFY.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-178
 - path: api/docs/reference/source/SPOTIFY_CONNECTOR.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-179
 - path: api/docs/reference/source/SPOTI_CLIENT.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-180
 - path: api/docs/reference/source/SYNC.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-181
 - path: api/docs/reference/source/SYNC_SERVICE.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-182
 - path: api/docs/reference/source/SYSTEM.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-183
 - path: api/docs/reference/source/TEST_AUTH_FLOW.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-184
 - path: api/docs/reference/source/TRACKS.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-185
 - path: api/docs/reference/source/TRACKS_SERVICE.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-186
 - path: api/docs/reference/source/TRIGGERS.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-187
 - path: api/docs/reference/source/USER.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-188
 - path: api/docs/reference/source/USER_SERVICE.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-189
 - path: api/docs/reference/source/WEBHOOK.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-190
 - path: api/docs/reference/source/WEBHOOKS.py.md
   type: doc
+  meta:
+    description: '- (To be filled in)'
+    tags:
+    - app
+    - /
+    - source
+    - reference
+    - api
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-191
 - path: api/docs/system/ERROR_HANDLING_DESIGN.md
   type: doc
+  meta:
+    description: '**Status:** Proposed'
+    tags:
+    - app
+    - /
+    - api
+    - system
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-194
 - path: api/docs/system/INSTALLATION.md
   type: doc
+  meta:
+    description: This document provides detailed instructions for installing and setting
+      up the Zotify API.
+    tags:
+    - app
+    - /
+    - api
+    - system
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-195
 - path: api/docs/system/PRIVACY_COMPLIANCE.md
   type: doc
+  meta:
+    description: This document outlines how the Zotify API project complies with data
+      protection laws, specifically the EU General Data Protection Regulation (GDPR).
+    tags:
+    - app
+    - /
+    - api
+    - system
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-196
 - path: api/docs/system/REQUIREMENTS.md
   type: doc
+  meta:
+    description: This document lists the system and software requirements for running
+      the Zotify API and its related tools.
+    tags:
+    - app
+    - /
+    - api
+    - system
+    - docs
   registered: true
   index: api/docs/DOCS_QUALITY_INDEX.md
   id: API-197
 - path: api/docs/system/zotify-openapi-external-v1.json
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - app
+    - /
+    - api
+    - system
+    - docs
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/docs/system/zotify-openapi-external-v1.yaml
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - app
+    - /
+    - api
+    - system
+    - docs
   registered: exempted
   index: '-'
   id: API-199
 - path: api/logging_config.yml
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - /
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-247
 - path: api/logging_framework.yml
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - /
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-248
-- path: api/logs/debug.log
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: api/logs/security.log
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
 - path: api/mypy.ini
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/pyproject.toml
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/ruff.toml
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/src/storage/spotify_tokens.json
   type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: api/src/zotify_api.egg-info/PKG-INFO
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: api/src/zotify_api.egg-info/SOURCES.txt
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: api/src/zotify_api.egg-info/dependency_links.txt
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: api/src/zotify_api.egg-info/requires.txt
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: api/src/zotify_api.egg-info/top_level.txt
-  type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - app
+    - /
+    - storage
+    - src
+    - api
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/src/zotify_api/auth_state.py
   type: code
+  meta:
+    description: import logging
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-025
 - path: api/src/zotify_api/config.py
   type: code
+  meta:
+    description: from pathlib import Path
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-026
 - path: api/src/zotify_api/core/error_handler/__init__.py
   type: code
+  meta:
+    description: import logging
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - error_handler
+    - api
+    - core
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-027
 - path: api/src/zotify_api/core/error_handler/actions/__init__.py
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - error_handler
+    - actions
+    - api
+    - core
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-028
 - path: api/src/zotify_api/core/error_handler/actions/log_critical.py
   type: code
+  meta:
+    description: from typing import Any, Dict
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - error_handler
+    - actions
+    - api
+    - core
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-029
 - path: api/src/zotify_api/core/error_handler/actions/webhook.py
   type: code
+  meta:
+    description: import logging
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - error_handler
+    - actions
+    - api
+    - core
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-030
 - path: api/src/zotify_api/core/error_handler/config.py
   type: code
+  meta:
+    description: from typing import Any, Dict, List, Literal
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - error_handler
+    - api
+    - core
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-031
 - path: api/src/zotify_api/core/error_handler/formatter.py
   type: code
+  meta:
+    description: import traceback
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - error_handler
+    - api
+    - core
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-032
 - path: api/src/zotify_api/core/error_handler/hooks.py
   type: code
+  meta:
+    description: import asyncio
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - error_handler
+    - api
+    - core
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-033
 - path: api/src/zotify_api/core/error_handler/triggers.py
   type: code
+  meta:
+    description: import importlib
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - error_handler
+    - api
+    - core
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-034
 - path: api/src/zotify_api/core/logging_framework/__init__.py
   type: code
+  meta:
+    description: from typing import Any, List, Optional
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - logging_framework
+    - core
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-035
 - path: api/src/zotify_api/core/logging_framework/filters.py
   type: code
+  meta:
+    description: import logging
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - logging_framework
+    - core
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-036
 - path: api/src/zotify_api/core/logging_framework/schemas.py
   type: code
+  meta:
+    description: from typing import Annotated, Any, Dict, List, Literal, Optional,
+      Union
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - logging_framework
+    - core
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-037
 - path: api/src/zotify_api/core/logging_framework/service.py
   type: code
+  meta:
+    description: import asyncio
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - logging_framework
+    - core
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-038
 - path: api/src/zotify_api/core/logging_handlers/__init__.py
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - logging_handlers
+    - api
+    - core
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-039
 - path: api/src/zotify_api/core/logging_handlers/base.py
   type: code
+  meta:
+    description: from abc import ABC, abstractmethod
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - logging_handlers
+    - api
+    - core
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-040
 - path: api/src/zotify_api/core/logging_handlers/console_handler.py
   type: code
+  meta:
+    description: import logging
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - logging_handlers
+    - api
+    - core
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-041
 - path: api/src/zotify_api/core/logging_handlers/database_job_handler.py
   type: code
+  meta:
+    description: import logging
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - logging_handlers
+    - api
+    - core
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-042
 - path: api/src/zotify_api/core/logging_handlers/json_audit_handler.py
   type: code
+  meta:
+    description: import json
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - logging_handlers
+    - api
+    - core
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-043
 - path: api/src/zotify_api/database/__init__.py
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - database
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-428
 - path: api/src/zotify_api/database/crud.py
   type: code
+  meta:
+    description: from typing import Any, Dict, List
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - database
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-045
 - path: api/src/zotify_api/database/models.py
   type: code
+  meta:
+    description: import datetime
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - database
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-046
 - path: api/src/zotify_api/database/session.py
   type: code
+  meta:
+    description: from typing import Generator
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - database
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-047
 - path: api/src/zotify_api/globals.py
   type: code
+  meta:
+    description: from datetime import datetime, timezone
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-048
 - path: api/src/zotify_api/logging_config.py
   type: code
+  meta:
+    description: import logging
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-049
 - path: api/src/zotify_api/main.py
   type: code
+  meta:
+    description: import logging as py_logging
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-050
 - path: api/src/zotify_api/middleware/request_id.py
   type: code
+  meta:
+    description: import uuid
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - middleware
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-051
 - path: api/src/zotify_api/models/config_models.py
   type: code
+  meta:
+    description: from typing import Optional
+    tags:
+    - zotify_api
+    - app
+    - models
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-052
 - path: api/src/zotify_api/models/sync.py
   type: code
+  meta:
+    description: from pydantic import BaseModel
+    tags:
+    - zotify_api
+    - app
+    - models
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-053
 - path: api/src/zotify_api/providers/__init__.py
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - zotify_api
+    - providers
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-438
 - path: api/src/zotify_api/providers/base.py
   type: code
+  meta:
+    description: from abc import ABC, abstractmethod
+    tags:
+    - zotify_api
+    - providers
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-055
 - path: api/src/zotify_api/providers/spotify_connector.py
   type: code
+  meta:
+    description: import base64
+    tags:
+    - zotify_api
+    - providers
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-056
 - path: api/src/zotify_api/routes/__init__.py
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - routes
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-057
 - path: api/src/zotify_api/routes/auth.py
   type: code
+  meta:
+    description: import secrets
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - routes
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-058
 - path: api/src/zotify_api/routes/cache.py
   type: code
+  meta:
+    description: from typing import Any, Dict
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - routes
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-059
 - path: api/src/zotify_api/routes/config.py
   type: code
+  meta:
+    description: from typing import Any, Dict
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - routes
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-060
 - path: api/src/zotify_api/routes/downloads.py
   type: code
+  meta:
+    description: from typing import Any, Dict, List, Optional
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - routes
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-061
 - path: api/src/zotify_api/routes/jwt_auth.py
   type: code
+  meta:
+    description: from fastapi import APIRouter, Depends, HTTPException, status
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - routes
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-062
 - path: api/src/zotify_api/routes/network.py
   type: code
+  meta:
+    description: from typing import Any, Dict
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - routes
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-063
 - path: api/src/zotify_api/routes/notifications.py
   type: code
+  meta:
+    description: from typing import Any, Dict, List
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - routes
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-064
 - path: api/src/zotify_api/routes/playlists.py
   type: code
+  meta:
+    description: from typing import Any, Dict
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - routes
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-065
 - path: api/src/zotify_api/routes/search.py
   type: code
+  meta:
+    description: from typing import Any, Dict, Literal
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - routes
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-066
 - path: api/src/zotify_api/routes/sync.py
   type: code
+  meta:
+    description: from typing import Callable, Dict
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - routes
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-067
 - path: api/src/zotify_api/routes/system.py
   type: code
+  meta:
+    description: import os
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - routes
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-068
 - path: api/src/zotify_api/routes/tracks.py
   type: code
+  meta:
+    description: from typing import Any, Dict
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - routes
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-069
 - path: api/src/zotify_api/routes/user.py
   type: code
+  meta:
+    description: from typing import Any, Dict, List
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - routes
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-070
 - path: api/src/zotify_api/routes/webhooks.py
   type: code
+  meta:
+    description: from typing import Any, Dict
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - routes
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-071
 - path: api/src/zotify_api/schemas/auth.py
   type: code
+  meta:
+    description: from typing import Optional
+    tags:
+    - zotify_api
+    - schemas
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-072
 - path: api/src/zotify_api/schemas/cache.py
   type: code
+  meta:
+    description: from typing import Dict, Optional
+    tags:
+    - zotify_api
+    - schemas
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-073
 - path: api/src/zotify_api/schemas/download.py
   type: code
+  meta:
+    description: from datetime import datetime
+    tags:
+    - zotify_api
+    - schemas
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-074
 - path: api/src/zotify_api/schemas/generic.py
   type: code
+  meta:
+    description: from typing import Generic, TypeVar
+    tags:
+    - zotify_api
+    - schemas
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-075
 - path: api/src/zotify_api/schemas/logging_schemas.py
   type: code
+  meta:
+    description: from typing import Optional
+    tags:
+    - zotify_api
+    - schemas
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-076
 - path: api/src/zotify_api/schemas/metadata.py
   type: code
+  meta:
+    description: from typing import Optional
+    tags:
+    - zotify_api
+    - schemas
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-077
 - path: api/src/zotify_api/schemas/network.py
   type: code
+  meta:
+    description: from typing import Optional
+    tags:
+    - zotify_api
+    - schemas
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-078
 - path: api/src/zotify_api/schemas/notifications.py
   type: code
+  meta:
+    description: from pydantic import BaseModel
+    tags:
+    - zotify_api
+    - schemas
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-079
 - path: api/src/zotify_api/schemas/playlists.py
   type: code
+  meta:
+    description: from typing import Any, Dict, List, Optional
+    tags:
+    - zotify_api
+    - schemas
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-080
 - path: api/src/zotify_api/schemas/spotify.py
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - zotify_api
+    - schemas
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-081
 - path: api/src/zotify_api/schemas/system.py
   type: code
+  meta:
+    description: from pydantic import BaseModel
+    tags:
+    - zotify_api
+    - schemas
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-082
 - path: api/src/zotify_api/schemas/tracks.py
   type: code
+  meta:
+    description: from datetime import datetime
+    tags:
+    - zotify_api
+    - schemas
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-083
 - path: api/src/zotify_api/schemas/user.py
   type: code
+  meta:
+    description: import datetime
+    tags:
+    - zotify_api
+    - schemas
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-084
 - path: api/src/zotify_api/schemas/webhooks.py
   type: code
+  meta:
+    description: from typing import Any, Dict, List
+    tags:
+    - zotify_api
+    - schemas
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-085
 - path: api/src/zotify_api/services/__init__.py
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - services
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-470
 - path: api/src/zotify_api/services/auth.py
   type: code
+  meta:
+    description: import logging
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - services
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-087
 - path: api/src/zotify_api/services/cache_service.py
   type: code
+  meta:
+    description: '"""'
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - services
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-088
 - path: api/src/zotify_api/services/config_service.py
   type: code
+  meta:
+    description: '"""'
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - services
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-089
 - path: api/src/zotify_api/services/db.py
   type: code
+  meta:
+    description: from typing import Optional
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - services
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-090
 - path: api/src/zotify_api/services/deps.py
   type: code
+  meta:
+    description: import logging
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - services
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-091
 - path: api/src/zotify_api/services/download_service.py
   type: code
+  meta:
+    description: import time
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - services
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-092
 - path: api/src/zotify_api/services/jwt_service.py
   type: code
+  meta:
+    description: from datetime import datetime, timedelta, timezone
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - services
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-093
 - path: api/src/zotify_api/services/logging_service.py
   type: code
+  meta:
+    description: import importlib
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - services
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-094
 - path: api/src/zotify_api/services/metadata_service.py
   type: code
+  meta:
+    description: from typing import Any, Dict
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - services
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-095
 - path: api/src/zotify_api/services/network_service.py
   type: code
+  meta:
+    description: '"""'
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - services
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-096
 - path: api/src/zotify_api/services/notifications_service.py
   type: code
+  meta:
+    description: import logging
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - services
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-097
 - path: api/src/zotify_api/services/playlists_service.py
   type: code
+  meta:
+    description: import logging
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - services
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-098
 - path: api/src/zotify_api/services/search.py
   type: code
+  meta:
+    description: from typing import Any, Dict, List, Tuple, cast
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - services
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-099
 - path: api/src/zotify_api/services/spoti_client.py
   type: code
+  meta:
+    description: import logging as py_logging
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - services
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-100
 - path: api/src/zotify_api/services/sync_service.py
   type: code
+  meta:
+    description: '"""'
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - services
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-101
 - path: api/src/zotify_api/services/tracks_service.py
   type: code
+  meta:
+    description: import logging
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - services
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-102
 - path: api/src/zotify_api/services/user_service.py
   type: code
+  meta:
+    description: from typing import Any, Dict, List
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - services
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-103
 - path: api/src/zotify_api/services/webhooks.py
   type: code
+  meta:
+    description: import logging
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
+    - services
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-104
 - path: api/src/zotify_api/storage/user_data.json
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - zotify_api
+    - app
+    - /
+    - storage
+    - src
+    - api
   registered: exempted
   index: '-'
   id: MISSING
 - path: api/src/zotify_api/temp_violation.py
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-105
-- path: api/storage/zotify.db
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
 - path: api/tests/__init__.py
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - tests
+    - api
+    - app
+    - /
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-233
 - path: api/tests/conftest.py
   type: code
+  meta:
+    description: import os
+    tags:
+    - tests
+    - api
+    - app
+    - /
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-234
 - path: api/tests/test_cache.py
   type: code
+  meta:
+    description: from typing import Any, Generator
+    tags:
+    - tests
+    - api
+    - app
+    - /
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-235
 - path: api/tests/test_config.py
   type: code
+  meta:
+    description: from pathlib import Path
+    tags:
+    - tests
+    - api
+    - app
+    - /
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-236
 - path: api/tests/test_download.py
   type: code
+  meta:
+    description: from typing import Any, Generator, Optional
+    tags:
+    - tests
+    - api
+    - app
+    - /
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-237
 - path: api/tests/test_network.py
   type: code
+  meta:
+    description: from typing import Generator
+    tags:
+    - tests
+    - api
+    - app
+    - /
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-238
 - path: api/tests/test_notifications.py
   type: code
+  meta:
+    description: import pytest
+    tags:
+    - tests
+    - api
+    - app
+    - /
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-239
 - path: api/tests/test_playlists.py
   type: code
+  meta:
+    description: from typing import Any
+    tags:
+    - tests
+    - api
+    - app
+    - /
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-240
 - path: api/tests/test_system.py
   type: code
+  meta:
+    description: from unittest.mock import MagicMock, mock_open, patch
+    tags:
+    - tests
+    - api
+    - app
+    - /
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-241
 - path: api/tests/test_tracks.py
   type: code
+  meta:
+    description: from io import BytesIO
+    tags:
+    - tests
+    - api
+    - app
+    - /
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-242
 - path: api/tests/test_user.py
   type: code
+  meta:
+    description: import pytest
+    tags:
+    - tests
+    - api
+    - app
+    - /
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-243
 - path: api/tests/unit/providers/test_spotify_connector.py
   type: code
+  meta:
+    description: from unittest.mock import AsyncMock, MagicMock, patch
+    tags:
+    - providers
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-210
 - path: api/tests/unit/test_auth.py
   type: code
+  meta:
+    description: from datetime import datetime, timedelta, timezone
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-211
 - path: api/tests/unit/test_cache_service.py
   type: code
+  meta:
+    description: from typing import Dict
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-212
 - path: api/tests/unit/test_config.py
   type: code
+  meta:
+    description: pass
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-213
 - path: api/tests/unit/test_crud.py
   type: code
+  meta:
+    description: from unittest.mock import MagicMock, patch
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-214
 - path: api/tests/unit/test_deps.py
   type: code
+  meta:
+    description: from datetime import datetime, timedelta, timezone
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-215
 - path: api/tests/unit/test_error_handler.py
   type: code
+  meta:
+    description: import logging
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-216
 - path: api/tests/unit/test_error_handler_actions.py
   type: code
+  meta:
+    description: from unittest.mock import MagicMock, patch
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-217
 - path: api/tests/unit/test_flexible_logging.py
   type: code
+  meta:
+    description: import asyncio
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-218
 - path: api/tests/unit/test_jwt_auth_db.py
   type: code
+  meta:
+    description: import pytest
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-219
 - path: api/tests/unit/test_logging_config.py
   type: code
+  meta:
+    description: from unittest.mock import Mock, patch
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-220
 - path: api/tests/unit/test_metadata_service.py
   type: code
+  meta:
+    description: import pytest
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-221
 - path: api/tests/unit/test_network_service.py
   type: code
+  meta:
+    description: from typing import Any, Dict
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-222
 - path: api/tests/unit/test_new_logging_system.py
   type: code
+  meta:
+    description: import contextlib
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-223
 - path: api/tests/unit/test_notifications_service.py
   type: code
+  meta:
+    description: from unittest.mock import MagicMock
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-224
 - path: api/tests/unit/test_playlists_service.py
   type: code
+  meta:
+    description: from unittest.mock import MagicMock
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-225
 - path: api/tests/unit/test_search.py
   type: code
+  meta:
+    description: from unittest.mock import AsyncMock, MagicMock
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-226
 - path: api/tests/unit/test_spoti_client.py
   type: code
+  meta:
+    description: from unittest.mock import AsyncMock, MagicMock, patch
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-227
 - path: api/tests/unit/test_sync.py
   type: code
+  meta:
+    description: from unittest.mock import MagicMock
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-228
 - path: api/tests/unit/test_tracks_service.py
   type: code
+  meta:
+    description: from unittest.mock import AsyncMock, MagicMock, patch
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-229
 - path: api/tests/unit/test_user_service.py
   type: code
+  meta:
+    description: import pytest
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-230
 - path: api/tests/unit/test_user_service_db.py
   type: code
+  meta:
+    description: import pytest
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-231
 - path: api/tests/unit/test_webhooks.py
   type: code
+  meta:
+    description: from unittest.mock import MagicMock, patch
+    tags:
+    - app
+    - /
+    - tests
+    - unit
+    - api
   registered: true
   index: api/docs/CODE_FILE_INDEX.md
   id: API-232
-- path: api/zotify.db
-  type: exempt
-  registered: exempted
-  index: '-'
-  id: MISSING
 - path: project/ALIGNMENT_MATRIX.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Description:** API Routes Layer'
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-083
 - path: project/ALIGNMENT_MATRIX.yml
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - app
+    - project
+    - /
   registered: exempted
   index: '-'
   id: DOC-072
 - path: project/BACKLOG.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Date:** 2025-08-18'
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-002
 - path: project/CICD.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: This document provides a high-level overview of the Continuous Integration
+      / Continuous Deployment (CI/CD) pipeline for this project. It is intended for
+      a project management and stakeholder audience, explaining the purpose and value
+      of each quality gate in the development process.
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-003
 - path: project/DEPENDENCIES.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: This document outlines the policy for adding new third-party dependencies
+      to the Zotify API project.
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-004
 - path: project/EXECUTION_PLAN.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Status:** Live Document'
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-005
 - path: project/FUTURE_ENHANCEMENTS.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '> **Note:** See the [`ALIGNMENT_MATRIX.md`](./ALIGNMENT_MATRIX.md)
+      for status and implementation tracking of these enhancements.'
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-006
 - path: project/HIGH_LEVEL_DESIGN.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Status:** Live Document'
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-007
 - path: project/LESSONS-LEARNT.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Purpose:**'
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-008
 - path: project/LOGGING_PHASES.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '> **Purpose of this Document**'
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-009
 - path: project/LOGGING_SYSTEM_DESIGN.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Status:** Proposed'
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-010
 - path: project/LOGGING_TRACEABILITY_MATRIX.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Status:** Proposed'
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-011
 - path: project/LOW_LEVEL_DESIGN.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: This LLD describes the specific implementation details of the Zotify
+      API's subsystems, with a focus on the new provider-agnostic architecture.
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-012
 - path: project/ONBOARDING.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Objective:** To bring any new developer fully up to speed on the
+      Zotify API project.'
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-013
 - path: project/PID.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Project Name:** Zotify API Refactoring and Enhancement'
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-014
 - path: project/PROJECT_BRIEF.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Project Name:** Gonk API Refactoring and Enhancement'
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-015
 - path: project/PROJECT_PLAN.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Date:** 2025-09-01'
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-016
+- path: project/PROJECT_REGISTRY.md
+  type: doc
+  meta:
+    description: '| **Alignment Matrix** | [`ALIGNMENT_MATRIX.md`](ALIGNMENT_MATRIX.md)
+      | |'
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
+  id: DOC-100
 - path: project/QA_GOVERNANCE.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Status:** Live Document'
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-018
 - path: project/ROADMAP.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Date:** 2025-09-01'
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-019
 - path: project/SECURITY.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Date:** 2025-08-18'
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-020
 - path: project/TASK_CHECKLIST.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**NOTE: This is a mandatory pre-submit checklist. All applicable
+      steps must be verified before your work is considered complete.**'
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-021
 - path: project/USECASES.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: This document captures realistic, demanding user scenarios that the
+      API should ideally support.
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-022
 - path: project/USECASES_GAP_ANALYSIS.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: This document compares the **desired capabilities** from `USECASES.md`
+      with the **current** Zotify API implementation.
+    tags:
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-023
 - path: project/api/endpoints.yaml
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - api
+    - app
+    - project
+    - /
   registered: exempted
   index: '-'
   id: DOC-024
 - path: project/logs/ACTIVITY.md
   type: doc
+  meta:
+    description: '---'
+    tags:
+    - logs
+    - app
+    - project
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: project/logs/CURRENT_STATE.md
   type: doc
+  meta:
+    description: '**Status:** Live Document'
+    tags:
+    - logs
+    - app
+    - project
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: project/logs/SESSION_LOG.md
   type: doc
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: project/logs/chat/File_linting_review.md
-  type: doc
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: project/logs/chat/File_linting_review_manifest.md
-  type: doc
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: project/logs/chat/Manifest_review_and_mapping.md
-  type: doc
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: project/logs/chat/Manifest_review_and_mapping_manifest.md
-  type: doc
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: project/logs/chat/chats.py
-  type: code
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: project/logs/chat/combined_chats_manifest.md
-  type: doc
-  registered: exempted
-  index: '-'
-  id: MISSING
-- path: project/logs/chat/conversations.json
-  type: exempt
+  meta:
+    description: '---'
+    tags:
+    - logs
+    - app
+    - project
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: project/logs/conversations.json
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - logs
+    - app
+    - project
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: project/process/GAP_ANALYSIS_TEMPLATE.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Author:** [Your Name]'
+    tags:
+    - app
+    - project
+    - process
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-046
 - path: project/proposals/DBSTUDIO_PLUGIN.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Date:** 2025-09-23'
+    tags:
+    - proposals
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-047
 - path: project/proposals/DYNAMIC_PLUGIN_PROPOSAL.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Date:** 2025-08-18'
+    tags:
+    - proposals
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-048
 - path: project/proposals/GONKUI_PLUGIN.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Date:** 2025-09-23'
+    tags:
+    - proposals
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-049
 - path: project/proposals/GOVERNANCE_AUDIT_REFACTOR.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Author:** Jules'
+    tags:
+    - proposals
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-050
 - path: project/proposals/HOME_AUTOMATION_PROPOSAL.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Date:** 2025-08-18'
+    tags:
+    - proposals
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-051
 - path: project/proposals/LOW_CODE_PROPOSAL.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Date:** 2025-08-18'
+    tags:
+    - proposals
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-052
 - path: project/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Date:** 2025-08-18'
+    tags:
+    - proposals
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-053
 - path: project/proposals/NEW_PROPOSAL.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: This is a test proposal to verify the linter functionality.
+    tags:
+    - proposals
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-054
 - path: project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Status:** Proposed'
+    tags:
+    - proposals
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-055
 - path: project/proposals/TRACE_INDEX_SCHEMA_ADAPTATION.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Date:** 2025-09-25'
+    tags:
+    - proposals
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-056
 - path: project/proposals/TRACE_INDEX_SCHEMA_FIX.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Date:** 2025-09-25'
+    tags:
+    - proposals
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-057
 - path: project/reports/ALIGNMENT_INTEGRITY_SNAPSHOT.yml
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - reports
+    - app
+    - project
+    - /
   registered: exempted
   index: '-'
   id: DOC-076
 - path: project/reports/ALIGNMENT_VALIDATION_REPORT.txt
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - reports
+    - app
+    - project
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: project/reports/ARCHIVE_ALIGNMENT_MATRIX_OLD.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '- id: SYS-02'
+    tags:
+    - reports
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-074
 - path: project/reports/CONTENT_ALIGNMENT_REPORT.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Date:** 2025-10-06'
+    tags:
+    - reports
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-058
 - path: project/reports/DESCRIPTION_COMPLIANCE_REPORT.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '| File | Registered In | Status | Notes |'
+    tags:
+    - reports
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-059
 - path: project/reports/DOCUMENT_TAG_INVENTORY.yml
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - reports
+    - app
+    - project
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: project/reports/GOVERNANCE_DEMO_REPORT.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Author:** Jules'
+    tags:
+    - reports
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-061
 - path: project/reports/HANDOVER_BRIEF_CHATGTP.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: The project is currently in **API Phase 5b**, with governance, QA,
+      and documentation workflows partially implemented and audited. This session
+      has finalized **workflow mappings, incremental task definitions, and a repo
+      manifest** that captures the full repo content offline.
+    tags:
+    - reports
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-062
 - path: project/reports/HANDOVER_BRIEF_JULES.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Date:** 2025-10-06'
+    tags:
+    - reports
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-063
 - path: project/reports/PROJECT_AUDIT_FINAL_REPORT.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '**Note:** This is a static template. Do **not** overwrite.'
+    tags:
+    - reports
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-064
 - path: project/reports/PROJECT_DOCUMENT_ALIGNMENT.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '- `project/BACKLOG.md`'
+    tags:
+    - reports
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: MISSING
 - path: project/reports/REPO_MANIFEST.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '- path: verify_alignment_migration.py'
+    tags:
+    - reports
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-078
 - path: project/reports/SEMANTIC_ALIGNMENT_REPORT.md
   type: doc
-  registered: false
-  index: '-'
-  missing_from:
-  - project/PROJECT_REGISTRY.md
+  meta:
+    description: '- Average HLD Alignment: **84.21%**'
+    tags:
+    - reports
+    - app
+    - project
+    - /
+  registered: true
+  index: project/PROJECT_REGISTRY.md
   id: DOC-079
 - path: project/reports/TRACE_INDEX.yml
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - reports
+    - app
+    - project
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: project/reports/TRACE_INDEX.yml.bak
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - reports
+    - app
+    - project
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: scripts/CODE_FILE_INDEX.md
   type: doc
+  meta:
+    description: This file is auto-generated. Do not edit manually.
+    tags:
+    - app
+    - scripts
+    - /
   registered: exempted
   index: '-'
   id: OPS-001
 - path: scripts/api/docs/CODE_FILE_INDEX.md
   type: doc
+  meta:
+    description: This file is auto-generated.
+    tags:
+    - app
+    - /
+    - scripts
+    - api
+    - docs
   registered: exempted
   index: '-'
   id: MISSING
 - path: scripts/api/docs/DOCS_QUALITY_INDEX.md
   type: doc
+  meta:
+    description: This file is auto-generated.
+    tags:
+    - app
+    - /
+    - scripts
+    - api
+    - docs
   registered: exempted
   index: '-'
   id: MISSING
 - path: scripts/api/docs/MASTER_INDEX.md
   type: doc
+  meta:
+    description: No description available.
+    tags:
+    - app
+    - /
+    - scripts
+    - api
+    - docs
   registered: exempted
   index: '-'
   id: MISSING
 - path: scripts/api/src/zotify_api/temp_violation.py
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - zotify_api
+    - app
+    - /
+    - src
+    - scripts
+    - api
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-002
 - path: scripts/audit_api.py
   type: code
+  meta:
+    description: import importlib
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-003
 - path: scripts/audit_endpoints.py
   type: code
+  meta:
+    description: import inspect
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-004
+- path: scripts/backfill_trace_meta.py
+  type: code
+  meta:
+    description: '"""'
+    tags:
+    - app
+    - scripts
+    - /
+  registered: true
+  index: scripts/CODE_FILE_INDEX.md
+  id: MISSING
 - path: scripts/build_project_registry.py
   type: code
+  meta:
+    description: '"""'
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-005
 - path: scripts/content_alignment_check.py
   type: code
+  meta:
+    description: '"""'
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-006
 - path: scripts/description_compliance_check.py
   type: code
+  meta:
+    description: import os
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-007
 - path: scripts/doc-lint-rules.yml
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-008
 - path: scripts/fix_tag_inventory.py
   type: code
+  meta:
+    description: import yaml
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-061
 - path: scripts/functional_test.py
   type: code
+  meta:
+    description: import pytest
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-009
 - path: scripts/generate_alignment_matrix_md.py
   type: code
+  meta:
+    description: '"""'
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-010
 - path: scripts/generate_endpoints_doc.py
   type: code
+  meta:
+    description: import json
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-011
 - path: scripts/generate_openapi.py
   type: code
+  meta:
+    description: import json
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-012
 - path: scripts/generate_repo_manifest.py
   type: code
+  meta:
+    description: import os
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-013
 - path: scripts/gonkui
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - app
+    - scripts
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: scripts/lint_governance_links.json
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - app
+    - scripts
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: scripts/lint_governance_links.py
   type: code
+  meta:
+    description: '"""'
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-016
 - path: scripts/linter.py
   type: code
+  meta:
+    description: '"""'
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-017
 - path: scripts/make_manifest.py
   type: code
+  meta:
+    description: '"""'
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-018
 - path: scripts/manage_docs_index.py
   type: code
+  meta:
+    description: import os
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-019
 - path: scripts/migrate_alignment_matrix.py
   type: code
+  meta:
+    description: '"""'
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-020
 - path: scripts/migrate_and_tag_repository.py
   type: code
+  meta:
+    description: '"""'
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-021
 - path: scripts/project/reports/TRACE_INDEX.yml
   type: code
+  meta:
+    description: No description available.
+    tags:
+    - app
+    - project
+    - /
+    - reports
+    - scripts
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: MISSING
 - path: scripts/project_registry.json
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - app
+    - scripts
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: scripts/propagate_descriptions.py
   type: code
+  meta:
+    description: import os
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-023
 - path: scripts/repo_governance.py
   type: code
+  meta:
+    description: import os
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-024
 - path: scripts/repo_inventory_and_governance.py
   type: code
+  meta:
+    description: (.*)
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-025
 - path: scripts/run_e2e_auth_test.sh
   type: code
+  meta:
+    description: set -e
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-026
 - path: scripts/semantic_alignment_check.py
   type: code
+  meta:
+    description: import os
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-027
 - path: scripts/start.sh
   type: code
+  meta:
+    description: set -e
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-028
 - path: scripts/test_auth_flow.py
   type: code
+  meta:
+    description: import os
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-029
 - path: scripts/test_full_pipeline.sh
   type: code
+  meta:
+    description: set -euo pipefail
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-035
 - path: scripts/test_single_config.sh
   type: code
+  meta:
+    description: set -euo pipefail
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-030
 - path: scripts/validate_code_index.py
   type: code
+  meta:
+    description: import os
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-031
 - path: scripts/verify_alignment_migration.py
   type: code
+  meta:
+    description: '"""'
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-036
 - path: scripts/verify_governance.py
   type: code
+  meta:
+    description: '"""'
+    tags:
+    - app
+    - scripts
+    - /
   registered: true
   index: scripts/CODE_FILE_INDEX.md
   id: OPS-032
 - path: snitch/.golangci.yml
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - snitch
+    - app
+    - /
   registered: exempted
   index: '-'
   id: API-252
 - path: snitch/CODE_FILE_INDEX.md
   type: doc
+  meta:
+    description: This file is auto-generated. Do not edit manually.
+    tags:
+    - snitch
+    - app
+    - /
   registered: exempted
   index: '-'
   id: API-253
 - path: snitch/DOCS_INDEX.md
   type: doc
+  meta:
+    description: This file is auto-generated. Do not edit manually.
+    tags:
+    - snitch
+    - app
+    - /
   registered: exempted
   index: '-'
   id: API-254
 - path: snitch/README.md
   type: doc
+  meta:
+    description: Snitch is a short-lived, local OAuth callback HTTP listener written
+      in Go. It is a subproject of Zotify-API.
+    tags:
+    - snitch
+    - app
+    - /
   registered: exempted
   index: '-'
   id: API-255
 - path: snitch/docs/ARCHITECTURE.md
   type: doc
+  meta:
+    description: '**Status:** Active'
+    tags:
+    - snitch
+    - app
+    - docs
+    - /
   registered: true
   index: snitch/DOCS_INDEX.md
   id: API-256
 - path: snitch/docs/INSTALLATION.md
   type: doc
+  meta:
+    description: '**Status:** Active'
+    tags:
+    - snitch
+    - app
+    - docs
+    - /
   registered: true
   index: snitch/DOCS_INDEX.md
   id: API-257
 - path: snitch/docs/MILESTONES.md
   type: doc
+  meta:
+    description: This document tracks key project milestones and events.
+    tags:
+    - snitch
+    - app
+    - docs
+    - /
   registered: true
   index: snitch/DOCS_INDEX.md
   id: API-258
 - path: snitch/docs/MODULES.md
   type: doc
+  meta:
+    description: '**Status:** Active'
+    tags:
+    - snitch
+    - app
+    - docs
+    - /
   registered: true
   index: snitch/DOCS_INDEX.md
   id: API-259
 - path: snitch/docs/PHASES.md
   type: doc
+  meta:
+    description: This document provides a more detailed breakdown of the tasks required
+      for each development phase.
+    tags:
+    - snitch
+    - app
+    - docs
+    - /
   registered: true
   index: snitch/DOCS_INDEX.md
   id: API-260
 - path: snitch/docs/PHASE_2_SECURE_CALLBACK.md
   type: doc
+  meta:
+    description: '**Status:** Superseded'
+    tags:
+    - snitch
+    - app
+    - docs
+    - /
   registered: true
   index: snitch/DOCS_INDEX.md
   id: API-261
 - path: snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md
   type: doc
+  meta:
+    description: '**Status:** Proposed'
+    tags:
+    - snitch
+    - app
+    - docs
+    - /
   registered: true
   index: snitch/DOCS_INDEX.md
   id: API-262
 - path: snitch/docs/PROJECT_PLAN.md
   type: doc
+  meta:
+    description: '**Date:** 2025-09-01'
+    tags:
+    - snitch
+    - app
+    - docs
+    - /
   registered: true
   index: snitch/DOCS_INDEX.md
   id: API-263
 - path: snitch/docs/ROADMAP.md
   type: doc
+  meta:
+    description: This document outlines the high-level, phased development plan for
+      the Snitch subproject.
+    tags:
+    - snitch
+    - app
+    - docs
+    - /
   registered: true
   index: snitch/DOCS_INDEX.md
   id: API-264
 - path: snitch/docs/STATUS.md
   type: doc
+  meta:
+    description: This document provides a live view of the project's progress.
+    tags:
+    - snitch
+    - app
+    - docs
+    - /
   registered: true
   index: snitch/DOCS_INDEX.md
   id: API-265
 - path: snitch/docs/TASKS.md
   type: doc
+  meta:
+    description: '- [x] Write Installation Manual (Phase 1)'
+    tags:
+    - snitch
+    - app
+    - docs
+    - /
   registered: true
   index: snitch/DOCS_INDEX.md
   id: API-266
 - path: snitch/docs/TEST_RUNBOOK.md
   type: doc
+  meta:
+    description: This document provides instructions for testing the Snitch listener.
+    tags:
+    - snitch
+    - app
+    - docs
+    - /
   registered: true
   index: snitch/DOCS_INDEX.md
   id: API-267
 - path: snitch/docs/USER_MANUAL.md
   type: doc
+  meta:
+    description: '**Status:** Active'
+    tags:
+    - snitch
+    - app
+    - docs
+    - /
   registered: true
   index: snitch/DOCS_INDEX.md
   id: API-268
 - path: snitch/docs/phase5-ipc.md
   type: doc
+  meta:
+    description: This document outlines the secure Inter-Process Communication (IPC)
+      mechanism implemented between the Zotify API and the Snitch helper application.
+    tags:
+    - snitch
+    - app
+    - docs
+    - /
   registered: true
   index: snitch/DOCS_INDEX.md
   id: API-269
 - path: snitch/go.mod
   type: exempt
+  meta:
+    description: No description available.
+    tags:
+    - snitch
+    - app
+    - /
   registered: exempted
   index: '-'
   id: MISSING
 - path: snitch/snitch.go
   type: code
+  meta:
+    description: // snitch is a small helper application for the Zotify API.
+    tags:
+    - snitch
+    - app
+    - /
   registered: true
   index: snitch/CODE_FILE_INDEX.md
   id: MISSING
 - path: tests/scripts/test_build_project_registry.py
   type: code
+  meta:
+    description: '"""'
+    tags:
+    - tests
+    - app
+    - scripts
+    - /
   registered: exempted
   index: '-'
   id: TEST-002

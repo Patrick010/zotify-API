@@ -133,10 +133,11 @@ def build_registry(
             source = "filesystem"
 
         module, category = derive_module_category(path_obj)
+        meta = trace_item.get("meta", {}) if trace_item else {}
         entry = {
             "name": derive_name(path_obj, legacy_item), "path": path_str, "type": "doc",
             "module": module, "category": category, "registered_in": trace_item.get("registered_in", []) if trace_item else [],
-            "status": status, "notes": trace_item.get("description") or (legacy_item["notes"] if legacy_item else ""), "source": source,
+            "status": status, "notes": meta.get("description") or (legacy_item["notes"] if legacy_item else ""), "source": source,
         }
         registry.append(entry)
 

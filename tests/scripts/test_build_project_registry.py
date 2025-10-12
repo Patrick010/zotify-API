@@ -55,13 +55,17 @@ class TestCorrectedBuildProjectRegistry(unittest.TestCase):
         trace_content = """
 artifacts:
   - path: project/proposals/NEW_PROPOSAL.md
-    description: "This is the correct description from TRACE_INDEX."
+    meta:
+      description: "This is the correct description from TRACE_INDEX."
   - path: project/proposals/QA_GATE_IMPLEMENTATION_PLAN.md
-    description: "This is also the correct description."
+    meta:
+      description: "This is also the correct description."
   - path: api/docs/some_api_doc.md
-    description: "This description for a non-project file should be ignored."
+    meta:
+      description: "This description for a non-project file should be ignored."
   - path: project/proposals/MISSING_FILE.md
-    description: "A file that does not exist on disk"
+    meta:
+      description: "A file that does not exist on disk"
 """
         build_project_registry.TRACE_INDEX_PATH.write_text(trace_content)
 

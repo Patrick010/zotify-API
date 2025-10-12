@@ -6237,3 +6237,4 @@ This file is auto-generated. Do not edit manually.
 | `scripts/.venv/lib/python3.13/site-packages/zipp/compat/py313.py` | | | Active | | |
 | `scripts/.venv/lib/python3.13/site-packages/zipp/glob.py` | | | Active | | |
 | `scripts/project/reports/TRACE_INDEX.yml` | | | Active | | |
+| `scripts/backfill_trace_meta.py` | | | Active | | |

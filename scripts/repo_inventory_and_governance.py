@@ -74,6 +74,37 @@ def get_file_type(filepath: str) -> str:
     return FILETYPE_MAP.get(os.path.splitext(filepath)[1], "exempt")
 
 
+def extract_metadata(filepath: Path) -> Dict[str, Any]:
+    """Extracts metadata (description, tags) from a file."""
+    description = "No description available."
+    tags = []
+
+    try:
+        # Infer tags from path
+        tags = [part for part in filepath.parts if part not in IGNORED_DIRS and part != filepath.name]
+
+        # Extract description from file content
+        content = filepath.read_text(encoding="utf-8", errors="ignore")
+
+        # Check for summary comments
+        summary_match = re.search(r"<!-- Summary: (.*) -->|# Summary: (.*)", content)
+        if summary_match:
+            description = summary_match.group(1) or summary_match.group(2)
+        else:
+            # Fallback to first non-empty line for certain file types
+            if filepath.suffix in [".md", ".py", ".sh", ".go"]:
+                for line in content.splitlines():
+                    stripped_line = line.strip()
+                    if stripped_line and not stripped_line.startswith(("#", "!", "<")):
+                        description = stripped_line
+                        break
+    except Exception:
+        # Ignore files that cannot be read
+        pass
+
+    return {"description": description.strip(), "tags": list(set(tags))}
+
+
 def find_all_files() -> List[str]:
     files: List[str] = []
 
@@ -201,6 +232,35 @@ def validate_trace_index_schema(trace_index_path: Path) -> bool:
     return True
 
 
+def validate_metadata(trace_index: List[Dict[str, Any]]) -> None:
+    """Validates the metadata of the trace index, printing warnings."""
+    print("\n--- Validating Metadata ---")
+    warnings = 0
+    for item in trace_index:
+        path = item.get("path")
+        meta = item.get("meta")
+
+        if not meta:
+            print(f"⚠️  Warning: Missing 'meta' field for artifact: {path}")
+            warnings += 1
+            continue
+
+        description = meta.get("description", "").strip()
+        if not description or description == "No description available.":
+            print(f"⚠️  Warning: Missing 'meta.description' for artifact: {path}")
+            warnings += 1
+
+        tags = meta.get("tags", [])
+        if item.get("type") in ["code", "doc"] and not tags:
+            print(f"⚠️  Warning: Missing 'meta.tags' for artifact: {path}")
+            warnings += 1
+
+    if warnings == 0:
+        print("✅ Metadata validation passed with no warnings.")
+    else:
+        print(f"\nFound {warnings} metadata warning(s).")
+
+
 # --- Main ---
 def main():
     parser = argparse.ArgumentParser(description="Repository inventory and governance script.")
@@ -235,7 +295,9 @@ def main():
 
     for f in sorted(all_files):
         ftype = get_file_type(f)
-        entry: Dict[str, Any] = {"path": f, "type": ftype}
+        full_path = PROJECT_ROOT / f
+        meta = extract_metadata(full_path) if full_path.exists() else {"description": "File not found.", "tags": []}
+        entry: Dict[str, Any] = {"path": f, "type": ftype, "meta": meta}
         required: List[str] = []
         if ftype != "exempt":
             for r in INDEX_MAP:
@@ -287,6 +349,9 @@ def main():
 
     if not validate_trace_index_schema(trace_index_path):
         return 1
+
+    validate_metadata(trace_index)
+
     if test_mode:
         return 0
 
