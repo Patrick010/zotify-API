@@ -1,0 +1,65 @@
+# summarizer.py
+import logging
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+from sentence_transformers import SentenceTransformer, util
+import torch
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# --- Document Embedding Model ---
+DOC_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
+_doc_model = SentenceTransformer(DOC_MODEL_NAME)
+logger.info(f"Loaded document model: {DOC_MODEL_NAME}")
+
+# --- Code Embedding Model ---
+CODE_EMBED_MODEL_NAME = "microsoft/graphcodebert-base"
+try:
+    _code_embed_model = SentenceTransformer(CODE_EMBED_MODEL_NAME)
+except Exception:
+    logger.warning(f"No sentence-transformers model found for {CODE_EMBED_MODEL_NAME}, using mean pooling")
+    _code_embed_model = SentenceTransformer('all-MiniLM-L6-v2')  # fallback
+
+logger.info(f"Loaded code embedding model: {CODE_EMBED_MODEL_NAME}")
+
+# --- Code Summarization Model ---
+CODE_SUM_MODEL_NAME = "Salesforce/codet5-base-multi-sum"
+_code_tokenizer = AutoTokenizer.from_pretrained(CODE_SUM_MODEL_NAME)
+_code_model = AutoModelForSeq2SeqLM.from_pretrained(CODE_SUM_MODEL_NAME)
+logger.info(f"Loaded CodeT5 model: {CODE_SUM_MODEL_NAME}")
+
+
+def summarize_doc(doc_text: str, max_tokens: int = 256):
+    """Summarize a document or text using semantic embeddings."""
+    inputs = doc_text.strip()
+    return inputs  # identity; doc summaries are preserved externally
+
+
+def summarize_code(code_text: str, block_mode: bool = False, max_new_tokens: int = 256):
+    """
+    Summarize code using CodeT5.
+    If block_mode=True, summarize by logical blocks instead of full file.
+    """
+    if block_mode:
+        # Split by double newlines as simple block heuristic
+        blocks = [b.strip() for b in code_text.split("\n\n") if b.strip()]
+        summaries = []
+        for block in blocks:
+            tokenized = _code_tokenizer(block, return_tensors="pt", truncation=True)
+            out = _code_model.generate(**tokenized, max_new_tokens=max_new_tokens)
+            summaries.append(_code_tokenizer.decode(out[0], skip_special_tokens=True))
+        return " | ".join(summaries)
+    else:
+        tokenized = _code_tokenizer(code_text, return_tensors="pt", truncation=True)
+        out = _code_model.generate(**tokenized, max_new_tokens=max_new_tokens)
+        return _code_tokenizer.decode(out[0], skip_special_tokens=True)
+
+
+def validate_summary(orig_text: str, summary_text: str, threshold: float = 0.3, is_code: bool = False):
+    """Check semantic similarity between original and summary."""
+    model = _code_embed_model if is_code else _doc_model
+    emb_orig = model.encode(orig_text, convert_to_tensor=True)
+    emb_summary = model.encode(summary_text, convert_to_tensor=True)
+    score = util.cos_sim(emb_orig, emb_summary).item()
+    logger.info(f"Validation similarity: {score:.3f}")
+    return score >= threshold

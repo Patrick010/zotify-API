@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zotify-nlp"
+version = "0.1.0"
+description = "NLP module for Zotify API: document and code summarization"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "Your Name", email = "you@example.com" }
+]
+license = { text = "MIT" }
+keywords = ["nlp", "summarization", "transformers", "sentence-transformers", "code-analysis"]
+
+# URLs section requires strings only
+urls = { Homepage = "https://github.com/your-org/zotify-API", Documentation = "https://github.com/your-org/zotify-API/wiki/NLP-Module" }
+
+# Dependencies must be an array of strings
+dependencies = [
+    "torch>=2.1.0,<3.0",
+    "transformers>=4.45.0,<5.0",
+    "sentence-transformers>=2.2.2,<3.0",
+    "tqdm>=4.66.0,<5.0"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["*"]
+
+[tool.black]
+line-length = 120
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"
+
+[tool.flake8]
+max-line-length = 120
+extend-ignore = ["E203", "W503"]

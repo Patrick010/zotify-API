@@ -109,6 +109,7 @@ celerybeat.pid
 # Environments
 .env
 .venv
+.venv-nlp
 env/
 venv/
 ENV/
@@ -172,3 +173,7 @@ api/src/storage/spotify_tokens.json
 api/storage/
 api/*.db
 project/logs/chat/
+
+# Ignore NLP caches
+nlp/cache/
+nlp/.cache/

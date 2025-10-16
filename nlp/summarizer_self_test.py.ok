@@ -1,0 +1,54 @@
+# summarizer_self_test.py
+import logging
+from summarizer import summarize_doc, summarize_code, validate_summary
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+TEST_DOC = """Zotify API is a modular backend built around Librespot.
+It provides media automation, playlist synchronization, and integration with third-party systems.
+The architecture focuses on modularity and extensibility, supporting multiple plugins and data sources."""
+
+TEST_ROLE_DOC = """This document defines the high-level objectives of the Zotify API project.
+It describes the intended role of each module, outlines key milestones, and explains the impact of the platform on users and stakeholders."""
+
+TEST_CODE = """class Calculator:
+    def multiply(self, x, y):
+        return x * y
+    def add(self, a, b):
+        return a + b
+"""
+
+def run_test():
+    logger.info("="*80)
+    logger.info("Starting Summarizer Self-Test")
+    logger.info("="*80)
+
+    # --- Document Summary ---
+    doc_summary = summarize_doc(TEST_DOC)
+    logger.info(f"[DOC] Summary: {doc_summary}")
+
+    role_summary = summarize_doc(TEST_ROLE_DOC)
+    logger.info(f"[ROLE DOC] Summary: {role_summary}")
+
+    doc_pass = validate_summary(TEST_DOC, doc_summary)
+    logger.info(f"Doc similarity pass: {doc_pass}")
+
+    role_pass = validate_summary(TEST_ROLE_DOC, role_summary)
+    logger.info(f"Role similarity pass: {role_pass}")
+
+    # --- Code Summary ---
+    code_summary = summarize_code(TEST_CODE, block_mode=False)
+    logger.info(f"[CODE] Summary: {code_summary}")
+
+    block_summary = summarize_code(TEST_CODE, block_mode=True)
+    logger.info(f"[BLOCK] Summary: {block_summary}")
+
+    code_pass = validate_summary(TEST_CODE, code_summary, is_code=True)
+    block_pass = validate_summary(TEST_CODE, block_summary, is_code=True)
+    logger.info(f"Code similarity pass: {code_pass}")
+    logger.info(f"Block-based similarity pass: {block_pass}")
+
+
+if __name__ == "__main__":
+    run_test()
