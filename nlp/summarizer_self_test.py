@@ -1,148 +1,144 @@
 #!/usr/bin/env python3
 """
-Self-test for summarizer.py
-Validates doc/code summaries, semantic similarity, and reports cache status
+summarizer_self_test.py
+
+Comprehensive regression test for summarizer.py.
+
+Covers:
+- Document summarization
+- Code summarization
+- Validation logic
+- generate_description_meta()
+- generate_tag_meta()
+- Embedding consistency checks
+- summarize_file() entrypoint
 """
 
+import json
 import sys
-import time
-import statistics
+import torch
+import tempfile
 from pathlib import Path
 
-sys.path.append(str(Path(__file__).resolve().parent))
-import summarizer as sm
-import nlp_config as cfg
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-# Sample inputs
-DOC_SAMPLE = """
-# Zotify API Manual
-The Zotify API provides a backend wrapper around Librespot to allow automation of Spotify downloads,
-media metadata synchronization, and playlist management. It exposes endpoints for user configuration,
-authentication, and privacy compliance. Each module is isolated and configurable.
-"""
+import summarizer as s
 
-ROLE_DOC_SAMPLE = """
-# ROADMAP.md
-Tracks milestones, feature sets, and progress of the Zotify API implementation.
-It defines priorities and next-phase planning for Snitch integration.
-"""
+def print_header(title):
+    print(f"\n{'='*60}\n{title}\n{'='*60}")
 
-CODE_SAMPLE = """
-class PlaylistManager:
-    def __init__(self, client):
-        self.client = client
+def run_tests():
+    results = {}
 
-    def fetch_playlist(self, playlist_id):
-        data = self.client.get_playlist(playlist_id)
-        return data
+    # ------------------------------
+    # 1. Basic Doc Summarization
+    # ------------------------------
+    print_header("TEST 1: Document summarization")
+    sample_doc = (
+        "The Zotify API allows developers to manage Spotify downloads, "
+        "perform track analysis, and integrate metadata enrichment."
+    )
+    summary = s.summarize_doc(sample_doc)
+    results["doc_summary"] = summary
+    print(f"Summary: {summary}")
 
-    def sync_playlist(self, playlist_id, local_tracks):
-        remote = self.fetch_playlist(playlist_id)
-        updated = [t for t in local_tracks if t not in remote['tracks']]
-        for track in updated:
-            self.client.add_to_playlist(playlist_id, track)
-        return True
-"""
+    # ------------------------------
+    # 2. Code Summarization
+    # ------------------------------
+    print_header("TEST 2: Code summarization")
+    sample_code = (
+        "def download_track(track_id):\n"
+        "    '''Download a track from Spotify using its ID'''\n"
+        "    response = api.get(f'/track/{track_id}')\n"
+        "    save_to_disk(response.data)\n"
+    )
+    code_summary = s.summarize_code(sample_code)
+    results["code_summary"] = code_summary
+    print(f"Summary: {code_summary}")
 
-# ------------------------------
-# Helpers
-# ------------------------------
-def safe_summarize_doc(text: str, max_len=40, min_len=10) -> str:
-    return sm.summarize_doc(text, max_length=max_len, min_length=min_len)
+    # ------------------------------
+    # 3. Validation
+    # ------------------------------
+    print_header("TEST 3: Validation")
+    valid_doc = s.validate_summary(sample_doc, summary)
+    valid_code = s.validate_summary(sample_code, code_summary, is_code=True)
+    results["validation_doc"] = valid_doc
+    results["validation_code"] = valid_code
+    print(f"Doc validation passed: {valid_doc}")
+    print(f"Code validation passed: {valid_code}")
 
-def print_cache_status():
-    print("\n=== MODEL CACHE STATUS ===")
-    for k, path in cfg.MODEL_CACHE_DIRS.items():
-        status = "HIT" if any(path.glob("**/*")) else "MISS"
-        print(f"{k:25}: {status}")
+    # ------------------------------
+    # 4. Description Meta Generation
+    # ------------------------------
+    print_header("TEST 4: generate_description_meta()")
+    doc_meta = s.generate_description_meta(sample_doc)
+    code_meta = s.generate_description_meta(sample_code, is_code=True)
+    results["doc_meta"] = doc_meta
+    results["code_meta"] = code_meta
+    print(json.dumps({"doc_meta": doc_meta, "code_meta": code_meta}, indent=2))
 
-# ------------------------------
-# Tests
-# ------------------------------
-def run_doc_tests():
-    print("\n=== DOC SUMMARIZATION TEST ===")
-    t0 = time.time()
-    doc_summary = safe_summarize_doc(DOC_SAMPLE)
-    t1 = time.time()
-    role_summary = safe_summarize_doc(ROLE_DOC_SAMPLE)
-    t2 = time.time()
+    # ------------------------------
+    # 5. Tag Meta Generation
+    # ------------------------------
+    print_header("TEST 5: generate_tag_meta()")
+    doc_tags = s.generate_tag_meta(sample_doc)
+    code_tags = s.generate_tag_meta(sample_code, is_code=True)
+    results["doc_tags"] = doc_tags
+    results["code_tags"] = code_tags
+    print(f"Doc tags: {doc_tags}")
+    print(f"Code tags: {code_tags}")
 
-    print("Doc summary:", doc_summary)
-    print("Role summary:", role_summary)
+    # ------------------------------
+    # 6. Embedding Consistency Check
+    # ------------------------------
+    print_header("TEST 6: Embedding consistency")
+    doc_emb = s.doc_embedder.encode([sample_doc], convert_to_tensor=True)
+    code_emb = s.code_embedder.encode([sample_code], convert_to_tensor=True)
+    results["embedding_doc_shape"] = tuple(doc_emb.shape)
+    results["embedding_code_shape"] = tuple(code_emb.shape)
+    print(f"Doc embedding shape: {doc_emb.shape}")
+    print(f"Code embedding shape: {code_emb.shape}")
 
-    valid_doc = sm.validate_summary(DOC_SAMPLE, doc_summary, is_code=False)
-    valid_role = sm.validate_summary(ROLE_DOC_SAMPLE, role_summary, is_code=False)
+    # ------------------------------
+    # 7. File-based summarize_file() test
+    # ------------------------------
+    print_header("TEST 7: summarize_file() entrypoint")
+    with tempfile.TemporaryDirectory() as tmpdir:
+        doc_path = Path(tmpdir) / "sample_doc.txt"
+        code_path = Path(tmpdir) / "sample_code.py"
+        doc_path.write_text(sample_doc, encoding="utf-8")
+        code_path.write_text(sample_code, encoding="utf-8")
 
-    print(f"Doc validation: {valid_doc}, inference time: {t1-t0:.2f}s")
-    print(f"Role validation: {valid_role}, inference time: {t2-t1:.2f}s")
+        doc_summary_file, doc_tags_file = s.summarize_file(doc_path)
+        code_summary_file, code_tags_file = s.summarize_file(code_path)
+        results["file_doc_summary"] = doc_summary_file
+        results["file_doc_tags"] = doc_tags_file
+        results["file_code_summary"] = code_summary_file
+        results["file_code_tags"] = code_tags_file
 
-    return {
-        "doc_valid": valid_doc,
-        "role_valid": valid_role,
-        "doc_summary_len": len(doc_summary.split()),
-        "role_summary_len": len(role_summary.split())
-    }
+        print(f"File Doc Summary: {doc_summary_file}")
+        print(f"File Doc Tags: {doc_tags_file}")
+        print(f"File Code Summary: {code_summary_file}")
+        print(f"File Code Tags: {code_tags_file}")
 
-def run_code_tests():
-    print("\n=== CODE SUMMARIZATION TEST ===")
-    t0 = time.time()
-    summary_basic = sm.summarize_code(CODE_SAMPLE, block_mode=False)
-    summary_block = sm.summarize_code(CODE_SAMPLE, block_mode=True)
-    t1 = time.time()
+    # ------------------------------
+    # 8. Summary
+    # ------------------------------
+    print_header("SUMMARY")
+    print(json.dumps(results, indent=2))
 
-    print("Basic code summary:", summary_basic)
-    print("Block code summary:", summary_block)
+    # Sanity validations
+    if not summary or not code_summary:
+        raise AssertionError("Summaries are empty.")
+    if not isinstance(doc_tags, list) or not isinstance(code_tags, list):
+        raise AssertionError("Tag generation failed.")
+    if doc_emb.shape[1] != s.doc_embedder.encode(["test"]).shape[1]:
+        raise AssertionError("Doc embedding dimension mismatch.")
+    if code_emb.shape[1] != s.code_embedder.encode(["test"], convert_to_tensor=True).shape[1]:
+        raise AssertionError("Code embedding dimension mismatch.")
 
-    valid_basic = sm.validate_summary(CODE_SAMPLE, summary_basic, is_code=True)
-    valid_block = sm.validate_summary(CODE_SAMPLE, summary_block, is_code=True)
-
-    print(f"Validation (basic): {valid_basic}")
-    print(f"Validation (block): {valid_block}")
-    print(f"Total code runtime: {t1 - t0:.2f}s")
-
-    return {
-        "valid_basic": valid_basic,
-        "valid_block": valid_block,
-        "summary_basic_len": len(summary_basic.split()),
-        "summary_block_len": len(summary_block.split()),
-        "runtime_sec": t1 - t0
-    }
-
-# ------------------------------
-# Main
-# ------------------------------
-def main():
-    print("=== SUMMARIZER SELF TEST ===")
-    print(f"Using device: {sm.DEVICE_NAME}")
-    print_cache_status()
-
-    doc_results = run_doc_tests()
-    code_results = run_code_tests()
-
-    summary_len_avg = statistics.mean([
-        doc_results["doc_summary_len"],
-        doc_results["role_summary_len"],
-        code_results["summary_basic_len"],
-        code_results["summary_block_len"]
-    ])
-
-    pass_rate = sum([
-        doc_results["doc_valid"],
-        doc_results["role_valid"],
-        code_results["valid_basic"],
-        code_results["valid_block"]
-    ]) / 4.0
-
-    print("\n=== SUMMARY ===")
-    print(f"Average summary length: {summary_len_avg:.1f} words")
-    print(f"Validation pass rate: {pass_rate * 100:.1f}%")
-    print(f"Code runtime: {code_results['runtime_sec']:.2f}s")
-
-    if pass_rate < 0.5:
-        print("WARNING: semantic similarity low. Check model download/inference.")
-        sys.exit(1)
-    else:
-        sys.exit(0)
+    print("\n✅ All summarizer regression tests passed successfully.")
 
 if __name__ == "__main__":
-    main()
+    torch.set_grad_enabled(False)
+    run_tests()

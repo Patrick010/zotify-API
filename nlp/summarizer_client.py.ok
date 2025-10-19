@@ -1,0 +1,116 @@
+#!/usr/bin/env python3
+"""
+summarizer_client.py
+
+Centralized summarizer for repo_inventory_and_governance.py.
+Uses the new scripts for code/docs summarization and tag generation.
+"""
+
+import logging
+from pathlib import Path
+import importlib.util
+import subprocess
+import sys
+import json
+
+# --- Load summarize_tags ---
+tags_path = Path(__file__).parent / "summarize_tags.py"
+spec = importlib.util.spec_from_file_location("summarize_tags", tags_path)
+tags_module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(tags_module)
+extract_tags = tags_module.generate_tags_from_text
+
+# --- Helper functions to call summarizers directly ---
+
+
+def summarize_doc_file(filepath: Path) -> str:
+    """
+    Calls the doc summarizer script on a single file and returns the description.
+    """
+    from io import StringIO
+
+    # read file content
+    content = filepath.read_text(encoding="utf-8")
+
+    # the original summarize_docs.py expects text input
+    # We'll import its summarize_text function dynamically
+    docs_path = Path(__file__).parent / "summarize_docs.py"
+    spec = importlib.util.spec_from_file_location("summarize_docs", docs_path)
+    docs_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(docs_module)
+
+    if hasattr(docs_module, "summarize_text"):
+        return docs_module.summarize_text(content)
+    else:
+        return f"[summarize_docs.py missing summarize_text()]"
+
+
+def summarize_code_file(filepath: Path) -> str:
+    """
+    Calls the code summarizer script on a single file and returns the description.
+    """
+    code_content = filepath.read_text(encoding="utf-8")
+
+    code_path = Path(__file__).parent / "summarize_code.py"
+    spec = importlib.util.spec_from_file_location("summarize_code", code_path)
+    code_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(code_module)
+
+    if hasattr(code_module, "summarize_code_text"):
+        return code_module.summarize_code_text(code_content)
+    else:
+        return f"[summarize_code.py missing summarize_code_text()]"
+
+
+# --- Core client class ---
+class SummarizerClient:
+    """Handles generation of descriptions and tags for code/docs."""
+
+    def __init__(self):
+        self.logger = logging.getLogger("SummarizerClient")
+        self.logger.setLevel(logging.INFO)
+
+    def summarize_file(self, filepath: str) -> dict:
+        """
+        Summarize a single file and generate tags.
+        Returns: { "file": str, "description": str, "tags": list[str] }
+        """
+        fpath = Path(filepath)
+        if not fpath.exists():
+            return {"file": filepath, "description": f"File not found: {filepath}", "tags": []}
+
+        ext = fpath.suffix.lower()
+        if ext in (".py", ".js", ".go", ".sh"):
+            description = summarize_code_file(fpath)
+        elif ext in (".md", ".rst", ".txt"):
+            description = summarize_doc_file(fpath)
+        else:
+            description = f"Unrecognized file type ({ext}) – skipped."
+
+        # Tag generation
+        tags = extract_tags(description)
+
+        return {"file": filepath, "description": description, "tags": tags}
+
+    def batch_summarize(self, files: list[str]) -> list[dict]:
+        """Summarize multiple files in sequence."""
+        return [self.summarize_file(f) for f in files]
+
+
+# --- CLI for testing ---
+if __name__ == "__main__":
+    import sys
+    logging.basicConfig(level=logging.INFO)
+
+    client = SummarizerClient()
+
+    if len(sys.argv) < 2:
+        print("Usage: python summarizer_client.py <file1> [file2 ...]")
+        sys.exit(1)
+
+    results = client.batch_summarize(sys.argv[1:])
+    for r in results:
+        print("\n=== Summary ===")
+        print(f"File: {r['file']}")
+        print(f"Description: {r['description']}")
+        print(f"Tags: {r['tags'][:15]}")

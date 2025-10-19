@@ -1,54 +1,148 @@
-# summarizer_self_test.py
-import logging
-from summarizer import summarize_doc, summarize_code, validate_summary
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-TEST_DOC = """Zotify API is a modular backend built around Librespot.
-It provides media automation, playlist synchronization, and integration with third-party systems.
-The architecture focuses on modularity and extensibility, supporting multiple plugins and data sources."""
-
-TEST_ROLE_DOC = """This document defines the high-level objectives of the Zotify API project.
-It describes the intended role of each module, outlines key milestones, and explains the impact of the platform on users and stakeholders."""
-
-TEST_CODE = """class Calculator:
-    def multiply(self, x, y):
-        return x * y
-    def add(self, a, b):
-        return a + b
+#!/usr/bin/env python3
+"""
+Self-test for summarizer.py
+Validates doc/code summaries, semantic similarity, and reports cache status
 """
 
-def run_test():
-    logger.info("="*80)
-    logger.info("Starting Summarizer Self-Test")
-    logger.info("="*80)
+import sys
+import time
+import statistics
+from pathlib import Path
 
-    # --- Document Summary ---
-    doc_summary = summarize_doc(TEST_DOC)
-    logger.info(f"[DOC] Summary: {doc_summary}")
+sys.path.append(str(Path(__file__).resolve().parent))
+import summarizer as sm
+import nlp_config as cfg
 
-    role_summary = summarize_doc(TEST_ROLE_DOC)
-    logger.info(f"[ROLE DOC] Summary: {role_summary}")
+# Sample inputs
+DOC_SAMPLE = """
+# Zotify API Manual
+The Zotify API provides a backend wrapper around Librespot to allow automation of Spotify downloads,
+media metadata synchronization, and playlist management. It exposes endpoints for user configuration,
+authentication, and privacy compliance. Each module is isolated and configurable.
+"""
 
-    doc_pass = validate_summary(TEST_DOC, doc_summary)
-    logger.info(f"Doc similarity pass: {doc_pass}")
+ROLE_DOC_SAMPLE = """
+# ROADMAP.md
+Tracks milestones, feature sets, and progress of the Zotify API implementation.
+It defines priorities and next-phase planning for Snitch integration.
+"""
 
-    role_pass = validate_summary(TEST_ROLE_DOC, role_summary)
-    logger.info(f"Role similarity pass: {role_pass}")
+CODE_SAMPLE = """
+class PlaylistManager:
+    def __init__(self, client):
+        self.client = client
 
-    # --- Code Summary ---
-    code_summary = summarize_code(TEST_CODE, block_mode=False)
-    logger.info(f"[CODE] Summary: {code_summary}")
+    def fetch_playlist(self, playlist_id):
+        data = self.client.get_playlist(playlist_id)
+        return data
 
-    block_summary = summarize_code(TEST_CODE, block_mode=True)
-    logger.info(f"[BLOCK] Summary: {block_summary}")
+    def sync_playlist(self, playlist_id, local_tracks):
+        remote = self.fetch_playlist(playlist_id)
+        updated = [t for t in local_tracks if t not in remote['tracks']]
+        for track in updated:
+            self.client.add_to_playlist(playlist_id, track)
+        return True
+"""
 
-    code_pass = validate_summary(TEST_CODE, code_summary, is_code=True)
-    block_pass = validate_summary(TEST_CODE, block_summary, is_code=True)
-    logger.info(f"Code similarity pass: {code_pass}")
-    logger.info(f"Block-based similarity pass: {block_pass}")
+# ------------------------------
+# Helpers
+# ------------------------------
+def safe_summarize_doc(text: str, max_len=40, min_len=10) -> str:
+    return sm.summarize_doc(text, max_length=max_len, min_length=min_len)
 
+def print_cache_status():
+    print("\n=== MODEL CACHE STATUS ===")
+    for k, path in cfg.MODEL_CACHE_DIRS.items():
+        status = "HIT" if any(path.glob("**/*")) else "MISS"
+        print(f"{k:25}: {status}")
+
+# ------------------------------
+# Tests
+# ------------------------------
+def run_doc_tests():
+    print("\n=== DOC SUMMARIZATION TEST ===")
+    t0 = time.time()
+    doc_summary = safe_summarize_doc(DOC_SAMPLE)
+    t1 = time.time()
+    role_summary = safe_summarize_doc(ROLE_DOC_SAMPLE)
+    t2 = time.time()
+
+    print("Doc summary:", doc_summary)
+    print("Role summary:", role_summary)
+
+    valid_doc = sm.validate_summary(DOC_SAMPLE, doc_summary, is_code=False)
+    valid_role = sm.validate_summary(ROLE_DOC_SAMPLE, role_summary, is_code=False)
+
+    print(f"Doc validation: {valid_doc}, inference time: {t1-t0:.2f}s")
+    print(f"Role validation: {valid_role}, inference time: {t2-t1:.2f}s")
+
+    return {
+        "doc_valid": valid_doc,
+        "role_valid": valid_role,
+        "doc_summary_len": len(doc_summary.split()),
+        "role_summary_len": len(role_summary.split())
+    }
+
+def run_code_tests():
+    print("\n=== CODE SUMMARIZATION TEST ===")
+    t0 = time.time()
+    summary_basic = sm.summarize_code(CODE_SAMPLE, block_mode=False)
+    summary_block = sm.summarize_code(CODE_SAMPLE, block_mode=True)
+    t1 = time.time()
+
+    print("Basic code summary:", summary_basic)
+    print("Block code summary:", summary_block)
+
+    valid_basic = sm.validate_summary(CODE_SAMPLE, summary_basic, is_code=True)
+    valid_block = sm.validate_summary(CODE_SAMPLE, summary_block, is_code=True)
+
+    print(f"Validation (basic): {valid_basic}")
+    print(f"Validation (block): {valid_block}")
+    print(f"Total code runtime: {t1 - t0:.2f}s")
+
+    return {
+        "valid_basic": valid_basic,
+        "valid_block": valid_block,
+        "summary_basic_len": len(summary_basic.split()),
+        "summary_block_len": len(summary_block.split()),
+        "runtime_sec": t1 - t0
+    }
+
+# ------------------------------
+# Main
+# ------------------------------
+def main():
+    print("=== SUMMARIZER SELF TEST ===")
+    print(f"Using device: {sm.DEVICE_NAME}")
+    print_cache_status()
+
+    doc_results = run_doc_tests()
+    code_results = run_code_tests()
+
+    summary_len_avg = statistics.mean([
+        doc_results["doc_summary_len"],
+        doc_results["role_summary_len"],
+        code_results["summary_basic_len"],
+        code_results["summary_block_len"]
+    ])
+
+    pass_rate = sum([
+        doc_results["doc_valid"],
+        doc_results["role_valid"],
+        code_results["valid_basic"],
+        code_results["valid_block"]
+    ]) / 4.0
+
+    print("\n=== SUMMARY ===")
+    print(f"Average summary length: {summary_len_avg:.1f} words")
+    print(f"Validation pass rate: {pass_rate * 100:.1f}%")
+    print(f"Code runtime: {code_results['runtime_sec']:.2f}s")
+
+    if pass_rate < 0.5:
+        print("WARNING: semantic similarity low. Check model download/inference.")
+        sys.exit(1)
+    else:
+        sys.exit(0)
 
 if __name__ == "__main__":
-    run_test()
+    main()

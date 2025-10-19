@@ -1,13 +1,23 @@
 # ID: API-250
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=65.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "zotify-api"
 version = "0.1.0"
-description = "A REST API for the Zotify music and podcast downloader."
-requires-python = ">=3.10"
+description = "Merged API + NLP environment for Zotify."
+requires-python = ">=3.11"
+readme = "README.md"
+authors = [
+    { name = "Your Name", email = "you@example.com" }
+]
+license = { text = "MIT" }
+keywords = ["api", "nlp", "summarization", "transformers", "sentence-transformers", "spacy", "music", "download"]
+
+urls = { Homepage = "https://github.com/Patrick010/zotify-API", Documentation = "https://github.com/Patrick010/zotify-API/wiki" }
+
+# All dependencies installed via TOML; NLP + API merged
 dependencies = [
     "fastapi",
     "uvicorn",
@@ -30,11 +40,11 @@ dependencies = [
     "python-jose[cryptography]",
     "passlib[bcrypt]",
     "bcrypt==3.2.0",
-	"pytest-cov",
-	"xenon",
-	"radon",
-	"semgrep",
-	"coverage",
+    "pytest-cov",
+    "xenon",
+    "radon",
+    "semgrep",
+    "coverage",
     "pyyaml",
     "pytest-mock",
     "requests-mock",
@@ -44,7 +54,13 @@ dependencies = [
     "safety",
     "types-pyyaml",
     "sqlalchemy[mypy]",
-	"black"
+    "black",
+    # NLP
+    "torch>=2.1.0,<3.0",
+    "transformers>=4.45.0,<5.0",
+    "sentence-transformers>=2.2.2,<3.0",
+    "spacy>=3.6.0,<4.0",
+    "tqdm>=4.66.0,<5.0"
 ]
 
 [project.optional-dependencies]
@@ -56,6 +72,21 @@ dev = [
     "mkdocs-monorepo-plugin"
 ]
 
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["*"]
+
+[tool.black]
+line-length = 120
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"
+
+[tool.flake8]
+max-line-length = 120
+extend-ignore = ["E203", "W503"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-v"
@@ -66,18 +97,14 @@ filterwarnings = [
 [tool.pytest-asyncio]
 mode = "auto"
 
-[tool.black]
-line-length = 88
-target-version = ["py310"]
-
 [tool.ruff]
 line-length = 88
-select = ["E", "F", "W", "I"]   # basic errors, flake8, imports
-ignore = ["E501"]               # if you let Black handle line length
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]
 fix = true
 
 [tool.mypy]
-python_version = "3.10"
+python_version = "3.11"
 strict = true
 disallow_untyped_defs = true
 warn_unused_ignores = true

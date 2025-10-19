@@ -11,15 +11,20 @@ manifest_path = "scripts/repo_manifest.txt"
 base_url = "https://chatgtp.sixfold.nl"
 
 # Folders/files to include in the manifest
+
+#include_paths = [
+#    "project",
+#    "api",
+#    "Gonk",
+#    "scripts",
+#    "snitch",
+#    "templates",
+#    "tests",
+#    "AGENTS.md",
+#]
+
 include_paths = [
-    "project",
-    "api",
-    "Gonk",
     "scripts",
-    "snitch",
-    "templates",
-    "tests",
-    "AGENTS.md",
 ]
 
 # File types to include

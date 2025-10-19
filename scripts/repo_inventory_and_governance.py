@@ -4,9 +4,9 @@ repo_inventory_and_governance.py - inventory + governance index generator (patch
 
 Fixes applied:
 - Ensure PROJECT_ROOT is resolved correctly to avoid walking the entire filesystem.
-- Robustly ignore directories by checking path parts (so `project/logs/chat` can be ignored).
-- Exclude chat logs explicitly from registration logic to remove them from Unlinked / Unregistered.
-- Cleaned up find_all_files and index population flow to avoid prior syntax issues.
+- Robustly ignore directories by checking path parts.
+- Exclude chat logs explicitly from registration logic.
+- Replaced extract_metadata() with new summarizer.
 - Minimal behavior changes — preserves existing index-generation and audit output logic.
 """
 
@@ -18,19 +18,27 @@ import argparse
 import subprocess
 from pathlib import Path
 from typing import List, Dict, Any, Set, Tuple
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+# --- Import summarizer ---
+# from summarizer import summarize_file  # adjust import to your actual summarizer
+from nlp.summarizer import summarize_file
 
 # --- Configuration ---
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 print("PROJECT_ROOT:", PROJECT_ROOT)
+
 FILETYPE_MAP = {
     ".md": "doc", ".py": "code", ".sh": "code", ".html": "code", ".js": "code",
     ".ts": "code", ".css": "code", ".yml": "code", ".go": "code",
 }
+
 IGNORED_DIRS = {
     "project/logs/chat", ".git", ".idea", ".venv", "node_modules",
     "build", "dist", "target", "__pycache__", "site", "archive",
-    "templates", ".pytest_cache"
+    "templates", ".pytest_cache", "cache", ".cache", "storage", "chat"
 }
+
 IGNORED_FILES = {
     "mkdocs.yml", "openapi.json", "bandit.yml", "changed_files.txt",
     "verification_report.md", "LICENSE"
@@ -40,7 +48,6 @@ INDEX_MAP = [
     {"match": lambda p, f: f == "doc" and p.startswith("api/docs/"),
      "indexes": ["api/docs/MASTER_INDEX.md", "api/docs/DOCS_QUALITY_INDEX.md"]},
 
-    # Exclude project/logs/chat explicitly
     {"match": lambda p, f: f == "doc" and (
         (p.startswith("project/archive/docs/") or
          p.startswith("project/process/") or
@@ -74,57 +81,29 @@ def get_file_type(filepath: str) -> str:
     return FILETYPE_MAP.get(os.path.splitext(filepath)[1], "exempt")
 
 
-def extract_metadata(filepath: Path) -> Dict[str, Any]:
-    """Extracts metadata (description, tags) from a file."""
-    description = "No description available."
-    tags = []
-
+def extract_metadata(filepath: Path) -> dict:
+    """Replacement of extract_metadata() using new summarizer."""
     try:
-        # Infer tags from path
-        tags = [part for part in filepath.parts if part not in IGNORED_DIRS and part != filepath.name]
-
-        # Extract description from file content
-        content = filepath.read_text(encoding="utf-8", errors="ignore")
-
-        # Check for summary comments
-        summary_match = re.search(r"<!-- Summary: (.*) -->|# Summary: (.*)", content)
-        if summary_match:
-            description = summary_match.group(1) or summary_match.group(2)
-        else:
-            # Fallback to first non-empty line for certain file types
-            if filepath.suffix in [".md", ".py", ".sh", ".go"]:
-                for line in content.splitlines():
-                    stripped_line = line.strip()
-                    if stripped_line and not stripped_line.startswith(("#", "!", "<")):
-                        description = stripped_line
-                        break
-    except Exception:
-        # Ignore files that cannot be read
-        pass
-
-    return {"description": description.strip(), "tags": list(set(tags))}
+        summary, tags = summarize_file(filepath)  # must return (description: str, tags: List[str])
+        return {"description": summary.strip(), "tags": list(set(tags))}
+    except Exception as e:
+        print(f"⚠️ Failed to summarize {filepath}: {e}")
+        return {"description": "No description available.", "tags": []}
 
 
 def find_all_files() -> List[str]:
     files: List[str] = []
-
     for root, dirs, filenames in os.walk(PROJECT_ROOT):
         root_path = Path(root)
         rel_parts = root_path.relative_to(PROJECT_ROOT).parts
-
-        # Skip if any parent directory is ignored
         if any(p in IGNORED_DIRS for p in rel_parts):
             dirs[:] = []  # prevent descending
             continue
-
-        # Prune ignored subdirs
         dirs[:] = [d for d in dirs if d not in IGNORED_DIRS]
-
         for f in filenames:
             if f in IGNORED_FILES:
                 continue
             files.append(str(Path(root_path, f).relative_to(PROJECT_ROOT)).replace(os.sep, "/"))
-
     return files
 
 
@@ -170,7 +149,6 @@ def create_and_populate_index(index_path_str: str, files_to_add: List[str], file
     new_files_to_add = sorted([f for f in files_to_add if f not in existing_files])
     if not new_files_to_add:
         return
-
     lines_to_append = []
     if "CODE_FILE_INDEX" in index_path_str:
         lines_to_append = [f"| `{f}` | | | Active | | |" for f in new_files_to_add]
@@ -181,7 +159,6 @@ def create_and_populate_index(index_path_str: str, files_to_add: List[str], file
             rel_link = os.path.relpath(PROJECT_ROOT / f, index_path.parent)
             doc_name = Path(f).stem.replace('_', ' ').replace('-', ' ').title()
             lines_to_append.append(f"| **{doc_name}** | [`{Path(f).name}`]({rel_link}) | |")
-
     if not index_path.exists() and ("CODE_FILE_INDEX" in index_path_str or "DOCS_QUALITY_INDEX" in index_path_str):
         if "CODE_FILE_INDEX" in index_path_str:
             header = ("# Code File Index\n\nThis file is auto-generated.\n\n"
@@ -193,7 +170,6 @@ def create_and_populate_index(index_path_str: str, files_to_add: List[str], file
                       "|-----------|-------|----------|------|-------|\n")
         index_path.write_text(header + "\n".join(sorted(lines_to_append)) + "\n", encoding="utf-8")
         return
-
     with open(index_path, "a", encoding="utf-8") as fh:
         try:
             if index_path.exists() and index_path.read_text(encoding="utf-8")[-1] != "\n":
@@ -233,28 +209,23 @@ def validate_trace_index_schema(trace_index_path: Path) -> bool:
 
 
 def validate_metadata(trace_index: List[Dict[str, Any]]) -> None:
-    """Validates the metadata of the trace index, printing warnings."""
     print("\n--- Validating Metadata ---")
     warnings = 0
     for item in trace_index:
         path = item.get("path")
         meta = item.get("meta")
-
         if not meta:
             print(f"⚠️  Warning: Missing 'meta' field for artifact: {path}")
             warnings += 1
             continue
-
         description = meta.get("description", "").strip()
         if not description or description == "No description available.":
             print(f"⚠️  Warning: Missing 'meta.description' for artifact: {path}")
             warnings += 1
-
         tags = meta.get("tags", [])
         if item.get("type") in ["code", "doc"] and not tags:
             print(f"⚠️  Warning: Missing 'meta.tags' for artifact: {path}")
             warnings += 1
-
     if warnings == 0:
         print("✅ Metadata validation passed with no warnings.")
     else:
@@ -307,7 +278,6 @@ def main():
                 except Exception:
                     continue
         required = sorted(list(set(required)))
-
         if not required:
             entry["registered"] = "exempted"
             entry["index"] = "-"

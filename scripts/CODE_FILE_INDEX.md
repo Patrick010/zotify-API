@@ -6238,3 +6238,9 @@ This file is auto-generated. Do not edit manually.
 | `scripts/.venv/lib/python3.13/site-packages/zipp/glob.py` | | | Active | | |
 | `scripts/project/reports/TRACE_INDEX.yml` | | | Active | | |
 | `scripts/backfill_trace_meta.py` | | | Active | | |
+| `scripts/fix_trace_index_paths.py` | | | Active | | |
+| `scripts/generate_descriptions.py` | | | Active | | |
+| `scripts/generate_repo_manifest_md.py` | | | Active | | |
+| `scripts/post_install.sh` | | | Active | | |
+| `scripts/reorder_trace_index_keys.py` | | | Active | | |
+| `scripts/trace_description_generator.py` | | | Active | | |
