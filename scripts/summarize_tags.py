@@ -48,7 +48,7 @@ def generate_tags_from_text(text: str) -> list[str]:
         if t not in seen:
             deduped.append(t)
             seen.add(t)
-    return deduped
+    return deduped[:5]
 
 extract_tags = generate_tags_from_text
 

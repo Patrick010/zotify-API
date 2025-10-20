@@ -18,11 +18,13 @@ import argparse
 import subprocess
 from pathlib import Path
 from typing import List, Dict, Any, Set, Tuple
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-# --- Import summarizer ---
-# from summarizer import summarize_file  # adjust import to your actual summarizer
-from nlp.summarizer import summarize_file
+# Ensure scripts directory is in the Python path
+sys.path.append(str(Path(__file__).resolve().parent))
+
+from summarize_docs import summarize_doc
+from summarize_code import summarize_code_file
+from summarize_tags import generate_tags_from_text
 
 # --- Configuration ---
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -80,15 +82,29 @@ def get_file_type(filepath: str) -> str:
         return "exempt"
     return FILETYPE_MAP.get(os.path.splitext(filepath)[1], "exempt")
 
-
 def extract_metadata(filepath: Path) -> dict:
-    """Replacement of extract_metadata() using new summarizer."""
+    """
+    Extracts metadata for a given file by calling the appropriate summarizer function.
+    """
+    file_type = get_file_type(str(filepath))
+    summary = ""
+
     try:
-        summary, tags = summarize_file(filepath)  # must return (description: str, tags: List[str])
-        return {"description": summary.strip(), "tags": list(set(tags))}
+        content = filepath.read_text(encoding="utf-8", errors="replace")
+
+        if file_type == "doc":
+            summary = summarize_doc(content)
+        elif file_type == "code":
+            summary = summarize_code_file(content)
+        else:
+            return {"description": "No description available.", "tags": []}
+
     except Exception as e:
-        print(f"⚠️ Failed to summarize {filepath}: {e}")
-        return {"description": "No description available.", "tags": []}
+        summary = f"[Error reading or summarizing file: {e}]"
+
+    tags = generate_tags_from_text(summary)
+
+    return {"description": summary, "tags": tags}
 
 
 def find_all_files() -> List[str]:
