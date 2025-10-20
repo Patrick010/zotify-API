@@ -1,3 +1,16 @@
+---
+## ACT-150: Refactored the summarization workflow to use direct function calls to the new Groq-based summarizer scripts. This improves robustness and resolves the issues caused by the previous subprocess-based implementation. Also updated the documentation to reflect this change.
+
+**Date:** 2025-10-20
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Complete the refactoring of the summarization workflow.
+
+### Outcome
+The previous implementation using subprocess was fragile and prone to errors. The new implementation using direct function calls is more robust and reliable.
+
 <!-- ID: DOC-127 -->
 ---
 ## ACT-149: Fixed multiple scripts (repo_inventory_and_governance.py, verify_alignment_migration.py, test_full_pipeline.sh) to correctly generate and validate the repository's trace index. Rebuilt the DOCUMENT_TAG_INVENTORY.yml from embedded file IDs to ensure data integrity.

@@ -257,6 +257,7 @@ def main():
     parser.add_argument("--update-project-registry", action="store_true", help="Update the project registry JSON and Markdown files.")
     parser.add_argument("--extras-file", type=Path, default=PROJECT_ROOT / "scripts/project_registry_extras.yml", help="Path to the project registry extras file.")
     parser.add_argument("--debug", action="store_true", help="Enable debug printing for scripts that support it.")
+    parser.add_argument("--progress", action="store_true", help="Show a progress bar during full scans.")
     args = parser.parse_args()
 
     if args.update_project_registry:
@@ -280,7 +281,11 @@ def main():
     all_indexes_content = {str(p): parse_markdown_index(PROJECT_ROOT / p) for p in all_index_paths}
     files_to_create: Dict[str, List[str]] = {}
 
-    for f in sorted(all_files):
+    from tqdm import tqdm
+
+    iterator = tqdm(sorted(all_files), desc="Processing files", unit="file") if args.progress and not test_mode else sorted(all_files)
+
+    for f in iterator:
         ftype = get_file_type(f)
         full_path = PROJECT_ROOT / f
         meta = extract_metadata(full_path) if full_path.exists() else {"description": "File not found.", "tags": []}
