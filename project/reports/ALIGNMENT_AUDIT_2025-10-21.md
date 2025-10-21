@@ -9,9 +9,9 @@
 
 | Metric                          | Count |
 | ------------------------------- | ----- |
-| Total Artifacts in Trace Index  | 374 |
+| Total Artifacts in Trace Index  | 362 |
 | Total Artifacts in Tag Inventory| 341 |
-| **Orphans** (in Trace, not Inv) | 43 |
+| **Orphans** (in Trace, not Inv) | 31 |
 | **Missing** (in Inv, not Trace) | 10 |
 | Duplicate IDs in Inventory      | 0 |
 | Mismatched IDs (Embedded vs Inv)| 0 |
@@ -34,18 +34,6 @@
 - `project/logs/ACTIVITY.md`
 - `project/logs/CURRENT_STATE.md`
 - `project/logs/SESSION_LOG.md`
-- `project/logs/chat/File_linting_review.md`
-- `project/logs/chat/File_linting_review_manifest.md`
-- `project/logs/chat/Manifest_review_and_mapping.md`
-- `project/logs/chat/Manifest_review_and_mapping_001.md`
-- `project/logs/chat/Manifest_review_and_mapping_002.md`
-- `project/logs/chat/Manifest_review_and_mapping_manifest.md`
-- `project/logs/chat/Repo_Task_Doc_Mgmt_Step_2.md`
-- `project/logs/chat/Repo_Task_Doc_Mgmt_Step_2_001.md`
-- `project/logs/chat/Repo_Task_Doc_Mgmt_Step_2_002.md`
-- `project/logs/chat/Repo_Task_Doc_Mgmt_Step_2_manifest.md`
-- `project/logs/chat/chats.py`
-- `project/logs/chat/combined_chats_manifest.md`
 - `project/logs/handover/End of session HANDOVER_BRIEF_CHATGTP.md`
 - `project/logs/handover/HANDOVER_BRIEF_CHATGTP_File_linting_review.md`
 - `project/logs/handover/HANDOVER_BRIEF_CHATGTP_Trace_NLP_Integration_Phase_5c_Semantic_Governance_Alignment.md`
@@ -81,7 +69,7 @@
 
 ## 2. Semantic Description Quality
 
-Found 13 files with low-quality descriptions.
+Found 8 files with low-quality descriptions.
 
 | File Path | Severity | Description Preview |
 | --- | --- | --- |
@@ -89,11 +77,6 @@ Found 13 files with low-quality descriptions.
 | `Gonk/GonkUI/DOCS_INDEX.md` | **NON-SEMANTIC** | `This file is auto-generated . Do not edit manually . Use the contents of the document to help you un` |
 | `api/docs/CODE_FILE_INDEX.md` | **NON-SEMANTIC** | `Alembic environment script, configures and runs migrations . The file is auto-generated . Do not edi` |
 | `api/docs/DOCS_QUALITY_INDEX.md` | **NON-SEMANTIC** | `API-204 is an index for documents related to code quality standards and reports . This file is auto-` |
-| `project/logs/chat/File_linting_review.md` | **NON-SEMANTIC** | `No description available.` |
-| `project/logs/chat/Manifest_review_and_mapping.md` | **NON-SEMANTIC** | `No description available.` |
-| `project/logs/chat/Manifest_review_and_mapping_001.md` | **NON-SEMANTIC** | `No description available.` |
-| `project/logs/chat/Manifest_review_and_mapping_002.md` | **NON-SEMANTIC** | `No description available.` |
-| `project/logs/chat/Repo_Task_Doc_Mgmt_Step_2.md` | **NON-SEMANTIC** | `No description available.` |
 | `scripts/CODE_FILE_INDEX.md` | **NON-SEMANTIC** | `This file is auto-generated . Do not edit manually . Use the file to test linter violations .` |
 | `snitch/CODE_FILE_INDEX.md` | **NON-SEMANTIC** | `This file is auto-generated . Do not edit manually . The main Go source file is for the snitch modul` |
 | `snitch/DOCS_INDEX.md` | **NON-SEMANTIC** | `This file is auto-generated . Do not edit manually . Use the supplied information to help you instal` |
@@ -117,7 +100,6 @@ Found 13 files with low-quality descriptions.
 - Missing embedded ID in `project/PROCESS_AUTOMATION.md`.
 - Missing embedded ID in `project/REPOSITORY_TASK_DOCUMENT_MANAGEMENT_PLAN.md`.
 - Missing embedded ID in `project/reports/PROJECT_DOCUMENT_ALIGNMENT.md`.
-- Missing embedded ID in `project/reports/ALIGNMENT_AUDIT_2025-10-21.md`.
 - ID format error in `scripts/CODE_FILE_INDEX.md`: Expected prefix `SCR-`, found `OPS-001`.
 - ID format error in `snitch/DOCS_INDEX.md`: Expected prefix `SNITCH-`, found `API-254`.
 - ID format error in `snitch/CODE_FILE_INDEX.md`: Expected prefix `SNITCH-`, found `API-253`.
@@ -198,7 +180,7 @@ None
 - `project/reports/ARCHIVE_ALIGNMENT_MATRIX_OLD.md`
 
 ### Unlinked (Not Found in Index)
-- `project/reports/ALIGNMENT_AUDIT_2025-10-21.md`
+None
 
 ---
 

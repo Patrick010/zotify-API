@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/-bin/env python3
 # -*- coding: utf-8 -*-
 # ID: OPS-037
 """
@@ -173,7 +173,7 @@ def check_tag_consistency() -> list:
         dirs[:] = [d for d in dirs if d not in IGNORED_DIRS]
 
         for f in filenames:
-            if f in IGNORED_FILES or f.startswith("run_audit"):
+            if f in IGNORED_FILES or f.startswith("audit_governance_report"):
                 continue
 
             file_path = root_path / f
@@ -357,12 +357,22 @@ def main():
         print("Aborting audit due to missing or invalid core governance files.")
         return 1
 
-    # Filter out exempt files from trace_index_data
+    # Filter out exempt and ignored files from trace_index_data
     if "artifacts" in trace_index_data:
-        trace_index_data["artifacts"] = [
-            item for item in trace_index_data["artifacts"]
-            if item.get("type") != "exempt"
-        ]
+        artifacts = trace_index_data["artifacts"]
+
+        # Filter by type: exempt
+        artifacts = [item for item in artifacts if item.get("type") != "exempt"]
+
+        # Filter by IGNORED_DIRS and IGNORED_FILES
+        filtered_artifacts = []
+        for item in artifacts:
+            path = item.get("path", "")
+            if any(part in IGNORED_DIRS for part in Path(path).parts) or Path(path).name in IGNORED_FILES:
+                continue
+            filtered_artifacts.append(item)
+
+        trace_index_data["artifacts"] = filtered_artifacts
 
     trace_index_map = {item["path"]: item for item in trace_index_data.get("artifacts", [])}
 
