@@ -1,3 +1,18 @@
+<!-- ID: DOC-043 -->
+
+---
+## ACT-151: Fixed a bug in the linter's logging logic that incorrectly prepended new log entries, pushing the required <!-- ID: ... --> comment down from the first line of the file. Also manually corrected the log files that were broken by this bug.
+
+**Date:** 2025-10-21
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Fixed a bug in the linter's logging logic that incorrectly prepended new log entries, pushing the required <!-- ID: ... --> comment down from the first line of the file. Also manually corrected the log files that were broken by this bug.
+
+### Outcome
+The prepend_to_file function in the linter was not ID-aware, causing it to break the log files. The log files were also missing their DOC- IDs, which had to be manually deduced and restored.
+
 ---
 ## ACT-150: Refactor Groq-based Summarization Workflow for Robustness and Extensibility
 
@@ -37,7 +52,6 @@ Reconcile TRACE_INDEX.yml with DOCUMENT_TAG_INVENTORY.yml and fix the full pipel
 ### Outcome
 The root cause of the pipeline failure was a combination of incorrect data in the tag inventory and scripts with flawed logic. The verification script was also checking directories that should have been excluded.
 
-<!-- ID: DOC-043 -->
 ---
 ## ACT-148: Content Alignment Check Implemented
 

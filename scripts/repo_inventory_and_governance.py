@@ -102,7 +102,7 @@ def extract_metadata(filepath: Path) -> dict:
     except Exception as e:
         summary = f"[Error reading or summarizing file: {e}]"
 
-    tags = generate_tags_from_summary(summary)
+    tags = generate_tags_from_summary(summary, top_k=5)
 
     return {"description": summary, "tags": tags}
 

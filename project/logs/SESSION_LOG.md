@@ -1,3 +1,13 @@
+<!-- ID: DOC-045 -->
+
+---
+## Session Report: 2025-10-21
+
+**Summary:** Fixed a bug in the linter's logging logic that incorrectly prepended new log entries, pushing the required <!-- ID: ... --> comment down from the first line of the file. Also manually corrected the log files that were broken by this bug.
+
+**Findings:**
+The prepend_to_file function in the linter was not ID-aware, causing it to break the log files. The log files were also missing their DOC- IDs, which had to be manually deduced and restored.
+
 ---
 ## Session Report: 2025-10-20
 
@@ -6,7 +16,6 @@
 **Findings:**
 The previous implementation using subprocess was fragile and prone to errors. The new implementation using direct function calls is more robust and reliable.
 
-<!-- ID: DOC-129 -->
 ---
 ## Session Report: 2025-10-11
 
@@ -15,7 +24,6 @@ The previous implementation using subprocess was fragile and prone to errors. Th
 **Findings:**
 The root cause of the pipeline failure was a combination of incorrect data in the tag inventory and scripts with flawed logic. The verification script was also checking directories that should have been excluded.
 
-<!-- ID: DOC-045 -->
 ---
 ## Session Report: 2025-10-06
 

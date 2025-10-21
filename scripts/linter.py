@@ -128,13 +128,28 @@ def format_current_state(summary: str, objective: str, next_steps: str) -> str:
 
 
 def prepend_to_file(file_path: Path, content: str) -> None:
+    """
+    Prepends content to a file, preserving the top-line ID comment if it exists.
+    """
     try:
         file_path.parent.mkdir(parents=True, exist_ok=True)
+        id_line = ""
+        existing = ""
         if file_path.exists():
-            existing = file_path.read_text(encoding="utf-8")
+            lines = file_path.read_text(encoding="utf-8").splitlines()
+            if lines and lines[0].startswith("<!-- ID:"):
+                id_line = lines[0]
+                existing = "\n".join(lines[1:])
+            else:
+                existing = "\n".join(lines)
+
+        # Ensure there's a blank line after the ID and before the new content
+        if id_line:
+            final_content = id_line + "\n\n" + content.strip() + "\n\n" + existing.strip()
         else:
-            existing = ""
-        file_path.write_text(content.strip() + "\n\n" + existing, encoding="utf-8")
+            final_content = content.strip() + "\n\n" + existing.strip()
+
+        file_path.write_text(final_content.strip() + "\n", encoding="utf-8")
         print(f"[LOG] Updated {file_path}")
     except Exception as e:
         print(f"[ERROR] Could not write to {file_path}: {e}", file=sys.stderr)
@@ -262,6 +277,45 @@ def get_changed_files_from_git_status() -> List[Tuple[str, str]]:
 
 
 # === Doc matrix rules ===
+
+
+def check_file_content_rules(changed_files: Set[str]) -> List[str]:
+    """
+    Enforce rules that inspect the content of individual files.
+    """
+    errors: List[str] = []
+    if yaml is None or not DOC_LINT_RULES.exists():
+        return errors
+
+    try:
+        rules_doc = yaml.safe_load(DOC_LINT_RULES.read_text(encoding="utf-8"))
+        rules = rules_doc.get("file_content_rules", []) if isinstance(rules_doc, dict) else []
+    except Exception as e:
+        print(f"[ERROR] Could not parse file_content_rules from {DOC_LINT_RULES}: {e}", file=sys.stderr)
+        return ["file_content_rules parse error"]
+
+    for rule in rules:
+        include_paths = rule.get("include_paths", [])
+        must_start_with = rule.get("must_start_with")
+
+        for file_path_str in changed_files:
+            if not any(file_path_str.endswith(p) for p in include_paths):
+                continue
+
+            file_path = PROJECT_ROOT / file_path_str
+            if not file_path.exists():
+                continue
+
+            try:
+                lines = file_path.read_text(encoding="utf-8").splitlines()
+                # If the file contains the "must_start_with" string, it must be on the first line.
+                if any(must_start_with in line for line in lines):
+                    if not lines[0].strip().startswith(must_start_with):
+                        errors.append(f"{file_path_str}: {rule.get('message')}")
+            except Exception as e:
+                print(f"[WARN] Could not read or check {file_path_str}: {e}", file=sys.stderr)
+
+    return errors
 
 
 def check_doc_matrix_rules(changed_files: Set[str]) -> List[str]:
@@ -527,7 +581,8 @@ def main() -> int:
     # 2) Doc-matrix checks – always run
     print("\n--- Doc-matrix checks ---")
     doc_errors = check_doc_matrix_rules(changed_files_set)
-    if doc_errors:
+    content_errors = check_file_content_rules(changed_files_set)
+    if doc_errors or content_errors:
         print("[ERROR] Documentation matrix checks failed:", file=sys.stderr)
         for msg in doc_errors:
             print(f"- {msg}", file=sys.stderr)
