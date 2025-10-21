@@ -1,4 +1,29 @@
-<!-- ID: DOC-127 -->
+---
+## ACT-150: Refactor Groq-based Summarization Workflow for Robustness and Extensibility
+
+**Date:** 2025-10-20
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+To overhaul the summarization workflow in `repo_inventory_and_governance.py`. This involved replacing the fragile `subprocess`-based execution with a robust, direct-import model, fixing critical bugs in the summarizer scripts, adding rate-limiting and progress tracking, and updating all relevant process documentation to reflect the new architecture.
+
+### Outcome
+The project's summarization capabilities have been significantly improved through a comprehensive refactoring effort:
+- **Architectural Shift:** The core `repo_inventory_and_governance.py` script was refactored to directly import and call functions from `summarize_docs.py` and `summarize_code.py`. This replaces the previous unreliable `subprocess` implementation, providing better error handling and stability.
+- **Bug Fix:** A critical bug in `summarize_code.py` that prevented it from processing single files (a blocker for the integration) was identified and fixed.
+- **API Rate Limiting:** Implemented `time.sleep()` delays in both summarizer scripts to mitigate Groq API rate-limiting errors encountered during large-scale repository scans.
+- **Feature Enhancement:**
+    - The `summarize_tags.py` script was modified to limit tag generation to a maximum of five, improving the quality of generated metadata.
+    - A `--progress` flag was added to `repo_inventory_and_governance.py` to display a `tqdm` progress bar, enhancing the user experience during long-running summarization tasks.
+- **Process Compliance:** The `project/PROCESS_AUTOMATION.md` document was updated to accurately describe the new, refactored summarization workflow, ensuring the project's "Living Documentation" remains up-to-date.
+
+### Related Documents
+- `scripts/repo_inventory_and_governance.py`
+- `scripts/summarize_docs.py`
+- `scripts/summarize_code.py`
+- `scripts/summarize_tags.py`
+- `project/PROCESS_AUTOMATION.md`
 ---
 ## ACT-149: Fixed multiple scripts (repo_inventory_and_governance.py, verify_alignment_migration.py, test_full_pipeline.sh) to correctly generate and validate the repository's trace index. Rebuilt the DOCUMENT_TAG_INVENTORY.yml from embedded file IDs to ensure data integrity.
 

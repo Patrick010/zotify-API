@@ -20,10 +20,6 @@ DOC_DIR = ROOT / "project"
 MAX_TOKENS = 30  # ~15-25 words
 MAX_RETRIES = 3  # Retry attempts for 429 errors
 
-if not GROQ_API_KEY:
-    print("Error: GROQ_API_KEY not found in environment.")
-    sys.exit(1)
-
 # Prompt Template (refined for unique verb starters)
 PROMPT_TEMPLATE = """
 Generate exactly 1 sentence (15-25 words) in active voice describing the document's role, responsibilities, or purpose within the project, strictly using a unique starting verb per document from establishes, directs, manages, guides, ensures, regulates, or governs to avoid repetitive verb patterns across outputs.
@@ -37,11 +33,13 @@ Document:
 Role description:
 """
 
-# Summarize function
 def summarize_doc(content: str, retries=0) -> str:
+    if not GROQ_API_KEY:
+        return "[Error: GROQ_API_KEY not found in environment.]"
+
     content = content.replace("\0", "").strip()[:100000]  # Truncate to fit context
     prompt = PROMPT_TEMPLATE.format(content=content)
-    
+
     payload = {
         "model": "llama-3.3-70b-versatile",
         "messages": [
@@ -56,7 +54,7 @@ def summarize_doc(content: str, retries=0) -> str:
         "Authorization": f"Bearer {GROQ_API_KEY}",
         "Content-Type": "application/json"
     }
-    
+
     try:
         response = requests.post(GROQ_API_URL, json=payload, headers=headers, timeout=30)
         response.raise_for_status()
@@ -72,19 +70,13 @@ def summarize_doc(content: str, retries=0) -> str:
     except requests.RequestException as e:
         if hasattr(e, 'response') and e.response and e.response.status_code == 429 and retries < MAX_RETRIES:
             retry_after = float(e.response.headers.get("Retry-After", 60))
-            print(f"429 error, retrying after {retry_after:.1f}s...")
+            print(f"429 error, retrying after {retry_after:.1f}s...", file=sys.stderr)
             time.sleep(retry_after)
             return summarize_doc(content, retries + 1)
         return f"[Error: {e}]"
     except Exception as e:
         return f"[Unexpected: {e}]"
 
-# Helper
-def get_doc_files(directory: Path):
-    extensions = (".md", ".rst", ".txt")
-    return [f for f in directory.rglob("*") if f.is_file() and f.suffix in extensions]
-
-# Main
 def main():
     import argparse
     parser = argparse.ArgumentParser(description="Summarize documentation files using Groq.")
@@ -103,31 +95,51 @@ def main():
     args = parser.parse_args()
     target = Path(args.path)
     if not target.exists():
-        print(f"Path not found: {target}")
+        print(f"Path not found: {target}", file=sys.stderr)
         sys.exit(1)
-    
+
+    # Helper
+    def get_doc_files(directory: Path):
+        extensions = (".md", ".rst", ".txt")
+        return [f for f in directory.rglob("*") if f.is_file() and f.suffix in extensions]
+
     if target.is_dir():
         files = get_doc_files(target)
         if not files:
-            print("No documentation files found.")
+            print("No documentation files found.", file=sys.stderr)
             return
     else:
         if target.suffix not in (".md", ".rst", ".txt"):
-            print(f"Invalid file type: {target.suffix}. Must be .md, .rst, or .txt.")
+            print(f"Invalid file type: {target.suffix}. Must be .md, .rst, or .txt.", file=sys.stderr)
             sys.exit(1)
         files = [target]
-    
+
     files = files[:args.max_files]
-    print(f"Summarizing {len(files)} document(s)...\n")
-    for file_path in tqdm(files, desc="Processing files", unit="file"):
+
+    is_single_file = target.is_file()
+
+    if not is_single_file:
+        print(f"Summarizing {len(files)} document(s)...", file=sys.stderr)
+
+    iterator = tqdm(files, desc="Processing files", unit="file", file=sys.stderr) if not is_single_file else files
+
+    for file_path in iterator:
         try:
             content = file_path.read_text(encoding="utf-8", errors="replace")
-            print(f"\n=== {file_path} ===\n")
             summary = summarize_doc(content)
-            print(summary or "[No summary returned]")
-            time.sleep(3.0)  # ~20 RPM, avoids 429s
+
+            if is_single_file:
+                print(summary or "[No summary returned]")
+            else:
+                print(f"\n=== {file_path} ===", file=sys.stderr)
+                print(summary or "[No summary returned]")
+
+            time.sleep(10.0)
         except Exception as e:
-            print(f"[Error processing {file_path}]: {e}")
+            print(f"[Error processing {file_path}]: {e}", file=sys.stderr)
 
 if __name__ == "__main__":
+    if not GROQ_API_KEY:
+        print("Error: GROQ_API_KEY not found in environment.", file=sys.stderr)
+        sys.exit(1)
     main()

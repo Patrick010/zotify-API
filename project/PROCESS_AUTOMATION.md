@@ -139,9 +139,8 @@ Invoked as part of the `repo_inventory_and_governance.py` workflow whenever `TRA
 
 | Module | Purpose |
 |--------|---------|
-| `nlp/summarizer.py` | Produces file-level summaries using transformer models. |
-| `nlp/description_builder.py` | Constructs structured semantic descriptions. |
-| `nlp/tagger.py` | Assigns document IDs, prefixes, and semantic tags for alignment. |
+| `scripts/summarize_docs.py` & `scripts/summarize_code.py` | Produces file-level summaries using the Groq API. The core logic from these scripts is imported and called directly by the main governance script. |
+| `scripts/summarize_tags.py` | Generates keyword tags from a summary using a local, NLP-based approach (POS tagging). |
 
 **Runtime Environment:**  
 - Python venv `.venv-nlp` with SpaCy and transformer models.  
