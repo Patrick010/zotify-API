@@ -105,50 +105,23 @@ Found 13 files with low-quality descriptions.
 ## 3. Tag & ID Consistency
 
 - ID format error in `Gonk/CODE_FILE_INDEX.md`: Expected prefix `GONK-`, found `API-001`.
-- Missing embedded ID in `project/PROJECT_REGISTRY.md`.
-- Missing embedded ID in `project/PROCESS_AUTOMATION.md`.
-- Missing embedded ID in `project/REPOSITORY_TASK_DOCUMENT_MANAGEMENT_PLAN.md`.
-- ID format error in `scripts/CODE_FILE_INDEX.md`: Expected prefix `SCR-`, found `OPS-001`.
-- ID format error in `snitch/DOCS_INDEX.md`: Expected prefix `SNITCH-`, found `API-254`.
-- ID format error in `snitch/CODE_FILE_INDEX.md`: Expected prefix `SNITCH-`, found `API-253`.
-- ID format error in `snitch/README.md`: Expected prefix `SNITCH-`, found `API-255`.
-- Missing embedded ID in `templates/ONBOARDING.md`.
-- Missing embedded ID in `templates/API-DEVELOPER-GUIDE.md`.
-- Missing embedded ID in `templates/SECURITY.md`.
-- Missing embedded ID in `templates/HANDOVER_BRIEF.md`.
-- Missing embedded ID in `templates/LESSONS-LEARNT.md`.
-- Missing embedded ID in `templates/PROJECT_REGISTRY.md`.
-- Missing embedded ID in `templates/CICD-DEV.md`.
-- Missing embedded ID in `templates/LOGGING_SYSTEM_DESIGN.md`.
-- Missing embedded ID in `templates/FUTURE_ENHANCEMENTS.md`.
-- Missing embedded ID in `templates/PID.md`.
-- Missing embedded ID in `templates/TRACEABILITY_MATRIX.md`.
-- Missing embedded ID in `templates/TASK_CHECKLIST.md`.
-- Missing embedded ID in `templates/USECASES.md`.
-- Missing embedded ID in `templates/PROJECT_BRIEF.md`.
-- Missing embedded ID in `templates/BACKLOG.md`.
-- Missing embedded ID in `templates/LOW_LEVEL_DESIGN.md`.
-- Missing embedded ID in `templates/USECASES_GAP_ANALYSIS.md`.
-- Missing embedded ID in `templates/LOGGING_PHASES.md`.
-- Missing embedded ID in `templates/INITIATION.md`.
-- Missing embedded ID in `templates/EXECUTION_PLAN.md`.
-- Missing embedded ID in `templates/CICD-PROJ.md`.
-- Missing embedded ID in `templates/HIGH_LEVEL_DESIGN.md`.
-- Missing embedded ID in `templates/ROADMAP.md`.
-- Missing embedded ID in `templates/ENDPOINTS.md`.
-- Missing embedded ID in `templates/LOGGING_TRACEABILITY_MATRIX.md`.
-- Missing embedded ID in `templates/SYSTEM-INTEGRATION-GUIDE.md`.
-- Missing embedded ID in `templates/AGENTS.md`.
 - ID format error in `Gonk/GonkUI/DOCS_INDEX.md`: Expected prefix `GONK-`, found `API-010`.
 - ID format error in `Gonk/GonkUI/README.md`: Expected prefix `GONK-`, found `API-011`.
-- ID format error in `Gonk/GonkCLI/DOCS_INDEX.md`: Expected prefix `GONK-`, found `API-002`.
-- ID format error in `Gonk/GonkCLI/README.md`: Expected prefix `GONK-`, found `API-003`.
 - ID format error in `Gonk/GonkUI/docs/CHANGELOG.md`: Expected prefix `GONK-`, found `API-014`.
 - ID format error in `Gonk/GonkUI/docs/CONTRIBUTING.md`: Expected prefix `GONK-`, found `API-015`.
 - ID format error in `Gonk/GonkUI/docs/ARCHITECTURE.md`: Expected prefix `GONK-`, found `API-013`.
 - ID format error in `Gonk/GonkUI/docs/USER_MANUAL.md`: Expected prefix `GONK-`, found `API-017`.
+- ID format error in `Gonk/GonkCLI/DOCS_INDEX.md`: Expected prefix `GONK-`, found `API-002`.
+- ID format error in `Gonk/GonkCLI/README.md`: Expected prefix `GONK-`, found `API-003`.
+- Missing embedded ID in `project/PROJECT_REGISTRY.md`.
+- Missing embedded ID in `project/PROCESS_AUTOMATION.md`.
+- Missing embedded ID in `project/REPOSITORY_TASK_DOCUMENT_MANAGEMENT_PLAN.md`.
 - Missing embedded ID in `project/reports/PROJECT_DOCUMENT_ALIGNMENT.md`.
 - Missing embedded ID in `project/reports/ALIGNMENT_AUDIT_2025-10-21.md`.
+- ID format error in `scripts/CODE_FILE_INDEX.md`: Expected prefix `SCR-`, found `OPS-001`.
+- ID format error in `snitch/DOCS_INDEX.md`: Expected prefix `SNITCH-`, found `API-254`.
+- ID format error in `snitch/CODE_FILE_INDEX.md`: Expected prefix `SNITCH-`, found `API-253`.
+- ID format error in `snitch/README.md`: Expected prefix `SNITCH-`, found `API-255`.
 - ID format error in `snitch/docs/INSTALLATION.md`: Expected prefix `SNITCH-`, found `API-257`.
 - ID format error in `snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md`: Expected prefix `SNITCH-`, found `API-262`.
 - ID format error in `snitch/docs/MILESTONES.md`: Expected prefix `SNITCH-`, found `API-258`.
@@ -163,16 +136,6 @@ Found 13 files with low-quality descriptions.
 - ID format error in `snitch/docs/MODULES.md`: Expected prefix `SNITCH-`, found `API-259`.
 - ID format error in `snitch/docs/ROADMAP.md`: Expected prefix `SNITCH-`, found `API-264`.
 - ID format error in `snitch/docs/USER_MANUAL.md`: Expected prefix `SNITCH-`, found `API-268`.
-- Missing embedded ID in `templates/proposals/HOME_AUTOMATION_PROPOSAL.md`.
-- Missing embedded ID in `templates/proposals/LOW_CODE_PROPOSAL.md`.
-- Missing embedded ID in `templates/proposals/DYNAMIC_PLUGIN_PROPOSAL.md`.
-- Missing embedded ID in `templates/proposals/MULTI_SOURCE_METADATA_PROPOSAL.md`.
-- Missing embedded ID in `templates/audit/PHASE_1_TRACEABILITY_MATRIX.md`.
-- Missing embedded ID in `templates/audit/HLD_LLD_ALIGNMENT_PLAN.md`.
-- Missing embedded ID in `templates/audit/AUDIT_TRACEABILITY_MATRIX.md`.
-- Missing embedded ID in `templates/audit/FIRST_AUDIT.md`.
-- Missing embedded ID in `templates/audit/AUDIT-PHASE-1.md`.
-- Missing embedded ID in `templates/audit/audit-prompt.md`.
 - ID format error in `tests/scripts/test_linter.py`: Expected prefix `TEST-`, found `DOC-123`.
 
 ---

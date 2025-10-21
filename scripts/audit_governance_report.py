@@ -32,6 +32,19 @@ WEAK_DESC_KEYWORDS = [
     "no description",
 ]
 
+# Ignored directories and files from repo_inventory_and_governance.py
+IGNORED_DIRS = {
+    "project/logs/chat", ".git", ".idea", ".venv", "node_modules",
+    "build", "dist", "target", "__pycache__", "site", "archive",
+    "templates", ".pytest_cache", "cache", ".cache", "storage", "chat"
+}
+
+IGNORED_FILES = {
+    "mkdocs.yml", "openapi.json", "bandit.yml", "changed_files.txt",
+    "verification_report.md", "LICENSE"
+}
+
+
 # Expected tag prefixes based on directory structure
 TAG_PREFIX_MAP = {
     "project/": "DOC-",
@@ -151,30 +164,38 @@ def check_tag_consistency() -> list:
     contain a valid embedded ID comment.
     """
     findings = []
-    all_files = [p for p in PROJECT_ROOT.rglob("*") if p.is_file() and ".git" not in p.parts]
-
-    for file_path in all_files:
-        if file_path.name.startswith("run_audit"):
-             continue
-        try:
-            content = file_path.read_text(encoding="utf-8")
-            relative_path_str = str(file_path.relative_to(PROJECT_ROOT))
-
-            match = re.search(r"<!--\s*ID:\s*([A-Z0-9-]+)\s*-->", content)
-            if match:
-                embedded_id = match.group(1)
-                expected_prefix = get_tag_prefix(relative_path_str)
-                if not embedded_id.startswith(expected_prefix):
-                    findings.append(
-                        f"ID format error in `{relative_path_str}`: "
-                        f"Expected prefix `{expected_prefix}`, found `{embedded_id}`."
-                    )
-            elif file_path.suffix == ".md" and "logs" not in relative_path_str:
-                 if not content.strip().startswith("<!-- ID:"):
-                    findings.append(f"Missing embedded ID in `{relative_path_str}`.")
-
-        except (UnicodeDecodeError, OSError):
+    for root, dirs, filenames in os.walk(PROJECT_ROOT):
+        root_path = Path(root)
+        rel_parts = root_path.relative_to(PROJECT_ROOT).parts
+        if any(p in IGNORED_DIRS for p in rel_parts):
+            dirs[:] = []  # prevent descending
             continue
+        dirs[:] = [d for d in dirs if d not in IGNORED_DIRS]
+
+        for f in filenames:
+            if f in IGNORED_FILES or f.startswith("run_audit"):
+                continue
+
+            file_path = root_path / f
+            try:
+                content = file_path.read_text(encoding="utf-8")
+                relative_path_str = str(file_path.relative_to(PROJECT_ROOT))
+
+                match = re.search(r"<!--\s*ID:\s*([A-Z0-9-]+)\s*-->", content)
+                if match:
+                    embedded_id = match.group(1)
+                    expected_prefix = get_tag_prefix(relative_path_str)
+                    if not embedded_id.startswith(expected_prefix):
+                        findings.append(
+                            f"ID format error in `{relative_path_str}`: "
+                            f"Expected prefix `{expected_prefix}`, found `{embedded_id}`."
+                        )
+                elif file_path.suffix == ".md" and "logs" not in relative_path_str:
+                     if not content.strip().startswith("<!-- ID:"):
+                        findings.append(f"Missing embedded ID in `{relative_path_str}`.")
+
+            except (UnicodeDecodeError, OSError):
+                continue
 
     return findings
 
