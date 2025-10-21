@@ -336,6 +336,13 @@ def main():
         print("Aborting audit due to missing or invalid core governance files.")
         return 1
 
+    # Filter out exempt files from trace_index_data
+    if "artifacts" in trace_index_data:
+        trace_index_data["artifacts"] = [
+            item for item in trace_index_data["artifacts"]
+            if item.get("type") != "exempt"
+        ]
+
     trace_index_map = {item["path"]: item for item in trace_index_data.get("artifacts", [])}
 
     all_findings = {

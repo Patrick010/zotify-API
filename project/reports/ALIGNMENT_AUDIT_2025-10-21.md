@@ -9,10 +9,10 @@
 
 | Metric                          | Count |
 | ------------------------------- | ----- |
-| Total Artifacts in Trace Index  | 436 |
+| Total Artifacts in Trace Index  | 374 |
 | Total Artifacts in Tag Inventory| 341 |
-| **Orphans** (in Trace, not Inv) | 101 |
-| **Missing** (in Inv, not Trace) | 6 |
+| **Orphans** (in Trace, not Inv) | 43 |
+| **Missing** (in Inv, not Trace) | 10 |
 | Duplicate IDs in Inventory      | 0 |
 | Mismatched IDs (Embedded vs Inv)| 0 |
 
@@ -20,65 +20,15 @@
 ### Details: Orphans (In Trace Index but not Tag Inventory)
 - `.github/workflows/ci.yml`
 - `.github/workflows/pushmirror.yml`
-- `.gitignore`
-- `Gonk/GonkUI/GonkUI.egg-info/PKG-INFO`
-- `Gonk/GonkUI/GonkUI.egg-info/SOURCES.txt`
-- `Gonk/GonkUI/GonkUI.egg-info/dependency_links.txt`
-- `Gonk/GonkUI/GonkUI.egg-info/requires.txt`
-- `Gonk/GonkUI/GonkUI.egg-info/top_level.txt`
-- `Gonk/GonkUI/pyproject.toml`
 - `Gonk/GonkUI/static/app.js`
 - `Gonk/GonkUI/static/styles.css`
-- `Gonk/pyproject.toml`
-- `api/.gitignore`
-- `api/.ruff_cache/.gitignore`
-- `api/.ruff_cache/CACHEDIR.TAG`
-- `api/alembic.ini`
-- `api/alembic/README`
-- `api/alembic/script.py.mako`
-- `api/api_dumps/cache.json`
-- `api/api_dumps/downloads.json`
-- `api/api_dumps/logging.json`
-- `api/api_dumps/metadata.json`
-- `api/api_dumps/network.json`
-- `api/api_dumps/playlist.json`
-- `api/api_dumps/spotify.json`
-- `api/api_dumps/stubs.json`
-- `api/api_dumps/sync.json`
-- `api/api_dumps/system.json`
-- `api/api_dumps/tracks.json`
-- `api/api_dumps/user.json`
-- `api/docs/system/zotify-openapi-external-v1.json`
-- `api/logs/debug.log`
-- `api/logs/security.log`
-- `api/mypy.ini`
-- `api/pyproject.toml`
-- `api/ruff.toml`
-- `api/src/zotify_api.egg-info/PKG-INFO`
-- `api/src/zotify_api.egg-info/SOURCES.txt`
-- `api/src/zotify_api.egg-info/dependency_links.txt`
-- `api/src/zotify_api.egg-info/requires.txt`
-- `api/src/zotify_api.egg-info/top_level.txt`
-- `api/zotify_api.egg-info/PKG-INFO`
-- `api/zotify_api.egg-info/SOURCES.txt`
-- `api/zotify_api.egg-info/dependency_links.txt`
-- `api/zotify_api.egg-info/requires.txt`
-- `api/zotify_api.egg-info/top_level.txt`
 - `nlp/__init__.py`
 - `nlp/description_builder.py`
 - `nlp/nlp_config.py`
 - `nlp/nlp_engine.py`
-- `nlp/pyproject.toml`
 - `nlp/summarizer.py`
-- `nlp/summarizer.py.ok`
 - `nlp/summarizer_self_test.py`
-- `nlp/summarizer_self_test.py.ok`
 - `nlp/tagger.py`
-- `nlp/zotify_nlp.egg-info/PKG-INFO`
-- `nlp/zotify_nlp.egg-info/SOURCES.txt`
-- `nlp/zotify_nlp.egg-info/dependency_links.txt`
-- `nlp/zotify_nlp.egg-info/requires.txt`
-- `nlp/zotify_nlp.egg-info/top_level.txt`
 - `project/PROCESS_AUTOMATION.md`
 - `project/REPOSITORY_TASK_DOCUMENT_MANAGEMENT_PLAN.md`
 - `project/logs/ACTIVITY.md`
@@ -100,33 +50,29 @@
 - `project/logs/handover/HANDOVER_BRIEF_CHATGTP_File_linting_review.md`
 - `project/logs/handover/HANDOVER_BRIEF_CHATGTP_Trace_NLP_Integration_Phase_5c_Semantic_Governance_Alignment.md`
 - `project/logs/handover/HANDOVER_BRIEF_CHATGTP_template.md`
-- `project/reports/ALIGNMENT_VALIDATION_REPORT.txt`
 - `project/reports/DOCUMENT_TAG_INVENTORY.yml`
 - `project/reports/PROJECT_DOCUMENT_ALIGNMENT.md`
 - `project/reports/TRACE_INDEX.yml`
-- `project/reports/TRACE_INDEX.yml.bak`
 - `scripts/backfill_trace_meta.py`
 - `scripts/fix_trace_index_paths.py`
 - `scripts/generate_descriptions.py`
 - `scripts/generate_repo_manifest_md.py`
-- `scripts/gonkui`
-- `scripts/lint_governance_links.json`
 - `scripts/post_install.sh`
-- `scripts/project_registry.json`
-- `scripts/propagate_descriptions.py.new`
 - `scripts/reorder_trace_index_keys.py`
 - `scripts/trace_description_generator.py`
-- `scripts/trace_description_intermediate.json`
-- `snitch/go.mod`
 - `snitch/snitch.go`
 
 ### Details: Missing (In Tag Inventory but not Trace Index)
 - `mkdocs.yml`
+- `.pre-commit-config.yaml`
 - `bandit.yml`
 - `scripts/api/src/zotify_api/temp_violation.py`
 - `snitch/mkdocs.yml`
+- `snitch/.golangci.yml`
 - `project/reports/SEMANTIC_ALIGNMENT_REPORT.md`
+- `project/api/endpoints.yaml`
 - `Gonk/GonkUI/mkdocs.yml`
+- `api/docs/system/zotify-openapi-external-v1.yaml`
 
 ### Details: Duplicate IDs
 - ``
@@ -202,6 +148,7 @@ Found 13 files with low-quality descriptions.
 - ID format error in `Gonk/GonkUI/docs/ARCHITECTURE.md`: Expected prefix `GONK-`, found `API-013`.
 - ID format error in `Gonk/GonkUI/docs/USER_MANUAL.md`: Expected prefix `GONK-`, found `API-017`.
 - Missing embedded ID in `project/reports/PROJECT_DOCUMENT_ALIGNMENT.md`.
+- Missing embedded ID in `project/reports/ALIGNMENT_AUDIT_2025-10-21.md`.
 - ID format error in `snitch/docs/INSTALLATION.md`: Expected prefix `SNITCH-`, found `API-257`.
 - ID format error in `snitch/docs/PHASE_2_ZERO_TRUST_DESIGN.md`: Expected prefix `SNITCH-`, found `API-262`.
 - ID format error in `snitch/docs/MILESTONES.md`: Expected prefix `SNITCH-`, found `API-258`.
@@ -288,7 +235,7 @@ None
 - `project/reports/ARCHIVE_ALIGNMENT_MATRIX_OLD.md`
 
 ### Unlinked (Not Found in Index)
-None
+- `project/reports/ALIGNMENT_AUDIT_2025-10-21.md`
 
 ---
 
