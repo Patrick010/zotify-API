@@ -1,6 +1,19 @@
 <!-- ID: DOC-043 -->
 
 ---
+## ACT-152: Created a new, unified governance audit script
+
+**Date:** 2025-10-22
+**Status:** ✅ Done
+**Assignee:** Jules
+
+### Objective
+Created a new, unified governance audit script
+
+### Outcome
+The new script, scripts/generate_alignment_audit_report.py, replaces the old, buggy audit script. It has been corrected to use the proper project root and file paths, and its logic has been refined to be consistent with the main governance script.
+
+---
 ## ACT-151: Fixed a bug in the linter's logging logic that incorrectly prepended new log entries, pushing the required <!-- ID: ... --> comment down from the first line of the file. Also manually corrected the log files that were broken by this bug.
 
 **Date:** 2025-10-21
