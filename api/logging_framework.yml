@@ -1,0 +1,38 @@
+# Configuration for the Flexible Logging Framework
+logging:
+  default_level: INFO
+  sinks:
+    - name: "default_console"
+      type: "console"
+      level: "INFO"
+
+    - name: "debug_file"
+      type: "file"
+      level: "DEBUG"
+      path: "logs/debug.log"
+      max_bytes: 10485760 # 10 MB
+      backup_count: 3
+
+    - name: "security_log"
+      type: "file"
+      level: "INFO"
+      path: "logs/security.log"
+      max_bytes: 10485760 # 10 MB
+      backup_count: 3
+
+    - name: "critical_webhook"
+      type: "webhook"
+      level: "CRITICAL"
+      url: "https://example.com/webhook-for-critical-errors"
+
+triggers:
+  - tag: "security"
+    action: "route_to_sink"
+    details:
+      destination: "security_log"
+
+  - event: "database_connection_error"
+    action: "send_alert"
+    details:
+      level: "CRITICAL"
+      destinations: ["critical_webhook"]
