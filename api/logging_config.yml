@@ -1,0 +1,23 @@
+# Zotify API Logging Configuration
+
+# This file defines the handlers for the LoggingService.
+# The service will dynamically load and instantiate handlers based on this configuration.
+
+handlers:
+  - type: console_handler
+    levels:
+      - DEBUG
+      - INFO
+      - WARNING
+      - ERROR
+      - CRITICAL
+
+  - type: json_audit_handler
+    levels:
+      - AUDIT
+    # The filename is relative to the directory where the API is run.
+    filename: logs/audit.json.log
+
+  - type: database_job_handler
+    levels:
+      - JOB_STATUS

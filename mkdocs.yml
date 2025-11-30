@@ -1,0 +1,72 @@
+# MkDocs Configuration
+
+site_name: Zotify API Documentation
+site_description: 'A comprehensive guide to the Zotify API, its features, and architecture.'
+site_author: 'Zotify Development Team'
+
+theme:
+  name: material
+  palette:
+    # Palette toggle for light vs dark mode
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+
+# The main documentation source directory
+docs_dir: 'api/docs'
+
+nav:
+  - 'Home': 'CHANGELOG.md'
+  - 'Manuals':
+    - 'API Developer Guide': 'manuals/API_DEVELOPER_GUIDE.md'
+    - 'CI/CD': 'manuals/CICD.md'
+    - 'Error Handling': 'manuals/ERROR_HANDLING_GUIDE.md'
+    - 'Logging Guide': 'manuals/LOGGING_GUIDE.md'
+    - 'Operator Manual': 'manuals/OPERATOR_MANUAL.md'
+    - 'System Integration Guide': 'manuals/SYSTEM_INTEGRATION_GUIDE.md'
+    - 'User Manual': 'manuals/USER_MANUAL.md'
+  - 'Providers':
+    - 'Spotify': 'providers/SPOTIFY.md'
+  - 'Reference':
+    - 'API Reference': 'reference/API_REFERENCE.md'
+    - 'Code Quality Index': 'reference/CODE_QUALITY_INDEX.md'
+    - 'Feature Specs': 'reference/FEATURE_SPECS.md'
+    - 'Master Index': 'reference/MASTER_INDEX.md'
+    - 'Features':
+      - 'Authentication': 'reference/features/AUTHENTICATION.md'
+      - 'Automated Doc Workflow': 'reference/features/AUTOMATED_DOCUMENTATION_WORKFLOW.md'
+      - 'Flexible Logging': 'reference/features/DEVELOPER_FLEXIBLE_LOGGING_FRAMEWORK.md'
+      - 'Provider Extensions': 'reference/features/PROVIDER_AGNOSTIC_EXTENSIONS.md'
+      - 'Provider OAuth': 'reference/features/PROVIDER_OAUTH.md'
+    - 'Source Code':
+      - 'CRUD.py': 'reference/source/CRUD.py.md'
+      - 'TRACKS_SERVICE.py': 'reference/source/TRACKS_SERVICE.py.md'
+  - 'System':
+    - 'Error Handling Design': 'system/ERROR_HANDLING_DESIGN.md'
+    - 'Installation': 'system/INSTALLATION.md'
+    - 'Privacy Compliance': 'system/PRIVACY_COMPLIANCE.md'
+    - 'Requirements': 'system/REQUIREMENTS.md'
+
+# Extensions
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - admonition
+  - toc:
+      permalink: true
